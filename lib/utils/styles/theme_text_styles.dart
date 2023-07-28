@@ -53,4 +53,12 @@ abstract class ThemeTextStyles {
     height: 0.5,
     fontWeight: FontWeight.w500,
   );
+
+  static const TextStyle landingPageBtnThemeTextStyle = TextStyle(
+    fontFamily: 'Montserrat',
+    color: ThemeColors.primaryThemeColor,
+    fontSize: 18,
+    height: 0.5,
+    fontWeight: FontWeight.w600,
+  );
 }

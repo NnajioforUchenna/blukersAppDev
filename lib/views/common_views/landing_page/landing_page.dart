@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
-import 'option_box.dart';
+import './widgets/option_box.dart';
 import '../../../utils/styles/index.dart';
 
 class LandingPage extends StatelessWidget {
@@ -44,30 +44,32 @@ class LandingPage extends StatelessWidget {
                 ),
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             // Fourth section: Two boxes
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // First box
                 OptionBox(
-                    icon: Icons.work,
+                    imgSrc: 'images/worker_icon.png',
                     title: "A Job",
                     onTap: () {
                       up.userType = "worker";
                       Navigator.pushNamed(context, '/jobs');
                     }),
-
+                // Space between boxes
+                const SizedBox(width: 20),
                 // Second box
                 OptionBox(
-                  icon: Icons.group,
+                  imgSrc: 'images/company_icon.png',
                   title: "Workers",
                   onTap: () {
                     up.userType = "company";
                     Navigator.pushNamed(context, '/workers');
                   },
                 ),
+
               ],
             ),
           ],

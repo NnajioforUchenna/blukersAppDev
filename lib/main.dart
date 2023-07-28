@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           // useMaterial3: true,
           primarySwatch: Colors.blue,
-          fontFamily: 'Montserrat',
+          fontFamily: 'Montserrat-Regular.ttf',
         ),
         initialRoute: '/',
         onGenerateRoute: generateRoute,
