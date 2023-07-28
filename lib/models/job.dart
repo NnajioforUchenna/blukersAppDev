@@ -5,7 +5,8 @@ class Job {
   final String? requirements;
   final double? highRange;
   final double? lowRange;
-  final int numberOfApplicants; // New parameter.
+  final int numberOfApplicants;
+  final int numberOfJobPosts; // New parameter
 
   Job({
     required this.jobId,
@@ -14,7 +15,8 @@ class Job {
     this.requirements,
     this.highRange,
     this.lowRange,
-    required this.numberOfApplicants, // Initialize in the constructor.
+    required this.numberOfApplicants,
+    required this.numberOfJobPosts, // Initialize in the constructor
   });
 
   Map<String, dynamic> toMap() {
@@ -25,7 +27,8 @@ class Job {
       'requirements': requirements,
       'highRange': highRange,
       'lowRange': lowRange,
-      'numberOfApplicants': numberOfApplicants, // Add to map.
+      'numberOfApplicants': numberOfApplicants,
+      'numberOfJobPosts': numberOfJobPosts, // Add to map
     };
   }
 
@@ -37,7 +40,8 @@ class Job {
       requirements: map['requirements'],
       highRange: map['highRange'],
       lowRange: map['lowRange'],
-      numberOfApplicants: map['numberOfApplicants'], // Extract from map.
+      numberOfApplicants: map['numberOfApplicants'],
+      numberOfJobPosts: map['numberOfJobPosts'], // Extract from map
     );
   }
 

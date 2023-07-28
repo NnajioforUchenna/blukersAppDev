@@ -27,6 +27,10 @@ class JobPost {
   final JobUrgencyLevel? jobUrgencyLevel;
   final JobPostStatus? jobPostStatus;
 
+  // New fields
+  final List<String> industryIds;
+  final List<String> jobIds;
+
   JobPost({
     required this.companyId,
     required this.jobTitle,
@@ -46,7 +50,10 @@ class JobPost {
     required this.numberOfPositionsAvailable,
     this.jobUrgencyLevel,
     this.jobPostStatus,
+    required this.industryIds, // Updated
+    required this.jobIds, // Updated
   });
+
   Map<String, dynamic> toMap() {
     return {
       'companyId': companyId,
@@ -67,6 +74,8 @@ class JobPost {
       'jobType': jobType.index,
       'jobUrgencyLevel': jobUrgencyLevel?.index,
       'jobPostStatus': jobPostStatus?.index,
+      'industryIds': industryIds,
+      'jobIds': jobIds,
     };
   }
 
@@ -108,6 +117,8 @@ class JobPost {
       jobPostStatus: map['jobPostStatus'] != null
           ? JobPostStatus.values[map['jobPostStatus']]
           : null,
+      industryIds: List<String>.from(map['industryIds']),
+      jobIds: List<String>.from(map['jobIds']),
     );
   }
 

@@ -1,12 +1,12 @@
 class Skill {
   final String id;
-  final String name;
-  final String description;
+  final String? name; // name is now nullable
+  final String? description; // description is now nullable
 
   Skill({
     required this.id,
-    required this.name,
-    required this.description,
+    this.name, // name is now optional
+    this.description, // description is now optional
   });
 
   Map<String, dynamic> toMap() {
@@ -19,9 +19,10 @@ class Skill {
 
   static Skill fromMap(Map<String, dynamic> map) {
     return Skill(
-      id: map['id'],
-      name: map['name'],
-      description: map['description'],
+      id: map['id'] ?? '', // provide a default value if 'id' is null
+      name: map['name'] as String?, // cast as String but keep it nullable
+      description:
+          map['description'] as String?, // cast as String but keep it nullable
     );
   }
 

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/user_provider.dart';
 import 'option_box.dart';
 
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -53,7 +56,8 @@ class LandingPage extends StatelessWidget {
                     icon: Icons.work,
                     title: "A Job",
                     onTap: () {
-                      Navigator.pushNamed(context, '/workers');
+                      up.userType = "worker";
+                      Navigator.pushNamed(context, '/jobs');
                     }),
 
                 // Second box
@@ -61,6 +65,7 @@ class LandingPage extends StatelessWidget {
                   icon: Icons.group,
                   title: "Workers",
                   onTap: () {
+                    up.userType = "company";
                     Navigator.pushNamed(context, '/workers');
                   },
                 ),

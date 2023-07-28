@@ -7,6 +7,7 @@ import 'package:bulkers/providers/worker_provider.dart';
 import 'package:bulkers/services/generate_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Blukers",
         debugShowCheckedModeBanner: false,
+        builder: EasyLoading.init(),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,

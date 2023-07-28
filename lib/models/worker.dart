@@ -106,7 +106,10 @@ class Worker {
       activeMemberships: map['activeMemberships'] != null
           ? List<String>.from(map['activeMemberships'])
           : null,
-      workStatus: WorkStatus.values[map['workStatus']],
+      // workStatus: WorkStatus.values[map['workStatus']],
+      workStatus: map['workStatus'] == "activelyLooking"
+          ? WorkStatus.activelyLooking
+          : WorkStatus.hired,
       addresses: map['addresses'] != null
           ? (map['addresses'] as List)
               .map((addressMap) => Address.fromMap(addressMap))

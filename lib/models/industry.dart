@@ -44,4 +44,20 @@ class Industry {
   String toString() {
     return toMap().toString();
   }
+
+  int getApplicantCount() {
+    int count = 0;
+    for (Job job in jobs) {
+      count += job.numberOfApplicants;
+    }
+    return count;
+  }
+
+  getNumberOfJobPosts() {
+    int count = 0;
+    for (Job job in jobs) {
+      count += job.numberOfJobPosts;
+    }
+    return count;
+  }
 }
