@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
-import './widgets/option_box.dart';
+import 'option_box.dart';
 import '../../../utils/styles/index.dart';
 
 class LandingPage extends StatelessWidget {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/styles/index.dart';
 
 class MyButtomNavigationBar extends StatefulWidget {
   const MyButtomNavigationBar({super.key});
@@ -13,21 +14,25 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
   Widget build(BuildContext context) {
     return NavigationBar(
       animationDuration: const Duration(milliseconds: 1000),
-      destinations: const <Widget>[
+      destinations: <Widget>[
         NavigationDestination(
-          icon: Icon(Icons.groups),
-          label: 'Workers',
+          icon: Icon(Icons.home, color: ThemeColors.grey2ThemeColor),
+          selectedIcon: Icon(Icons.home, color: ThemeColors.primaryThemeColor),
+          label: 'Home',
         ),
         NavigationDestination(
-          icon: Icon(Icons.work_history),
-          label: 'Explore',
+          icon: Icon(Icons.work, color: ThemeColors.grey2ThemeColor),
+          selectedIcon: Icon(Icons.work, color: ThemeColors.primaryThemeColor),
+          label: 'My Jobs',
         ),
         NavigationDestination(
-          icon: Icon(Icons.chat),
+          icon: Icon(Icons.chat, color: ThemeColors.grey2ThemeColor),
+          selectedIcon: Icon(Icons.chat, color: ThemeColors.primaryThemeColor),
           label: 'Chat',
         ),
         NavigationDestination(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.person, color: ThemeColors.grey2ThemeColor),
+          selectedIcon: Icon(Icons.person, color: ThemeColors.primaryThemeColor),
           label: 'Profile',
         ),
       ],
@@ -37,9 +42,10 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
         });
       },
       selectedIndex: currentPageIndex,
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       elevation: 10,
-      surfaceTintColor: Colors.limeAccent,
+      // surfaceTintColor: Colors.blue,
+      indicatorColor: Colors.white,
     );
   }
 }
