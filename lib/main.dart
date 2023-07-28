@@ -43,8 +43,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         builder: EasyLoading.init(),
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          useMaterial3: true,
+          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          // useMaterial3: true,
+          primarySwatch: Colors.blue,
+          fontFamily: 'Montserrat',
         ),
         initialRoute: '/',
         onGenerateRoute: generateRoute,
