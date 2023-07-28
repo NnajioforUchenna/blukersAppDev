@@ -41,7 +41,7 @@ class _OptionBoxState extends State<OptionBox> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
             side: _isHovering
-                ? BorderSide(color: Colors.pink, width: 2.0)
+                ? BorderSide(color: ThemeColors.primaryThemeColor, width: 2.0)
                 : BorderSide.none,
           ),
           child: Container(

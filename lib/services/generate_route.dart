@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../views/common_views/landing_page/landing_page.dart';
+import '../views/common_views/landing_page_components/landing_page.dart';
 import '../views/company/workers.dart';
 import '../views/worker/jobs.dart';
 
