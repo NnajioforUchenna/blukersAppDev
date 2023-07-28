@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/styles/index.dart';
 
 class MyNavigationRail extends StatefulWidget {
   const MyNavigationRail({super.key});
@@ -21,19 +22,19 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
     return NavigationRail(
       selectedIndex: _selectedIndex,
       onDestinationSelected: changeDestination,
-      minWidth: 100,
+      minWidth: 80,
       labelType: NavigationRailLabelType.all,
-      selectedIconTheme: const IconThemeData(color: Colors.white),
-      selectedLabelTextStyle: TextStyle(color: Colors.lightBlue[500]),
-      unselectedLabelTextStyle: const TextStyle(color: Colors.white70),
+      selectedIconTheme: const IconThemeData(color: ThemeColors.primaryThemeColor),
+      selectedLabelTextStyle: TextStyle(color: ThemeColors.primaryThemeColor),
+      unselectedLabelTextStyle: const TextStyle(color: ThemeColors.grey1ThemeColor),
       elevation: 5,
-      useIndicator: true,
-      backgroundColor: Colors.blue[200],
-      indicatorColor: Colors.pink,
+      useIndicator: false,
+      backgroundColor: Colors.white,
+      indicatorColor: Colors.white,
       leading: Column(
         children: [
           Image.asset(
-            'assets/images/logo.png',
+            'assets/images/looking_for_you.png',
             fit: BoxFit.contain,
             width: 150,
           ),
@@ -45,20 +46,24 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
       // trailing: const MyTrailingWidget(),
       destinations: const <NavigationRailDestination>[
         NavigationRailDestination(
-          icon: Icon(Icons.groups),
-          label: Text('Workers'),
-          padding: EdgeInsets.all(16.0),
+          icon: Icon(Icons.home, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: Icon(Icons.home, color: ThemeColors.primaryThemeColor),
+          label: Text('Home'),
+          // padding: EdgeInsets.all(16.0),
         ),
         NavigationRailDestination(
-          icon: Icon(Icons.work_history),
-          label: Text('Explore'),
+          icon: Icon(Icons.work, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: Icon(Icons.work, color: ThemeColors.primaryThemeColor),
+          label: Text('My Jobs'),
         ),
         NavigationRailDestination(
-          icon: Icon(Icons.chat),
+          icon: Icon(Icons.chat, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: Icon(Icons.chat, color: ThemeColors.primaryThemeColor),
           label: Text('Chat'),
         ),
         NavigationRailDestination(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.person, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: Icon(Icons.person, color: ThemeColors.primaryThemeColor),
           label: Text('Profile'),
         ),
       ],
