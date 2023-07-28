@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 import 'option_box.dart';
+import '../../../utils/styles/index.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -22,27 +23,25 @@ class LandingPage extends StatelessWidget {
                 fit: BoxFit.contain,
               ),
             ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Transform.translate(
               offset: const Offset(0, -60),
               child: const Text(
-                "Bulkers: Bridging Blue Collars Worldwide!",
+                "Dream. Build. Connect.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: ThemeTextStyles.landingPageSubtitleThemeTextStyle,
               ),
             ),
             const SizedBox(
-              height: 40,
+              height: 25,
             ),
             // Third section: Question to the user
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text("What are you seeking?",
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.ebGaramond(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.pink,
-                  )),
+                  style: ThemeTextStyles.landingPageQuestionThemeTextStyle,
+                ),
             ),
             const SizedBox(
               height: 10,
