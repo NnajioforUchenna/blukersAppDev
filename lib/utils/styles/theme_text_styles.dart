@@ -41,7 +41,7 @@ abstract class ThemeTextStyles {
   static const TextStyle landingPageSubtitleThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
     color: ThemeColors.primaryThemeColor,
-    fontSize: 22,
+    fontSize: 28,
     height: 0.5,
     fontWeight: FontWeight.w600,
   );
