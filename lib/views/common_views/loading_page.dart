@@ -20,7 +20,7 @@ class LoadingPage extends StatelessWidget {
             ),
             SizedBox(height: 50), // space between progress bar and text
             Text(
-              'Getting Records from Database...',
+              'Loading...',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
