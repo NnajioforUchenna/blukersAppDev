@@ -7,8 +7,8 @@ class ThemeColors {
   static const blukersBlueThemeColor = Color.fromRGBO(30, 117, 187, 1); // #1E75BB
   static const blukersOrangeThemeColor = Color.fromRGBO(242, 100, 34, 1); // #F26422
 
-  static final primaryThemeColor = blukersBlueColor;
-  static final secondaryThemeColor = blukersOrangeColor;
+  static final primaryThemeColor = Color.fromRGBO(30, 117, 187, 1); // #1E75BB
+  static final secondaryThemeColor = Color.fromRGBO(242, 100, 34, 1); // #F26422
 
   static final black1ThemeColor = Color.fromRGBO(25, 25, 25, 0.95); // #
   static final black2ThemeColor = Color.fromRGBO(0, 0, 0, 0.85); // #

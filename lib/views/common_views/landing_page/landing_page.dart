@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 import 'option_box.dart';
+import '../../../utils/styles/index.dart';
 
 class LandingPage extends StatelessWidget {
   @override

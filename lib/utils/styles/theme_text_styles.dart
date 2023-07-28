@@ -10,25 +10,25 @@ abstract class ThemeTextStyles {
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle headerThemeTextStyle = TextStyle(
+  static TextStyle headerThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
-    color: ThemeColors.black1,
+    color: ThemeColors.black1ThemeColor,
     fontSize: 40,
     height: 0.5,
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle bodyThemeTextStyle = TextStyle(
+  static TextStyle bodyThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
-    color: ThemeColors.black1,
+    color: ThemeColors.black1ThemeColor,
     fontSize: 10,
     height: 0.5,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle bottomNavThemeTextStyle = TextStyle(
+  static TextStyle bottomNavThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
-    color: ThemeColors.black1,
+    color: ThemeColors.black1ThemeColor,
     fontSize: 10,
     height: 0.5,
     fontWeight: FontWeight.w400,
