@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'industry_body_panel.dart';
 import 'industry_head_panel.dart';
 
+import '../../../utils/styles/index.dart';
+
 class DisplayIndustry extends StatelessWidget {
   final Industry industry;
   const DisplayIndustry({super.key, required this.industry});
@@ -13,16 +15,19 @@ class DisplayIndustry extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: IndustryHeadPanel(industry: industry),
+      backgroundColor: Colors.grey.shade100,
+      collapsedBackgroundColor: Colors.white,
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text("Please select the Job Type?",
+          child: Text("Select a Job",
               textAlign: TextAlign.center,
-              style: GoogleFonts.ebGaramond(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.pink,
-              )),
+                color: ThemeColors.secondaryThemeColor,
+              )
+            ),
         ),
         IndustryBodyPanel(jobs: industry.jobs),
       ],

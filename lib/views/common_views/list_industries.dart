@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import '../../providers/industry_provider.dart';
 import 'display_industry.dart';
 
+import '../../../utils/styles/index.dart';
+
 class ListIndustries extends StatelessWidget {
   const ListIndustries({super.key});
 
@@ -21,14 +23,25 @@ class ListIndustries extends StatelessWidget {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
+        return Container(
+          color: ThemeColors.grey2ThemeColor,
+          child: Column(
+            children: [
+              // // SizedBox(height: 10),
+              // Divider(
+              //   height: 1,
+              //   color: ThemeColors.grey2ThemeColor,
+              // ),
+            ],
+          )
+        );
         return const Column(
           children: [
-            SizedBox(
-              height: 10,
-            ),
-            Divider(
-              color: Colors.blueGrey,
-            ),
+            // // SizedBox(height: 10),
+            // Divider(
+            //   height: 1,
+            //   color: ThemeColors.grey2ThemeColor,
+            // ),
           ],
         );
       },

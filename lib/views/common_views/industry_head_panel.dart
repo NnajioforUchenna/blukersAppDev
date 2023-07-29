@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 
 import '../../models/industry.dart';
 
+import '../../../utils/styles/index.dart';
+
 class IndustryHeadPanel extends StatelessWidget {
   final Industry industry;
   const IndustryHeadPanel({super.key, required this.industry});
@@ -12,27 +14,32 @@ class IndustryHeadPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              industry.name,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+    return Container(
+      // color: Colors.red,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                industry.name,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColors.grey1ThemeColor,
+                ),
               ),
-            ),
-            Spacer(),
-            ApplicantCount(
-                count: up.userType == 'company'
-                    ? industry.getApplicantCount()
-                    : industry.getNumberOfJobPosts(),
-                color: Colors.red),
-          ],
-        ),
-      ],
+              Spacer(),
+              ApplicantCount(
+                  count: up.userType == 'company'
+                      ? industry.getApplicantCount()
+                      : industry.getNumberOfJobPosts(),
+                  color: ThemeColors.grey1ThemeColor,
+                ),
+            ],
+          ),
+        ],
+      )
     );
   }
 }
