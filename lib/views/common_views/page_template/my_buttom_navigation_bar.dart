@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../utils/styles/index.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 class MyButtomNavigationBar extends StatefulWidget {
   const MyButtomNavigationBar({super.key});

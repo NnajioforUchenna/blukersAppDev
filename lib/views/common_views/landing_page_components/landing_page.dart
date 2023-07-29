@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider.dart';
+import 'package:bulkers/providers/user_provider.dart';
 import 'option_box.dart';
-import '../../../utils/styles/index.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 class LandingPage extends StatelessWidget {
   @override

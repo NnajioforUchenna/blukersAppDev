@@ -2,10 +2,9 @@ import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/views/common_views/applicant_count.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 import '../../models/industry.dart';
-
-import '../../../utils/styles/index.dart';
 
 class IndustryHeadPanel extends StatelessWidget {
   final Industry industry;

@@ -1,11 +1,11 @@
 import 'package:bulkers/models/industry.dart';
+import 'package:bulkers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 import '../../providers/industry_provider.dart';
 import 'display_industry.dart';
-
-import '../../../utils/styles/index.dart';
 
 class ListIndustries extends StatelessWidget {
   const ListIndustries({super.key});

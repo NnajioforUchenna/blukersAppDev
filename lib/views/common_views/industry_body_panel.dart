@@ -2,14 +2,13 @@ import 'package:bulkers/providers/job_posts_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 import '../../models/job.dart';
 import '../../providers/user_provider.dart';
 import '../company/workers_components/display_workers.dart';
 import '../worker/jobs_componets/display_jobs.dart';
 import 'applicant_count.dart';
-
-import '../../../utils/styles/index.dart';
 
 class IndustryBodyPanel extends StatelessWidget {
   final List<Job> jobs;

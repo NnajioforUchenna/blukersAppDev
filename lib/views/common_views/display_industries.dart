@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:bulkers/utils/styles/index.dart';
+import 'package:bulkers/services/responsive.dart';
 
 import 'list_industries.dart';
-
-import '../../../utils/styles/index.dart';
 
 class DisplayIndustries extends StatelessWidget {
   const DisplayIndustries({super.key});
@@ -27,7 +27,9 @@ class DisplayIndustries extends StatelessWidget {
           const SizedBox(height: 10),
           // Industries List View
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: (Responsive.isDesktop(context))
+              ? MediaQuery.of(context).size.width * 0.6
+              : MediaQuery.of(context).size.width * 0.8,
             height: MediaQuery.of(context).size.height * 0.8,
             child: Container(
               clipBehavior: Clip.hardEdge,

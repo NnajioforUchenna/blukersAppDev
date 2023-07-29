@@ -1,11 +1,10 @@
 import 'package:bulkers/models/industry.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 import 'industry_body_panel.dart';
 import 'industry_head_panel.dart';
-
-import '../../../utils/styles/index.dart';
 
 class DisplayIndustry extends StatelessWidget {
   final Industry industry;
@@ -20,7 +19,7 @@ class DisplayIndustry extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text("Select a Job",
+          child: Text("Select a Job Position",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
