@@ -10,8 +10,10 @@ class DisplayWorkerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(32.0))),
       child: Stack(
-        alignment: Alignment.topRight,
+        alignment: Alignment.topCenter,
         children: <Widget>[
           Column(
             children: [

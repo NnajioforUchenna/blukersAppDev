@@ -13,11 +13,24 @@ class WorkerDisplayWidget extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Profile Picture
           if (worker.profilePhotoUrl != null)
             Image.network(worker.profilePhotoUrl!),
+          // Container(
+          //     width: 100, // Adjust size as necessary
+          //     height: 100, // Adjust size as necessary
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(100), // Rounded rectangle
+          //       image: DecorationImage(
+          //         image: NetworkImage(worker.profilePhotoUrl!),
+          //         fit: BoxFit.cover,
+          //       ),
+          //     ),
+          //   ),
+          
           const SizedBox(height: 10.0),
 
           // Full Name

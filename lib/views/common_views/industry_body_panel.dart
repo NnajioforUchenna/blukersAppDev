@@ -84,7 +84,7 @@ class IndustryBodyPanel extends StatelessWidget {
                   ],
                 ),
                 subtitle: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 4.0, bottom: 6.0),
                   child: Text(
                     'Salary: ${job.lowRange} - ${job.highRange}',
                     style: const TextStyle(

@@ -11,7 +11,7 @@ class DisplayJobPostDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Stack(
-        alignment: Alignment.topRight,
+        alignment: Alignment.topCenter,
         children: <Widget>[
           Column(
             children: [

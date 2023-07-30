@@ -3,6 +3,7 @@ import 'package:bulkers/providers/job_posts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 import 'display_job_post_dialog.dart';
 
@@ -16,13 +17,19 @@ class DisplayJobs extends StatelessWidget {
     final List<JobPost> jobPosts = jp.selectedJobPosts;
     return Scaffold(
       appBar: AppBar(
-          title: Text('Jobs listed under $title',
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: ThemeColors.primaryThemeColor,
+          ),
+          elevation: 0,
+          title: Text('$title (Jobs)',
               textAlign: TextAlign.center,
-              style: GoogleFonts.ebGaramond(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.pink,
-              ))),
+                color: ThemeColors.primaryThemeColor,
+              ),
+            )),
       body: ListView.separated(
         padding:
             const EdgeInsets.all(10), // Added to give some space around cards
@@ -30,7 +37,11 @@ class DisplayJobs extends StatelessWidget {
         itemBuilder: (context, index) {
           final jobPost = jobPosts[index];
           return Card(
-            elevation: 5,
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: ThemeColors.primaryThemeColor, width: 2),
+              borderRadius: BorderRadius.circular(15),
+            ),
             margin: const EdgeInsets.symmetric(
                 vertical: 10, horizontal: 0), // Adjust for spacing
             child: ListTile(
@@ -45,14 +56,21 @@ class DisplayJobs extends StatelessWidget {
                           jobPost: jobPost,
                         ));
               },
-              title: Text('${jobPost.jobTitle} '),
+              title: Text(
+                '${jobPost.jobTitle} ',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColors.primaryThemeColor,
+                ),
+              ),
               subtitle: Text(jobPost.jobDescription),
               leading: Container(
                 width: 50, // Adjust size as necessary
                 height: 50, // Adjust size as necessary
                 decoration: BoxDecoration(
                     borderRadius:
-                        BorderRadius.circular(15), // Rounded rectangle
+                        BorderRadius.circular(100), // Rounded rectangle
                     image: const DecorationImage(
                       image: NetworkImage("https://picsum.photos/200/300"),
                       fit: BoxFit.cover,
@@ -65,7 +83,7 @@ class DisplayJobs extends StatelessWidget {
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(
-            height: 10,
+            height: 5,
           );
         },
       ),
