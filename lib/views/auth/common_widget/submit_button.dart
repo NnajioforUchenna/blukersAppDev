@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
-  SubmitButton({super.key, required this.onTap, required this.text});
+  const SubmitButton(
+      {super.key,
+      required this.onTap,
+      required this.text,
+      required this.isDisabled});
   final VoidCallback onTap;
   final String text;
+  final bool isDisabled;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isDisabled ? null : onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.symmetric(vertical: 12),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.deepOrangeAccent,
+          color: isDisabled ? Colors.grey : Colors.deepOrangeAccent,
           borderRadius: const BorderRadius.all(Radius.circular(50)),
           boxShadow: <BoxShadow>[
             BoxShadow(

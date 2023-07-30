@@ -26,7 +26,7 @@ class IndustryBodyPanel extends StatelessWidget {
         final job = jobs[index];
         return InkWell(
           onTap: () {
-            if (up.userType == 'company') {
+            if (up.userRole == 'company') {
               wp.getWorkersByJobID(job.jobId);
               // navigate anonymously to the DisplayWorkers page
               Navigator.of(context).push(
@@ -56,7 +56,7 @@ class IndustryBodyPanel extends StatelessWidget {
                   children: [
                     Text(job.title),
                     ApplicantCount(
-                        count: up.userType == 'company'
+                        count: up.userRole == 'company'
                             ? job.numberOfApplicants
                             : job.numberOfJobPosts,
                         color: Colors.blueGrey)

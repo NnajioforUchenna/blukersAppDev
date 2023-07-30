@@ -36,12 +36,12 @@ class WorkerDisplayWidget extends StatelessWidget {
           const SizedBox(height: 10.0),
 
           // Skills
-          Text('Skills: ${worker.skillIds.join(', ')}'),
+          Text('Skills: ${worker.skillIds?.join(', ')}'),
 
           const SizedBox(height: 10.0),
 
           // Birthdate
-          Text('Birthdate: ${worker.birthdate.toLocal().toIso8601String()}'),
+          Text('Birthdate: ${worker.birthdate?.toLocal().toIso8601String()}'),
 
           const SizedBox(height: 10.0),
 

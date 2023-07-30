@@ -14,9 +14,6 @@ class CompanyLogo extends StatelessWidget {
           width: 270,
           // height: 45,
         ),
-        const SizedBox(
-          width: 10,
-        ),
       ],
     );
   }

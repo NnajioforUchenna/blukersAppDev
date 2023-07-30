@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+
+import '../../../../providers/user_provider.dart';
+import '../../../../utils/styles/index.dart';
 
 const deliverySteps = [
   'Login Information',
@@ -12,17 +16,17 @@ const List<Icon> icons = [
   Icon(
     Icons.login,
     color: Colors.white,
-    size: 40,
+    size: 30,
   ),
   Icon(
     Icons.person,
     color: Colors.white,
-    size: 40,
+    size: 30,
   ),
   Icon(
     Icons.contact_phone,
     color: Colors.white,
-    size: 40,
+    size: 30,
   ),
 ];
 
@@ -35,72 +39,67 @@ class SignUpTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const currentStep = 0;
+    UserProvider up = Provider.of<UserProvider>(context);
+    var currentStep = up.registerCurrentPageIndex;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(currentStep * 120.0);
     });
 
-    return CustomScrollView(
-      slivers: [
-        SliverList(
-            delegate: SliverChildListDelegate([
-          Container(
-            margin: const EdgeInsets.all(8),
-            constraints: const BoxConstraints(maxHeight: 150),
-            decoration: BoxDecoration(
-              color: Colors.blue, // Set the background color of the container
-              borderRadius: BorderRadius.circular(20), // Set the border radius
+    return Container(
+      margin: const EdgeInsets.all(8),
+      constraints: const BoxConstraints(maxHeight: 140),
+      decoration: BoxDecoration(
+        color: ThemeColors
+            .primaryThemeColor, // Set the background color of the container
+        borderRadius: BorderRadius.circular(20), // Set the border radius
+      ),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        controller: _scrollController,
+        itemCount: deliverySteps.length,
+        itemBuilder: (BuildContext context, int index) {
+          final step = deliverySteps[index];
+          var indicatorSize = 30.0;
+          var beforeLineStyle = LineStyle(
+            color: Colors.white.withOpacity(0.8),
+          );
+          LineStyle afterLineStyle = const LineStyle(color: Color(0xFF747888));
+
+          _DeliveryStatus status;
+
+          if (index < currentStep) {
+            status = _DeliveryStatus.done;
+            afterLineStyle = const LineStyle(color: Colors.white);
+          } else if (index > currentStep) {
+            status = _DeliveryStatus.todo;
+            indicatorSize = 20;
+            beforeLineStyle = const LineStyle(color: Color(0xFF747888));
+          } else {
+            // afterLineStyle = const LineStyle(color: Colors.white);
+            status = _DeliveryStatus.doing;
+          }
+
+          return TimelineTile(
+            axis: TimelineAxis.horizontal,
+            alignment: TimelineAlign.manual,
+            lineXY: 0.6,
+            isFirst: index == 0,
+            isLast: index == deliverySteps.length - 1,
+            beforeLineStyle: beforeLineStyle,
+            afterLineStyle: afterLineStyle,
+            indicatorStyle: IndicatorStyle(
+              width: indicatorSize,
+              height: indicatorSize,
+              indicator: _IndicatorDelivery(status: status),
             ),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              controller: _scrollController,
-              itemCount: deliverySteps.length,
-              itemBuilder: (BuildContext context, int index) {
-                final step = deliverySteps[index];
-                var indicatorSize = 30.0;
-                var beforeLineStyle = LineStyle(
-                  color: Colors.white.withOpacity(0.8),
-                );
-
-                _DeliveryStatus status;
-
-                LineStyle afterLineStyle =
-                    const LineStyle(color: Color(0xFF747888));
-                if (index < currentStep) {
-                  status = _DeliveryStatus.done;
-                } else if (index > currentStep) {
-                  status = _DeliveryStatus.todo;
-                  indicatorSize = 20;
-                  beforeLineStyle = const LineStyle(color: Color(0xFF747888));
-                } else {
-                  afterLineStyle = const LineStyle(color: Color(0xFF747888));
-                  status = _DeliveryStatus.doing;
-                }
-
-                return TimelineTile(
-                  axis: TimelineAxis.horizontal,
-                  alignment: TimelineAlign.manual,
-                  lineXY: 0.6,
-                  isFirst: index == 0,
-                  isLast: index == deliverySteps.length - 1,
-                  beforeLineStyle: beforeLineStyle,
-                  afterLineStyle: afterLineStyle,
-                  indicatorStyle: IndicatorStyle(
-                    width: indicatorSize,
-                    height: indicatorSize,
-                    indicator: _IndicatorDelivery(status: status),
-                  ),
-                  startChild: _StartChildDelivery(index: index),
-                  endChild: _EndChildDelivery(
-                    text: step,
-                    current: index == currentStep,
-                  ),
-                );
-              },
+            startChild: _StartChildDelivery(index: index),
+            endChild: _EndChildDelivery(
+              text: step,
+              current: index == currentStep,
             ),
-          )
-        ])),
-      ],
+          );
+        },
+      ),
     );
   }
 }
@@ -140,7 +139,9 @@ class _EndChildDelivery extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.sniglet(
                     fontSize: 16,
-                    color: current ? const Color(0xFF2ACA8E) : Colors.white,
+                    color: current
+                        ? ThemeColors.secondaryThemeColor
+                        : Colors.white,
                   ),
                 ),
               ),
@@ -174,7 +175,7 @@ class _IndicatorDelivery extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Color(0xFF2ACA8E),
+            color: ThemeColors.secondaryThemeColor,
           ),
           child: const Center(
             child: SizedBox(

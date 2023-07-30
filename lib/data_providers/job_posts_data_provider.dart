@@ -6,8 +6,7 @@ class JobPostsDataProvider {
   static Future<List<Map<String, dynamic>>> getJobPostsByJobID(
       String jobId) async {
     // Create a reference to the Firestore collection
-    CollectionReference jobPosts =
-        FirebaseFirestore.instance.collection('JobPosts');
+    CollectionReference jobPosts = _firestore.collection('JobPosts');
 
     // Query the collection: Fetch documents where jobId is in the jobPositionIds field
     QuerySnapshot querySnapshot =

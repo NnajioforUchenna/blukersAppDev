@@ -1,0 +1,35 @@
+import 'package:bulkers/utils/styles/index.dart';
+import 'package:flutter/material.dart';
+
+import 'common_widget/company_logo.dart';
+import 'registration_process_component/page_slider.dart';
+import 'registration_process_component/sign_up_timeline.dart';
+
+class RegistrationProcess extends StatelessWidget {
+  RegistrationProcess({super.key});
+  // PageSlider controller
+  final PageController _pageController = PageController(initialPage: 0);
+  // Function to go to the next page in PageSlider
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Center(
+          child: Text(
+            'Registration Process',
+            style: ThemeTextStyles.headerThemeTextStyle,
+          ),
+        ),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverList(
+              delegate: SliverChildListDelegate(
+                  [SignUpTimeline(), const CompanyLogo(), const PageSlider()]))
+        ],
+      ),
+    );
+  }
+}

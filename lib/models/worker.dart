@@ -5,90 +5,133 @@ import 'work_experience.dart';
 enum WorkStatus { activelyLooking, hired }
 
 class Worker {
-  final String workerId;
-  final String firstName;
-  final String?
-      middleName; // Made optional because not everyone has a middle name.
-  final String lastName;
-  final String? profilePhotoUrl;
-  final List<String> industryIds;
-  final List<String> jobPositionIds;
-  final List<String> skillIds;
-  final List<String>? activeMemberships;
-  final WorkStatus workStatus;
-  final List<Address>? addresses;
-  final DateTime birthdate;
-  final List<WorkExperience>? workExperiences;
-  final List<Reference>? references;
-  final List<String> savedJobPostIds;
-  final List<String> appliedJobPostIds;
-  final List<String> workerBadgeIds;
-  final List<String> certificationsIds;
-  final List<String> workerVerificationsIds;
-  final String? pdfResumeUrl;
-  final String? onlineResume;
-  final bool isVerified;
-  final bool isBasicProfileCompleted;
-  final bool isProfileUpdateNeeded;
+  String workerId;
+  String firstName;
+  String? middleName;
+  String lastName;
+  List<String> emails;
+  String? workerBriefDescription;
+  String? profilePhotoUrl;
+  List<String>? industryIds;
+  List<String>? jobPositionIds;
+  List<String>? skillIds;
+  List<String>? activeMemberships;
+  WorkStatus? workStatus;
+  List<Address>? addresses;
+  DateTime? birthdate;
+  List<WorkExperience>? workExperiences;
+  List<Reference>? references;
+  List<String>? savedJobPostIds;
+  List<String>? appliedJobPostIds;
+  List<String>? workerBadgeIds;
+  List<String>? certificationsIds;
+  List<String>? workerVerificationsIds;
+  String? pdfResumeUrl;
+  String? onlineResume;
+  bool? isVerified;
+  bool? isBasicProfileCompleted;
+  bool? isProfileUpdateNeeded;
 
   Worker({
     required this.workerId,
     required this.firstName,
-    this.middleName,
     required this.lastName,
+    required this.emails,
+    this.workerBriefDescription,
     this.profilePhotoUrl,
-    required this.industryIds,
-    required this.jobPositionIds,
-    required this.skillIds,
+    this.industryIds,
+    this.jobPositionIds,
+    this.skillIds,
     this.activeMemberships,
-    required this.workStatus,
+    this.workStatus,
     this.addresses,
-    required this.birthdate,
+    this.birthdate,
     this.workExperiences,
     this.references,
-    required this.savedJobPostIds,
-    required this.appliedJobPostIds,
-    required this.workerBadgeIds,
-    required this.certificationsIds,
-    required this.workerVerificationsIds,
+    this.savedJobPostIds,
+    this.appliedJobPostIds,
+    this.workerBadgeIds,
+    this.certificationsIds,
+    this.workerVerificationsIds,
     this.pdfResumeUrl,
     this.onlineResume,
-    required this.isVerified,
-    required this.isBasicProfileCompleted,
-    required this.isProfileUpdateNeeded,
+    this.isVerified,
+    this.isBasicProfileCompleted,
+    this.isProfileUpdateNeeded,
+    required middleName,
   });
 
+  Worker.fromSignUp({
+    required this.workerId,
+    required this.firstName,
+    required this.lastName,
+    required String email,
+    required String this.workerBriefDescription,
+  })  : emails = [email],
+        isBasicProfileCompleted = true;
+
   Map<String, dynamic> toMap() {
-    return {
+    Map<String, dynamic> map = {
       'workerId': workerId,
       'firstName': firstName,
-      'middleName': middleName,
       'lastName': lastName,
-      'profilePhotoUrl': profilePhotoUrl,
-      'industryIds': industryIds,
-      'jobPositionIds': jobPositionIds,
-      'skillIds': skillIds,
-      'activeMemberships': activeMemberships,
-      'workStatus': workStatus.index,
-      'addresses': addresses?.map((address) => address.toMap()).toList(),
-      'birthdate': birthdate.toIso8601String(),
-      'workExperiences': workExperiences
-          ?.map((we) => we.toMap())
-          .toList(), // Assuming WorkExperience has toMap method
-      'references': references
-          ?.map((ref) => ref.toMap())
-          .toList(), // Assuming Reference has toMap method
-      'savedJobPostIds': savedJobPostIds,
-      'appliedJobPostIds': appliedJobPostIds,
-      'workerBadgeIds': workerBadgeIds,
-      'certificationsIds': certificationsIds,
-      'workerVerificationsIds': workerVerificationsIds,
-      'pdfResumeUrl': pdfResumeUrl,
-      'onlineResume': onlineResume,
-      'isVerified': isVerified,
-      'isBasicProfileCompleted': isBasicProfileCompleted,
-      'isProfileUpdateNeeded': isProfileUpdateNeeded,
     };
+
+    if (profilePhotoUrl != null) map['profilePhotoUrl'] = profilePhotoUrl;
+    if (emails.isNotEmpty) map['emails'] = emails;
+    if (industryIds != null) map['industryIds'] = industryIds;
+    if (jobPositionIds != null) map['jobPositionIds'] = jobPositionIds;
+    if (skillIds != null) map['skillIds'] = skillIds;
+    if (birthdate != null && birthdate != DateTime.now()) {
+      map['birthdate'] = birthdate!.toIso8601String();
+    }
+    if (savedJobPostIds != null) map['savedJobPostIds'] = savedJobPostIds;
+    if (appliedJobPostIds != null) {
+      map['appliedJobPostIds'] = appliedJobPostIds;
+    }
+    if (workerBadgeIds != null) map['workerBadgeIds'] = workerBadgeIds;
+    if (certificationsIds != null) {
+      map['certificationsIds'] = certificationsIds;
+    }
+    if (workerVerificationsIds != null) {
+      map['workerVerificationsIds'] = workerVerificationsIds;
+    }
+    if (pdfResumeUrl != null) map['pdfResumeUrl'] = pdfResumeUrl;
+    if (onlineResume != null) map['onlineResume'] = onlineResume;
+    if (workerBriefDescription != null && workerBriefDescription!.isNotEmpty) {
+      map['workerBriefDescription'] = workerBriefDescription;
+    }
+    if (activeMemberships != null && activeMemberships!.isNotEmpty) {
+      map['activeMemberships'] = activeMemberships;
+    }
+    if (workStatus == WorkStatus.activelyLooking) {
+      map['workStatus'] = 'activelyLooking';
+    } else {
+      map['workStatus'] = 'hired';
+    }
+
+    // Other checks for remaining properties
+    if (addresses != null && addresses!.isNotEmpty) {
+      map['addresses'] = addresses!.map((address) => address.toMap()).toList();
+    }
+    if (workExperiences != null && workExperiences!.isNotEmpty) {
+      map['workExperiences'] =
+          workExperiences!.map((exp) => exp.toMap()).toList();
+    }
+    if (references != null && references!.isNotEmpty) {
+      map['references'] = references!.map((ref) => ref.toMap()).toList();
+    }
+    if (isVerified != null) {
+      map['isVerified'] = isVerified;
+    }
+    if (isBasicProfileCompleted != null) {
+      map['isBasicProfileCompleted'] = isBasicProfileCompleted;
+    }
+    if (isProfileUpdateNeeded != null) {
+      map['isProfileUpdateNeeded'] = isProfileUpdateNeeded;
+    }
+
+    return map;
   }
 
   // Inside the Worker class...
@@ -136,6 +179,8 @@ class Worker {
       isVerified: map['isVerified'],
       isBasicProfileCompleted: map['isBasicProfileCompleted'],
       isProfileUpdateNeeded: map['isProfileUpdateNeeded'],
+      workerBriefDescription: map['workerBriefDescription'] ?? "",
+      emails: map['emails'] ?? [],
     );
   }
 }

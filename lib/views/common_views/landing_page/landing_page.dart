@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
-import 'option_box.dart';
 import '../../../utils/styles/index.dart';
+import 'option_box.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -36,12 +35,13 @@ class LandingPage extends StatelessWidget {
               height: 25,
             ),
             // Third section: Question to the user
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text("What are you seeking?",
-                  textAlign: TextAlign.center,
-                  style: ThemeTextStyles.landingPageQuestionThemeTextStyle,
-                ),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                "What are you seeking?",
+                textAlign: TextAlign.center,
+                style: ThemeTextStyles.landingPageQuestionThemeTextStyle,
+              ),
             ),
             const SizedBox(
               height: 10,
@@ -55,7 +55,7 @@ class LandingPage extends StatelessWidget {
                     icon: Icons.work,
                     title: "A Job",
                     onTap: () {
-                      up.userType = "worker";
+                      up.userRole = "worker";
                       Navigator.pushNamed(context, '/jobs');
                     }),
 
@@ -64,7 +64,7 @@ class LandingPage extends StatelessWidget {
                   icon: Icons.group,
                   title: "Workers",
                   onTap: () {
-                    up.userType = "company";
+                    up.userRole = "company";
                     Navigator.pushNamed(context, '/workers');
                   },
                 ),

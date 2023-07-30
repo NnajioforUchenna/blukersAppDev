@@ -26,7 +26,7 @@ class IndustryHeadPanel extends StatelessWidget {
             ),
             Spacer(),
             ApplicantCount(
-                count: up.userType == 'company'
+                count: up.userRole == 'company'
                     ? industry.getApplicantCount()
                     : industry.getNumberOfJobPosts(),
                 color: Colors.red),

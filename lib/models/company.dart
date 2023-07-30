@@ -1,26 +1,26 @@
 import 'address.dart';
 
 class Company {
-  final String companyId;
-  final String? logoUrl; // Nullable
-  final String? wallpaperUrl; // Nullable
-  final String name;
-  final String? companyDescription; // Nullable
-  final List<String> emails; // At least one is necessary
-  final List<String> phoneNumbers; // At least one is necessary
-  final List<Address>? addresses; // Nullable
-  final int? yearFounded; // Nullable
-  final int? totalEmployees; // Nullable
-  final List<String>? industryIds; // Nullable
-  final List<String>? jobPostIds; // Nullable
-  final List<String>? companyBadgeIds; // Nullable
-  final List<String>? companyCertificationIds; // Nullable
-  final List<String>? companyVerificationIds; // Nullable
-  final List<String>? companyPhotoUrls; // Nullable
-  final List<String>? companyReviewIds; // Nullable
-  final bool? isVerified; // Nullable
-  final bool? isBasicProfileCompleted; // Nullable
-  final bool? isProfileUpdateNeeded; // Nullable
+  String companyId;
+  String? logoUrl;
+  String? wallpaperUrl;
+  String name;
+  String? companyDescription;
+  List<String> emails;
+  List<String> phoneNumbers;
+  List<Address>? addresses;
+  int? yearFounded;
+  int? totalEmployees;
+  List<String>? industryIds;
+  List<String>? jobPostIds;
+  List<String>? companyBadgeIds;
+  List<String>? companyCertificationIds;
+  List<String>? companyVerificationIds;
+  List<String>? companyPhotoUrls;
+  List<String>? companyReviewIds;
+  bool? isVerified;
+  bool? isBasicProfileCompleted;
+  bool? isProfileUpdateNeeded;
 
   Company({
     required this.companyId,
@@ -45,29 +45,58 @@ class Company {
     this.isProfileUpdateNeeded,
   });
 
+  Company.fromSignUp({
+    required String companyId,
+    required String name,
+    required List<String> emails,
+    required String companyDescription,
+  }) : this(
+          companyId: companyId,
+          name: name,
+          emails: emails,
+          phoneNumbers: [],
+          companyDescription: companyDescription,
+          isBasicProfileCompleted: true,
+        );
+
   Map<String, dynamic> toMap() {
-    return {
+    Map<String, dynamic> map = {
       'companyId': companyId,
-      'logoUrl': logoUrl,
-      'wallpaperUrl': wallpaperUrl,
       'name': name,
-      'companyDescription': companyDescription,
       'emails': emails,
       'phoneNumbers': phoneNumbers,
-      'addresses': addresses?.map((address) => address.toMap()).toList(),
-      'yearFounded': yearFounded,
-      'totalEmployees': totalEmployees,
-      'industryIds': industryIds,
-      'jobPostIds': jobPostIds,
-      'companyBadgeIds': companyBadgeIds,
-      'companyCertificationIds': companyCertificationIds,
-      'companyVerificationIds': companyVerificationIds,
-      'companyPhotoUrls': companyPhotoUrls,
-      'companyReviewIds': companyReviewIds,
-      'isVerified': isVerified,
-      'isBasicProfileCompleted': isBasicProfileCompleted,
-      'isProfileUpdateNeeded': isProfileUpdateNeeded,
     };
+
+    if (logoUrl != null) map['logoUrl'] = logoUrl;
+    if (wallpaperUrl != null) map['wallpaperUrl'] = wallpaperUrl;
+    if (companyDescription != null) {
+      map['companyDescription'] = companyDescription;
+    }
+    if (addresses != null) {
+      map['addresses'] = addresses?.map((address) => address.toMap()).toList();
+    }
+    if (yearFounded != null) map['yearFounded'] = yearFounded;
+    if (totalEmployees != null) map['totalEmployees'] = totalEmployees;
+    if (industryIds != null) map['industryIds'] = industryIds;
+    if (jobPostIds != null) map['jobPostIds'] = jobPostIds;
+    if (companyBadgeIds != null) map['companyBadgeIds'] = companyBadgeIds;
+    if (companyCertificationIds != null) {
+      map['companyCertificationIds'] = companyCertificationIds;
+    }
+    if (companyVerificationIds != null) {
+      map['companyVerificationIds'] = companyVerificationIds;
+    }
+    if (companyPhotoUrls != null) map['companyPhotoUrls'] = companyPhotoUrls;
+    if (companyReviewIds != null) map['companyReviewIds'] = companyReviewIds;
+    if (isVerified != null) map['isVerified'] = isVerified;
+    if (isBasicProfileCompleted != null) {
+      map['isBasicProfileCompleted'] = isBasicProfileCompleted;
+    }
+    if (isProfileUpdateNeeded != null) {
+      map['isProfileUpdateNeeded'] = isProfileUpdateNeeded;
+    }
+
+    return map;
   }
 
   static Company fromMap(Map<String, dynamic> map) {

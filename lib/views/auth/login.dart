@@ -122,6 +122,7 @@ class _LoginState extends State<Login> {
                     ),
                     SizedBox(height: height * .020),
                     SubmitButton(
+                      isDisabled: true,
                       key: const Key('loginButton'),
                       onTap: () {},
                       text: "Sign In",

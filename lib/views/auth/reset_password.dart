@@ -65,7 +65,8 @@ class ResetPasswordPage extends StatelessWidget {
   }
 
   Widget _buildResetButton() {
-    return SubmitButton(onTap: onResetPassword, text: "Reset Password");
+    return SubmitButton(
+        isDisabled: true, onTap: onResetPassword, text: "Reset Password");
   }
 
   onResetPassword() {
