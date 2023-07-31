@@ -1,14 +1,24 @@
+import 'package:bulkers/services/responsive.dart';
+import 'package:bulkers/utils/styles/index.dart';
+import 'package:bulkers/views/common_views/loading_page.dart';
+import 'package:bulkers/views/company/workers_components/build_list_view_workers.dart';
+import 'package:bulkers/views/company/workers_components/worker_display_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/worker.dart';
 import '../../../providers/worker_provider.dart';
-import 'display_worker_dialog.dart';
 
-class DisplayWorkers extends StatelessWidget {
+class DisplayWorkers extends StatefulWidget {
   final String title;
-  const DisplayWorkers({super.key, required this.title});
+  DisplayWorkers({super.key, required this.title});
+
+  @override
+  State<DisplayWorkers> createState() => _DisplayWorkersState();
+}
+
+class _DisplayWorkersState extends State<DisplayWorkers> {
+  Worker? _selectedWorker;
 
   @override
   Widget build(BuildContext context) {
@@ -16,60 +26,49 @@ class DisplayWorkers extends StatelessWidget {
     final List<Worker> workers = wp.selectedWorkers;
     return Scaffold(
       appBar: AppBar(
-          title: Text('Workers listed under $title',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.ebGaramond(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.pink,
-              ))),
-      body: ListView.separated(
-        padding:
-            const EdgeInsets.all(10), // Added to give some space around cards
-        itemCount: workers.length,
-        itemBuilder: (context, index) {
-          final worker = workers[index];
-          return Card(
-            elevation: 5,
-            margin: const EdgeInsets.symmetric(
-                vertical: 10, horizontal: 0), // Adjust for spacing
-            child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 15), // Add padding for larger appearance
-              onTap: () {
-                print(
-                    'Display details for ${worker.firstName} ${worker.lastName}');
-                showDialog(
-                    context: context,
-                    builder: (context) => DisplayWorkerDialog(
-                          worker: worker,
-                        ));
-              },
-              title: Text('${worker.firstName} ${worker.lastName}'),
-              subtitle: Text(worker.skillIds.toString()),
-              leading: Container(
-                width: 50, // Adjust size as necessary
-                height: 50, // Adjust size as necessary
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15), // Rounded rectangle
-                  image: DecorationImage(
-                    image: NetworkImage(worker.profilePhotoUrl!),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              trailing: Text(worker.workStatus!.toString()),
-              // Add more details for each worker, if needed
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(
+            color: ThemeColors.primaryThemeColor,
+          ),
+          elevation: 0,
+          title: Text(
+            '${widget.title} (Workers)',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: ThemeColors.primaryThemeColor,
             ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(
-            height: 10,
-          );
-        },
-      ),
+          )),
+      body: wp.selectedWorkers.isEmpty
+          ? LoadingPage()
+          : Responsive.isDesktop(context)
+              ? buildWebContent()
+              : const BuildListViewWorkers(),
     );
   }
+
+  Widget buildWebContent() {
+    return const Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        // 1st column
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: BuildListViewWorkers(),
+          ),
+        ),
+        // 2nd column
+        Expanded(
+          flex: 2,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: WorkerDisplayWidget(),
+          ),
+        ),
+      ],
+    );
+  }
+  //
 }

@@ -2,6 +2,7 @@ import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import '../common_files/constants.dart';
 import '../models/address.dart';
 import '../models/app_user.dart';
 import '../models/company.dart';
@@ -15,6 +16,8 @@ class UserProvider with ChangeNotifier {
   int registerCurrentPageIndex = 0;
 
   UserProvider() {}
+
+  int currentPageIndex = 0;
 
   void setRegisterPageIndex() {
     registerCurrentPageIndex++;
@@ -129,5 +132,16 @@ class UserProvider with ChangeNotifier {
 
     EasyLoading.dismiss();
     setRegisterPageIndex();
+  }
+
+  void navigate(BuildContext context, int index) {
+    currentPageIndex = index;
+    if (userRole == "worker") {
+      Navigator.pushNamed(context, routesWorker[index]);
+    } else {
+      Navigator.pushNamed(context, routesCompany[index]);
+    }
+
+    // notifyListeners();
   }
 }

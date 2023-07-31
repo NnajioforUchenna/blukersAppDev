@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 class OptionBox extends StatefulWidget {
-  final IconData icon;
+  final String imgSrc;
   final String title;
   final Function onTap;
   const OptionBox(
       {super.key,
-      required this.icon,
+      required this.imgSrc,
       required this.title,
       required this.onTap});
 
@@ -40,22 +41,30 @@ class _OptionBoxState extends State<OptionBox> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
             side: _isHovering
-                ? BorderSide(color: Colors.pink, width: 2.0)
+                ? BorderSide(color: ThemeColors.primaryThemeColor, width: 2.0)
                 : BorderSide.none,
           ),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.3,
+            width: MediaQuery.of(context).size.height * 0.2,
             height: MediaQuery.of(context).size.height * 0.2,
             padding: EdgeInsets.all(16.0),
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    widget.icon,
-                    size: 50,
+                  Image.asset(
+                    widget.imgSrc,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    fit: BoxFit.cover,
                   ),
-                  Text(widget.title),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  Text(
+                    widget.title,
+                    textAlign: TextAlign.center,
+                    style: ThemeTextStyles.landingPageBtnThemeTextStyle,
+                  ),
                 ],
               ),
             ),

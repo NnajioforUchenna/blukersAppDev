@@ -1,10 +1,11 @@
+import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 
 class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100], // light purple background
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -12,18 +13,19 @@ class LoadingPage extends StatelessWidget {
           children: [
             Transform.scale(
               scale: 2.0, // adjust the scale value to make it bigger or smaller
-              child: CircularProgressIndicator(
+              child: const CircularProgressIndicator(
                 strokeWidth: 5,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.pink[700]!),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    ThemeColors.primaryThemeColor),
               ),
             ),
-            SizedBox(height: 50), // space between progress bar and text
-            Text(
-              'Getting Records from Database...',
+            const SizedBox(height: 50), // space between progress bar and text
+            const Text(
+              'Loading...',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.deepPurple[700],
+                color: ThemeColors.secondaryThemeColor,
               ),
             ),
           ],

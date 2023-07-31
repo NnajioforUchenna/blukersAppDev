@@ -1,4 +1,5 @@
 import 'package:bulkers/models/industry.dart';
+import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,15 +22,8 @@ class ListIndustries extends StatelessWidget {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return const Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            Divider(
-              color: Colors.blueGrey,
-            ),
-          ],
+        return Container(
+          color: ThemeColors.grey2ThemeColor,
         );
       },
     );

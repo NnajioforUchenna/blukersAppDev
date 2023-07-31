@@ -6,6 +6,8 @@ import '../models/job_post.dart';
 class JobPostsProvider with ChangeNotifier {
   Map<String, JobPost> _jobPosts = {};
 
+  JobPost? selectedJobPost;
+
   Map<String, JobPost> get jobPosts => _jobPosts;
 
   List<JobPost> selectedJobPosts = [];
@@ -16,7 +18,13 @@ class JobPostsProvider with ChangeNotifier {
       selectedJobPosts = jobPosts.map((jobPost) {
         return JobPost.fromMap(jobPost);
       }).toList();
+      selectedJobPost = selectedJobPosts.first;
       notifyListeners();
     });
+  }
+
+  void setSelectedJobPost(JobPost jobPost) {
+    selectedJobPost = jobPost;
+    notifyListeners();
   }
 }

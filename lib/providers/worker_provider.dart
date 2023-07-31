@@ -11,8 +11,14 @@ class WorkerProvider with ChangeNotifier {
   Worker? get worker => _worker;
 
   List<Worker> selectedWorkers = [];
+  Worker? selectedWorker;
 
   update(AppUser? user) {}
+
+  setSelectedWorker(Worker worker) {
+    selectedWorker = worker;
+    notifyListeners();
+  }
 
   void getWorkersByJobID(String jobId) {
     // Get all workers for the job with the given jobId.
@@ -20,6 +26,7 @@ class WorkerProvider with ChangeNotifier {
       selectedWorkers = workers.map((worker) {
         return Worker.fromMap(worker);
       }).toList();
+      selectedWorker = selectedWorkers[0];
       notifyListeners();
     });
   }

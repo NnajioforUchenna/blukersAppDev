@@ -1,4 +1,7 @@
+import 'package:bulkers/providers/user_provider.dart';
+import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyButtomNavigationBar extends StatefulWidget {
   const MyButtomNavigationBar({super.key});
@@ -9,37 +12,52 @@ class MyButtomNavigationBar extends StatefulWidget {
 
 class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
   int currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
+    currentPageIndex = up.currentPageIndex;
     return NavigationBar(
       animationDuration: const Duration(milliseconds: 1000),
-      destinations: const <Widget>[
-        NavigationDestination(
-          icon: Icon(Icons.groups),
-          label: 'Workers',
+      destinations: <Widget>[
+        const NavigationDestination(
+          icon: Icon(Icons.home, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: Icon(Icons.home, color: ThemeColors.primaryThemeColor),
+          label: 'Home',
         ),
         NavigationDestination(
-          icon: Icon(Icons.work_history),
-          label: 'Explore',
+          icon: const Icon(Icons.work, color: ThemeColors.grey1ThemeColor),
+          selectedIcon:
+              const Icon(Icons.work, color: ThemeColors.primaryThemeColor),
+          label: up.userRole == 'company' ? 'My Job Posts' : 'My Jobs',
         ),
-        NavigationDestination(
-          icon: Icon(Icons.chat),
+        const NavigationDestination(
+          icon: Icon(Icons.chat, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: Icon(Icons.chat, color: ThemeColors.primaryThemeColor),
           label: 'Chat',
         ),
-        NavigationDestination(
-          icon: Icon(Icons.person),
+        const NavigationDestination(
+          icon: Icon(Icons.person, color: ThemeColors.grey1ThemeColor),
+          selectedIcon:
+              Icon(Icons.person, color: ThemeColors.primaryThemeColor),
           label: 'Profile',
+        ),
+        const NavigationDestination(
+          icon: Icon(Icons.login, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: Icon(Icons.login, color: ThemeColors.primaryThemeColor),
+          label: 'Login',
         ),
       ],
       onDestinationSelected: (int index) {
         setState(() {
-          currentPageIndex = index;
+          up.navigate(context, index);
         });
       },
       selectedIndex: currentPageIndex,
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       elevation: 10,
-      surfaceTintColor: Colors.limeAccent,
+      // surfaceTintColor: Colors.blue,
+      indicatorColor: Colors.white,
     );
   }
 }

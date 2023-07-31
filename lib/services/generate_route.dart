@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../views/common_views/landing_page/landing_page.dart';
+import '../views/auth/login.dart';
+import '../views/auth/registration_process.dart';
+import '../views/common_views/landing_page_components/landing_page.dart';
+import '../views/company/company_chat.dart';
+import '../views/company/company_profile.dart';
+import '../views/company/my_job_posts.dart';
 import '../views/company/workers.dart';
 import '../views/worker/jobs.dart';
+import '../views/worker/my_jobs.dart';
+import '../views/worker/worker_chat.dart';
+import '../views/worker/worker_profile.dart';
 
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -12,6 +20,22 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
       return MaterialPageRoute(builder: (context) => const Jobs());
+    case '/myJobs':
+      return MaterialPageRoute(builder: (context) => const MyJobs());
+    case '/myJobPosts':
+      return MaterialPageRoute(builder: (context) => const MyJobPosts());
+    case '/workerChat':
+      return MaterialPageRoute(builder: (context) => const WorkerChat());
+    case '/workerProfile':
+      return MaterialPageRoute(builder: (context) => const WorkerProfile());
+    case '/companyChat':
+      return MaterialPageRoute(builder: (context) => const CompanyChat());
+    case 'companyProfile':
+      return MaterialPageRoute(builder: (context) => const CompanyProfile());
+    case '/login':
+      return MaterialPageRoute(builder: (context) => const Login());
+    case '/register':
+      return MaterialPageRoute(builder: (context) => RegistrationProcess());
     default:
       return MaterialPageRoute(builder: (context) => LandingPage());
   }

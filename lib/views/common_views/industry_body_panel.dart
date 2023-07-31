@@ -1,5 +1,6 @@
 import 'package:bulkers/providers/job_posts_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
+import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,20 +52,48 @@ class IndustryBodyPanel extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
+              shape: RoundedRectangleBorder(
+                side:
+                    BorderSide(color: ThemeColors.primaryThemeColor, width: 2),
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: ListTile(
                 title: Row(
                   children: [
-                    Text(job.title),
+                    Text(
+                      job.title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: ThemeColors.primaryThemeColor,
+                      ),
+                    ),
+                    Spacer(),
+                    Icon(
+                      up.userRole == 'company'
+                          ? Icons.groups
+                          : Icons.work_outline,
+                      color: ThemeColors.primaryThemeColor,
+                      size: 30.0,
+                    ),
                     ApplicantCount(
-                        count: up.userRole == 'company'
-                            ? job.numberOfApplicants
-                            : job.numberOfJobPosts,
-                        color: Colors.blueGrey)
+                      count: up.userRole == 'company'
+                          ? job.numberOfApplicants
+                          : job.numberOfJobPosts,
+                      color: ThemeColors.primaryThemeColor,
+                    ),
                   ],
                 ),
-                trailing: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text('Salary: ${job.lowRange} - ${job.highRange}'),
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 4.0, bottom: 6.0),
+                  child: Text(
+                    'Salary: ${job.lowRange} - ${job.highRange}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: ThemeColors.grey1ThemeColor,
+                    ),
+                  ),
                 ),
               ),
             ),

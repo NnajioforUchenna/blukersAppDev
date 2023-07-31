@@ -1,69 +1,77 @@
+import 'package:bulkers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/job_post.dart';
+import '../../../providers/job_posts_provider.dart';
+import '../../auth/common_widget/login_or_register.dart';
+import '../../common_views/loading_page.dart';
 // Assuming you've imported the required classes (JobPost, Skill, Address) above
 
 class JobPostWidget extends StatelessWidget {
-  final JobPost jobPost;
-
-  JobPostWidget({required this.jobPost});
+  const JobPostWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Card(
-        elevation: 4.0,
-        margin: EdgeInsets.all(10.0),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (jobPost.companyImageUrl != null)
-                Center(
-                  child: Image.network(
-                    jobPost.companyImageUrl!,
-                    fit: BoxFit.cover,
-                    width: 100.0,
-                    height: 100.0,
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
+    JobPost? jobPost = jp.selectedJobPost;
+    return jobPost == null
+        ? Center(child: SizedBox(height: 100, width: 100, child: LoadingPage()))
+        : up.appUser == null
+            ? const LoginOrRegister()
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (jobPost.companyImageUrl != null)
+                        Center(
+                          child: Image.network(
+                            jobPost.companyImageUrl!,
+                            fit: BoxFit.cover,
+                            width: 100.0,
+                            height: 100.0,
+                          ),
+                        ),
+                      const SizedBox(height: 10.0),
+                      Text('Company ID: ${jobPost.companyId}',
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 5.0),
+                      Text('Job Title: ${jobPost.jobTitle}'),
+                      const SizedBox(height: 5.0),
+                      Text('Job Description: ${jobPost.jobDescription}'),
+                      const SizedBox(height: 5.0),
+                      Text('Requirements: ${jobPost.requirements}'),
+                      const SizedBox(height: 5.0),
+                      Text(
+                          'Job Type: ${jobPost.jobType.toString().split('.').last}'),
+                      const SizedBox(height: 5.0),
+                      ...jobPost.skills
+                          .map((skill) => Text('Skill: ${skill.name}'))
+                          .toList(),
+                      if (jobPost.addresses != null)
+                        ...jobPost.addresses!
+                            .map((address) => Text(
+                                'Address: ${address.street}, ${address.city}, ${address.state}, ${address.country}'))
+                            .toList(),
+                      const SizedBox(height: 5.0),
+                      Text(
+                          'Number of Positions: ${jobPost.numberOfPositionsAvailable}'),
+                      const SizedBox(height: 5.0),
+                      if (jobPost.jobUrgencyLevel != null)
+                        Text(
+                            'Urgency Level: ${jobPost.jobUrgencyLevel!.toString().split('.').last}'),
+                      const SizedBox(height: 5.0),
+                      if (jobPost.jobPostStatus != null)
+                        Text(
+                            'Job Status: ${jobPost.jobPostStatus!.toString().split('.').last}'),
+                      const SizedBox(height: 5.0),
+                    ],
                   ),
                 ),
-              SizedBox(height: 10.0),
-              Text('Company ID: ${jobPost.companyId}',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(height: 5.0),
-              Text('Job Title: ${jobPost.jobTitle}'),
-              SizedBox(height: 5.0),
-              Text('Job Description: ${jobPost.jobDescription}'),
-              SizedBox(height: 5.0),
-              Text('Requirements: ${jobPost.requirements}'),
-              SizedBox(height: 5.0),
-              Text('Job Type: ${jobPost.jobType.toString().split('.').last}'),
-              SizedBox(height: 5.0),
-              ...jobPost.skills
-                  .map((skill) => Text('Skill: ${skill.name}'))
-                  .toList(),
-              if (jobPost.addresses != null)
-                ...jobPost.addresses!
-                    .map((address) => Text(
-                        'Address: ${address.street}, ${address.city}, ${address.state}, ${address.country}'))
-                    .toList(),
-              SizedBox(height: 5.0),
-              Text(
-                  'Number of Positions: ${jobPost.numberOfPositionsAvailable}'),
-              SizedBox(height: 5.0),
-              if (jobPost.jobUrgencyLevel != null)
-                Text(
-                    'Urgency Level: ${jobPost.jobUrgencyLevel!.toString().split('.').last}'),
-              SizedBox(height: 5.0),
-              if (jobPost.jobPostStatus != null)
-                Text(
-                    'Job Status: ${jobPost.jobPostStatus!.toString().split('.').last}'),
-              SizedBox(height: 5.0),
-            ],
-          ),
-        ),
-      ),
-    );
+              );
   }
 }
