@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/user_provider.dart';
+import '../auth/common_widget/login_or_register.dart';
 import '../common_views/page_template/page_template.dart';
 
 class WorkerProfile extends StatelessWidget {
@@ -7,6 +10,8 @@ class WorkerProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageTemplate(child: Container());
+    UserProvider up = Provider.of<UserProvider>(context);
+    return PageTemplate(
+        child: up.appUser == null ? const LoginOrRegister() : Container());
   }
 }

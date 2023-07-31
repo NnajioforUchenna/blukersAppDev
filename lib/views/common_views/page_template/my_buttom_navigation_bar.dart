@@ -42,11 +42,6 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
               Icon(Icons.person, color: ThemeColors.primaryThemeColor),
           label: 'Profile',
         ),
-        const NavigationDestination(
-          icon: Icon(Icons.login, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: Icon(Icons.login, color: ThemeColors.primaryThemeColor),
-          label: 'Login',
-        ),
       ],
       onDestinationSelected: (int index) {
         setState(() {

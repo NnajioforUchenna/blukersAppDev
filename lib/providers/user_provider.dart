@@ -137,9 +137,11 @@ class UserProvider with ChangeNotifier {
   void navigate(BuildContext context, int index) {
     currentPageIndex = index;
     if (userRole == "worker") {
-      Navigator.pushNamed(context, routesWorker[index]);
+      Navigator.pushNamedAndRemoveUntil(
+          context, routesWorker[index], (Route<dynamic> route) => false);
     } else {
-      Navigator.pushNamed(context, routesCompany[index]);
+      Navigator.pushNamedAndRemoveUntil(
+          context, routesCompany[index], (Route<dynamic> route) => false);
     }
 
     // notifyListeners();

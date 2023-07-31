@@ -14,19 +14,15 @@ class MyNavigationRail extends StatefulWidget {
 class _MyNavigationRailState extends State<MyNavigationRail> {
   int _selectedIndex = 0;
 
-  void changeDestination(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     _selectedIndex = up.currentPageIndex;
     return NavigationRail(
       selectedIndex: _selectedIndex,
-      onDestinationSelected: changeDestination,
+      onDestinationSelected: (int index) {
+        up.navigate(context, index);
+      },
       minWidth: 80,
       labelType: NavigationRailLabelType.all,
       selectedIconTheme:
@@ -39,6 +35,7 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
       useIndicator: false,
       backgroundColor: Colors.white,
       indicatorColor: Colors.white,
+
       leading: Column(
         children: [
           Image.asset(
@@ -77,11 +74,6 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
           selectedIcon:
               Icon(Icons.person, color: ThemeColors.primaryThemeColor),
           label: Text('Profile'),
-        ),
-        const NavigationRailDestination(
-          icon: Icon(Icons.login, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: Icon(Icons.login, color: ThemeColors.primaryThemeColor),
-          label: Text('Login'),
         ),
       ],
     );
