@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../views/auth/login.dart';
 import '../views/auth/registration_process.dart';
+import '../views/auth/reset_password.dart';
 import '../views/common_views/landing_page_components/landing_page.dart';
 import '../views/company/company_chat.dart';
 import '../views/company/company_profile.dart';
@@ -15,7 +16,7 @@ import '../views/worker/worker_profile.dart';
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(builder: (context) => LandingPage());
+      return MaterialPageRoute(builder: (context) => const MyJobPosts());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
@@ -36,6 +37,8 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const Login());
     case '/register':
       return MaterialPageRoute(builder: (context) => RegistrationProcess());
+    case '/forgot-password':
+      return MaterialPageRoute(builder: (context) => ResetPasswordPage());
     default:
       return MaterialPageRoute(builder: (context) => LandingPage());
   }

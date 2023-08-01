@@ -1,13 +1,26 @@
+import 'package:bulkers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'common_widget/company_logo.dart';
 import 'common_widget/submit_button.dart';
 
-class ResetPasswordPage extends StatelessWidget {
+class ResetPasswordPage extends StatefulWidget {
+  @override
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
+}
+
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  TextEditingController emailController = TextEditingController();
+
+  isFormComplete() {
+    return emailController.text.isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Reset Password",
@@ -35,7 +48,7 @@ class ResetPasswordPage extends StatelessWidget {
             const SizedBox(height: 50),
             _buildEmailField(),
             const SizedBox(height: 50),
-            _buildResetButton(),
+            _buildResetButton(context, up),
           ],
         ),
       ),
@@ -44,12 +57,18 @@ class ResetPasswordPage extends StatelessWidget {
 
   Widget _buildEmailField() {
     return TextFormField(
+      controller: emailController,
       decoration: InputDecoration(
         labelText: "Email",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
+      onChanged: (value) {
+        setState(() {
+          isFormComplete();
+        });
+      },
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "Please enter your email";
@@ -64,15 +83,14 @@ class ResetPasswordPage extends StatelessWidget {
     );
   }
 
-  Widget _buildResetButton() {
+  Widget _buildResetButton(context, up) {
     return SubmitButton(
-        isDisabled: true, onTap: onResetPassword, text: "Reset Password");
-  }
-
-  onResetPassword() {
-    print("Reset button tapped");
-    EasyLoading.show(
-      maskType: EasyLoadingMaskType.black,
-    );
+        isDisabled: !isFormComplete(),
+        onTap: () {
+          if (isFormComplete()) {
+            up.resetPassword(context, emailController.text);
+          }
+        },
+        text: "Reset Password");
   }
 }

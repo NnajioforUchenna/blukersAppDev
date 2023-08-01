@@ -138,18 +138,22 @@ class Worker {
 
   static Worker fromMap(Map<String, dynamic> map) {
     return Worker(
-      workerId: map['workerId'],
-      firstName: map['firstName'],
-      middleName: map['middleName'],
-      lastName: map['lastName'],
-      profilePhotoUrl: map['profilePhotoUrl'],
-      industryIds: List<String>.from(map['industryIds']),
-      jobPositionIds: List<String>.from(map['jobPositionIds']),
-      skillIds: List<String>.from(map['skillIds']),
+      workerId: map['workerId'] ?? '',
+      firstName: map['firstName'] ?? '',
+      middleName: map['middleName'] ?? '',
+      lastName: map['lastName'] ?? '',
+      profilePhotoUrl: map['profilePhotoUrl'] ?? '',
+      industryIds: map['industryIds'] != null
+          ? List<String>.from(map['industryIds'])
+          : [],
+      jobPositionIds: map['jobPositionIds'] != null
+          ? List<String>.from(map['jobPositionIds'])
+          : [],
+      skillIds:
+          map['skillIds'] != null ? List<String>.from(map['skillIds']) : [],
       activeMemberships: map['activeMemberships'] != null
           ? List<String>.from(map['activeMemberships'])
-          : null,
-      // workStatus: WorkStatus.values[map['workStatus']],
+          : [],
       workStatus: map['workStatus'] == "activelyLooking"
           ? WorkStatus.activelyLooking
           : WorkStatus.hired,
@@ -157,30 +161,42 @@ class Worker {
           ? (map['addresses'] as List)
               .map((addressMap) => Address.fromMap(addressMap))
               .toList()
-          : null,
-      birthdate: DateTime.parse(map['birthdate']),
+          : [],
+      birthdate: map['birthdate'] != null
+          ? DateTime.parse(map['birthdate'])
+          : DateTime.now(),
       workExperiences: map['workExperiences'] != null
           ? (map['workExperiences'] as List)
               .map((weMap) => WorkExperience.fromMap(weMap))
               .toList()
-          : null, // Assuming WorkExperience has fromMap method
+          : [],
       references: map['references'] != null
           ? (map['references'] as List)
               .map((refMap) => Reference.fromMap(refMap))
               .toList()
-          : null, // Assuming Reference has fromMap method
-      savedJobPostIds: List<String>.from(map['savedJobPostIds']),
-      appliedJobPostIds: List<String>.from(map['appliedJobPostIds']),
-      workerBadgeIds: List<String>.from(map['workerBadgeIds']),
-      certificationsIds: List<String>.from(map['certificationsIds']),
-      workerVerificationsIds: List<String>.from(map['workerVerificationsIds']),
-      pdfResumeUrl: map['pdfResumeUrl'],
-      onlineResume: map['onlineResume'],
-      isVerified: map['isVerified'],
-      isBasicProfileCompleted: map['isBasicProfileCompleted'],
-      isProfileUpdateNeeded: map['isProfileUpdateNeeded'],
+          : [],
+      savedJobPostIds: map['savedJobPostIds'] != null
+          ? List<String>.from(map['savedJobPostIds'])
+          : [],
+      appliedJobPostIds: map['appliedJobPostIds'] != null
+          ? List<String>.from(map['appliedJobPostIds'])
+          : [],
+      workerBadgeIds: map['workerBadgeIds'] != null
+          ? List<String>.from(map['workerBadgeIds'])
+          : [],
+      certificationsIds: map['certificationsIds'] != null
+          ? List<String>.from(map['certificationsIds'])
+          : [],
+      workerVerificationsIds: map['workerVerificationsIds'] != null
+          ? List<String>.from(map['workerVerificationsIds'])
+          : [],
+      pdfResumeUrl: map['pdfResumeUrl'] ?? '',
+      onlineResume: map['onlineResume'] ?? '',
+      isVerified: map['isVerified'] ?? false,
+      isBasicProfileCompleted: map['isBasicProfileCompleted'] ?? false,
+      isProfileUpdateNeeded: map['isProfileUpdateNeeded'] ?? false,
       workerBriefDescription: map['workerBriefDescription'] ?? "",
-      emails: map['emails'] ?? [],
+      emails: map['emails'] != null ? List<String>.from(map['emails']) : [],
     );
   }
 }

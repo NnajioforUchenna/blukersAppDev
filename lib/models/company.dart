@@ -21,29 +21,30 @@ class Company {
   bool? isVerified;
   bool? isBasicProfileCompleted;
   bool? isProfileUpdateNeeded;
+  List<String>? interestingWorkersIds;
 
-  Company({
-    required this.companyId,
-    this.logoUrl,
-    this.wallpaperUrl,
-    required this.name,
-    this.companyDescription,
-    required this.emails,
-    required this.phoneNumbers,
-    this.addresses,
-    this.yearFounded,
-    this.totalEmployees,
-    this.industryIds,
-    this.jobPostIds,
-    this.companyBadgeIds,
-    this.companyCertificationIds,
-    this.companyVerificationIds,
-    this.companyPhotoUrls,
-    this.companyReviewIds,
-    this.isVerified,
-    this.isBasicProfileCompleted,
-    this.isProfileUpdateNeeded,
-  });
+  Company(
+      {required this.companyId,
+      this.logoUrl,
+      this.wallpaperUrl,
+      required this.name,
+      this.companyDescription,
+      required this.emails,
+      required this.phoneNumbers,
+      this.addresses,
+      this.yearFounded,
+      this.totalEmployees,
+      this.industryIds,
+      this.jobPostIds,
+      this.companyBadgeIds,
+      this.companyCertificationIds,
+      this.companyVerificationIds,
+      this.companyPhotoUrls,
+      this.companyReviewIds,
+      this.isVerified,
+      this.isBasicProfileCompleted,
+      this.isProfileUpdateNeeded,
+      this.interestingWorkersIds});
 
   Company.fromSignUp({
     required String companyId,
@@ -95,6 +96,9 @@ class Company {
     if (isProfileUpdateNeeded != null) {
       map['isProfileUpdateNeeded'] = isProfileUpdateNeeded;
     }
+    if (interestingWorkersIds != null) {
+      map['interestingWorkersIds'] = interestingWorkersIds;
+    }
 
     return map;
   }
@@ -139,6 +143,9 @@ class Company {
       isVerified: map['isVerified'],
       isBasicProfileCompleted: map['isBasicProfileCompleted'],
       isProfileUpdateNeeded: map['isProfileUpdateNeeded'],
+      interestingWorkersIds: map['interestingWorkersIds'] != null
+          ? List<String>.from(map['interestingWorkersIds'])
+          : null,
     );
   }
 

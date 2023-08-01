@@ -54,7 +54,7 @@ class UserDataProvider {
   }
 
   static void updateBasicInformation(Company company) {
-    // Reference to the Firestore collection
+    // Adding AppUser to Firestore
     CollectionReference appUserCollection = firestore.collection('AppUsers');
     appUserCollection.doc(company.companyId).update({
       'company': company.toMap(),
@@ -62,14 +62,37 @@ class UserDataProvider {
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
+
+    CollectionReference companiesCollection = firestore.collection('Companies');
+    company.isBasicProfileCompleted = true;
+    companiesCollection
+        .doc(company.companyId)
+        .set(
+          company.toMap(),
+        )
+        .catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
   }
 
   static void updateWorkerBasicInformation(Worker worker) {
+    // Adding AppUser to Firestore
     CollectionReference appUserCollection = firestore.collection('AppUsers');
     appUserCollection.doc(worker.workerId).update({
       'worker': worker.toMap(),
       'isBasicInformation': true
     }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+
+    // Adding Worker to Firestore
+    CollectionReference workersCollection = firestore.collection('Workers');
+    workersCollection
+        .doc(worker.workerId)
+        .set(
+          worker.toMap(),
+        )
+        .catchError((error) {
       print("Error adding user to Firestore: $error");
     });
   }
@@ -84,5 +107,65 @@ class UserDataProvider {
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
+  }
+
+  static Future<Map<String, dynamic>> loginUser(
+      String email, String password) async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return {
+        'success': true,
+        'userCredential': userCredential,
+      };
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = extractFirebaseError(e.message!);
+      return {
+        'success': false,
+        'error': errorMessage,
+      };
+    } catch (e) {
+      return {
+        'success': false,
+        'error': e.toString(),
+      };
+    }
+  }
+
+  static Future<AppUser?> getAppUser(String uid) async {
+    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    DocumentSnapshot documentSnapshot = await appUserCollection.doc(uid).get();
+
+    if (documentSnapshot.exists) {
+      Map<String, dynamic> data =
+          documentSnapshot.data() as Map<String, dynamic>;
+      return AppUser.fromMap(data);
+    } else {
+      return null; // or handle this scenario as per your requirements
+    }
+  }
+
+  static Future<Map<String, dynamic>> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return {
+        'success': true,
+        'message': 'Password reset email sent successfully',
+      };
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = extractFirebaseError(e.message!);
+      return {
+        'success': false,
+        'error': errorMessage,
+      };
+    } catch (e) {
+      return {
+        'success': false,
+        'error': e.toString(),
+      };
+    }
   }
 }

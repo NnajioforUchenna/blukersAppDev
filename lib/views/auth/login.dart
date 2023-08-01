@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/user_provider.dart';
 import '../../services/responsive.dart';
 import '../../services/validation.dart';
 import 'common_widget/auth_input.dart';
@@ -16,9 +18,18 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isFormComplete() {
+    return emailController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
       body: Center(
         child: SizedBox(
@@ -39,13 +50,13 @@ class _LoginState extends State<Login> {
                       const CompanyLogo(),
                       const SizedBox(height: 30),
                       FormBuilder(
+                        key: _formKey,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         child: Column(
                           children: [
                             AuthInput(
                               child: FormBuilderTextField(
-                                // key: Key('username'),
-                                // name: 'username',
+                                controller: emailController,
                                 key: const Key('email'),
                                 name: 'email',
                                 textInputAction: TextInputAction.next,
@@ -58,6 +69,11 @@ class _LoginState extends State<Login> {
                                   }
                                   return Validation().validateEmail(value);
                                 }),
+                                onChanged: (value) {
+                                  setState(() {
+                                    isFormComplete();
+                                  });
+                                },
                                 decoration: InputDecoration(
                                   hintText: "Email",
                                   border: OutlineInputBorder(
@@ -75,6 +91,7 @@ class _LoginState extends State<Login> {
                             const SizedBox(height: 20),
                             AuthInput(
                               child: FormBuilderTextField(
+                                controller: passwordController,
                                 key: const Key('password'),
                                 obscureText: true,
                                 textInputAction: TextInputAction.done,
@@ -83,6 +100,11 @@ class _LoginState extends State<Login> {
                                     return "required";
                                   }
                                 }),
+                                onChanged: (value) {
+                                  setState(() {
+                                    isFormComplete();
+                                  });
+                                },
                                 decoration: InputDecoration(
                                     hintText: "Password",
                                     border: OutlineInputBorder(
@@ -111,7 +133,9 @@ class _LoginState extends State<Login> {
                       ),
                       InkWell(
                         key: const Key('forgotPasswordButton'),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/forgot-password');
+                        },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           alignment: Alignment.centerRight,
@@ -127,14 +151,25 @@ class _LoginState extends State<Login> {
                       ),
                       SizedBox(height: height * .020),
                       SubmitButton(
-                        isDisabled: true,
+                        isDisabled: !isFormComplete(),
                         key: const Key('loginButton'),
-                        onTap: () {},
+                        onTap: () {
+                          if (isFormComplete()) {
+                            // You can submit your form data here.
+                            print('Form is valid');
+                            up.loginAppUser(
+                                context: context,
+                                email: emailController.text,
+                                password: passwordController.text);
+                          }
+                        },
                         text: "Sign In",
                       ),
                       const SizedBox(height: 10),
                       LabelButton(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
                         title: "Don't have an account?",
                         subTitle: "Register",
                       ),

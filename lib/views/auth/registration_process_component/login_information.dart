@@ -232,7 +232,9 @@ class _LoginInformationState extends State<LoginInformation> {
                     ),
                     SizedBox(height: height * .01),
                     LabelButton(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, "/login");
+                      },
                       title: "Already Have An Account?",
                       subTitle: "Sign In",
                     ),

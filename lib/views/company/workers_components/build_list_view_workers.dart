@@ -1,10 +1,14 @@
+import 'package:bulkers/providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/worker.dart';
+import '../../../providers/user_provider.dart';
 import '../../../providers/worker_provider.dart';
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
+import '../../common_views/please_login_dialog.dart';
+import 'confirmation_dialog.dart';
 import 'display_worker_dialog.dart';
 
 class BuildListViewWorkers extends StatelessWidget {
@@ -15,7 +19,10 @@ class BuildListViewWorkers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
+    CompanyProvider cp = Provider.of<CompanyProvider>(context);
     final List<Worker> workers = wp.selectedWorkers;
+
     return ListView.separated(
       padding:
           const EdgeInsets.all(10), // Added to give some space around cards
@@ -33,8 +40,9 @@ class BuildListViewWorkers extends StatelessWidget {
               vertical: 10, horizontal: 0), // Adjust for spacing
           child: ListTile(
             contentPadding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 15), // Add padding for larger appearance
+              vertical: 10,
+              horizontal: 15,
+            ),
             onTap: () {
               if (Responsive.isDesktop(context)) {
                 wp.setSelectedWorker(worker);
@@ -58,18 +66,53 @@ class BuildListViewWorkers extends StatelessWidget {
             ),
             subtitle: Text(worker.skillIds.toString()),
             leading: Container(
-              width: 50, // Adjust size as necessary
-              height: 50, // Adjust size as necessary
+              width: 50,
+              height: 50,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100), // Rounded rectangle
+                borderRadius: BorderRadius.circular(100),
                 image: DecorationImage(
                   image: NetworkImage(worker.profilePhotoUrl!),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            trailing: Text(worker.workStatus!.toString()),
-            // Add more details for each worker, if needed
+            trailing: Row(
+              mainAxisSize:
+                  MainAxisSize.min, // Take up only as much space as needed
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    // Add functionality for Save
+                    if (up.appUser == null) {
+                      showDialog(
+                          context: context,
+                          builder: (context) => PleaseLoginDialog(
+                                worker: worker,
+                              ));
+                    } else {
+                      bool? result = await showDialog<bool>(
+                        context: context,
+                        builder: (context) => ConfirmationDialog(
+                          worker: worker,
+                        ),
+                      );
+                      if (result != null && result) {
+                        wp.addInterestingWorker(up.appUser, worker);
+                      }
+                    }
+                    ;
+                  },
+                  icon:
+                      Icon(Icons.bookmark), // Assuming this is the 'Save' icon
+                ),
+                IconButton(
+                  onPressed: () {
+                    // Add functionality for Chat
+                  },
+                  icon: Icon(Icons.chat), // Chat icon
+                ),
+              ],
+            ),
           ),
         );
       },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data_providers/company_data_provider.dart';
 import '../data_providers/worker_data_provider.dart';
 import '../models/app_user.dart';
 import '../models/worker.dart';
@@ -29,6 +30,10 @@ class WorkerProvider with ChangeNotifier {
       selectedWorker = selectedWorkers[0];
       notifyListeners();
     });
+  }
+
+  void addInterestingWorker(AppUser? appUser, Worker worker) {
+    CompanyDataProvider.addInterestingWorker(appUser, worker);
   }
 
 // Any other methods related to the Worker can be added as required.

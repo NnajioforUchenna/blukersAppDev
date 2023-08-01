@@ -146,4 +146,83 @@ class UserProvider with ChangeNotifier {
 
     // notifyListeners();
   }
+
+  Future<void> loginAppUser(
+      {required BuildContext context,
+      required String email,
+      required String password}) async {
+    // Display a loading indicator with a message to the user.
+    EasyLoading.show(
+      status: 'Logging you in...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    // Attempt to log the user in.
+    var result = await UserDataProvider.loginUser(email, password);
+
+    // Check if the login was successful.
+    if (result['success']) {
+      // Fetch user details from the database or wherever necessary.
+      // This step assumes that you have a method to get user details after they log in.
+      AppUser? appUser4DB =
+          await UserDataProvider.getAppUser(result['userCredential'].user!.uid);
+
+      // Set the _appUser
+      _appUser = appUser4DB;
+      notifyListeners();
+
+      // Dismiss the loading indicator.
+      EasyLoading.dismiss();
+
+      // Navigate to the home page.
+      if (userRole == "worker") {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/jobs', (Route<dynamic> route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/workers', (Route<dynamic> route) => false);
+      }
+    } else {
+      // Print and display any errors that occurred during login.
+      print("Error: ${result['error']}");
+      EasyLoading.dismiss();
+      EasyLoading.showError(result['error'],
+          duration: const Duration(seconds: 3));
+    }
+  }
+
+  Future<void> resetAppUserPassword({
+    required BuildContext context,
+    required String email,
+  }) async {
+    // Display a loading indicator with a message to the user.
+    EasyLoading.show(
+      status: 'Sending password reset link...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    // Attempt to send a password reset email.
+    var result = await UserDataProvider.resetPassword(email);
+
+    // Check if the reset link was sent successfully.
+    if (result['success']) {
+      // Dismiss the loading indicator.
+      EasyLoading.dismiss();
+      notifyListeners();
+
+      // Show success message.
+      EasyLoading.showSuccess(
+        result['message'],
+        duration: const Duration(seconds: 3),
+      );
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/login', (Route<dynamic> route) => false);
+    } else {
+      // Print and display any errors that occurred during the password reset attempt.
+      print("Error: ${result['error']}");
+      EasyLoading.dismiss();
+      EasyLoading.showError(result['error'],
+          duration: const Duration(seconds: 3));
+    }
+  }
 }
