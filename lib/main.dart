@@ -1,4 +1,5 @@
 import 'package:bulkers/firebase_options.dart';
+import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/providers/company_provider.dart';
 import 'package:bulkers/providers/industry_provider.dart';
 import 'package:bulkers/providers/job_posts_provider.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => IndustriesProvider()),
         ChangeNotifierProvider(create: (context) => JobPostsProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
+         ChangeNotifierProvider(create: (context) => ChatProvider()),
         ChangeNotifierProxyProvider<UserProvider, CompanyProvider>(
           create: (context) => CompanyProvider(),
           update: (_, user, CompanyProvider? previous) =>

@@ -1,0 +1,59 @@
+import 'package:bulkers/models/chat_message.dart';
+import 'package:bulkers/models/chat_room.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final firestore = FirebaseFirestore.instance;
+
+class ChatDataProvider {
+  static createChatRoom(
+      {required String myUid,
+      required String recipientUid,
+      required String roomName,
+      required String message}) async {
+    DocumentReference chatRoomDocRef = firestore.collection('ChatRooms').doc();
+    ChatRoom chatRoom = ChatRoom(
+        id: chatRoomDocRef.id,
+        roomName: roomName,
+        lastMessage: message,
+        members: [myUid, recipientUid]);
+    await chatRoomDocRef.set(chatRoom.toMap()).catchError((error) {
+      print("Error adding chat room to Firestore: $error");
+    });
+  }
+
+  static fetchGroupsByUserId(String uid) async {
+    List<Map<String, dynamic>> res = [];
+    var snapshot = await firestore
+        .collection('ChatRooms')
+        .where("members", arrayContains: uid)
+        .get();
+    for (int i = 0; i < snapshot.docs.length; i++) {
+      //print(snapshot.docs[i].data());
+      res.add(snapshot.docs[i].data());
+    }
+    return res;
+  }
+
+  static sendMessage(ChatMessage chatMessage, String roomId) async {
+    await firestore
+        .collection('ChatMessages')
+        .doc(roomId)
+        .collection('messages')
+        .add(chatMessage.toMap());
+  }
+
+  static Stream<QuerySnapshot> fetchMessagesByGroupId(String groupId)  {
+   
+    return  firestore
+        .collection('ChatMessages')
+        .doc(groupId.trim())
+        .collection('messages')
+        .orderBy('sentAt')
+        .snapshots();
+    // for (int i = 0; i < snapshot.docs.length; i++) {
+    //   //print(snapshot.docs[i].data());
+    //   res.add(snapshot.docs[i].data());
+    // }
+   // return res;
+  }
+}

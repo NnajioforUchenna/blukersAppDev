@@ -1,3 +1,4 @@
+import 'package:bulkers/views/company/chat_message_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../views/auth/login.dart';
@@ -39,6 +40,12 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => RegistrationProcess());
     case '/forgot-password':
       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
+    case '/company-chat':
+      return MaterialPageRoute(builder: (context) => const CompanyChat());
+    case '/chat-message':
+      return MaterialPageRoute(
+          builder: (context) => ChatMessageScreen(settings.arguments),
+          settings: settings);
     default:
       return MaterialPageRoute(builder: (context) => LandingPage());
   }

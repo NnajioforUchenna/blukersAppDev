@@ -7,6 +7,9 @@ class WorkerChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageTemplate(child: Container());
+    return PageTemplate(
+        child: Container(
+      child: Center(child: Text("Chat Screen")),
+    ));
   }
 }
