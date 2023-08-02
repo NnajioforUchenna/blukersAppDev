@@ -42,9 +42,15 @@ class ChatDataProvider {
         .add(chatMessage.toMap());
   }
 
-  static Stream<QuerySnapshot> fetchMessagesByGroupId(String groupId)  {
-   
-    return  firestore
+  static updateLastMEssage(String chatMessage, String roomId) async {
+    await firestore
+        .collection('ChatRooms')
+        .doc(roomId)
+        .update({"lastMessage": chatMessage});
+  }
+
+  static Stream<QuerySnapshot> fetchMessagesByGroupId(String groupId) {
+    return firestore
         .collection('ChatMessages')
         .doc(groupId.trim())
         .collection('messages')
@@ -54,6 +60,6 @@ class ChatDataProvider {
     //   //print(snapshot.docs[i].data());
     //   res.add(snapshot.docs[i].data());
     // }
-   // return res;
+    // return res;
   }
 }

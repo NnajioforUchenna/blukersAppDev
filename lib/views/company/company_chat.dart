@@ -37,9 +37,9 @@ class CompanyChat extends StatelessWidget {
                         "roomName": chatProvider.chatRooms[index].roomName,
                       });
                       // chatProvider.createChatRoom(
-                      //     myUid: "iQ9M1ieRt9P4Er7W5G5KSzNNrB43",
-                      //     recipientUid: "tneFz8KUXnPVD4Rx9mIVhQlqHbI2",
-                      //     roomName: "Test Room 3",
+                      //     myUid: up.appUser!.uid,
+                      //     recipientUid: "tt7wei2DIUfvcb294hXrOVtHf6p2",
+                      //     roomName: up.appUser!.displayName ?? "Room",
                       //     message: "test message 3");
                     },
                   );
