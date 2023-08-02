@@ -7,16 +7,15 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ChatProvider with ChangeNotifier {
   final List<ChatRoom> _chatRooms = [];
-  final List<ChatMessage> _chatMessages = [];
 
   List<ChatRoom> get chatRooms => _chatRooms;
-  List<ChatMessage> get chatMessages => _chatMessages;
 
   createChatRoom(
       {required String myUid,
       required String recipientUid,
       required String roomName,
-      required String message}) async {
+      required String message,
+      String chatLogo = ""}) async {
     EasyLoading.show(
       status: 'Setting up your chat',
       maskType: EasyLoadingMaskType.black,
@@ -25,7 +24,8 @@ class ChatProvider with ChangeNotifier {
         myUid: myUid,
         recipientUid: recipientUid,
         roomName: roomName,
-        message: message);
+        message: message,
+        chatLogo: chatLogo);
     EasyLoading.dismiss();
   }
 
@@ -44,31 +44,17 @@ class ChatProvider with ChangeNotifier {
   }
 
   sendMessage(String message, String sentBy, String roomId) async {
-    // EasyLoading.show(
-    //   status: 'Setting up your chat',
-    //   maskType: EasyLoadingMaskType.black,
-    // );
     ChatMessage chatMessage =
         ChatMessage(message: message, sentAt: DateTime.now(), sentBy: sentBy);
+    int index = _chatRooms.indexWhere((element) => element.id == roomId);
+    _chatRooms[index].lastMessage = message;
 
     await ChatDataProvider.sendMessage(chatMessage, roomId);
-   // _chatMessages.add(chatMessage);
-    //  EasyLoading.dismiss();
-    //notifyListeners();
+    await ChatDataProvider.updateLastMEssage(message, roomId);
+    notifyListeners();
   }
 
   Stream<QuerySnapshot> getMessagesByGroupId(String groupId) {
-    // EasyLoading.show(
-    //   status: 'Setting up your chat',
-    //   maskType: EasyLoadingMaskType.black,
-    // );
-    //final List<Map<String, dynamic>> res =
     return ChatDataProvider.fetchMessagesByGroupId(groupId);
-    //  _chatMessages.clear();
-    // for (int i = 0; i < res.length; ++i) {
-    //   _chatMessages.add(ChatMessage.fromMap(res[i]));
-    // }
-    // EasyLoading.dismiss();
-    // notifyListeners();
   }
 }

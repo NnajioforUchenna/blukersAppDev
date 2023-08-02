@@ -37,10 +37,12 @@ class CompanyChat extends StatelessWidget {
                         "roomName": chatProvider.chatRooms[index].roomName,
                       });
                       // chatProvider.createChatRoom(
-                      //     myUid: "iQ9M1ieRt9P4Er7W5G5KSzNNrB43",
-                      //     recipientUid: "tneFz8KUXnPVD4Rx9mIVhQlqHbI2",
-                      //     roomName: "Test Room 3",
-                      //     message: "test message 3");
+                      //     myUid: up.appUser!.uid,
+                      //     recipientUid: "tt7wei2DIUfvcb294hXrOVtHf6p2",
+                      //     roomName: up.appUser!.displayName ?? "My Room",
+                      //     message: "test message 3",
+                      //     chatLogo:
+                      //         "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/users%2Fdfe6f4bd20c02bd964b002b7bfbeeefe.jpeg?alt=media&token=f647bf7c-aad7-4ece-aaa3-affde0dd6196");
                     },
                   );
                 }),

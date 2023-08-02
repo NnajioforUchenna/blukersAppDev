@@ -3,12 +3,14 @@ class ChatRoom {
   String roomName;
   List<String> members;
   String lastMessage;
+  String? chatLogo = "";
 
   ChatRoom(
       {required this.id,
       required this.roomName,
       required this.lastMessage,
-      required this.members});
+      required this.members,
+      this.chatLogo});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
@@ -16,6 +18,7 @@ class ChatRoom {
     data["members"] = members;
     data["lastMessage"] = lastMessage;
     data["id"] = id;
+    data["chatLogo"] = chatLogo;
     return data;
   }
 
@@ -25,6 +28,7 @@ class ChatRoom {
         id: map["id"],
         roomName: map["roomName"],
         lastMessage: map["lastMessage"],
-        members: List<String>.from(membersFromMap));
+        members: List<String>.from(membersFromMap),
+        chatLogo: map["chatLogo"] ?? "");
   }
 }
