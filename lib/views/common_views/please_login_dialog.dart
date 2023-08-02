@@ -1,11 +1,8 @@
 import 'package:bulkers/views/common_views/please_login.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/worker.dart';
-
 class PleaseLoginDialog extends StatelessWidget {
-  final Worker worker;
-  const PleaseLoginDialog({super.key, required this.worker});
+  const PleaseLoginDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/models/app_user.dart';
 import 'package:bulkers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-var db = FirebaseFirestore.instance;
+import '../models/job_post.dart';
+
+final FirebaseFirestore db = FirebaseFirestore.instance;
 
 class CompanyDataProvider {
   static void addInterestingWorker(AppUser? appUser, Worker worker) {
@@ -19,30 +23,72 @@ class CompanyDataProvider {
     });
   }
 
-  static Future<List<Worker>> getInterestingWorkers(String companyId) async {
-    print('getInterestingWorkers called');
-    DocumentSnapshot doc =
-        await db.collection('Companies').doc(companyId).get();
+  static final StreamController<List<Worker>> _streamController =
+      StreamController<List<Worker>>.broadcast();
 
-    if (doc.exists) {
-      Map<String, dynamic> data = doc.data()
-          as Map<String, dynamic>; // Type casting to Map<String, dynamic>
-      List<dynamic> workerList = data['interestingWorkers'];
-      print(workerList);
+  static final StreamController<List<JobPost>> _jobPostStreamController =
+      StreamController<List<JobPost>>.broadcast();
 
-      List<Worker> returnWorkerList = [];
+  static StreamController<List<JobPost>> fetchMyJobPosts(String companyId) {
+    db.collection('Companies').doc(companyId).get().then((doc) {
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        List<dynamic> jobPostIdList = data['jobPostIds'] ?? [];
+        print(jobPostIdList);
 
-      for (var workerId in workerList) {
-        DocumentSnapshot doc =
-            await db.collection('Workers').doc(workerId).get();
-        Map<String, dynamic> workerData = doc.data()
-            as Map<String, dynamic>; // Type casting to Map<String, dynamic>
-        returnWorkerList.add(Worker.fromMap(workerData));
+        List<JobPost> returnJobPostList = [];
+
+        Future.forEach(jobPostIdList, (jobPostId) async {
+          DocumentSnapshot jobPostDoc =
+              await db.collection('JobPosts').doc(jobPostId).get();
+          if (jobPostDoc.exists) {
+            Map<String, dynamic> jobPostData =
+                jobPostDoc.data() as Map<String, dynamic>;
+            returnJobPostList.add(JobPost.fromMap(jobPostData));
+          }
+        }).then((_) {
+          _jobPostStreamController.add(returnJobPostList);
+        });
+      } else {
+        _jobPostStreamController.add([]);
       }
+    });
 
-      return returnWorkerList;
-    } else {
-      return [];
-    }
+    return _jobPostStreamController;
+  }
+
+  static StreamController<List<Worker>> fetchInterestingWorkers(
+      String companyId) {
+    db.collection('Companies').doc(companyId).get().then((doc) {
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data()
+            as Map<String, dynamic>; // Type casting to Map<String, dynamic>
+        List<dynamic> workerList = data['interestingWorkers'] ?? [];
+        print(workerList);
+
+        List<Worker> returnWorkerList = [];
+
+        Future.forEach(workerList, (workerId) async {
+          DocumentSnapshot workerDoc =
+              await db.collection('workers').doc(workerId).get();
+          if (workerDoc.exists) {
+            Map<String, dynamic> workerData = workerDoc.data()
+                as Map<String, dynamic>; // Type casting to Map<String, dynamic>
+            returnWorkerList.add(Worker.fromMap(workerData));
+          }
+        }).then((_) {
+          _streamController.add(returnWorkerList);
+        });
+      } else {
+        _streamController.add([]);
+      }
+    });
+
+    return _streamController;
+  }
+
+  static void streamDispose() {
+    _streamController.close();
+    _jobPostStreamController.close();
   }
 }

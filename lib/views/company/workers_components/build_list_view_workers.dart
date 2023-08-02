@@ -86,9 +86,7 @@ class BuildListViewWorkers extends StatelessWidget {
                     if (up.appUser == null) {
                       showDialog(
                           context: context,
-                          builder: (context) => PleaseLoginDialog(
-                                worker: worker,
-                              ));
+                          builder: (context) => PleaseLoginDialog());
                     } else {
                       bool? result = await showDialog<bool>(
                         context: context,

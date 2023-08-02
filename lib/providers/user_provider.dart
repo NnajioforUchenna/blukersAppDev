@@ -11,6 +11,7 @@ import '../models/worker.dart';
 class UserProvider with ChangeNotifier {
   AppUser? _appUser;
   String userRole = "company";
+
   AppUser? get appUser => _appUser;
 
   int registerCurrentPageIndex = 0;
