@@ -52,7 +52,7 @@ class LandingPage extends StatelessWidget {
               children: [
                 // First box
                 OptionBox(
-                    imgSrc: 'images/worker_icon.png',
+                    imgSrc: 'assets/images/worker_icon.png',
                     title: "A Job",
                     onTap: () {
                       up.userRole = "worker";
@@ -62,7 +62,7 @@ class LandingPage extends StatelessWidget {
                 const SizedBox(width: 20),
                 // Second box
                 OptionBox(
-                  imgSrc: 'images/company_icon.png',
+                  imgSrc: 'assets/images/company_icon.png',
                   title: "Workers",
                   onTap: () {
                     up.userRole = "company";

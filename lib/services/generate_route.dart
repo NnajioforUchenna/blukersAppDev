@@ -1,3 +1,4 @@
+import 'package:bulkers/views/company/chat_message_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../views/auth/login.dart';
@@ -18,8 +19,7 @@ import '../views/worker/worker_profile.dart';
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(
-          builder: (context) => const CreateWorkerProfile());
+      return MaterialPageRoute(builder: (context) => LandingPage());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
@@ -47,6 +47,12 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
     case '/createWorkerProfile':
       return MaterialPageRoute(
           builder: (context) => const CreateWorkerProfile());
+    case '/company-chat':
+      return MaterialPageRoute(builder: (context) => const CompanyChat());
+    case '/chat-message':
+      return MaterialPageRoute(
+          builder: (context) => ChatMessageScreen(settings.arguments),
+          settings: settings);
     default:
       return MaterialPageRoute(builder: (context) => LandingPage());
   }

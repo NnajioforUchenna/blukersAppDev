@@ -1,3 +1,4 @@
+import 'package:bulkers/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
+    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
       body: Center(
         child: SizedBox(
@@ -153,14 +155,15 @@ class _LoginState extends State<Login> {
                       SubmitButton(
                         isDisabled: !isFormComplete(),
                         key: const Key('loginButton'),
-                        onTap: () {
+                        onTap: () async {
                           if (isFormComplete()) {
                             // You can submit your form data here.
                             print('Form is valid');
-                            up.loginAppUser(
+                            await up.loginAppUser(
                                 context: context,
                                 email: emailController.text,
                                 password: passwordController.text);
+                           await chatProvider.getGroups(up.appUser?.uid ?? "");
                           }
                         },
                         text: "Sign In",
