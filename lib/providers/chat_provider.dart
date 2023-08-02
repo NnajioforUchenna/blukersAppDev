@@ -20,13 +20,16 @@ class ChatProvider with ChangeNotifier {
       status: 'Setting up your chat',
       maskType: EasyLoadingMaskType.black,
     );
-    await ChatDataProvider.createChatRoom(
+    ChatRoom chatRoom = await ChatDataProvider.createChatRoom(
         myUid: myUid,
         recipientUid: recipientUid,
         roomName: roomName,
         message: message,
         chatLogo: chatLogo);
+    _chatRooms.add(chatRoom);
+    notifyListeners();
     EasyLoading.dismiss();
+    return chatRoom.id;
   }
 
   getGroups(String uid) async {

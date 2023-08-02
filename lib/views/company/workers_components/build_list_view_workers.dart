@@ -1,3 +1,4 @@
+import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class BuildListViewWorkers extends StatelessWidget {
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
+    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     CompanyProvider cp = Provider.of<CompanyProvider>(context);
     final List<Worker> workers = wp.selectedWorkers;
 
@@ -104,8 +106,18 @@ class BuildListViewWorkers extends StatelessWidget {
                       Icon(Icons.bookmark), // Assuming this is the 'Save' icon
                 ),
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // Add functionality for Chat
+                    String roomId = await chatProvider.createChatRoom(
+                        myUid: up.appUser!.uid,
+                        recipientUid: worker.workerId,
+                        roomName: worker.firstName + worker.lastName,
+                        message: "",
+                        chatLogo: worker.profilePhotoUrl ?? "");
+                    Navigator.pushNamed(context, '/chat-message', arguments: {
+                      "roomId": roomId,
+                      "roomName": worker.firstName + worker.lastName,
+                    });
                   },
                   icon: Icon(Icons.chat), // Chat icon
                 ),
