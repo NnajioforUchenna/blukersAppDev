@@ -19,7 +19,8 @@ import '../views/worker/worker_profile.dart';
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(builder: (context) => LandingPage());
+      return MaterialPageRoute(
+          builder: (context) => const CreateWorkerProfile());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
