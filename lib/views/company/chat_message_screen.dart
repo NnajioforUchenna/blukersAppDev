@@ -1,5 +1,6 @@
 import 'package:bulkers/models/chat_message.dart';
 import 'package:bulkers/providers/chat_provider.dart';
+import 'package:bulkers/utils/styles/index.dart';
 import 'package:bulkers/views/company/workers_components/chat_component.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +40,10 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(roomName),
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
-      backgroundColor: Colors.grey[400],
+      backgroundColor: ThemeColors.chatScreenBackgroundColor,
       body: SafeArea(
         child: Column(children: [
           Expanded(
@@ -51,12 +54,14 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                   if (snapshot.hasData) {
                     List<QueryDocumentSnapshot<Object?>>? messages =
                         snapshot.data?.docs.reversed.toList();
-
                     return Container(
-                      //height: 500,
-                      // width:250,
-                      // margin: const EdgeInsets.symmetric(vertical: 12),
-                      //color: Colors.amber,
+                      //  color: Colors.white,
+                      decoration:const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(52),
+                            bottomRight: Radius.circular(52),
+                          )),
                       child: ListView.builder(
                           reverse: true,
                           controller: _scrollController,
@@ -70,7 +75,10 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                                     as Map<String, dynamic>);
                             bool isMe = (chatMessage.sentBy == up.appUser!.uid);
                             return ChatComponent(
-                                message: chatMessage.message, isMe: isMe,time: chatMessage.sentAt,);
+                              message: chatMessage.message,
+                              isMe: isMe,
+                              time: chatMessage.sentAt,
+                            );
                           }),
                     );
                   } else {
@@ -79,32 +87,35 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                 }),
           ),
           Container(
-            height: 70,
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.all(12),
+            height: 55,
+            width: MediaQuery.of(context).size.width * 5/6,
+            padding: const EdgeInsets.all(16),
+            margin:const EdgeInsets.only(top: 12,bottom: 12),
             decoration: const BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12))),
+                color: ThemeColors.chatScreenTextEditColor,
+                borderRadius: BorderRadius.all(Radius.circular(40))),
             // color: Colors.red,
             child: Row(
               children: [
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * 3.5 / 4,
+                Expanded(
                     child: TextField(
                       controller: _textController,
                       onChanged: (value) {
                         textMessage = value;
                       },
+                      style:const TextStyle(color: Colors.white),
                     )),
                 GestureDetector(
                     onTap: () {
                       onSendMessage();
                     },
-                    child: const Icon(
-                      Icons.send_rounded,
-                      size: 27,
+                    child: Container(
+                      margin:const EdgeInsets.only(left: 8),
+                      child: const Icon(
+                        Icons.send_rounded,
+                        size: 27,
+                        color: Colors.white,
+                      ),
                     ))
               ],
             ),

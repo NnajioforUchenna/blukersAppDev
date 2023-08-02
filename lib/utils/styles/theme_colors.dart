@@ -18,4 +18,6 @@ class ThemeColors {
 
   static const red1ThemeColor = Color.fromRGBO(222, 29, 29, 0.9); // #
   static const green1ThemeColor = Color.fromRGBO(29, 222, 111, 0.9); // #
+  static const chatScreenBackgroundColor = Color.fromRGBO(31, 46, 68, 0.9); // #
+   static const chatScreenTextEditColor = Color.fromRGBO(29, 41, 60, 1); // #
 }
