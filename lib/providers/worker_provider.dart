@@ -9,6 +9,8 @@ import '../models/worker.dart';
 class WorkerProvider with ChangeNotifier {
   Worker? _worker;
 
+  int workerCurrentPageIndex = 0;
+
   Worker? get worker => _worker;
 
   List<Worker> selectedWorkers = [];
