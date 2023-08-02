@@ -1,7 +1,7 @@
 final List<String> routesWorker = [
   '/jobs',
   '/myJobs',
-  '/workerChat',
+  '/companyChat',
   '/workerProfile',
   '/login'
 ];

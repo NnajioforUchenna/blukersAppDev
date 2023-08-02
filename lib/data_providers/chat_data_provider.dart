@@ -8,15 +8,16 @@ class ChatDataProvider {
   static createChatRoom(
       {required String myUid,
       required String recipientUid,
-      required String roomName,
+      required String myName,
+      required String recipientName,
       required String message,
-      String chatLogo = ""}) async {
+      String myLogo = "",String recipientLogo = ""}) async {
     DocumentReference chatRoomDocRef = firestore.collection('ChatRooms').doc();
     ChatRoom chatRoom = ChatRoom(
         id: chatRoomDocRef.id,
-        roomName: roomName,
+        names: [myName,recipientName],
         lastMessage: message,
-        chatLogo: chatLogo,
+        chatLogo: [myLogo,recipientLogo],
         members: [myUid, recipientUid]);
     await chatRoomDocRef.set(chatRoom.toMap()).catchError((error) {
       print("Error adding chat room to Firestore: $error");

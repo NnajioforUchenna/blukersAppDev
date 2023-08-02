@@ -1,6 +1,8 @@
 import 'package:bulkers/models/chat_room.dart';
+import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatListComponent extends StatelessWidget {
   const ChatListComponent(
@@ -10,6 +12,7 @@ class ChatListComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -25,10 +28,12 @@ class ChatListComponent extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
-                child: chatRoom.chatLogo != null && chatRoom.chatLogo != ""
+                child: chatRoom.chatLogo[1] != "" && chatRoom.chatLogo[0] != ""
                     ? FadeInImage.assetNetwork(
                         placeholder: "assets/images/loading.jpeg",
-                        image: chatRoom.chatLogo!,
+                        image: up.appUser!.uid == chatRoom.members[0]
+                            ? chatRoom.chatLogo[1]
+                            : chatRoom.chatLogo[0],
                         //width: MediaQuery.of(context).size.width,
                         fit: BoxFit.cover,
                       )
@@ -41,7 +46,9 @@ class ChatListComponent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    chatRoom.roomName,
+                    up.appUser!.uid == chatRoom.members[0]
+                            ? chatRoom.names[1]
+                            : chatRoom.names[0],
                     style: ThemeTextStyles.headingThemeTextStyle,
                   ),
                   const SizedBox(

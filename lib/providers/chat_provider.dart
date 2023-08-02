@@ -13,9 +13,11 @@ class ChatProvider with ChangeNotifier {
   createChatRoom(
       {required String myUid,
       required String recipientUid,
-      required String roomName,
+      required String myName,
+      required String recipientName,
       required String message,
-      String chatLogo = ""}) async {
+      String myLogo = "",
+      String recipientLogo = ""}) async {
     EasyLoading.show(
       status: 'Setting up your chat',
       maskType: EasyLoadingMaskType.black,
@@ -29,9 +31,11 @@ class ChatProvider with ChangeNotifier {
       chatRoom = await ChatDataProvider.createChatRoom(
           myUid: myUid,
           recipientUid: recipientUid,
-          roomName: roomName,
+          myName: myName,
+          recipientName: recipientName,
           message: message,
-          chatLogo: chatLogo);
+          myLogo: myLogo,
+          recipientLogo: recipientLogo);
       _chatRooms.add(chatRoom);
       notifyListeners();
     } else {
