@@ -44,10 +44,13 @@ class _ClassificationPageState extends State<ClassificationPage> {
               return Column(
                 children: [
                   CheckboxListTile(
-                    title: Text(
-                      industry.name,
-                      style: G,
-                    ),
+                    title: Text(industry.name,
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          height: 1.25,
+                        )),
                     value: selectedIndustries.contains(industry.industryId),
                     onChanged: (bool? value) {
                       if (value != null && value) {
