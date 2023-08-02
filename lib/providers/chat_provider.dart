@@ -20,14 +20,23 @@ class ChatProvider with ChangeNotifier {
       status: 'Setting up your chat',
       maskType: EasyLoadingMaskType.black,
     );
-    ChatRoom chatRoom = await ChatDataProvider.createChatRoom(
-        myUid: myUid,
-        recipientUid: recipientUid,
-        roomName: roomName,
-        message: message,
-        chatLogo: chatLogo);
-    _chatRooms.add(chatRoom);
-    notifyListeners();
+    int chat = _chatRooms.indexWhere((element) =>
+        element.members[0] == myUid && element.members[1] == recipientUid);
+    ChatRoom chatRoom;
+    //if chat room does not exist then create chat room
+    //else move user to already created chatroom
+    if (chat == -1) {
+      chatRoom = await ChatDataProvider.createChatRoom(
+          myUid: myUid,
+          recipientUid: recipientUid,
+          roomName: roomName,
+          message: message,
+          chatLogo: chatLogo);
+      _chatRooms.add(chatRoom);
+      notifyListeners();
+    } else {
+      chatRoom = _chatRooms[chat];
+    }
     EasyLoading.dismiss();
     return chatRoom.id;
   }
