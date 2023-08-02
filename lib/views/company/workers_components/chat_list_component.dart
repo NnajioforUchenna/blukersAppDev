@@ -3,7 +3,8 @@ import 'package:bulkers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class ChatListComponent extends StatelessWidget {
-  const ChatListComponent({super.key, required this.chatRoom, required this.onTap});
+  const ChatListComponent(
+      {super.key, required this.chatRoom, required this.onTap});
   final ChatRoom chatRoom;
   final VoidCallback onTap;
 
@@ -14,8 +15,9 @@ class ChatListComponent extends StatelessWidget {
       child: Container(
         height: 120,
         padding: const EdgeInsets.all(12),
-        margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 6),
-        decoration: BoxDecoration(color: Colors.grey[200],borderRadius: BorderRadius.circular(20)),
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+            color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
         child: Row(
           children: [
             SizedBox(
@@ -23,16 +25,14 @@ class ChatListComponent extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
-                child:
-                    // FadeInImage.assetNetwork(
-                    //         placeholder:
-                    //             AssetRes.loadingLogo,
-                    //         image:
-                    //             context.fbImageUrl.value,
-                    //         //width: MediaQuery.of(context).size.width,
-                    //         fit: BoxFit.cover,
-                    //       )
-                    Image.asset("assets/images/mockImage.png"),
+                child: chatRoom.chatLogo != null && chatRoom.chatLogo != ""
+                    ? FadeInImage.assetNetwork(
+                        placeholder: "assets/images/loading.jpeg",
+                        image: chatRoom.chatLogo!,
+                        //width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset("assets/images/mockImage.png"),
               ),
             ),
             Container(

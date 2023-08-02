@@ -14,7 +14,8 @@ class ChatProvider with ChangeNotifier {
       {required String myUid,
       required String recipientUid,
       required String roomName,
-      required String message}) async {
+      required String message,
+      String chatLogo = ""}) async {
     EasyLoading.show(
       status: 'Setting up your chat',
       maskType: EasyLoadingMaskType.black,
@@ -23,7 +24,8 @@ class ChatProvider with ChangeNotifier {
         myUid: myUid,
         recipientUid: recipientUid,
         roomName: roomName,
-        message: message);
+        message: message,
+        chatLogo: chatLogo);
     EasyLoading.dismiss();
   }
 
