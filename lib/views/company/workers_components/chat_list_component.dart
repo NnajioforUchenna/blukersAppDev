@@ -28,16 +28,23 @@ class ChatListComponent extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
-                child: chatRoom.chatLogo[1] != "" && chatRoom.chatLogo[0] != ""
-                    ? FadeInImage.assetNetwork(
-                        placeholder: "assets/images/loading.jpeg",
-                        image: up.appUser!.uid == chatRoom.members[0]
-                            ? chatRoom.chatLogo[1]
-                            : chatRoom.chatLogo[0],
-                        //width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.asset("assets/images/mockImage.png"),
+                child: up.appUser!.uid == chatRoom.members[0]
+                    ? chatRoom.chatLogo[1] != ""
+                        ? FadeInImage.assetNetwork(
+                            placeholder: "assets/images/loading.jpeg",
+                            image: chatRoom.chatLogo[1],
+                            //width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset("assets/images/mockImage.png")
+                    : chatRoom.chatLogo[0] != ""
+                        ? FadeInImage.assetNetwork(
+                            placeholder: "assets/images/loading.jpeg",
+                            image: chatRoom.chatLogo[0],
+                            //width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset("assets/images/mockImage.png"),
               ),
             ),
             Container(
@@ -47,8 +54,8 @@ class ChatListComponent extends StatelessWidget {
                 children: [
                   Text(
                     up.appUser!.uid == chatRoom.members[0]
-                            ? chatRoom.names[1]
-                            : chatRoom.names[0],
+                        ? chatRoom.names[1]
+                        : chatRoom.names[0],
                     style: ThemeTextStyles.headingThemeTextStyle,
                   ),
                   const SizedBox(
