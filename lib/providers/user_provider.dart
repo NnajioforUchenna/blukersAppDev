@@ -30,7 +30,8 @@ class UserProvider with ChangeNotifier {
   Future<void> registerUser(
       {required String email,
       required String password,
-      required String userType}) async {
+      required String userType,
+      required ChatProvider chatProvider}) async {
     // Display a loading indicator with a message to the user.
     EasyLoading.show(
       status: 'Creating your Account...',
@@ -54,7 +55,9 @@ class UserProvider with ChangeNotifier {
 
       // Store the user data in the database.
       UserDataProvider.registerUserToDatabase(appUser);
-
+      await NotificationService.registerNotification(
+          _appUser!.uid, chatProvider);
+      NotificationService.configLocalNotification();
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
 
@@ -153,7 +156,8 @@ class UserProvider with ChangeNotifier {
   Future<void> loginAppUser(
       {required BuildContext context,
       required String email,
-      required String password, required ChatProvider chatProvider}) async {
+      required String password,
+      required ChatProvider chatProvider}) async {
     // Display a loading indicator with a message to the user.
     EasyLoading.show(
       status: 'Logging you in...',
@@ -172,7 +176,8 @@ class UserProvider with ChangeNotifier {
 
       // Set the _appUser
       _appUser = appUser4DB;
-      await NotificationService.registerNotification(_appUser!.uid,chatProvider);
+      await NotificationService.registerNotification(
+          _appUser!.uid, chatProvider);
       NotificationService.configLocalNotification();
       notifyListeners();
 
