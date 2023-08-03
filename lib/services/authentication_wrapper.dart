@@ -14,7 +14,7 @@ class AuthenticationWrapper extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     if (up.user != null) {
       return up.appUser != null && up.appUser?.registeredAs == 'company'
-          ? Workers()
+          ? Workers() //CreateWorkerProfile
           : Jobs();
     } else {
       return LandingPage();

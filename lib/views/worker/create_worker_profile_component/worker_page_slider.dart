@@ -9,7 +9,9 @@ import 'personal_information_page.dart';
 import 'professional_credentials_page.dart';
 import 'profile_photo_page.dart';
 import 'reference_page.dart';
+import 'resume_page.dart';
 import 'work_experience_page.dart';
+import 'worker_congratulation_page.dart';
 
 class WorkerPageSlider extends StatefulWidget {
   const WorkerPageSlider({Key? key}) : super(key: key);
@@ -65,8 +67,8 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
           ProfessionalCredentialsPage(),
           WorkExperiencePage(),
           ReferencePage(),
-          // ResumePage(),
-          // CongratulationPage(), // Name can be adjusted based on your actual page name
+          ResumePage(),
+          WorkerCongratulationPage(), // Name can be adjusted based on your actual page name
         ],
       ),
     );

@@ -13,22 +13,17 @@ import '../models/worker.dart';
 
 class WorkerProvider with ChangeNotifier {
   Worker? _worker;
-  AppUser? appUser = AppUser(
-    uid: '4MKdXj3TMJQyj2XFeAsq1cyj90y',
-    email: 'Uchena@gmail.com',
-  );
+  AppUser? appUser;
 
   int workerCurrentPageIndex = 0;
-
   Worker? get worker => _worker;
 
   List<Worker> selectedWorkers = [];
   Worker? selectedWorker;
 
   update(AppUser? user) {
-    // print('update called i was listening');
-    // appUser = user;
-    // notifyListeners();
+    appUser = user;
+    notifyListeners();
   }
 
   setSelectedWorker(Worker worker) {
@@ -51,38 +46,47 @@ class WorkerProvider with ChangeNotifier {
     CompanyDataProvider.addInterestingWorker(appUser, worker);
   }
 
+  //  Create Worker Profile Parameters
   Worker? newWorker;
-  int workerProfileCurrentPageIndex = 5;
+  int workerProfileCurrentPageIndex = 0;
   List<Map<String, dynamic>> workExperience = [{}, {}];
   List<Map<String, dynamic>> references = [{}, {}];
 
+  // Move to the next page in the worker's profile creation process.
   workerProfileNextPage() {
     workerProfileCurrentPageIndex++;
     notifyListeners();
   }
 
-  void createWorkerProfile(
-      List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
-    // newWorker = Worker(
-    //   workerId: appUser!.uid,
-    //   firstName: appUser!.worker!.firstName,
-    //   lastName: appUser!.worker!.lastName,
-    //   emails: [appUser!.email!],
-    // );
-    //
-    // // Add the selected industries to the newWorker.
-    // newWorker!.industryIds = selectedIndustries;
-    // newWorker!.jobIds =
-    //     selectedJobs.values.toList().expand((element) => element).toList();
-    workerProfileNextPage();
+  // Create a new Worker profile using the selected industries and jobs.
+  void createWorkerProfile(context, List<String> selectedIndustries,
+      Map<String, List<String>> selectedJobs) {
+    if (appUser!.worker == null) {
+      newWorker = Worker.fromNewProfile(
+        workerId: appUser!.uid,
+        emails: [appUser!.email!],
+      );
+
+      // Add the selected industries to the newWorker.
+      newWorker!.industryIds = selectedIndustries;
+      newWorker!.jobIds =
+          selectedJobs.values.toList().expand((element) => element).toList();
+      workerProfileNextPage();
+    } else {
+      // PLease sign in
+      EasyLoading.showError('Please Sign In');
+      Navigator.of(context).pushNamed('/login');
+    }
   }
 
   void addPersonalInformtion(String firstName, String middleName,
       String lateName, String day, String month, String year) {
-    // newWorker!.firstName = firstName;
-    // newWorker!.middleName = middleName;
-    // newWorker!.lastName = lateName;
-    // newWorker!.birthdate = DateTime.parse('$year-$month-$day');
+    newWorker!.firstName = firstName;
+    newWorker!.middleName = middleName;
+    newWorker!.lastName = lateName;
+    newWorker!.birthdate = DateTime.parse(
+        '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}');
+
     workerProfileNextPage();
   }
 

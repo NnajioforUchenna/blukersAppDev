@@ -1,5 +1,4 @@
 import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +17,17 @@ class _ClassificationPageState extends State<ClassificationPage> {
   late List<Industry> industries;
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
+
+  bool isSelected = false;
+  isSelect() {
+    setState(() {
+      if (selectedJobs.isNotEmpty) {
+        isSelected = true;
+      } else {
+        isSelected = false;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +110,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                                     .remove(job.jobId);
                               });
                             }
+                            isSelect();
                           },
                         ),
                       );
@@ -111,14 +122,17 @@ class _ClassificationPageState extends State<ClassificationPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Spacer(),
+                const Spacer(),
                 ElevatedButton(
-                  onPressed: () {
-                    wp.createWorkerProfile(selectedIndustries, selectedJobs);
-                  },
+                  onPressed: !isSelected
+                      ? null
+                      : () {
+                          wp.createWorkerProfile(
+                              context, selectedIndustries, selectedJobs);
+                        },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        ThemeColors.secondaryThemeColor),
+                        isSelected ? Colors.deepOrangeAccent : Colors.grey),
                   ),
                   child: const Text("Next"),
                 ),

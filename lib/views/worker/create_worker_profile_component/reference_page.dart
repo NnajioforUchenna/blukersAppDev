@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/worker_provider.dart';
+import '../../../utils/styles/theme_colors.dart';
 import 'reference_form.dart';
 
 class ReferencePage extends StatelessWidget {
@@ -41,6 +42,36 @@ class ReferencePage extends StatelessWidget {
                     )
                   ],
                 ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle "previous" logic here
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          ThemeColors.secondaryThemeColor),
+                    ),
+                    child: const Text("Previous"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle "submit" or "next" logic here
+                      wp.workerProfileNextPage();
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          ThemeColors.secondaryThemeColor),
+                    ),
+                    child: const Text("Next"),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 50)

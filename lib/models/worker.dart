@@ -32,6 +32,12 @@ class Worker {
   bool? isBasicProfileCompleted;
   bool? isProfileUpdateNeeded;
 
+  Worker.fromNewProfile(
+      {required this.workerId,
+      required this.emails,
+      this.firstName = '',
+      this.lastName = ''});
+
   Worker({
     required this.workerId,
     required this.firstName,

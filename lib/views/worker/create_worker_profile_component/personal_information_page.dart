@@ -1,6 +1,7 @@
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
   TextEditingController birthDayController = TextEditingController();
   TextEditingController birthMonthController = TextEditingController();
   TextEditingController birthYearController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isFormComplete() {
     return firstNameController.text.isNotEmpty &&
@@ -45,6 +47,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Form(
+                key: _formKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -148,8 +151,16 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
                               onEditingComplete: () => node.nextFocus(),
-                              validator: (value) =>
-                                  value!.isEmpty ? "Required" : null,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Required";
+                                }
+                                final int? day = int.tryParse(value);
+                                if (day == null || day < 1 || day > 31) {
+                                  return "Enter a valid day (1-31)";
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                 hintText: "Day",
                                 border: OutlineInputBorder(
@@ -165,7 +176,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: AuthInput(
                             child: TextFormField(
@@ -173,8 +184,16 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
                               onEditingComplete: () => node.nextFocus(),
-                              validator: (value) =>
-                                  value!.isEmpty ? "Required" : null,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Required";
+                                }
+                                final int? month = int.tryParse(value);
+                                if (month == null || month < 1 || month > 12) {
+                                  return "Enter a valid month (1-12)";
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                 hintText: "Month",
                                 border: OutlineInputBorder(
@@ -190,7 +209,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: AuthInput(
                             child: TextFormField(
@@ -198,8 +217,19 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
                               onEditingComplete: () => node.nextFocus(),
-                              validator: (value) =>
-                                  value!.isEmpty ? "Required" : null,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Required";
+                                }
+                                final int currentYear = DateTime.now().year;
+                                final int? year = int.tryParse(value);
+                                if (year == null ||
+                                    year < 1900 ||
+                                    year > currentYear) {
+                                  return "Enter a valid year (1900-$currentYear)";
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                 hintText: "Year",
                                 border: OutlineInputBorder(
@@ -217,6 +247,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         ),
                       ],
                     ),
+
                     const SizedBox(height: 40),
                     SizedBox(height: height * 0.02),
                     Row(
@@ -234,7 +265,8 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            if (isFormComplete()) {
+                            if (_formKey.currentState!.validate() &&
+                                isFormComplete()) {
                               wp.addPersonalInformtion(
                                 firstNameController.text,
                                 middleNameController.text,
@@ -243,13 +275,17 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                                 birthMonthController.text,
                                 birthYearController.text,
                               );
+                              print("Personal Information Added");
+                            } else {
+                              EasyLoading.showError(
+                                  "Please fill all the fields");
                             }
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ThemeColors.secondaryThemeColor),
                           ),
-                          child: Text("Next"),
+                          child: const Text("Next"),
                         ),
                       ],
                     ),
