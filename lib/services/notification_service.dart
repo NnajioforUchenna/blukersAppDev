@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:bulkers/main.dart';
 import 'package:bulkers/providers/chat_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 final firebaseMessaging = FirebaseMessaging.instance;
@@ -11,6 +13,7 @@ final firestore = FirebaseFirestore.instance;
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 ChatProvider? chatProvider;
+//final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class NotificationService {
   static Future<void> registerNotification(
@@ -25,27 +28,27 @@ class NotificationService {
       } else {
         print("no notification");
       }
+      int index = chatProvider!.chatRooms
+          .indexWhere((element) => element.id == res["roomId"]);
+      chatProvider!.chatRooms[index].lastMessage = res["message"];
+      chatProvider!.notifyListners();
       print('onMessage:: $res');
       //message.data;
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
+      final res = json.decode(message.data["body"]);
+       int index = chatProvider!.chatRooms
+          .indexWhere((element) => element.id == res["roomId"]);
+      chatProvider!.chatRooms[index].lastMessage = res["message"];
+      chatProvider!.notifyListners();
+      navigatorKey.currentState!.pushNamed('/chat-message', arguments: {
+        "roomId": res["roomId"].toString(),
+        "roomName": res["sendByNamy"].toString(),
+      });
       // Navigator.pushNamed(context, '/message',
       //     arguments: MessageArguments(message, true));
     });
-    // firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) {
-    //   print('onMessage: $message');
-    //   Platform.isAndroid
-    //       ? showNotification(message['notification'])
-    //       : showNotification(message['aps']['alert']);
-    //   return;
-    // }, onResume: (Map<String, dynamic> message) {
-    //   print('onResume: $message');
-    //   return;
-    // }, onLaunch: (Map<String, dynamic> message) {
-    //   print('onLaunch: $message');
-    //   return;
-    // });
 
     String? token = await firebaseMessaging.getToken();
     firestore.collection('AppUsers').doc(uid).update({'pushToken': token});
