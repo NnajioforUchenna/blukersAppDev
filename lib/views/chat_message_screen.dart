@@ -29,12 +29,16 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
         as Map<String, String>)["roomName"] as String;
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
-    onSendMessage() {
+    onSendMessage() async{
       // print(messagesLength);
       _textController.clear();
       _scrollController.animateTo(0,
           duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-      chatProvider.sendMessage(textMessage, up.appUser!.uid, roomId);
+     await chatProvider.sendMessage(textMessage, up.appUser!.uid, roomId);
+      setState(() {
+        
+      textMessage = "";
+      });
     }
 
     return Scaffold(
@@ -56,7 +60,7 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                         snapshot.data?.docs.reversed.toList();
                     return Container(
                       //  color: Colors.white,
-                      decoration:const BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(52),
@@ -88,9 +92,9 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
           ),
           Container(
             height: 55,
-            width: MediaQuery.of(context).size.width * 5/6,
+            width: MediaQuery.of(context).size.width * 5 / 6,
             padding: const EdgeInsets.all(16),
-            margin:const EdgeInsets.only(top: 12,bottom: 12),
+            margin: const EdgeInsets.only(top: 12, bottom: 12),
             decoration: const BoxDecoration(
                 color: ThemeColors.chatScreenTextEditColor,
                 borderRadius: BorderRadius.all(Radius.circular(40))),
@@ -99,22 +103,28 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
               children: [
                 Expanded(
                     child: TextField(
-                      controller: _textController,
-                      onChanged: (value) {
-                        textMessage = value;
-                      },
-                      style:const TextStyle(color: Colors.white),
-                    )),
+                  controller: _textController,
+                  onChanged: (value) {
+                    setState(() {
+                      
+                    textMessage = value;
+                    });
+                  },
+                  style: const TextStyle(color: Colors.white),
+                )),
                 GestureDetector(
                     onTap: () {
+                      if (textMessage == "") {
+                        return;
+                      }
                       onSendMessage();
                     },
                     child: Container(
-                      margin:const EdgeInsets.only(left: 8),
-                      child: const Icon(
+                      margin: const EdgeInsets.only(left: 8),
+                      child: Icon(
                         Icons.send_rounded,
                         size: 27,
-                        color: Colors.white,
+                        color: (textMessage != "") ? Colors.white : Colors.grey,
                       ),
                     ))
               ],

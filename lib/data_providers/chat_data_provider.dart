@@ -8,17 +8,21 @@ class ChatDataProvider {
   static createChatRoom(
       {required String myUid,
       required String recipientUid,
-      required String roomName,
-      required String message}) async {
+      required String myName,
+      required String recipientName,
+      required String message,
+      String myLogo = "",String recipientLogo = ""}) async {
     DocumentReference chatRoomDocRef = firestore.collection('ChatRooms').doc();
     ChatRoom chatRoom = ChatRoom(
         id: chatRoomDocRef.id,
-        roomName: roomName,
+        names: [myName,recipientName],
         lastMessage: message,
+        chatLogo: [myLogo,recipientLogo],
         members: [myUid, recipientUid]);
     await chatRoomDocRef.set(chatRoom.toMap()).catchError((error) {
       print("Error adding chat room to Firestore: $error");
     });
+    return chatRoom;
   }
 
   static fetchGroupsByUserId(String uid) async {
@@ -42,9 +46,15 @@ class ChatDataProvider {
         .add(chatMessage.toMap());
   }
 
-  static Stream<QuerySnapshot> fetchMessagesByGroupId(String groupId)  {
-   
-    return  firestore
+  static updateLastMEssage(String chatMessage, String roomId) async {
+    await firestore
+        .collection('ChatRooms')
+        .doc(roomId)
+        .update({"lastMessage": chatMessage});
+  }
+
+  static Stream<QuerySnapshot> fetchMessagesByGroupId(String groupId) {
+    return firestore
         .collection('ChatMessages')
         .doc(groupId.trim())
         .collection('messages')
@@ -54,6 +64,6 @@ class ChatDataProvider {
     //   //print(snapshot.docs[i].data());
     //   res.add(snapshot.docs[i].data());
     // }
-   // return res;
+    // return res;
   }
 }
