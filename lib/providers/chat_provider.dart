@@ -61,6 +61,10 @@ class ChatProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void notifyListners() {
+    notifyListeners();
+  }
+
   sendMessage(String message, String sentBy, String roomId) async {
     ChatMessage chatMessage = ChatMessage(
         message: message,
