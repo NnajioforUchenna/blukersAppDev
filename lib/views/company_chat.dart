@@ -29,8 +29,6 @@ class CompanyChat extends StatelessWidget {
                     chatRoom: chatProvider.chatRooms[index],
                     onTap: () {
                       print("tap");
-                      // chatProvider.getMessagesByGroupId(
-                      //     chatProvider.chatRooms[index].id);
                       chatProvider.activeRoomId =
                           chatProvider.chatRooms[index].id;
                       Navigator.pushNamed(context, '/chat-message', arguments: {
@@ -40,13 +38,6 @@ class CompanyChat extends StatelessWidget {
                             ? chatProvider.chatRooms[index].names[1]
                             : chatProvider.chatRooms[index].names[0],
                       });
-                      // chatProvider.createChatRoom(
-                      //     myUid: up.appUser!.uid,
-                      //     recipientUid: "tt7wei2DIUfvcb294hXrOVtHf6p2",
-                      //     roomName: up.appUser!.displayName ?? "My Room",
-                      //     message: "test message 3",
-                      //     chatLogo:
-                      //         "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/users%2Fdfe6f4bd20c02bd964b002b7bfbeeefe.jpeg?alt=media&token=f647bf7c-aad7-4ece-aaa3-affde0dd6196");
                     },
                   );
                 }),
