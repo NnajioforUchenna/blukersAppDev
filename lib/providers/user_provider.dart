@@ -1,4 +1,6 @@
 import 'package:bulkers/data_providers/user_data_provider.dart';
+import 'package:bulkers/providers/chat_provider.dart';
+import 'package:bulkers/services/notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -51,7 +53,8 @@ class UserProvider with ChangeNotifier {
   Future<void> registerUser(
       {required String email,
       required String password,
-      required String userType}) async {
+      required String userType,
+      required ChatProvider chatProvider}) async {
     // Display a loading indicator with a message to the user.
     EasyLoading.show(
       status: 'Creating your Account...',
@@ -75,7 +78,9 @@ class UserProvider with ChangeNotifier {
 
       // Store the user data in the database.
       UserDataProvider.registerUserToDatabase(appUser);
-
+      await NotificationService.registerNotification(
+          _appUser!.uid, chatProvider);
+      NotificationService.configLocalNotification();
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
 
@@ -174,7 +179,8 @@ class UserProvider with ChangeNotifier {
   Future<void> loginAppUser(
       {required BuildContext context,
       required String email,
-      required String password}) async {
+      required String password,
+      required ChatProvider chatProvider}) async {
     // Display a loading indicator with a message to the user.
     EasyLoading.show(
       status: 'Logging you in...',
@@ -193,6 +199,9 @@ class UserProvider with ChangeNotifier {
 
       // Set the _appUser
       _appUser = appUser4DB;
+      await NotificationService.registerNotification(
+          _appUser!.uid, chatProvider);
+      NotificationService.configLocalNotification();
       notifyListeners();
 
       // Dismiss the loading indicator.

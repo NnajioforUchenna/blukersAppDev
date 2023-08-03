@@ -110,12 +110,14 @@ class BuildListViewWorkers extends StatelessWidget {
                     // Add functionality for Chat
                     String roomId = await chatProvider.createChatRoom(
                         myUid: up.appUser!.uid,
-                        recipientUid: worker.workerId,
+                        recipientUid:
+                            worker.workerId,
                         myName: up.appUser!.displayName ?? "Company",
                         recipientName: worker.firstName + worker.lastName,
                         message: "",
                         myLogo: up.appUser!.photoUrl ?? "",
                         recipientLogo: worker.profilePhotoUrl ?? "");
+                    chatProvider.activeRoomId = roomId;
                     Navigator.pushNamed(context, '/chat-message', arguments: {
                       "roomId": roomId,
                       "roomName": worker.firstName + worker.lastName,

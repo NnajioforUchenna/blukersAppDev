@@ -1,3 +1,5 @@
+import 'package:bulkers/providers/chat_provider.dart';
+import 'package:bulkers/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +34,7 @@ class _LoginInformationState extends State<LoginInformation> {
     final height = MediaQuery.of(context).size.height;
     final node = FocusScope.of(context);
     UserProvider up = Provider.of<UserProvider>(context);
-
+    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     return SizedBox(
       height: height,
       child: Stack(
@@ -224,6 +226,7 @@ class _LoginInformationState extends State<LoginInformation> {
                             email: emailController.text,
                             password: passwordController.text,
                             userType: groupValue,
+                            chatProvider: chatProvider,
                           );
                         }
                       },

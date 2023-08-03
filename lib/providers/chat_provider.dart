@@ -1,12 +1,14 @@
 import 'package:bulkers/data_providers/chat_data_provider.dart';
 import 'package:bulkers/models/chat_message.dart';
 import 'package:bulkers/models/chat_room.dart';
+import 'package:bulkers/services/notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ChatProvider with ChangeNotifier {
   final List<ChatRoom> _chatRooms = [];
+  String activeRoomId = "";
 
   List<ChatRoom> get chatRooms => _chatRooms;
 
@@ -60,8 +62,11 @@ class ChatProvider with ChangeNotifier {
   }
 
   sendMessage(String message, String sentBy, String roomId) async {
-    ChatMessage chatMessage =
-        ChatMessage(message: message, sentAt: DateTime.now(), sentBy: sentBy);
+    ChatMessage chatMessage = ChatMessage(
+        message: message,
+        sentAt: DateTime.now(),
+        sentBy: sentBy,
+        roomId: roomId);
     int index = _chatRooms.indexWhere((element) => element.id == roomId);
     _chatRooms[index].lastMessage = message;
 

@@ -41,7 +41,7 @@ class WorkExperience {
       jobStartDate: DateTime.parse(map['jobStartDate']),
       jobEndDate:
           map['jobEndDate'] != null ? DateTime.parse(map['jobEndDate']) : null,
-      isCurrentlyWorking: map['isCurrentlyWorking'],
+      isCurrentlyWorking: map['isCurrentlyWorking'] ?? false,
     );
   }
 }
