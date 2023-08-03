@@ -1,5 +1,6 @@
 import 'package:bulkers/models/chat_message.dart';
 import 'package:bulkers/providers/chat_provider.dart';
+import 'package:bulkers/services/notification_service.dart';
 import 'package:bulkers/utils/styles/index.dart';
 import 'package:bulkers/views/company/workers_components/chat_component.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,15 +30,14 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
         as Map<String, String>)["roomName"] as String;
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
-    onSendMessage() async{
+    onSendMessage() async {
       // print(messagesLength);
       _textController.clear();
       _scrollController.animateTo(0,
           duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-     await chatProvider.sendMessage(textMessage, up.appUser!.uid, roomId);
+      await chatProvider.sendMessage(textMessage, up.appUser!.uid, roomId);
       setState(() {
-        
-      textMessage = "";
+        textMessage = "";
       });
     }
 
@@ -58,6 +58,16 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                   if (snapshot.hasData) {
                     List<QueryDocumentSnapshot<Object?>>? messages =
                         snapshot.data?.docs.reversed.toList();
+                    // if (messages!.isNotEmpty) {
+                    //   ChatMessage chat = ChatMessage.fromMap(
+                    //       messages[0].data() as Map<String, dynamic>);
+                    //   if (chat.roomId != roomId) {
+                    //     NotificationService.showNotification(
+                    //         from: roomName, message: chat.message);
+                    //   } else {
+                    //     print("donot show notification");
+                    //   }
+                    // }
                     return Container(
                       //  color: Colors.white,
                       decoration: const BoxDecoration(
@@ -106,8 +116,7 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                   controller: _textController,
                   onChanged: (value) {
                     setState(() {
-                      
-                    textMessage = value;
+                      textMessage = value;
                     });
                   },
                   style: const TextStyle(color: Colors.white),

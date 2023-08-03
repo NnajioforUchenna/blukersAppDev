@@ -31,6 +31,8 @@ class CompanyChat extends StatelessWidget {
                       print("tap");
                       // chatProvider.getMessagesByGroupId(
                       //     chatProvider.chatRooms[index].id);
+                      chatProvider.activeRoomId =
+                          chatProvider.chatRooms[index].id;
                       Navigator.pushNamed(context, '/chat-message', arguments: {
                         "roomId": chatProvider.chatRooms[index].id,
                         "roomName": up.appUser!.uid ==

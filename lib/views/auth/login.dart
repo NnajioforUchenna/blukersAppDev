@@ -22,6 +22,7 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   bool isFormComplete() {
     return emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty;
@@ -162,8 +163,9 @@ class _LoginState extends State<Login> {
                             await up.loginAppUser(
                                 context: context,
                                 email: emailController.text,
-                                password: passwordController.text);
-                           await chatProvider.getGroups(up.appUser?.uid ?? "");
+                                password: passwordController.text,
+                                chatProvider: chatProvider);
+                            await chatProvider.getGroups(up.appUser?.uid ?? "");
                           }
                         },
                         text: "Sign In",
