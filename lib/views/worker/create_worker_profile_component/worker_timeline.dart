@@ -10,7 +10,7 @@ const workerSteps = [
   'Classification',
   'Personal Information',
   'Profile Photo',
-  'Skills',
+  'Professional Credentials',
   'Work Experience',
   'References',
   'Resume',
@@ -58,14 +58,12 @@ enum _WorkerStatus { done, doing, todo }
 
 class WorkerTimeLine extends StatelessWidget {
   WorkerTimeLine({super.key});
-
   final ScrollController _scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     // Replace with your data provider
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
-    var currentStep = wp.workerCurrentPageIndex;
+    var currentStep = wp.workerProfileCurrentPageIndex;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(currentStep * 120.0);
     });

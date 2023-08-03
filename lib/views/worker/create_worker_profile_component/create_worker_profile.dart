@@ -16,7 +16,7 @@ class CreateWorkerProfile extends StatelessWidget {
         title: const Center(
           child: Text(
             'Creating My Work Profile',
-            style: ThemeTextStyles.headerThemeTextStyle,
+            style: ThemeTextStyles.appBarThemeTextStyle,
           ),
         ),
       ),

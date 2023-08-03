@@ -13,7 +13,7 @@ class Worker {
   String? workerBriefDescription;
   String? profilePhotoUrl;
   List<String>? industryIds;
-  List<String>? jobPositionIds;
+  List<String>? jobIds;
   List<String>? skillIds;
   List<String>? activeMemberships;
   WorkStatus? workStatus;
@@ -40,7 +40,7 @@ class Worker {
     this.workerBriefDescription,
     this.profilePhotoUrl,
     this.industryIds,
-    this.jobPositionIds,
+    this.jobIds,
     this.skillIds,
     this.activeMemberships,
     this.workStatus,
@@ -58,7 +58,7 @@ class Worker {
     this.isVerified,
     this.isBasicProfileCompleted,
     this.isProfileUpdateNeeded,
-    required middleName,
+    this.middleName,
   });
 
   Worker.fromSignUp({
@@ -80,7 +80,7 @@ class Worker {
     if (profilePhotoUrl != null) map['profilePhotoUrl'] = profilePhotoUrl;
     if (emails.isNotEmpty) map['emails'] = emails;
     if (industryIds != null) map['industryIds'] = industryIds;
-    if (jobPositionIds != null) map['jobPositionIds'] = jobPositionIds;
+    if (jobIds != null) map['jobIds'] = jobIds;
     if (skillIds != null) map['skillIds'] = skillIds;
     if (birthdate != null && birthdate != DateTime.now()) {
       map['birthdate'] = birthdate!.toIso8601String();
@@ -146,9 +146,7 @@ class Worker {
       industryIds: map['industryIds'] != null
           ? List<String>.from(map['industryIds'])
           : [],
-      jobPositionIds: map['jobPositionIds'] != null
-          ? List<String>.from(map['jobPositionIds'])
-          : [],
+      jobIds: map['jobIds'] != null ? List<String>.from(map['jobIds']) : [],
       skillIds:
           map['skillIds'] != null ? List<String>.from(map['skillIds']) : [],
       activeMemberships: map['activeMemberships'] != null

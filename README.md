@@ -19,6 +19,7 @@ samples, guidance on mobile development, and a full API reference.
 JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
 UserProvider up = Provider.of<UserProvider>(context);
 IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
+WorkerProvider wp = Provider.of<WorkerProvider>(context);
 
 
 Navigator.pushNamed(context, '/workers');

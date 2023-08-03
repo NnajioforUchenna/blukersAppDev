@@ -1,4 +1,5 @@
 import 'package:bulkers/data_providers/user_data_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -9,6 +10,11 @@ import '../models/company.dart';
 import '../models/worker.dart';
 
 class UserProvider with ChangeNotifier {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? _user;
+
+  User? get user => _user;
+
   AppUser? _appUser;
   String userRole = "company";
 
@@ -16,7 +22,24 @@ class UserProvider with ChangeNotifier {
 
   int registerCurrentPageIndex = 0;
 
-  UserProvider() {}
+  UserProvider() {
+    _auth.authStateChanges().listen((User? user) {
+      _user = user;
+      if (user != null) {
+        initializeAppUser(user.uid);
+      }
+      notifyListeners();
+    });
+  }
+
+  Future<void> initializeAppUser(uid) async {
+    _appUser = await UserDataProvider.getAppUser(uid);
+    notifyListeners();
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 
   int currentPageIndex = 0;
 

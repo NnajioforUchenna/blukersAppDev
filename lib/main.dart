@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
+import 'services/authentication_wrapper.dart';
 import 'views/auth/common_widget/supported_Locales.dart';
 
 Future<void> main() async {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => IndustriesProvider()),
         ChangeNotifierProvider(create: (context) => JobPostsProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
-         ChangeNotifierProvider(create: (context) => ChatProvider()),
+        ChangeNotifierProvider(create: (context) => ChatProvider()),
         ChangeNotifierProxyProvider<UserProvider, CompanyProvider>(
           create: (context) => CompanyProvider(),
           update: (_, user, CompanyProvider? previous) =>
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'Montserrat-Regular.ttf',
         ),
-        initialRoute: '/',
+        home: AuthenticationWrapper(),
         onGenerateRoute: generateRoute,
       ),
     );

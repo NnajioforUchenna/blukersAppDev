@@ -1,3 +1,4 @@
+import 'package:bulkers/providers/worker_provider.dart';
 import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +23,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     industries = ip.industries.values.toList();
+    WorkerProvider wp = Provider.of<WorkerProvider>(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
@@ -40,6 +42,8 @@ class _ClassificationPageState extends State<ClassificationPage> {
               ),
             ),
             const SizedBox(height: 20),
+            if (industries.isEmpty)
+              const Center(child: CircularProgressIndicator()),
             ...industries.map((industry) {
               return Column(
                 children: [
@@ -67,27 +71,37 @@ class _ClassificationPageState extends State<ClassificationPage> {
                   ),
                   if (selectedIndustries.contains(industry.industryId))
                     ...industry.jobs.map((job) {
-                      return CheckboxListTile(
-                        title: Text(job.title),
-                        value: selectedJobs[industry.industryId]
-                                ?.contains(job.jobId) ??
-                            false,
-                        onChanged: (bool? value) {
-                          if (value != null && value) {
-                            if (!selectedJobs
-                                .containsKey(industry.industryId)) {
-                              selectedJobs[industry.industryId] = [];
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: CheckboxListTile(
+                          title: Text(job.title,
+                              style: GoogleFonts.ebGaramond(
+                                color: Colors.blueGrey[700],
+                                fontSize: 20,
+                                fontWeight: FontWeight.w200,
+                                height: 1.25,
+                              )),
+                          value: selectedJobs[industry.industryId]
+                                  ?.contains(job.jobId) ??
+                              false,
+                          onChanged: (bool? value) {
+                            if (value != null && value) {
+                              if (!selectedJobs
+                                  .containsKey(industry.industryId)) {
+                                selectedJobs[industry.industryId] = [];
+                              }
+                              setState(() {
+                                selectedJobs[industry.industryId]!
+                                    .add(job.jobId);
+                              });
+                            } else {
+                              setState(() {
+                                selectedJobs[industry.industryId]!
+                                    .remove(job.jobId);
+                              });
                             }
-                            setState(() {
-                              selectedJobs[industry.industryId]!.add(job.jobId);
-                            });
-                          } else {
-                            setState(() {
-                              selectedJobs[industry.industryId]!
-                                  .remove(job.jobId);
-                            });
-                          }
-                        },
+                          },
+                        ),
                       );
                     }).toList()
                 ],
@@ -97,19 +111,10 @@ class _ClassificationPageState extends State<ClassificationPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Spacer(),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context); // Go to the previous page
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        ThemeColors.secondaryThemeColor),
-                  ),
-                  child: Text("Previous"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle saving or further processing of selected industries and jobs
+                    wp.createWorkerProfile(selectedIndustries, selectedJobs);
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(

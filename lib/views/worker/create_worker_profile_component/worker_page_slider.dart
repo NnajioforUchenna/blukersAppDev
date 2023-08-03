@@ -1,16 +1,15 @@
-import 'package:bulkers/providers/job_posts_provider.dart'; // This provider might need to be adjusted or replaced for the worker's timeline
+import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Import the necessary pages for the worker's timeline
 import 'classification_page.dart';
 // import 'congratulation_page.dart'; // Name can be adjusted based on your actual page name
-// import 'personal_information_page.dart';
-// import 'profile_photo_page.dart';
-// import 'references_page.dart';
-// import 'resume_page.dart';
-// import 'skills_page.dart';
-// import 'work_experience_page.dart';
+import 'personal_information_page.dart';
+import 'professional_credentials_page.dart';
+import 'profile_photo_page.dart';
+import 'reference_page.dart';
+import 'work_experience_page.dart';
 
 class WorkerPageSlider extends StatefulWidget {
   const WorkerPageSlider({Key? key}) : super(key: key);
@@ -27,8 +26,8 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
   void initState() {
     super.initState();
 
-    _currentPageIndex = Provider.of<JobPostsProvider>(context, listen: false)
-        .jobPostCurrentPageIndex; // This might need to be adjusted for the worker's timeline
+    _currentPageIndex = Provider.of<WorkerProvider>(context, listen: false)
+        .workerProfileCurrentPageIndex; // This might need to be adjusted for the worker's timeline
     _pageController = PageController(
       initialPage: _currentPageIndex,
     );
@@ -48,10 +47,10 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
   @override
   Widget build(BuildContext context) {
     // This provider might need to be adjusted for the worker's timeline
-    JobPostsProvider up = Provider.of<JobPostsProvider>(context);
-    if (_currentPageIndex != up.jobPostCurrentPageIndex) {
+    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    if (_currentPageIndex != wp.workerProfileCurrentPageIndex) {
       animateToNextPage();
-      _currentPageIndex = up.jobPostCurrentPageIndex;
+      _currentPageIndex = wp.workerProfileCurrentPageIndex;
     }
 
     return SizedBox(
@@ -61,11 +60,11 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           ClassificationPage(),
-          // PersonalInformationPage(),
-          // ProfilePhotoPage(),
-          // SkillsPage(),
-          // WorkExperiencePage(),
-          // ReferencesPage(),
+          PersonalInformationPage(),
+          ProfilePhotoPage(),
+          ProfessionalCredentialsPage(),
+          WorkExperiencePage(),
+          ReferencePage(),
           // ResumePage(),
           // CongratulationPage(), // Name can be adjusted based on your actual page name
         ],

@@ -1,4 +1,9 @@
+import 'dart:typed_data';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../data_providers/company_data_provider.dart';
 import '../data_providers/worker_data_provider.dart';
@@ -8,6 +13,10 @@ import '../models/worker.dart';
 
 class WorkerProvider with ChangeNotifier {
   Worker? _worker;
+  AppUser? appUser = AppUser(
+    uid: '4MKdXj3TMJQyj2XFeAsq1cyj90y',
+    email: 'Uchena@gmail.com',
+  );
 
   int workerCurrentPageIndex = 0;
 
@@ -16,7 +25,11 @@ class WorkerProvider with ChangeNotifier {
   List<Worker> selectedWorkers = [];
   Worker? selectedWorker;
 
-  update(AppUser? user) {}
+  update(AppUser? user) {
+    // print('update called i was listening');
+    // appUser = user;
+    // notifyListeners();
+  }
 
   setSelectedWorker(Worker worker) {
     selectedWorker = worker;
@@ -36,6 +49,128 @@ class WorkerProvider with ChangeNotifier {
 
   void addInterestingWorker(AppUser? appUser, Worker worker) {
     CompanyDataProvider.addInterestingWorker(appUser, worker);
+  }
+
+  Worker? newWorker;
+  int workerProfileCurrentPageIndex = 5;
+  List<Map<String, dynamic>> workExperience = [{}, {}];
+  List<Map<String, dynamic>> references = [{}, {}];
+
+  workerProfileNextPage() {
+    workerProfileCurrentPageIndex++;
+    notifyListeners();
+  }
+
+  void createWorkerProfile(
+      List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
+    // newWorker = Worker(
+    //   workerId: appUser!.uid,
+    //   firstName: appUser!.worker!.firstName,
+    //   lastName: appUser!.worker!.lastName,
+    //   emails: [appUser!.email!],
+    // );
+    //
+    // // Add the selected industries to the newWorker.
+    // newWorker!.industryIds = selectedIndustries;
+    // newWorker!.jobIds =
+    //     selectedJobs.values.toList().expand((element) => element).toList();
+    workerProfileNextPage();
+  }
+
+  void addPersonalInformtion(String firstName, String middleName,
+      String lateName, String day, String month, String year) {
+    // newWorker!.firstName = firstName;
+    // newWorker!.middleName = middleName;
+    // newWorker!.lastName = lateName;
+    // newWorker!.birthdate = DateTime.parse('$year-$month-$day');
+    workerProfileNextPage();
+  }
+
+  Future<void> selectLogo(BuildContext context) async {
+    ImagePicker imagePicker = ImagePicker();
+    final XFile? image =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+
+    EasyLoading.show(
+      status: 'Uploading Your Profile Image...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    // Checking the size of the selected file
+    if (image != null) {
+      Uint8List bytes = await image.readAsBytes();
+      int sizeInBytes = bytes.lengthInBytes;
+      double sizeInMB = sizeInBytes / (1024 * 1024);
+
+      if (sizeInMB > 10) {
+        EasyLoading.dismiss();
+        EasyLoading.showError(
+            'Selected file is more than 10 MB. Please select a smaller file.');
+        return;
+      }
+      print(appUser!.uid);
+      String result = await WorkerDataProvider.uploadImageToFirebaseStorage(
+          appUser!.uid, await image.readAsBytes(), image.name.split('.').last);
+      // If the result is not an error, then update the logoUrl of the Worker.
+      if (result != 'error') {
+        appUser?.photoUrl = result;
+        EasyLoading.dismiss();
+        EasyLoading.showError('Uploaded your profile image successfully.');
+        notifyListeners();
+      } else {
+        EasyLoading.dismiss();
+        EasyLoading.showError(
+            'An error occurred while uploading your profile image. Please try again.');
+      }
+    }
+  }
+
+  Future<Map<String, dynamic>> uploadCredential() async {
+    Map<String, dynamic> returnFile = {};
+    PlatformFile? filePlatformFile;
+    String result = '';
+
+    FilePickerResult? resultFile = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (resultFile != null) {
+      returnFile['file'] = resultFile?.files.first;
+      filePlatformFile = resultFile.files.first;
+      EasyLoading.show(
+        status: 'Uploading Your Credential...',
+        maskType: EasyLoadingMaskType.black,
+      );
+      String resultUrl =
+          await WorkerDataProvider.uploadCredentialToFirebaseStorage(
+              appUser!.uid, filePlatformFile.bytes!, filePlatformFile.name);
+      if (resultUrl != 'error') {
+        appUser?.worker?.certificationsIds?.add(resultUrl);
+        EasyLoading.dismiss();
+        EasyLoading.showError('Uploaded your credential successfully.',
+            duration: Duration(seconds: 3));
+        notifyListeners();
+        result = resultUrl;
+      } else {
+        EasyLoading.dismiss();
+        EasyLoading.showError(
+            'An error occurred while uploading your credential. Please try again.',
+            duration: Duration(seconds: 3));
+      }
+    }
+
+    returnFile['url'] = result;
+    return returnFile;
+  }
+
+  void addWorkExperience() {
+    workExperience.add({});
+    notifyListeners();
+  }
+
+  void addReference() {
+    references.add({});
+    notifyListeners();
   }
 
 // Any other methods related to the Worker can be added as required.
