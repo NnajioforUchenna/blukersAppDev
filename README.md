@@ -21,5 +21,10 @@ UserProvider up = Provider.of<UserProvider>(context);
 IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
 WorkerProvider wp = Provider.of<WorkerProvider>(context);
 
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ListOfAppliedWorkers(jobPost: jobPost)),
+                  );
 Navigator.pushNamed(context, '/workers');

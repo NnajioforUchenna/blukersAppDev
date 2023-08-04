@@ -1,9 +1,11 @@
 import 'package:bulkers/models/job_post.dart';
 import 'package:bulkers/providers/company_provider.dart';
+import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/styles/theme_colors.dart';
+import 'my_job_post_component/list_of_applied_workers/list_of_applied_workers.dart';
 import 'my_job_post_component/loading_my_job_posts.dart';
 import 'my_job_post_component/no_job_posts.dart';
 
@@ -13,7 +15,7 @@ class MyJobPostsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CompanyProvider cp = Provider.of<CompanyProvider>(context);
-// Using the hypothetical JobPostProvider
+    WorkerProvider wp = Provider.of<WorkerProvider>(context);
 
     return StreamBuilder<List<JobPost>>(
       stream: cp
@@ -32,53 +34,53 @@ class MyJobPostsTab extends StatelessWidget {
             itemCount: jobPosts.length,
             itemBuilder: (context, index) {
               JobPost jobPost = jobPosts[index];
-              return Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                      color: ThemeColors.primaryThemeColor, width: 2),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 15,
+              return InkWell(
+                onTap: () {
+                  wp.setDisplayLists(jobPost);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ListOfAppliedWorkers(jobPost: jobPost)),
+                  );
+                },
+                child: Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(
+                        color: ThemeColors.primaryThemeColor, width: 2),
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  onTap: () {
-                    // if (Responsive.isDesktop(context)) {
-                    //   jp.setSelectedJobPost(jobPost); // Assuming JobPostProvider has a similar function to WorkerProvider
-                    // } else {
-                    //   showDialog(
-                    //     context: context,
-                    //     builder: (context) => DisplayJobPostDialog(
-                    //       jobPost: jobPost, // Display job post details in a dialog
-                    //     ),
-                    //   );
-                    // }
-                  },
-                  title: Text(
-                    '${jobPost.jobTitle} at ${jobPost.companyName}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: ThemeColors.primaryThemeColor,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 15,
                     ),
-                  ),
-                  subtitle: Text(jobPost.jobDescription),
-                  leading: jobPost.companyImageUrl != null
-                      ? Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            image: DecorationImage(
-                              image: NetworkImage(jobPost.companyImageUrl!),
-                              fit: BoxFit.cover,
+                    title: Text(
+                      '${jobPost.jobTitle} at ${jobPost.companyName}',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: ThemeColors.primaryThemeColor,
+                      ),
+                    ),
+                    subtitle: Text(jobPost.jobDescription),
+                    leading: jobPost.companyLogo != null
+                        ? Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                image: NetworkImage(jobPost.companyLogo!),
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        )
-                      : null, // Display company image if available
+                          )
+                        : null, // Display company image if available
+                  ),
                 ),
               );
             },

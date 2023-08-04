@@ -19,6 +19,7 @@ class Worker {
   WorkStatus? workStatus;
   List<Address>? addresses;
   DateTime? birthdate;
+  DateTime? dateCreated;
   List<WorkExperience>? workExperiences;
   List<Reference>? references;
   List<String>? savedJobPostIds;
@@ -52,6 +53,7 @@ class Worker {
     this.workStatus,
     this.addresses,
     this.birthdate,
+    this.dateCreated,
     this.workExperiences,
     this.references,
     this.savedJobPostIds,
@@ -88,9 +90,12 @@ class Worker {
     if (industryIds != null) map['industryIds'] = industryIds;
     if (jobIds != null) map['jobIds'] = jobIds;
     if (skillIds != null) map['skillIds'] = skillIds;
-    if (birthdate != null && birthdate != DateTime.now()) {
+    if (birthdate != null) {
       map['birthdate'] = birthdate!.toIso8601String();
     }
+    if (dateCreated != null)
+      map['dateCreated'] = dateCreated!.toIso8601String();
+
     if (savedJobPostIds != null) map['savedJobPostIds'] = savedJobPostIds;
     if (appliedJobPostIds != null) {
       map['appliedJobPostIds'] = appliedJobPostIds;
@@ -140,8 +145,6 @@ class Worker {
     return map;
   }
 
-  // Inside the Worker class...
-
   static Worker fromMap(Map<String, dynamic> map) {
     return Worker(
       workerId: map['workerId'] ?? '',
@@ -166,9 +169,11 @@ class Worker {
               .map((addressMap) => Address.fromMap(addressMap))
               .toList()
           : [],
-      birthdate: map['birthdate'] != null
-          ? DateTime.parse(map['birthdate'])
-          : DateTime.now(),
+      birthdate:
+          map['birthdate'] != null ? DateTime.parse(map['birthdate']) : null,
+      dateCreated: map['dateCreated'] != null
+          ? DateTime.parse(map['dateCreated'])
+          : null,
       workExperiences: map['workExperiences'] != null
           ? (map['workExperiences'] as List)
               .map((weMap) => WorkExperience.fromMap(weMap))

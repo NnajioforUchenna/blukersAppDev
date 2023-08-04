@@ -34,6 +34,16 @@ class Address {
     );
   }
 
+  String displayAddress() {
+    return [
+      if (street != null && street!.isNotEmpty) street,
+      if (city != null && city!.isNotEmpty) city,
+      if (state != null && state!.isNotEmpty) state,
+      if (postalCode != null && postalCode!.isNotEmpty) postalCode,
+      if (country != null && country!.isNotEmpty) country,
+    ].join(',');
+  }
+
   @override
   String toString() {
     return '''Address(

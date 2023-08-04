@@ -1,6 +1,6 @@
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/yourLogo.dart';
+import 'package:bulkers/views/worker/create_worker_profile_component/yourProfilePhoto.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +40,7 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
               const SizedBox(height: 20),
               Column(
                 children: [
-                  const YourLogo(),
+                  const YourProfilePhoto(),
                   const SizedBox(height: 30),
                   Row(
                     children: [

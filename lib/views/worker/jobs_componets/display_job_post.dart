@@ -27,10 +27,10 @@ class JobPostWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      if (jobPost.companyImageUrl != null)
+                      if (jobPost.companyLogo != null)
                         Center(
                           child: Image.network(
-                            jobPost.companyImageUrl!,
+                            jobPost.companyLogo!,
                             fit: BoxFit.cover,
                             width: 100.0,
                             height: 100.0,

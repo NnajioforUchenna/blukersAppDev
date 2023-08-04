@@ -52,6 +52,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^22.2.7
   firebase_messaging: ^14.6.5
   flutter_local_notifications: ^9.7.0
+  shared_preferences: ^2.2.0
 
 
 

@@ -60,8 +60,7 @@ class WorkExperiencePage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Handle "submit" or "next" logic here
-                    wp.workerProfileNextPage();
+                    wp.setWorkExperience();
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(

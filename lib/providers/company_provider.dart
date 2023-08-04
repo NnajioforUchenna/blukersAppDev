@@ -18,7 +18,6 @@ class CompanyProvider with ChangeNotifier {
   Map<String, Worker> interestingWorkers = {};
 
   update(AppUser? user) {
-    print('update called i was listening');
     appUser = user;
     notifyListeners();
   }

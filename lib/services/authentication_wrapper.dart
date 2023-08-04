@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../providers/user_provider.dart';
 import '../views/common_views/landing_page_components/landing_page.dart';
-import '../views/company/workers.dart';
-import '../views/worker/jobs.dart';
+import '../views/worker/create_worker_profile_component/create_worker_profile.dart';
+import '../views/worker/jobs_componets/display_jobs.dart';
 
 class AuthenticationWrapper extends StatelessWidget {
   const AuthenticationWrapper({super.key});
@@ -14,8 +14,10 @@ class AuthenticationWrapper extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     if (up.user != null) {
       return up.appUser != null && up.appUser?.registeredAs == 'company'
-          ? Workers() //CreateWorkerProfile
-          : Jobs();
+          ? const DisplayJobs(
+              title: 'Farmer',
+            ) //CreateWorkerProfile //Workers() //Jobs()
+          : CreateWorkerProfile();
     } else {
       return LandingPage();
     }

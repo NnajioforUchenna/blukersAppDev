@@ -52,7 +52,7 @@ class _ProfessionalCredentialsPageState
                 height: 1.25,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
             // Qualification and Certification Label
             const Text(
@@ -60,7 +60,7 @@ class _ProfessionalCredentialsPageState
               textAlign: TextAlign.start,
               style: TextStyle(
                 color: Colors.black87,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
                 height: 1.25,
               ),
@@ -101,7 +101,7 @@ class _ProfessionalCredentialsPageState
               textAlign: TextAlign.start,
               style: TextStyle(
                 color: Colors.black87,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -138,22 +138,21 @@ class _ProfessionalCredentialsPageState
                   onPressed: () {
                     // Handle "previous" logic here
                   },
-                  child: const Text("Previous"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                         ThemeColors.secondaryThemeColor),
                   ),
+                  child: const Text("Previous"),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Handle "submit" or "next" logic here
-                    wp.workerProfileNextPage();
+                    wp.setSkills(selectedSkills);
                   },
-                  child: const Text("Next"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                         ThemeColors.secondaryThemeColor),
                   ),
+                  child: const Text("Next"),
                 ),
               ],
             ),

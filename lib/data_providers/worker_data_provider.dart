@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:bulkers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -65,25 +66,6 @@ class WorkerDataProvider {
     }, SetOptions(merge: true));
   }
 
-  // static Future<String> uploadPaymentReceipt(
-  //     PlatformFile pdfPlatformFile) async {
-  //   Uint8List fileBytes = pdfPlatformFile!.bytes!;
-  //   String fileName = pdfPlatformFile.name;
-  //   String downLoadUrl = '';
-  //
-  //   // Upload file
-  //   await FirebaseStorage.instance
-  //       .ref('Receipts/$fileName')
-  //       .putData(fileBytes)
-  //       .then((value) async {
-  //     await value.ref.getDownloadURL().then((value) {
-  //       downLoadUrl = value;
-  //     });
-  //   });
-  //
-  //   return downLoadUrl;
-  // }
-
   static Future<String> uploadCredentialToFirebaseStorage(
       String uid, Uint8List uint8list, String name) async {
     final storageRef = FirebaseStorage.instance.ref();
@@ -96,12 +78,90 @@ class WorkerDataProvider {
       fileUrl = await uploadTaskSnapshot.ref.getDownloadURL();
 
       // Set the logoUrl in the database
-      await updateOrAddUserCredential(uid, fileUrl, name);
+      await updateOrAddUserCredential(uid, fileUrl);
     } catch (e) {
       print(e);
     }
     return fileUrl;
   }
 
-  static updateOrAddUserCredential(String uid, String fileUrl, String name) {}
+  static Future<void> updateOrAddUserCredential(
+      String uid, String fileUrl) async {
+    // For AppUsers collection within worker map
+    await db.collection('AppUsers').doc(uid).set({
+      'worker': {
+        'certificationsIds': FieldValue.arrayUnion([fileUrl]),
+      },
+    }, SetOptions(merge: true));
+
+    // For workers collection
+    await db.collection('workers').doc(uid).set({
+      'certificationsIds': FieldValue.arrayUnion([fileUrl]),
+    }, SetOptions(merge: true));
+  }
+
+  static Future<void> updateOrAddUserSkill(String uid, String skillId) async {
+    // For AppUsers collection within worker map
+    await db.collection('AppUsers').doc(uid).set({
+      'worker': {
+        'skillIds': FieldValue.arrayUnion([skillId]),
+      },
+    }, SetOptions(merge: true));
+
+    // For workers collection
+    await db.collection('workers').doc(uid).set({
+      'skillIds': FieldValue.arrayUnion([skillId]),
+    }, SetOptions(merge: true));
+  }
+
+  static void createWorkerProfile(Worker worker) {
+    db
+        .collection('workers')
+        .doc(worker.workerId)
+        .set(worker.toMap(), SetOptions(merge: true));
+  }
+
+  static getWorkerProfile(String uid) async {
+    final DocumentReference docRef = db.collection('workers').doc(uid);
+
+    try {
+      final DocumentSnapshot doc = await docRef.get();
+
+      if (doc.exists) {
+        print('Document data: ${doc.data()}');
+      } else {
+        print('No such document!');
+      }
+    } catch (e) {
+      print('Error fetching document: $e');
+    }
+  }
+
+  static Future<List<Worker>> getWorkerLists(
+      String uid, String parameter) async {
+    // Fetch the workerIds from the 'JobPosts' collection
+    DocumentSnapshot jobPostSnapshot =
+        await db.collection('JobPosts').doc(uid).get();
+    List<String>? workerIds = jobPostSnapshot.get(parameter)?.cast<String>();
+
+    // Check if workerIds are null or empty
+    if (workerIds == null || workerIds.isEmpty) {
+      return [];
+    }
+
+    // Fetch the workers from the 'workers' collection based on the workerIds
+    List<Worker> workers = [];
+    for (String workerId in workerIds) {
+      DocumentSnapshot workerSnapshot =
+          await db.collection('workers').doc(workerId).get();
+
+      if (workerSnapshot.exists) {
+        Map<String, dynamic> workerData =
+            workerSnapshot.data()! as Map<String, dynamic>;
+        workers.add(Worker.fromMap(workerData));
+      }
+    }
+
+    return workers;
+  }
 }

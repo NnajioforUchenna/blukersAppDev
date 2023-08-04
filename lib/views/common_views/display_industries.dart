@@ -13,7 +13,7 @@ class DisplayIndustries extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
           const Padding(
             padding: EdgeInsets.all(16.0),

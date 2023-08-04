@@ -34,8 +34,6 @@ class CompanyDataProvider {
       if (doc.exists) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         List<dynamic> jobPostIdList = data['jobPostIds'] ?? [];
-        print(jobPostIdList);
-
         List<JobPost> returnJobPostList = [];
 
         Future.forEach(jobPostIdList, (jobPostId) async {
@@ -64,10 +62,7 @@ class CompanyDataProvider {
         Map<String, dynamic> data = doc.data()
             as Map<String, dynamic>; // Type casting to Map<String, dynamic>
         List<dynamic> workerList = data['interestingWorkers'] ?? [];
-        print(workerList);
-
         List<Worker> returnWorkerList = [];
-
         Future.forEach(workerList, (workerId) async {
           DocumentSnapshot workerDoc =
               await db.collection('workers').doc(workerId).get();
@@ -83,7 +78,6 @@ class CompanyDataProvider {
         _streamController.add([]);
       }
     });
-
     return _streamController;
   }
 

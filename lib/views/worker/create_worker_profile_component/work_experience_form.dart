@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../auth/common_widget/auth_input.dart';
 import 'work_experience_date.dart';
 import 'work_experience_location_form.dart';
 
@@ -29,16 +30,14 @@ class WorkExperienceForm extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const SizedBox(height: 20),
-            AuthInput(
-              child: Text(
-                "Work Experience ${index + 1}",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.ebGaramond(
-                  color: Colors.deepOrangeAccent,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                  height: 1.25,
-                ),
+            Text(
+              "Work Experience ${index + 1}",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.ebGaramond(
+                color: Colors.deepOrangeAccent,
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
+                height: 1.25,
               ),
             ),
             const SizedBox(height: 10),

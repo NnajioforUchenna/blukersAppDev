@@ -22,7 +22,7 @@ class AppUser {
   Worker? worker; // Added Worker parameter
   Company? company; // Added Company parameter
   Address? address;
-
+  String? deviceTokenU;
   AppUser({
     required this.uid,
     this.email,
@@ -39,6 +39,7 @@ class AppUser {
     this.worker, // Added Worker parameter
     this.company, // Added Company parameter
     this.address,
+    this.deviceTokenU,
   });
 
   // New constructor for User.fromSignUp
@@ -58,6 +59,7 @@ class AppUser {
     this.worker, // Added Worker parameter
     this.company, // Added Company parameter
     this.address,
+    this.deviceTokenU,
   });
 
   Map<String, dynamic> toMap() {
@@ -87,6 +89,7 @@ class AppUser {
     if (worker != null) data['worker'] = worker!.toMap();
     if (company != null) data['company'] = company!.toMap();
     if (address != null) data['address'] = address!.toMap();
+    if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
 
     return data;
   }
@@ -120,5 +123,29 @@ class AppUser {
   @override
   String toString() {
     return toMap().toString();
+  }
+
+  // Convert AppUser object to Map<String, String>
+  Map<String, String> toSp() {
+    return {
+      'uid': uid ?? "",
+      'email': email ?? "",
+      'language': language ?? "",
+      'displayName': displayName ?? "",
+      'photoUrl': photoUrl ?? "",
+      'deviceTokenU': deviceTokenU ?? "",
+    };
+  }
+
+  // Convert Map<String, String> to AppUser object
+  static Future<AppUser?> fromSp(Map<String, String> userMap) async {
+    return AppUser(
+      uid: userMap['uid'] ?? "",
+      email: userMap['email'],
+      language: userMap['language'],
+      displayName: userMap['displayName'],
+      photoUrl: userMap['photoUrl'],
+      deviceTokenU: userMap['deviceTokenU'],
+    );
   }
 }

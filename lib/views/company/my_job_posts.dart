@@ -38,7 +38,7 @@ class MyJobPosts extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.add), // Use Icon instead of IconButton
+                      const Icon(Icons.add), // Use Icon instead of IconButton
                       if (Responsive.isDesktop(context))
                         const Padding(
                           padding: EdgeInsets.only(left: 4.0),

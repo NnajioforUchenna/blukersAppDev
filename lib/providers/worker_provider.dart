@@ -8,6 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import '../data_providers/company_data_provider.dart';
 import '../data_providers/worker_data_provider.dart';
 import '../models/app_user.dart';
+import '../models/job_post.dart';
+import '../models/reference.dart';
+import '../models/work_experience.dart';
 import '../models/worker.dart';
 // Assuming the file containing the Worker class is named 'worker.dart'.
 
@@ -61,7 +64,9 @@ class WorkerProvider with ChangeNotifier {
   // Create a new Worker profile using the selected industries and jobs.
   void createWorkerProfile(context, List<String> selectedIndustries,
       Map<String, List<String>> selectedJobs) {
-    if (appUser!.worker == null) {
+    if (appUser != null) {
+      getMyProfile();
+
       newWorker = Worker.fromNewProfile(
         workerId: appUser!.uid,
         emails: [appUser!.email!],
@@ -79,6 +84,7 @@ class WorkerProvider with ChangeNotifier {
     }
   }
 
+  // Add the worker's personal information to the newWorker.
   void addPersonalInformtion(String firstName, String middleName,
       String lateName, String day, String month, String year) {
     newWorker!.firstName = firstName;
@@ -90,7 +96,8 @@ class WorkerProvider with ChangeNotifier {
     workerProfileNextPage();
   }
 
-  Future<void> selectLogo(BuildContext context) async {
+  // Add Profile Photo to Worker
+  Future<void> selectProfilePhoto(BuildContext context) async {
     ImagePicker imagePicker = ImagePicker();
     final XFile? image =
         await imagePicker.pickImage(source: ImageSource.gallery);
@@ -128,6 +135,7 @@ class WorkerProvider with ChangeNotifier {
     }
   }
 
+  // Uploading Worker Credential
   Future<Map<String, dynamic>> uploadCredential() async {
     Map<String, dynamic> returnFile = {};
     PlatformFile? filePlatformFile;
@@ -159,13 +167,20 @@ class WorkerProvider with ChangeNotifier {
         EasyLoading.dismiss();
         EasyLoading.showError(
             'An error occurred while uploading your credential. Please try again.',
-            duration: Duration(seconds: 3));
+            duration: const Duration(seconds: 3));
       }
     }
 
     returnFile['url'] = result;
     return returnFile;
   }
+
+  void setSkills(List<String> selectedSkills) {
+    newWorker!.skillIds = selectedSkills;
+    workerProfileNextPage();
+  }
+
+  // Uploading Worker Credential
 
   void addWorkExperience() {
     workExperience.add({});
@@ -174,6 +189,56 @@ class WorkerProvider with ChangeNotifier {
 
   void addReference() {
     references.add({});
+    notifyListeners();
+  }
+
+  void setWorkExperience() {
+    workExperience.forEach((element) {
+      print(element);
+      newWorker!.workExperiences = [];
+      newWorker!.workExperiences?.add(WorkExperience.fromMap(element));
+    });
+    workerProfileNextPage();
+  }
+
+  void setReference() {
+    references.forEach((element) {
+      newWorker!.references = [];
+      newWorker!.references?.add(Reference.fromMap(element));
+    });
+    workerProfileNextPage();
+  }
+
+  void setResumeUrl(String pdfUrl) {
+    newWorker!.pdfResumeUrl = pdfUrl;
+  }
+
+  void setResume(String text) {
+    newWorker!.onlineResume = text;
+    workerProfileNextPage();
+    newWorker?.dateCreated = DateTime.now();
+    WorkerDataProvider.createWorkerProfile(newWorker!);
+  }
+
+  void getMyProfile() {
+    WorkerDataProvider.getWorkerProfile(appUser!.uid).then((worker) {
+      appUser!.worker = worker;
+      notifyListeners();
+    });
+  }
+
+  // Create Parameter to Display Lists (Applied Users)
+  List<Worker> appliedWorkers = [];
+
+  Future<void> setDisplayLists(JobPost jobPost) async {
+    print('set display lists jobPost.jobPostId: ${jobPost.jobPostId}');
+    print(jobPost.toString());
+    if (jobPost.jobPostId.isEmpty) {
+      return;
+    }
+
+    appliedWorkers = await WorkerDataProvider.getWorkerLists(
+        jobPost.jobPostId, 'applicantUserIds');
     notifyListeners();
   }
 

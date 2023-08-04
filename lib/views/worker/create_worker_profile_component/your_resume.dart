@@ -22,7 +22,7 @@ class _YourResumeState extends State<YourResume> {
   @override
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
-    String? logoUrl = wp.appUser?.photoUrl;
+
     return Card(
       elevation: 8.0,
       shape: RoundedRectangleBorder(
@@ -48,6 +48,7 @@ class _YourResumeState extends State<YourResume> {
                       filePlatformFile = result['file'];
                     });
                   }
+                  wp.setResumeUrl(fileNameUrl!);
                 },
                 child: SizedBox(
                   height: 150,

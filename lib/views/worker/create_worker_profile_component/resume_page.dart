@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/styles/theme_colors.dart';
+import '../../auth/common_widget/auth_input.dart';
 import 'your_resume.dart';
 
 class ResumePage extends StatelessWidget {
@@ -71,7 +72,7 @@ class ResumePage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Handle "submit" or "next" logic here
-                      wp.workerProfileNextPage();
+                      wp.setResume(linkedInUrlController.text);
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -87,15 +88,5 @@ class ResumePage extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class AuthInput extends StatelessWidget {
-  final Widget child;
-  const AuthInput({Key? key, required this.child}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return child;
   }
 }

@@ -62,8 +62,7 @@ class ReferencePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle "submit" or "next" logic here
-                      wp.workerProfileNextPage();
+                      wp.setReference();
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

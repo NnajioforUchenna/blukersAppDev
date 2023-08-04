@@ -2,12 +2,24 @@ import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WorkExperienceLocationForm extends StatelessWidget {
-  final int intialIndex;
-  WorkExperienceLocationForm({super.key, required this.intialIndex});
+import '../../auth/common_widget/auth_input.dart';
 
+class WorkExperienceLocationForm extends StatefulWidget {
+  final int intialIndex;
+  const WorkExperienceLocationForm({Key? key, required this.intialIndex})
+      : super(key: key);
+
+  @override
+  State<WorkExperienceLocationForm> createState() =>
+      _WorkExperienceLocationFormState();
+}
+
+class _WorkExperienceLocationFormState
+    extends State<WorkExperienceLocationForm> {
   final TextEditingController cityController = TextEditingController();
+
   final TextEditingController stateController = TextEditingController();
+
   final TextEditingController countryController = TextEditingController();
 
   @override
@@ -26,7 +38,7 @@ class WorkExperienceLocationForm extends StatelessWidget {
               onEditingComplete: () => node.nextFocus(),
               validator: (value) => value!.isEmpty ? "Required" : null,
               onChanged: (value) {
-                wp.workExperience[intialIndex]['city'] = value;
+                wp.workExperience[widget.intialIndex]['city'] = value;
               },
               decoration: InputDecoration(
                 hintText: "City",
@@ -53,7 +65,7 @@ class WorkExperienceLocationForm extends StatelessWidget {
               onEditingComplete: () => node.nextFocus(),
               validator: (value) => value!.isEmpty ? "Required" : null,
               onChanged: (value) {
-                wp.workExperience[intialIndex]['state'] = value;
+                wp.workExperience[widget.intialIndex]['state'] = value;
               },
               decoration: InputDecoration(
                 hintText: "State",
@@ -80,7 +92,7 @@ class WorkExperienceLocationForm extends StatelessWidget {
               onEditingComplete: () => node.unfocus(),
               validator: (value) => value!.isEmpty ? "Required" : null,
               onChanged: (value) {
-                wp.workExperience[intialIndex]['country'] = value;
+                wp.workExperience[widget.intialIndex]['country'] = value;
               },
               decoration: InputDecoration(
                 hintText: "Country",
@@ -99,17 +111,5 @@ class WorkExperienceLocationForm extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-// Assuming AuthInput is a separate widget like this:
-class AuthInput extends StatelessWidget {
-  final Widget child;
-
-  AuthInput({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return child;
   }
 }

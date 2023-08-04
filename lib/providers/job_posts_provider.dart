@@ -14,6 +14,11 @@ class JobPostsProvider with ChangeNotifier {
 
   JobPost? selectedJobPost;
 
+  // trying to build UI
+  JobPostsProvider() {
+    getJobPostsByJobID('farmer');
+  }
+
   Map<String, JobPost> get jobPosts => _jobPosts;
 
   List<JobPost> selectedJobPosts = [];

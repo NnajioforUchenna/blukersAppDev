@@ -1,6 +1,7 @@
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/services/notification_service.dart';
+import 'package:bulkers/services/user_shared_preferences_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -13,14 +14,14 @@ import '../models/worker.dart';
 
 class UserProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _user;
 
+  User? _user;
   User? get user => _user;
 
   AppUser? _appUser;
-  String userRole = "company";
-
   AppUser? get appUser => _appUser;
+
+  String userRole = "company";
 
   int registerCurrentPageIndex = 0;
 
@@ -75,6 +76,9 @@ class UserProvider with ChangeNotifier {
 
       // Set the _appUser
       _appUser = appUser;
+
+      // Add to Shared Preferences
+      UserSharedPreferencesServices.create(appUser);
 
       // Store the user data in the database.
       UserDataProvider.registerUserToDatabase(appUser);
@@ -199,9 +203,15 @@ class UserProvider with ChangeNotifier {
 
       // Set the _appUser
       _appUser = appUser4DB;
-      await NotificationService.registerNotification(
-          _appUser!.uid, chatProvider);
-      NotificationService.configLocalNotification();
+
+      // Add to Shared Preferences
+      if (appUser4DB != null) {
+        UserSharedPreferencesServices.create(appUser4DB);
+      }
+
+      // await NotificationService.registerNotification(
+      //     _appUser!.uid, chatProvider);
+      // NotificationService.configLocalNotification();
       notifyListeners();
 
       // Dismiss the loading indicator.

@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/worker_provider.dart';
 
-class YourLogo extends StatelessWidget {
-  const YourLogo({
+class YourProfilePhoto extends StatelessWidget {
+  const YourProfilePhoto({
     Key? key,
   }) : super(key: key);
 
@@ -27,7 +27,7 @@ class YourLogo extends StatelessWidget {
               const SizedBox(height: 30),
               InkWell(
                 onTap: () {
-                  wp.selectLogo(context);
+                  wp.selectProfilePhoto(context);
                 },
                 child: SizedBox(
                   height: 150,

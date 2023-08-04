@@ -1,3 +1,5 @@
+import '../models/address.dart';
+
 final List<String> routesWorker = [
   '/jobs',
   '/myJobs',
@@ -12,3 +14,10 @@ final List<String> routesCompany = [
   'companyProfile',
   '/login'
 ];
+
+String getAddressesInStringFormat(List<Address>? addresses) {
+  if (addresses == null || addresses.isEmpty) {
+    return 'No addresses available';
+  }
+  return addresses.map((address) => address.displayAddress()).join('\n');
+}

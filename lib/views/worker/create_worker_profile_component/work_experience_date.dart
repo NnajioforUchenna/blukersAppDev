@@ -15,6 +15,13 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
   DateTime? _startDate;
   DateTime? _endDate;
   bool _isCurrentlyWorking = false;
+  late WorkerProvider wp;
+
+  @override
+  void initState() {
+    super.initState();
+    wp = Provider.of<WorkerProvider>(context, listen: false);
+  }
 
   Future<void> _selectDate(BuildContext context,
       {bool isStartDate = true}) async {
@@ -28,8 +35,10 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
       setState(() {
         if (isStartDate) {
           _startDate = pickedDate;
+          wp.workExperience[widget.intialIndex]['jobStartDate'] = _startDate;
         } else {
           _endDate = pickedDate;
+          wp.workExperience[widget.intialIndex]['jobEndDate'] = _endDate;
         }
       });
     }
@@ -37,7 +46,7 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    wp = Provider.of<WorkerProvider>(context);
     return Column(
       children: [
         Row(
@@ -48,8 +57,6 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                 child: ElevatedButton(
                   onPressed: () {
                     _selectDate(context);
-                    wp.workExperience[widget.intialIndex]['startDate'] =
-                        _startDate;
                   },
                   child: Text(_startDate == null
                       ? "Select Start Date"
@@ -66,8 +73,6 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                       ? null
                       : () {
                           _selectDate(context, isStartDate: false);
-                          wp.workExperience[widget.intialIndex]['endDate'] =
-                              _endDate;
                         },
                   child: Text(_endDate == null
                       ? "Select End Date"

@@ -1,3 +1,4 @@
+import '../common_files/get_time_ago.dart';
 import 'address.dart';
 import 'skill.dart';
 
@@ -13,7 +14,7 @@ class JobPost {
   final String? companyName;
   final String jobTitle;
   final String jobDescription;
-  final String? companyImageUrl;
+  final String? companyLogo;
   final String requirements;
   final List<Skill> skills;
   final JobType jobType;
@@ -28,6 +29,7 @@ class JobPost {
   final int numberOfPositionsAvailable;
   final JobUrgencyLevel? jobUrgencyLevel;
   final JobPostStatus? jobPostStatus;
+  final DateTime? dateCreated;
 
   // New fields
   final List<String> industryIds;
@@ -39,7 +41,7 @@ class JobPost {
     required this.companyName,
     required this.jobTitle,
     required this.jobDescription,
-    this.companyImageUrl,
+    this.companyLogo,
     required this.requirements,
     required this.skills,
     required this.jobType,
@@ -56,7 +58,10 @@ class JobPost {
     this.jobPostStatus,
     required this.industryIds, // Updated
     required this.jobIds, // Updated
+    this.dateCreated,
   });
+
+  get timeAgo => getTimeAgo(dateCreated.toString());
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {
@@ -70,10 +75,11 @@ class JobPost {
       'industryIds': industryIds,
       'jobIds': jobIds,
       'jobPostId': jobPostId,
+      'dateCreated': dateCreated ?? DateTime.now(),
     };
 
     // Check and add only if not null
-    if (companyImageUrl != null) data['companyImageUrl'] = companyImageUrl;
+    if (companyLogo != null) data['companyLogo'] = companyLogo;
     if (skills != null && skills.isNotEmpty)
       data['skills'] = skills.map((skill) => skill.toMap()).toList();
     if (contractDuration != null) data['contractDuration'] = contractDuration;
@@ -100,7 +106,7 @@ class JobPost {
       companyName: map['companyName'] ?? '',
       jobTitle: map['jobTitle'] ?? '',
       jobDescription: map['jobDescription'] ?? '',
-      companyImageUrl: map['companyImageUrl'],
+      companyLogo: map['companyLogo'],
       requirements: map['requirements'] ?? '',
       skills: map['skills'] != null
           ? (map['skills'] as List)
@@ -143,6 +149,10 @@ class JobPost {
           ? List<String>.from(map['industryIds'])
           : [],
       jobIds: map['jobIds'] != null ? List<String>.from(map['jobIds']) : [],
+      dateCreated: map['dateCreated'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(
+              map['dateCreated'].millisecondsSinceEpoch)
+          : DateTime.now(),
     );
   }
 
