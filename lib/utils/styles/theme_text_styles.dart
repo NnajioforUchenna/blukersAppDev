@@ -42,7 +42,7 @@ abstract class ThemeTextStyles {
     fontFamily: 'Montserrat',
     color: ThemeColors.primaryThemeColor,
     fontSize: 28,
-    height: 0.5,
+    height: 1.2,
     fontWeight: FontWeight.w600,
   );
 
