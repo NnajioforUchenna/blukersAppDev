@@ -27,10 +27,16 @@ class CompanyChat extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(UniconsLine.chat,
-                      color: ThemeColors.secondaryThemeColor, size: 50),
+                      color: ThemeColors.grey1ThemeColor, size: 50),
                   Text(
                     "You have no chats",
-                    style: ThemeTextStyles.headingThemeTextStyle,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: ThemeColors.grey1ThemeColor,
+                      fontSize: 20,
+                      height: 1.5,
+                      fontWeight: FontWeight.w600,
+                    ),
                   )
                 ],
               ))
