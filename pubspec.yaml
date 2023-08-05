@@ -53,6 +53,7 @@ dependencies:
   firebase_messaging: ^14.6.5
   flutter_local_notifications: ^9.7.0
   shared_preferences: ^2.2.0
+  unicons: ^2.1.1
 
 
 

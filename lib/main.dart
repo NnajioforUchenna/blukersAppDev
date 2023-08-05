@@ -57,9 +57,9 @@ class MyApp extends StatelessWidget {
         ],
         builder: EasyLoading.init(),
         theme: ThemeData(
-          useMaterial3: true,
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: Color.fromRGBO(30, 117, 187, 1)),
+          // useMaterial3: true,
+          // colorScheme:
+          //     ColorScheme.fromSeed(seedColor: Color.fromRGBO(30, 117, 187, 1)),
           // // Setup your ThemeData colorScheme manually:
           // colorScheme: const ColorScheme(
           //   brightness: Brightness.light,
@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
           //   background: Colors.white,
           //   onBackground: Colors.black,
           //   surface: Colors.white,
-          //   onSurface: Colors.black,
+          //   onSurface: Color.fromRGBO(30, 117, 187, 1),
           // ),
           primarySwatch: Colors.blue,
           fontFamily: 'Montserrat',
