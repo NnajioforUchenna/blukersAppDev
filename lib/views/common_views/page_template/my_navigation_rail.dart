@@ -64,8 +64,8 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
           selectedIcon: const Icon(UniconsLine.briefcase_alt,
               color: ThemeColors.primaryThemeColor),
           label: up.userRole == 'company'
-              ? const Text('My Job Posts')
-              : const Text('My Jobs'),
+              ? const Text('Jobs')
+              : const Text('Jobs'),
         ),
         const NavigationRailDestination(
           icon: Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
