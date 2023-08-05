@@ -20,12 +20,13 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
-    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
           // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           // useMaterial3: true,
           primarySwatch: Colors.blue,
-          fontFamily: 'Montserrat-Regular.ttf',
+          fontFamily: 'Montserrat',
         ),
         home: AuthenticationWrapper(),
         onGenerateRoute: generateRoute,
