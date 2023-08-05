@@ -38,6 +38,7 @@ class _OptionBoxState extends State<OptionBox> {
         },
         child: Card(
           elevation: 5,
+          clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
             side: _isHovering
@@ -45,6 +46,7 @@ class _OptionBoxState extends State<OptionBox> {
                 : BorderSide.none,
           ),
           child: Container(
+            color: Colors.white,
             width: MediaQuery.of(context).size.height * 0.2,
             height: MediaQuery.of(context).size.height * 0.2,
             padding: EdgeInsets.all(16.0),

@@ -41,15 +41,15 @@ abstract class ThemeTextStyles {
   static const TextStyle landingPageSubtitleThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
     color: ThemeColors.primaryThemeColor,
-    fontSize: 28,
+    fontSize: 26,
     height: 1.2,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w800,
   );
 
   static const TextStyle landingPageQuestionThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
     color: ThemeColors.secondaryThemeColor,
-    fontSize: 24,
+    fontSize: 22,
     height: 0.5,
     fontWeight: FontWeight.w500,
   );
@@ -57,7 +57,7 @@ abstract class ThemeTextStyles {
   static const TextStyle landingPageBtnThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
     color: ThemeColors.primaryThemeColor,
-    fontSize: 18,
+    fontSize: 16,
     height: 0.5,
     fontWeight: FontWeight.w600,
   );
