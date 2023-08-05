@@ -32,7 +32,7 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
               color: ThemeColors.grey1ThemeColor),
           selectedIcon: const Icon(UniconsLine.briefcase_alt,
               color: ThemeColors.primaryThemeColor),
-          label: up.userRole == 'company' ? 'My Job Posts' : 'My Jobs',
+          label: up.userRole == 'company' ? 'Jobs' : 'Jobs',
         ),
         const NavigationDestination(
           icon: Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
