@@ -1,6 +1,7 @@
 import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../providers/user_provider.dart';
 
@@ -51,28 +52,31 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
       // trailing: const MyTrailingWidget(),
       destinations: <NavigationRailDestination>[
         const NavigationRailDestination(
-          icon: Icon(Icons.home, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: Icon(Icons.home, color: ThemeColors.primaryThemeColor),
+          icon: Icon(UniconsLine.estate, color: ThemeColors.grey1ThemeColor),
+          selectedIcon:
+              Icon(UniconsLine.estate, color: ThemeColors.primaryThemeColor),
           label: Text('Home'),
           // padding: EdgeInsets.all(16.0),
         ),
         NavigationRailDestination(
-          icon: const Icon(Icons.work, color: ThemeColors.grey1ThemeColor),
-          selectedIcon:
-              const Icon(Icons.work, color: ThemeColors.primaryThemeColor),
+          icon: const Icon(UniconsLine.briefcase_alt,
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.briefcase_alt,
+              color: ThemeColors.primaryThemeColor),
           label: up.userRole == 'company'
-              ? const Text('My Job Posts')
-              : const Text('My Jobs'),
+              ? const Text('Jobs')
+              : const Text('Jobs'),
         ),
         const NavigationRailDestination(
-          icon: Icon(Icons.chat, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: Icon(Icons.chat, color: ThemeColors.primaryThemeColor),
+          icon: Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
+          selectedIcon:
+              Icon(UniconsLine.chat, color: ThemeColors.primaryThemeColor),
           label: Text('Chat'),
         ),
         const NavigationRailDestination(
-          icon: Icon(Icons.person, color: ThemeColors.grey1ThemeColor),
+          icon: Icon(UniconsLine.user, color: ThemeColors.grey1ThemeColor),
           selectedIcon:
-              Icon(Icons.person, color: ThemeColors.primaryThemeColor),
+              Icon(UniconsLine.user, color: ThemeColors.primaryThemeColor),
           label: Text('Profile'),
         ),
       ],

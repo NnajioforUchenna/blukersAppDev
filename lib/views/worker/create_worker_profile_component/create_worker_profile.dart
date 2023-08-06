@@ -13,12 +13,13 @@ class CreateWorkerProfile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Center(
-          child: Text(
-            'Creating My Work Profile',
-            style: ThemeTextStyles.appBarThemeTextStyle,
-          ),
-        ),
+        elevation: 0,
+        // title: const Center(
+        //   child: Text(
+        //     'Creating My Work Profile',
+        //     style: ThemeTextStyles.appBarThemeTextStyle,
+        //   ),
+        // ),
       ),
       body: Center(
         child: SizedBox(

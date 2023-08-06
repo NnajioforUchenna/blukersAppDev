@@ -5,6 +5,7 @@ import 'package:bulkers/views/common_views/page_template/page_template.dart';
 import 'package:bulkers/views/company/workers_components/chat_list_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 class CompanyChat extends StatelessWidget {
   const CompanyChat({super.key});
@@ -17,11 +18,28 @@ class CompanyChat extends StatelessWidget {
       child: Container(
         child: chatProvider.chatRooms.isEmpty
             ? const Center(
-                child: Text(
-                  "No Chats Available!",
-                  style: ThemeTextStyles.headingThemeTextStyle,
-                ),
-              )
+                // child: Text(
+                //   "No Chats Available!",
+                //   style: ThemeTextStyles.headingThemeTextStyle,
+                // ),
+                child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(UniconsLine.chat,
+                      color: ThemeColors.grey1ThemeColor, size: 50),
+                  Text(
+                    "You have no chats",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: ThemeColors.grey1ThemeColor,
+                      fontSize: 20,
+                      height: 1.5,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  )
+                ],
+              ))
             : ListView.builder(
                 itemCount: chatProvider.chatRooms.length,
                 itemBuilder: (BuildContext context, int index) {

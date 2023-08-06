@@ -41,10 +41,10 @@ class _ClassificationPageState extends State<ClassificationPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               "Select Your Industries and Jobs",
               textAlign: TextAlign.center,
-              style: GoogleFonts.ebGaramond(
+              style: TextStyle(
                 color: Colors.deepOrangeAccent,
                 fontSize: 25,
                 fontWeight: FontWeight.w600,
@@ -59,7 +59,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                 children: [
                   CheckboxListTile(
                     title: Text(industry.name,
-                        style: GoogleFonts.ebGaramond(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -85,7 +85,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CheckboxListTile(
                           title: Text(job.title,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: Colors.blueGrey[700],
                                 fontSize: 20,
                                 fontWeight: FontWeight.w200,

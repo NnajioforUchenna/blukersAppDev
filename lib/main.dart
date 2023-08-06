@@ -57,10 +57,25 @@ class MyApp extends StatelessWidget {
         ],
         builder: EasyLoading.init(),
         theme: ThemeData(
-          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           // useMaterial3: true,
+          // colorScheme:
+          //     ColorScheme.fromSeed(seedColor: Color.fromRGBO(30, 117, 187, 1)),
+          // // Setup your ThemeData colorScheme manually:
+          // colorScheme: const ColorScheme(
+          //   brightness: Brightness.light,
+          //   primary: Color.fromRGBO(30, 117, 187, 1),
+          //   onPrimary: Colors.white,
+          //   secondary: Colors.white,
+          //   onSecondary: Color.fromARGB(255, 83, 83, 83),
+          //   error: Colors.red,
+          //   onError: Colors.white,
+          //   background: Colors.white,
+          //   onBackground: Colors.black,
+          //   surface: Colors.white,
+          //   onSurface: Color.fromRGBO(30, 117, 187, 1),
+          // ),
           primarySwatch: Colors.blue,
-          fontFamily: 'Montserrat-Regular.ttf',
+          fontFamily: 'Montserrat',
         ),
         home: AuthenticationWrapper(),
         onGenerateRoute: generateRoute,
