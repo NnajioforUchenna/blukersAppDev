@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../utils/styles/theme_colors.dart';
 
@@ -18,38 +19,38 @@ const workerSteps = [
 
 const List<Icon> workerIcons = [
   Icon(
-    Icons.class_,
-    color: Colors.white,
+    UniconsLine.constructor,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.person,
-    color: Colors.white,
+    UniconsLine.user,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.photo_camera,
-    color: Colors.white,
+    UniconsLine.user_square,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.build,
-    color: Colors.white,
+    UniconsLine.award,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.work,
-    color: Colors.white,
+    UniconsLine.briefcase_alt,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.book,
-    color: Colors.white,
+    UniconsLine.postcard,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.description,
-    color: Colors.white,
+    UniconsLine.file_alt,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
 ];
@@ -72,20 +73,31 @@ class WorkerTimeLine extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       constraints: const BoxConstraints(maxHeight: 140),
       decoration: BoxDecoration(
-        color: ThemeColors.primaryThemeColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
+          // color: ThemeColors.primaryThemeColor,
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.grey,
+          //     offset: Offset(0.0, 1.0), //(x,y)
+          //     blurRadius: 6.0,
+          //   ),
+          // ],
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: ThemeColors.secondaryThemeColor,
+            width: 2,
+          )),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         controller: _scrollController,
         itemCount: workerSteps.length,
         itemBuilder: (BuildContext context, int index) {
           final step = workerSteps[index];
-          var indicatorSize = 30.0;
+          var indicatorSize = 40.0;
           var beforeLineStyle = LineStyle(
             color: Colors.white.withOpacity(0.8),
           );
-          LineStyle afterLineStyle = const LineStyle(color: Color(0xFF747888));
+          LineStyle afterLineStyle =
+              const LineStyle(color: ThemeColors.grey1ThemeColor);
 
           _WorkerStatus status;
 
@@ -95,7 +107,8 @@ class WorkerTimeLine extends StatelessWidget {
           } else if (index > currentStep) {
             status = _WorkerStatus.todo;
             indicatorSize = 20;
-            beforeLineStyle = const LineStyle(color: Color(0xFF747888));
+            beforeLineStyle =
+                const LineStyle(color: ThemeColors.grey1ThemeColor);
           } else {
             status = _WorkerStatus.doing;
           }
@@ -158,11 +171,12 @@ class _EndChildWorker extends StatelessWidget {
                 child: Text(
                   text,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.sniglet(
+                  style: TextStyle(
                     fontSize: 14,
+                    fontWeight: FontWeight.w600,
                     color: current
                         ? ThemeColors.secondaryThemeColor
-                        : Colors.white,
+                        : ThemeColors.grey1ThemeColor,
                   ),
                 ),
               ),
@@ -213,7 +227,7 @@ class _IndicatorWorker extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Color(0xFF747888),
+            color: ThemeColors.grey1ThemeColor,
           ),
           child: Center(
             child: Container(
