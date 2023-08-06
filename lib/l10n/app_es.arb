@@ -1,5 +1,4 @@
 { 
-    "hi": "Hola, ¿Como estas?", 
     "hello": "Hola {userName}",
     "@hello": {
         "description": "Un mensaje con un parametro",
@@ -9,5 +8,9 @@
                 "example": "Bob"
             }
         }
-    } 
+    },
+    "dreamBuildConnect": "Sueña. Conecta. Construye.",
+    "whatAreYouLookingFor": "¿Que estas buscando?",
+    "aJob": "Un Trabajo",
+    "workers": "Trabajadores"
 }

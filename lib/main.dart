@@ -13,9 +13,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 import 'services/authentication_wrapper.dart';
-import 'views/auth/common_widget/supported_Locales.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:bulkers/l10n/l10n.dart';
+import 'package:bulkers/utils/localization/deviceLocale.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,29 +52,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Blukers",
         debugShowCheckedModeBanner: false,
-        //
-        // localizationsDelegates: const [
-        //   CountryLocalizations.delegate,
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        // ],
-        // supportedLocales: supportedLocales,
-        //
-        // localizationsDelegates: AppLocalizations.localizationsDelegates,
-        // supportedLocales: AppLocalizations.supportedLocales,
-        //
-        // localizationsDelegates: AppLocalizations.localizationsDelegates,
+        // Localization
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('en'), // English
-          Locale('es'), // Spanish
-        ],
-        // supportedLocales: L10n.all,
+        supportedLocales: L10n.all,
+        locale: DeviceLocale().get() == 'es'
+            ? const Locale('es')
+            : const Locale('en'),
         //
         builder: EasyLoading.init(),
         theme: ThemeData(

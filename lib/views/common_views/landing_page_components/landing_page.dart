@@ -26,8 +26,8 @@ class LandingPage extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Transform.translate(
               offset: const Offset(0, -60),
-              child: const Text(
-                "Dream. Build. Connect.",
+              child: Text(
+                AppLocalizations.of(context)!.dreamBuildConnect,
                 textAlign: TextAlign.center,
                 style: ThemeTextStyles.landingPageSubtitleThemeTextStyle,
               ),
@@ -36,11 +36,10 @@ class LandingPage extends StatelessWidget {
               height: 25,
             ),
             // Third section: Question to the user
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                AppLocalizations.of(context)!.hi,
-                // "What are you seeking?",
+                AppLocalizations.of(context)!.whatAreYouLookingFor,
                 textAlign: TextAlign.center,
                 style: ThemeTextStyles.landingPageQuestionThemeTextStyle,
               ),
@@ -55,7 +54,7 @@ class LandingPage extends StatelessWidget {
                 // First box
                 OptionBox(
                     imgSrc: 'assets/images/worker_icon.png',
-                    title: "A Job",
+                    title: AppLocalizations.of(context)!.aJob,
                     onTap: () {
                       up.userRole = "worker";
                       Navigator.pushNamed(context, '/jobs');
@@ -65,7 +64,7 @@ class LandingPage extends StatelessWidget {
                 // Second box
                 OptionBox(
                   imgSrc: 'assets/images/company_icon.png',
-                  title: "Workers",
+                  title: AppLocalizations.of(context)!.workers,
                   onTap: () {
                     up.userRole = "company";
                     Navigator.pushNamed(context, '/workers');

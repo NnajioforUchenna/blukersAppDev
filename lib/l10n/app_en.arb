@@ -1,5 +1,4 @@
 { 
-    "hi": "Hello, How are you?", 
     "hello": "Hello {userName}",
     "@hello": {
         "description": "A message with a single parameter",
@@ -9,5 +8,9 @@
                 "example": "Bob"
             }
         }
-    } 
+    },
+    "dreamBuildConnect": "Dream. Build. Connect.",
+    "whatAreYouLookingFor": "What are you looking for?",
+    "aJob": "A Job",
+    "workers": "Workers"
 }
