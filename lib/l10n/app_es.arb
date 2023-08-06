@@ -1,0 +1,13 @@
+{ 
+    "hi": "Hola, ¿Como estas?", 
+    "hello": "Hola {userName}",
+    "@hello": {
+        "description": "Un mensaje con un parametro",
+        "placeholders": {
+            "userName": {
+                "type": "String",
+                "example": "Bob"
+            }
+        }
+    } 
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../utils/styles/index.dart';
@@ -38,7 +39,8 @@ class LandingPage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                "What are you seeking?",
+                AppLocalizations.of(context)!.hi,
+                // "What are you seeking?",
                 textAlign: TextAlign.center,
                 style: ThemeTextStyles.landingPageQuestionThemeTextStyle,
               ),

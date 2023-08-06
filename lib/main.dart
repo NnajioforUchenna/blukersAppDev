@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 
 import 'services/authentication_wrapper.dart';
 import 'views/auth/common_widget/supported_Locales.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,12 +51,30 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Blukers",
         debugShowCheckedModeBanner: false,
-        supportedLocales: supportedLocales,
+        //
+        // localizationsDelegates: const [
+        //   CountryLocalizations.delegate,
+        //   GlobalMaterialLocalizations.delegate,
+        //   GlobalWidgetsLocalizations.delegate,
+        // ],
+        // supportedLocales: supportedLocales,
+        //
+        // localizationsDelegates: AppLocalizations.localizationsDelegates,
+        // supportedLocales: AppLocalizations.supportedLocales,
+        //
+        // localizationsDelegates: AppLocalizations.localizationsDelegates,
         localizationsDelegates: const [
-          CountryLocalizations.delegate,
-          // GlobalMaterialLocalizations.delegate,
-          // GlobalWidgetsLocalizations.delegate,
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
         ],
+        supportedLocales: const [
+          Locale('en'), // English
+          Locale('es'), // Spanish
+        ],
+        // supportedLocales: L10n.all,
+        //
         builder: EasyLoading.init(),
         theme: ThemeData(
           // useMaterial3: true,
