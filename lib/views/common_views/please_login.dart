@@ -15,7 +15,6 @@ class PleaseLogin extends StatelessWidget {
           // Company Logo
           const CompanyLogo(),
           const SizedBox(height: 30.0),
-
           RichText(
             text: TextSpan(
               style: const TextStyle(
@@ -30,7 +29,7 @@ class PleaseLogin extends StatelessWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         // Navigate to login page or perform login action here
-                        print('Login clicked');
+
                         Navigator.pushNamedAndRemoveUntil(
                             context, '/login', (Route<dynamic> route) => false);
                       }),
@@ -41,7 +40,7 @@ class PleaseLogin extends StatelessWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         // Navigate to register page or perform register action here
-                        print('Register clicked');
+
                         Navigator.pushNamedAndRemoveUntil(context, '/register',
                             (Route<dynamic> route) => false);
                       }),

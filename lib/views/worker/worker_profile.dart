@@ -12,6 +12,15 @@ class WorkerProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     return PageTemplate(
-        child: up.appUser == null ? const LoginOrRegister() : Container());
+        child: up.appUser == null
+            ? const LoginOrRegister()
+            : const Column(
+                children: [
+                  Row(children: [
+                    Spacer(),
+                    // CreateYourProfile(),
+                  ]),
+                ],
+              ));
   }
 }

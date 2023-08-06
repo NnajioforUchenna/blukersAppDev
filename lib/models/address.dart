@@ -13,6 +13,8 @@ class Address {
     this.country, // country is now optional
   });
 
+  get location => '$city, $state, $country';
+
   Map<String, dynamic> toMap() {
     return {
       'street': street,

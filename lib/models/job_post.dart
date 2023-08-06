@@ -8,6 +8,8 @@ enum JobPostStatus { active, inactive }
 
 enum JobType { fullTime, partTime, contract, specifiedTime }
 
+enum SalaryType { hourly, daily, weekly, biWeekly, monthly, yearly }
+
 class JobPost {
   final String jobPostId;
   final String companyId;
@@ -19,7 +21,7 @@ class JobPost {
   final List<Skill> skills;
   final JobType jobType;
   final String? contractDuration;
-  final String? salaryTypeId;
+  final SalaryType? salaryType;
   final double? salaryAmount;
   final List<Address>? addresses;
   final List<String>? applicantUserIds;
@@ -30,6 +32,7 @@ class JobPost {
   final JobUrgencyLevel? jobUrgencyLevel;
   final JobPostStatus? jobPostStatus;
   final DateTime? dateCreated;
+  final String? schedule;
 
   // New fields
   final List<String> industryIds;
@@ -46,7 +49,7 @@ class JobPost {
     required this.skills,
     required this.jobType,
     this.contractDuration,
-    this.salaryTypeId,
+    this.salaryType,
     this.salaryAmount,
     this.addresses,
     this.applicantUserIds,
@@ -59,9 +62,12 @@ class JobPost {
     required this.industryIds, // Updated
     required this.jobIds, // Updated
     this.dateCreated,
+    this.schedule,
   });
 
   get timeAgo => getTimeAgo(dateCreated.toString());
+
+  get location => addresses?.first.location ?? 'Location not set';
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {
@@ -75,6 +81,7 @@ class JobPost {
       'industryIds': industryIds,
       'jobIds': jobIds,
       'jobPostId': jobPostId,
+      'schedule': schedule ?? 'Schedule not set',
       'dateCreated': dateCreated ?? DateTime.now(),
     };
 
@@ -83,7 +90,7 @@ class JobPost {
     if (skills != null && skills.isNotEmpty)
       data['skills'] = skills.map((skill) => skill.toMap()).toList();
     if (contractDuration != null) data['contractDuration'] = contractDuration;
-    if (salaryTypeId != null) data['salaryTypeId'] = salaryTypeId;
+
     if (salaryAmount != null) data['salaryAmount'] = salaryAmount;
     if (addresses != null && addresses!.isNotEmpty)
       data['addresses'] = addresses!.map((address) => address.toMap()).toList();
@@ -94,7 +101,9 @@ class JobPost {
     if (hiredUserIds != null) data['hiredUserIds'] = hiredUserIds;
     if (jobUrgencyLevel != null)
       data['jobUrgencyLevel'] = jobUrgencyLevel!.index;
+
     if (jobPostStatus != null) data['jobPostStatus'] = jobPostStatus!.index;
+    if (salaryType != null) data['salaryType'] = salaryType!.index;
 
     return data;
   }
@@ -108,13 +117,16 @@ class JobPost {
       jobDescription: map['jobDescription'] ?? '',
       companyLogo: map['companyLogo'],
       requirements: map['requirements'] ?? '',
+      schedule: map['schedule'] ?? '',
       skills: map['skills'] != null
           ? (map['skills'] as List)
               .map((skillMap) => Skill.fromMap(skillMap))
               .toList()
           : [],
       contractDuration: map['contractDuration'],
-      salaryTypeId: map['salaryTypeId'],
+      salaryType: map['salaryType'] != null
+          ? SalaryType.values[map['salaryType']]
+          : null,
       salaryAmount: map['salaryAmount'] != null
           ? double.parse(map['salaryAmount'].toString())
           : null,

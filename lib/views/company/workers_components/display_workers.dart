@@ -1,8 +1,9 @@
 import 'package:bulkers/services/responsive.dart';
 import 'package:bulkers/utils/styles/index.dart';
 import 'package:bulkers/views/common_views/loading_page.dart';
+import 'package:bulkers/views/company/workers_components/Worker_search_bar.dart';
 import 'package:bulkers/views/company/workers_components/build_list_view_workers.dart';
-import 'package:bulkers/views/company/workers_components/worker_display_widget.dart';
+import 'package:bulkers/views/company/workers_components/display_worker_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,10 +27,8 @@ class _DisplayWorkersState extends State<DisplayWorkers> {
     final List<Worker> workers = wp.selectedWorkers;
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(
-            color: ThemeColors.primaryThemeColor,
-          ),
+          backgroundColor: ThemeColors.primaryThemeColor,
+          iconTheme: const IconThemeData(color: Colors.white),
           elevation: 0,
           title: Text(
             '${widget.title} (Workers)',
@@ -49,22 +48,30 @@ class _DisplayWorkersState extends State<DisplayWorkers> {
   }
 
   Widget buildWebContent() {
-    return const Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return const Column(
       children: [
-        // 1st column
+        WorkerSearchBar(),
+        SizedBox(height: 10),
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: BuildListViewWorkers(),
-          ),
-        ),
-        // 2nd column
-        Expanded(
-          flex: 2,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: WorkerDisplayWidget(),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // 1st column
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: BuildListViewWorkers(),
+                ),
+              ),
+              // 2nd column
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: WorkerDisplayDetailsWidget(),
+                ),
+              ),
+            ],
           ),
         ),
       ],

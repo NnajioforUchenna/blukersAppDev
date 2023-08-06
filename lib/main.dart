@@ -20,12 +20,13 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
-    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
         title: "Blukers",
         debugShowCheckedModeBanner: false,
         supportedLocales: supportedLocales,
-        localizationsDelegates: [
+        localizationsDelegates: const [
           CountryLocalizations.delegate,
           // GlobalMaterialLocalizations.delegate,
           // GlobalWidgetsLocalizations.delegate,

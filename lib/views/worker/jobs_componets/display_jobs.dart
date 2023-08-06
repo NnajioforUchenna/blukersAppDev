@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
 import 'build_list_view_jobs.dart';
-import 'display_job_post.dart';
+import 'display_job_post_details.dart';
+import 'job_search_bar.dart';
 
 class DisplayJobs extends StatelessWidget {
   final String title;
@@ -18,7 +19,7 @@ class DisplayJobs extends StatelessWidget {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: ThemeColors.primaryThemeColor,
           iconTheme: const IconThemeData(
             color: ThemeColors.primaryThemeColor,
           ),
@@ -27,11 +28,9 @@ class DisplayJobs extends StatelessWidget {
             '$title (Jobs)',
             textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: ThemeColors.primaryThemeColor,
-            ),
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
           )),
+      backgroundColor: const Color(0xFFF5F5F8),
       body: jp.selectedJobPosts.isEmpty
           ? LoadingPage()
           : Responsive.isDesktop(context)
@@ -41,22 +40,30 @@ class DisplayJobs extends StatelessWidget {
   }
 
   Widget buildWebContent() {
-    return const Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
       children: [
-        // 1st column
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: BuildListViewJobs(),
-          ),
-        ),
-        // 2nd column
-        Expanded(
-          flex: 2,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: JobPostWidget(),
+        JobSearchBar(),
+        const SizedBox(height: 10),
+        const Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 1st column
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: BuildListViewJobs(),
+                ),
+              ),
+              // 2nd column
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: JobPostDetailsWidget(),
+                ),
+              ),
+            ],
           ),
         ),
       ],

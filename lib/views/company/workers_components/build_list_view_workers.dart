@@ -1,15 +1,10 @@
-import 'package:bulkers/providers/chat_provider.dart';
-import 'package:bulkers/providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/worker.dart';
-import '../../../providers/user_provider.dart';
 import '../../../providers/worker_provider.dart';
 import '../../../services/responsive.dart';
-import '../../../utils/styles/theme_colors.dart';
-import '../../common_views/please_login_dialog.dart';
-import 'confirmation_dialog.dart';
+import 'display_worker_card.dart';
 import 'display_worker_dialog.dart';
 
 class BuildListViewWorkers extends StatelessWidget {
@@ -20,9 +15,9 @@ class BuildListViewWorkers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
-    UserProvider up = Provider.of<UserProvider>(context);
-    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
-    CompanyProvider cp = Provider.of<CompanyProvider>(context);
+    // UserProvider up = Provider.of<UserProvider>(context);
+    // ChatProvider chatProvider = Provider.of<ChatProvider>(context);
+    // CompanyProvider cp = Provider.of<CompanyProvider>(context);
     final List<Worker> workers = wp.selectedWorkers;
 
     return ListView.separated(
@@ -31,20 +26,8 @@ class BuildListViewWorkers extends StatelessWidget {
       itemCount: workers.length,
       itemBuilder: (context, index) {
         final worker = workers[index];
-        return Card(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            side: const BorderSide(
-                color: ThemeColors.primaryThemeColor, width: 2),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          margin: const EdgeInsets.symmetric(
-              vertical: 10, horizontal: 0), // Adjust for spacing
-          child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 15,
-            ),
+        return DisplayWorkerCard(
+            worker: worker,
             onTap: () {
               if (Responsive.isDesktop(context)) {
                 wp.setSelectedWorker(worker);
@@ -56,79 +39,7 @@ class BuildListViewWorkers extends StatelessWidget {
                           worker: worker,
                         ));
               }
-              //
-            },
-            title: Text(
-              '${worker.firstName} ${worker.lastName}',
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: ThemeColors.primaryThemeColor,
-              ),
-            ),
-            subtitle: Text(worker.skillIds.toString()),
-            leading: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                image: DecorationImage(
-                  image: NetworkImage(worker.profilePhotoUrl!),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            trailing: Row(
-              mainAxisSize:
-                  MainAxisSize.min, // Take up only as much space as needed
-              children: [
-                IconButton(
-                  onPressed: () async {
-                    // Add functionality for Save
-                    if (up.appUser == null) {
-                      showDialog(
-                          context: context,
-                          builder: (context) => PleaseLoginDialog());
-                    } else {
-                      bool? result = await showDialog<bool>(
-                        context: context,
-                        builder: (context) => ConfirmationDialog(
-                          worker: worker,
-                        ),
-                      );
-                      if (result != null && result) {
-                        wp.addInterestingWorker(up.appUser, worker);
-                      }
-                    }
-                    ;
-                  },
-                  icon:
-                      Icon(Icons.bookmark), // Assuming this is the 'Save' icon
-                ),
-                IconButton(
-                  onPressed: () async {
-                    // Add functionality for Chat
-                    String roomId = await chatProvider.createChatRoom(
-                        myUid: up.appUser!.uid,
-                        recipientUid:
-                            worker.workerId,
-                        myName: up.appUser!.displayName ?? "Company",
-                        recipientName: worker.firstName + worker.lastName,
-                        message: "",
-                        myLogo: up.appUser!.photoUrl ?? "",
-                        recipientLogo: worker.profilePhotoUrl ?? "");
-                    chatProvider.activeRoomId = roomId;
-                    Navigator.pushNamed(context, '/chat-message', arguments: {
-                      "roomId": roomId,
-                      "roomName": worker.firstName + worker.lastName,
-                    });
-                  },
-                  icon: Icon(Icons.chat), // Chat icon
-                ),
-              ],
-            ),
-          ),
-        );
+            });
       },
       separatorBuilder: (BuildContext context, int index) {
         return const SizedBox(

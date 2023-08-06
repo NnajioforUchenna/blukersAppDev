@@ -1,6 +1,5 @@
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/providers/chat_provider.dart';
-import 'package:bulkers/services/notification_service.dart';
 import 'package:bulkers/services/user_shared_preferences_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +21,15 @@ class UserProvider with ChangeNotifier {
   AppUser? get appUser => _appUser;
 
   String userRole = "company";
+
+  switchUserRole() {
+    if (userRole == "company") {
+      userRole = "worker";
+    } else {
+      userRole = "company";
+    }
+    notifyListeners();
+  }
 
   int registerCurrentPageIndex = 0;
 
@@ -82,9 +90,10 @@ class UserProvider with ChangeNotifier {
 
       // Store the user data in the database.
       UserDataProvider.registerUserToDatabase(appUser);
-      await NotificationService.registerNotification(
-          _appUser!.uid, chatProvider);
-      NotificationService.configLocalNotification();
+      //
+      // await NotificationService.registerNotification(
+      //     _appUser!.uid, chatProvider);
+      // NotificationService.configLocalNotification();
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
 

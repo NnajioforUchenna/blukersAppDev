@@ -16,7 +16,7 @@ class JobPostsProvider with ChangeNotifier {
 
   // trying to build UI
   JobPostsProvider() {
-    getJobPostsByJobID('farmer');
+    getJobPostsByJobID('agriculturaltechnician');
   }
 
   Map<String, JobPost> get jobPosts => _jobPosts;

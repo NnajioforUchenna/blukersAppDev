@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/job.dart';
 import '../../providers/user_provider.dart';
+import '../../services/on_hover.dart';
 import '../company/workers_components/display_workers.dart';
 import '../worker/jobs_componets/display_jobs.dart';
 import 'applicant_count.dart';
@@ -49,49 +50,51 @@ class IndustryBodyPanel extends StatelessWidget {
               );
             }
           },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                side:
-                    BorderSide(color: ThemeColors.primaryThemeColor, width: 2),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: ListTile(
-                title: Row(
-                  children: [
-                    Text(
-                      job.title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+          child: OnHover(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                      color: ThemeColors.primaryThemeColor, width: 2),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: ListTile(
+                  title: Row(
+                    children: [
+                      Text(
+                        job.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: ThemeColors.primaryThemeColor,
+                        ),
+                      ),
+                      Spacer(),
+                      Icon(
+                        up.userRole == 'company'
+                            ? Icons.groups
+                            : Icons.work_outline,
+                        color: ThemeColors.primaryThemeColor,
+                        size: 30.0,
+                      ),
+                      ApplicantCount(
+                        count: up.userRole == 'company'
+                            ? job.numberOfApplicants
+                            : job.numberOfJobPosts,
                         color: ThemeColors.primaryThemeColor,
                       ),
-                    ),
-                    Spacer(),
-                    Icon(
-                      up.userRole == 'company'
-                          ? Icons.groups
-                          : Icons.work_outline,
-                      color: ThemeColors.primaryThemeColor,
-                      size: 30.0,
-                    ),
-                    ApplicantCount(
-                      count: up.userRole == 'company'
-                          ? job.numberOfApplicants
-                          : job.numberOfJobPosts,
-                      color: ThemeColors.primaryThemeColor,
-                    ),
-                  ],
-                ),
-                subtitle: Padding(
-                  padding: const EdgeInsets.only(top: 4.0, bottom: 6.0),
-                  child: Text(
-                    'Salary: ${job.lowRange} - ${job.highRange}',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: ThemeColors.grey1ThemeColor,
+                    ],
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 4.0, bottom: 6.0),
+                    child: Text(
+                      'Salary: ${job.lowRange} - ${job.highRange}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: ThemeColors.grey1ThemeColor,
+                      ),
                     ),
                   ),
                 ),

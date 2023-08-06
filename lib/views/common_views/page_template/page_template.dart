@@ -3,6 +3,7 @@ import 'package:bulkers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../switch_role.dart';
 import 'my_buttom_navigation_bar.dart';
 import 'my_navigation_rail.dart';
 
@@ -17,16 +18,26 @@ class PageTemplate extends StatelessWidget {
       bottomNavigationBar:
           Responsive.isDesktop(context) ? null : const MyButtomNavigationBar(),
       body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            if (Responsive.isDesktop(context))
-              const Expanded(
-                child: MyNavigationRail(),
-              ),
+            // To Switch Roles Easily
+            Row(
+              children: [Spacer(), SwitchRole()],
+            ),
             Expanded(
-              flex: 5,
-              child: child,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (Responsive.isDesktop(context))
+                    const Expanded(
+                      child: MyNavigationRail(),
+                    ),
+                  Expanded(
+                    flex: 5,
+                    child: child,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

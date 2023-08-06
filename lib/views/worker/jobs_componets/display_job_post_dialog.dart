@@ -1,7 +1,7 @@
 import 'package:bulkers/models/job_post.dart';
 import 'package:flutter/material.dart';
 
-import 'display_job_post.dart';
+import 'display_job_post_details.dart';
 
 class DisplayJobPostDialog extends StatelessWidget {
   final JobPost jobPost;
@@ -18,7 +18,7 @@ class DisplayJobPostDialog extends StatelessWidget {
               SizedBox(
                 height: 70,
               ),
-              JobPostWidget()
+              JobPostDetailsWidget()
             ],
           ),
           Row(

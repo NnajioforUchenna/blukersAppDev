@@ -5,7 +5,7 @@ import '../../../common_files/constants.dart';
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../services/responsive.dart';
-import 'display_card.dart';
+import 'display_job_card.dart';
 import 'display_job_post_dialog.dart';
 
 class BuildListViewJobs extends StatelessWidget {
@@ -16,30 +16,22 @@ class BuildListViewJobs extends StatelessWidget {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     final List<JobPost> jobPosts = jp.selectedJobPosts;
     return ListView.separated(
+      shrinkWrap: true,
       padding:
           const EdgeInsets.all(10), // Added to give some space around cards
       itemCount: jobPosts.length,
       itemBuilder: (context, index) {
-        final jobPost = jobPosts[index];
-        print(jobPost);
-        print('timeAgo: ${jobPost.timeAgo}');
-        print('jobTitle: ${jobPost.jobTitle}');
-        print('salaryAmount: ${jobPost.salaryAmount}');
-        print('salaryTypeId: ${jobPost.salaryTypeId}');
-        print('companyName: ${jobPost.companyName}');
-        print('addresses: ${getAddressesInStringFormat(jobPost.addresses)}');
-        print('companyLogo: ${jobPost.companyLogo}');
-        print('_________________________');
-        print('');
-
-        return DisplayCard(
+        JobPost jobPost = jobPosts[index];
+        // Todo Remember to remove the default values
+        return DisplayJobCard(
             timeAgo: jobPost.timeAgo,
             title: jobPost.jobTitle,
             salaryRange: jobPost.salaryAmount.toString(),
-            salaryType: jobPost.salaryTypeId,
-            companyName: jobPost.companyName,
-            location: getAddressesInStringFormat(jobPost.addresses),
-            companyLogo: jobPost.companyLogo,
+            salaryType: getSalaryType(jobPost.salaryType) ?? 'Salary Type',
+            companyName: jobPost.companyName ?? 'Company Name',
+            location: jobPost.location ?? 'Location',
+            companyLogo: jobPost.companyLogo ?? 'https://picsum.photos/200/300',
+            jobPostId: jobPost.companyId,
             onTap: () {
               if (Responsive.isDesktop(context)) {
                 jp.setSelectedJobPost(jobPost);

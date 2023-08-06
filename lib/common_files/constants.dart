@@ -1,4 +1,5 @@
 import '../models/address.dart';
+import '../models/job_post.dart';
 
 final List<String> routesWorker = [
   '/jobs',
@@ -20,4 +21,42 @@ String getAddressesInStringFormat(List<Address>? addresses) {
     return 'No addresses available';
   }
   return addresses.map((address) => address.displayAddress()).join('\n');
+}
+
+String getSalaryType(SalaryType? salaryType) {
+  if (salaryType == null) {
+    return 'Not specified';
+  }
+
+  switch (salaryType) {
+    case SalaryType.hourly:
+      return 'Hourly';
+    case SalaryType.daily:
+      return 'Daily';
+    case SalaryType.weekly:
+      return 'Weekly';
+    case SalaryType.biWeekly:
+      return 'Bi-Weekly';
+    case SalaryType.monthly:
+      return 'Monthly';
+    case SalaryType.yearly:
+      return 'Yearly';
+    default:
+      return 'N/A';
+  }
+}
+
+String getJobType(JobType jobType) {
+  switch (jobType) {
+    case JobType.fullTime:
+      return 'Full Time';
+    case JobType.partTime:
+      return 'Part Time';
+    case JobType.contract:
+      return 'Contract';
+    case JobType.specifiedTime:
+      return 'Specified Time';
+    default:
+      return 'N/A';
+  }
 }
