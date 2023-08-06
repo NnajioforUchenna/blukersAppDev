@@ -10,8 +10,8 @@ import '../../common_views/loading_page.dart';
 import 'detail_page_block_one.dart';
 import 'detail_page_block_three.dart';
 import 'detail_page_block_two.dart';
-// Assuming you've imported the required classes (JobPost, Skill, Address) above
 
+// Assuming you've imported the required classes (JobPost, Skill, Address) above
 class JobPostDetailsWidget extends StatelessWidget {
   const JobPostDetailsWidget({super.key});
 
@@ -23,11 +23,11 @@ class JobPostDetailsWidget extends StatelessWidget {
     return jobPost == null
         ? Center(child: SizedBox(height: 100, width: 100, child: LoadingPage()))
         : Container(
-            margin: const EdgeInsets.only(right: 50),
+            margin: const EdgeInsets.symmetric(
+                horizontal: 16), // Adjusted the margin
             child: Card(
                 elevation: 5,
                 child: AnimatedContainer(
-                    height: 1000,
                     duration: const Duration(milliseconds: 500),
                     padding: const EdgeInsets.all(20),
                     decoration: const BoxDecoration(

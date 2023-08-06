@@ -21,7 +21,7 @@ class DisplayJobs extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: ThemeColors.primaryThemeColor,
           iconTheme: const IconThemeData(
-            color: ThemeColors.primaryThemeColor,
+            color: Colors.white,
           ),
           elevation: 0,
           title: Text(

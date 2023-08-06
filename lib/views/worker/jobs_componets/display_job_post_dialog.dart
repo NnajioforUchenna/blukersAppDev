@@ -13,14 +13,7 @@ class DisplayJobPostDialog extends StatelessWidget {
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
-          const Column(
-            children: [
-              SizedBox(
-                height: 70,
-              ),
-              JobPostDetailsWidget()
-            ],
-          ),
+          const JobPostDetailsWidget(),
           Row(
             children: [
               const Spacer(),

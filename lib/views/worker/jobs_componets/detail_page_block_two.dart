@@ -9,49 +9,35 @@ class DetailPageBlockTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Row(
-          children: [
-            Text("About Job",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          ],
-        ),
-        const SizedBox(height: 15),
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                "Industry: ${jobPost.industryIds.join(', ')}",
-                style: const TextStyle(fontSize: 18),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                "Job Position: ${jobPost.jobIds.join(', ')}",
-                style: const TextStyle(fontSize: 18),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 15),
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                "Skills: ${jobPost.skills.map((skill) => skill.name ?? '').join(', ')}",
-                style: const TextStyle(fontSize: 18),
-              ),
-            ),
-          ],
-        ),
-        const Divider()
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0), // Add padding around the column
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, // Align content to start
+        children: [
+          const Row(
+            children: [
+              Text("About Job",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ],
+          ),
+          const SizedBox(height: 15),
+          Text(
+            "Industry: ${jobPost.industryIds.join(', ')}",
+            style: const TextStyle(fontSize: 18),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            "Job Position: ${jobPost.jobIds.join(', ')}",
+            style: const TextStyle(fontSize: 18),
+          ),
+          const SizedBox(height: 15),
+          Text(
+            "Skills: ${jobPost.skills.map((skill) => skill.name ?? '').join(', ')}",
+            style: const TextStyle(fontSize: 18),
+          ),
+          const Divider(),
+        ],
+      ),
     );
   }
 }

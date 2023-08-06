@@ -37,6 +37,9 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
 
   @override
   Widget build(BuildContext context) {
+    double width =
+        MediaQuery.of(context).size.width; // Getting the screen width
+
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
 
     bool isJobPostSelected() {
@@ -97,25 +100,33 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.title!,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.title!,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          Text(widget.location!),
-                        ],
+                            Text(
+                              widget.location!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
                       ),
-                      Spacer(),
-                      Image.network(
-                        widget.companyLogo!,
-                        height: 50,
-                        width: 50,
-                      ),
+                      if (width > 600) // Show logo only on larger screens
+                        Image.network(
+                          widget.companyLogo!,
+                          height: 50,
+                          width: 50,
+                        ),
                     ],
                   )
                 ],
