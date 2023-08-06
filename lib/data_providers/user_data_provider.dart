@@ -109,6 +109,14 @@ class UserDataProvider {
     });
   }
 
+  static Future<void> updateUserBasicInfo(
+      Map<String, dynamic> info, String uid) async {
+    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    await appUserCollection.doc(uid).update(info).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
   static Future<Map<String, dynamic>> loginUser(
       String email, String password) async {
     try {

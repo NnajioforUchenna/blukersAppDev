@@ -69,4 +69,12 @@ abstract class ThemeTextStyles {
     height: 1.5,
     fontWeight: FontWeight.w700,
   );
+  static const TextStyle informationDisplayPlaceHolderThemeTextStyle =
+      TextStyle(
+    fontFamily: 'Montserrat',
+    color: ThemeColors.black1ThemeColor,
+    fontSize: 16,
+    height: 1.0,
+    fontWeight: FontWeight.w600,
+  );
 }

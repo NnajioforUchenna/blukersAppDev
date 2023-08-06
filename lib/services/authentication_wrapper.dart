@@ -1,3 +1,4 @@
+import 'package:bulkers/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,7 @@ class AuthenticationWrapper extends StatelessWidget {
           ? const Workers() //CreateWorkerProfile //Workers() //Jobs()
           : const Jobs();
     } else {
-      return JobTimeline();
+      return Login();
     }
   }
 }

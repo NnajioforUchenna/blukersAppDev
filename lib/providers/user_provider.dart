@@ -163,7 +163,7 @@ class UserProvider with ChangeNotifier {
         postalCode: postalCode,
         country: country);
 
-    String completePhoneNumber = ext + phoneNumber;
+    String completePhoneNumber = "$ext-$phoneNumber";
 
     UserDataProvider.updateContactInformation(
         completePhoneNumber, address, appUser!.uid);
@@ -174,6 +174,30 @@ class UserProvider with ChangeNotifier {
 
     EasyLoading.dismiss();
     setRegisterPageIndex();
+  }
+
+  Future<void> updateUserBasicInfo(
+      String displayName, String phoneNo, String language) async {
+    EasyLoading.show(
+      status: 'Updating your Basic Info...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    Map<String, dynamic> info = {
+      "displayName": displayName,
+      "phoneNumber": phoneNo,
+      "language": language,
+    };
+
+    await UserDataProvider.updateUserBasicInfo(info, _appUser!.uid);
+
+    _appUser!.displayName = displayName;
+    _appUser!.phoneNumber = phoneNo;
+    _appUser!.language = language;
+
+    EasyLoading.dismiss();
+    notifyListeners();
+    // setRegisterPageIndex();
   }
 
   void navigate(BuildContext context, int index) {

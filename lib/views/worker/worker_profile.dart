@@ -17,7 +17,8 @@ class WorkerProfile extends StatelessWidget {
             : const Column(
                 children: [
                   Row(children: [
-                    Spacer(),
+                    // Spacer(),
+                    Text("Worker"),
                     // CreateYourProfile(),
                   ]),
                 ],
