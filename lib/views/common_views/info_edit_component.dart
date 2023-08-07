@@ -10,12 +10,14 @@ class InfoEditComponent extends StatefulWidget {
       required this.value,
       required this.action,
       required this.onChangeValue,
-      this.ext});
+      this.ext,
+      this.onChangeExtValue});
   final String placeHolder;
   final String value;
   final TextInputAction action;
   final String? ext;
   final Function(String value) onChangeValue;
+  final Function(String value)? onChangeExtValue;
 
   @override
   State<InfoEditComponent> createState() => _InfoEditComponentState();
@@ -60,6 +62,7 @@ class _InfoEditComponentState extends State<InfoEditComponent> {
                             print(value);
                             // _onCountryChange(value);
                             ext = value.dialCode;
+                            widget.onChangeExtValue!(value.dialCode!);
                           },
                           initialSelection: ext,
                           favorite: const ['+1', '+52', 'FR'],

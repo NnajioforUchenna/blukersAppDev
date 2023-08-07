@@ -2,8 +2,8 @@ import 'package:bulkers/utils/styles/theme_text_styles.dart';
 import 'package:bulkers/views/common_views/info_display_component.dart';
 import 'package:flutter/material.dart';
 
-class BasicProfileDetail extends StatelessWidget {
-  const BasicProfileDetail(
+class UserBasicProfileDetail extends StatelessWidget {
+  const UserBasicProfileDetail(
       {super.key,
       required this.displayName,
       required this.email,
@@ -18,14 +18,14 @@ class BasicProfileDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          "Basic Information",
-          style:
-              ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
+        // Text(
+        //   "Basic Information",
+        //   style:
+        //       ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
+        // ),
+        // const SizedBox(
+        //   height: 20,
+        // ),
         InfoDisplayComponent(
           placeHolder: "Display Name",
           value: displayName,

@@ -71,6 +71,9 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
             phoneNo = value;
           },
           ext: ext,
+          onChangeExtValue: (value) {
+            ext = value;
+          },
         ),
         InfoEditComponent(
           placeHolder: "language",
@@ -88,7 +91,8 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
           children: [
             GestureDetector(
               onTap: () async {
-                await up.updateUserBasicInfo(displayName, phoneNo, language);
+                await up.updateUserBasicInfo(
+                    displayName, ext, phoneNo, language);
                 Navigator.of(context).pop();
               },
               child: Container(

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 class InfoDisplayComponent extends StatelessWidget {
   const InfoDisplayComponent(
-      {super.key, required this.placeHolder, required this.value});
+      {super.key, required this.placeHolder, required this.value, this.icon});
   final String placeHolder;
   final String value;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +17,17 @@ class InfoDisplayComponent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              placeHolder,
-              style:
-                  ThemeTextStyles.informationDisplayPlaceHolderThemeTextStyle,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    placeHolder,
+                    style: ThemeTextStyles
+                        .informationDisplayPlaceHolderThemeTextStyle,
+                  ),
+                ),
+                if (icon != null) icon!,
+              ],
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 16),

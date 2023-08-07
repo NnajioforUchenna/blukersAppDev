@@ -1,4 +1,5 @@
 import 'package:bulkers/views/chat_message_screen.dart';
+import 'package:bulkers/views/company/company_basic_info.dart';
 import 'package:bulkers/views/company_chat.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,8 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const MyJobs());
     case '/myJobPosts':
       return MaterialPageRoute(builder: (context) => const MyJobPosts());
+      case '/companyBasicInfo':
+      return MaterialPageRoute(builder: (context) => const CompanyBasicInfo());
     case '/workerProfile':
       return MaterialPageRoute(builder: (context) => const WorkerProfile());
     case '/companyChat':

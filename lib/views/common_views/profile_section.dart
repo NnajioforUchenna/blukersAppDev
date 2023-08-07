@@ -7,11 +7,15 @@ class ProfileSection extends StatelessWidget {
       required this.heading,
       required this.icon,
       required this.onClickSection,
-      this.onClickEdit});
+      this.onClickEdit,
+      this.showBasicInfo,
+      this.showEditIcon = true});
   final String heading;
   final IconData icon;
   final VoidCallback onClickSection;
   final VoidCallback? onClickEdit;
+  final bool? showBasicInfo;
+  final bool showEditIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +33,26 @@ class ProfileSection extends StatelessWidget {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: onClickSection,
-            child: Icon(
-              Icons.keyboard_arrow_down,
-              color: Colors.grey[700],
-              size: 30,
+          if (showBasicInfo != null)
+            GestureDetector(
+              onTap: onClickSection,
+              child: Icon(
+                showBasicInfo!
+                    ? Icons.keyboard_arrow_up
+                    : Icons.keyboard_arrow_down,
+                color: Colors.grey[700],
+                size: 30,
+              ),
             ),
-          ),
-          GestureDetector(
-            onTap: onClickEdit ?? onClickSection,
-            child: Icon(
-              icon,
-              color: Colors.grey[700],
-              size: 30,
-            ),
-          )
+          if (showEditIcon)
+            GestureDetector(
+              onTap: onClickEdit ?? onClickSection,
+              child: Icon(
+                icon,
+                color: Colors.grey[700],
+                size: 30,
+              ),
+            )
         ],
       ),
     );

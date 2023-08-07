@@ -177,7 +177,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> updateUserBasicInfo(
-      String displayName, String phoneNo, String language) async {
+      String displayName,String ext, String phoneNo, String language) async {
     EasyLoading.show(
       status: 'Updating your Basic Info...',
       maskType: EasyLoadingMaskType.black,
@@ -185,14 +185,14 @@ class UserProvider with ChangeNotifier {
 
     Map<String, dynamic> info = {
       "displayName": displayName,
-      "phoneNumber": phoneNo,
+      "phoneNumber": "$ext-$phoneNo",
       "language": language,
     };
 
     await UserDataProvider.updateUserBasicInfo(info, _appUser!.uid);
 
     _appUser!.displayName = displayName;
-    _appUser!.phoneNumber = phoneNo;
+    _appUser!.phoneNumber = "$ext-$phoneNo";
     _appUser!.language = language;
 
     EasyLoading.dismiss();
