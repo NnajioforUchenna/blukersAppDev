@@ -231,8 +231,6 @@ class WorkerProvider with ChangeNotifier {
   List<Worker> appliedWorkers = [];
 
   Future<void> setDisplayLists(JobPost jobPost) async {
-    print('set display lists jobPost.jobPostId: ${jobPost.jobPostId}');
-    print(jobPost.toString());
     if (jobPost.jobPostId.isEmpty) {
       return;
     }

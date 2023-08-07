@@ -2,9 +2,6 @@ import 'package:bulkers/views/worker/create_worker_profile_component/worker_page
 import 'package:bulkers/views/worker/create_worker_profile_component/worker_timeline.dart';
 import 'package:flutter/material.dart';
 
-import '../../../services/responsive.dart';
-import '../../../utils/styles/theme_text_styles.dart';
-
 class CreateWorkerProfile extends StatelessWidget {
   const CreateWorkerProfile({super.key});
 
@@ -24,9 +21,9 @@ class CreateWorkerProfile extends StatelessWidget {
       body: Center(
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
-          width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width * 0.3
-              : MediaQuery.of(context).size.width,
+          // width: Responsive.isDesktop(context)
+          //     ? MediaQuery.of(context).size.width * 0.3
+          //     : MediaQuery.of(context).size.width,
           child: CustomScrollView(
             slivers: [
               SliverList(

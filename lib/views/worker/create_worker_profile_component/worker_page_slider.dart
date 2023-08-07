@@ -1,4 +1,5 @@
 import 'package:bulkers/providers/worker_provider.dart';
+import 'package:bulkers/services/make_responsive_web.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +41,7 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
       // Adjusted for the 8 steps in WorkerPageSlider
       _pageController.animateToPage(
         _currentPageIndex + 1,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         curve: Curves.easeInOut,
       );
     }
@@ -61,14 +62,33 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          ClassificationPage(),
-          PersonalInformationPage(),
-          ProfilePhotoPage(),
-          ProfessionalCredentialsPage(),
-          WorkExperiencePage(),
-          ReferencePage(),
-          ResumePage(),
-          WorkerCongratulationPage(), // Name can be adjusted based on your actual page name
+          MakeResponsiveWeb(
+              image: const AssetImage('assets/images/classificationPage.png'),
+              child: ClassificationPage()),
+          MakeResponsiveWeb(
+              image:
+                  const AssetImage('assets/images/personalInformationPage.png'),
+              child: PersonalInformationPage()),
+          MakeResponsiveWeb(
+              image: const AssetImage('assets/images/profilePhotoPage.png'),
+              child: ProfilePhotoPage()),
+          MakeResponsiveWeb(
+              image: const AssetImage(
+                  'assets/images/professionalCredentialsPage.png'),
+              child: ProfessionalCredentialsPage()),
+          MakeResponsiveWeb(
+              image: const AssetImage('assets/images/workExperience.png'),
+              child: WorkExperiencePage()),
+          MakeResponsiveWeb(
+              image: const AssetImage('assets/images/referencePage.png'),
+              child: ReferencePage()),
+          const MakeResponsiveWeb(
+              image: AssetImage('assets/images/resumePage.png'),
+              child: ResumePage()),
+          const MakeResponsiveWeb(
+              image: AssetImage('assets/images/workerCongratulationPage.png'),
+              child:
+                  WorkerCongratulationPage()), // Name can be adjusted based on your actual page name
         ],
       ),
     );

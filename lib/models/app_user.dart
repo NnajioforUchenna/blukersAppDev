@@ -23,6 +23,11 @@ class AppUser {
   Company? company; // Added Company parameter
   Address? address;
   String? deviceTokenU;
+
+  // navigation Controls
+  String? userRole;
+  int? timelineStep;
+
   AppUser({
     required this.uid,
     this.email,
@@ -40,6 +45,8 @@ class AppUser {
     this.company, // Added Company parameter
     this.address,
     this.deviceTokenU,
+    this.userRole,
+    this.timelineStep,
   });
 
   // New constructor for User.fromSignUp
@@ -60,6 +67,8 @@ class AppUser {
     this.company, // Added Company parameter
     this.address,
     this.deviceTokenU,
+    this.userRole,
+    this.timelineStep,
   });
 
   Map<String, dynamic> toMap() {
@@ -90,6 +99,8 @@ class AppUser {
     if (company != null) data['company'] = company!.toMap();
     if (address != null) data['address'] = address!.toMap();
     if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
+    if (userRole != null) data['userRole'] = userRole;
+    if (timelineStep != null) data['timelineStep'] = timelineStep;
 
     return data;
   }
@@ -108,6 +119,8 @@ class AppUser {
       isBasicInformation: map['isBasicInformation'],
       isContactInformation: map['isContactInformation'],
       isRegistrationComplete: map['isRegistrationComplete'],
+      userRole: map['userRole'],
+      timelineStep: map['timelineStep'],
       worker: map['worker'] != null
           ? Worker.fromMap(map['worker'])
           : null, // Convert Map to Worker object
@@ -134,6 +147,8 @@ class AppUser {
       'displayName': displayName ?? "",
       'photoUrl': photoUrl ?? "",
       'deviceTokenU': deviceTokenU ?? "",
+      'userRole': userRole ?? '',
+      'timelineStep': timelineStep.toString(),
     };
   }
 
@@ -146,6 +161,8 @@ class AppUser {
       displayName: userMap['displayName'],
       photoUrl: userMap['photoUrl'],
       deviceTokenU: userMap['deviceTokenU'],
+      userRole: userMap['userRole'],
+      timelineStep: int.parse(userMap['timelineStep'] ?? '0'),
     );
   }
 }

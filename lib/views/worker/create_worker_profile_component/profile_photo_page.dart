@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../services/responsive.dart';
+
 class ProfilePhotoPage extends StatefulWidget {
   ProfilePhotoPage({Key? key}) : super(key: key);
 
@@ -21,7 +23,10 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
     return SizedBox(
       height: height * 0.7,
       child: Center(
-        child: Padding(
+        child: Container(
+          width: Responsive.isDesktop(context)
+              ? MediaQuery.of(context).size.width * 0.3
+              : MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

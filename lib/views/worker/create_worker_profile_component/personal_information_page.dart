@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../services/responsive.dart';
 import '../../auth/common_widget/auth_input.dart';
 
 // Import other necessary packages here if required.
@@ -41,6 +42,9 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     return SizedBox(
       height: height,
+      width: Responsive.isDesktop(context)
+          ? MediaQuery.of(context).size.width * 0.3
+          : MediaQuery.of(context).size.width,
       child: Stack(
         children: <Widget>[
           Container(

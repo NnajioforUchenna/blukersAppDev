@@ -138,4 +138,27 @@ class JobPostsProvider with ChangeNotifier {
     jobPostCurrentPageIndex = 0;
     notifyListeners();
   }
+
+  Future<List<JobPost>> getAppliedJobPostIds(String uid) {
+    return JobPostsDataProvider.getAppliedJobPostIds(uid)
+        .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
+  }
+
+  Future<List<JobPost>> getSavedJobPostIds(String uid) async {
+    try {
+      final ids = await JobPostsDataProvider.getSavedJobPostIds(uid);
+      print(ids);
+      final jobPosts = await JobPostsDataProvider.getJobPostsByCompanyIds(ids);
+      return jobPosts;
+    } catch (error) {
+      print('An error occurred: $error');
+      // Handle the error as needed, perhaps by returning an empty list or throwing a specific exception.
+      return [];
+    }
+  }
+
+  // Future<List<JobPost>> getSavedJobPostIds(String uid) {
+  //   return JobPostsDataProvider.getSavedJobPostIds(uid)
+  //       .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
+  // }
 }

@@ -1,4 +1,5 @@
 import 'package:bulkers/data_providers/user_data_provider.dart';
+import 'package:bulkers/models/job_post.dart';
 import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/services/user_shared_preferences_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../common_files/constants.dart';
+import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
 import '../models/app_user.dart';
 import '../models/company.dart';
@@ -20,7 +22,9 @@ class UserProvider with ChangeNotifier {
   AppUser? _appUser;
   AppUser? get appUser => _appUser;
 
+  // Navigation Controls
   String userRole = "company";
+  int jobTimelineStep = 0;
 
   switchUserRole() {
     if (userRole == "company") {
@@ -45,11 +49,25 @@ class UserProvider with ChangeNotifier {
 
   Future<void> initializeAppUser(uid) async {
     _appUser = await UserDataProvider.getAppUser(uid);
+    if (_appUser!.userRole == "company") {
+      userRole = "company";
+    } else {
+      userRole = "worker";
+    }
+    if (_appUser!.timelineStep != null) {
+      jobTimelineStep = _appUser!.timelineStep!;
+    }
     notifyListeners();
   }
 
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  void setJobTimelineStep(int step) {
+    jobTimelineStep = step;
+    notifyListeners();
+    UserDataProvider.updateTimelineStep(_appUser!.uid, step);
   }
 
   int currentPageIndex = 0;
@@ -80,7 +98,9 @@ class UserProvider with ChangeNotifier {
           uid: result['userCredential'].user!.uid,
           email: email,
           isLoginInformation: true,
-          registeredAs: userType);
+          registeredAs: userType,
+          userRole: userType,
+          timelineStep: 1);
 
       // Set the _appUser
       _appUser = appUser;
@@ -276,5 +296,40 @@ class UserProvider with ChangeNotifier {
       EasyLoading.showError(result['error'],
           duration: const Duration(seconds: 3));
     }
+  }
+
+  isJobPostApplied(String jobPostId) {
+    return appUser?.worker?.appliedJobPostIds?.contains(jobPostId) ??
+        false; // Change to JobPostId
+  }
+
+  void applyForJobPost(JobPost jobPost) {
+    print(jobPost.toString());
+    // Update UI interFace
+    appUser?.worker?.appliedJobPostIds
+        ?.add(jobPost.companyId); // Todo Change companyId to jobPostId
+    notifyListeners();
+    // Persist data to database
+    UserDataProvider.updateWorkerAppliedJobPostIds(
+        appUser!.worker!.appliedJobPostIds!, appUser!.uid);
+    // update JobPost Records
+    JobPostsDataProvider.updateJobPostAppliedWorkerIds(
+        jobPost.companyId, appUser!.uid); // Todo Change companyId to jobPostId
+  }
+
+  bool isJobPostSaved(String jobPostId) {
+    return appUser?.worker?.savedJobPostIds?.contains(jobPostId) ??
+        false; // Change to JobPostId
+  }
+
+  void saveJobPost(JobPost jobPost) {
+    // Update UI interFace
+    appUser?.worker?.savedJobPostIds
+        ?.add(jobPost.companyId); // Todo Change companyId to jobPostId
+    notifyListeners();
+    // Persist data to database
+    UserDataProvider.updateWorkerSavedJobPostIds(
+        appUser!.worker!.savedJobPostIds!, appUser!.uid);
+// Todo Change companyId to jobPostId
   }
 }

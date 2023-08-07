@@ -35,10 +35,12 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
       setState(() {
         if (isStartDate) {
           _startDate = pickedDate;
-          wp.workExperience[widget.intialIndex]['jobStartDate'] = _startDate;
+          wp.workExperience[widget.intialIndex]['jobStartDate'] =
+              _startDate.toString();
         } else {
           _endDate = pickedDate;
-          wp.workExperience[widget.intialIndex]['jobEndDate'] = _endDate;
+          wp.workExperience[widget.intialIndex]['jobEndDate'] =
+              _endDate.toString();
         }
       });
     }

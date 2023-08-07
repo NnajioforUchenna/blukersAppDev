@@ -36,4 +36,36 @@ class JobPostsDataProvider {
       'jobPostIds': FieldValue.arrayUnion([jobPostId])
     });
   }
+
+  static void updateJobPostAppliedWorkerIds(String jobPostId, String uid) {
+    CollectionReference jobPosts = db.collection('JobPosts');
+    jobPosts.doc(jobPostId).update({
+      'applicantUserIds': FieldValue.arrayUnion([uid])
+    });
+  }
+
+  static Future<List<String>> getSavedJobPostIds(String uid) async {
+    DocumentSnapshot userDoc = await db.collection('AppUsers').doc(uid).get();
+    return List<String>.from(userDoc['worker.savedJobPostIds'] ?? []);
+  }
+
+  static Future<List<String>> getAppliedJobPostIds(String uid) async {
+    DocumentSnapshot userDoc = await db.collection('AppUsers').doc(uid).get();
+    return List<String>.from(userDoc['worker.appliedJobPostIds'] ?? []);
+  }
+
+  static Future<List<JobPost>> getJobPostsByCompanyIds(
+      List<String> jobPostIds) async {
+    List<JobPost> jobPosts = [];
+    for (String id in jobPostIds) {
+      QuerySnapshot query = await db
+          .collection('JobPosts')
+          .where('companyId', isEqualTo: id)
+          .get();
+      jobPosts.addAll(query.docs
+          .map((doc) => JobPost.fromMap(doc.data() as Map<String, dynamic>))
+          .toList());
+    }
+    return jobPosts;
+  }
 }

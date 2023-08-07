@@ -28,3 +28,9 @@ WorkerProvider wp = Provider.of<WorkerProvider>(context);
                             ListOfAppliedWorkers(jobPost: jobPost)),
                   );
 Navigator.pushNamed(context, '/workers');
+
+                showDialog(
+                    context: context,
+                    builder: (context) => DisplayJobPostDialog(
+                          jobPost: jobPost,
+                        ));

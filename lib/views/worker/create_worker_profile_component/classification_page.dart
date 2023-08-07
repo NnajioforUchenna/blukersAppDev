@@ -1,10 +1,10 @@
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/industry.dart';
 import '../../../providers/industry_provider.dart';
+import '../../../services/responsive.dart';
 
 class ClassificationPage extends StatefulWidget {
   ClassificationPage({Key? key}) : super(key: key);
@@ -35,6 +35,9 @@ class _ClassificationPageState extends State<ClassificationPage> {
     industries = ip.industries.values.toList();
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     return Container(
+      width: Responsive.isDesktop(context)
+          ? MediaQuery.of(context).size.width * 0.3
+          : MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
         child: Column(

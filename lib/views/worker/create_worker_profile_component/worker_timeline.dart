@@ -1,10 +1,10 @@
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:unicons/unicons.dart';
 
+import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 
 const workerSteps = [
@@ -113,23 +113,28 @@ class WorkerTimeLine extends StatelessWidget {
             status = _WorkerStatus.doing;
           }
 
-          return TimelineTile(
-            axis: TimelineAxis.horizontal,
-            alignment: TimelineAlign.manual,
-            lineXY: 0.6,
-            isFirst: index == 0,
-            isLast: index == workerSteps.length - 1,
-            beforeLineStyle: beforeLineStyle,
-            afterLineStyle: afterLineStyle,
-            indicatorStyle: IndicatorStyle(
-              width: indicatorSize,
-              height: indicatorSize,
-              indicator: _IndicatorWorker(status: status),
-            ),
-            startChild: _StartChildWorker(index: index),
-            endChild: _EndChildWorker(
-              text: step,
-              current: index == currentStep,
+          return SizedBox(
+            width: Responsive.isDesktop(context)
+                ? MediaQuery.of(context).size.width / 6
+                : null,
+            child: TimelineTile(
+              axis: TimelineAxis.horizontal,
+              alignment: TimelineAlign.manual,
+              lineXY: 0.6,
+              isFirst: index == 0,
+              isLast: index == workerSteps.length - 1,
+              beforeLineStyle: beforeLineStyle,
+              afterLineStyle: afterLineStyle,
+              indicatorStyle: IndicatorStyle(
+                width: indicatorSize,
+                height: indicatorSize,
+                indicator: _IndicatorWorker(status: status),
+              ),
+              startChild: _StartChildWorker(index: index),
+              endChild: _EndChildWorker(
+                text: step,
+                current: index == currentStep,
+              ),
             ),
           );
         },

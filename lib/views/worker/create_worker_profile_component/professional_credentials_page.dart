@@ -2,6 +2,7 @@ import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'credential_field.dart';
 
@@ -37,6 +38,9 @@ class _ProfessionalCredentialsPageState
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
+      width: Responsive.isDesktop(context)
+          ? MediaQuery.of(context).size.width * 0.3
+          : MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

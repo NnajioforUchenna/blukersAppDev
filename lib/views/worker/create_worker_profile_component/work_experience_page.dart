@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/worker_provider.dart';
+import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'work_experience_form.dart';
 
@@ -17,6 +18,9 @@ class WorkExperiencePage extends StatelessWidget {
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
+      width: Responsive.isDesktop(context)
+          ? MediaQuery.of(context).size.width * 0.3
+          : MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
         child: Column(
           children: [

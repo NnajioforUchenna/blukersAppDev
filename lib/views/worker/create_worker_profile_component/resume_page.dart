@@ -1,3 +1,4 @@
+import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,7 @@ class ResumePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
     final linkedInUrlController = TextEditingController();
+    UserProvider up = Provider.of<UserProvider>(context);
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
 
     return Scaffold(
@@ -72,6 +74,7 @@ class ResumePage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Handle "submit" or "next" logic here
+                      up.setJobTimelineStep(2);
                       wp.setResume(linkedInUrlController.text);
                     },
                     style: ButtonStyle(
