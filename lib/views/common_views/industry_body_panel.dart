@@ -1,8 +1,10 @@
 import 'package:bulkers/providers/job_posts_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:bulkers/utils/styles/index.dart';
+import 'package:bulkers/utils/helpers/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../models/job.dart';
 import '../../providers/user_provider.dart';
@@ -54,27 +56,32 @@ class IndustryBodyPanel extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
+                elevation: 2,
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                      color: ThemeColors.primaryThemeColor, width: 2),
-                  borderRadius: BorderRadius.circular(15),
+                  // side: const BorderSide(
+                  //     color: ThemeColors.primaryThemeColor, width: 2),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: ListTile(
                   title: Row(
                     children: [
-                      Text(
-                        job.title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: ThemeColors.primaryThemeColor,
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(
+                            text: job.title,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: ThemeColors.primaryThemeColor,
+                            ),
+                          ),
                         ),
                       ),
-                      Spacer(),
+                      // Spacer(),
                       Icon(
                         up.userRole == 'company'
-                            ? Icons.groups
-                            : Icons.work_outline,
+                            ? UniconsLine.users_alt
+                            : UniconsLine.briefcase_alt,
                         color: ThemeColors.primaryThemeColor,
                         size: 30.0,
                       ),
@@ -89,7 +96,7 @@ class IndustryBodyPanel extends StatelessWidget {
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 4.0, bottom: 6.0),
                     child: Text(
-                      'Salary: ${job.lowRange} - ${job.highRange}',
+                      'Salary: ${NumberFormatHelper().doubleToStrSimpleCurrency(job.lowRange)} - ${NumberFormatHelper().doubleToStrSimpleCurrency(job.highRange)}',
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,

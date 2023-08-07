@@ -1,6 +1,7 @@
 import 'package:bulkers/services/responsive.dart';
 import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:unicons/unicons.dart';
 
 import 'list_industries.dart';
 
@@ -13,10 +14,18 @@ class DisplayIndustries extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
+            height: MediaQuery.of(context).size.height * 0.025,
           ),
+          const Icon(
+            UniconsLine.hard_hat,
+            color: ThemeColors.secondaryThemeColor,
+            size: 60,
+          ),
+          // SizedBox(
+          //   height: MediaQuery.of(context).size.height * 0.005,
+          // ),
           const Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
             child: Text(
               "Select an Industry",
               textAlign: TextAlign.center,
