@@ -5,8 +5,8 @@ import '../../../common_files/constants.dart';
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../services/responsive.dart';
+import 'animate_job_post_details.dart';
 import 'display_job_card.dart';
-import 'display_job_post_details.dart';
 import 'display_job_post_dialog.dart';
 
 class CompleteJobPostWidget extends StatelessWidget {
@@ -43,7 +43,7 @@ Widget buildWebContent(jobPosts) {
         flex: 2,
         child: Padding(
           padding: EdgeInsets.all(8.0),
-          child: JobPostDetailsWidget(),
+          child: AnimateJobPostDetails(),
         ),
       ),
     ],

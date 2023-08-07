@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../common_files/constants.dart';
+import '../data_providers/app_user_stream_service.dart';
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
 import '../models/app_user.dart';
@@ -21,21 +22,15 @@ class UserProvider with ChangeNotifier {
 
   AppUser? _appUser;
   AppUser? get appUser => _appUser;
+  late StreamService streamService;
 
-  // Navigation Controls
-  String userRole = "company";
-  int jobTimelineStep = 0;
-
-  switchUserRole() {
-    if (userRole == "company") {
-      userRole = "worker";
-    } else {
-      userRole = "company";
-    }
-    notifyListeners();
-  }
+  // Navigation Variables
+  String? userRole;
+  int companyTimelineStep = 0;
+  int workerTimelineStep = 0;
 
   int registerCurrentPageIndex = 0;
+  int currentPageIndex = 0;
 
   UserProvider() {
     _auth.authStateChanges().listen((User? user) {
@@ -47,17 +42,19 @@ class UserProvider with ChangeNotifier {
     });
   }
 
-  Future<void> initializeAppUser(uid) async {
-    _appUser = await UserDataProvider.getAppUser(uid);
-    if (_appUser!.userRole == "company") {
-      userRole = "company";
-    } else {
-      userRole = "worker";
-    }
-    if (_appUser!.timelineStep != null) {
-      jobTimelineStep = _appUser!.timelineStep!;
-    }
-    notifyListeners();
+  void initializeAppUser(String uid) {
+    streamService = StreamService(uid);
+    streamService.appUser.listen((updatedAppUser) {
+      _appUser = updatedAppUser;
+      updateNavigationVariables();
+      notifyListeners();
+    });
+  }
+
+  void updateNavigationVariables() {
+    userRole = _appUser!.userRole;
+    companyTimelineStep = _appUser!.companyTimelineStep!;
+    workerTimelineStep = _appUser!.workerTimelineStep!;
   }
 
   Future<void> signOut() async {
@@ -65,12 +62,8 @@ class UserProvider with ChangeNotifier {
   }
 
   void setJobTimelineStep(int step) {
-    jobTimelineStep = step;
-    notifyListeners();
     UserDataProvider.updateTimelineStep(_appUser!.uid, step);
   }
-
-  int currentPageIndex = 0;
 
   void setRegisterPageIndex() {
     registerCurrentPageIndex++;
@@ -95,12 +88,21 @@ class UserProvider with ChangeNotifier {
     if (result['success']) {
       // Prepare the user data for storage.
       AppUser appUser = AppUser.fromSignUp(
-          uid: result['userCredential'].user!.uid,
-          email: email,
-          isLoginInformation: true,
-          registeredAs: userType,
-          userRole: userType,
-          timelineStep: 1);
+        uid: result['userCredential'].user!.uid,
+        email: email,
+        isLoginInformation: true,
+        registeredAs: userType,
+        userRole: userType,
+      );
+
+      if (userType == "worker") {
+        appUser.workerTimelineStep = 1;
+      }
+      ;
+      if (userType == "company") {
+        appUser.companyTimelineStep = 1;
+      }
+      ;
 
       // Set the _appUser
       _appUser = appUser;
@@ -331,5 +333,20 @@ class UserProvider with ChangeNotifier {
     UserDataProvider.updateWorkerSavedJobPostIds(
         appUser!.worker!.savedJobPostIds!, appUser!.uid);
 // Todo Change companyId to jobPostId
+  }
+
+  bool isWorkerSaved(String workerId) {
+    return appUser?.company?.interestingWorkersIds?.contains(workerId) ??
+        false; // Change to JobPostId
+  }
+
+  void navigateBasedOnRole(BuildContext context) {
+    if (userRole == "worker") {
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/jobs', (Route<dynamic> route) => false);
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/workers', (Route<dynamic> route) => false);
+    }
   }
 }

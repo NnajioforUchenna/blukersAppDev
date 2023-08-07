@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../models/address.dart';
 import '../models/job_post.dart';
 
@@ -59,4 +61,10 @@ String getJobType(JobType jobType) {
     default:
       return 'N/A';
   }
+}
+
+void prettyPrintMap(Map<String, dynamic> map) {
+  JsonEncoder encoder = const JsonEncoder.withIndent('  ');
+  String prettyPrint = encoder.convert(map);
+  print(prettyPrint);
 }

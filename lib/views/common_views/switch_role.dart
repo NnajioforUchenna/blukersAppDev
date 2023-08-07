@@ -16,7 +16,7 @@ class _SwitchRoleState extends State<SwitchRole> {
     UserProvider up = Provider.of<UserProvider>(context);
     return GestureDetector(
       onTap: () {
-        up.switchUserRole();
+        // up.switchUserRole();
         setState(() {
           isWorker = !isWorker;
         });

@@ -1,11 +1,10 @@
 import 'package:bulkers/models/job_post.dart';
 import 'package:bulkers/providers/company_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
+import 'package:bulkers/views/worker/jobs_componets/complete_job_posts_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utils/styles/theme_colors.dart';
-import 'my_job_post_component/list_of_applied_workers/list_of_applied_workers.dart';
 import 'my_job_post_component/loading_my_job_posts.dart';
 import 'my_job_post_component/no_job_posts.dart';
 
@@ -29,67 +28,7 @@ class MyJobPostsTab extends StatelessWidget {
           return NoMyJobPosts();
         } else {
           List<JobPost> jobPosts = snapshot.data!;
-          return ListView.separated(
-            padding: const EdgeInsets.all(10),
-            itemCount: jobPosts.length,
-            itemBuilder: (context, index) {
-              JobPost jobPost = jobPosts[index];
-              return InkWell(
-                onTap: () {
-                  wp.setDisplayLists(jobPost);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ListOfAppliedWorkers(jobPost: jobPost)),
-                  );
-                },
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                        color: ThemeColors.primaryThemeColor, width: 2),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 15,
-                    ),
-                    title: Text(
-                      '${jobPost.jobTitle} at ${jobPost.companyName}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: ThemeColors.primaryThemeColor,
-                      ),
-                    ),
-                    subtitle: Text(jobPost.jobDescription),
-                    leading: jobPost.companyLogo != null
-                        ? Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              image: DecorationImage(
-                                image: NetworkImage(jobPost.companyLogo!),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
-                        : null, // Display company image if available
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                height: 5,
-              );
-            },
-          );
+          return CompleteJobPostWidget(jobPosts: jobPosts);
         }
       },
     );

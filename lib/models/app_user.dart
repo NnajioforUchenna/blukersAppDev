@@ -1,4 +1,5 @@
 import 'package:bulkers/models/worker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'address.dart';
 import 'company.dart';
@@ -26,7 +27,8 @@ class AppUser {
 
   // navigation Controls
   String? userRole;
-  int? timelineStep;
+  int? workerTimelineStep = 0;
+  int? companyTimelineStep = 0;
 
   AppUser({
     required this.uid,
@@ -46,7 +48,8 @@ class AppUser {
     this.address,
     this.deviceTokenU,
     this.userRole,
-    this.timelineStep,
+    this.workerTimelineStep,
+    this.companyTimelineStep,
   });
 
   // New constructor for User.fromSignUp
@@ -68,7 +71,8 @@ class AppUser {
     this.address,
     this.deviceTokenU,
     this.userRole,
-    this.timelineStep,
+    this.workerTimelineStep,
+    this.companyTimelineStep,
   });
 
   Map<String, dynamic> toMap() {
@@ -100,9 +104,40 @@ class AppUser {
     if (address != null) data['address'] = address!.toMap();
     if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
     if (userRole != null) data['userRole'] = userRole;
-    if (timelineStep != null) data['timelineStep'] = timelineStep;
+    if (workerTimelineStep != null) data['timelineStep'] = workerTimelineStep;
+    if (companyTimelineStep != null) data['timelineStep'] = companyTimelineStep;
 
     return data;
+  }
+
+  factory AppUser.fromDocument(DocumentSnapshot<Map<String, dynamic>> doc) {
+    Map<String, dynamic> map = doc.data()!;
+    return AppUser(
+      uid: map['uid'],
+      email: map['email'],
+      language: map['language'],
+      displayName: map['displayName'],
+      phoneNumber: map['phoneNumber'],
+      photoUrl: map['photoUrl'],
+      isEmailVerified: map['isEmailVerified'],
+      isLoginInformation: map['isLoginInformation'],
+      registeredAs: map['registeredAs'],
+      isBasicInformation: map['isBasicInformation'],
+      isContactInformation: map['isContactInformation'],
+      isRegistrationComplete: map['isRegistrationComplete'],
+      userRole: map['userRole'],
+      workerTimelineStep: map['timelineStep'],
+      companyTimelineStep: map['timelineStep'],
+      worker: map['worker'] != null
+          ? Worker.fromMap(map['worker'])
+          : null, // Convert Map to Worker object
+      company: map['company'] != null
+          ? Company.fromMap(map['company'])
+          : null, // Convert Map to Company object
+      address: map['address'] != null
+          ? Address.fromMap(map['address'])
+          : null, // Convert Map to Address object
+    );
   }
 
   static AppUser fromMap(Map<String, dynamic> map) {
@@ -120,7 +155,8 @@ class AppUser {
       isContactInformation: map['isContactInformation'],
       isRegistrationComplete: map['isRegistrationComplete'],
       userRole: map['userRole'],
-      timelineStep: map['timelineStep'],
+      workerTimelineStep: map['timelineStep'],
+      companyTimelineStep: map['timelineStep'],
       worker: map['worker'] != null
           ? Worker.fromMap(map['worker'])
           : null, // Convert Map to Worker object
@@ -148,7 +184,8 @@ class AppUser {
       'photoUrl': photoUrl ?? "",
       'deviceTokenU': deviceTokenU ?? "",
       'userRole': userRole ?? '',
-      'timelineStep': timelineStep.toString(),
+      'workerTimelineStep': workerTimelineStep.toString(),
+      'companyTimelineStep': companyTimelineStep.toString(),
     };
   }
 
@@ -162,7 +199,8 @@ class AppUser {
       photoUrl: userMap['photoUrl'],
       deviceTokenU: userMap['deviceTokenU'],
       userRole: userMap['userRole'],
-      timelineStep: int.parse(userMap['timelineStep'] ?? '0'),
+      workerTimelineStep: int.parse(userMap['workerTimelineStep'] ?? '0'),
+      companyTimelineStep: int.parse(userMap['companyTimelineStep'] ?? '0'),
     );
   }
 }

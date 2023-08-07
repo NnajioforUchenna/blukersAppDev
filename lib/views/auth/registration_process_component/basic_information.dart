@@ -41,7 +41,7 @@ class _BasicInformationState extends State<BasicInformation> {
     final height = MediaQuery.of(context).size.height;
     final node = FocusScope.of(context);
     UserProvider up = Provider.of<UserProvider>(context);
-    userRole = up.userRole;
+    userRole = up.userRole!;
 
     return SizedBox(
       height: height,

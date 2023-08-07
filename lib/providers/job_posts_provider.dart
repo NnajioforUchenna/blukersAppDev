@@ -134,9 +134,9 @@ class JobPostsProvider with ChangeNotifier {
     print('newJobPostData: $newJobPostData');
     JobPost jobPost = JobPost.fromMap(newJobPostData);
     JobPostsDataProvider.createJobPost(jobPost);
+    notifyListeners();
     newJobPostData = {};
     jobPostCurrentPageIndex = 0;
-    notifyListeners();
   }
 
   Future<List<JobPost>> getAppliedJobPostIds(String uid) {

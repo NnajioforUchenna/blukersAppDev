@@ -7,6 +7,7 @@ import '../views/auth/registration_process.dart';
 import '../views/auth/reset_password.dart';
 import '../views/common_views/landing_page_components/landing_page.dart';
 import '../views/company/company_profile.dart';
+import '../views/company/create_company_profile/create_company_profile.dart';
 import '../views/company/my_job_posts.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
 import '../views/company/workers.dart';
@@ -18,8 +19,7 @@ import '../views/worker/worker_profile.dart';
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(
-          builder: (context) =>  LandingPage());
+      return MaterialPageRoute(builder: (context) => LandingPage());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
@@ -45,6 +45,9 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
     case '/createWorkerProfile':
       return MaterialPageRoute(
           builder: (context) => const CreateWorkerProfile());
+    case '/createCompanyProfile':
+      return MaterialPageRoute(
+          builder: (context) => const CreateCompanyProfile());
     case '/company-chat':
       return MaterialPageRoute(builder: (context) => const CompanyChat());
     case '/chat-message':

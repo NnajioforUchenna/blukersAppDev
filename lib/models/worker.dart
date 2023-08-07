@@ -1,3 +1,4 @@
+import '../common_files/get_time_ago.dart';
 import 'address.dart';
 import 'reference.dart';
 import 'work_experience.dart';
@@ -10,6 +11,7 @@ class Worker {
   String? middleName;
   String lastName;
   List<String> emails;
+  String? phoneNumber;
   String? workerBriefDescription;
   String? profilePhotoUrl;
   List<String>? industryIds;
@@ -67,6 +69,7 @@ class Worker {
     this.isBasicProfileCompleted,
     this.isProfileUpdateNeeded,
     this.middleName,
+    this.phoneNumber,
   });
 
   Worker.fromSignUp({
@@ -77,6 +80,9 @@ class Worker {
     required String this.workerBriefDescription,
   })  : emails = [email],
         isBasicProfileCompleted = true;
+
+  get timeAgo => getTimeAgo(dateCreated.toString());
+  get location => addresses?.first.location ?? 'Location not set';
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
@@ -93,8 +99,11 @@ class Worker {
     if (birthdate != null) {
       map['birthdate'] = birthdate!.toIso8601String();
     }
-    if (dateCreated != null)
+    if (dateCreated != null) {
       map['dateCreated'] = dateCreated!.toIso8601String();
+    } else {
+      map['dateCreated'] = DateTime.now().toIso8601String();
+    }
 
     if (savedJobPostIds != null) map['savedJobPostIds'] = savedJobPostIds;
     if (appliedJobPostIds != null) {
@@ -142,6 +151,13 @@ class Worker {
       map['isProfileUpdateNeeded'] = isProfileUpdateNeeded;
     }
 
+    if (middleName != null) {
+      map['middleName'] = middleName;
+    }
+    if (phoneNumber != null) {
+      map['phoneNumber'] = phoneNumber;
+    }
+
     return map;
   }
 
@@ -173,7 +189,7 @@ class Worker {
           map['birthdate'] != null ? DateTime.parse(map['birthdate']) : null,
       dateCreated: map['dateCreated'] != null
           ? DateTime.parse(map['dateCreated'])
-          : null,
+          : DateTime.now(),
       workExperiences: map['workExperiences'] != null
           ? (map['workExperiences'] as List)
               .map((weMap) => WorkExperience.fromMap(weMap))
@@ -206,6 +222,7 @@ class Worker {
       isProfileUpdateNeeded: map['isProfileUpdateNeeded'] ?? false,
       workerBriefDescription: map['workerBriefDescription'] ?? "",
       emails: map['emails'] != null ? List<String>.from(map['emails']) : [],
+      phoneNumber: map['phoneNumber'] ?? '',
     );
   }
 }

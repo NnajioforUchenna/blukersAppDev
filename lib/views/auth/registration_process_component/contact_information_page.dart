@@ -43,6 +43,7 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
+    String initialSelection = up.userRole == 'company' ? '+1' : '+52';
     return SizedBox(
       height: height,
       child: Stack(
@@ -83,10 +84,10 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                               child: Center(
                                 child: CountryCodePicker(
                                   onChanged: (value) {
-                                    print(value);
+                                    ext = value.toString();
                                     _onCountryChange(value);
                                   },
-                                  initialSelection: '+52',
+                                  initialSelection: initialSelection,
                                   favorite: const ['+1', '+52', 'FR'],
                                   showCountryOnly: false,
                                   showOnlyCountryWhenClosed: false,

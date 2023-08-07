@@ -2,10 +2,11 @@ import 'package:bulkers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../common_files/constants.dart';
-import '../../../models/job_post.dart';
-import '../../../utils/styles/theme_colors.dart';
-import '../../common_views/job_timeline/display_job_timeline_dialog.dart';
+import '../../../../common_files/constants.dart';
+import '../../../../models/job_post.dart';
+import '../../../../services/rounded_image.dart';
+import '../../../../utils/styles/theme_colors.dart';
+import '../../../common_views/job_timeline/display_job_timeline_dialog.dart';
 
 class DetailPageBlockOne extends StatelessWidget {
   final JobPost jobPost;
@@ -34,7 +35,7 @@ class DetailPageBlockOne extends StatelessWidget {
                 const Spacer(),
                 IconButton(
                     onPressed: () {
-                      if (up.jobTimelineStep < 2) {
+                      if (up.workerTimelineStep < 2) {
                         showDialog(
                             context: context,
                             builder: (context) =>
@@ -96,7 +97,7 @@ class DetailPageBlockOne extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      if (up.jobTimelineStep < 2) {
+                      if (up.workerTimelineStep < 2) {
                         showDialog(
                             context: context,
                             builder: (context) =>
@@ -117,10 +118,10 @@ class DetailPageBlockOne extends StatelessWidget {
                 ),
 
                 const Spacer(), // Add space between button and image
-                Image.network(
-                  jobPost.companyLogo ?? 'https://picsum.photos/200/300',
-                  height: 100,
-                  width: 100,
+                RoundedImageWidget(
+                  size: 100,
+                  imageUrl:
+                      jobPost.companyLogo ?? 'https://picsum.photos/200/300',
                 ),
               ],
             ),

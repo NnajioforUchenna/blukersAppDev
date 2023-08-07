@@ -101,7 +101,7 @@ class UserDataProvider {
       String completePhoneNumber, Address address, String uid) {
     CollectionReference appUserCollection = firestore.collection('AppUsers');
     appUserCollection.doc(uid).update({
-      'completePhoneNumber': completePhoneNumber,
+      'phoneNumber': completePhoneNumber,
       'address': address.toMap(),
       'isContactInformation': true
     }).catchError((error) {

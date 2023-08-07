@@ -1,4 +1,5 @@
 import 'address.dart';
+import 'social_media_platform.dart';
 
 class Company {
   String companyId;
@@ -6,10 +7,13 @@ class Company {
   String? wallpaperUrl;
   String name;
   String? companyDescription;
+  String? companySlogan;
+  String? companyIndustry;
   List<String> emails;
   List<String> phoneNumbers;
   List<Address>? addresses;
   int? yearFounded;
+  String? website;
   int? totalEmployees;
   List<String>? industryIds;
   List<String>? jobPostIds;
@@ -22,6 +26,7 @@ class Company {
   bool? isBasicProfileCompleted;
   bool? isProfileUpdateNeeded;
   List<String>? interestingWorkersIds;
+  List<SocialMediaPlatform>? socialMediaPlatforms;
 
   Company(
       {required this.companyId,
@@ -29,11 +34,14 @@ class Company {
       this.wallpaperUrl,
       required this.name,
       this.companyDescription,
+      this.companySlogan,
+      this.companyIndustry,
       required this.emails,
       required this.phoneNumbers,
       this.addresses,
       this.yearFounded,
       this.totalEmployees,
+      this.website,
       this.industryIds,
       this.jobPostIds,
       this.companyBadgeIds,
@@ -44,6 +52,7 @@ class Company {
       this.isVerified,
       this.isBasicProfileCompleted,
       this.isProfileUpdateNeeded,
+      this.socialMediaPlatforms,
       this.interestingWorkersIds});
 
   Company.fromSignUp({
@@ -69,13 +78,21 @@ class Company {
     };
 
     if (logoUrl != null) map['logoUrl'] = logoUrl;
+    if (website != null) map['website'] = website;
     if (wallpaperUrl != null) map['wallpaperUrl'] = wallpaperUrl;
     if (companyDescription != null) {
       map['companyDescription'] = companyDescription;
     }
+    if (companySlogan != null) map['companySlogan'] = companySlogan;
+    if (companyIndustry != null) map['companyIndustry'] = companyIndustry;
     if (addresses != null) {
       map['addresses'] = addresses?.map((address) => address.toMap()).toList();
     }
+    if (socialMediaPlatforms != null) {
+      map['socialMediaPlatforms'] =
+          socialMediaPlatforms?.map((platform) => platform.toMap()).toList();
+    }
+
     if (yearFounded != null) map['yearFounded'] = yearFounded;
     if (totalEmployees != null) map['totalEmployees'] = totalEmployees;
     if (industryIds != null) map['industryIds'] = industryIds;
@@ -107,18 +124,32 @@ class Company {
     return Company(
       companyId: map['companyId'],
       logoUrl: map['logoUrl'],
+      website: map['website'],
       wallpaperUrl: map['wallpaperUrl'],
       name: map['name'],
       companyDescription: map['companyDescription'],
-      emails: List<String>.from(map['emails']),
-      phoneNumbers: List<String>.from(map['phoneNumbers']),
+      companySlogan: map['companySlogan'],
+      companyIndustry: map['companyIndustry'],
+      emails: map['emails'] != null ? List<String>.from(map['emails']) : [],
+      phoneNumbers: map['phoneNumbers'] != null
+          ? List<String>.from(map['phoneNumbers'])
+          : [],
       addresses: map['addresses'] != null
           ? (map['addresses'] as List)
               .map((addressMap) => Address.fromMap(addressMap))
               .toList()
           : null,
-      yearFounded: map['yearFounded'],
-      totalEmployees: map['totalEmployees'],
+      socialMediaPlatforms: map['socialMediaPlatforms'] != null
+          ? (map['socialMediaPlatforms'] as List)
+              .map((platformMap) => SocialMediaPlatform.fromMap(platformMap))
+              .toList()
+          : null,
+      yearFounded: map['yearFounded'] != null
+          ? int.parse(map['yearFounded'].toString())
+          : null,
+      totalEmployees: map['totalEmployees'] != null
+          ? int.parse(map['totalEmployees'].toString())
+          : null,
       industryIds: map['industryIds'] != null
           ? List<String>.from(map['industryIds'])
           : null,

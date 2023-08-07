@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/job_posts_provider.dart';
+import '../../../services/rounded_image.dart';
 import '../../../utils/styles/theme_colors.dart';
 
 class DisplayJobCard extends StatefulWidget {
@@ -122,13 +123,22 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                         ),
                       ),
                       if (width > 600) // Show logo only on larger screens
+                        RoundedImageWidget(
+                          imageUrl: widget.companyLogo!,
+                        ),
+                    ],
+                  ),
+                  if (width < 600)
+                    Row(
+                      children: [
+                        Spacer(),
                         Image.network(
                           widget.companyLogo!,
                           height: 50,
                           width: 50,
                         ),
-                    ],
-                  )
+                      ],
+                    ),
                 ],
               ),
             ),

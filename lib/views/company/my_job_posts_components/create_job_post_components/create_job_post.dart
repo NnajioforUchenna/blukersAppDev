@@ -31,7 +31,7 @@ class CreateJobPost extends StatelessWidget {
               SliverList(
                   delegate: SliverChildListDelegate([
                 JobPostTimeline(),
-                SizedBox(
+                const SizedBox(
                   height: 30.0,
                 ),
                 const JobPostPageSlider()

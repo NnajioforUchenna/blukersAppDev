@@ -43,7 +43,7 @@ class Address {
       if (state != null && state!.isNotEmpty) state,
       if (postalCode != null && postalCode!.isNotEmpty) postalCode,
       if (country != null && country!.isNotEmpty) country,
-    ].join(',');
+    ].join(', ');
   }
 
   @override

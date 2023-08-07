@@ -1,7 +1,7 @@
-import 'package:bulkers/views/company/workers_components/display_worker_details.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/worker.dart';
+import 'animate_worker_details_page.dart';
 
 class DisplayWorkerDialog extends StatelessWidget {
   final Worker worker;
@@ -20,7 +20,7 @@ class DisplayWorkerDialog extends StatelessWidget {
               SizedBox(
                 height: 70,
               ),
-              WorkerDisplayDetailsWidget()
+              AnimateWorkerDetails()
             ],
           ),
           Row(

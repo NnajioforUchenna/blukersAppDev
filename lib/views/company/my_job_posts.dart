@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/user_provider.dart';
+import '../common_views/worker_timeline/display_worker_timeline_dialog.dart';
 import 'my_job_posts_components/interesting_workers_tab.dart';
 import 'my_job_posts_components/my_job_posts_tab.dart';
 
@@ -32,7 +33,14 @@ class MyJobPosts extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: InkWell(
                   onTap: () {
-                    jpp.createNewJobPost(up.appUser, context);
+                    if (up.companyTimelineStep < 2) {
+                      showDialog(
+                          context: context,
+                          builder: (context) =>
+                              const DisplayWorkerTimelineDialog());
+                    } else {
+                      jpp.createNewJobPost(up.appUser, context);
+                    }
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

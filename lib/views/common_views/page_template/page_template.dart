@@ -3,7 +3,6 @@ import 'package:bulkers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../switch_role.dart';
 import 'my_buttom_navigation_bar.dart';
 import 'my_navigation_rail.dart';
 
@@ -20,10 +19,10 @@ class PageTemplate extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // To Switch Roles Easily
-            Row(
-              children: [Spacer(), SwitchRole()],
-            ),
+            // // To Switch Roles Easily
+            // Row(
+            //   children: [Spacer(), SwitchRole()],
+            // ),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

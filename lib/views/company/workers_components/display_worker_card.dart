@@ -1,6 +1,9 @@
+import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/worker.dart';
+import '../../../services/rounded_image.dart';
 
 class DisplayWorkerCard extends StatefulWidget {
   final Worker? worker;
@@ -21,6 +24,12 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
 
   @override
   Widget build(BuildContext context) {
+    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+
+    bool isWorkerSelected() {
+      return wp.selectedWorker?.workerId == widget.worker?.workerId;
+    }
+
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovering = true),
       onExit: (_) => setState(() => _isHovering = false),
@@ -36,10 +45,22 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
             child: AnimatedContainer(
               padding: const EdgeInsets.all(20),
               duration: const Duration(milliseconds: 500),
+              decoration: BoxDecoration(
+                color:
+                    isWorkerSelected() ? const Color(0xFFE5EDFF) : Colors.white,
+                border: Border(
+                  left: BorderSide(
+                    width: 2,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+              ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(widget.worker?.timeAgo ?? ''),
+                  SizedBox(height: 10),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         widget.worker?.firstName ?? '',
@@ -48,29 +69,17 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                           fontSize: 18,
                         ),
                       ),
-                      if (widget.worker?.profilePhotoUrl != null)
-                        Image.network(
-                          widget.worker!.profilePhotoUrl!,
-                          height: 50,
-                          width: 50,
+                      SizedBox(width: 10),
+                      Text(
+                        widget.worker?.lastName ?? '',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                         ),
+                      )
                     ],
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    widget.worker?.lastName ?? '',
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    widget.worker?.workerBriefDescription ?? '',
-                    style: const TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -85,14 +94,44 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5),
-                  Text(
-                    widget.worker?.emails.join(', ') ?? '',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.worker?.skillIds?.join(', ') ??
+                                  '', // TODO: Change this to worker?.jobIds?.join(', ') ?? '',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              widget.worker?.location!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                  Row(
+                    children: [
+                      Spacer(),
+                      if (widget.worker?.profilePhotoUrl != null)
+                        RoundedImageWidget(
+                          imageUrl: widget.worker!.profilePhotoUrl!,
+                        ),
+                    ],
+                  )
                 ],
               ),
             ),

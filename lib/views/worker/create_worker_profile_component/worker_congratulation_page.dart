@@ -41,11 +41,7 @@ class _WorkerCongratulationPageState extends State<WorkerCongratulationPage> {
   _navigateAfterDelay() {
     Future.delayed(Duration(seconds: countdownValue), () {
       _timer.cancel(); // Cancel the timer if it's still active
-      if (up.userRole == "company") {
-        Navigator.pushReplacementNamed(context, '/myJobPosts');
-      } else {
-        Navigator.pushReplacementNamed(context, '/myProfile');
-      }
+      up.navigateBasedOnRole(context);
     });
   }
 

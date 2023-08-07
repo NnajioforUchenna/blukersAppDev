@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../common_files/constants.dart';
-import '../../../models/job_post.dart';
+import '../../../../common_files/constants.dart';
+import '../../../../models/job_post.dart';
 
 class DetailPageBlockThree extends StatelessWidget {
   final JobPost jobPost;

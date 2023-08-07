@@ -1,7 +1,7 @@
 import 'package:bulkers/models/job_post.dart';
 import 'package:flutter/material.dart';
 
-import 'display_job_post_details.dart';
+import 'animate_job_post_details.dart';
 
 class DisplayJobPostDialog extends StatelessWidget {
   final JobPost jobPost;
@@ -13,7 +13,7 @@ class DisplayJobPostDialog extends StatelessWidget {
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
-          const JobPostDetailsWidget(),
+          const AnimateJobPostDetails(),
           Row(
             children: [
               const Spacer(),

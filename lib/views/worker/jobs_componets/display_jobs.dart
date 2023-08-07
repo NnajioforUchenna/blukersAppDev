@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
+import 'animate_job_post_details.dart';
 import 'build_list_view_jobs.dart';
-import 'display_job_post_details.dart';
 import 'job_search_bar.dart';
 
 class DisplayJobs extends StatelessWidget {
@@ -60,7 +60,7 @@ class DisplayJobs extends StatelessWidget {
                 flex: 2,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: JobPostDetailsWidget(),
+                  child: AnimateJobPostDetails(),
                 ),
               ),
             ],

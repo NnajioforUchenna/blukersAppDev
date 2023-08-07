@@ -11,7 +11,7 @@ class JobTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    int currentStep = up.jobTimelineStep;
+    int currentStep = up.workerTimelineStep;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
