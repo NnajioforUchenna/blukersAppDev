@@ -11,9 +11,11 @@ class InfoEditListComponent extends StatefulWidget {
       required this.value,
       this.ext,
       required this.onChangeValue,
-      this.onChangeExtValue});
+      this.onChangeExtValue,
+      this.textInputType = TextInputType.text});
   final String placeHolder;
   final List<String> value;
+  final TextInputType textInputType;
 
   final List<String>? ext;
   final Function(List<String> value) onChangeValue;
@@ -133,6 +135,7 @@ class _InfoEditListComponentState extends State<InfoEditListComponent> {
                               border: Border.all(color: Colors.blueAccent)),
                           child: TextField(
                             controller: e["controller"],
+                            keyboardType: widget.textInputType,
                             //  textInputAction: widget.action,
                             onChanged: (val) {
                               // print(value[0]["controller"]);

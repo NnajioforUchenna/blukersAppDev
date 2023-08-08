@@ -13,11 +13,15 @@ class EditCompanyBasicInfo extends StatefulWidget {
       required this.placeHolder,
       this.value,
       this.values,
-      this.isPhoneNumber = false});
+      this.isPhoneNumber = false,
+      required this.onPressUpdate,
+      this.textInputType = TextInputType.text});
   final String placeHolder;
   final String? value;
   final List<String>? values;
   final bool isPhoneNumber;
+  final Function(String? value, List<String>? values) onPressUpdate;
+  final TextInputType textInputType;
 
   @override
   State<EditCompanyBasicInfo> createState() => _EditCompanyBasicInfoState();
@@ -68,6 +72,7 @@ class _EditCompanyBasicInfoState extends State<EditCompanyBasicInfo> {
             placeHolder: widget.placeHolder,
             value: value!,
             action: TextInputAction.next,
+            textInputType: widget.textInputType,
             onChangeValue: (val) {
               value = val;
               print(val);
@@ -78,8 +83,10 @@ class _EditCompanyBasicInfoState extends State<EditCompanyBasicInfo> {
               placeHolder: widget.placeHolder,
               value: values!,
               ext: ext,
+              textInputType: widget.textInputType,
               onChangeValue: (val) {
                 print(val);
+                values = val;
               }),
         const SizedBox(
           height: 20,
@@ -91,7 +98,9 @@ class _EditCompanyBasicInfoState extends State<EditCompanyBasicInfo> {
               onTap: () async {
                 // await up.updateUserBasicInfo(
                 //     displayName, ext, phoneNo, language);
-                print(value);
+                //   await up.updateCompanyInfo();
+                widget.onPressUpdate(value, values);
+                // print(value);
                 //  Navigator.of(context).pop();
               },
               child: Container(

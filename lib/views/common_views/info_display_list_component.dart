@@ -3,8 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class InfoDisplayListComponent extends StatelessWidget {
-  const InfoDisplayListComponent(
-      {super.key, required this.placeHolder, required this.value, this.icon});
+  const InfoDisplayListComponent({
+    super.key,
+    required this.placeHolder,
+    required this.value,
+    this.icon,
+  });
   final String placeHolder;
   final List<String> value;
   final Widget? icon;

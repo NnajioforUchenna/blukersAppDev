@@ -11,13 +11,15 @@ class InfoEditComponent extends StatefulWidget {
       required this.action,
       required this.onChangeValue,
       this.ext,
-      this.onChangeExtValue});
+      this.onChangeExtValue,
+       this.textInputType = TextInputType.text});
   final String placeHolder;
   final String value;
   final TextInputAction action;
   final String? ext;
   final Function(String value) onChangeValue;
   final Function(String value)? onChangeExtValue;
+  final TextInputType textInputType;
 
   @override
   State<InfoEditComponent> createState() => _InfoEditComponentState();
@@ -85,6 +87,7 @@ class _InfoEditComponentState extends State<InfoEditComponent> {
                     child: TextField(
                       controller: controller,
                       textInputAction: widget.action,
+                      keyboardType: widget.textInputType,
                       onChanged: (val) {
                         if (ext != null) {
                           widget.onChangeValue("${ext!}-$val");

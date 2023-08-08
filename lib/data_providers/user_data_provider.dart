@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:bulkers/models/address.dart';
 import 'package:bulkers/models/app_user.dart';
 import 'package:bulkers/models/company.dart';
 import 'package:bulkers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 final firestore = FirebaseFirestore.instance;
 
@@ -117,6 +122,34 @@ class UserDataProvider {
     });
   }
 
+  static Future<void> updateCompanyInfo(
+      Map<String, dynamic> info, String uid) async {
+    CollectionReference appUserCollection = firestore.collection('AppUsers');
+     CollectionReference companyCollection = firestore.collection('Companies');
+    await appUserCollection
+        .doc(uid)
+        .update({"company": info}).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+      await companyCollection
+        .doc(uid)
+        .update(info).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+    static Future<void> updateUserProfilePic(
+      Map<String, dynamic> info, String uid) async {
+    CollectionReference appUserCollection = firestore.collection('AppUsers');
+   
+    await appUserCollection
+        .doc(uid)
+        .update(info).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+   
+  }
+
   static Future<Map<String, dynamic>> loginUser(
       String email, String password) async {
     try {
@@ -174,6 +207,40 @@ class UserDataProvider {
         'success': false,
         'error': e.toString(),
       };
+    }
+  }
+
+  static Future<String?> uploadImage({File? flow, String? path}) async {
+    final firebaseStorage = FirebaseStorage.instance;
+    // final imagePicker = ImagePicker();
+    // PickedFile? image;
+    String? imageUrl;
+    //Check Permissions
+    // await Permission.photos.request();
+
+    // var permissionStatus = await Permission.photos.status;
+    // if (kDebugMode) {
+    //   print(permissionStatus);
+    // }
+
+    if (flow != null) {
+      //  File(image.path);
+      //Upload to Firebase
+      var snapshot = firebaseStorage.ref().child(path!).putFile(flow).snapshot;
+      await Future.delayed(Duration(seconds: 3));
+      String downloadUrl = await snapshot.ref.getDownloadURL();
+      // setState(() {
+      imageUrl = downloadUrl;
+      if (kDebugMode) {
+        print(imageUrl);
+      }
+      return imageUrl;
+      // });
+    } else {
+      if (kDebugMode) {
+        print('No Image Path Received');
+      }
+      return '';
     }
   }
 }

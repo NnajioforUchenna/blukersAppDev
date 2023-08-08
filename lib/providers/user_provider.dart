@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/services/user_shared_preferences_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../common_files/constants.dart';
 import '../models/address.dart';
@@ -177,7 +180,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> updateUserBasicInfo(
-      String displayName,String ext, String phoneNo, String language) async {
+      String displayName, String ext, String phoneNo, String language) async {
     EasyLoading.show(
       status: 'Updating your Basic Info...',
       maskType: EasyLoadingMaskType.black,
@@ -194,6 +197,37 @@ class UserProvider with ChangeNotifier {
     _appUser!.displayName = displayName;
     _appUser!.phoneNumber = "$ext-$phoneNo";
     _appUser!.language = language;
+
+    EasyLoading.dismiss();
+    notifyListeners();
+    // setRegisterPageIndex();
+  }
+
+  Future<void> updateUserProfilePic(String imageUrl) async {
+    EasyLoading.show(
+      status: 'Updating your Basic Info...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    await UserDataProvider.updateUserProfilePic(
+        {"photoUrl": imageUrl}, _appUser!.uid);
+
+    _appUser!.photoUrl = imageUrl;
+
+    EasyLoading.dismiss();
+    notifyListeners();
+    // setRegisterPageIndex();
+  }
+
+  Future<void> updateCompanyInfo(Company company) async {
+    EasyLoading.show(
+      status: 'Updating your Basic Info...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    await UserDataProvider.updateCompanyInfo(company.toMap(), _appUser!.uid);
+
+    _appUser!.company = company;
 
     EasyLoading.dismiss();
     notifyListeners();
@@ -300,5 +334,59 @@ class UserProvider with ChangeNotifier {
       EasyLoading.showError(result['error'],
           duration: const Duration(seconds: 3));
     }
+  }
+
+  Future<String?> ontapGallery(String storagePath) async {
+    ImagePicker picker = ImagePicker();
+    XFile? gallery =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    if (gallery == null) {
+      return "";
+    }
+    //Get.back();
+    EasyLoading.show(
+      status: 'Uploading your Profile Pic...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    String path = gallery.path;
+    File image = File(path);
+    String? imageUrl = await UserDataProvider.uploadImage(
+        flow: image, path: "$storagePath${appUser!.uid}");
+
+    // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
+    //fbImageUrl.value = imageUrl ?? "";
+    await Future.delayed(Duration(seconds: 2));
+
+    EasyLoading.dismiss();
+    return imageUrl;
+    // imagePicker();
+  }
+
+  Future<String?> ontapCamera(String storagePath) async {
+    ImagePicker picker = ImagePicker();
+    XFile? gallery = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 15,
+        preferredCameraDevice: CameraDevice.front);
+    if (gallery == null) {
+      return "";
+    }
+    //Get.back();
+    EasyLoading.show(
+      status: 'Uploading your Profile Pic...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    String path = gallery.path;
+    File image = File(path);
+    String? imageUrl = await UserDataProvider.uploadImage(
+        flow: image, path: "$storagePath${appUser!.uid}");
+
+    // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
+    //fbImageUrl.value = imageUrl ?? "";
+    await Future.delayed(Duration(seconds: 2));
+
+    EasyLoading.dismiss();
+    return imageUrl;
+    // imagePicker();
   }
 }

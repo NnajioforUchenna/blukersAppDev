@@ -1,26 +1,16 @@
 import 'package:bulkers/models/address.dart';
+import 'package:bulkers/models/company.dart';
 import 'package:bulkers/views/common_views/info_display_component.dart';
 import 'package:bulkers/views/common_views/info_display_list_component.dart';
 import 'package:bulkers/views/common_views/profile_dialog.dart';
 import 'package:bulkers/views/company/profile_components/edit_company_basic_info.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CompanyBasicProfileDetail extends StatelessWidget {
   const CompanyBasicProfileDetail(
-      {super.key,
-      required this.name,
-      this.companyDescription,
-      required this.emails,
-      required this.phoneNumbers,
-      required this.onPressEditIcon,
-      this.addresses});
-  final String name;
-  final String? companyDescription;
-  final List<String> emails;
-  final List<String> phoneNumbers;
-  final List<Address>? addresses;
-  final VoidCallback onPressEditIcon;
+      {super.key, required this.company, required this.onPressUpdate});
+  final Company company;
+  final Function(Company company) onPressUpdate;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +26,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
         // ),
         InfoDisplayComponent(
           placeHolder: "Display Name",
-          value: name,
+          value: company.name,
           icon: GestureDetector(
             onTap: () {
               print("Edit clicked");
@@ -45,7 +35,12 @@ class CompanyBasicProfileDetail extends StatelessWidget {
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
                     placeHolder: "Name",
-                    value: name,
+                    value: company.name,
+                    onPressUpdate: (value, values) {
+                      print(value);
+                      company.name = value!;
+                      onPressUpdate(company);
+                    },
                     //   values: company.emails,//["+92-317 7936365"],
                     // isPhoneNumber: true,
                   ),
@@ -61,7 +56,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
         ),
         InfoDisplayListComponent(
           placeHolder: "Email",
-          value: emails,
+          value: company.emails,
           icon: GestureDetector(
             onTap: () {
               print("Edit clicked");
@@ -70,8 +65,14 @@ class CompanyBasicProfileDetail extends StatelessWidget {
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
                     placeHolder: "Emails",
+                      textInputType: TextInputType.emailAddress,
                     //value: name,
-                    values: emails, //["+92-317 7936365"],
+                    values: company.emails, //["+92-317 7936365"],
+                    onPressUpdate: (value, values) {
+                      print(values);
+                      company.emails = values!;
+                      onPressUpdate(company);
+                    },
                     // isPhoneNumber: true,
                   ),
                 ),
@@ -86,7 +87,8 @@ class CompanyBasicProfileDetail extends StatelessWidget {
         ),
         InfoDisplayListComponent(
           placeHolder: "Phone No",
-          value: phoneNumbers,
+          
+          value: company.phoneNumbers,
           icon: GestureDetector(
             onTap: () {
               print("Edit clicked");
@@ -94,10 +96,16 @@ class CompanyBasicProfileDetail extends StatelessWidget {
                 context: context,
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
-                    placeHolder: "Emails",
+                    placeHolder: "Phone Numbers",
+                      textInputType: TextInputType.phone,
                     //value: name,
-                    values: ["+92-317 7936365"],
-                     isPhoneNumber: true,
+                    values: company.phoneNumbers,
+                    isPhoneNumber: true,
+                    onPressUpdate: (value, values) {
+                      print(values);
+                      company.phoneNumbers = values!;
+                      onPressUpdate(company);
+                    },
                   ),
                 ),
               );
@@ -111,7 +119,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
         ),
         InfoDisplayComponent(
           placeHolder: "Description",
-          value: companyDescription!,
+          value: company.companyDescription!,
           icon: GestureDetector(
             onTap: () {
               print("Edit clicked");
@@ -120,7 +128,11 @@ class CompanyBasicProfileDetail extends StatelessWidget {
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
                     placeHolder: "Description",
-                    value: companyDescription,
+                    value: company.companyDescription,
+                    onPressUpdate: (value, values) {
+                      company.companyDescription = value!;
+                      onPressUpdate(company);
+                    },
                     //   values: company.emails,//["+92-317 7936365"],
                     // isPhoneNumber: true,
                   ),

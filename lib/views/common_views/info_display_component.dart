@@ -38,7 +38,7 @@ class InfoDisplayComponent extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(color: Colors.blueAccent)),
               child: Text(
-                value != "" ? value : "Not Available",
+                value != ""  ? value : "Not Available",
                 style:
                     ThemeTextStyles.informationDisplayPlaceHolderThemeTextStyle,
               ),
