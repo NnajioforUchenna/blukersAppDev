@@ -57,10 +57,10 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Personal Information",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
@@ -136,10 +136,10 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                     SizedBox(height: height * 0.05),
                     // Add birthdate inputs (Day, Month, Year)
                     // You can adjust these fields based on your design preferences.
-                    Text(
+                    const Text(
                       "Birthdate",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
