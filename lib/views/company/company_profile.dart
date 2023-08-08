@@ -30,6 +30,32 @@ class _CompanyProfileState extends State<CompanyProfile> {
           : SingleChildScrollView(
               child: Column(
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          await up.signOut();
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil("/", (route) => false);
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 16),
+                          decoration: BoxDecoration(
+                              color: ThemeColors.primaryThemeColor,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Text(
+                            "Logout",
+                            style: ThemeTextStyles
+                                .informationDisplayPlaceHolderThemeTextStyle
+                                .apply(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   Text(
                     "Profile",
                     style: ThemeTextStyles.headingThemeTextStyle
@@ -111,7 +137,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                 InkWell(
                                                   onTap: () async {
                                                     String? imageUrl =
-                                                        await up.ontapCamera("/profile_images/");
+                                                        await up.ontapCamera(
+                                                            "/profile_images/");
                                                     if (imageUrl != "") {
                                                       await up
                                                           .updateUserProfilePic(
@@ -169,7 +196,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                 InkWell(
                                                   onTap: () async {
                                                     String? imageUrl =
-                                                        await up.ontapGallery("/profile_images/");
+                                                        await up.ontapGallery(
+                                                            "/profile_images/");
                                                     if (imageUrl != "") {
                                                       await up
                                                           .updateUserProfilePic(
@@ -283,6 +311,13 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       }
                     },
                   ),
+                  // Positioned(
+                  //   bottom: 10,
+                  //   right: 10,
+                  //   child: Container(
+                  //     child: Text("Logout"),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

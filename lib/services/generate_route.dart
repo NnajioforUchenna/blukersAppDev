@@ -1,6 +1,11 @@
+import 'package:bulkers/services/authentication_wrapper.dart';
 import 'package:bulkers/views/chat_message_screen.dart';
 import 'package:bulkers/views/company/company_basic_info.dart';
 import 'package:bulkers/views/company_chat.dart';
+import 'package:bulkers/views/worker/create_worker_profile_component/online_resume_additional_detail_screen.dart';
+import 'package:bulkers/views/worker/create_worker_profile_component/reference_page.dart';
+import 'package:bulkers/views/worker/online_resume_screen.dart';
+import 'package:bulkers/views/worker/pdf_view_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../views/auth/login.dart';
@@ -19,8 +24,7 @@ import '../views/worker/worker_profile.dart';
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(
-          builder: (context) =>  LandingPage());
+      return MaterialPageRoute(builder: (context) => AuthenticationWrapper());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
@@ -29,8 +33,19 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const MyJobs());
     case '/myJobPosts':
       return MaterialPageRoute(builder: (context) => const MyJobPosts());
-      case '/companyBasicInfo':
+    case '/companyBasicInfo':
       return MaterialPageRoute(builder: (context) => const CompanyBasicInfo());
+    case '/onlineResumeScreen':
+      return MaterialPageRoute(
+          builder: (context) => const OnlineResumeScreen());
+    case '/onlineResumeAdditionalDetailScreen':
+      return MaterialPageRoute(
+          builder: (context) => const OnlineResumeAdditionalDetailScreen(),
+          settings: settings);
+           case '/pdfViewScreen':
+      return MaterialPageRoute(
+          builder: (context) => const ResumeScreen(),
+          settings: settings);
     case '/workerProfile':
       return MaterialPageRoute(builder: (context) => const WorkerProfile());
     case '/companyChat':

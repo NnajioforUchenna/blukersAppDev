@@ -77,8 +77,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'Montserrat',
         ),
-        home: AuthenticationWrapper(),
+        // home: AuthenticationWrapper(),
         onGenerateRoute: generateRoute,
+        initialRoute: "/",
         navigatorKey: navigatorKey,
       ),
     );

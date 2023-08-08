@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/services/user_shared_preferences_services.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -53,6 +54,8 @@ class UserProvider with ChangeNotifier {
 
   Future<void> signOut() async {
     await _auth.signOut();
+    _appUser = null;
+    notifyListeners();
   }
 
   int currentPageIndex = 0;
@@ -180,7 +183,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> updateUserBasicInfo(
-      String displayName, String ext, String phoneNo, String language) async {
+      String displayName, String phoneNo, String language) async {
     EasyLoading.show(
       status: 'Updating your Basic Info...',
       maskType: EasyLoadingMaskType.black,
@@ -188,14 +191,14 @@ class UserProvider with ChangeNotifier {
 
     Map<String, dynamic> info = {
       "displayName": displayName,
-      "phoneNumber": "$ext-$phoneNo",
+      "phoneNumber": phoneNo,
       "language": language,
     };
 
     await UserDataProvider.updateUserBasicInfo(info, _appUser!.uid);
 
     _appUser!.displayName = displayName;
-    _appUser!.phoneNumber = "$ext-$phoneNo";
+    _appUser!.phoneNumber = phoneNo;
     _appUser!.language = language;
 
     EasyLoading.dismiss();
@@ -228,6 +231,21 @@ class UserProvider with ChangeNotifier {
     await UserDataProvider.updateCompanyInfo(company.toMap(), _appUser!.uid);
 
     _appUser!.company = company;
+
+    EasyLoading.dismiss();
+    notifyListeners();
+    // setRegisterPageIndex();
+  }
+
+  Future<void> updateWorkerInfo(Worker worker) async {
+    EasyLoading.show(
+      status: 'Updating your Basic Info...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    await UserDataProvider.updateWorkerInfo(worker.toMap(), _appUser!.uid);
+
+    _appUser!.worker = worker;
 
     EasyLoading.dismiss();
     notifyListeners();
@@ -285,13 +303,13 @@ class UserProvider with ChangeNotifier {
       EasyLoading.dismiss();
 
       // Navigate to the home page.
-      if (userRole == "worker") {
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/jobs', (Route<dynamic> route) => false);
-      } else {
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/workers', (Route<dynamic> route) => false);
-      }
+      // if (userRole == "worker") {
+      //   Navigator.pushNamedAndRemoveUntil(
+      //       context, '/jobs', (Route<dynamic> route) => false);
+      // } else {
+      //   Navigator.pushNamedAndRemoveUntil(
+      //       context, '/workers', (Route<dynamic> route) => false);
+      // }
     } else {
       // Print and display any errors that occurred during login.
       print("Error: ${result['error']}");
@@ -388,5 +406,76 @@ class UserProvider with ChangeNotifier {
     EasyLoading.dismiss();
     return imageUrl;
     // imagePicker();
+  }
+
+  Future<String?> onTapPdf(String storagePath) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowMultiple: true,
+      allowedExtensions: [
+        'pdf',
+        /* 'xlsx',
+        'xlsm',
+        'xls',
+        'ppt',
+        'pptx',
+        'doc',
+        'docx',
+        'txt',
+        'text',
+        'rtf',
+        'zip',*/
+      ],
+    );
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      EasyLoading.show(
+        status: 'Uploading your Profile Pic...',
+        maskType: EasyLoadingMaskType.black,
+      );
+      // List<PlatformFile> fileList = result.files;
+
+      // debugPrint("FILES : $file");
+      // filepath.value = file.name.toString();
+      // final kb = file.size / 1024;
+      // final kbVal = kb.ceil().toInt();
+      // final mb = kb / 1024;
+      // fileSize?.value = kbVal;
+      // filesize = mb;
+
+      // if (kDebugMode) {
+      //   print(filesize);
+      // }
+
+      // debugPrint("filepath $filepath FileSize ${fileSize?.value}  $kbVal");
+      // {
+      //   PlatformFile file = result.files.first;
+      //   // List<PlatformFile> fileList = result.files;
+
+      //   debugPrint("FILES : $file");
+      //   filepath.value = file.name.toString();
+      //   fileSize?.value = file.size.ceil().toInt();
+      //   isPdfUploadError.value = false;
+
+      //   debugPrint("filepath $filepath FileSize $fileSize");
+      // }
+
+      final File fileForFirebase = File(file.path!);
+
+      String? imageUrl = await UserDataProvider.uploadImage(
+          flow: fileForFirebase, path: "$storagePath${appUser!.uid}");
+
+      // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
+      //fbImageUrl.value = imageUrl ?? "";
+      await Future.delayed(Duration(seconds: 2));
+
+      EasyLoading.dismiss();
+      return imageUrl;
+      // return pdfUrl;
+    } else {
+      // User canceled the picker
+      return "";
+    }
   }
 }

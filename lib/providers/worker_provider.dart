@@ -45,6 +45,12 @@ class WorkerProvider with ChangeNotifier {
     });
   }
 
+  void addNewReference() {
+    // Get all workers for the job with the given jobId.
+    references.add({});
+    notifyListeners();
+  }
+
   void addInterestingWorker(AppUser? appUser, Worker worker) {
     CompanyDataProvider.addInterestingWorker(appUser, worker);
   }

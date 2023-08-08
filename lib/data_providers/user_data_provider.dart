@@ -138,6 +138,22 @@ class UserDataProvider {
     });
   }
 
+   static Future<void> updateWorkerInfo(
+      Map<String, dynamic> info, String uid) async {
+    CollectionReference appUserCollection = firestore.collection('AppUsers');
+     CollectionReference companyCollection = firestore.collection('Workers');
+    await appUserCollection
+        .doc(uid)
+        .update({"worker": info}).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+      await companyCollection
+        .doc(uid)
+        .update(info).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
     static Future<void> updateUserProfilePic(
       Map<String, dynamic> info, String uid) async {
     CollectionReference appUserCollection = firestore.collection('AppUsers');
@@ -227,7 +243,7 @@ class UserDataProvider {
       //  File(image.path);
       //Upload to Firebase
       var snapshot = firebaseStorage.ref().child(path!).putFile(flow).snapshot;
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(Duration(seconds: 5));
       String downloadUrl = await snapshot.ref.getDownloadURL();
       // setState(() {
       imageUrl = downloadUrl;

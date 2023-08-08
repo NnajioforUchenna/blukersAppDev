@@ -1,44 +1,28 @@
+import 'package:bulkers/models/worker.dart';
 import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/utils/styles/index.dart';
 import 'package:bulkers/views/common_views/info_edit_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class EditBasicProfile extends StatefulWidget {
-  const EditBasicProfile(
-      {super.key,
-      required this.displayName,
-      required this.phoneNo,
-      required this.language});
-  final String displayName;
-  final String phoneNo;
-  final String language;
+class EditWorkerBasicProfile extends StatefulWidget {
+  const EditWorkerBasicProfile(
+      {super.key,});
+
 
   @override
-  State<EditBasicProfile> createState() => _EditBasicProfileState();
+  State<EditWorkerBasicProfile> createState() => _EditBasicProfileState();
 }
 
-class _EditBasicProfileState extends State<EditBasicProfile> {
-  String displayName = "";
-  String phoneNo = "";
-  String ext = "";
-  String language = "";
-  @override
-  void initState() {
-    displayName = widget.displayName;
-    if (widget.phoneNo != "") {
-      var extPlusPhone = widget.phoneNo.split("-");
-      ext = extPlusPhone[0];
-      phoneNo = extPlusPhone[1];
-    }
-    language = widget.language;
-    // TODO: implement initState
-    super.initState();
-  }
+class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
+ 
+
 
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
+    Worker worker = up.appUser!.worker!;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -56,31 +40,39 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
           height: 20,
         ),
         InfoEditComponent(
-          placeHolder: "Display Name",
-          value: displayName,
+          placeHolder: "First Name",
+          value: worker.firstName,
           action: TextInputAction.next,
           onChangeValue: (value) {
-            displayName = value;
+            worker.firstName = value;
           },
         ),
         InfoEditComponent(
-          placeHolder: "Phone No",
-          value: phoneNo,
+          placeHolder: "Middle Name",
+          value: worker.middleName ?? "",
           action: TextInputAction.next,
           onChangeValue: (value) {
-            phoneNo = value;
+            worker.middleName = value;
           },
-          ext: ext,
-          onChangeExtValue: (value) {
-            ext = value;
-          },
+          // ext: ext,
+          // onChangeExtValue: (value) {
+          //   ext = value;
+          // },
         ),
         InfoEditComponent(
-          placeHolder: "language",
-          value: language,
+          placeHolder: "Last Name",
+          value: worker.lastName,
           action: TextInputAction.done,
           onChangeValue: (value) {
-            language = value;
+            worker.lastName = value;
+          },
+        ),
+        InfoEditComponent(
+          placeHolder: "Description",
+          value: worker.workerBriefDescription ?? "",
+          action: TextInputAction.done,
+          onChangeValue: (value) {
+            worker.workerBriefDescription = value;
           },
         ),
         const SizedBox(
@@ -91,8 +83,7 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
           children: [
             GestureDetector(
               onTap: () async {
-                await up.updateUserBasicInfo(
-                    displayName,  phoneNo, language);
+                await up.updateWorkerInfo(worker);
                 Navigator.of(context).pop();
               },
               child: Container(
