@@ -297,7 +297,7 @@ class UserProvider with ChangeNotifier {
       if (appUser4DB != null) {
         UserSharedPreferencesServices.create(appUser4DB);
       }
-      if (kIsWeb) {
+      if (!kIsWeb) {
         await NotificationService.registerNotification(
             _appUser!.uid, chatProvider);
         NotificationService.configLocalNotification();
