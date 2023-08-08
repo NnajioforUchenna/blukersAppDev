@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/providers/chat_provider.dart';
+import 'package:bulkers/services/notification_service.dart';
 import 'package:bulkers/services/user_shared_preferences_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
@@ -97,9 +99,11 @@ class UserProvider with ChangeNotifier {
       // Store the user data in the database.
       UserDataProvider.registerUserToDatabase(appUser);
       //
-      // await NotificationService.registerNotification(
-      //     _appUser!.uid, chatProvider);
-      // NotificationService.configLocalNotification();
+      if (!kIsWeb) {
+        await NotificationService.registerNotification(
+            _appUser!.uid, chatProvider);
+        NotificationService.configLocalNotification();
+      }
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
 
