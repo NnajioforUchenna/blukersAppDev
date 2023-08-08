@@ -94,9 +94,10 @@ class WorkerTimeLine extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final step = workerSteps[index];
           var indicatorSize = 40.0;
-          var beforeLineStyle = LineStyle(
-              // color: Colors.white.withOpacity(0.8),
-              color: ThemeColors.secondaryThemeColor);
+          var beforeLineStyle = const LineStyle(
+            // color: Colors.white.withOpacity(0.8),
+            color: ThemeColors.secondaryThemeColor,
+          );
           LineStyle afterLineStyle =
               const LineStyle(color: ThemeColors.grey1ThemeColor);
 
