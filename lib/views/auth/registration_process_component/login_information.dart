@@ -54,10 +54,10 @@ class _LoginInformationState extends State<LoginInformation> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Create Your Account",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
