@@ -32,7 +32,6 @@ class DisplayIndustries extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
               child: Text(
-                // AppLocalizations.of(context)!.selectAnIndustry,
                 AppLocalizations.of(context)!.selectAnIndustry,
                 textAlign: TextAlign.center,
                 style: ThemeTextStyles.headerThemeTextStyle,
