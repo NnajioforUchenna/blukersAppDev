@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../../providers/user_provider.dart';
 import '../../../../utils/styles/index.dart';
@@ -14,18 +15,18 @@ const deliverySteps = [
 
 const List<Icon> icons = [
   Icon(
-    Icons.login,
-    color: Colors.white,
+    UniconsLine.key_skeleton_alt,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.person,
-    color: Colors.white,
+    UniconsLine.info_circle,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.contact_phone,
-    color: Colors.white,
+    UniconsLine.postcard,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
 ];
@@ -48,11 +49,11 @@ class SignUpTimeline extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(8),
       constraints: const BoxConstraints(maxHeight: 140),
-      decoration: BoxDecoration(
-        color: ThemeColors
-            .primaryThemeColor, // Set the background color of the container
-        borderRadius: BorderRadius.circular(20), // Set the border radius
-      ),
+      // decoration: BoxDecoration(
+      //   color: ThemeColors
+      //       .primaryThemeColor, // Set the background color of the container
+      //   borderRadius: BorderRadius.circular(20), // Set the border radius
+      // ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         controller: _scrollController,
@@ -60,20 +61,24 @@ class SignUpTimeline extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final step = deliverySteps[index];
           var indicatorSize = 30.0;
-          var beforeLineStyle = LineStyle(
-            color: Colors.white.withOpacity(0.8),
+          var beforeLineStyle = const LineStyle(
+            // color: Colors.white.withOpacity(0.8),
+            color: ThemeColors.secondaryThemeColor,
           );
-          LineStyle afterLineStyle = const LineStyle(color: Color(0xFF747888));
+          LineStyle afterLineStyle =
+              const LineStyle(color: ThemeColors.grey1ThemeColor);
 
           _DeliveryStatus status;
 
           if (index < currentStep) {
             status = _DeliveryStatus.done;
-            afterLineStyle = const LineStyle(color: Colors.white);
+            afterLineStyle =
+                const LineStyle(color: ThemeColors.secondaryThemeColor);
           } else if (index > currentStep) {
             status = _DeliveryStatus.todo;
             indicatorSize = 20;
-            beforeLineStyle = const LineStyle(color: Color(0xFF747888));
+            beforeLineStyle =
+                const LineStyle(color: ThemeColors.grey1ThemeColor);
           } else {
             // afterLineStyle = const LineStyle(color: Colors.white);
             status = _DeliveryStatus.doing;
@@ -141,7 +146,7 @@ class _EndChildDelivery extends StatelessWidget {
                     fontSize: 16,
                     color: current
                         ? ThemeColors.secondaryThemeColor
-                        : Colors.white,
+                        : ThemeColors.grey1ThemeColor,
                   ),
                 ),
               ),
@@ -165,10 +170,10 @@ class _IndicatorDelivery extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white,
+            color: ThemeColors.secondaryThemeColor,
           ),
           child: const Center(
-            child: Icon(Icons.check, color: Color(0xFF5D6173)),
+            child: Icon(Icons.check, color: Colors.white),
           ),
         );
       case _DeliveryStatus.doing:
@@ -192,7 +197,7 @@ class _IndicatorDelivery extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Color(0xFF747888),
+            color: ThemeColors.grey1ThemeColor,
           ),
           child: Center(
             child: Container(

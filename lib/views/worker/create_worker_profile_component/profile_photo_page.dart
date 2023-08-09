@@ -32,10 +32,10 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 "Upload Profile Photo",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.deepOrangeAccent,
                   fontSize: 25,
                   fontWeight: FontWeight.w600,

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../services/validation.dart';
+import '../../../utils/styles/theme_colors.dart';
 import '../../../providers/user_provider.dart';
 import '../common_widget/auth_input.dart';
 import '../common_widget/label_button.dart';
@@ -54,10 +55,10 @@ class _LoginInformationState extends State<LoginInformation> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Create Your Account",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -133,14 +134,13 @@ class _LoginInformationState extends State<LoginInformation> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Text(
-                      "Are you registering as a company or an individual? ",
+                    const Text(
+                      "Are you a worker or a company? ",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        // color: Colors.green.shade800,
-                        color: Colors.grey.shade600,
+                        color: ThemeColors.secondaryThemeColor,
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         height: 1.25,
                       ),
                     ),
@@ -186,7 +186,7 @@ class _LoginInformationState extends State<LoginInformation> {
                                   isFormComplete();
                                 });
                               },
-                              activeColor: const Color.fromRGBO(0, 130, 66, 1),
+                              activeColor: ThemeColors.primaryThemeColor,
                             ),
                           ),
                           Expanded(
@@ -211,7 +211,7 @@ class _LoginInformationState extends State<LoginInformation> {
                                   isFormComplete();
                                 });
                               },
-                              activeColor: const Color.fromRGBO(0, 130, 66, 1),
+                              activeColor: ThemeColors.secondaryThemeColor,
                             ),
                           ),
                         ],

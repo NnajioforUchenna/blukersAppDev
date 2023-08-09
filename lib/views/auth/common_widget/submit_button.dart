@@ -15,6 +15,7 @@ class SubmitButton extends StatelessWidget {
       onTap: isDisabled ? null : onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
+        height: 55,
         padding: const EdgeInsets.symmetric(vertical: 12),
         alignment: Alignment.center,
         decoration: BoxDecoration(

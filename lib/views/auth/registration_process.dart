@@ -18,12 +18,13 @@ class RegistrationProcess extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Center(
-          child: Text(
-            'Registration Process',
-            style: ThemeTextStyles.headerThemeTextStyle,
-          ),
-        ),
+        elevation: 0,
+        // title: const Center(
+        //   child: Text(
+        //     'Registration Process',
+        //     style: ThemeTextStyles.headerThemeTextStyle,
+        //   ),
+        // ),
       ),
       body: Center(
         child: SizedBox(

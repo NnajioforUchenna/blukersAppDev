@@ -23,10 +23,10 @@ class ResumePage extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Text(
+            const Text(
               "Upload Profile Your Resume",
               textAlign: TextAlign.center,
-              style: GoogleFonts.ebGaramond(
+              style: TextStyle(
                 color: Colors.deepOrangeAccent,
                 fontSize: 25,
                 fontWeight: FontWeight.w600,

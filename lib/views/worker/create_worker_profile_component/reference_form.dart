@@ -33,7 +33,7 @@ class ReferenceForm extends StatelessWidget {
             Text(
               "Reference Form ${index + 1}",
               textAlign: TextAlign.center,
-              style: GoogleFonts.ebGaramond(
+              style: const TextStyle(
                 color: Colors.deepOrangeAccent,
                 fontSize: 25,
                 fontWeight: FontWeight.w600,
