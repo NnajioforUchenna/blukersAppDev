@@ -91,7 +91,7 @@ class Worker {
       'firstName': firstName,
       'lastName': lastName,
     };
-
+    if (middleName != null) map['middleName'] = middleName;
     if (profilePhotoUrl != null) map['profilePhotoUrl'] = profilePhotoUrl;
     if (emails.isNotEmpty) map['emails'] = emails;
     if (industryIds != null) map['industryIds'] = industryIds;

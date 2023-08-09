@@ -1,26 +1,463 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:bulkers/models/worker.dart';
+import 'package:bulkers/utils/styles/theme_colors.dart';
+import 'package:bulkers/utils/styles/theme_text_styles.dart';
+import 'package:bulkers/views/common_views/industry_jobs_dropdown.dart';
+import 'package:bulkers/views/common_views/info_display_component.dart';
+import 'package:bulkers/views/common_views/profile_dialog.dart';
+import 'package:bulkers/views/common_views/profile_section.dart';
+import 'package:bulkers/views/company/profile_components/edit_basic_profile.dart';
+import 'package:bulkers/views/company/profile_components/user_basic_profile_details.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/user_provider.dart';
 import '../auth/common_widget/login_or_register.dart';
 import '../common_views/page_template/page_template.dart';
 
-class WorkerProfile extends StatelessWidget {
+class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
+
+  @override
+  State<WorkerProfile> createState() => _WorkerProfileState();
+}
+
+class _WorkerProfileState extends State<WorkerProfile> {
+  bool showBasicInfo = false;
+  bool showIndustries = false;
+  bool showPdfResume = false;
+
+  Future<File?> viewPdf(String pdfUrl) async {
+    EasyLoading.show(
+      status: 'Settingup Resume...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    Completer<File> completer = Completer();
+    if (kDebugMode) {
+      print("Start download file from internet!");
+    }
+    try {
+      // "https://berlin2017.droidcon.cod.newthinking.net/sites/global.droidcon.cod.newthinking.net/files/media/documents/Flutter%20-%2060FPS%20UI%20of%20the%20future%20%20-%20DroidconDE%2017.pdf";
+      // final url = "https://pdfkit.org/docs/guide.pdf";
+      var url = pdfUrl;
+      if (url == null || url == "") {
+        return null;
+      }
+      final filename = url.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      var response = await request.close();
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      var dir = await getApplicationDocumentsDirectory();
+      if (kDebugMode) {
+        print("Download files");
+      }
+      if (kDebugMode) {
+        print("${dir.path}/$filename");
+      }
+      File file = File("${dir.path}/$filename");
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+      // loader = false;
+    } catch (e) {
+      throw Exception('Error parsing asset file!');
+    }
+    EasyLoading.dismiss();
+    return completer.future;
+  }
 
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
+
     return PageTemplate(
-        child: up.appUser == null
-            ? const LoginOrRegister()
-            : const Column(
+      child: up.appUser == null
+          ? LoginOrRegister()
+          : SingleChildScrollView(
+              child: Column(
                 children: [
-                  Row(children: [
-                    Spacer(),
-                    // CreateYourProfile(),
-                  ]),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          await up.signOut();
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil("/", (route) => false);
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 16),
+                          decoration: BoxDecoration(
+                              color: ThemeColors.primaryThemeColor,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Text(
+                            "Logout",
+                            style: ThemeTextStyles
+                                .informationDisplayPlaceHolderThemeTextStyle
+                                .apply(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    "Profile",
+                    style: ThemeTextStyles.headingThemeTextStyle
+                        .apply(color: Colors.black),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Stack(
+                    children: [
+                      SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: up.appUser!.photoUrl != null &&
+                                  up.appUser!.photoUrl != ""
+                              ? FadeInImage.assetNetwork(
+                                  placeholder: "assets/images/loading.jpeg",
+                                  image: up.appUser!.photoUrl!,
+                                  //width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset("assets/images/mockImage.png"),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet<void>(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                  //  height: 450,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(45),
+                                      topRight: Radius.circular(45),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        const SizedBox(height: 30),
+                                        Text(
+                                          'Change Avatar',
+                                          style: ThemeTextStyles
+                                              .headingThemeTextStyle,
+                                        ),
+                                        // const SizedBox(height: 20),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 18, vertical: 18),
+                                          child: Container(
+                                            //  height: 170,
+                                            width: 500,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: const Color(0xffF3ECFF),
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(5),
+                                              ),
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () async {
+                                                    String? imageUrl =
+                                                        await up.ontapCamera(
+                                                            "/profile_images/");
+                                                    if (imageUrl != "") {
+                                                      await up
+                                                          .updateUserProfilePic(
+                                                              imageUrl!);
+                                                    }
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Container(
+                                                    height: 70,
+                                                    width: 70,
+                                                    margin: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 100,
+                                                        vertical: 10),
+                                                    decoration: BoxDecoration(
+                                                      color: ThemeColors
+                                                          .blukersBlueThemeColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              80),
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.camera_alt,
+                                                      size: 40,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "Take photo",
+                                                  style: ThemeTextStyles
+                                                      .headingThemeTextStyle,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 18),
+                                          child: Container(
+                                            //   height: 120,
+                                            width: 500,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: const Color(0xffF3ECFF),
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(5),
+                                              ),
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () async {
+                                                    String? imageUrl =
+                                                        await up.ontapGallery(
+                                                            "/profile_images/");
+                                                    if (imageUrl != "") {
+                                                      await up
+                                                          .updateUserProfilePic(
+                                                              imageUrl!);
+                                                    }
+                                                    Navigator.of(context).pop();
+                                                    print(imageUrl);
+                                                  },
+                                                  child: Container(
+                                                    height: 70,
+                                                    width: 70,
+                                                    margin: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 100,
+                                                        vertical: 10),
+                                                    decoration: BoxDecoration(
+                                                      color: ThemeColors
+                                                          .blukersBlueThemeColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              80),
+                                                    ),
+                                                    child: const Image(
+                                                      image: AssetImage(
+                                                          "assets/images/galleryImage.png"),
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "Form gallery",
+                                                  style: ThemeTextStyles
+                                                      .headingThemeTextStyle,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: const CircleAvatar(
+                            radius: 15,
+                            backgroundColor: ThemeColors.blukersBlueThemeColor,
+                            child: Icon(
+                              Icons.edit,
+                              size: 15,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    up.appUser!.displayName ?? "My Profile",
+                    style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
+                        .apply(color: Colors.black),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  ProfileSection(
+                    heading: "Basic Information",
+                    icon: Icons.edit_outlined,
+                    showBasicInfo: showBasicInfo,
+                    onClickSection: () {
+                      print("Section clicked");
+                      setState(() {
+                        showBasicInfo = !showBasicInfo;
+                      });
+                    },
+                    onClickEdit: () {
+                      print("Edit clicked");
+                      showDialog(
+                        context: context,
+                        builder: (context) => ProfileDialog(
+                          child: EditBasicProfile(
+                            displayName: up.appUser!.displayName ?? "",
+                            phoneNo: up.appUser!.phoneNumber ?? "",
+                            language: up.appUser!.language ?? "",
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  if (showBasicInfo)
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: UserBasicProfileDetail(
+                        displayName: up.appUser!.displayName ?? "Not Available",
+                        email: up.appUser!.email ?? "Not Available",
+                        phoneNo: up.appUser!.phoneNumber ?? "Not Available",
+                        language: up.appUser!.language ?? "Not Available",
+                      ),
+                    ),
+                  ProfileSection(
+                    heading: "Industries / Jobs",
+                    icon: Icons.edit_outlined,
+                    showBasicInfo: showIndustries,
+                    showEditIcon: false,
+                    onClickSection: () {
+                      print("Section clicked");
+                      setState(() {
+                        showIndustries = !showIndustries;
+                      });
+                    },
+                  ),
+                  if (showIndustries && up.appUser!.worker != null)
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: InfoDisplayComponent(
+                        placeHolder: "Industires / Jobs",
+                        value:
+                            "Industries: ${up.appUser!.worker!.industryIds != null ? up.appUser!.worker!.industryIds!.join(", ") : ""}\n\nJobs: ${up.appUser!.worker!.jobIds != null ? up.appUser!.worker!.jobIds!.join(", ") : ""}",
+                        icon: GestureDetector(
+                          onTap: () {
+                            print("Edit clicked");
+                            showDialog(
+                              context: context,
+                              builder: (context) => ProfileDialog(
+                                  child: IndustryJobsDropdownComponent(
+                                initialIndustries:
+                                    up.appUser!.worker!.industryIds ?? [],
+                                initialJobs: up.appUser!.worker!.jobIds ?? [],
+                                onPressUpdate:
+                                    (selectedIndustries, selectedJobs) async {
+                                  print(selectedIndustries);
+                                  if (up.appUser!.worker != null) {
+                                    up.appUser!.worker!.industryIds =
+                                        selectedIndustries;
+                                    up.appUser!.worker!.jobIds = selectedJobs;
+                                    up.updateWorkerInfo(up.appUser!.worker!);
+                                  }
+                                  Navigator.of(context).pop();
+                                },
+                              )),
+                            );
+                          },
+                          child: Icon(
+                            Icons.edit_outlined,
+                            color: Colors.grey[700],
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ProfileSection(
+                    heading: "Online Resume",
+                    icon: Icons.arrow_forward_ios,
+                    onClickSection: () {
+                      print("Section clicked/ Edit Clicked");
+                      if (up.appUser!.worker != null) {
+                        Navigator.pushNamed(context, "/onlineResumeScreen");
+                      }
+                    },
+                  ),
+                  ProfileSection(
+                    heading: "Pdf Resume",
+                    icon: Icons.edit_outlined,
+                    showBasicInfo: showPdfResume,
+                    onClickSection: () {
+                      print("Section clicked");
+                      setState(() {
+                        showPdfResume = !showPdfResume;
+                      });
+                    },
+                    onClickEdit: () async {
+                      String? pdfUrl = await up.onTapPdf("/pdf-resume/");
+                      if (up.appUser!.worker != null && pdfUrl != "") {
+                        up.appUser!.worker!.pdfResumeUrl = pdfUrl;
+                        await up.updateWorkerInfo(up.appUser!.worker!);
+                      }
+                      print("Edit clicked");
+                    },
+                  ),
+                  if (showPdfResume)
+                    GestureDetector(
+                      onTap: () async {
+                        File? file =
+                            await viewPdf(up.appUser!.worker!.pdfResumeUrl!);
+                        if (file != null) {
+                          Uint8List bytes = await file.readAsBytes();
+                          Navigator.of(context).pushNamed("/pdfViewScreen",
+                              arguments: {"remotePDFpath": bytes});
+                        }
+
+                        print(file);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 16),
+                        decoration: BoxDecoration(
+                            // color: Colors.blue[50],
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.blueAccent)),
+                        child: Text("My Resume.pdf"),
+                      ),
+                    )
                 ],
-              ));
+              ),
+            ),
+    );
   }
 }

@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/models/job_post.dart';
 import 'package:bulkers/providers/chat_provider.dart';
+import 'package:bulkers/services/notification_service.dart';
 import 'package:bulkers/services/user_shared_preferences_services.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../common_files/constants.dart';
 import '../data_providers/app_user_stream_service.dart';
@@ -59,6 +65,8 @@ class UserProvider with ChangeNotifier {
 
   Future<void> signOut() async {
     await _auth.signOut();
+    _appUser = null;
+    notifyListeners();
   }
 
   void setJobTimelineStep(int step) {
@@ -107,9 +115,11 @@ class UserProvider with ChangeNotifier {
       // Store the user data in the database.
       UserDataProvider.registerUserToDatabase(appUser);
       //
-      // await NotificationService.registerNotification(
-      //     _appUser!.uid, chatProvider);
-      // NotificationService.configLocalNotification();
+      if (!kIsWeb) {
+        await NotificationService.registerNotification(
+            _appUser!.uid, chatProvider);
+        NotificationService.configLocalNotification();
+      }
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
 
@@ -178,7 +188,7 @@ class UserProvider with ChangeNotifier {
         postalCode: postalCode,
         country: country);
 
-    String completePhoneNumber = ext + phoneNumber;
+    String completePhoneNumber = "$ext-$phoneNumber";
 
     UserDataProvider.updateContactInformation(
         completePhoneNumber, address, appUser!.uid);
@@ -189,6 +199,76 @@ class UserProvider with ChangeNotifier {
 
     EasyLoading.dismiss();
     setRegisterPageIndex();
+  }
+
+  Future<void> updateUserBasicInfo(
+      String displayName, String phoneNo, String language) async {
+    EasyLoading.show(
+      status: 'Updating your Basic Info...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    Map<String, dynamic> info = {
+      "displayName": displayName,
+      "phoneNumber": phoneNo,
+      "language": language,
+    };
+
+    await UserDataProvider.updateUserBasicInfo(info, _appUser!.uid);
+
+    _appUser!.displayName = displayName;
+    _appUser!.phoneNumber = phoneNo;
+    _appUser!.language = language;
+
+    EasyLoading.dismiss();
+    notifyListeners();
+    // setRegisterPageIndex();
+  }
+
+  Future<void> updateUserProfilePic(String imageUrl) async {
+    EasyLoading.show(
+      status: 'Updating your Basic Info...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    await UserDataProvider.updateUserProfilePic(
+        {"photoUrl": imageUrl}, _appUser!.uid);
+
+    _appUser!.photoUrl = imageUrl;
+
+    EasyLoading.dismiss();
+    notifyListeners();
+    // setRegisterPageIndex();
+  }
+
+  Future<void> updateCompanyInfo(Company company) async {
+    EasyLoading.show(
+      status: 'Updating your Basic Info...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    await UserDataProvider.updateCompanyInfo(company.toMap(), _appUser!.uid);
+
+    _appUser!.company = company;
+
+    EasyLoading.dismiss();
+    notifyListeners();
+    // setRegisterPageIndex();
+  }
+
+  Future<void> updateWorkerInfo(Worker worker) async {
+    EasyLoading.show(
+      status: 'Updating your Basic Info...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    await UserDataProvider.updateWorkerInfo(worker.toMap(), _appUser!.uid);
+
+    _appUser!.worker = worker;
+
+    EasyLoading.dismiss();
+    notifyListeners();
+    // setRegisterPageIndex();
   }
 
   void navigate(BuildContext context, int index) {
@@ -232,23 +312,24 @@ class UserProvider with ChangeNotifier {
       if (appUser4DB != null) {
         UserSharedPreferencesServices.create(appUser4DB);
       }
-
-      // await NotificationService.registerNotification(
-      //     _appUser!.uid, chatProvider);
-      // NotificationService.configLocalNotification();
+      if (!kIsWeb) {
+        await NotificationService.registerNotification(
+            _appUser!.uid, chatProvider);
+        NotificationService.configLocalNotification();
+      }
       notifyListeners();
 
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
 
       // Navigate to the home page.
-      if (userRole == "worker") {
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/jobs', (Route<dynamic> route) => false);
-      } else {
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/workers', (Route<dynamic> route) => false);
-      }
+      // if (userRole == "worker") {
+      //   Navigator.pushNamedAndRemoveUntil(
+      //       context, '/jobs', (Route<dynamic> route) => false);
+      // } else {
+      //   Navigator.pushNamedAndRemoveUntil(
+      //       context, '/workers', (Route<dynamic> route) => false);
+      // }
     } else {
       // Print and display any errors that occurred during login.
       print("Error: ${result['error']}");
@@ -293,7 +374,7 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  isJobPostApplied(String jobPostId) {
+  bool isJobPostApplied(String jobPostId) {
     return appUser?.worker?.appliedJobPostIds?.contains(jobPostId) ??
         false; // Change to JobPostId
   }
@@ -343,5 +424,130 @@ class UserProvider with ChangeNotifier {
   void updateUI(String workerId) {
     appUser?.company?.interestingWorkersIds?.add(workerId);
     notifyListeners();
+  }
+
+  Future<String?> ontapGallery(String storagePath) async {
+    ImagePicker picker = ImagePicker();
+    XFile? gallery =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    if (gallery == null) {
+      return "";
+    }
+    //Get.back();
+    EasyLoading.show(
+      status: 'Uploading your Profile Pic...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    String path = gallery.path;
+    File image = File(path);
+    String? imageUrl = await UserDataProvider.uploadImage(
+        flow: image, path: "$storagePath${appUser!.uid}");
+
+    // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
+    //fbImageUrl.value = imageUrl ?? "";
+    await Future.delayed(Duration(seconds: 2));
+
+    EasyLoading.dismiss();
+    return imageUrl;
+    // imagePicker();
+  }
+
+  Future<String?> ontapCamera(String storagePath) async {
+    ImagePicker picker = ImagePicker();
+    XFile? gallery = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 15,
+        preferredCameraDevice: CameraDevice.front);
+    if (gallery == null) {
+      return "";
+    }
+    //Get.back();
+    EasyLoading.show(
+      status: 'Uploading your Profile Pic...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    String path = gallery.path;
+    File image = File(path);
+    String? imageUrl = await UserDataProvider.uploadImage(
+        flow: image, path: "$storagePath${appUser!.uid}");
+
+    // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
+    //fbImageUrl.value = imageUrl ?? "";
+    await Future.delayed(Duration(seconds: 2));
+
+    EasyLoading.dismiss();
+    return imageUrl;
+    // imagePicker();
+  }
+
+  Future<String?> onTapPdf(String storagePath) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowMultiple: true,
+      allowedExtensions: [
+        'pdf',
+        /* 'xlsx',
+        'xlsm',
+        'xls',
+        'ppt',
+        'pptx',
+        'doc',
+        'docx',
+        'txt',
+        'text',
+        'rtf',
+        'zip',*/
+      ],
+    );
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      EasyLoading.show(
+        status: 'Uploading your Profile Pic...',
+        maskType: EasyLoadingMaskType.black,
+      );
+      // List<PlatformFile> fileList = result.files;
+
+      // debugPrint("FILES : $file");
+      // filepath.value = file.name.toString();
+      // final kb = file.size / 1024;
+      // final kbVal = kb.ceil().toInt();
+      // final mb = kb / 1024;
+      // fileSize?.value = kbVal;
+      // filesize = mb;
+
+      // if (kDebugMode) {
+      //   print(filesize);
+      // }
+
+      // debugPrint("filepath $filepath FileSize ${fileSize?.value}  $kbVal");
+      // {
+      //   PlatformFile file = result.files.first;
+      //   // List<PlatformFile> fileList = result.files;
+
+      //   debugPrint("FILES : $file");
+      //   filepath.value = file.name.toString();
+      //   fileSize?.value = file.size.ceil().toInt();
+      //   isPdfUploadError.value = false;
+
+      //   debugPrint("filepath $filepath FileSize $fileSize");
+      // }
+
+      final File fileForFirebase = File(file.path!);
+
+      String? imageUrl = await UserDataProvider.uploadImage(
+          flow: fileForFirebase, path: "$storagePath${appUser!.uid}");
+
+      // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
+      //fbImageUrl.value = imageUrl ?? "";
+      await Future.delayed(Duration(seconds: 2));
+
+      EasyLoading.dismiss();
+      return imageUrl;
+      // return pdfUrl;
+    } else {
+      // User canceled the picker
+      return "";
+    }
   }
 }

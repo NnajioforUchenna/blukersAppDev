@@ -1,4 +1,5 @@
 import 'package:bulkers/views/common_views/landing_page_components/landing_page.dart';
+import 'package:bulkers/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ class AuthenticationWrapper extends StatelessWidget {
           : const Jobs();
     } else {
       return LandingPage();
+      // return Login();
     }
   }
 }
