@@ -66,18 +66,25 @@ class ChatProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  sendMessage(String message, String sentBy, String roomId) async {
+  sendMessage(String message, String sentById, String roomId, String sentToId,
+      String sentByName) async {
     ChatMessage chatMessage = ChatMessage(
         message: message,
         sentAt: DateTime.now(),
-        sentBy: sentBy,
+        sentBy: sentById,
         roomId: roomId);
+
+    await ChatDataProvider.sendMessage(
+        chatMessage: chatMessage,
+        roomId: roomId,
+        sentToId: sentToId,
+        sentByName: sentByName);
+    await ChatDataProvider.updateLastMEssage(message, roomId);
     int index = _chatRooms.indexWhere((element) => element.id == roomId);
+
     _chatRooms[index].lastMessage = message;
 
-    await ChatDataProvider.sendMessage(chatMessage, roomId);
-    await ChatDataProvider.updateLastMEssage(message, roomId);
-    notifyListeners();
+    notifyListners();
   }
 
   Stream<QuerySnapshot> getMessagesByGroupId(String groupId) {

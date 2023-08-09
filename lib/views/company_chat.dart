@@ -28,12 +28,17 @@ class CompanyChat extends StatelessWidget {
                       print("tap");
                       chatProvider.activeRoomId =
                           chatProvider.chatRooms[index].id;
+                      List<String> sentToId = chatProvider
+                          .chatRooms[index].members
+                          .where((element) => element != up.appUser!.uid)
+                          .toList();
                       Navigator.pushNamed(context, '/chat-message', arguments: {
                         "roomId": chatProvider.chatRooms[index].id,
                         "roomName": up.appUser!.uid ==
                                 chatProvider.chatRooms[index].members[0]
                             ? chatProvider.chatRooms[index].names[1]
                             : chatProvider.chatRooms[index].names[0],
+                          "sentToId": sentToId[0],
                       });
                     },
                   );
