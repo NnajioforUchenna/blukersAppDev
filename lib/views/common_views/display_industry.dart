@@ -13,7 +13,7 @@ class DisplayIndustry extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: IndustryHeadPanel(industry: industry),
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.grey.shade200,
       collapsedBackgroundColor: Colors.white,
       children: [
         const Padding(
