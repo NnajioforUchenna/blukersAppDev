@@ -13,8 +13,9 @@ class WorkerDataProvider {
     CollectionReference workers = db.collection('workers');
 
     // Query the collection: Fetch documents where jobId is in the jobPositionIds field
+    print(jobId);
     QuerySnapshot querySnapshot =
-        await workers.where('jobPositionIds', arrayContains: jobId).get();
+        await workers.where('jobIds', arrayContains: jobId).get();
 
     // Convert the documents to a list of maps and return
     return querySnapshot.docs
@@ -163,5 +164,63 @@ class WorkerDataProvider {
     }
 
     return workers;
+  }
+
+  static Future<List<Worker>> getWorkers(
+      String nameRelated, String locationRelated) async {
+    final CollectionReference workersCollection =
+        FirebaseFirestore.instance.collection('workers');
+
+    // Query for each field separately
+    var queries = [
+      workersCollection.where('firstName', isEqualTo: nameRelated),
+      workersCollection.where('middleName', isEqualTo: nameRelated),
+      workersCollection.where('lastName', isEqualTo: nameRelated),
+      workersCollection.where('addresses.street', isEqualTo: locationRelated),
+      workersCollection.where('addresses.city', isEqualTo: locationRelated),
+      workersCollection.where('addresses.state', isEqualTo: locationRelated),
+      workersCollection.where('addresses.country', isEqualTo: locationRelated),
+    ];
+
+    // Execute all queries and combine the results
+    var allWorkers = <Worker>[];
+    for (var query in queries) {
+      final snapshot = await query.get();
+      final workers = snapshot.docs.map((doc) {
+        return Worker.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
+      allWorkers.addAll(workers);
+    }
+
+    // Optionally, remove duplicates
+    var uniqueWorkers = <Worker>{};
+    uniqueWorkers.addAll(allWorkers);
+    allWorkers = uniqueWorkers.toList();
+
+    return allWorkers;
+  }
+
+  static getWorkersFromList(List<String> applicantIds) async {
+    List<Worker> result = [];
+
+    final CollectionReference workersRef = db.collection('workers');
+
+    // Iterating through each applicantId and retrieving the corresponding Worker
+    for (String applicantId in applicantIds) {
+      try {
+        DocumentSnapshot documentSnapshot =
+            await workersRef.doc(applicantId).get();
+        if (documentSnapshot.exists) {
+          Map<String, dynamic> data =
+              documentSnapshot.data() as Map<String, dynamic>;
+          result.add(Worker.fromMap(
+              data)); // Using the fromMap method of the Worker class
+        }
+      } catch (e) {
+        print("Error fetching worker: $e");
+      }
+    }
+
+    return result;
   }
 }

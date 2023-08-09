@@ -5,7 +5,8 @@ String getTimeAgo(String dateCreated) {
 
   DateTime createdDate;
   try {
-    createdDate = DateTime.parse(dateCreated);
+    createdDate = DateTime.parse(
+        DateTime.fromMillisecondsSinceEpoch(int.parse(dateCreated)).toString());
   } catch (e) {
     return "Invalid date format";
   }

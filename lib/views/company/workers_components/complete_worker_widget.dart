@@ -14,15 +14,18 @@ class CompleteWorkerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive.isDesktop(context)
-        ? buildWebContentWorkers(workers)
-        : ListViewWorkers(
-            workers: workers,
-          );
+    return ConstrainedBox(
+        constraints:
+            BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+        child: Responsive.isDesktop(context)
+            ? buildWebContentWorkers(workers, context)
+            : ListViewWorkers(
+                workers: workers,
+              ));
   }
 }
 
-buildWebContentWorkers(List<Worker> workers) {
+buildWebContentWorkers(List<Worker> workers, context) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

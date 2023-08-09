@@ -9,6 +9,7 @@ import '../views/common_views/landing_page_components/landing_page.dart';
 import '../views/company/company_profile.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
 import '../views/company/my_job_posts.dart';
+import '../views/company/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
 import '../views/company/workers.dart';
 import '../views/worker/create_worker_profile_component/create_worker_profile.dart';
@@ -45,6 +46,8 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
     case '/createWorkerProfile':
       return MaterialPageRoute(
           builder: (context) => const CreateWorkerProfile());
+    case '/applicants':
+      return MaterialPageRoute(builder: (context) => const Applicants());
     case '/createCompanyProfile':
       return MaterialPageRoute(
           builder: (context) => const CreateCompanyProfile());

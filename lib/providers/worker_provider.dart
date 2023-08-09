@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -35,6 +36,7 @@ class WorkerProvider with ChangeNotifier {
   }
 
   void getWorkersByJobID(String jobId) {
+    print(jobId);
     // Get all workers for the job with the given jobId.
     WorkerDataProvider.getWorkersByJobID(jobId).then((workers) {
       selectedWorkers = workers.map((worker) {
@@ -46,7 +48,10 @@ class WorkerProvider with ChangeNotifier {
   }
 
   void addInterestingWorker(AppUser? appUser, Worker worker) {
+    // Update Companies Data
     CompanyDataProvider.addInterestingWorker(appUser, worker);
+    // Update AppUSER details
+    UserDataProvider.addInterestingWorker(appUser!.uid, worker.workerId);
   }
 
   //  Create Worker Profile Parameters
@@ -231,12 +236,48 @@ class WorkerProvider with ChangeNotifier {
   List<Worker> appliedWorkers = [];
 
   Future<void> setDisplayLists(JobPost jobPost) async {
-    if (jobPost.jobPostId.isEmpty) {
+    if (jobPost.jobPostId!.isEmpty) {
       return;
     }
 
     appliedWorkers = await WorkerDataProvider.getWorkerLists(
-        jobPost.jobPostId, 'applicantUserIds');
+        jobPost!.jobPostId!, 'applicantUserIds');
+    notifyListeners();
+  }
+
+  // Searching Parameters
+  bool isSearching = false;
+  Future<void> searchWorkers(String nameRelated, String locationRelated) async {
+    selectedWorkers = [];
+    selectedWorkers =
+        await WorkerDataProvider.getWorkers(nameRelated, locationRelated);
+    if (selectedWorkers.isEmpty) {
+      EasyLoading.showError(
+          'No Workers Found with $nameRelated $locationRelated');
+    } else {
+      selectedWorker = selectedWorkers.first;
+      isSearching = true;
+      notifyListeners();
+    }
+  }
+
+  // initialize the Applicant list
+  List<Worker> applicants = [];
+  Future<bool> getApplicants(List<String> list) async {
+    // Clearing existing applicants if any
+    applicants.clear();
+    applicants = await WorkerDataProvider.getWorkersFromList(list);
+    notifyListeners();
+    if (applicants.isEmpty) {
+      EasyLoading.showError('No Applicants Found');
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  void setSearching(bool bool) {
+    isSearching = bool;
     notifyListeners();
   }
 

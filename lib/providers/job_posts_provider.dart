@@ -1,6 +1,7 @@
 import 'package:bulkers/models/app_user.dart';
 import 'package:bulkers/views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
@@ -14,11 +15,6 @@ class JobPostsProvider with ChangeNotifier {
 
   JobPost? selectedJobPost;
 
-  // trying to build UI
-  JobPostsProvider() {
-    getJobPostsByJobID('agriculturaltechnician');
-  }
-
   Map<String, JobPost> get jobPosts => _jobPosts;
 
   List<JobPost> selectedJobPosts = [];
@@ -26,6 +22,7 @@ class JobPostsProvider with ChangeNotifier {
 
   void getJobPostsByJobID(String jobId) {
     // Get all jobPosts for the job with the given jobId.
+    print(jobId);
     JobPostsDataProvider.getJobPostsByJobID(jobId).then((jobPosts) {
       selectedJobPosts = jobPosts.map((jobPost) {
         return JobPost.fromMap(jobPost);
@@ -47,12 +44,13 @@ class JobPostsProvider with ChangeNotifier {
     } else {
       newJobPostData['companyId'] = appUser.uid;
       newJobPostData['companyName'] = appUser.company?.name;
-      newJobPostData['companyImageUrl'] = appUser.company?.logoUrl;
+      newJobPostData['companyLogo'] = appUser.company?.logoUrl;
       Navigator.pushNamed(context, '/createJobPost');
     }
   }
 
   void setIndustryAndJob(String industryId, String jobId) {
+    print(jobId);
     newJobPostData['industryIds'] = [industryId];
     newJobPostData['jobIds'] = [jobId];
     setJobPostPageNext();
@@ -126,14 +124,18 @@ class JobPostsProvider with ChangeNotifier {
         country: Country);
 
     newJobPostData['addresses'] = [address.toMap()];
+    newJobPostData['address'] = address.toMap();
     createJopPost();
     setJobPostPageNext();
   }
 
-  void createJopPost() {
+  Future<void> createJopPost() async {
     print('newJobPostData: $newJobPostData');
+
+    // make sure that the jobPost accepts JobPost Model
     JobPost jobPost = JobPost.fromMap(newJobPostData);
-    JobPostsDataProvider.createJobPost(jobPost);
+    jobPost.dateCreated = DateTime.now().millisecondsSinceEpoch;
+    await JobPostsDataProvider.createJobPost(jobPost);
     notifyListeners();
     newJobPostData = {};
     jobPostCurrentPageIndex = 0;
@@ -147,14 +149,33 @@ class JobPostsProvider with ChangeNotifier {
   Future<List<JobPost>> getSavedJobPostIds(String uid) async {
     try {
       final ids = await JobPostsDataProvider.getSavedJobPostIds(uid);
-      print(ids);
       final jobPosts = await JobPostsDataProvider.getJobPostsByCompanyIds(ids);
       return jobPosts;
     } catch (error) {
-      print('An error occurred: $error');
       // Handle the error as needed, perhaps by returning an empty list or throwing a specific exception.
       return [];
     }
+  }
+
+  // Searching Parameters for Job Posts
+  bool isSearching = false;
+  Future<void> searchJobPosts(
+      String nameRelated, String locationRelated) async {
+    selectedJobPosts = [];
+    selectedJobPosts =
+        await JobPostsDataProvider.searchJobPosts(nameRelated, locationRelated);
+    if (selectedJobPosts.isEmpty) {
+      EasyLoading.showError('No Jobs Found with $nameRelated $locationRelated');
+    } else {
+      selectedJobPost = selectedJobPosts.first;
+      isSearching = true;
+      notifyListeners();
+    }
+  }
+
+  void setSearching(bool bool) {
+    isSearching = bool;
+    notifyListeners();
   }
 
   // Future<List<JobPost>> getSavedJobPostIds(String uid) {

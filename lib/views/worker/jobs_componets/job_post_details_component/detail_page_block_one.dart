@@ -18,10 +18,8 @@ class DetailPageBlockOne extends StatelessWidget {
     // Get screen width
     double width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
-    bool isJobApplied = !up.isJobPostApplied(jobPost.companyId ??
-        ''); // Todo remember to change this to companyId to jobPostId
-    bool isJobSaved = up.isJobPostSaved(jobPost.companyId ??
-        ''); // Todo remember to change this to companyId to jobPostId
+    bool isJobApplied = !up.isJobPostApplied(jobPost.jobPostId ?? '');
+    bool isJobSaved = up.isJobPostSaved(jobPost.jobPostId ?? '');
 
     return SingleChildScrollView(
       child: Padding(

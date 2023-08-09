@@ -20,17 +20,22 @@ class JobPostsDataProvider {
   }
 
   static Future<void> createJobPost(JobPost jobPost) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference jobPosts = db.collection('JobPosts');
     CollectionReference companies = db.collection('Companies');
 
-    // Step 1: Push the JobPost to Firestore
-    DocumentReference jobPostDoc = await jobPosts
-        .add(jobPost.toMap()); // Assuming JobPost has a toMap method
-
-    // Step 2: Retrieve the document ID of the newly created job post
+    // Create a document reference and get the ID
+    DocumentReference jobPostDoc = jobPosts.doc();
     String jobPostId = jobPostDoc.id;
 
-    // Step 3: Add the retrieved document ID to the jobPostIds field in the relevant Companies document
+    // Set the jobPostId inside the jobPost
+    jobPost.jobPostId = jobPostId;
+
+    // Add the JobPost to Firestore using the created reference
+    await jobPostDoc
+        .set(jobPost.toMap()); // Assuming JobPost has a toMap method
+
+    // Add the retrieved document ID to the jobPostIds field in the relevant Companies document
     DocumentReference companyDoc = companies.doc(jobPost.companyId);
     await companyDoc.update({
       'jobPostIds': FieldValue.arrayUnion([jobPostId])
@@ -67,5 +72,35 @@ class JobPostsDataProvider {
           .toList());
     }
     return jobPosts;
+  }
+
+  static searchJobPosts(String nameRelated, String locationRelated) async {
+    CollectionReference jobPosts = db.collection('JobPosts');
+
+    var queries = [
+      jobPosts.where('companyName', isEqualTo: nameRelated),
+      jobPosts.where('skills', arrayContains: nameRelated),
+      jobPosts.where('jobTitle', isEqualTo: nameRelated),
+      jobPosts.where('addresses.street', isEqualTo: locationRelated),
+      jobPosts.where('addresses.city', isEqualTo: locationRelated),
+      jobPosts.where('addresses.state', isEqualTo: locationRelated),
+      jobPosts.where('addresses.country', isEqualTo: locationRelated),
+    ];
+
+    var allJobPosts = <JobPost>[];
+    for (var query in queries) {
+      final snapshot = await query.get();
+      final jobPosts = snapshot.docs.map((doc) {
+        return JobPost.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
+      allJobPosts.addAll(jobPosts);
+    }
+
+    // Optionally, remove duplicates
+    var uniqueJobPosts = <JobPost>{};
+    uniqueJobPosts.addAll(allJobPosts);
+    allJobPosts = uniqueJobPosts.toList();
+
+    return allJobPosts;
   }
 }

@@ -104,8 +104,10 @@ class AppUser {
     if (address != null) data['address'] = address!.toMap();
     if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
     if (userRole != null) data['userRole'] = userRole;
-    if (workerTimelineStep != null) data['timelineStep'] = workerTimelineStep;
-    if (companyTimelineStep != null) data['timelineStep'] = companyTimelineStep;
+    if (workerTimelineStep != null)
+      data['workerTimelineStep'] = workerTimelineStep;
+    if (companyTimelineStep != null)
+      data['companyTimelineStep'] = companyTimelineStep;
 
     return data;
   }
@@ -126,8 +128,8 @@ class AppUser {
       isContactInformation: map['isContactInformation'],
       isRegistrationComplete: map['isRegistrationComplete'],
       userRole: map['userRole'],
-      workerTimelineStep: map['timelineStep'],
-      companyTimelineStep: map['timelineStep'],
+      workerTimelineStep: map['workerTimelineStep'],
+      companyTimelineStep: map['companyTimelineStep'],
       worker: map['worker'] != null
           ? Worker.fromMap(map['worker'])
           : null, // Convert Map to Worker object
@@ -155,8 +157,8 @@ class AppUser {
       isContactInformation: map['isContactInformation'],
       isRegistrationComplete: map['isRegistrationComplete'],
       userRole: map['userRole'],
-      workerTimelineStep: map['timelineStep'],
-      companyTimelineStep: map['timelineStep'],
+      workerTimelineStep: map['workerTimelineStep'],
+      companyTimelineStep: map['companyTimelineStep'],
       worker: map['worker'] != null
           ? Worker.fromMap(map['worker'])
           : null, // Convert Map to Worker object

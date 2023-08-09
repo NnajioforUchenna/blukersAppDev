@@ -55,6 +55,7 @@ dependencies:
   shared_preferences: ^2.2.0
   unicons: ^2.1.1
   flutter_blurhash: ^0.7.0
+  flutter_spinkit: ^5.2.0
 
 
 

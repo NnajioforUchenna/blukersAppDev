@@ -43,7 +43,10 @@ class WorkerDetailBlockOne extends StatelessWidget {
                           builder: (context) =>
                               const DisplayWorkerTimelineDialog());
                     } else {
-                      wp.addInterestingWorker(up.appUser, worker);
+                      if (!isWorkerSaved) {
+                        up.updateUI(worker.workerId);
+                        wp.addInterestingWorker(up.appUser, worker);
+                      }
                     }
                   },
                   icon: Icon(

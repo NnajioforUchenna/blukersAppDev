@@ -62,6 +62,7 @@ class UserProvider with ChangeNotifier {
   }
 
   void setJobTimelineStep(int step) {
+    _appUser!.workerTimelineStep = step;
     UserDataProvider.updateTimelineStep(_appUser!.uid, step);
   }
 
@@ -93,16 +94,9 @@ class UserProvider with ChangeNotifier {
         isLoginInformation: true,
         registeredAs: userType,
         userRole: userType,
+        workerTimelineStep: 1,
+        companyTimelineStep: 1,
       );
-
-      if (userType == "worker") {
-        appUser.workerTimelineStep = 1;
-      }
-      ;
-      if (userType == "company") {
-        appUser.companyTimelineStep = 1;
-      }
-      ;
 
       // Set the _appUser
       _appUser = appUser;
@@ -123,7 +117,6 @@ class UserProvider with ChangeNotifier {
       setRegisterPageIndex();
     } else {
       // Print and display any errors that occurred during registration.
-      print("Error: ${result['error']}");
       EasyLoading.dismiss();
       EasyLoading.showError(result['error'],
           duration: const Duration(seconds: 3));
@@ -308,15 +301,14 @@ class UserProvider with ChangeNotifier {
   void applyForJobPost(JobPost jobPost) {
     print(jobPost.toString());
     // Update UI interFace
-    appUser?.worker?.appliedJobPostIds
-        ?.add(jobPost.companyId); // Todo Change companyId to jobPostId
+    appUser?.worker?.appliedJobPostIds?.add(jobPost!.jobPostId!);
     notifyListeners();
     // Persist data to database
     UserDataProvider.updateWorkerAppliedJobPostIds(
         appUser!.worker!.appliedJobPostIds!, appUser!.uid);
     // update JobPost Records
     JobPostsDataProvider.updateJobPostAppliedWorkerIds(
-        jobPost.companyId, appUser!.uid); // Todo Change companyId to jobPostId
+        jobPost!.jobPostId!, appUser!.uid);
   }
 
   bool isJobPostSaved(String jobPostId) {
@@ -326,13 +318,11 @@ class UserProvider with ChangeNotifier {
 
   void saveJobPost(JobPost jobPost) {
     // Update UI interFace
-    appUser?.worker?.savedJobPostIds
-        ?.add(jobPost.companyId); // Todo Change companyId to jobPostId
+    appUser?.worker?.savedJobPostIds?.add(jobPost!.jobPostId!);
     notifyListeners();
     // Persist data to database
     UserDataProvider.updateWorkerSavedJobPostIds(
         appUser!.worker!.savedJobPostIds!, appUser!.uid);
-// Todo Change companyId to jobPostId
   }
 
   bool isWorkerSaved(String workerId) {
@@ -348,5 +338,10 @@ class UserProvider with ChangeNotifier {
       Navigator.pushNamedAndRemoveUntil(
           context, '/workers', (Route<dynamic> route) => false);
     }
+  }
+
+  void updateUI(String workerId) {
+    appUser?.company?.interestingWorkersIds?.add(workerId);
+    notifyListeners();
   }
 }

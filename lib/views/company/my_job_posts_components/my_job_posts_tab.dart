@@ -1,6 +1,6 @@
 import 'package:bulkers/models/job_post.dart';
 import 'package:bulkers/providers/company_provider.dart';
-import 'package:bulkers/providers/worker_provider.dart';
+import 'package:bulkers/providers/job_posts_provider.dart';
 import 'package:bulkers/views/worker/jobs_componets/complete_job_posts_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ class MyJobPostsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CompanyProvider cp = Provider.of<CompanyProvider>(context);
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    JobPostsProvider jpp = Provider.of<JobPostsProvider>(context);
 
     return StreamBuilder<List<JobPost>>(
       stream: cp

@@ -17,11 +17,14 @@ class CompleteJobPostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive.isDesktop(context)
-        ? buildWebContent(jobPosts)
-        : ListViewJobs(
-            jobPosts: jobPosts,
-          );
+    return ConstrainedBox(
+        constraints:
+            BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+        child: Responsive.isDesktop(context)
+            ? buildWebContent(jobPosts)
+            : ListViewJobs(
+                jobPosts: jobPosts,
+              ));
   }
 }
 

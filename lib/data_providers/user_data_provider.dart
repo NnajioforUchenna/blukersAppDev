@@ -172,7 +172,7 @@ class UserDataProvider {
   static void updateTimelineStep(String uid, int step) {
     CollectionReference appUserCollection = firestore.collection('AppUsers');
     appUserCollection.doc(uid).update({
-      'timelineStep': step,
+      'workerTimelineStep': step,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
@@ -193,6 +193,19 @@ class UserDataProvider {
       'worker.savedJobPostIds': list,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static Future<void> addInterestingWorker(String uid, String workerId) async {
+    final CollectionReference usersCollection =
+        FirebaseFirestore.instance.collection('AppUsers');
+
+    // Reference to the user's document
+    final DocumentReference userDoc = usersCollection.doc(uid);
+
+    // Update the interestingWorkersIds field by adding workerId
+    await userDoc.update({
+      'company.interestingWorkersIds': FieldValue.arrayUnion([workerId])
     });
   }
 }

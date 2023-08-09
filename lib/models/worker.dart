@@ -19,7 +19,7 @@ class Worker {
   List<String>? skillIds;
   List<String>? activeMemberships;
   WorkStatus? workStatus;
-  List<Address>? addresses;
+  List<Address>? addresses = [];
   DateTime? birthdate;
   DateTime? dateCreated;
   List<WorkExperience>? workExperiences;
@@ -82,7 +82,8 @@ class Worker {
         isBasicProfileCompleted = true;
 
   get timeAgo => getTimeAgo(dateCreated.toString());
-  get location => addresses?.first.location ?? 'Location not set';
+  get location =>
+      addresses!.isNotEmpty ? addresses?.first.location : 'Location not set';
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {

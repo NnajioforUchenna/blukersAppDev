@@ -11,32 +11,33 @@ enum JobType { fullTime, partTime, contract, specifiedTime }
 enum SalaryType { hourly, daily, weekly, biWeekly, monthly, yearly }
 
 class JobPost {
-  final String jobPostId;
-  final String companyId;
-  final String? companyName;
-  final String jobTitle;
-  final String jobDescription;
-  final String? companyLogo;
-  final String requirements;
-  final List<Skill> skills;
-  final JobType jobType;
-  final String? contractDuration;
-  final SalaryType? salaryType;
-  final double? salaryAmount;
-  final List<Address>? addresses;
-  final List<String>? applicantUserIds;
-  final List<String>? declineUserIds;
-  final List<String>? interviewedUserIds;
-  final List<String>? hiredUserIds;
-  final int numberOfPositionsAvailable;
-  final JobUrgencyLevel? jobUrgencyLevel;
-  final JobPostStatus? jobPostStatus;
-  final DateTime? dateCreated;
-  final String? schedule;
+  String? jobPostId = '';
+  String companyId;
+  String? companyName;
+  String jobTitle;
+  String jobDescription;
+  String? companyLogo;
+  String requirements;
+  List<Skill> skills;
+  JobType jobType;
+  String? contractDuration;
+  SalaryType? salaryType;
+  double? salaryAmount;
+  List<Address>? addresses;
+  Address? address;
+  List<String>? applicantUserIds = [];
+  List<String>? declineUserIds;
+  List<String>? interviewedUserIds;
+  List<String>? hiredUserIds;
+  int numberOfPositionsAvailable;
+  JobUrgencyLevel? jobUrgencyLevel;
+  JobPostStatus? jobPostStatus;
+  int? dateCreated;
+  String? schedule;
 
   // New fields
-  final List<String> industryIds;
-  final List<String> jobIds;
+  List<String> industryIds;
+  List<String> jobIds;
 
   JobPost({
     required this.jobPostId,
@@ -63,6 +64,7 @@ class JobPost {
     required this.jobIds, // Updated
     this.dateCreated,
     this.schedule,
+    this.address,
   });
 
   get timeAgo => getTimeAgo(dateCreated.toString());
@@ -82,10 +84,11 @@ class JobPost {
       'jobIds': jobIds,
       'jobPostId': jobPostId,
       'schedule': schedule ?? 'Schedule not set',
-      'dateCreated': dateCreated ?? DateTime.now(),
     };
 
     // Check and add only if not null
+    if (dateCreated != null) data['dateCreated'] = dateCreated;
+
     if (companyLogo != null) data['companyLogo'] = companyLogo;
     if (skills != null && skills.isNotEmpty)
       data['skills'] = skills.map((skill) => skill.toMap()).toList();
@@ -104,12 +107,22 @@ class JobPost {
 
     if (jobPostStatus != null) data['jobPostStatus'] = jobPostStatus!.index;
     if (salaryType != null) data['salaryType'] = salaryType!.index;
+    if (address != null) data['address'] = address!.toMap();
 
     return data;
   }
 
   static JobPost fromMap(Map<String, dynamic> map) {
+    int mapDateCreated = 0;
+    try {
+      mapDateCreated =
+          map['dateCreated'] ?? DateTime.now().millisecondsSinceEpoch;
+    } catch (e) {
+      mapDateCreated = DateTime.now().millisecondsSinceEpoch;
+    }
+
     return JobPost(
+      dateCreated: mapDateCreated,
       jobPostId: map['jobPostId'] ?? '',
       companyId: map['companyId'] ?? '',
       companyName: map['companyName'] ?? '',
@@ -137,7 +150,7 @@ class JobPost {
           : null,
       applicantUserIds: map['applicantUserIds'] != null
           ? List<String>.from(map['applicantUserIds'])
-          : null,
+          : [],
       declineUserIds: map['declineUserIds'] != null
           ? List<String>.from(map['declineUserIds'])
           : null,
@@ -161,10 +174,7 @@ class JobPost {
           ? List<String>.from(map['industryIds'])
           : [],
       jobIds: map['jobIds'] != null ? List<String>.from(map['jobIds']) : [],
-      dateCreated: map['dateCreated'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              map['dateCreated'].millisecondsSinceEpoch)
-          : DateTime.now(),
+      address: map['address'] != null ? Address.fromMap(map['address']) : null,
     );
   }
 

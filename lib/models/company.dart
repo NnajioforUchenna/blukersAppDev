@@ -25,8 +25,9 @@ class Company {
   bool? isVerified;
   bool? isBasicProfileCompleted;
   bool? isProfileUpdateNeeded;
-  List<String>? interestingWorkersIds;
+  List<String>? interestingWorkersIds = [];
   List<SocialMediaPlatform>? socialMediaPlatforms;
+  DateTime? dateCreated;
 
   Company(
       {required this.companyId,
@@ -41,6 +42,7 @@ class Company {
       this.addresses,
       this.yearFounded,
       this.totalEmployees,
+      this.dateCreated,
       this.website,
       this.industryIds,
       this.jobPostIds,
@@ -113,9 +115,11 @@ class Company {
     if (isProfileUpdateNeeded != null) {
       map['isProfileUpdateNeeded'] = isProfileUpdateNeeded;
     }
-    if (interestingWorkersIds != null) {
+    if (interestingWorkersIds!.isNotEmpty) {
       map['interestingWorkersIds'] = interestingWorkersIds;
     }
+
+    if (dateCreated != null) map['dateCreated'] = dateCreated;
 
     return map;
   }
@@ -158,7 +162,7 @@ class Company {
           : null,
       companyBadgeIds: map['companyBadgeIds'] != null
           ? List<String>.from(map['companyBadgeIds'])
-          : null,
+          : [],
       companyCertificationIds: map['companyCertificationIds'] != null
           ? List<String>.from(map['companyCertificationIds'])
           : null,
@@ -176,6 +180,9 @@ class Company {
       isProfileUpdateNeeded: map['isProfileUpdateNeeded'],
       interestingWorkersIds: map['interestingWorkersIds'] != null
           ? List<String>.from(map['interestingWorkersIds'])
+          : [],
+      dateCreated: map['dateCreated'] != null
+          ? DateTime.parse(map['dateCreated'])
           : null,
     );
   }

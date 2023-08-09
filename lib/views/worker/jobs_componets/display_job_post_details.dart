@@ -1,8 +1,11 @@
+import 'package:bulkers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/job_post.dart';
 import '../../../utils/styles/theme_colors.dart';
 import '../../common_views/loading_page.dart';
+import 'job_post_details_component/detail_page_block_five.dart';
 import 'job_post_details_component/detail_page_block_four.dart';
 import 'job_post_details_component/detail_page_block_one.dart';
 import 'job_post_details_component/detail_page_block_three.dart';
@@ -53,6 +56,7 @@ class _JobPostDetailsWidgetState extends State<JobPostDetailsWidget>
   @override
   Widget build(BuildContext context) {
     JobPost? jobPost = widget.jobPost;
+    UserProvider up = Provider.of<UserProvider>(context);
 
     return jobPost == null
         ? Center(child: SizedBox(height: 100, width: 100, child: LoadingPage()))
@@ -80,6 +84,9 @@ class _JobPostDetailsWidgetState extends State<JobPostDetailsWidget>
                         DetailPageBlockTwo(jobPost: jobPost),
                         DetailPageBlockThree(jobPost: jobPost),
                         DetailPageBlockFour(jobPost: jobPost),
+                        if (up.appUser != null &&
+                            up.appUser!.uid == jobPost.companyId)
+                          DetailPageBlockFive(jobPost: jobPost),
                       ],
                     ),
                   ),
