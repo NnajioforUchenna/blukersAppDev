@@ -8,6 +8,9 @@ import 'package:provider/provider.dart';
 import 'my_job_post_component/loading_my_job_posts.dart';
 import 'my_job_post_component/no_job_posts.dart';
 
+import 'package:bulkers/views/common_views/components/icon_text_404.dart';
+import 'package:unicons/unicons.dart';
+
 class MyJobPostsTab extends StatelessWidget {
   const MyJobPostsTab({super.key});
 
@@ -25,7 +28,10 @@ class MyJobPostsTab extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return NoMyJobPosts();
+          // return NoMyJobPosts();
+          return IconText404(
+              text: "You have not created any job post",
+              icon: UniconsLine.file_alt);
         } else {
           List<JobPost> jobPosts = snapshot.data!;
           return CompleteJobPostWidget(jobPosts: jobPosts);

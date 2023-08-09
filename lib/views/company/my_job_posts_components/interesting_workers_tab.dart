@@ -8,6 +8,9 @@ import '../workers_components/complete_worker_widget.dart';
 import 'interesting_workers_components/loading_interesting_workers.dart';
 import 'interesting_workers_components/no_interesting_worker.dart';
 
+import 'package:bulkers/views/common_views/components/icon_text_404.dart';
+import 'package:unicons/unicons.dart';
+
 class InterestingWorkersTab extends StatelessWidget {
   const InterestingWorkersTab({super.key});
 
@@ -23,7 +26,8 @@ class InterestingWorkersTab extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const NoInterestingWorkers();
+          // return const NoInterestingWorkers();
+          return IconText404(text: "No workers", icon: UniconsLine.constructor);
         } else {
           List<Worker> workers = snapshot.data!;
           return CompleteWorkerWidget(workers: workers);

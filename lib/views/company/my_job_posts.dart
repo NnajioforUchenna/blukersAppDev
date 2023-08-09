@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/user_provider.dart';
+import '../../utils/styles/theme_colors.dart';
 import '../common_views/worker_timeline/display_worker_timeline_dialog.dart';
 import 'my_job_posts_components/interesting_workers_tab.dart';
 import 'my_job_posts_components/my_job_posts_tab.dart';
+import 'package:unicons/unicons.dart';
 
 class MyJobPosts extends StatelessWidget {
   const MyJobPosts({super.key});
@@ -21,11 +23,20 @@ class MyJobPosts extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Company Dashboard'),
+            backgroundColor: Colors.white,
+            title: const Text(
+              'Jobs',
+              style: TextStyle(
+                  color: ThemeColors.primaryThemeColor,
+                  fontWeight: FontWeight.bold),
+            ),
             bottom: const TabBar(
+              indicatorColor: ThemeColors.primaryThemeColor,
+              labelColor: ThemeColors.primaryThemeColor,
+              unselectedLabelColor: ThemeColors.grey1ThemeColor,
               tabs: [
-                Tab(text: 'Interesting Workers'),
-                Tab(text: 'My Job Posts'),
+                Tab(text: 'Saved Workers', icon: Icon(UniconsLine.constructor)),
+                Tab(text: 'My Jobs', icon: Icon(UniconsLine.file_alt)),
               ],
             ),
             actions: [

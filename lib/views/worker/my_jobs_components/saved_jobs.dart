@@ -6,6 +6,9 @@ import '../../../providers/job_posts_provider.dart';
 import '../../../providers/user_provider.dart';
 import '../jobs_componets/complete_job_posts_widget.dart';
 
+import 'package:bulkers/views/common_views/components/icon_text_404.dart';
+import 'package:unicons/unicons.dart';
+
 class SavedJobs extends StatefulWidget {
   const SavedJobs({super.key});
 
@@ -34,17 +37,20 @@ class _SavedJobsState extends State<SavedJobs> {
       future: jobPosts,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
           return snapshot.data == null
-              ? Text('No Saved Data')
+              ? IconText404(
+                  text: "No job posts found",
+                  icon: UniconsLine.file_bookmark_alt)
               : CompleteJobPostWidget(
                   jobPosts: snapshot.data!,
                 );
         }
-        return Text('No job posts found');
+        return IconText404(
+            text: "No job posts found", icon: UniconsLine.file_bookmark_alt);
       },
     );
   }
