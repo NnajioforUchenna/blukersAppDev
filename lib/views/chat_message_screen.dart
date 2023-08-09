@@ -26,6 +26,8 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
   Widget build(BuildContext context) {
     String roomId = (ModalRoute.of(context)!.settings.arguments
         as Map<String, String>)["roomId"] as String;
+    String sentToId = (ModalRoute.of(context)!.settings.arguments
+        as Map<String, String>)["sentToId"] as String;
     String roomName = (ModalRoute.of(context)!.settings.arguments
         as Map<String, String>)["roomName"] as String;
     UserProvider up = Provider.of<UserProvider>(context);
@@ -35,10 +37,8 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
       _textController.clear();
       _scrollController.animateTo(0,
           duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-      await chatProvider.sendMessage(textMessage, up.appUser!.uid, roomId);
-      setState(() {
-        textMessage = "";
-      });
+      await chatProvider.sendMessage(
+          textMessage, up.appUser!.uid, roomId, sentToId, roomName);
     }
 
     return WillPopScope(
@@ -124,6 +124,9 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                           return;
                         }
                         onSendMessage();
+                        setState(() {
+                          textMessage = "";
+                        });
                       },
                       child: Container(
                         margin: const EdgeInsets.only(left: 8),

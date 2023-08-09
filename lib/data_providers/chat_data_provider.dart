@@ -1,6 +1,7 @@
 import 'package:bulkers/models/chat_message.dart';
 import 'package:bulkers/models/chat_room.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 
 final firestore = FirebaseFirestore.instance;
 
@@ -11,13 +12,14 @@ class ChatDataProvider {
       required String myName,
       required String recipientName,
       required String message,
-      String myLogo = "",String recipientLogo = ""}) async {
+      String myLogo = "",
+      String recipientLogo = ""}) async {
     DocumentReference chatRoomDocRef = firestore.collection('ChatRooms').doc();
     ChatRoom chatRoom = ChatRoom(
         id: chatRoomDocRef.id,
-        names: [myName,recipientName],
+        names: [myName, recipientName],
         lastMessage: message,
-        chatLogo: [myLogo,recipientLogo],
+        chatLogo: [myLogo, recipientLogo],
         members: [myUid, recipientUid]);
     await chatRoomDocRef.set(chatRoom.toMap()).catchError((error) {
       print("Error adding chat room to Firestore: $error");
@@ -38,12 +40,26 @@ class ChatDataProvider {
     return res;
   }
 
-  static sendMessage(ChatMessage chatMessage, String roomId) async {
+  static sendMessage(
+      {required ChatMessage chatMessage,
+      required String roomId,
+      required String sentByName,
+      required String sentToId}) async {
     await firestore
         .collection('ChatMessages')
         .doc(roomId)
         .collection('messages')
         .add(chatMessage.toMap());
+    var res = await http.post(
+        Uri.parse(
+            "https://sendmessagepushnotifications-v2xxr3wlvq-uc.a.run.app"),
+        body: {
+          "sentToId": sentToId,
+          "roomId": roomId,
+          "sentByName": sentByName,
+          "message": chatMessage.message
+        });
+    print(res);
   }
 
   static updateLastMEssage(String chatMessage, String roomId) async {

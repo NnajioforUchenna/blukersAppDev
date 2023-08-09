@@ -56,6 +56,7 @@ dependencies:
   unicons: ^2.1.1
   flutter_pdfview: ^1.0.1
   permission_handler:
+  http: ^1.1.0
 
 
 
