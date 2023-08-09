@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/services/on_hover.dart';
 import 'package:bulkers/services/responsive.dart';
@@ -12,6 +13,15 @@ class IndustryHeadPanel extends StatelessWidget {
   final Industry industry;
   const IndustryHeadPanel({super.key, required this.industry});
 
+  bool checkAssetExists(String assetName) {
+    try {
+      AssetImage(assetName);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
@@ -20,10 +30,24 @@ class IndustryHeadPanel extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.network(
-              industry.imageUrl!,
+            // child: Image.network(
+            //   industry.imageUrl!,
+            //   width: Responsive.isDesktop(context) ? 70 : 55,
+            // ),
+            // File("path/to/file").exists()
+            child: Image.asset(
+              // checkAssetExists(
+              //         "assets/images/industry-icons/" + industry.name + ".png")
+              //     ? "assets/images/industry-icons/" + industry.name + ".png"
+              //     : "assets/images/industry-icons/industry.png",
+              "assets/images/industry-icons/industry.png",
               width: Responsive.isDesktop(context) ? 70 : 55,
+              fit: BoxFit.cover,
             ),
+            // child: Image.network(
+            //   industry.imageUrl!,
+            //   width: Responsive.isDesktop(context) ? 70 : 55,
+            // ),
           ),
           SizedBox(width: Responsive.isDesktop(context) ? 25 : 10),
           Expanded(

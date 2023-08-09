@@ -20,9 +20,9 @@ class Jobs extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const AllSearchBar(),
-            const SizedBox(height: 10),
-            const Divider(),
+            // const AllSearchBar(),
+            // const SizedBox(height: 10),
+            // const Divider(),
             AnimatedCrossFade(
               firstChild: ip.industries.isEmpty
                   ? LoadingPage()

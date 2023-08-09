@@ -2,6 +2,7 @@ import 'package:bulkers/services/responsive.dart';
 import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'list_industries.dart';
 
@@ -28,10 +29,11 @@ class DisplayIndustries extends StatelessWidget {
             //   height: MediaQuery.of(context).size.height * 0.005,
             // ),
 
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
               child: Text(
-                "Select an Industry",
+                // AppLocalizations.of(context)!.selectAnIndustry,
+                AppLocalizations.of(context)!.selectAnIndustry,
                 textAlign: TextAlign.center,
                 style: ThemeTextStyles.headerThemeTextStyle,
               ),

@@ -1,6 +1,7 @@
 import 'package:bulkers/views/auth/common_widget/company_logo.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:unicons/unicons.dart';
 
 class LoginOrRegister extends StatelessWidget {
   const LoginOrRegister({Key? key}) : super(key: key);
@@ -13,12 +14,20 @@ class LoginOrRegister extends StatelessWidget {
         children: <Widget>[
           // Company Logo
           const CompanyLogo(),
-          const SizedBox(height: 30.0),
+          const SizedBox(height: 15.0),
+
+          Icon(
+            UniconsLine.user,
+            color: Colors.grey.shade400,
+            size: 60,
+          ),
+          const SizedBox(height: 10.0),
 
           RichText(
             text: TextSpan(
               style: const TextStyle(
-                fontSize: 16.0,
+                fontFamily: 'Montserrat',
+                fontSize: 18.0,
                 color: Colors.black,
               ),
               children: <TextSpan>[

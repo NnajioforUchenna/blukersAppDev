@@ -14,6 +14,7 @@ class ListIndustries extends StatelessWidget {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
 
     return ListView.separated(
+
       itemCount: ip.industries.length,
       itemBuilder: (BuildContext context, int index) {
         List<Industry> industries = ip.industries.values.toList();
