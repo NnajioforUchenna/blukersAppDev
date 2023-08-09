@@ -1,0 +1,16 @@
+{ 
+    "hello": "Hola {userName}",
+    "@hello": {
+        "description": "Un mensaje con un parametro",
+        "placeholders": {
+            "userName": {
+                "type": "String",
+                "example": "Bob"
+            }
+        }
+    },
+    "dreamBuildConnect": "Sueña. Conecta. Construye.",
+    "whatAreYouLookingFor": "¿Que estas buscando?",
+    "aJob": "Un Trabajo",
+    "workers": "Trabajadores"
+}

@@ -13,7 +13,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 import 'services/authentication_wrapper.dart';
-import 'views/auth/common_widget/supported_Locales.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:bulkers/l10n/l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,12 +51,20 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Blukers",
         debugShowCheckedModeBanner: false,
-        supportedLocales: supportedLocales,
+        // LOCALIZATION
+        // - Manually set a locale:
+        // locale: const Locale('en'),
+        // - supportedLocales, if they match the phone's locale,
+        // flutter automatically use the langage for the given delegates.
+        // If they don't match the phone's locale, default locale will be 'en'.
+        supportedLocales: L10n.all,
         localizationsDelegates: const [
-          CountryLocalizations.delegate,
-          // GlobalMaterialLocalizations.delegate,
-          // GlobalWidgetsLocalizations.delegate,
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
         ],
+        //
         builder: EasyLoading.init(),
         theme: ThemeData(
           // useMaterial3: true,
