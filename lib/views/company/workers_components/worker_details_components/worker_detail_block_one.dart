@@ -1,11 +1,11 @@
 import 'package:bulkers/models/worker.dart';
+import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:bulkers/services/rounded_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider.dart';
-import '../../../../services/notification_service.dart';
 import '../../../../utils/styles/theme_colors.dart';
 import '../../../common_views/worker_timeline/display_worker_timeline_dialog.dart';
 
@@ -18,6 +18,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     bool isWorkerSaved = up.isWorkerSaved(worker.workerId ?? '');
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -168,7 +169,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                           builder: (context) =>
                               const DisplayWorkerTimelineDialog());
                     } else {
-                      String roomId = await chatProvider?.createChatRoom(
+                      String? roomId = await chatProvider?.createChatRoom(
                           myUid: up.appUser!.uid,
                           recipientUid: worker.workerId,
                           myName: up.appUser!.displayName ?? "Company",
@@ -176,11 +177,14 @@ class WorkerDetailBlockOne extends StatelessWidget {
                           message: "",
                           myLogo: up.appUser!.photoUrl ?? "",
                           recipientLogo: worker.profilePhotoUrl ?? "");
-                      chatProvider?.activeRoomId = roomId;
-                      Navigator.pushNamed(context, '/chat-message', arguments: {
-                        "roomId": roomId,
-                        "roomName": worker.firstName + worker.lastName,
-                      });
+                      if (roomId != null) {
+                        chatProvider.activeRoomId = roomId!;
+                        Navigator.pushNamed(context, '/chat-message',
+                            arguments: {
+                              "roomId": roomId,
+                              "roomName": worker.firstName + worker.lastName,
+                            });
+                      }
                     }
                   },
                 ),

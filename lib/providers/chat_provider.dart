@@ -12,7 +12,7 @@ class ChatProvider with ChangeNotifier {
 
   List<ChatRoom> get chatRooms => _chatRooms;
 
-  createChatRoom(
+  Future<String?> createChatRoom(
       {required String myUid,
       required String recipientUid,
       required String myName,
@@ -29,6 +29,7 @@ class ChatProvider with ChangeNotifier {
     ChatRoom chatRoom;
     //if chat room does not exist then create chat room
     //else move user to already created chatroom
+    print("chat" + chat.toString());
     if (chat == -1) {
       chatRoom = await ChatDataProvider.createChatRoom(
           myUid: myUid,
