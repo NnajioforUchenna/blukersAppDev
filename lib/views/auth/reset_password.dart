@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'common_widget/company_logo.dart';
 import 'common_widget/submit_button.dart';
 
+import 'package:bulkers/views/common_views/components/index.dart';
+
 class ResetPasswordPage extends StatefulWidget {
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
@@ -22,14 +24,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Reset Password",
-            style: GoogleFonts.ebGaramond(
-              color: Colors.deepOrangeAccent,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              height: 1.25,
-            )),
+      appBar: MyAppBar(
+        title: "Reset Password",
       ),
       body: Container(
         padding: const EdgeInsets.all(20),
