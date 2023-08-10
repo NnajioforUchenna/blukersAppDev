@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/styles/theme_colors.dart';
 import '../../auth/common_widget/auth_input.dart';
-import '../../common_views/address_form.dart';
+import '../../common_views/address_form/address_form.dart';
+import '../../common_views/address_form/validate_address.dart';
 
 class ContactDetailsPage extends StatefulWidget {
   const ContactDetailsPage({super.key});
@@ -146,15 +147,22 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                           onPressed: () {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
-                              cp.addContactDetails(
-                                ext,
-                                _customerServicePhoneController.text,
+                              ValidateAddress(
                                 _streetController.text,
                                 _cityController.text,
                                 _stateController.text,
                                 _postalCodeController.text,
                                 _countryController.text,
                               );
+                              // cp.addContactDetails(
+                              //   ext,
+                              //   _customerServicePhoneController.text,
+                              //   _streetController.text,
+                              //   _cityController.text,
+                              //   _stateController.text,
+                              //   _postalCodeController.text,
+                              //   _countryController.text,
+                              // );
                             } else {
                               EasyLoading.showError(
                                   "Please fill all the fields");

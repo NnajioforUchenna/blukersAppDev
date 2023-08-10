@@ -2,7 +2,7 @@ import '../common_files/get_time_ago.dart';
 import 'address.dart';
 import 'skill.dart';
 
-enum JobUrgencyLevel { high, medium, low }
+enum JobUrgencyLevel { low, medium, high }
 
 enum JobPostStatus { active, inactive }
 
@@ -11,170 +11,146 @@ enum JobType { fullTime, partTime, contract, specifiedTime }
 enum SalaryType { hourly, daily, weekly, biWeekly, monthly, yearly }
 
 class JobPost {
-  String? jobPostId = '';
+  String jobPostId;
   String companyId;
-  String? companyName;
+  String companyName;
   String jobTitle;
   String jobDescription;
-  String? companyLogo;
+  String companyLogo;
   String requirements;
   List<Skill> skills;
   JobType jobType;
-  String? contractDuration;
-  SalaryType? salaryType;
-  double? salaryAmount;
-  List<Address>? addresses;
+  String contractDuration;
+  SalaryType salaryType;
+  double salaryAmount;
+  List<Address> addresses;
   Address? address;
-  List<String>? applicantUserIds = [];
-  List<String>? declineUserIds;
-  List<String>? interviewedUserIds;
-  List<String>? hiredUserIds;
+  List<String> applicantUserIds;
+  List<String> declineUserIds;
+  List<String> interviewedUserIds;
+  List<String> hiredUserIds;
   int numberOfPositionsAvailable;
-  JobUrgencyLevel? jobUrgencyLevel;
-  JobPostStatus? jobPostStatus;
-  int? dateCreated;
-  String? schedule;
-
+  JobUrgencyLevel jobUrgencyLevel;
+  JobPostStatus jobPostStatus;
+  int dateCreated;
+  String schedule;
   // New fields
   List<String> industryIds;
   List<String> jobIds;
 
   JobPost({
-    required this.jobPostId,
-    required this.companyId,
-    required this.companyName,
-    required this.jobTitle,
-    required this.jobDescription,
-    this.companyLogo,
-    required this.requirements,
-    required this.skills,
-    required this.jobType,
-    this.contractDuration,
-    this.salaryType,
-    this.salaryAmount,
-    this.addresses,
-    this.applicantUserIds,
-    this.declineUserIds,
-    this.interviewedUserIds,
-    this.hiredUserIds,
-    required this.numberOfPositionsAvailable,
-    this.jobUrgencyLevel,
-    this.jobPostStatus,
-    required this.industryIds, // Updated
-    required this.jobIds, // Updated
-    this.dateCreated,
-    this.schedule,
-    this.address,
+    this.jobPostId = '',
+    this.companyId = '',
+    this.companyName = '',
+    this.jobTitle = '',
+    this.jobDescription = '',
+    this.companyLogo = '',
+    this.requirements = '',
+    this.skills = const [],
+    this.jobType = JobType.fullTime,
+    this.contractDuration = '',
+    this.salaryType = SalaryType.hourly,
+    this.salaryAmount = 0.0,
+    this.addresses = const [],
+    this.applicantUserIds = const [],
+    this.declineUserIds = const [],
+    this.interviewedUserIds = const [],
+    this.hiredUserIds = const [],
+    this.numberOfPositionsAvailable = 0,
+    this.jobUrgencyLevel = JobUrgencyLevel.high,
+    this.jobPostStatus = JobPostStatus.active,
+    this.industryIds = const [],
+    this.jobIds = const [],
+    this.dateCreated = 0,
+    this.schedule = '',
+    this.address, // Needs to be passed or made nullable
   });
 
   get timeAgo => getTimeAgo(dateCreated.toString());
 
-  get location => addresses?.first.location ?? 'Location not set';
+  get location => address != null ? address!.location : '';
 
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> data = {
-      'companyId': companyId,
-      'companyName': companyName,
-      'jobTitle': jobTitle,
-      'jobDescription': jobDescription,
-      'requirements': requirements,
-      'numberOfPositionsAvailable': numberOfPositionsAvailable,
-      'jobType': jobType.index,
-      'industryIds': industryIds,
-      'jobIds': jobIds,
-      'jobPostId': jobPostId,
-      'schedule': schedule ?? 'Schedule not set',
+    return {
+      if (jobPostId.isNotEmpty) 'jobPostId': jobPostId,
+      if (companyId.isNotEmpty) 'companyId': companyId,
+      if (companyName.isNotEmpty) 'companyName': companyName,
+      if (jobTitle.isNotEmpty) 'jobTitle': jobTitle,
+      if (jobDescription.isNotEmpty) 'jobDescription': jobDescription,
+      if (companyLogo.isNotEmpty) 'companyLogo': companyLogo,
+      if (requirements.isNotEmpty) 'requirements': requirements,
+      if (skills.isNotEmpty)
+        'skills': skills
+            .map((skill) => skill.toMap())
+            .toList(), // Assuming Skill has a toMap method
+      if (jobType != JobType.fullTime) 'jobType': jobType.index,
+      if (contractDuration.isNotEmpty) 'contractDuration': contractDuration,
+      if (salaryType != SalaryType.hourly) 'salaryType': salaryType.index,
+      if (salaryAmount != 0.0) 'salaryAmount': salaryAmount,
+      if (addresses.isNotEmpty)
+        'addresses': addresses
+            .map((address) => address.toMap())
+            .toList(), // Assuming Address has a toMap method
+      if (address != null)
+        'address': address!.toMap(), // Assuming Address has a toMap method
+      if (applicantUserIds.isNotEmpty) 'applicantUserIds': applicantUserIds,
+      if (declineUserIds.isNotEmpty) 'declineUserIds': declineUserIds,
+      if (interviewedUserIds.isNotEmpty)
+        'interviewedUserIds': interviewedUserIds,
+      if (hiredUserIds.isNotEmpty) 'hiredUserIds': hiredUserIds,
+      if (numberOfPositionsAvailable != 0)
+        'numberOfPositionsAvailable': numberOfPositionsAvailable,
+      if (jobUrgencyLevel != JobUrgencyLevel.high)
+        'jobUrgencyLevel': jobUrgencyLevel.index,
+      if (jobPostStatus != JobPostStatus.active)
+        'jobPostStatus': jobPostStatus.index,
+      if (dateCreated != 0) 'dateCreated': dateCreated,
+      if (schedule.isNotEmpty) 'schedule': schedule,
+      if (industryIds.isNotEmpty) 'industryIds': industryIds,
+      if (jobIds.isNotEmpty) 'jobIds': jobIds,
     };
-
-    // Check and add only if not null
-    if (dateCreated != null) data['dateCreated'] = dateCreated;
-
-    if (companyLogo != null) data['companyLogo'] = companyLogo;
-    if (skills != null && skills.isNotEmpty)
-      data['skills'] = skills.map((skill) => skill.toMap()).toList();
-    if (contractDuration != null) data['contractDuration'] = contractDuration;
-
-    if (salaryAmount != null) data['salaryAmount'] = salaryAmount;
-    if (addresses != null && addresses!.isNotEmpty)
-      data['addresses'] = addresses!.map((address) => address.toMap()).toList();
-    if (applicantUserIds != null) data['applicantUserIds'] = applicantUserIds;
-    if (declineUserIds != null) data['declineUserIds'] = declineUserIds;
-    if (interviewedUserIds != null)
-      data['interviewedUserIds'] = interviewedUserIds;
-    if (hiredUserIds != null) data['hiredUserIds'] = hiredUserIds;
-    if (jobUrgencyLevel != null)
-      data['jobUrgencyLevel'] = jobUrgencyLevel!.index;
-
-    if (jobPostStatus != null) data['jobPostStatus'] = jobPostStatus!.index;
-    if (salaryType != null) data['salaryType'] = salaryType!.index;
-    if (address != null) data['address'] = address!.toMap();
-
-    return data;
   }
 
   static JobPost fromMap(Map<String, dynamic> map) {
-    int mapDateCreated = 0;
-    try {
-      mapDateCreated =
-          map['dateCreated'] ?? DateTime.now().millisecondsSinceEpoch;
-    } catch (e) {
-      mapDateCreated = DateTime.now().millisecondsSinceEpoch;
-    }
-
     return JobPost(
-      dateCreated: mapDateCreated,
       jobPostId: map['jobPostId'] ?? '',
       companyId: map['companyId'] ?? '',
       companyName: map['companyName'] ?? '',
       jobTitle: map['jobTitle'] ?? '',
       jobDescription: map['jobDescription'] ?? '',
-      companyLogo: map['companyLogo'],
+      companyLogo: map['companyLogo'] ?? '',
       requirements: map['requirements'] ?? '',
-      schedule: map['schedule'] ?? '',
       skills: map['skills'] != null
           ? (map['skills'] as List)
-              .map((skillMap) => Skill.fromMap(skillMap))
+              .map((skill) => Skill.fromMap(skill))
               .toList()
-          : [],
-      contractDuration: map['contractDuration'],
-      salaryType: map['salaryType'] != null
-          ? SalaryType.values[map['salaryType']]
-          : null,
-      salaryAmount: map['salaryAmount'] != null
-          ? double.parse(map['salaryAmount'].toString())
-          : null,
+          : const [],
+      jobType: JobType.values[map['jobType'] ?? JobType.fullTime.index],
+      contractDuration: map['contractDuration'] ?? '',
+      salaryType:
+          SalaryType.values[map['salaryType'] ?? SalaryType.hourly.index],
+      salaryAmount: map['salaryAmount'] ?? 0.0,
       addresses: map['addresses'] != null
           ? (map['addresses'] as List)
-              .map((addressMap) => Address.fromMap(addressMap))
+              .map((address) => Address.fromMap(address))
               .toList()
-          : null,
-      applicantUserIds: map['applicantUserIds'] != null
-          ? List<String>.from(map['applicantUserIds'])
-          : [],
-      declineUserIds: map['declineUserIds'] != null
-          ? List<String>.from(map['declineUserIds'])
-          : null,
-      interviewedUserIds: map['interviewedUserIds'] != null
-          ? List<String>.from(map['interviewedUserIds'])
-          : null,
-      hiredUserIds: map['hiredUserIds'] != null
-          ? List<String>.from(map['hiredUserIds'])
-          : null,
-      numberOfPositionsAvailable: map['numberOfPositionsAvailable'] != null
-          ? int.parse(map['numberOfPositionsAvailable'].toString())
-          : 0,
-      jobType: JobType.values[map['jobType'] ?? 0],
-      jobUrgencyLevel: map['jobUrgencyLevel'] != null
-          ? JobUrgencyLevel.values[map['jobUrgencyLevel']]
-          : null,
-      jobPostStatus: map['jobPostStatus'] != null
-          ? JobPostStatus.values[map['jobPostStatus']]
-          : null,
-      industryIds: map['industryIds'] != null
-          ? List<String>.from(map['industryIds'])
-          : [],
-      jobIds: map['jobIds'] != null ? List<String>.from(map['jobIds']) : [],
-      address: map['address'] != null ? Address.fromMap(map['address']) : null,
+          : const [],
+      address: map['address'] != null
+          ? Address.fromMap(map['address'])
+          : null, // Assuming Address has a fromMap method
+      applicantUserIds: map['applicantUserIds']?.cast<String>() ?? const [],
+      declineUserIds: map['declineUserIds']?.cast<String>() ?? const [],
+      interviewedUserIds: map['interviewedUserIds']?.cast<String>() ?? const [],
+      hiredUserIds: map['hiredUserIds']?.cast<String>() ?? const [],
+      numberOfPositionsAvailable: map['numberOfPositionsAvailable'] ?? 0,
+      jobUrgencyLevel: JobUrgencyLevel
+          .values[map['jobUrgencyLevel'] ?? JobUrgencyLevel.high.index],
+      jobPostStatus: JobPostStatus
+          .values[map['jobPostStatus'] ?? JobPostStatus.active.index],
+      industryIds: map['industryIds']?.cast<String>() ?? const [],
+      jobIds: map['jobIds']?.cast<String>() ?? const [],
+      dateCreated: map['dateCreated'] ?? 0,
+      schedule: map['schedule'] ?? '',
     );
   }
 

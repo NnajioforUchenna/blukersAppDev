@@ -8,222 +8,165 @@ enum WorkStatus { activelyLooking, hired }
 class Worker {
   String workerId;
   String firstName;
-  String? middleName;
+  String middleName;
   String lastName;
   List<String> emails;
-  String? phoneNumber;
-  String? workerBriefDescription;
-  String? profilePhotoUrl;
-  List<String>? industryIds;
-  List<String>? jobIds;
-  List<String>? skillIds;
-  List<String>? activeMemberships;
-  WorkStatus? workStatus;
-  List<Address>? addresses = [];
-  DateTime? birthdate;
-  DateTime? dateCreated;
-  List<WorkExperience>? workExperiences;
-  List<Reference>? references;
-  List<String>? savedJobPostIds;
-  List<String>? appliedJobPostIds;
-  List<String>? workerBadgeIds;
-  List<String>? certificationsIds;
-  List<String>? workerVerificationsIds;
-  String? pdfResumeUrl;
-  String? onlineResume;
-  bool? isVerified;
-  bool? isBasicProfileCompleted;
-  bool? isProfileUpdateNeeded;
-
-  Worker.fromNewProfile(
-      {required this.workerId,
-      required this.emails,
-      this.firstName = '',
-      this.lastName = ''});
+  String phoneNumber;
+  String workerBriefDescription;
+  String profilePhotoUrl;
+  List<String> industryIds;
+  List<String> jobIds;
+  List<String> skillIds;
+  List<String> activeMemberships;
+  WorkStatus workStatus;
+  List<Address> addresses;
+  int birthdate;
+  int dateCreated;
+  List<WorkExperience> workExperiences;
+  List<Reference> references;
+  List<String> savedJobPostIds;
+  List<String> appliedJobPostIds;
+  List<String> workerBadgeIds;
+  List<String> certificationsIds;
+  List<String> workerVerificationsIds;
+  String pdfResumeUrl;
+  String onlineResume;
+  bool isVerified;
+  bool isBasicProfileCompleted;
+  bool isProfileUpdateNeeded;
 
   Worker({
     required this.workerId,
-    required this.firstName,
-    required this.lastName,
-    required this.emails,
-    this.workerBriefDescription,
-    this.profilePhotoUrl,
-    this.industryIds,
-    this.jobIds,
-    this.skillIds,
-    this.activeMemberships,
-    this.workStatus,
-    this.addresses,
-    this.birthdate,
-    this.dateCreated,
-    this.workExperiences,
-    this.references,
-    this.savedJobPostIds,
-    this.appliedJobPostIds,
-    this.workerBadgeIds,
-    this.certificationsIds,
-    this.workerVerificationsIds,
-    this.pdfResumeUrl,
-    this.onlineResume,
-    this.isVerified,
-    this.isBasicProfileCompleted,
-    this.isProfileUpdateNeeded,
-    this.middleName,
-    this.phoneNumber,
+    this.firstName = '',
+    this.middleName = '',
+    this.lastName = '',
+    this.emails = const [],
+    this.phoneNumber = '',
+    this.workerBriefDescription = '',
+    this.profilePhotoUrl = 'https://picsum.photos/200/300',
+    this.industryIds = const [],
+    this.jobIds = const [],
+    this.skillIds = const [],
+    this.activeMemberships = const [],
+    this.workStatus = WorkStatus.activelyLooking,
+    this.addresses = const [],
+    this.birthdate = 0,
+    this.dateCreated = 0,
+    this.workExperiences = const [],
+    this.references = const [],
+    this.savedJobPostIds = const [],
+    this.appliedJobPostIds = const [],
+    this.workerBadgeIds = const [],
+    this.certificationsIds = const [],
+    this.workerVerificationsIds = const [],
+    this.pdfResumeUrl = '',
+    this.onlineResume = '',
+    this.isVerified = false,
+    this.isBasicProfileCompleted = false,
+    this.isProfileUpdateNeeded = false,
   });
-
-  Worker.fromSignUp({
-    required this.workerId,
-    required this.firstName,
-    required this.lastName,
-    required String email,
-    required String this.workerBriefDescription,
-  })  : emails = [email],
-        isBasicProfileCompleted = true;
 
   get timeAgo => getTimeAgo(dateCreated.toString());
   get location =>
       addresses!.isNotEmpty ? addresses?.first.location : 'Location not set';
 
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {
+    return {
       'workerId': workerId,
-      'firstName': firstName,
-      'lastName': lastName,
+      if (firstName.isNotEmpty) 'firstName': firstName,
+      if (middleName.isNotEmpty) 'middleName': middleName,
+      if (lastName.isNotEmpty) 'lastName': lastName,
+      if (emails.isNotEmpty) 'emails': emails,
+      if (phoneNumber.isNotEmpty) 'phoneNumber': phoneNumber,
+      if (workerBriefDescription.isNotEmpty)
+        'workerBriefDescription': workerBriefDescription,
+      if (profilePhotoUrl.isNotEmpty) 'profilePhotoUrl': profilePhotoUrl,
+      if (industryIds.isNotEmpty) 'industryIds': industryIds,
+      if (jobIds.isNotEmpty) 'jobIds': jobIds,
+      if (skillIds.isNotEmpty) 'skillIds': skillIds,
+      if (activeMemberships.isNotEmpty) 'activeMemberships': activeMemberships,
+      // Assuming workStatus has a meaningful toString or toMap method
+      'workStatus': workStatus.index,
+      // Assuming addresses have a meaningful toMap method
+      if (addresses.isNotEmpty)
+        'addresses': addresses.map((address) => address.toMap()).toList(),
+      if (dateCreated != 0) 'dateCreated': dateCreated,
+      if (birthdate != 0) 'birthdate': birthdate,
+      // Assuming workExperiences have a meaningful toMap method
+      if (workExperiences.isNotEmpty)
+        'workExperiences':
+            workExperiences.map((experience) => experience.toMap()).toList(),
+      // Assuming references have a meaningful toMap method
+      if (references.isNotEmpty)
+        'references': references.map((reference) => reference.toMap()).toList(),
+      if (savedJobPostIds.isNotEmpty) 'savedJobPostIds': savedJobPostIds,
+      if (appliedJobPostIds.isNotEmpty) 'appliedJobPostIds': appliedJobPostIds,
+      if (workerBadgeIds.isNotEmpty) 'workerBadgeIds': workerBadgeIds,
+      if (certificationsIds.isNotEmpty) 'certificationsIds': certificationsIds,
+      if (workerVerificationsIds.isNotEmpty)
+        'workerVerificationsIds': workerVerificationsIds,
+      if (pdfResumeUrl.isNotEmpty) 'pdfResumeUrl': pdfResumeUrl,
+      if (onlineResume.isNotEmpty) 'onlineResume': onlineResume,
+      if (isVerified) 'isVerified': isVerified,
+      if (isBasicProfileCompleted)
+        'isBasicProfileCompleted': isBasicProfileCompleted,
+      if (isProfileUpdateNeeded) 'isProfileUpdateNeeded': isProfileUpdateNeeded,
     };
-    if (middleName != null) map['middleName'] = middleName;
-    if (profilePhotoUrl != null) map['profilePhotoUrl'] = profilePhotoUrl;
-    if (emails.isNotEmpty) map['emails'] = emails;
-    if (industryIds != null) map['industryIds'] = industryIds;
-    if (jobIds != null) map['jobIds'] = jobIds;
-    if (skillIds != null) map['skillIds'] = skillIds;
-    if (birthdate != null) {
-      map['birthdate'] = birthdate!.toIso8601String();
-    }
-    if (dateCreated != null) {
-      map['dateCreated'] = dateCreated!.toIso8601String();
-    } else {
-      map['dateCreated'] = DateTime.now().toIso8601String();
-    }
-
-    if (savedJobPostIds != null) map['savedJobPostIds'] = savedJobPostIds;
-    if (appliedJobPostIds != null) {
-      map['appliedJobPostIds'] = appliedJobPostIds;
-    }
-    if (workerBadgeIds != null) map['workerBadgeIds'] = workerBadgeIds;
-    if (certificationsIds != null) {
-      map['certificationsIds'] = certificationsIds;
-    }
-    if (workerVerificationsIds != null) {
-      map['workerVerificationsIds'] = workerVerificationsIds;
-    }
-    if (pdfResumeUrl != null) map['pdfResumeUrl'] = pdfResumeUrl;
-    if (onlineResume != null) map['onlineResume'] = onlineResume;
-    if (workerBriefDescription != null && workerBriefDescription!.isNotEmpty) {
-      map['workerBriefDescription'] = workerBriefDescription;
-    }
-    if (activeMemberships != null && activeMemberships!.isNotEmpty) {
-      map['activeMemberships'] = activeMemberships;
-    }
-    if (workStatus == WorkStatus.activelyLooking) {
-      map['workStatus'] = 'activelyLooking';
-    } else {
-      map['workStatus'] = 'hired';
-    }
-
-    // Other checks for remaining properties
-    if (addresses != null && addresses!.isNotEmpty) {
-      map['addresses'] = addresses!.map((address) => address.toMap()).toList();
-    }
-    if (workExperiences != null && workExperiences!.isNotEmpty) {
-      map['workExperiences'] =
-          workExperiences!.map((exp) => exp.toMap()).toList();
-    }
-    if (references != null && references!.isNotEmpty) {
-      map['references'] = references!.map((ref) => ref.toMap()).toList();
-    }
-    if (isVerified != null) {
-      map['isVerified'] = isVerified;
-    }
-    if (isBasicProfileCompleted != null) {
-      map['isBasicProfileCompleted'] = isBasicProfileCompleted;
-    }
-    if (isProfileUpdateNeeded != null) {
-      map['isProfileUpdateNeeded'] = isProfileUpdateNeeded;
-    }
-
-    if (middleName != null) {
-      map['middleName'] = middleName;
-    }
-    if (phoneNumber != null) {
-      map['phoneNumber'] = phoneNumber;
-    }
-
-    return map;
   }
 
   static Worker fromMap(Map<String, dynamic> map) {
     return Worker(
-      workerId: map['workerId'] ?? '',
+      workerId: map['workerId'],
       firstName: map['firstName'] ?? '',
       middleName: map['middleName'] ?? '',
       lastName: map['lastName'] ?? '',
+      emails: (map['emails'] as List?)?.cast<String>() ?? [],
+      phoneNumber: map['phoneNumber'] ?? '',
+      workerBriefDescription: map['workerBriefDescription'] ?? '',
       profilePhotoUrl: map['profilePhotoUrl'] ?? '',
-      industryIds: map['industryIds'] != null
-          ? List<String>.from(map['industryIds'])
-          : [],
-      jobIds: map['jobIds'] != null ? List<String>.from(map['jobIds']) : [],
-      skillIds:
-          map['skillIds'] != null ? List<String>.from(map['skillIds']) : [],
-      activeMemberships: map['activeMemberships'] != null
-          ? List<String>.from(map['activeMemberships'])
-          : [],
-      workStatus: map['workStatus'] == "activelyLooking"
-          ? WorkStatus.activelyLooking
-          : WorkStatus.hired,
-      addresses: map['addresses'] != null
-          ? (map['addresses'] as List)
-              .map((addressMap) => Address.fromMap(addressMap))
-              .toList()
-          : [],
+      industryIds: (map['industryIds'] as List?)?.cast<String>() ?? [],
+      jobIds: (map['jobIds'] as List?)?.cast<String>() ?? [],
+      skillIds: (map['skillIds'] as List?)?.cast<String>() ?? [],
+      activeMemberships:
+          (map['activeMemberships'] as List?)?.cast<String>() ?? [],
+      workStatus: WorkStatus.values[int.parse(map['workStatus']
+          .toString())], // Assuming an appropriate constructor in WorkStatus
+      addresses: (map['addresses'] as List?)
+              ?.map((item) => Address.fromMap(item))
+              .toList() ??
+          [], // Assuming an appropriate constructor in Address
+
       birthdate:
-          map['birthdate'] != null ? DateTime.parse(map['birthdate']) : null,
+          map['birthdate'] != null ? int.parse(map['birthdate'].toString()) : 0,
       dateCreated: map['dateCreated'] != null
-          ? DateTime.parse(map['dateCreated'])
-          : DateTime.now(),
-      workExperiences: map['workExperiences'] != null
-          ? (map['workExperiences'] as List)
-              .map((weMap) => WorkExperience.fromMap(weMap))
-              .toList()
-          : [],
-      references: map['references'] != null
-          ? (map['references'] as List)
-              .map((refMap) => Reference.fromMap(refMap))
-              .toList()
-          : [],
-      savedJobPostIds: map['savedJobPostIds'] != null
-          ? List<String>.from(map['savedJobPostIds'])
-          : [],
-      appliedJobPostIds: map['appliedJobPostIds'] != null
-          ? List<String>.from(map['appliedJobPostIds'])
-          : [],
-      workerBadgeIds: map['workerBadgeIds'] != null
-          ? List<String>.from(map['workerBadgeIds'])
-          : [],
-      certificationsIds: map['certificationsIds'] != null
-          ? List<String>.from(map['certificationsIds'])
-          : [],
-      workerVerificationsIds: map['workerVerificationsIds'] != null
-          ? List<String>.from(map['workerVerificationsIds'])
-          : [],
+          ? int.parse(map['dateCreated'].toString())
+          : 0,
+      workExperiences: (map['workExperiences'] as List?)
+              ?.map((item) => WorkExperience.fromMap(item))
+              .toList() ??
+          [], // Assuming an appropriate constructor in WorkExperience
+      references: (map['references'] as List?)
+              ?.map((item) => Reference.fromMap(item))
+              .toList() ??
+          [], // Assuming an appropriate constructor in Reference
+      savedJobPostIds: (map['savedJobPostIds'] as List?)?.cast<String>() ?? [],
+      appliedJobPostIds:
+          (map['appliedJobPostIds'] as List?)?.cast<String>() ?? [],
+      workerBadgeIds: (map['workerBadgeIds'] as List?)?.cast<String>() ?? [],
+      certificationsIds:
+          (map['certificationsIds'] as List?)?.cast<String>() ?? [],
+      workerVerificationsIds:
+          (map['workerVerificationsIds'] as List?)?.cast<String>() ?? [],
       pdfResumeUrl: map['pdfResumeUrl'] ?? '',
       onlineResume: map['onlineResume'] ?? '',
       isVerified: map['isVerified'] ?? false,
       isBasicProfileCompleted: map['isBasicProfileCompleted'] ?? false,
       isProfileUpdateNeeded: map['isProfileUpdateNeeded'] ?? false,
-      workerBriefDescription: map['workerBriefDescription'] ?? "",
-      emails: map['emails'] != null ? List<String>.from(map['emails']) : [],
-      phoneNumber: map['phoneNumber'] ?? '',
     );
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
   }
 }

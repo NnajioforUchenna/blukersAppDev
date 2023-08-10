@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../models/work_experience.dart';
-// Make sure to import the location model if required
+import '../../../../services/responsive.dart';
 
+// Make sure to import the location model if required
 class WorkerDetailBlockFour extends StatelessWidget {
   final List<WorkExperience> workExperiences;
 
@@ -11,14 +12,17 @@ class WorkerDetailBlockFour extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double scaleFactor = Responsive.textScaleFactor(context);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Work Experience",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 20 * scaleFactor, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 15),
           ...workExperiences
@@ -27,32 +31,33 @@ class WorkerDetailBlockFour extends StatelessWidget {
                     children: [
                       Text(
                         "Company: ${experience.companyName}",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18 * scaleFactor),
                       ),
                       if (experience.location != null)
                         Text(
-                          "Location: ${experience.location!.city}, ${experience.location!.country}", // Adjust this line based on the structure of your Location class
-                          style: TextStyle(fontSize: 18),
+                          "Location: ${experience.location!.city}, ${experience.location!.country}",
+                          style: TextStyle(fontSize: 18 * scaleFactor),
                         ),
                       Text(
                         "Job Title: ${experience.jobTitle}",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18 * scaleFactor),
                       ),
                       Text(
                         "Description: ${experience.jobDescription}",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18 * scaleFactor),
                       ),
                       Text(
                         "Start Date: ${experience.jobStartDate?.toLocal()}",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18 * scaleFactor),
                       ),
                       if (experience.isCurrentlyWorking)
                         Text("Currently Working",
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.green)),
+                            style: TextStyle(
+                                fontSize: 18 * scaleFactor,
+                                color: Colors.green)),
                       if (experience.jobEndDate != null)
                         Text("End Date: ${experience.jobEndDate?.toLocal()}",
-                            style: TextStyle(fontSize: 18)),
+                            style: TextStyle(fontSize: 18 * scaleFactor)),
                       const SizedBox(height: 15),
                     ],
                   ))

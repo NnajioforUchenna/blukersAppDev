@@ -78,10 +78,10 @@ class WorkerProvider with ChangeNotifier {
     if (appUser != null) {
       getMyProfile();
 
-      newWorker = Worker.fromNewProfile(
-        workerId: appUser!.uid,
-        emails: [appUser!.email!],
-      );
+      newWorker = Worker.fromMap({
+        'workerId': appUser!.uid,
+        'emails': [appUser!.email!],
+      });
 
       // Add the selected industries to the newWorker.
       newWorker!.industryIds = selectedIndustries;
@@ -101,8 +101,9 @@ class WorkerProvider with ChangeNotifier {
     newWorker!.firstName = firstName;
     newWorker!.middleName = middleName;
     newWorker!.lastName = lateName;
-    newWorker!.birthdate = DateTime.parse(
-        '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}');
+    newWorker!.birthdate =
+        DateTime(int.parse(year), int.parse(month), int.parse(day))
+            .millisecondsSinceEpoch;
 
     workerProfileNextPage();
   }
@@ -227,7 +228,7 @@ class WorkerProvider with ChangeNotifier {
   void setResume(String text) {
     newWorker!.onlineResume = text;
     workerProfileNextPage();
-    newWorker?.dateCreated = DateTime.now();
+    newWorker?.dateCreated = DateTime.now().millisecondsSinceEpoch;
     WorkerDataProvider.createWorkerProfile(newWorker!);
   }
 

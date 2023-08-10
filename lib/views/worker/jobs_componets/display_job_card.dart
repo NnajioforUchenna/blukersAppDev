@@ -132,10 +132,8 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                     Row(
                       children: [
                         Spacer(),
-                        Image.network(
-                          widget.companyLogo!,
-                          height: 50,
-                          width: 50,
+                        RoundedImageWidget(
+                          imageUrl: widget.companyLogo!,
                         ),
                       ],
                     ),

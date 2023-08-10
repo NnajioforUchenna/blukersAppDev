@@ -3,59 +3,60 @@ import 'social_media_platform.dart';
 
 class Company {
   String companyId;
-  String? logoUrl;
-  String? wallpaperUrl;
+  String logoUrl;
+  String wallpaperUrl;
   String name;
-  String? companyDescription;
-  String? companySlogan;
-  String? companyIndustry;
+  String companyDescription;
+  String companySlogan;
+  String companyIndustry;
   List<String> emails;
   List<String> phoneNumbers;
-  List<Address>? addresses;
-  int? yearFounded;
-  String? website;
-  int? totalEmployees;
-  List<String>? industryIds;
-  List<String>? jobPostIds;
-  List<String>? companyBadgeIds;
-  List<String>? companyCertificationIds;
-  List<String>? companyVerificationIds;
-  List<String>? companyPhotoUrls;
-  List<String>? companyReviewIds;
-  bool? isVerified;
-  bool? isBasicProfileCompleted;
-  bool? isProfileUpdateNeeded;
-  List<String>? interestingWorkersIds = [];
-  List<SocialMediaPlatform>? socialMediaPlatforms;
-  DateTime? dateCreated;
+  List<Address> addresses;
+  int yearFounded;
+  String website;
+  int totalEmployees;
+  List<String> industryIds;
+  List<String> jobPostIds;
+  List<String> companyBadgeIds;
+  List<String> companyCertificationIds;
+  List<String> companyVerificationIds;
+  List<String> companyPhotoUrls;
+  List<String> companyReviewIds;
+  bool isVerified;
+  bool isBasicProfileCompleted;
+  bool isProfileUpdateNeeded;
+  List<String> interestingWorkersIds;
+  List<SocialMediaPlatform> socialMediaPlatforms;
+  int dateCreated;
 
-  Company(
-      {required this.companyId,
-      this.logoUrl,
-      this.wallpaperUrl,
-      required this.name,
-      this.companyDescription,
-      this.companySlogan,
-      this.companyIndustry,
-      required this.emails,
-      required this.phoneNumbers,
-      this.addresses,
-      this.yearFounded,
-      this.totalEmployees,
-      this.dateCreated,
-      this.website,
-      this.industryIds,
-      this.jobPostIds,
-      this.companyBadgeIds,
-      this.companyCertificationIds,
-      this.companyVerificationIds,
-      this.companyPhotoUrls,
-      this.companyReviewIds,
-      this.isVerified,
-      this.isBasicProfileCompleted,
-      this.isProfileUpdateNeeded,
-      this.socialMediaPlatforms,
-      this.interestingWorkersIds});
+  Company({
+    required this.companyId,
+    this.logoUrl = '',
+    this.wallpaperUrl = '',
+    required this.name,
+    this.companyDescription = '',
+    this.companySlogan = '',
+    this.companyIndustry = '',
+    required this.emails,
+    required this.phoneNumbers,
+    this.addresses = const [],
+    this.yearFounded = 0,
+    this.totalEmployees = 0,
+    this.dateCreated = 0, // Set to a default value, adjust as needed
+    this.website = '',
+    this.industryIds = const [],
+    this.jobPostIds = const [],
+    this.companyBadgeIds = const [],
+    this.companyCertificationIds = const [],
+    this.companyVerificationIds = const [],
+    this.companyPhotoUrls = const [],
+    this.companyReviewIds = const [],
+    this.isVerified = false,
+    this.isBasicProfileCompleted = false,
+    this.isProfileUpdateNeeded = false,
+    this.socialMediaPlatforms = const [],
+    this.interestingWorkersIds = const [],
+  });
 
   Company.fromSignUp({
     required String companyId,
@@ -75,51 +76,51 @@ class Company {
     Map<String, dynamic> map = {
       'companyId': companyId,
       'name': name,
-      'emails': emails,
-      'phoneNumbers': phoneNumbers,
     };
 
-    if (logoUrl != null) map['logoUrl'] = logoUrl;
-    if (website != null) map['website'] = website;
-    if (wallpaperUrl != null) map['wallpaperUrl'] = wallpaperUrl;
-    if (companyDescription != null) {
+    if (logoUrl.isNotEmpty) map['logoUrl'] = logoUrl;
+    if (website.isNotEmpty) map['website'] = website;
+    if (wallpaperUrl.isNotEmpty) map['wallpaperUrl'] = wallpaperUrl;
+    if (companyDescription.isNotEmpty) {
       map['companyDescription'] = companyDescription;
     }
-    if (companySlogan != null) map['companySlogan'] = companySlogan;
-    if (companyIndustry != null) map['companyIndustry'] = companyIndustry;
-    if (addresses != null) {
-      map['addresses'] = addresses?.map((address) => address.toMap()).toList();
+    if (companySlogan.isNotEmpty) map['companySlogan'] = companySlogan;
+    if (companyIndustry.isNotEmpty) map['companyIndustry'] = companyIndustry;
+    if (emails.isNotEmpty) map['emails'] = emails;
+    if (phoneNumbers.isNotEmpty) map['phoneNumbers'] = phoneNumbers;
+    if (addresses.isNotEmpty) {
+      map['addresses'] = addresses.map((address) => address.toMap()).toList();
     }
-    if (socialMediaPlatforms != null) {
+    if (socialMediaPlatforms.isNotEmpty) {
       map['socialMediaPlatforms'] =
-          socialMediaPlatforms?.map((platform) => platform.toMap()).toList();
+          socialMediaPlatforms.map((platform) => platform.toMap()).toList();
     }
-
-    if (yearFounded != null) map['yearFounded'] = yearFounded;
-    if (totalEmployees != null) map['totalEmployees'] = totalEmployees;
-    if (industryIds != null) map['industryIds'] = industryIds;
-    if (jobPostIds != null) map['jobPostIds'] = jobPostIds;
-    if (companyBadgeIds != null) map['companyBadgeIds'] = companyBadgeIds;
-    if (companyCertificationIds != null) {
+    if (yearFounded != 0) map['yearFounded'] = yearFounded;
+    if (totalEmployees != 0) map['totalEmployees'] = totalEmployees;
+    if (industryIds.isNotEmpty) map['industryIds'] = industryIds;
+    if (jobPostIds.isNotEmpty) map['jobPostIds'] = jobPostIds;
+    if (companyBadgeIds.isNotEmpty) map['companyBadgeIds'] = companyBadgeIds;
+    if (companyCertificationIds.isNotEmpty) {
       map['companyCertificationIds'] = companyCertificationIds;
     }
-    if (companyVerificationIds != null) {
+    if (companyVerificationIds.isNotEmpty) {
       map['companyVerificationIds'] = companyVerificationIds;
     }
-    if (companyPhotoUrls != null) map['companyPhotoUrls'] = companyPhotoUrls;
-    if (companyReviewIds != null) map['companyReviewIds'] = companyReviewIds;
-    if (isVerified != null) map['isVerified'] = isVerified;
-    if (isBasicProfileCompleted != null) {
+    if (companyPhotoUrls.isNotEmpty) map['companyPhotoUrls'] = companyPhotoUrls;
+    if (companyReviewIds.isNotEmpty) map['companyReviewIds'] = companyReviewIds;
+    if (isVerified) map['isVerified'] = isVerified;
+    if (isBasicProfileCompleted) {
       map['isBasicProfileCompleted'] = isBasicProfileCompleted;
     }
-    if (isProfileUpdateNeeded != null) {
+    if (isProfileUpdateNeeded) {
       map['isProfileUpdateNeeded'] = isProfileUpdateNeeded;
     }
-    if (interestingWorkersIds!.isNotEmpty) {
+    if (interestingWorkersIds.isNotEmpty) {
       map['interestingWorkersIds'] = interestingWorkersIds;
     }
-
-    if (dateCreated != null) map['dateCreated'] = dateCreated;
+    if (dateCreated != 0) {
+      map['dateCreated'] = dateCreated; // Assuming default value is 2000
+    }
 
     return map;
   }
@@ -127,13 +128,13 @@ class Company {
   static Company fromMap(Map<String, dynamic> map) {
     return Company(
       companyId: map['companyId'],
-      logoUrl: map['logoUrl'],
-      website: map['website'],
-      wallpaperUrl: map['wallpaperUrl'],
+      logoUrl: map['logoUrl'] ?? '',
+      website: map['website'] ?? '',
+      wallpaperUrl: map['wallpaperUrl'] ?? '',
       name: map['name'],
-      companyDescription: map['companyDescription'],
-      companySlogan: map['companySlogan'],
-      companyIndustry: map['companyIndustry'],
+      companyDescription: map['companyDescription'] ?? '',
+      companySlogan: map['companySlogan'] ?? '',
+      companyIndustry: map['companyIndustry'] ?? '',
       emails: map['emails'] != null ? List<String>.from(map['emails']) : [],
       phoneNumbers: map['phoneNumbers'] != null
           ? List<String>.from(map['phoneNumbers'])
@@ -142,48 +143,47 @@ class Company {
           ? (map['addresses'] as List)
               .map((addressMap) => Address.fromMap(addressMap))
               .toList()
-          : null,
+          : [],
       socialMediaPlatforms: map['socialMediaPlatforms'] != null
           ? (map['socialMediaPlatforms'] as List)
               .map((platformMap) => SocialMediaPlatform.fromMap(platformMap))
               .toList()
-          : null,
+          : [],
       yearFounded: map['yearFounded'] != null
           ? int.parse(map['yearFounded'].toString())
-          : null,
+          : 0,
       totalEmployees: map['totalEmployees'] != null
           ? int.parse(map['totalEmployees'].toString())
-          : null,
+          : 0,
       industryIds: map['industryIds'] != null
           ? List<String>.from(map['industryIds'])
-          : null,
-      jobPostIds: map['jobPostIds'] != null
-          ? List<String>.from(map['jobPostIds'])
-          : null,
+          : [],
+      jobPostIds:
+          map['jobPostIds'] != null ? List<String>.from(map['jobPostIds']) : [],
       companyBadgeIds: map['companyBadgeIds'] != null
           ? List<String>.from(map['companyBadgeIds'])
           : [],
       companyCertificationIds: map['companyCertificationIds'] != null
           ? List<String>.from(map['companyCertificationIds'])
-          : null,
+          : [],
       companyVerificationIds: map['companyVerificationIds'] != null
           ? List<String>.from(map['companyVerificationIds'])
-          : null,
+          : [],
       companyPhotoUrls: map['companyPhotoUrls'] != null
           ? List<String>.from(map['companyPhotoUrls'])
-          : null,
+          : [],
       companyReviewIds: map['companyReviewIds'] != null
           ? List<String>.from(map['companyReviewIds'])
-          : null,
-      isVerified: map['isVerified'],
-      isBasicProfileCompleted: map['isBasicProfileCompleted'],
-      isProfileUpdateNeeded: map['isProfileUpdateNeeded'],
+          : [],
+      isVerified: map['isVerified'] ?? false,
+      isBasicProfileCompleted: map['isBasicProfileCompleted'] ?? false,
+      isProfileUpdateNeeded: map['isProfileUpdateNeeded'] ?? false,
       interestingWorkersIds: map['interestingWorkersIds'] != null
           ? List<String>.from(map['interestingWorkersIds'])
           : [],
       dateCreated: map['dateCreated'] != null
-          ? DateTime.parse(map['dateCreated'])
-          : null,
+          ? int.parse(map['dateCreated'].toString())
+          : 0, // Assuming default value is 2000
     );
   }
 

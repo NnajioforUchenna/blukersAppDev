@@ -4,11 +4,8 @@ import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:bulkers/utils/styles/theme_text_styles.dart';
 import 'package:bulkers/views/common_views/profile_dialog.dart';
 import 'package:bulkers/views/common_views/profile_section.dart';
-import 'package:bulkers/views/company/profile_components/edit_basic_profile.dart';
-import 'package:bulkers/views/company/profile_components/user_basic_profile_details.dart';
 import 'package:bulkers/views/worker/create_worker_profile_component/edit_worker_basic_profile.dart';
 import 'package:bulkers/views/worker/create_worker_profile_component/worker_basic_profile_detail.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -115,7 +112,7 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                                                       "/onlineResume/ProfilePics");
                                               if (imageUrl != "") {
                                                 worker.profilePhotoUrl =
-                                                    imageUrl;
+                                                    imageUrl!;
                                                 await up
                                                     .updateWorkerInfo(worker);
                                               }
@@ -173,7 +170,7 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                                                       "/onlineResume/ProfilePics");
                                               if (imageUrl != "") {
                                                 worker.profilePhotoUrl =
-                                                    imageUrl;
+                                                    imageUrl!;
                                                 await up
                                                     .updateWorkerInfo(worker);
                                               }
@@ -286,7 +283,7 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                 }
               },
             ),
-              ProfileSection(
+            ProfileSection(
               heading: "Work Experience",
               icon: Icons.arrow_forward_ios,
               onClickSection: () {

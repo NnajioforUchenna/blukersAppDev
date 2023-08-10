@@ -1,5 +1,3 @@
-import 'package:bulkers/models/industry.dart';
-import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,19 +11,12 @@ class ListIndustries extends StatelessWidget {
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
 
-    return ListView.separated(
-      itemCount: ip.industries.length,
-      itemBuilder: (BuildContext context, int index) {
-        List<Industry> industries = ip.industries.values.toList();
+    return Column(
+      children: ip.industries.values.map((industry) {
         return DisplayIndustry(
-          industry: industries[index],
+          industry: industry,
         );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return Container(
-          color: ThemeColors.grey2ThemeColor,
-        );
-      },
+      }).toList(),
     );
   }
 }

@@ -81,6 +81,7 @@ class JobPostsDataProvider {
       jobPosts.where('companyName', isEqualTo: nameRelated),
       jobPosts.where('skills', arrayContains: nameRelated),
       jobPosts.where('jobTitle', isEqualTo: nameRelated),
+      jobPosts.where('jobIds', isEqualTo: nameRelated),
       jobPosts.where('addresses.street', isEqualTo: locationRelated),
       jobPosts.where('addresses.city', isEqualTo: locationRelated),
       jobPosts.where('addresses.state', isEqualTo: locationRelated),
