@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 
 import '../common_views/page_template/page_template.dart';
 
+import 'package:unicons/unicons.dart';
+
 class CompanyProfile extends StatefulWidget {
   const CompanyProfile({super.key});
 
@@ -41,25 +43,27 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         },
                         child: Container(
                           margin: const EdgeInsets.all(12),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 16),
+                          // padding: const EdgeInsets.symmetric(
+                          //     vertical: 12, horizontal: 16),
                           decoration: BoxDecoration(
-                              color: ThemeColors.primaryThemeColor,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Text(
-                            "Logout",
-                            style: ThemeTextStyles
-                                .informationDisplayPlaceHolderThemeTextStyle
-                                .apply(color: Colors.white),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(1000)),
+                          child: const Icon(
+                            UniconsLine.sign_out_alt,
+                            size: 60,
+                            color: Colors.red,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "Profile",
-                    style: ThemeTextStyles.headingThemeTextStyle
-                        .apply(color: Colors.black),
+                    style: TextStyle(
+                      color: ThemeColors.primaryThemeColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -67,8 +71,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   Stack(
                     children: [
                       SizedBox(
-                        width: 100,
-                        height: 100,
+                        width: 300,
+                        height: 300,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child: up.appUser!.photoUrl != null &&
@@ -150,7 +154,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                     height: 70,
                                                     width: 70,
                                                     margin: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         horizontal: 100,
                                                         vertical: 10),
                                                     decoration: BoxDecoration(
@@ -210,7 +214,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                     height: 70,
                                                     width: 70,
                                                     margin: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         horizontal: 100,
                                                         vertical: 10),
                                                     decoration: BoxDecoration(
@@ -244,11 +248,11 @@ class _CompanyProfileState extends State<CompanyProfile> {
                             );
                           },
                           child: const CircleAvatar(
-                            radius: 15,
-                            backgroundColor: ThemeColors.blukersBlueThemeColor,
+                            radius: 30,
+                            backgroundColor: ThemeColors.secondaryThemeColor,
                             child: Icon(
-                              Icons.edit,
-                              size: 15,
+                              UniconsLine.pen,
+                              size: 30,
                               color: Colors.white,
                             ),
                           ),
@@ -269,7 +273,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   ),
                   ProfileSection(
                     heading: "Basic Information",
-                    icon: Icons.edit_outlined,
+                    icon: UniconsLine.pen,
                     showBasicInfo: showBasicInfo,
                     onClickSection: () {
                       print("Section clicked");

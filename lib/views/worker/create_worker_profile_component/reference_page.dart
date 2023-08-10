@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:bulkers/views/common_views/components/index.dart';
 
 import '../../../providers/worker_provider.dart';
 import '../../../utils/styles/theme_colors.dart';

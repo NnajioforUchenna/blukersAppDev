@@ -68,7 +68,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                     Text(
                       "Contact Details Page",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,

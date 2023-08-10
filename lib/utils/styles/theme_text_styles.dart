@@ -7,7 +7,7 @@ abstract class ThemeTextStyles {
   static const TextStyle appBarThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
     color: ThemeColors.primaryThemeColor,
-    fontSize: 16,
+    fontSize: 20,
     height: 0.5,
     fontWeight: FontWeight.w600,
   );

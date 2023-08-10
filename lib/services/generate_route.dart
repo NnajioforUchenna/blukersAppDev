@@ -77,5 +77,6 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
           settings: settings);
     default:
       return MaterialPageRoute(builder: (context) => LandingPage());
+    // return MaterialPageRoute(builder: (context) => const CompanyChat());
   }
 }

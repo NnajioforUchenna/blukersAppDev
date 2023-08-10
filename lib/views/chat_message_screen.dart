@@ -3,6 +3,7 @@ import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/services/notification_service.dart';
 import 'package:bulkers/utils/styles/index.dart';
 import 'package:bulkers/views/company/workers_components/chat_component.dart';
+import 'package:bulkers/views/common_views/components/index.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,10 +49,8 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(roomName),
-          backgroundColor: Colors.white,
-          elevation: 0,
+        appBar: MyAppBar(
+          title: roomName,
         ),
         backgroundColor: ThemeColors.chatScreenBackgroundColor,
         body: SafeArea(

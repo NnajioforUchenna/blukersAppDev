@@ -62,7 +62,7 @@ class _CompensationAndContractPageState
               Text(
                 "Compensation & Contract",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.deepOrangeAccent,
                   fontSize: 25,
                   fontWeight: FontWeight.w600,

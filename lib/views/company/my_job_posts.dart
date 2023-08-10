@@ -57,11 +57,15 @@ class MyJobPosts extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.add), // Use Icon instead of IconButton
+                      const Icon(UniconsLine.file_plus_alt,
+                          color: ThemeColors
+                              .secondaryThemeColor), // Use Icon instead of IconButton
                       if (Responsive.isDesktop(context))
                         const Padding(
                           padding: EdgeInsets.only(left: 4.0),
-                          child: Text('Add Job Post'),
+                          child: Text('New',
+                              style: TextStyle(
+                                  color: ThemeColors.secondaryThemeColor)),
                         ),
                     ],
                   ),
