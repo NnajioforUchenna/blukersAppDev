@@ -2,7 +2,6 @@ import 'package:bulkers/providers/worker_provider.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:bulkers/views/worker/create_worker_profile_component/yourProfilePhoto.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
@@ -48,8 +47,18 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
                   const YourProfilePhoto(),
                   const SizedBox(height: 30),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          wp.workerProfileBackPage();
+                        },
+                        child: Text("Previous"),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              ThemeColors.secondaryThemeColor),
+                        ),
+                      ),
                       ElevatedButton(
                         onPressed: () {
                           if (wp.appUser?.photoUrl != null) {

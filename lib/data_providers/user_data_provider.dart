@@ -8,20 +8,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 final firestore = FirebaseFirestore.instance;
 
 class UserDataProvider {
   static String extractFirebaseError(String errorMessage) {
+    String originalString = errorMessage;
+    print("Error Message: $errorMessage");
     // This regex pattern captures the text between "Firebase: " and the error code in parentheses.
     RegExp pattern = RegExp(r'Firebase: (.*?)(?=\s\()');
     Match? match = pattern.firstMatch(errorMessage);
 
     if (match != null && match.groupCount >= 1) {
       return match.group(1)!; // Returns the captured Firebase error message
+    } else {
+      print("Error second Message: $originalString");
+      return originalString;
     }
-    return "Unknown Error Please Check your Internet"; // Default error message if no match is found
   }
 
   static Future<Map<String, dynamic>> registerUser(

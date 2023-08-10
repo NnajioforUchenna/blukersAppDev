@@ -36,11 +36,11 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
     );
   }
 
-  void animateToNextPage() {
+  void animateToNextPage(index) {
     if (_currentPageIndex < 7) {
       // Adjusted for the 8 steps in WorkerPageSlider
       _pageController.animateToPage(
-        _currentPageIndex + 1,
+        index,
         duration: const Duration(seconds: 1),
         curve: Curves.easeInOut,
       );
@@ -52,7 +52,7 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
     // This provider might need to be adjusted for the worker's timeline
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     if (_currentPageIndex != wp.workerProfileCurrentPageIndex) {
-      animateToNextPage();
+      animateToNextPage(wp.workerProfileCurrentPageIndex);
       _currentPageIndex = wp.workerProfileCurrentPageIndex;
     }
 

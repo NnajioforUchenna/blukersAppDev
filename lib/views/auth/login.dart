@@ -22,6 +22,7 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isPasswordVisible = true;
 
   bool isFormComplete() {
     return emailController.text.isNotEmpty &&
@@ -96,7 +97,7 @@ class _LoginState extends State<Login> {
                               child: FormBuilderTextField(
                                 controller: passwordController,
                                 key: const Key('password'),
-                                obscureText: true,
+                                obscureText: isPasswordVisible,
                                 textInputAction: TextInputAction.done,
                                 validator: ((value) {
                                   if (value == null) {
@@ -121,12 +122,17 @@ class _LoginState extends State<Login> {
                                     filled: true,
                                     suffixIcon: IconButton(
                                       icon: Icon(
-                                        true
+                                        isPasswordVisible
                                             ? Icons.visibility
                                             : Icons.visibility_off,
                                         color: Colors.grey[300],
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        setState(() {
+                                          isPasswordVisible =
+                                              !isPasswordVisible; // Toggle the password visibility state
+                                        });
+                                      },
                                     )),
                                 name: 'password',
                               ),

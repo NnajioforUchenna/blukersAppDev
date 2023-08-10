@@ -20,6 +20,7 @@ class WorkerProvider with ChangeNotifier {
   AppUser? appUser;
 
   int workerCurrentPageIndex = 0;
+
   Worker? get worker => _worker;
 
   List<Worker> selectedWorkers = [];
@@ -65,10 +66,17 @@ class WorkerProvider with ChangeNotifier {
   int workerProfileCurrentPageIndex = 0;
   List<Map<String, dynamic>> workExperience = [{}, {}];
   List<Map<String, dynamic>> references = [{}, {}];
+  List<Map<String, dynamic>> professionalCredentials = [{}];
+  Map<String, dynamic> previousParams = {};
 
   // Move to the next page in the worker's profile creation process.
   workerProfileNextPage() {
     workerProfileCurrentPageIndex++;
+    notifyListeners();
+  }
+
+  workerProfileBackPage() {
+    workerProfileCurrentPageIndex--;
     notifyListeners();
   }
 
@@ -77,6 +85,10 @@ class WorkerProvider with ChangeNotifier {
       Map<String, List<String>> selectedJobs) {
     if (appUser != null) {
       getMyProfile();
+
+      // Saving the selected industries and jobs to the previousParams.
+      previousParams['industries'] = selectedIndustries;
+      previousParams['jobs'] = selectedJobs;
 
       newWorker = Worker.fromMap({
         'workerId': appUser!.uid,
@@ -97,10 +109,19 @@ class WorkerProvider with ChangeNotifier {
 
   // Add the worker's personal information to the newWorker.
   void addPersonalInformtion(String firstName, String middleName,
-      String lateName, String day, String month, String year) {
+      String lastName, String day, String month, String year) {
+    // Saving the personal information to the previousParams.
+    previousParams['firstName'] = firstName;
+    previousParams['middleName'] = middleName;
+    previousParams['lastName'] = lastName;
+    previousParams['birthDay'] = day;
+    previousParams['birthMonth'] = month;
+    previousParams['birthYear'] = year;
+
+    // Saving the personal information to the newWorker.
     newWorker!.firstName = firstName;
     newWorker!.middleName = middleName;
-    newWorker!.lastName = lateName;
+    newWorker!.lastName = lastName;
     newWorker!.birthdate =
         DateTime(int.parse(year), int.parse(month), int.parse(day))
             .millisecondsSinceEpoch;
@@ -188,6 +209,9 @@ class WorkerProvider with ChangeNotifier {
   }
 
   void setSkills(List<String> selectedSkills) {
+// Saving the selected skills to the previousParams.
+    previousParams['skills'] = selectedSkills;
+
     newWorker!.skillIds = selectedSkills;
     workerProfileNextPage();
   }
@@ -201,6 +225,11 @@ class WorkerProvider with ChangeNotifier {
 
   void addReference() {
     references.add({});
+    notifyListeners();
+  }
+
+  void addCredential() {
+    professionalCredentials.add({});
     notifyListeners();
   }
 

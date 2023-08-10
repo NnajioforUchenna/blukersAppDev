@@ -23,6 +23,19 @@ class _WorkExperienceLocationFormState
   final TextEditingController countryController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
+      cityController.text = wp.workExperience[widget.intialIndex]['city'] ?? '';
+      stateController.text =
+          wp.workExperience[widget.intialIndex]['state'] ?? '';
+      countryController.text =
+          wp.workExperience[widget.intialIndex]['country'] ?? '';
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
     WorkerProvider wp = Provider.of<WorkerProvider>(context);

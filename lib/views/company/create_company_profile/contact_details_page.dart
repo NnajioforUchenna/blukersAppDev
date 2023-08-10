@@ -137,6 +137,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                       postalCodeController: _postalCodeController,
                       countryController: _countryController,
                       label: 'Head Office Address',
+                      validate: isFormComplete,
                     ),
                     const SizedBox(height: 40),
                     Row(

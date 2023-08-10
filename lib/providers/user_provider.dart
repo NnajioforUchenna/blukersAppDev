@@ -326,16 +326,16 @@ class UserProvider with ChangeNotifier {
       EasyLoading.dismiss();
 
       // Navigate to the home page.
-      // if (userRole == "worker") {
-      //   Navigator.pushNamedAndRemoveUntil(
-      //       context, '/jobs', (Route<dynamic> route) => false);
-      // } else {
-      //   Navigator.pushNamedAndRemoveUntil(
-      //       context, '/workers', (Route<dynamic> route) => false);
-      // }
+      if (userRole == "worker") {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/jobs', (Route<dynamic> route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/workers', (Route<dynamic> route) => false);
+      }
     } else {
       // Print and display any errors that occurred during login.
-      print("Error: ${result['error']}");
+
       EasyLoading.dismiss();
       EasyLoading.showError(result['error'],
           duration: const Duration(seconds: 3));

@@ -7,6 +7,8 @@ import '../../../utils/styles/theme_colors.dart';
 import 'credential_field.dart';
 
 class ProfessionalCredentialsPage extends StatefulWidget {
+  const ProfessionalCredentialsPage({super.key});
+
   @override
   _ProfessionalCredentialsPageState createState() =>
       _ProfessionalCredentialsPageState();
@@ -14,7 +16,8 @@ class ProfessionalCredentialsPage extends StatefulWidget {
 
 class _ProfessionalCredentialsPageState
     extends State<ProfessionalCredentialsPage> {
-  List<CredentialField> credentialControllers = [const CredentialField()];
+  late WorkerProvider wp;
+
   List<String> skills = [
     'Python',
     'Flutter',
@@ -25,17 +28,22 @@ class _ProfessionalCredentialsPageState
     'JavaScript'
   ];
   List<String> selectedSkills = [];
+  List<CredentialField> credentialForms = [];
 
-  void _addCredentialField() {
-    setState(() {
-      credentialControllers.add(const CredentialField());
-    });
+  @override
+  void initState() {
+    super.initState();
+    wp = Provider.of<WorkerProvider>(context, listen: false);
+    selectedSkills = wp.previousParams['skills'] ?? [];
   }
 
   @override
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
-
+    credentialForms = [];
+    for (int i = 0; i < wp.professionalCredentials.length; i++) {
+      credentialForms.add(CredentialField(index: i));
+    }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       width: Responsive.isDesktop(context)
@@ -70,30 +78,21 @@ class _ProfessionalCredentialsPageState
               ),
             ),
             const SizedBox(height: 10),
-
-            ...List.generate(credentialControllers.length, (index) {
-              return Column(
-                children: [
-                  const CredentialField(),
-                  const SizedBox(height: 10),
-                  if (index == credentialControllers.length - 1)
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Tooltip(
-                        message: "Add more credentials",
-                        child: IconButton(
-                          icon: const Icon(Icons.add),
-                          onPressed: () {
-                            setState(() {
-                              _addCredentialField();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                ],
-              );
-            }),
+            ...credentialForms,
+            Align(
+              alignment: Alignment.centerRight,
+              child: Tooltip(
+                message: "Add more credentials",
+                child: IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    setState(() {
+                      wp.addCredential();
+                    });
+                  },
+                ),
+              ),
+            ),
 
             Divider(thickness: 1, color: Colors.grey[400]),
 
@@ -140,7 +139,7 @@ class _ProfessionalCredentialsPageState
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Handle "previous" logic here
+                    wp.workerProfileBackPage();
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(

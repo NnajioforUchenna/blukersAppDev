@@ -2,7 +2,6 @@ import 'package:bulkers/providers/worker_provider.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
@@ -33,6 +32,20 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
         birthDayController.text.isNotEmpty &&
         birthMonthController.text.isNotEmpty &&
         birthYearController.text.isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
+      firstNameController.text = wp.previousParams["firstName"] ?? "";
+      middleNameController.text = wp.previousParams["middleName"] ?? "";
+      lastNameController.text = wp.previousParams["lastName"] ?? "";
+      birthDayController.text = wp.previousParams["birthDay"] ?? "";
+      birthMonthController.text = wp.previousParams["birthMonth"] ?? "";
+      birthYearController.text = wp.previousParams["birthYear"] ?? "";
+    });
   }
 
   @override
@@ -259,7 +272,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context); // Go to the previous page
+                            wp.workerProfileBackPage();
                           },
                           child: Text("Previous"),
                           style: ButtonStyle(

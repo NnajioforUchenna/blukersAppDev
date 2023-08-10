@@ -2,6 +2,7 @@ import 'package:bulkers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'my_job_timeline.dart';
 
@@ -105,7 +106,9 @@ Widget buildButton(double width, String text, context) {
           // Center the text inside the button
           child: Text(
             text.toUpperCase(),
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20 * Responsive.textScaleFactor(context)),
           ),
         ),
       ),

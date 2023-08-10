@@ -1,8 +1,8 @@
+import 'package:bulkers/views/common_views/landing_page_components/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/user_provider.dart';
-import '../views/company/create_company_profile/contact_details_page.dart';
 import '../views/company/workers.dart';
 import '../views/worker/jobs.dart';
 
@@ -17,7 +17,7 @@ class AuthenticationWrapper extends StatelessWidget {
           ? const Workers() //CreateWorkerProfile //Workers() //Jobs()
           : const Jobs();
     } else {
-      return ContactDetailsPage(); //
+      return LandingPage(); //
       // return Login();
     }
   }

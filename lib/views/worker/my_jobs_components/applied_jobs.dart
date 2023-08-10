@@ -1,13 +1,12 @@
 import 'package:bulkers/providers/job_posts_provider.dart';
 import 'package:bulkers/providers/user_provider.dart';
+import 'package:bulkers/views/common_views/components/icon_text_404.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../models/job_post.dart';
 import '../jobs_componets/complete_job_posts_widget.dart';
-
-import 'package:bulkers/views/common_views/components/icon_text_404.dart';
-import 'package:unicons/unicons.dart';
 
 class AppliedJobs extends StatefulWidget {
   const AppliedJobs({Key? key}) : super(key: key); // Corrected here
@@ -40,11 +39,16 @@ class _AppliedJobsState extends State<AppliedJobs> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
+          return IconText404(
+              text: "No job posts found", icon: UniconsLine.file_edit_alt);
         } else if (snapshot.hasData) {
-          return CompleteJobPostWidget(
-            jobPosts: snapshot.data!,
-          );
+          List<JobPost> jobPosts = snapshot.data!;
+          return jobPosts.isNotEmpty
+              ? CompleteJobPostWidget(
+                  jobPosts: jobPosts,
+                )
+              : IconText404(
+                  text: "No job posts found", icon: UniconsLine.file_edit_alt);
         }
         return IconText404(
             text: "No job posts found", icon: UniconsLine.file_edit_alt);

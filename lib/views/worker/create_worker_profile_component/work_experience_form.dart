@@ -1,22 +1,38 @@
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../auth/common_widget/auth_input.dart';
 import 'work_experience_date.dart';
 import 'work_experience_location_form.dart';
 
-class WorkExperienceForm extends StatelessWidget {
+class WorkExperienceForm extends StatefulWidget {
   final int index;
   WorkExperienceForm({Key? key, required this.index}) : super(key: key);
 
+  @override
+  State<WorkExperienceForm> createState() => _WorkExperienceFormState();
+}
+
+class _WorkExperienceFormState extends State<WorkExperienceForm> {
   final TextEditingController _companyNameController = TextEditingController();
-
   final TextEditingController _jobTitleController = TextEditingController();
-
   final TextEditingController _jobDescriptionController =
       TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
+      _companyNameController.text =
+          wp.workExperience[widget.index]['companyName'] ?? '';
+      _jobTitleController.text =
+          wp.workExperience[widget.index]['jobTitle'] ?? '';
+      _jobDescriptionController.text =
+          wp.workExperience[widget.index]['jobDescription'] ?? '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +47,7 @@ class WorkExperienceForm extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 20),
             Text(
-              "Work Experience ${index + 1}",
+              "Work Experience ${widget.index + 1}",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.deepOrangeAccent,
@@ -49,7 +65,7 @@ class WorkExperienceForm extends StatelessWidget {
                 onEditingComplete: () => node.nextFocus(),
                 validator: (value) => value!.isEmpty ? "Required" : null,
                 onChanged: (value) {
-                  wp.workExperience[index]['companyName'] = value;
+                  wp.workExperience[widget.index]['companyName'] = value;
                 },
                 decoration: InputDecoration(
                   hintText: "Company Name",
@@ -73,7 +89,7 @@ class WorkExperienceForm extends StatelessWidget {
                 onEditingComplete: () => node.nextFocus(),
                 validator: (value) => value!.isEmpty ? "Required" : null,
                 onChanged: (value) {
-                  wp.workExperience[index]['jobTitle'] = value;
+                  wp.workExperience[widget.index]['jobTitle'] = value;
                 },
                 decoration: InputDecoration(
                   hintText: "Job Title",
@@ -98,7 +114,7 @@ class WorkExperienceForm extends StatelessWidget {
                 onEditingComplete: () => node.nextFocus(),
                 validator: (value) => value!.isEmpty ? "Required" : null,
                 onChanged: (value) {
-                  wp.workExperience[index]['jobDescription'] = value;
+                  wp.workExperience[widget.index]['jobDescription'] = value;
                 },
                 decoration: InputDecoration(
                   hintText: "Job Description",
@@ -116,11 +132,11 @@ class WorkExperienceForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             WorkExperienceLocationForm(
-              intialIndex: index,
+              intialIndex: widget.index,
             ),
             const SizedBox(height: 10),
             WorkExperienceDate(
-              intialIndex: index,
+              intialIndex: widget.index,
             ),
             const SizedBox(height: 10),
             const Divider(

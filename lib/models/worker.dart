@@ -138,6 +138,7 @@ class Worker {
 
       birthdate:
           map['birthdate'] != null ? int.parse(map['birthdate'].toString()) : 0,
+
       dateCreated: map['dateCreated'] != null
           ? int.parse(map['dateCreated'].toString())
           : 0,

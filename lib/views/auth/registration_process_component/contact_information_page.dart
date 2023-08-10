@@ -1,7 +1,6 @@
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:bulkers/views/common_views/address_form/address_form.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
@@ -24,19 +23,20 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
   final _postalCodeController = TextEditingController();
   final _countryController = TextEditingController();
   String ext = '+52';
+  bool isValidate = false;
 
   void _onCountryChange(CountryCode countryCode) {
     print("New Country selected: " + countryCode.toString());
   }
 
-  // Implementation of isFormComplete method
-  bool isFormComplete() {
-    return _phoneController.text.isNotEmpty &&
-        _streetController.text.isNotEmpty &&
-        _cityController.text.isNotEmpty &&
-        _stateController.text.isNotEmpty &&
-        _postalCodeController.text.isNotEmpty &&
-        _countryController.text.isNotEmpty;
+  isFormComplete() {
+    setState(() {
+      isValidate = _phoneController.text.isNotEmpty &&
+          _streetController.text.isNotEmpty &&
+          _cityController.text.isNotEmpty &&
+          _stateController.text.isNotEmpty &&
+          _countryController.text.isNotEmpty;
+    });
   }
 
   @override
@@ -136,36 +136,14 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        border:
-                            Border.all(color: ThemeColors.secondaryThemeColor),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Address',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 10),
-                          _buildTextField(
-                              "Street", TextInputType.text, _streetController),
-                          const SizedBox(height: 20),
-                          _buildTextField(
-                              "City", TextInputType.text, _cityController),
-                          const SizedBox(height: 20),
-                          _buildTextField(
-                              "State", TextInputType.text, _stateController),
-                          const SizedBox(height: 20),
-                          _buildTextField("Postal Code", TextInputType.number,
-                              _postalCodeController),
-                          const SizedBox(height: 20),
-                          _buildTextField("Country", TextInputType.text,
-                              _countryController),
-                        ],
-                      ),
-                    ),
+                    AddressForm(
+                        streetController: _streetController,
+                        cityController: _cityController,
+                        stateController: _stateController,
+                        postalCodeController: _postalCodeController,
+                        countryController: _countryController,
+                        label: "Address",
+                        validate: isFormComplete),
                     const SizedBox(height: 40),
                     SubmitButton(
                       onTap: () {
@@ -180,7 +158,7 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                         );
                       },
                       text: "Save To Profile",
-                      isDisabled: !isFormComplete(),
+                      isDisabled: !isValidate,
                     ),
                     SizedBox(height: height * .05),
                   ],

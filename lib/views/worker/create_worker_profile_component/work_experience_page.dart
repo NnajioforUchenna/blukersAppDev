@@ -54,7 +54,7 @@ class WorkExperiencePage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Handle "previous" logic here
+                    wp.workerProfileBackPage();
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(

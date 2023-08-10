@@ -1,7 +1,6 @@
 import 'package:bulkers/data_providers/industries_data_provider.dart';
 import 'package:bulkers/models/industry.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart';
 
 import '../views/common_views/address_form/validate_address.dart';
@@ -44,7 +43,6 @@ class IndustriesProvider with ChangeNotifier {
     final places = FlutterGooglePlacesSdk(MYKEY);
     FindAutocompletePredictionsResponse findPredictions =
         await places.findAutocompletePredictions(address);
-
     predictions = findPredictions.predictions;
     notifyListeners();
   }
@@ -56,10 +54,23 @@ class IndustriesProvider with ChangeNotifier {
     if (result['isAddressValid']) {
       updateAddress(result['formattedAddress']);
     } else {
-      EasyLoading.showError('Please Verify This Address');
-      updateAddress(result['formattedAddress']);
+      var addressDic = parsePrediction(prediction);
+      updateAddress(addressDic);
     }
     predictions = [];
     notifyListeners();
+  }
+
+  parsePrediction(AutocompletePrediction prediction) {
+    var addressDic = {};
+    List<String> parts = prediction.secondaryText.split(',');
+    addressDic['street'] = prediction.primaryText;
+    if (parts.length >= 2) {
+      addressDic['city'] = parts[0].trim();
+      addressDic['state'] = parts[1].trim();
+      addressDic['country'] = parts[2].trim();
+    }
+
+    return addressDic;
   }
 }

@@ -14,10 +14,10 @@ class ClassificationPage extends StatefulWidget {
 }
 
 class _ClassificationPageState extends State<ClassificationPage> {
+  late WorkerProvider wp;
   late List<Industry> industries;
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
-
   bool isSelected = false;
   isSelect() {
     setState(() {
@@ -30,10 +30,19 @@ class _ClassificationPageState extends State<ClassificationPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    wp = Provider.of<WorkerProvider>(context, listen: false);
+    selectedIndustries = wp.previousParams['industries'] ?? [];
+    selectedJobs = wp.previousParams['jobs'] ?? {};
+    isSelect(); // Check if something is selected on initialization
+  }
+
+  @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     industries = ip.industries.values.toList();
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    wp = Provider.of<WorkerProvider>(context);
     return Container(
       width: Responsive.isDesktop(context)
           ? MediaQuery.of(context).size.width * 0.3

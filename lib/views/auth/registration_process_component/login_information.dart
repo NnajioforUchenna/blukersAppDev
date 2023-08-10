@@ -1,12 +1,10 @@
 import 'package:bulkers/providers/chat_provider.dart';
-import 'package:bulkers/services/notification_service.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../services/validation.dart';
-import '../../../utils/styles/theme_colors.dart';
 import '../../../providers/user_provider.dart';
+import '../../../utils/styles/theme_colors.dart';
 import '../common_widget/auth_input.dart';
 import '../common_widget/label_button.dart';
 import '../common_widget/submit_button.dart';
@@ -23,6 +21,7 @@ class _LoginInformationState extends State<LoginInformation> {
   TextEditingController passwordController = TextEditingController();
   String groupValue = '';
   final _formKey = GlobalKey<FormState>();
+  bool isPasswordVisible = true;
 
   bool isFormComplete() {
     return emailController.text.isNotEmpty &&
@@ -97,7 +96,7 @@ class _LoginInformationState extends State<LoginInformation> {
                     AuthInput(
                       child: TextFormField(
                         controller: passwordController,
-                        obscureText: true,
+                        obscureText: isPasswordVisible,
                         textInputAction: TextInputAction.done,
                         onEditingComplete: () {
                           setState(() {
@@ -116,10 +115,17 @@ class _LoginInformationState extends State<LoginInformation> {
                           hintText: "Password",
                           suffixIcon: IconButton(
                             icon: Icon(
-                              true ? Icons.visibility : Icons.visibility_off,
+                              isPasswordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                               color: Colors.grey[300],
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              print('i was called');
+                              setState(() {
+                                isPasswordVisible = !isPasswordVisible;
+                              });
+                            },
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),

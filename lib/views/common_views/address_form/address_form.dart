@@ -13,6 +13,7 @@ class AddressForm extends StatefulWidget {
   final TextEditingController stateController;
   final TextEditingController postalCodeController;
   final TextEditingController countryController;
+  final Function validate;
 
   const AddressForm({
     required this.streetController,
@@ -21,6 +22,7 @@ class AddressForm extends StatefulWidget {
     required this.postalCodeController,
     required this.countryController,
     required this.label,
+    required this.validate,
   });
 
   @override
@@ -47,6 +49,7 @@ class _AddressFormState extends State<AddressForm> {
       widget.stateController.text = ip.selectedAddress['state'] ?? '';
       widget.postalCodeController.text = ip.selectedAddress['postalCode'] ?? '';
       widget.countryController.text = ip.selectedAddress['country'] ?? '';
+      widget.validate();
       ip.isSelectedAddress = false;
     }
   }
@@ -83,6 +86,7 @@ class _AddressFormState extends State<AddressForm> {
                       _showOptions =
                           false; // Hide suggestions when user submits the field
                     });
+                    widget.validate();
                   },
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -132,6 +136,7 @@ class _AddressFormState extends State<AddressForm> {
           setState(() {
             _showOptions = false;
           });
+          widget.validate();
         },
         keyboardType: type,
         decoration: InputDecoration(

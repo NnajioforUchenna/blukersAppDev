@@ -1,7 +1,6 @@
 import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/styles/theme_colors.dart';
@@ -63,7 +62,7 @@ class ResumePage extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Handle "previous" logic here
+                      wp.workerProfileBackPage();
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

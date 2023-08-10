@@ -21,6 +21,21 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
   void initState() {
     super.initState();
     wp = Provider.of<WorkerProvider>(context, listen: false);
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      if (wp.workExperience[widget.intialIndex]['jobStartDate'] != null) {
+        _startDate = DateTime.parse(
+            wp.workExperience[widget.intialIndex]['jobStartDate']);
+      }
+
+      if (wp.workExperience[widget.intialIndex]['jobEndDate'] != null) {
+        _endDate =
+            DateTime.parse(wp.workExperience[widget.intialIndex]['jobEndDate']);
+      }
+      _isCurrentlyWorking =
+          wp.workExperience[widget.intialIndex]['isCurrentlyWorking'];
+      setState(() {});
+    });
   }
 
   Future<void> _selectDate(BuildContext context,

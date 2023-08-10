@@ -32,11 +32,11 @@ class _CompanyPageSliderState extends State<CompanyPageSlider> {
     );
   }
 
-  void animateToNextPage() {
+  void animateToNextPage(index) {
     if (_currentPageIndex < 6) {
       // Adjusted for the 7 steps in CompanyPageSlider
       _pageController.animateToPage(
-        _currentPageIndex + 1,
+        index,
         duration: const Duration(seconds: 1),
         curve: Curves.easeInOut,
       );
@@ -48,7 +48,7 @@ class _CompanyPageSliderState extends State<CompanyPageSlider> {
     // This provider might need to be adjusted for the company's timeline
     CompanyProvider cp = Provider.of<CompanyProvider>(context);
     if (_currentPageIndex != cp.companyProfileCurrentPageIndex) {
-      animateToNextPage();
+      animateToNextPage(cp.companyProfileCurrentPageIndex);
       _currentPageIndex = cp.companyProfileCurrentPageIndex;
     }
 

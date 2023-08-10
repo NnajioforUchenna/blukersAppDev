@@ -20,13 +20,14 @@ import '../views/worker/create_worker_profile_component/create_worker_profile.da
 import '../views/worker/jobs.dart';
 import '../views/worker/my_jobs.dart';
 import '../views/worker/worker_profile.dart';
+import 'authentication_wrapper.dart';
 
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(builder: (context) => LandingPage());
-    // return MaterialPageRoute(
-    //     builder: (context) => const AuthenticationWrapper());
+      // return MaterialPageRoute(builder: (context) => LandingPage());
+      return MaterialPageRoute(
+          builder: (context) => const AuthenticationWrapper());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
