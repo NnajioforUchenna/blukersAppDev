@@ -12,32 +12,41 @@ class Responsive extends StatelessWidget {
     required this.desktop,
   }) : super(key: key);
 
-// This size work fine on my design, maybe you need some customization depends on your design
+  // Breakpoints
+  static const double mobileBreakpoint = 850;
+  static const double tabletBreakpoint = 1100;
 
-  // This isMobile, isTablet, isDesktop helep us later
+  // Helpers to determine device type
   static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width < 850;
+      MediaQuery.of(context).size.width < mobileBreakpoint;
 
   static bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width < 1100 &&
-      MediaQuery.of(context).size.width >= 850;
+      MediaQuery.of(context).size.width < tabletBreakpoint &&
+      MediaQuery.of(context).size.width >= mobileBreakpoint;
 
   static bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 1100;
+      MediaQuery.of(context).size.width >= tabletBreakpoint;
+
+  // Get text scale factor based on device type
+  static double textScaleFactor(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    if (width < mobileBreakpoint) {
+      return 0.8;
+    } else if (width < tabletBreakpoint) {
+      return 1;
+    } else {
+      return 1.2;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    // If our width is more than 1100 then we consider it a desktop
-    if (size.width >= 1100) {
+    if (size.width >= tabletBreakpoint) {
       return desktop;
-    }
-    // If width it less then 1100 and more then 850 we consider it as tablet
-    else if (size.width >= 850 && tablet != null) {
+    } else if (size.width >= mobileBreakpoint && tablet != null) {
       return tablet!;
-    }
-    // Or less then that we called it mobile
-    else {
+    } else {
       return mobile;
     }
   }

@@ -141,13 +141,16 @@ class UserProvider with ChangeNotifier {
       status: 'Adding Basic Information...',
       maskType: EasyLoadingMaskType.black,
     );
-    Worker worker = Worker.fromSignUp(
-      workerId: appUser!.uid,
-      lastName: lastName,
-      firstName: name,
-      email: appUser!.email!,
-      workerBriefDescription: description,
-    );
+
+    Worker worker = Worker.fromMap({
+      'workerId': appUser!.uid,
+      'lastName': lastName,
+      'firstName': name,
+      'emails': [appUser!.email!],
+      'workerBriefDescription': description,
+      'isBasicProfileCompleted': true,
+    });
+
     UserDataProvider.updateWorkerBasicInformation(worker);
     _appUser!.worker = worker;
     _appUser!.isBasicInformation = true;

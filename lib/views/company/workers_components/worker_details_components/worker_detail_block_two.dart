@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/worker.dart';
+import '../../../../services/responsive.dart';
 
 class WorkerDetailBlockTwo extends StatelessWidget {
   final Worker worker;
@@ -12,6 +13,7 @@ class WorkerDetailBlockTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double scaleFactor = Responsive.textScaleFactor(context);
     bool isBlur = true; // You can change this value based on your requirements
 
     return Padding(
@@ -19,18 +21,19 @@ class WorkerDetailBlockTwo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Align content to start
         children: [
-          const Row(
+          Row(
             children: [
               Text("Personal Information",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                      fontSize: 20 * scaleFactor, fontWeight: FontWeight.bold)),
             ],
           ),
           const SizedBox(height: 15),
           Row(
             children: [
-              const Text(
+              Text(
                 "Email: ",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18 * scaleFactor),
               ),
               BlurOut(
                 isBlur: isBlur,
@@ -38,8 +41,8 @@ class WorkerDetailBlockTwo extends StatelessWidget {
                   worker.emails.isNotEmpty
                       ? worker.emails.first
                       : 'Email Not Provided',
-                  style: const TextStyle(
-                    fontSize: 18,
+                  style: TextStyle(
+                    fontSize: 18 * scaleFactor,
                   ),
                 ),
               ),
@@ -88,7 +91,10 @@ class WorkerDetailBlockTwo extends StatelessWidget {
                   onPressed: () {
                     // Handle membership activation
                   },
-                  child: const Text("Activate Your Membership"),
+                  child: Text(
+                    "Activate Your Membership",
+                    style: TextStyle(fontSize: 16 * scaleFactor),
+                  ),
                 ),
             ],
           ),

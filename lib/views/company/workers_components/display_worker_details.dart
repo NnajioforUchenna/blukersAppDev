@@ -56,11 +56,12 @@ class _WorkerDisplayDetailsWidgetState extends State<WorkerDisplayDetailsWidget>
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     Worker? worker = widget.worker;
     return worker == null
         ? Center(child: SizedBox(height: 100, width: 100, child: LoadingPage()))
         : Container(
-            margin: const EdgeInsets.only(right: 50),
+            margin: EdgeInsets.symmetric(horizontal: width * 0.04),
             child: Card(
               elevation: 5,
               child: Container(

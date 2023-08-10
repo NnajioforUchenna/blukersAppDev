@@ -1,7 +1,7 @@
 import 'package:bulkers/providers/job_posts_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
 import 'package:bulkers/utils/helpers/index.dart';
+import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
@@ -24,6 +24,7 @@ class IndustryBodyPanel extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: jobs.length,
       itemBuilder: (context, index) {

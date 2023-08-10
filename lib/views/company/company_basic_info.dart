@@ -2,11 +2,9 @@ import 'package:bulkers/models/company.dart';
 import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/common_views/profile_dialog.dart';
 import 'package:bulkers/views/common_views/profile_section.dart';
 import 'package:bulkers/views/company/profile_components/company_additional_profile_detail.dart';
 import 'package:bulkers/views/company/profile_components/company_basic_profile_detail.dart';
-import 'package:bulkers/views/company/profile_components/edit_company_basic_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -110,7 +108,7 @@ class _CompanyBasicInfoState extends State<CompanyBasicInfo> {
                                                   await up.ontapCamera(
                                                       "/company_profile_images/");
                                               if (imageUrl != "") {
-                                               company.logoUrl = imageUrl;
+                                                company.logoUrl = imageUrl!;
                                                 up.updateCompanyInfo(company);
                                               }
                                               Navigator.of(context).pop();
@@ -166,7 +164,7 @@ class _CompanyBasicInfoState extends State<CompanyBasicInfo> {
                                                   await up.ontapGallery(
                                                       "/company_profile_images/");
                                               if (imageUrl != "") {
-                                                company.logoUrl = imageUrl;
+                                                company.logoUrl = imageUrl!;
                                                 up.updateCompanyInfo(company);
                                               }
                                               Navigator.of(context).pop();

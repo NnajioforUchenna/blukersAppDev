@@ -61,6 +61,8 @@ dependencies:
   flutter_pdfview: ^1.0.1
   permission_handler:
   http: ^1.1.0
+  flutter_google_places_sdk: ^0.3.2+5
+
 
 
 

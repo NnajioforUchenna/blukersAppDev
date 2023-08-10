@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:bulkers/models/worker.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:bulkers/utils/styles/theme_text_styles.dart';
 import 'package:bulkers/views/common_views/industry_jobs_dropdown.dart';
@@ -200,7 +199,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                     height: 70,
                                                     width: 70,
                                                     margin: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         horizontal: 100,
                                                         vertical: 10),
                                                     decoration: BoxDecoration(
@@ -260,7 +259,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                     height: 70,
                                                     width: 70,
                                                     margin: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         horizontal: 100,
                                                         vertical: 10),
                                                     decoration: BoxDecoration(
@@ -425,7 +424,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     onClickEdit: () async {
                       String? pdfUrl = await up.onTapPdf("/pdf-resume/");
                       if (up.appUser!.worker != null && pdfUrl != "") {
-                        up.appUser!.worker!.pdfResumeUrl = pdfUrl;
+                        up.appUser!.worker!.pdfResumeUrl = pdfUrl!;
                         await up.updateWorkerInfo(up.appUser!.worker!);
                       }
                       print("Edit clicked");

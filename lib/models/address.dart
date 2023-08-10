@@ -6,11 +6,11 @@ class Address {
   final String? country; // country is now nullable
 
   Address({
-    this.street, // street is now optional
-    this.city, // city is now optional
-    this.state, // state is now optional
-    this.postalCode, // postalCode is now optional
-    this.country, // country is now optional
+    this.street = '', // street is now optional
+    this.city = '', // city is now optional
+    this.state = '', // state is now optional
+    this.postalCode = '', // postalCode is now optional
+    this.country = '', // country is now optional
   });
 
   get location => '$city, $state, $country';
@@ -27,12 +27,12 @@ class Address {
 
   static Address fromMap(Map<String, dynamic> map) {
     return Address(
-      street: map['street'] as String?, // cast as String but keep it nullable
-      city: map['city'] as String?, // cast as String but keep it nullable
-      state: map['state'] as String?, // cast as String but keep it nullable
+      street: map['street'] ?? '', // cast as String but keep it nullable
+      city: map['city'] ?? '', // cast as String but keep it nullable
+      state: map['state'] ?? '', // cast as String but keep it nullable
       postalCode:
-          map['postalCode'] as String?, // cast as String but keep it nullable
-      country: map['country'] as String?, // cast as String but keep it nullable
+          map['postalCode'] ?? '', // cast as String but keep it nullable
+      country: map['country'] ?? '', // cast as String but keep it nullable
     );
   }
 

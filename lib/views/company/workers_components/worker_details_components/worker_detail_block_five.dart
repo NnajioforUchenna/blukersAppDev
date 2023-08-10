@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../services/responsive.dart';
+
 class WorkerDetailBlockFive extends StatelessWidget {
   final List<String> skills;
 
@@ -8,14 +10,19 @@ class WorkerDetailBlockFive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double scaleFactor = Responsive.textScaleFactor(
+        context); // Scale factor based on the screen size
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Skills",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 20 * scaleFactor,
+                fontWeight: FontWeight.bold), // Apply scaling to font size
           ),
           const SizedBox(height: 15),
           Wrap(
@@ -23,9 +30,12 @@ class WorkerDetailBlockFive extends StatelessWidget {
             runSpacing: 4,
             children: skills
                 .map((skill) => Chip(
-                      label: Text(skill),
+                      label: Text(skill,
+                          style: TextStyle(
+                              fontSize: 16 * scaleFactor,
+                              color:
+                                  Colors.white)), // Apply scaling to font size
                       backgroundColor: Colors.blue,
-                      labelStyle: TextStyle(color: Colors.white),
                     ))
                 .toList(),
           ),

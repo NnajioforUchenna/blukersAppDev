@@ -1,9 +1,7 @@
-import 'package:bulkers/services/authentication_wrapper.dart';
 import 'package:bulkers/views/chat_message_screen.dart';
 import 'package:bulkers/views/company/company_basic_info.dart';
 import 'package:bulkers/views/company_chat.dart';
 import 'package:bulkers/views/worker/create_worker_profile_component/online_resume_additional_detail_screen.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/reference_page.dart';
 import 'package:bulkers/views/worker/online_resume_screen.dart';
 import 'package:bulkers/views/worker/pdf_view_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +25,8 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
       return MaterialPageRoute(builder: (context) => LandingPage());
-    // return MaterialPageRoute(builder: (context) => const AuthenticationWrapper());
+    // return MaterialPageRoute(
+    //     builder: (context) => const AuthenticationWrapper());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
