@@ -29,6 +29,28 @@ class AddressForm extends StatefulWidget {
 
 class _AddressFormState extends State<AddressForm> {
   bool _showOptions = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _initialize();
+    });
+  }
+
+  void _initialize() {
+    IndustriesProvider ip =
+        Provider.of<IndustriesProvider>(context, listen: false);
+    if (ip.isSelectedAddress) {
+      widget.streetController.text = ip.selectedAddress['street'] ?? '';
+      widget.cityController.text = ip.selectedAddress['city'] ?? '';
+      widget.stateController.text = ip.selectedAddress['state'] ?? '';
+      widget.postalCodeController.text = ip.selectedAddress['postalCode'] ?? '';
+      widget.countryController.text = ip.selectedAddress['country'] ?? '';
+      ip.isSelectedAddress = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);

@@ -18,7 +18,7 @@ class Worker {
   List<String> jobIds;
   List<String> skillIds;
   List<String> activeMemberships;
-  WorkStatus workStatus;
+  int workStatus;
   List<Address> addresses;
   int birthdate;
   int dateCreated;
@@ -48,7 +48,7 @@ class Worker {
     this.jobIds = const [],
     this.skillIds = const [],
     this.activeMemberships = const [],
-    this.workStatus = WorkStatus.activelyLooking,
+    this.workStatus = 0,
     this.addresses = const [],
     this.birthdate = 0,
     this.dateCreated = 0,
@@ -85,8 +85,7 @@ class Worker {
       if (jobIds.isNotEmpty) 'jobIds': jobIds,
       if (skillIds.isNotEmpty) 'skillIds': skillIds,
       if (activeMemberships.isNotEmpty) 'activeMemberships': activeMemberships,
-      // Assuming workStatus has a meaningful toString or toMap method
-      'workStatus': workStatus.index,
+      if (workStatus != 0) 'workStatus': workStatus,
       // Assuming addresses have a meaningful toMap method
       if (addresses.isNotEmpty)
         'addresses': addresses.map((address) => address.toMap()).toList(),
@@ -129,8 +128,9 @@ class Worker {
       skillIds: (map['skillIds'] as List?)?.cast<String>() ?? [],
       activeMemberships:
           (map['activeMemberships'] as List?)?.cast<String>() ?? [],
-      workStatus: WorkStatus.values[int.parse(map['workStatus']
-          .toString())], // Assuming an appropriate constructor in WorkStatus
+      workStatus: map['workStatus'] != null
+          ? int.parse(map['workStatus'].toString())
+          : 0,
       addresses: (map['addresses'] as List?)
               ?.map((item) => Address.fromMap(item))
               .toList() ??
