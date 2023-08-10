@@ -58,7 +58,7 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                     Text(
                       "Additional Information Page",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,

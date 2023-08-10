@@ -56,7 +56,7 @@ class _CompanyCharacteristicsPageState
                     Text(
                       "Company Characteristics",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,

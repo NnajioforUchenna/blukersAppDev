@@ -56,7 +56,7 @@ class _JobSearchBarState extends State<JobSearchBar> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'colony, city or state',
+                    hintText: 'Location',
                     prefixIcon: const Icon(Icons.location_on),
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.close),
@@ -89,7 +89,7 @@ class _JobSearchBarState extends State<JobSearchBar> {
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      'To Look For A Job',
+                      'Search Jobs',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),

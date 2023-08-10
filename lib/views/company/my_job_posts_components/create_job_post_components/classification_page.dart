@@ -38,7 +38,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                   Text(
                     "Select Industry",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: Colors.deepOrangeAccent,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -72,7 +72,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                     Text(
                       "Select Job",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,

@@ -19,6 +19,8 @@ import '../../providers/user_provider.dart';
 import '../auth/common_widget/login_or_register.dart';
 import '../common_views/page_template/page_template.dart';
 
+import 'package:unicons/unicons.dart';
+
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
 
@@ -90,25 +92,27 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         },
                         child: Container(
                           margin: const EdgeInsets.all(12),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 16),
+                          // padding: const EdgeInsets.symmetric(
+                          //     vertical: 12, horizontal: 16),
                           decoration: BoxDecoration(
-                              color: ThemeColors.primaryThemeColor,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Text(
-                            "Logout",
-                            style: ThemeTextStyles
-                                .informationDisplayPlaceHolderThemeTextStyle
-                                .apply(color: Colors.white),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(1000)),
+                          child: const Icon(
+                            UniconsLine.sign_out_alt,
+                            size: 60,
+                            color: Colors.red,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "Profile",
-                    style: ThemeTextStyles.headingThemeTextStyle
-                        .apply(color: Colors.black),
+                    style: TextStyle(
+                      color: ThemeColors.primaryThemeColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -116,10 +120,10 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   Stack(
                     children: [
                       SizedBox(
-                        width: 100,
-                        height: 100,
+                        width: 300,
+                        height: 300,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(1000),
                           child: up.appUser!.photoUrl != null &&
                                   up.appUser!.photoUrl != ""
                               ? FadeInImage.assetNetwork(
@@ -293,11 +297,11 @@ class _WorkerProfileState extends State<WorkerProfile> {
                             );
                           },
                           child: const CircleAvatar(
-                            radius: 15,
-                            backgroundColor: ThemeColors.blukersBlueThemeColor,
+                            radius: 30,
+                            backgroundColor: ThemeColors.secondaryThemeColor,
                             child: Icon(
-                              Icons.edit,
-                              size: 15,
+                              UniconsLine.pen,
+                              size: 30,
                               color: Colors.white,
                             ),
                           ),
@@ -318,7 +322,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   ),
                   ProfileSection(
                     heading: "Basic Information",
-                    icon: Icons.edit_outlined,
+                    icon: UniconsLine.pen,
                     showBasicInfo: showBasicInfo,
                     onClickSection: () {
                       print("Section clicked");
@@ -352,7 +356,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     ),
                   ProfileSection(
                     heading: "Industries / Jobs",
-                    icon: Icons.edit_outlined,
+                    icon: UniconsLine.pen,
                     showBasicInfo: showIndustries,
                     showEditIcon: false,
                     onClickSection: () {
@@ -394,7 +398,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                             );
                           },
                           child: Icon(
-                            Icons.edit_outlined,
+                            UniconsLine.pen,
                             color: Colors.grey[700],
                             size: 30,
                           ),
@@ -413,7 +417,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   ),
                   ProfileSection(
                     heading: "Pdf Resume",
-                    icon: Icons.edit_outlined,
+                    icon: UniconsLine.pen,
                     showBasicInfo: showPdfResume,
                     onClickSection: () {
                       print("Section clicked");

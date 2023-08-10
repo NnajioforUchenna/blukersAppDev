@@ -30,7 +30,7 @@ class RegistrationProcess extends StatelessWidget {
         child: SizedBox(
           height: height,
           width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width * 0.3
+              ? MediaQuery.of(context).size.width * 0.5
               : MediaQuery.of(context).size.width,
           child: CustomScrollView(
             slivers: [
