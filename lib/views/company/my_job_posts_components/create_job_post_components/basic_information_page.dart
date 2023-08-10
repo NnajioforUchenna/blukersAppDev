@@ -46,7 +46,7 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                     Text(
                       "Job Details",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
@@ -125,7 +125,7 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                     Text(
                       "Job Urgency Level",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,

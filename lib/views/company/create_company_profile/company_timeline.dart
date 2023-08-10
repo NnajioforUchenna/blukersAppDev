@@ -69,11 +69,12 @@ class CompanyTimeLine extends StatelessWidget {
           //     blurRadius: 6.0,
           //   ),
           // ],
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: ThemeColors.secondaryThemeColor,
-            width: 2,
-          )),
+          // borderRadius: BorderRadius.circular(10),
+          // border: Border.all(
+          //   color: ThemeColors.secondaryThemeColor,
+          //   width: 2,
+          // )
+          ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         controller: _scrollController,
@@ -82,7 +83,8 @@ class CompanyTimeLine extends StatelessWidget {
           final step = companySteps[index];
           var indicatorSize = 40.0;
           var beforeLineStyle = LineStyle(
-            color: Colors.white.withOpacity(0.8),
+            // color: Colors.white.withOpacity(0.8),
+            color: ThemeColors.secondaryThemeColor,
           );
           LineStyle afterLineStyle =
               const LineStyle(color: ThemeColors.grey1ThemeColor);
@@ -91,7 +93,8 @@ class CompanyTimeLine extends StatelessWidget {
 
           if (index < currentStep) {
             status = _CompanyStatus.done;
-            afterLineStyle = const LineStyle(color: Colors.white);
+            afterLineStyle =
+                const LineStyle(color: ThemeColors.secondaryThemeColor);
           } else if (index > currentStep) {
             status = _CompanyStatus.todo;
             indicatorSize = 20;
@@ -193,10 +196,10 @@ class _IndicatorCompany extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white,
+            color: ThemeColors.secondaryThemeColor,
           ),
           child: const Center(
-            child: Icon(Icons.check, color: Color(0xFF5D6173)),
+            child: Icon(Icons.check, color: Colors.white),
           ),
         );
       case _CompanyStatus.doing:

@@ -31,18 +31,18 @@ class _AllSearchBarState extends State<AllSearchBar> {
     up = Provider.of<UserProvider>(context, listen: false);
   }
 
-  String buttonLabel = 'To Look For A Job';
+  String buttonLabel = 'Search Jobs';
   String searchName = 'Position, work area or company';
 
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     if (up.userRole == 'company') {
-      buttonLabel = 'To Look For A Worker';
+      buttonLabel = 'Search Workers';
       searchName = 'Position, work area or company';
     } else {
-      buttonLabel = 'To Look For A Job';
-      searchName = 'Company Name, Skill or Job Title';
+      buttonLabel = 'Search Jobs';
+      searchName = 'Company name, skill or job title';
     }
     return Responsive(
       mobile: _buildMobileSearchBar(),
@@ -64,7 +64,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
             children: [
               _buildSearchField(_searchController1, searchName),
               const SizedBox(height: 20.0),
-              _buildSearchField(_searchController2, 'colony, city or state'),
+              _buildSearchField(_searchController2, 'Location'),
               const SizedBox(height: 20.0),
               _buildSearchButton(),
             ],
@@ -85,7 +85,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
         children: [
           _buildSearchField(_searchController1, searchName),
           const SizedBox(width: 20.0),
-          _buildSearchField(_searchController2, 'colony, city or state'),
+          _buildSearchField(_searchController2, 'Location'),
           const SizedBox(width: 20.0),
           _buildSearchButton(),
           const SizedBox(width: 10.0),

@@ -6,6 +6,11 @@ import 'package:provider/provider.dart';
 import 'common_widget/company_logo.dart';
 import 'common_widget/submit_button.dart';
 
+import 'package:bulkers/views/common_views/components/index.dart';
+
+import 'package:bulkers/services/responsive.dart';
+import 'package:bulkers/utils/styles/index.dart';
+
 class ResetPasswordPage extends StatefulWidget {
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
@@ -22,34 +27,34 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Reset Password",
-            style: GoogleFonts.ebGaramond(
-              color: Colors.deepOrangeAccent,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              height: 1.25,
-            )),
+      appBar: MyAppBar(
+        title: "Reset Password",
       ),
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CompanyLogo(),
-            const SizedBox(height: 20),
-            const Text(
-              "Enter the email address associated with your account. A link to reset your password will be sent to your email address.",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black,
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          width: Responsive.isDesktop(context)
+              ? MediaQuery.of(context).size.width * 0.5
+              : MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CompanyLogo(),
+              const SizedBox(height: 20),
+              const Text(
+                "Enter the email address associated with your account. A link to reset your password will be sent to your email address.",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColors.grey1ThemeColor,
+                ),
               ),
-            ),
-            const SizedBox(height: 50),
-            _buildEmailField(),
-            const SizedBox(height: 50),
-            _buildResetButton(context, up),
-          ],
+              const SizedBox(height: 50),
+              _buildEmailField(),
+              const SizedBox(height: 50),
+              _buildResetButton(context, up),
+            ],
+          ),
         ),
       ),
     );
