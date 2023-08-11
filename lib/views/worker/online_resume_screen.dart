@@ -58,7 +58,7 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                             //width: MediaQuery.of(context).size.width,
                             fit: BoxFit.cover,
                           )
-                        : Image.asset("assets/images/mockImage.png"),
+                        : Image.asset("assets/images/userDefaultImage.png"),
                   ),
                 ),
                 Positioned(

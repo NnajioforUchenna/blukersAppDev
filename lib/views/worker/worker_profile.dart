@@ -7,6 +7,7 @@ import 'package:bulkers/views/common_views/industry_jobs_dropdown.dart';
 import 'package:bulkers/views/common_views/info_display_component.dart';
 import 'package:bulkers/views/common_views/profile_dialog.dart';
 import 'package:bulkers/views/common_views/profile_section.dart';
+import 'package:bulkers/views/common_views/components/icon_text_404.dart';
 import 'package:bulkers/views/company/profile_components/edit_basic_profile.dart';
 import 'package:bulkers/views/company/profile_components/user_basic_profile_details.dart';
 import 'package:flutter/foundation.dart';
@@ -35,7 +36,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
 
   Future<File?> viewPdf(String pdfUrl) async {
     EasyLoading.show(
-      status: 'Settingup Resume...',
+      status: 'Opening file viewer...',
       maskType: EasyLoadingMaskType.black,
     );
     Completer<File> completer = Completer();
@@ -119,20 +120,28 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   ),
                   Stack(
                     children: [
-                      SizedBox(
-                        width: 300,
-                        height: 300,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(1000),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(1000),
+                        child: Container(
+                          // decoration: BoxDecoration(
+                          //   color: Colors.red,
+                          // ),
+                          width: 300,
+                          height: 300,
                           child: up.appUser!.photoUrl != null &&
                                   up.appUser!.photoUrl != ""
                               ? FadeInImage.assetNetwork(
                                   placeholder: "assets/images/loading.jpeg",
                                   image: up.appUser!.photoUrl!,
                                   //width: MediaQuery.of(context).size.width,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fitWidth,
                                 )
-                              : Image.asset("assets/images/mockImage.png"),
+                              // : Image.asset("assets/images/userDefaultImage.png"),
+                              : FittedBox(
+                                  child: Image.asset(
+                                      "assets/images/userDefaultImage.png"),
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                       Positioned(
@@ -406,18 +415,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       ),
                     ),
                   ProfileSection(
-                    heading: "Online Resume",
-                    icon: Icons.arrow_forward_ios,
-                    onClickSection: () {
-                      print("Section clicked/ Edit Clicked");
-                      if (up.appUser!.worker != null) {
-                        Navigator.pushNamed(context, "/onlineResumeScreen");
-                      }
-                    },
-                  ),
-                  ProfileSection(
                     heading: "Pdf Resume",
-                    icon: UniconsLine.pen,
+                    icon: UniconsLine.file_upload,
                     showBasicInfo: showPdfResume,
                     onClickSection: () {
                       print("Section clicked");
@@ -437,14 +436,19 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   if (showPdfResume)
                     GestureDetector(
                       onTap: () async {
-                        File? file =
-                            await viewPdf(up.appUser!.worker!.pdfResumeUrl!);
+                        String pdfResumeUrl = up.appUser!.worker!.pdfResumeUrl!;
+                        if (pdfResumeUrl.toString().isEmpty) {
+                          return;
+                        }
+                        print('pdfResumeUrl');
+                        print(pdfResumeUrl);
+                        File? file = await viewPdf(pdfResumeUrl);
                         if (file != null) {
                           Uint8List bytes = await file.readAsBytes();
                           Navigator.of(context).pushNamed("/pdfViewScreen",
                               arguments: {"remotePDFpath": bytes});
                         }
-
+                        print('Show PDF File');
                         print(file);
                       },
                       child: Container(
@@ -454,10 +458,32 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         decoration: BoxDecoration(
                             // color: Colors.blue[50],
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.blueAccent)),
-                        child: Text("My Resume.pdf"),
+                            border:
+                                Border.all(color: ThemeColors.grey2ThemeColor)),
+                        // child: Text("My Resume.pdf"),
+                        child:
+                            up.appUser!.worker!.pdfResumeUrl!.toString().isEmpty
+                                ? IconText404(
+                                    icon: UniconsLine.file_times,
+                                    text: 'You have not uploaded a PDF resume',
+                                  )
+                                : IconText404(
+                                    icon: UniconsLine.file,
+                                    text: 'Click here to view your PDF resume',
+                                  ),
                       ),
-                    )
+                    ),
+                  ProfileSection(
+                    heading: "Online Resume",
+                    icon: UniconsLine.arrow_right,
+                    showInfoInNewPage: true,
+                    onClickSection: () {
+                      print("Section clicked/ Edit Clicked");
+                      if (up.appUser!.worker != null) {
+                        Navigator.pushNamed(context, "/onlineResumeScreen");
+                      }
+                    },
+                  ),
                 ],
               ),
             ),

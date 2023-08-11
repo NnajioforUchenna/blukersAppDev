@@ -50,7 +50,7 @@ class _CompanyBasicInfoState extends State<CompanyBasicInfo> {
                             //width: MediaQuery.of(context).size.width,
                             fit: BoxFit.cover,
                           )
-                        : Image.asset("assets/images/mockImage.png"),
+                        : Image.asset("assets/images/userDefaultImage.png"),
                   ),
                 ),
                 Positioned(
