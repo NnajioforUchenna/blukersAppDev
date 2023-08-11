@@ -546,7 +546,7 @@ Uint8List bytes = await gallery.readAsBytes();
  
     print(appUser!.uid);
     PlatformFile? filePlatformFile = gallery.files.first;
-    ;
+    
 
     String? result = await UserDataProvider.uploadImage(
       image: filePlatformFile.bytes!,
