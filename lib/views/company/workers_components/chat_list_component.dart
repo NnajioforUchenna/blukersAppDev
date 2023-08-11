@@ -36,7 +36,7 @@ class ChatListComponent extends StatelessWidget {
                             //width: MediaQuery.of(context).size.width,
                             fit: BoxFit.cover,
                           )
-                        : Image.asset("assets/images/userDefaultImage.png")
+                        : Image.asset("assets/images/userDefaultProfilePic.png")
                     : chatRoom.chatLogo[0] != ""
                         ? FadeInImage.assetNetwork(
                             placeholder: "assets/images/loading.jpeg",
@@ -44,7 +44,8 @@ class ChatListComponent extends StatelessWidget {
                             //width: MediaQuery.of(context).size.width,
                             fit: BoxFit.cover,
                           )
-                        : Image.asset("assets/images/userDefaultImage.png"),
+                        : Image.asset(
+                            "assets/images/userDefaultProfilePic.png"),
               ),
             ),
             Container(

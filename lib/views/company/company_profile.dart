@@ -76,8 +76,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                           // decoration: BoxDecoration(
                           //   color: Colors.red,
                           // ),
-                          width: 300,
-                          height: 300,
+                          width: 250,
+                          height: 250,
                           child: up.appUser!.photoUrl != null &&
                                   up.appUser!.photoUrl != ""
                               ? FadeInImage.assetNetwork(
@@ -86,10 +86,10 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                   //width: MediaQuery.of(context).size.width,
                                   fit: BoxFit.fitWidth,
                                 )
-                              // : Image.asset("assets/images/userDefaultImage.png"),
+                              // : Image.asset("assets/images/userDefaultProfilePic.png"),
                               : FittedBox(
                                   child: Image.asset(
-                                      "assets/images/userDefaultImage.png"),
+                                      "assets/images/userDefaultProfilePic.png"),
                                   fit: BoxFit.fill,
                                 ),
                         ),
@@ -272,7 +272,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     height: 10,
                   ),
                   Text(
-                    up.appUser!.displayName ?? "My Profile",
+                    up.appUser!.displayName ?? "Display Name",
                     style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
                         .apply(color: Colors.black),
                   ),

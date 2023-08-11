@@ -6,10 +6,12 @@ class IconText404 extends StatelessWidget {
     super.key,
     required this.icon,
     required this.text,
+    this.color = ThemeColors.grey1ThemeColor,
   });
 
   IconData icon;
   String text;
+  Color color;
 
   @override
   Widget build(BuildContext context) {

@@ -126,8 +126,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                           // decoration: BoxDecoration(
                           //   color: Colors.red,
                           // ),
-                          width: 300,
-                          height: 300,
+                          width: 250,
+                          height: 250,
                           child: up.appUser!.photoUrl != null &&
                                   up.appUser!.photoUrl != ""
                               ? FadeInImage.assetNetwork(
@@ -136,10 +136,10 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                   //width: MediaQuery.of(context).size.width,
                                   fit: BoxFit.fitWidth,
                                 )
-                              // : Image.asset("assets/images/userDefaultImage.png"),
+                              // : Image.asset("assets/images/userDefaultProfilePic.png"),
                               : FittedBox(
                                   child: Image.asset(
-                                      "assets/images/userDefaultImage.png"),
+                                      "assets/images/userDefaultProfilePic.png"),
                                   fit: BoxFit.fill,
                                 ),
                         ),
@@ -322,7 +322,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     height: 10,
                   ),
                   Text(
-                    up.appUser!.displayName ?? "My Profile",
+                    up.appUser!.displayName ?? "Display Name",
                     style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
                         .apply(color: Colors.black),
                   ),
@@ -379,7 +379,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: InfoDisplayComponent(
-                        placeHolder: "Industires / Jobs",
+                        placeHolder: "Industries / Jobs",
                         value:
                             "Industries: ${up.appUser!.worker!.industryIds != null ? up.appUser!.worker!.industryIds!.join(", ") : ""}\n\nJobs: ${up.appUser!.worker!.jobIds != null ? up.appUser!.worker!.jobIds!.join(", ") : ""}",
                         icon: GestureDetector(
