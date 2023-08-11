@@ -1,4 +1,5 @@
 import 'package:bulkers/providers/worker_provider.dart';
+import 'package:bulkers/views/common_views/skills_form/skills_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,16 +18,6 @@ class ProfessionalCredentialsPage extends StatefulWidget {
 class _ProfessionalCredentialsPageState
     extends State<ProfessionalCredentialsPage> {
   late WorkerProvider wp;
-
-  List<String> skills = [
-    'Python',
-    'Flutter',
-    'Dart',
-    'React',
-    'Angular',
-    'Vue',
-    'JavaScript'
-  ];
   List<String> selectedSkills = [];
   List<CredentialField> credentialForms = [];
 
@@ -95,43 +86,8 @@ class _ProfessionalCredentialsPageState
             ),
 
             Divider(thickness: 1, color: Colors.grey[400]),
-
             const SizedBox(height: 20),
-
-            // Skills Section
-            const Text(
-              "Select Skills",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Wrap(
-              spacing: 10,
-              children: skills.map((skill) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ChoiceChip(
-                    label: Text(skill),
-                    selected: selectedSkills.contains(skill),
-                    onSelected: (selected) {
-                      setState(() {
-                        if (selected) {
-                          selectedSkills.add(skill);
-                        } else {
-                          selectedSkills.remove(skill);
-                        }
-                      });
-                    },
-                    backgroundColor: Colors.lightBlue[100],
-                    selectedColor: Colors.blue[700],
-                  ),
-                );
-              }).toList(),
-            ),
+            SkillsForm(selectedSkills: selectedSkills),
             const SizedBox(height: 40),
 
             Row(

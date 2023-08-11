@@ -32,7 +32,7 @@ class DetailPageBlockTwo extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Text(
-            "Skills: ${jobPost.skills.map((skill) => skill.name ?? '').join(', ')}",
+            "Skills: ${jobPost.skills.join(', ')}",
             style: const TextStyle(fontSize: 18),
           ),
           const Divider(),

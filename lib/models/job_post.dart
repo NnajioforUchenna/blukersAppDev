@@ -1,6 +1,5 @@
 import '../common_files/get_time_ago.dart';
 import 'address.dart';
-import 'skill.dart';
 
 enum JobUrgencyLevel { low, medium, high }
 
@@ -18,7 +17,7 @@ class JobPost {
   String jobDescription;
   String companyLogo;
   String requirements;
-  List<Skill> skills;
+  List<String> skills;
   JobType jobType;
   String contractDuration;
   SalaryType salaryType;
@@ -79,10 +78,7 @@ class JobPost {
       if (jobDescription.isNotEmpty) 'jobDescription': jobDescription,
       if (companyLogo.isNotEmpty) 'companyLogo': companyLogo,
       if (requirements.isNotEmpty) 'requirements': requirements,
-      if (skills.isNotEmpty)
-        'skills': skills
-            .map((skill) => skill.toMap())
-            .toList(), // Assuming Skill has a toMap method
+      if (skills.isNotEmpty) 'skills': skills,
       if (jobType != JobType.fullTime) 'jobType': jobType.index,
       if (contractDuration.isNotEmpty) 'contractDuration': contractDuration,
       if (salaryType != SalaryType.hourly) 'salaryType': salaryType.index,
@@ -113,45 +109,44 @@ class JobPost {
 
   static JobPost fromMap(Map<String, dynamic> map) {
     return JobPost(
-      jobPostId: map['jobPostId'] ?? '',
-      companyId: map['companyId'] ?? '',
-      companyName: map['companyName'] ?? '',
-      jobTitle: map['jobTitle'] ?? '',
-      jobDescription: map['jobDescription'] ?? '',
-      companyLogo: map['companyLogo'] ?? '',
-      requirements: map['requirements'] ?? '',
-      skills: map['skills'] != null
-          ? (map['skills'] as List)
-              .map((skill) => Skill.fromMap(skill))
-              .toList()
-          : const [],
+      jobPostId: map['jobPostId']?.toString() ?? '',
+      companyId: map['companyId']?.toString() ?? '',
+      companyName: map['companyName']?.toString() ?? '',
+      jobTitle: map['jobTitle']?.toString() ?? '',
+      jobDescription: map['jobDescription']?.toString() ?? '',
+      companyLogo: map['companyLogo']?.toString() ?? '',
+      requirements: map['requirements']?.toString() ?? '',
+      skills: map['skills']?.cast<String>() ?? const [],
       jobType: JobType.values[map['jobType'] ?? JobType.fullTime.index],
-      contractDuration: map['contractDuration'] ?? '',
+      contractDuration: map['contractDuration']?.toString() ?? '',
       salaryType:
           SalaryType.values[map['salaryType'] ?? SalaryType.hourly.index],
-      salaryAmount: double.parse(map['salaryAmount'].toString()) ?? 0.0,
+      salaryAmount: map['salaryAmount'] != null
+          ? double.parse(map['salaryAmount'].toString())
+          : 0.0,
       addresses: map['addresses'] != null
           ? (map['addresses'] as List)
               .map((address) => Address.fromMap(address))
               .toList()
           : const [],
-      address: map['address'] != null
-          ? Address.fromMap(map['address'])
-          : null, // Assuming Address has a fromMap method
+      address: map['address'] != null ? Address.fromMap(map['address']) : null,
       applicantUserIds: map['applicantUserIds']?.cast<String>() ?? const [],
       declineUserIds: map['declineUserIds']?.cast<String>() ?? const [],
       interviewedUserIds: map['interviewedUserIds']?.cast<String>() ?? const [],
       hiredUserIds: map['hiredUserIds']?.cast<String>() ?? const [],
-      numberOfPositionsAvailable:
-          int.parse(map['numberOfPositionsAvailable'].toString()) ?? 0,
+      numberOfPositionsAvailable: map['numberOfPositionsAvailable'] != null
+          ? int.parse(map['numberOfPositionsAvailable'].toString())
+          : 0,
       jobUrgencyLevel: JobUrgencyLevel
           .values[map['jobUrgencyLevel'] ?? JobUrgencyLevel.high.index],
       jobPostStatus: JobPostStatus
           .values[map['jobPostStatus'] ?? JobPostStatus.active.index],
       industryIds: map['industryIds']?.cast<String>() ?? const [],
       jobIds: map['jobIds']?.cast<String>() ?? const [],
-      dateCreated: map['dateCreated'] ?? 0,
-      schedule: map['schedule'] ?? '',
+      dateCreated: map['dateCreated'] != null
+          ? int.parse(map['dateCreated'].toString())
+          : 0,
+      schedule: map['schedule']?.toString() ?? '',
     );
   }
 

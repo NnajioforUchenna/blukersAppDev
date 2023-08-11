@@ -6,7 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
 import '../models/job_post.dart';
-import '../models/skill.dart';
+import '../services/translate_jobPost.dart';
 import '../views/common_views/please_login_dialog.dart';
 
 class JobPostsProvider with ChangeNotifier {
@@ -22,7 +22,6 @@ class JobPostsProvider with ChangeNotifier {
 
   void getJobPostsByJobID(String jobId) {
     // Get all jobPosts for the job with the given jobId.
-    print(jobId);
     JobPostsDataProvider.getJobPostsByJobID(jobId).then((jobPosts) {
       selectedJobPosts = jobPosts.map((jobPost) {
         return JobPost.fromMap(jobPost);
@@ -30,6 +29,17 @@ class JobPostsProvider with ChangeNotifier {
       selectedJobPost = selectedJobPosts.first;
       notifyListeners();
     });
+  }
+
+  void translateJobPosts(targetLanguage) {
+    List<JobPost> translatedJobPosts = [];
+    selectedJobPosts.forEach((jobPost) async {
+      JobPost transLatedJobPost = await TranslateJobPost(
+          jobPost: jobPost, targetLanguage: targetLanguage);
+      translatedJobPosts.add(transLatedJobPost);
+    });
+    selectedJobPosts = translatedJobPosts;
+    notifyListeners();
   }
 
   void setSelectedJobPost(JobPost jobPost) {
@@ -93,10 +103,7 @@ class JobPostsProvider with ChangeNotifier {
     previousParams['selectedSkillNames'] = selectedSkillNames;
 
     newJobPostData['requirements'] = requirements;
-    List skillsAsMaps = selectedSkillNames
-        .map((skillName) => Skill(id: skillName, name: skillName).toMap())
-        .toList();
-    newJobPostData['skills'] = skillsAsMaps;
+    newJobPostData['skills'] = selectedSkillNames;
     setJobPostPageNext();
   }
 
