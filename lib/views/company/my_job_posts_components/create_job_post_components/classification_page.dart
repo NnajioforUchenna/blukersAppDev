@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/industry.dart';
@@ -19,6 +18,14 @@ class _ClassificationPageState extends State<ClassificationPage> {
   String? selectedJobId;
 
   @override
+  void initState() {
+    super.initState();
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context, listen: false);
+    selectedIndustryId = jp.previousParams['industryId'];
+    selectedJobId = jp.previousParams['jobId'];
+  }
+
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
@@ -35,7 +42,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     "Select Industry",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -69,7 +76,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                   ),
                   const SizedBox(height: 20),
                   if (selectedIndustryId != null) ...[
-                    Text(
+                    const Text(
                       "Select Job",
                       textAlign: TextAlign.center,
                       style: TextStyle(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -47,10 +47,21 @@ class _CompensationAndContractPageState
   }
 
   @override
+  void initState() {
+    super.initState();
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context, listen: false);
+    _selectedJobType = jp.previousParams['jobType'];
+    _selectedSalaryPeriod = jp.previousParams['salaryPeriod'];
+    _durationInMonth = jp.previousParams['durationInMonth'];
+    _startDate = jp.previousParams['startDate'];
+    _endDate = jp.previousParams['endDate'];
+    _salaryController.text = jp.previousParams['salaryAmount'] ?? '';
+  }
+
+  @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -59,7 +70,7 @@ class _CompensationAndContractPageState
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 "Compensation & Contract",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -78,7 +89,7 @@ class _CompensationAndContractPageState
                     child: Text(type.toString().split('.').last),
                   );
                 }).toList(),
-                hint: Text("Select a Job Type"),
+                hint: const Text("Select a Job Type"),
                 onChanged: (JobType? newValue) {
                   setState(() {
                     _selectedJobType = newValue;
@@ -127,7 +138,12 @@ class _CompensationAndContractPageState
                   Expanded(
                     child: TextField(
                       controller: _salaryController,
-                      keyboardType: TextInputType.number,
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(
+                            r'^\d+\.?\d*')), // This allows only numbers and a single decimal point
+                      ],
                       decoration: InputDecoration(
                         labelText: "Salary Amount",
                         border: OutlineInputBorder(
@@ -146,7 +162,7 @@ class _CompensationAndContractPageState
                           child: Text(period.toString().split('.').last),
                         );
                       }).toList(),
-                      hint: Text("Select Salary Period"),
+                      hint: const Text("Select Salary Period"),
                       onChanged: (SalaryPeriod? newValue) {
                         setState(() {
                           _selectedSalaryPeriod = newValue;

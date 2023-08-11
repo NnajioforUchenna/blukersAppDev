@@ -259,6 +259,7 @@ class WorkerProvider with ChangeNotifier {
     workerProfileNextPage();
     newWorker?.dateCreated = DateTime.now().millisecondsSinceEpoch;
     WorkerDataProvider.createWorkerProfile(newWorker!);
+    previousParams.clear();
   }
 
   void getMyProfile() {

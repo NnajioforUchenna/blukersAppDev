@@ -1,7 +1,6 @@
 import 'package:bulkers/providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
@@ -17,16 +16,19 @@ class SocialMediaPage extends StatefulWidget {
 
 class _SocialMediaPageState extends State<SocialMediaPage> {
   TextEditingController websiteController = TextEditingController();
-  List<TextEditingController> platformControllers = [TextEditingController()];
-  List<TextEditingController> linkControllers = [TextEditingController()];
+  late List<TextEditingController> platformControllers;
+  late List<TextEditingController> linkControllers;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  void dispose() {
-    websiteController.dispose();
-    platformControllers.forEach((controller) => controller.dispose());
-    linkControllers.forEach((controller) => controller.dispose());
-    super.dispose();
+  void initState() {
+    CompanyProvider cp = Provider.of<CompanyProvider>(context, listen: false);
+    websiteController.text = cp.previousParams['website'] ?? '';
+    platformControllers =
+        cp.previousParams['platformControllers'] ?? [TextEditingController()];
+    linkControllers =
+        cp.previousParams['linkControllers'] ?? [TextEditingController()];
+    super.initState();
   }
 
   void addSocialMediaField() {
@@ -57,7 +59,7 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Social Media Information",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -180,7 +182,7 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context); // Go to the previous page
+                            cp.companyProfileBackPage();
                           },
                           child: const Text("Previous"),
                           style: ButtonStyle(

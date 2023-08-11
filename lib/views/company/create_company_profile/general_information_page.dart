@@ -2,7 +2,6 @@ import 'package:bulkers/providers/company_provider.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
@@ -27,6 +26,16 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
     return companyNameController.text.isNotEmpty &&
         companySloganController.text.isNotEmpty &&
         shortDescriptionController.text.isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    CompanyProvider cp = Provider.of<CompanyProvider>(context, listen: false);
+    companyNameController.text = cp.previousParams["companyName"] ?? "";
+    companySloganController.text = cp.previousParams["companySlogan"] ?? "";
+    shortDescriptionController.text =
+        cp.previousParams["shortDescription"] ?? "";
   }
 
   @override

@@ -2,7 +2,6 @@ import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/company_provider.dart';
@@ -31,6 +30,17 @@ class _CompanyCharacteristicsPageState
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      CompanyProvider cp = Provider.of<CompanyProvider>(context, listen: false);
+      companySizeController.text = cp.previousParams['companySize'] ?? '';
+      industryController.text = cp.previousParams['industry'] ?? '';
+      yearFoundedController.text = cp.previousParams['yearFounded'] ?? '';
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final node = FocusScope.of(context);
@@ -53,7 +63,7 @@ class _CompanyCharacteristicsPageState
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Company Characteristics",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -67,6 +77,9 @@ class _CompanyCharacteristicsPageState
                     AuthInput(
                       child: TextFormField(
                         controller: companySizeController,
+                        onChanged: (value) {
+                          cp.previousParams['companySize'] = value;
+                        },
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
                         validator: (value) =>
@@ -89,6 +102,9 @@ class _CompanyCharacteristicsPageState
                     AuthInput(
                       child: TextFormField(
                         controller: industryController,
+                        onChanged: (value) {
+                          cp.previousParams['industry'] = value;
+                        },
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
                         validator: (value) =>
@@ -111,6 +127,9 @@ class _CompanyCharacteristicsPageState
                     AuthInput(
                       child: TextFormField(
                         controller: yearFoundedController,
+                        onChanged: (value) {
+                          cp.previousParams['yearFounded'] = value;
+                        },
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
@@ -145,7 +164,7 @@ class _CompanyCharacteristicsPageState
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context); // Go to the previous page
+                            cp.companyProfileBackPage();
                           },
                           child: Text("Previous"),
                           style: ButtonStyle(
@@ -175,7 +194,7 @@ class _CompanyCharacteristicsPageState
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ThemeColors.secondaryThemeColor),
                           ),
-                          child: const Text("Next"),
+                          child: const Text("Submit"),
                         ),
                       ],
                     ),

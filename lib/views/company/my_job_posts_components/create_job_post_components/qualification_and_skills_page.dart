@@ -27,6 +27,14 @@ class _QualificationAndSkillsPageState
   List<String> selectedSkills = [];
 
   @override
+  void initState() {
+    super.initState();
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context, listen: false);
+    _requirementsController.text = jp.previousParams['requirements'] ?? '';
+    selectedSkills = jp.previousParams['selectedSkillNames'] ?? [];
+  }
+
+  @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     final height = MediaQuery.of(context).size.height;

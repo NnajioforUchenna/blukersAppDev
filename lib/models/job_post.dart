@@ -129,7 +129,7 @@ class JobPost {
       contractDuration: map['contractDuration'] ?? '',
       salaryType:
           SalaryType.values[map['salaryType'] ?? SalaryType.hourly.index],
-      salaryAmount: map['salaryAmount'] ?? 0.0,
+      salaryAmount: double.parse(map['salaryAmount'].toString()) ?? 0.0,
       addresses: map['addresses'] != null
           ? (map['addresses'] as List)
               .map((address) => Address.fromMap(address))
@@ -142,7 +142,8 @@ class JobPost {
       declineUserIds: map['declineUserIds']?.cast<String>() ?? const [],
       interviewedUserIds: map['interviewedUserIds']?.cast<String>() ?? const [],
       hiredUserIds: map['hiredUserIds']?.cast<String>() ?? const [],
-      numberOfPositionsAvailable: map['numberOfPositionsAvailable'] ?? 0,
+      numberOfPositionsAvailable:
+          int.parse(map['numberOfPositionsAvailable'].toString()) ?? 0,
       jobUrgencyLevel: JobUrgencyLevel
           .values[map['jobUrgencyLevel'] ?? JobUrgencyLevel.high.index],
       jobPostStatus: JobPostStatus

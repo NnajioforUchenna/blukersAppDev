@@ -1,6 +1,7 @@
 import 'package:bulkers/utils/styles/index.dart';
+import 'package:bulkers/views/common_views/address_form/address_form.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/job_posts_provider.dart';
@@ -27,8 +28,12 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
     return _streetController.text.isNotEmpty &&
         _cityController.text.isNotEmpty &&
         _stateController.text.isNotEmpty &&
-        _postalCodeController.text.isNotEmpty &&
         _countryController.text.isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -55,7 +60,7 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Additional Information Page",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -66,45 +71,23 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        border:
-                            Border.all(color: ThemeColors.secondaryThemeColor),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Address',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 10),
-                          _buildTextField(
-                              "Street", TextInputType.text, _streetController),
-                          const SizedBox(height: 20),
-                          _buildTextField(
-                              "City", TextInputType.text, _cityController),
-                          const SizedBox(height: 20),
-                          _buildTextField(
-                              "State", TextInputType.text, _stateController),
-                          const SizedBox(height: 20),
-                          _buildTextField("Postal Code", TextInputType.number,
-                              _postalCodeController),
-                          const SizedBox(height: 20),
-                          _buildTextField("Country", TextInputType.text,
-                              _countryController),
-                        ],
-                      ),
-                    ),
+                    AddressForm(
+                        streetController: _streetController,
+                        cityController: _cityController,
+                        stateController: _stateController,
+                        postalCodeController: _postalCodeController,
+                        countryController: _countryController,
+                        label: "Address",
+                        validate: isFormComplete),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context); // Go to the previous page
+                            jp.setJobPostPagePrevious();
                           },
-                          child: Text("Previous"),
+                          child: const Text("Previous"),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ThemeColors.secondaryThemeColor),
@@ -120,13 +103,16 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                                   _stateController.text,
                                   _postalCodeController.text,
                                   _countryController.text);
+                            } else {
+                              EasyLoading.showError(
+                                  'Please fill all the fields');
                             }
                           },
-                          child: Text("Submit"),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ThemeColors.secondaryThemeColor),
                           ),
+                          child: const Text("Submit"),
                         ),
                       ],
                     ),

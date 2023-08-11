@@ -1,6 +1,6 @@
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/job_posts_provider.dart';
@@ -18,6 +18,17 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
   TextEditingController jobDescriptionController = TextEditingController();
   TextEditingController positionsAvailableController = TextEditingController();
   double urgencyValue = 1; // default to "medium"
+
+  @override
+  void initState() {
+    super.initState();
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context, listen: false);
+    jobTitleController.text = jp.previousParams['title'] ?? '';
+    jobDescriptionController.text = jp.previousParams['description'] ?? '';
+    positionsAvailableController.text =
+        jp.previousParams['positionsAvailable'] ?? '';
+    urgencyValue = jp.previousParams['urgencyValue'] ?? 1;
+  }
 
   bool isFormComplete() {
     return jobTitleController.text.isNotEmpty &&
@@ -103,6 +114,9 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                       child: TextFormField(
                         controller: positionsAvailableController,
                         keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
                         validator: (value) =>
@@ -160,7 +174,7 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context); // Go to the previous page
+                            jp.setJobPostPagePrevious();
                           },
                           child: Text("Previous"),
                           style: ButtonStyle(

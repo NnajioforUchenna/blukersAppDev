@@ -37,6 +37,8 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Map<String, dynamic> previousParams = {};
+
   void createNewJobPost(AppUser? appUser, BuildContext context) {
     if (appUser == null) {
       showDialog(
@@ -50,7 +52,10 @@ class JobPostsProvider with ChangeNotifier {
   }
 
   void setIndustryAndJob(String industryId, String jobId) {
-    print(jobId);
+    // store previous params
+    previousParams['industryId'] = industryId;
+    previousParams['jobId'] = jobId;
+
     newJobPostData['industryIds'] = [industryId];
     newJobPostData['jobIds'] = [jobId];
     setJobPostPageNext();
@@ -68,6 +73,12 @@ class JobPostsProvider with ChangeNotifier {
 
   void addBasicInformation(String title, String description,
       String positionsAvailable, int urgencyValue) {
+    // store previous params
+    previousParams['title'] = title;
+    previousParams['description'] = description;
+    previousParams['positionsAvailable'] = positionsAvailable;
+    previousParams['urgencyValue'] = urgencyValue;
+
     newJobPostData['jobTitle'] = title;
     newJobPostData['jobDescription'] = description;
     newJobPostData['numberOfPositionsAvailable'] = positionsAvailable;
@@ -76,8 +87,12 @@ class JobPostsProvider with ChangeNotifier {
   }
 
   void addQualificationAndSkills(
-      String requirement, List<String> selectedSkillNames) {
-    newJobPostData['requirements'] = requirement;
+      String requirements, List<String> selectedSkillNames) {
+    // store previous params
+    previousParams['requirements'] = requirements;
+    previousParams['selectedSkillNames'] = selectedSkillNames;
+
+    newJobPostData['requirements'] = requirements;
     List skillsAsMaps = selectedSkillNames
         .map((skillName) => Skill(id: skillName, name: skillName).toMap())
         .toList();
@@ -93,6 +108,14 @@ class JobPostsProvider with ChangeNotifier {
     DateTime? startDate,
     DateTime? endDate,
   }) {
+    // store previous params
+    previousParams['jobType'] = jobType;
+    previousParams['salaryAmount'] = salaryAmount;
+    previousParams['salaryPeriod'] = salaryPeriod;
+    previousParams['durationInMonth'] = durationInMonth;
+    previousParams['startDate'] = startDate;
+    previousParams['endDate'] = endDate;
+
     if (jobType != null) {
       newJobPostData['jobType'] = jobType.index;
     }

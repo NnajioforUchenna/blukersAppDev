@@ -34,11 +34,11 @@ class _JobPostPageSliderState extends State<JobPostPageSlider> {
     );
   }
 
-  void animateToNextPage() {
+  void animateToNextPage(index) {
     if (_currentPageIndex < 5) {
       // modified to fit the 5 steps in JobPost
       _pageController.animateToPage(
-        _currentPageIndex + 1,
+        index,
         duration: Duration(seconds: 1),
         curve: Curves.easeInOut,
       );
@@ -49,7 +49,7 @@ class _JobPostPageSliderState extends State<JobPostPageSlider> {
   Widget build(BuildContext context) {
     JobPostsProvider up = Provider.of<JobPostsProvider>(context);
     if (_currentPageIndex != up.jobPostCurrentPageIndex) {
-      animateToNextPage();
+      animateToNextPage(up.jobPostCurrentPageIndex);
       _currentPageIndex = up.jobPostCurrentPageIndex;
     }
 

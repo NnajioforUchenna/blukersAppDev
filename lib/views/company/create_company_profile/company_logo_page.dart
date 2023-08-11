@@ -1,7 +1,6 @@
 import 'package:bulkers/providers/company_provider.dart';
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
@@ -48,8 +47,18 @@ class _CompanyLogoPageState extends State<CompanyLogoPage> {
                   const YourCompanyLogo(), // Replace with your widget to handle company logo
                   const SizedBox(height: 30),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          cp.companyProfileBackPage();
+                        },
+                        child: Text("Previous"),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              ThemeColors.secondaryThemeColor),
+                        ),
+                      ),
                       ElevatedButton(
                         onPressed: () {
                           if (cp.appUser?.photoUrl != null) {

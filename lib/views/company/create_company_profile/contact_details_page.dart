@@ -2,13 +2,11 @@ import 'package:bulkers/providers/company_provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/styles/theme_colors.dart';
 import '../../auth/common_widget/auth_input.dart';
 import '../../common_views/address_form/address_form.dart';
-import '../../common_views/address_form/validate_address.dart';
 
 class ContactDetailsPage extends StatefulWidget {
   const ContactDetailsPage({super.key});
@@ -26,7 +24,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
   final _postalCodeController = TextEditingController();
   final _countryController = TextEditingController();
 
-  String ext = '+52';
+  String ext = '+1';
 
   void _onCountryChange(CountryCode countryCode) {
     ext = countryCode.toString();
@@ -38,8 +36,23 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
         _streetController.text.isNotEmpty &&
         _cityController.text.isNotEmpty &&
         _stateController.text.isNotEmpty &&
-        _postalCodeController.text.isNotEmpty &&
         _countryController.text.isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      CompanyProvider cp = Provider.of<CompanyProvider>(context, listen: false);
+      ext = cp.previousParams['ext'] ?? '+1';
+      _customerServicePhoneController.text =
+          cp.previousParams['phoneNumber'] ?? '';
+      _streetController.text = cp.previousParams['street'] ?? '';
+      _cityController.text = cp.previousParams['city'] ?? '';
+      _stateController.text = cp.previousParams['state'] ?? '';
+      _postalCodeController.text = cp.previousParams['postalCode'] ?? '';
+      _countryController.text = cp.previousParams['country'] ?? '';
+    });
   }
 
   @override
@@ -143,27 +156,29 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Spacer(),
+                        ElevatedButton(
+                          onPressed: () {
+                            cp.companyProfileBackPage();
+                          },
+                          child: Text("Previous"),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                ThemeColors.secondaryThemeColor),
+                          ),
+                        ),
                         ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
-                              ValidateAddress(
+                              cp.addContactDetails(
+                                ext,
+                                _customerServicePhoneController.text,
                                 _streetController.text,
                                 _cityController.text,
                                 _stateController.text,
                                 _postalCodeController.text,
                                 _countryController.text,
                               );
-                              // cp.addContactDetails(
-                              //   ext,
-                              //   _customerServicePhoneController.text,
-                              //   _streetController.text,
-                              //   _cityController.text,
-                              //   _stateController.text,
-                              //   _postalCodeController.text,
-                              //   _countryController.text,
-                              // );
                             } else {
                               EasyLoading.showError(
                                   "Please fill all the fields");

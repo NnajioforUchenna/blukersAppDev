@@ -31,7 +31,7 @@ class Responsive extends StatelessWidget {
   static double textScaleFactor(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     if (width < mobileBreakpoint) {
-      return 0.8;
+      return 0.7;
     } else if (width < tabletBreakpoint) {
       return 1;
     } else {

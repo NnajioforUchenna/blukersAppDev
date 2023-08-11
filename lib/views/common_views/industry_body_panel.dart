@@ -63,48 +63,55 @@ class IndustryBodyPanel extends StatelessWidget {
                   //     color: ThemeColors.primaryThemeColor, width: 2),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      Expanded(
-                        child: RichText(
-                          text: TextSpan(
-                            text: job.title,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: ThemeColors.primaryThemeColor,
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: RichText(
+                              text: TextSpan(
+                                text: job.title,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: ThemeColors.primaryThemeColor,
+                                ),
+                              ),
                             ),
+                          ),
+                          // Spacer(),
+                          Icon(
+                            up.userRole == 'company'
+                                ? UniconsLine.users_alt
+                                : UniconsLine.briefcase_alt,
+                            color: ThemeColors.primaryThemeColor,
+                            size: 30.0,
+                          ),
+                          ApplicantCount(
+                            count: up.userRole == 'company'
+                                ? job.numberOfApplicants
+                                : job.numberOfJobPosts,
+                            color: ThemeColors.primaryThemeColor,
+                          ),
+                        ],
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 4.0, bottom: 6.0),
+                        child: Text(
+                          'Salary: ${NumberFormatHelper().doubleToStrSimpleCurrency(job.lowRange)} - ${NumberFormatHelper().doubleToStrSimpleCurrency(job.highRange)}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: ThemeColors.grey1ThemeColor,
                           ),
                         ),
                       ),
-                      // Spacer(),
-                      Icon(
-                        up.userRole == 'company'
-                            ? UniconsLine.users_alt
-                            : UniconsLine.briefcase_alt,
-                        color: ThemeColors.primaryThemeColor,
-                        size: 30.0,
-                      ),
-                      ApplicantCount(
-                        count: up.userRole == 'company'
-                            ? job.numberOfApplicants
-                            : job.numberOfJobPosts,
-                        color: ThemeColors.primaryThemeColor,
-                      ),
-                    ],
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 4.0, bottom: 6.0),
-                    child: Text(
-                      'Salary: ${NumberFormatHelper().doubleToStrSimpleCurrency(job.lowRange)} - ${NumberFormatHelper().doubleToStrSimpleCurrency(job.highRange)}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: ThemeColors.grey1ThemeColor,
-                      ),
                     ),
-                  ),
+                    const SizedBox(
+                      height: 10,
+                    )
+                  ],
                 ),
               ),
             ),

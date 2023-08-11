@@ -50,9 +50,17 @@ class CompanyProvider with ChangeNotifier {
   }
 
   Map<String, dynamic> createCompanyProfileData = {};
+  Map<String, dynamic> previousParams = {};
 
   void addGeneralInformation(
       String companyName, String companySlogan, String shortDescription) {
+    // Storing Previous Parameters
+    previousParams.addAll({
+      'companyName': companyName,
+      'companySlogan': companySlogan,
+      'shortDescription': shortDescription,
+    });
+
     createCompanyProfileData.addAll({
       'companyId': appUser!.uid,
       'emails': [appUser!.email],
@@ -66,6 +74,11 @@ class CompanyProvider with ChangeNotifier {
 
   void companyProfileNextPage() {
     companyProfileCurrentPageIndex++;
+    notifyListeners();
+  }
+
+  void companyProfileBackPage() {
+    companyProfileCurrentPageIndex--;
     notifyListeners();
   }
 
@@ -111,6 +124,17 @@ class CompanyProvider with ChangeNotifier {
 
   void addContactDetails(String ext, String phoneNumber, String street,
       String city, String state, String postalCode, String country) {
+    // Storing Previous Parameters
+    previousParams.addAll({
+      'ext': ext,
+      'phoneNumber': phoneNumber,
+      'street': street,
+      'city': city,
+      'state': state,
+      'postalCode': postalCode,
+      'country': country,
+    });
+
     Address address = Address(
       street: street,
       city: city,
@@ -130,6 +154,13 @@ class CompanyProvider with ChangeNotifier {
       String website,
       List<TextEditingController> platformControllers,
       List<TextEditingController> linkControllers) {
+    // Storing Previous Parameters
+    previousParams.addAll({
+      'website': website,
+      'platformControllers': platformControllers,
+      'linkControllers': linkControllers,
+    });
+
     Map<String, dynamic> createCompanyProfileData = {};
 
     var socialPlatforms = [];
@@ -151,6 +182,13 @@ class CompanyProvider with ChangeNotifier {
 
   Future<bool> addCompanyCharacteristics(
       String companySize, String industry, String yearFounded) async {
+    // Storing Previous Parameters
+    previousParams.addAll({
+      'companySize': companySize,
+      'industry': industry,
+      'yearFounded': yearFounded,
+    });
+
     EasyLoading.show(
       status: 'Creating Your Company Profile...',
       maskType: EasyLoadingMaskType.black,
@@ -180,6 +218,7 @@ class CompanyProvider with ChangeNotifier {
 
     notifyListeners();
     updateCompanyTimelineStep();
+    previousParams.clear();
     return true;
   }
 
