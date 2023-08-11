@@ -6,9 +6,12 @@ import '../../../providers/user_provider.dart';
 import '../../../utils/styles/index.dart';
 import 'option_box.dart';
 
+import 'package:bulkers/views/auth/common_widget/label_button.dart';
+
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -72,6 +75,15 @@ class LandingPage extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: height * .01),
+            if (up.appUser == null)
+              LabelButton(
+                onTap: () {
+                  Navigator.pushNamed(context, "/login");
+                },
+                title: "Already Have An Account?",
+                subTitle: "Sign In",
+              ),
           ],
         ),
       ),
