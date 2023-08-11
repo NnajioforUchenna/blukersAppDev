@@ -9,6 +9,7 @@ import '../../../../providers/user_provider.dart';
 import '../../../../services/responsive.dart';
 import '../../../../utils/styles/theme_colors.dart';
 import '../../../common_views/worker_timeline/display_worker_timeline_dialog.dart';
+import '../../../new_chat_room.dart';
 
 class WorkerDetailBlockOne extends StatelessWidget {
   final Worker worker;
@@ -172,20 +173,26 @@ class WorkerDetailBlockOne extends StatelessWidget {
                             builder: (context) =>
                                 const DisplayWorkerTimelineDialog());
                       } else {
-                        String? roomId = await chatProvider?.createChatRoom(
-                            myUid: up.appUser!.uid,
-                            recipientUid: worker.workerId,
-                            myName: up.appUser!.displayName ?? "Company",
-                            recipientName: worker.firstName + worker.lastName,
-                            message: "",
-                            myLogo: up.appUser!.photoUrl ?? "",
-                            recipientLogo: worker.profilePhotoUrl ?? "");
-                        chatProvider?.activeRoomId = roomId!;
-                        Navigator.pushNamed(context, '/chat-message',
-                            arguments: {
-                              "roomId": roomId,
-                              "roomName": worker.firstName + worker.lastName,
-                            });
+                        chatProvider.startRoom(up.appUser, worker);
+                        // String? roomId = await chatProvider?.createChatRoom(
+                        //     myUid: up.appUser!.uid,
+                        //     recipientUid: worker.workerId,
+                        //     myName: up.appUser!.displayName ?? "Company",
+                        //     recipientName: worker.firstName + worker.lastName,
+                        //     message: "",
+                        //     myLogo: up.appUser!.photoUrl ?? "",
+                        //     recipientLogo: worker.profilePhotoUrl ?? "");
+                        // chatProvider?.activeRoomId = roomId!;
+                        // Navigator.pushNamed(context, '/chat-message',
+                        //     arguments: {
+                        //       "roomId": roomId,
+                        //       "roomName": worker.firstName + worker.lastName,
+                        //     });
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NewChatRoom()),
+                        );
                       }
                     },
                   ),

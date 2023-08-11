@@ -1,7 +1,8 @@
 import 'package:bulkers/data_providers/chat_data_provider.dart';
+import 'package:bulkers/models/app_user.dart';
 import 'package:bulkers/models/chat_message.dart';
 import 'package:bulkers/models/chat_room.dart';
-import 'package:bulkers/services/notification_service.dart';
+import 'package:bulkers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -89,5 +90,26 @@ class ChatProvider with ChangeNotifier {
 
   Stream<QuerySnapshot> getMessagesByGroupId(String groupId) {
     return ChatDataProvider.fetchMessagesByGroupId(groupId);
+  }
+
+  Map<String, String> chatDetails = {
+    "roomId": "<Room ID>",
+    "sentToId": "<Sent To ID>",
+    "roomName": "<Room Name>",
+  };
+  Future<void> startRoom(AppUser? appUser, Worker worker) async {
+    String? roomId = await createChatRoom(
+        myUid: appUser!.uid,
+        recipientUid: worker.workerId,
+        myName: appUser!.displayName ?? "Company",
+        recipientName: worker.firstName + worker.lastName,
+        message: "",
+        myLogo: appUser!.photoUrl ?? "",
+        recipientLogo: worker.profilePhotoUrl ?? "");
+
+    chatDetails["roomId"] = roomId ?? "";
+    chatDetails["sentToId"] = worker.workerId;
+    chatDetails["roomName"] = worker.firstName + worker.lastName;
+    notifyListeners();
   }
 }
