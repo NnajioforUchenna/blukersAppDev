@@ -14,6 +14,8 @@ import 'package:bulkers/views/worker/create_worker_profile_component/worker_basi
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:unicons/unicons.dart';
+
 class OnlineResumeScreen extends StatefulWidget {
   const OnlineResumeScreen({super.key});
 
@@ -35,19 +37,19 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Text(
-              "Profile",
-              style: ThemeTextStyles.headingThemeTextStyle
-                  .apply(color: Colors.black),
-            ),
+            // Text(
+            //   "Profile",
+            //   style: ThemeTextStyles.headingThemeTextStyle
+            //       .apply(color: Colors.black),
+            // ),
             const SizedBox(
               height: 20,
             ),
             Stack(
               children: [
                 SizedBox(
-                  width: 100,
-                  height: 100,
+                  width: 200,
+                  height: 200,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: worker.profilePhotoUrl != null &&
@@ -58,7 +60,8 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                             //width: MediaQuery.of(context).size.width,
                             fit: BoxFit.cover,
                           )
-                        : Image.asset("assets/images/mockImage.png"),
+                        : Image.asset(
+                            "assets/images/userDefaultProfilePic.png"),
                   ),
                 ),
                 Positioned(
@@ -278,7 +281,8 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
               ),
             ProfileSection(
               heading: "References",
-              icon: Icons.arrow_forward_ios,
+              icon: UniconsLine.arrow_right,
+              showInfoInNewPage: true,
               onClickSection: () {
                 print("Section clicked/ Edit Clicked");
                 if (up.appUser!.worker != null) {
@@ -290,7 +294,8 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
             ),
             ProfileSection(
               heading: "Work Experience",
-              icon: Icons.arrow_forward_ios,
+              icon: UniconsLine.arrow_right,
+              showInfoInNewPage: true,
               onClickSection: () {
                 print("Section clicked/ Edit Clicked");
                 if (up.appUser!.worker != null) {

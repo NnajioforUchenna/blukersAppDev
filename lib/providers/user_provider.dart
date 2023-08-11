@@ -506,7 +506,7 @@ class UserProvider with ChangeNotifier {
     if (result != null) {
       PlatformFile file = result.files.first;
       EasyLoading.show(
-        status: 'Uploading your Profile Pic...',
+        status: 'Uploading your PDF...',
         maskType: EasyLoadingMaskType.black,
       );
       // List<PlatformFile> fileList = result.files;
@@ -538,12 +538,18 @@ class UserProvider with ChangeNotifier {
 
       final File fileForFirebase = File(file.path!);
 
+      print('fileForFirebase');
+      print(fileForFirebase);
+
       String? imageUrl = await UserDataProvider.uploadImage(
           flow: fileForFirebase, path: "$storagePath${appUser!.uid}");
 
+      print('imageUrl');
+      print(imageUrl);
+
       // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
       //fbImageUrl.value = imageUrl ?? "";
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
 
       EasyLoading.dismiss();
       return imageUrl;

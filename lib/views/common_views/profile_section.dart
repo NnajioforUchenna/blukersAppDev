@@ -1,5 +1,7 @@
 import 'package:bulkers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:unicons/unicons.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 class ProfileSection extends StatelessWidget {
   const ProfileSection(
@@ -9,11 +11,13 @@ class ProfileSection extends StatelessWidget {
       required this.onClickSection,
       this.onClickEdit,
       this.showBasicInfo,
+      this.showInfoInNewPage = false,
       this.showEditIcon = true});
   final String heading;
   final IconData icon;
   final VoidCallback onClickSection;
   final VoidCallback? onClickEdit;
+  final bool? showInfoInNewPage;
   final bool? showBasicInfo;
   final bool showEditIcon;
 
@@ -33,26 +37,36 @@ class ProfileSection extends StatelessWidget {
               ),
             ),
           ),
-          if (showBasicInfo != null)
-            GestureDetector(
-              onTap: onClickSection,
-              child: Icon(
-                showBasicInfo!
-                    ? Icons.keyboard_arrow_up
-                    : Icons.keyboard_arrow_down,
-                color: Colors.grey[700],
-                size: 30,
-              ),
-            ),
-          if (showEditIcon)
+          if (showEditIcon && showInfoInNewPage == true)
             GestureDetector(
               onTap: onClickEdit ?? onClickSection,
               child: Icon(
                 icon,
-                color: Colors.grey[700],
+                color: ThemeColors.grey1ThemeColor,
+                size: 55,
+              ),
+            ),
+          if (showEditIcon && showInfoInNewPage == false)
+            GestureDetector(
+              onTap: onClickEdit ?? onClickSection,
+              child: Icon(
+                icon,
+                color: ThemeColors.secondaryThemeColor,
                 size: 30,
               ),
-            )
+            ),
+          if (showBasicInfo != null)
+            GestureDetector(
+              onTap: onClickSection,
+              child: Icon(
+                showBasicInfo! ? UniconsLine.angle_up : UniconsLine.angle_down,
+                // color: Colors.grey[700],
+                color: showBasicInfo!
+                    ? ThemeColors.primaryThemeColor
+                    : ThemeColors.grey1ThemeColor,
+                size: 60,
+              ),
+            ),
         ],
       ),
     );

@@ -70,20 +70,28 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   ),
                   Stack(
                     children: [
-                      SizedBox(
-                        width: 300,
-                        height: 300,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(1000),
+                        child: Container(
+                          // decoration: BoxDecoration(
+                          //   color: Colors.red,
+                          // ),
+                          width: 250,
+                          height: 250,
                           child: up.appUser!.photoUrl != null &&
                                   up.appUser!.photoUrl != ""
                               ? FadeInImage.assetNetwork(
                                   placeholder: "assets/images/loading.jpeg",
                                   image: up.appUser!.photoUrl!,
                                   //width: MediaQuery.of(context).size.width,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fitWidth,
                                 )
-                              : Image.asset("assets/images/mockImage.png"),
+                              // : Image.asset("assets/images/userDefaultProfilePic.png"),
+                              : FittedBox(
+                                  child: Image.asset(
+                                      "assets/images/userDefaultProfilePic.png"),
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                       Positioned(
@@ -264,7 +272,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     height: 10,
                   ),
                   Text(
-                    up.appUser!.displayName ?? "My Profile",
+                    up.appUser!.displayName ?? "Display Name",
                     style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
                         .apply(color: Colors.black),
                   ),
