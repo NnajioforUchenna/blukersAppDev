@@ -11,6 +11,8 @@ import 'interesting_workers_components/no_interesting_worker.dart';
 import 'package:bulkers/views/common_views/components/icon_text_404.dart';
 import 'package:unicons/unicons.dart';
 
+import 'package:bulkers/views/common_views/components/animations/index.dart';
+
 class InterestingWorkersTab extends StatelessWidget {
   const InterestingWorkersTab({super.key});
 
@@ -22,7 +24,8 @@ class InterestingWorkersTab extends StatelessWidget {
       stream: cp.getInterestingWorkersStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LoadingInterestingWorkers();
+          // return const LoadingInterestingWorkers();
+          return MyAnimation(name: 'circlePulseBlue2');
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {

@@ -27,10 +27,11 @@ class MyAnimation extends StatelessWidget {
       'congratulationsConfetti': 'assets/animations/animation_ll6su4li.json',
       'congratulationsConfettiBlue':
           'assets/animations/animation_ll6sz0it.json',
-      'circlePulseBlue': 'assets/animations/animation_ll6sv0mu.json',
-      'circlePulseBlue2': 'assets/animations/animation_ll6svq0n.json',
       'congratulationsConfettiBlue2':
           'assets/animations/animation_ll6sz5lm.json',
+      'circlePulseBlue': 'assets/animations/animation_ll6sv0mu.json',
+      'circlePulseBlue2': 'assets/animations/animation_ll6svq0n.json',
+      'workerRegistration': 'assets/animations/animation_ll70pq2n.json',
       'defaultAnimation': 'assets/animations/animation_ll6svq0n.json',
     };
 

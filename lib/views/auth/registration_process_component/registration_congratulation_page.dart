@@ -5,6 +5,10 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 
+import 'package:bulkers/utils/styles/index.dart';
+import 'package:bulkers/views/common_views/components/animations/index.dart';
+// import 'package:bulkers/views/auth/common_widget/submit_button.dart';
+
 class RegistrationCongratulationPage extends StatefulWidget {
   const RegistrationCongratulationPage({super.key});
 
@@ -15,7 +19,7 @@ class RegistrationCongratulationPage extends StatefulWidget {
 
 class _RegistrationCongratulationPageState
     extends State<RegistrationCongratulationPage> {
-  int countdownValue = 5;
+  int countdownValue = 10;
   late Timer _timer;
   late UserProvider up;
 
@@ -54,18 +58,41 @@ class _RegistrationCongratulationPageState
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const Icon(Icons.check_circle, color: Colors.green, size: 100),
+        // const Icon(Icons.check_circle, color: Colors.green, size: 100),
+        MyAnimation(
+          name: 'congratulationsConfettiBlue',
+          width: 300,
+          height: 300,
+        ),
         const SizedBox(height: 20),
         const Text(
           'Congratulations!',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 36,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+            color: ThemeColors.secondaryThemeColor,
+          ),
         ),
-        const Text('You have successfully signed up.'),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
+        const Text(
+          'You have successfully signed up.',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+            color: ThemeColors.grey1ThemeColor,
+          ),
+        ),
+        const SizedBox(height: 40),
         Text.rich(
           TextSpan(
-            text: 'Navigating in ',
-            style: const TextStyle(fontSize: 20),
+            text: 'Redirecting you to dashboard in ',
+            style: const TextStyle(
+                fontSize: 16,
+                color: ThemeColors.primaryThemeColor,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold),
             children: <TextSpan>[
               TextSpan(
                 text: '$countdownValue',
@@ -78,6 +105,17 @@ class _RegistrationCongratulationPageState
             ],
           ),
         ),
+        // SubmitButton(
+        //   onTap: () {
+        //     if (up.userRole == "company") {
+        //       Navigator.pushReplacementNamed(context, '/workers');
+        //     } else {
+        //       Navigator.pushReplacementNamed(context, '/jobs');
+        //     }
+        //   },
+        //   text: 'Continue',
+        //   isDisabled: false,
+        // ),
       ],
     );
   }
