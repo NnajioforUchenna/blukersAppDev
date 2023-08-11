@@ -28,6 +28,7 @@ class JobTimeline extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).primaryColor,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
