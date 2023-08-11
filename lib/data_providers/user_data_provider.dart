@@ -142,13 +142,13 @@ class UserDataProvider {
   static Future<void> updateWorkerInfo(
       Map<String, dynamic> info, String uid) async {
     CollectionReference appUserCollection = firestore.collection('AppUsers');
-    CollectionReference companyCollection = firestore.collection('Workers');
+    CollectionReference companyCollection = firestore.collection('workers');
     await appUserCollection
         .doc(uid)
         .update({"worker": info}).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
-    await companyCollection.doc(uid).update(info).catchError((error) {
+    await companyCollection.doc(uid).set(info).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
   }
@@ -262,11 +262,12 @@ class UserDataProvider {
     });
   }
 
-  static Future<String?> uploadImage({File? flow, String? path}) async {
-    final firebaseStorage = FirebaseStorage.instance;
+  static Future<String?> uploadImage(
+      {Uint8List? image, String? path}) async {
+    // final firebaseStorage = FirebaseStorage.instance;
     // final imagePicker = ImagePicker();
     // PickedFile? image;
-    String? imageUrl;
+    // String? imageUrl;
     //Check Permissions
     // await Permission.photos.request();
 
@@ -274,25 +275,42 @@ class UserDataProvider {
     // if (kDebugMode) {
     //   print(permissionStatus);
     // }
+    final storageRef = FirebaseStorage.instance.ref();
+    Reference? imagesRef = storageRef.child(path!);
+    String imageUrl = '';
 
-    if (flow != null) {
-      //  File(image.path);
-      //Upload to Firebase
-      var snapshot = firebaseStorage.ref().child(path!).putFile(flow).snapshot;
-      await Future.delayed(Duration(seconds: 5));
-      String downloadUrl = await snapshot.ref.getDownloadURL();
-      // setState(() {
-      imageUrl = downloadUrl;
-      if (kDebugMode) {
-        print(imageUrl);
-      }
+    try {
+      print(image?.lengthInBytes.toString());
+      final uploadTask = await imagesRef.putData(
+        image!,
+      );
+      print(uploadTask);
+      imageUrl = await uploadTask.ref.getDownloadURL();
+      // Set the logoUrl in the database
+      // await updateOrAddUserPhoto(uid, imageUrl);
       return imageUrl;
-      // });
-    } else {
-      if (kDebugMode) {
-        print('No Image Path Received');
-      }
-      return '';
+    } catch (e) {
+      print(e);
+      return 'error';
     }
+    // if (flow != null) {
+    //   //  File(image.path);
+    //   //Upload to Firebase
+    //   var snapshot = firebaseStorage.ref().child(path!).putFile(flow).snapshot;
+    //   await Future.delayed(Duration(seconds: 5));
+    //   String downloadUrl = await snapshot.ref.getDownloadURL();
+    //   // setState(() {
+    //   imageUrl = downloadUrl;
+    //   if (kDebugMode) {
+    //     print(imageUrl);
+    //   }
+    //   return imageUrl;
+    //   // });
+    // } else {
+    //   if (kDebugMode) {
+    //     print('No Image Path Received');
+    //   }
+    //   return '';
+    // }
   }
 }

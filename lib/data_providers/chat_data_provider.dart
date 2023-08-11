@@ -53,13 +53,17 @@ class ChatDataProvider {
     var res = await http.post(
         Uri.parse(
             "https://sendmessagepushnotifications-v2xxr3wlvq-uc.a.run.app"),
+            headers: {
+         // "Accept": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
         body: {
           "sentToId": sentToId,
           "roomId": roomId,
           "sentByName": sentByName,
           "message": chatMessage.message
         });
-    print(res);
+    print("res:: "+res.toString());
   }
 
   static updateLastMEssage(String chatMessage, String roomId) async {

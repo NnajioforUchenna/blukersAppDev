@@ -11,6 +11,7 @@ import 'package:bulkers/views/company/profile_components/user_basic_profile_deta
 
 import 'package:bulkers/views/worker/create_worker_profile_component/edit_worker_basic_profile.dart';
 import 'package:bulkers/views/worker/create_worker_profile_component/worker_basic_profile_detail.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -97,6 +98,7 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                                         ThemeTextStyles.headingThemeTextStyle,
                                   ),
                                   // const SizedBox(height: 20),
+                                  if(!kIsWeb)
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 18, vertical: 18),
@@ -222,14 +224,14 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                       );
                     },
                     child: const CircleAvatar(
-                      radius: 15,
-                      backgroundColor: ThemeColors.blukersBlueThemeColor,
-                      child: Icon(
-                        Icons.edit,
-                        size: 15,
-                        color: Colors.white,
-                      ),
-                    ),
+                            radius: 30,
+                            backgroundColor: ThemeColors.secondaryThemeColor,
+                            child: Icon(
+                              UniconsLine.pen,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                          ),
                   ),
                 ),
               ],
@@ -259,12 +261,8 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                 print("Edit clicked");
                 showDialog(
                   context: context,
-                  builder: (context) => ProfileDialog(
-                    child: EditWorkerBasicProfile(
-                        // displayName: up.appUser!.displayName ?? "",
-                        // phoneNo: up.appUser!.phoneNumber ?? "",
-                        // language: up.appUser!.language ?? "",
-                        ),
+                  builder: (context) =>const  ProfileDialog(
+                    child: EditWorkerBasicProfile(),
                   ),
                 );
               },

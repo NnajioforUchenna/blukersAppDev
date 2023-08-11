@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:bulkers/utils/styles/theme_text_styles.dart';
@@ -33,44 +33,44 @@ class _WorkerProfileState extends State<WorkerProfile> {
   bool showBasicInfo = false;
   bool showIndustries = false;
   bool showPdfResume = false;
-
-  Future<File?> viewPdf(String pdfUrl) async {
-    EasyLoading.show(
-      status: 'Opening file viewer...',
-      maskType: EasyLoadingMaskType.black,
-    );
-    Completer<File> completer = Completer();
-    if (kDebugMode) {
-      print("Start download file from internet!");
-    }
-    try {
-      // "https://berlin2017.droidcon.cod.newthinking.net/sites/global.droidcon.cod.newthinking.net/files/media/documents/Flutter%20-%2060FPS%20UI%20of%20the%20future%20%20-%20DroidconDE%2017.pdf";
-      // final url = "https://pdfkit.org/docs/guide.pdf";
-      var url = pdfUrl;
-      if (url == null || url == "") {
-        return null;
-      }
-      final filename = url.substring(url.lastIndexOf("/") + 1);
-      var request = await HttpClient().getUrl(Uri.parse(url));
-      var response = await request.close();
-      var bytes = await consolidateHttpClientResponseBytes(response);
-      var dir = await getApplicationDocumentsDirectory();
-      if (kDebugMode) {
-        print("Download files");
-      }
-      if (kDebugMode) {
-        print("${dir.path}/$filename");
-      }
-      File file = File("${dir.path}/$filename");
-      await file.writeAsBytes(bytes, flush: true);
-      completer.complete(file);
-      // loader = false;
-    } catch (e) {
-      throw Exception('Error parsing asset file!');
-    }
-    EasyLoading.dismiss();
-    return completer.future;
-  }
+ 
+  // Future<File?> viewPdf(String pdfUrl) async {
+  //   EasyLoading.show(
+  //     status: 'Opening file viewer...',
+  //     maskType: EasyLoadingMaskType.black,
+  //   );
+  //   Completer<File> completer = Completer();
+  //   if (kDebugMode) {
+  //     print("Start download file from internet!");
+  //   }
+  //   try {
+  //     // "https://berlin2017.droidcon.cod.newthinking.net/sites/global.droidcon.cod.newthinking.net/files/media/documents/Flutter%20-%2060FPS%20UI%20of%20the%20future%20%20-%20DroidconDE%2017.pdf";
+  //     // final url = "https://pdfkit.org/docs/guide.pdf";
+  //     var url = pdfUrl;
+  //     if (url == null || url == "") {
+  //       return null;
+  //     }
+  //     final filename = url.substring(url.lastIndexOf("/") + 1);
+  //     var request = await HttpClient().getUrl(Uri.parse(url));
+  //     var response = await request.close();
+  //     var bytes = await consolidateHttpClientResponseBytes(response);
+  //     var dir = await getApplicationDocumentsDirectory();
+  //     if (kDebugMode) {
+  //       print("Download files");
+  //     }
+  //     if (kDebugMode) {
+  //       print("${dir.path}/$filename");
+  //     }
+  //     File file = File("${dir.path}/$filename");
+  //     await file.writeAsBytes(bytes, flush: true);
+  //     completer.complete(file);
+  //     // loader = false;
+  //   } catch (e) {
+  //     throw Exception('Error parsing asset file!');
+  //   }
+  //   EasyLoading.dismiss();
+  //   return completer.future;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -179,6 +179,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                               .headingThemeTextStyle,
                                         ),
                                         // const SizedBox(height: 20),
+                                        if(!kIsWeb)
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 18, vertical: 18),
@@ -442,14 +443,14 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         }
                         print('pdfResumeUrl');
                         print(pdfResumeUrl);
-                        File? file = await viewPdf(pdfResumeUrl);
-                        if (file != null) {
-                          Uint8List bytes = await file.readAsBytes();
+                       // File? file = await viewPdf(pdfResumeUrl);
+                        //if (file != null) {
+                         // Uint8List bytes = await file.readAsBytes();
                           Navigator.of(context).pushNamed("/pdfViewScreen",
-                              arguments: {"remotePDFpath": bytes});
-                        }
+                              arguments: {"remotePDFpath": pdfResumeUrl});
+                       // }
                         print('Show PDF File');
-                        print(file);
+                      //  print(file);
                       },
                       child: Container(
                         margin: const EdgeInsets.all(12),

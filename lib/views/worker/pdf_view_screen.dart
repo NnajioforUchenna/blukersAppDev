@@ -34,8 +34,8 @@ class _ResumeScreenState extends State<ResumeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Uint8List remotePDFpath = (ModalRoute.of(context)!.settings.arguments
-        as Map<String, Uint8List>)["remotePDFpath"] as Uint8List;
+    String remotePDFpath = (ModalRoute.of(context)!.settings.arguments
+        as Map<String, String>)["remotePDFpath"] as String;
     //docFile = DefaultCacheManager().getSingleFile("https://firebasestorage.googleapis.com/v0/b/Blukers-5275d.appspot.com/o/files%2FDocument%20from%20Jyot%20Vavadiya?alt=media&token=e8da4c45-8050-4022-bc4d-32b6b6703634");
     return Scaffold(
       backgroundColor: Colors.black,
@@ -43,7 +43,7 @@ class _ResumeScreenState extends State<ResumeScreen> {
       body: Container(
       width: MediaQuery.of(context).size.width ,
       height: MediaQuery.of(context).size.height ,
-      child: SfPdfViewer.memory(remotePDFpath),
+      child: SfPdfViewer.network(remotePDFpath),
     )
     );
   }
