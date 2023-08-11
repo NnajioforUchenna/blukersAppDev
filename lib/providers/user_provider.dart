@@ -432,10 +432,14 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<String?> ontapGallery(String storagePath) async {
-    FilePickerResult? gallery = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['png'],
-    );
+    // FilePickerResult? gallery = await FilePicker.platform.pickFiles(
+    //   type: FileType.custom,
+    //   allowedExtensions: ['png'],
+    // );
+     ImagePicker imagePicker = ImagePicker();
+    final XFile? gallery =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+
     if (gallery == null) {
       return "";
     }
@@ -443,14 +447,23 @@ class UserProvider with ChangeNotifier {
       status: 'Uploading your Profile Pic...',
       maskType: EasyLoadingMaskType.black,
     );
+Uint8List bytes = await gallery.readAsBytes();
+      int sizeInBytes = bytes.lengthInBytes;
+      double sizeInMB = sizeInBytes / (1024 * 1024);
 
+      if (sizeInMB > 10) {
+        EasyLoading.dismiss();
+        EasyLoading.showError(
+            'Selected file is more than 10 MB. Please select a smaller file.');
+        return "";
+      }
  
     print(appUser!.uid);
-    PlatformFile? filePlatformFile = gallery.files.first;
-    ;
+    //PlatformFile? filePlatformFile = gallery.files.first;
+  //  ;
 
     String? result = await UserDataProvider.uploadImage(
-      image: filePlatformFile.bytes!,
+      image: await gallery.readAsBytes(),
       path: "$storagePath${appUser!.uid}",
     );
     // If the result is not an error, then update the logoUrl of the Worker.

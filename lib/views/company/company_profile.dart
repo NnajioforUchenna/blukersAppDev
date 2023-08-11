@@ -7,6 +7,7 @@ import 'package:bulkers/views/common_views/profile_section.dart';
 import 'package:bulkers/views/company/profile_components/user_basic_profile_details.dart';
 import 'package:bulkers/views/company/profile_components/edit_basic_profile.dart';
 import 'package:bulkers/views/company/workers_components/display_worker_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -129,6 +130,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                               .headingThemeTextStyle,
                                         ),
                                         // const SizedBox(height: 20),
+                                        if(!kIsWeb)
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 18, vertical: 18),
