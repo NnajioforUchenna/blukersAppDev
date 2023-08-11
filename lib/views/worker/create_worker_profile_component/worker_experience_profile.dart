@@ -53,8 +53,11 @@ class WorkerExperienceProfile extends StatelessWidget {
                     companyName: wp.workExperience[i]["companyName"],
                     jobTitle: wp.workExperience[i]["jobTitle"],
                     jobDescription: wp.workExperience[i]["jobDescription"],
-                    jobStartDate: wp.workExperience[i]["jobStartDate"],
-                    jobEndDate: wp.workExperience[i]["jobEndDate"],
+                    jobStartDate:
+                        DateTime.parse(wp.workExperience[i]["jobStartDate"]),
+                    jobEndDate: wp.workExperience[i]["isCurrentlyWorking"]
+                        ? null
+                        : DateTime.parse(wp.workExperience[i]["jobEndDate"]),
                     isCurrentlyWorking:
                         wp.workExperience[i]["isCurrentlyWorking"] ?? false));
               }

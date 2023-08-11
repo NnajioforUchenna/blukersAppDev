@@ -91,8 +91,8 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
           children: [
             GestureDetector(
               onTap: () async {
-                await up.updateUserBasicInfo(
-                    displayName,  phoneNo, language);
+                print(ext + phoneNo);
+                await up.updateUserBasicInfo(displayName, "$ext-$phoneNo", language);
                 Navigator.of(context).pop();
               },
               child: Container(

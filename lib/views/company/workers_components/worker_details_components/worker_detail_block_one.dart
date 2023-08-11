@@ -9,7 +9,6 @@ import '../../../../providers/user_provider.dart';
 import '../../../../services/responsive.dart';
 import '../../../../utils/styles/theme_colors.dart';
 import '../../../common_views/worker_timeline/display_worker_timeline_dialog.dart';
-import '../../../new_chat_room.dart';
 
 class WorkerDetailBlockOne extends StatelessWidget {
   final Worker worker;
@@ -183,16 +182,12 @@ class WorkerDetailBlockOne extends StatelessWidget {
                         //     myLogo: up.appUser!.photoUrl ?? "",
                         //     recipientLogo: worker.profilePhotoUrl ?? "");
                         // chatProvider?.activeRoomId = roomId!;
-                        // Navigator.pushNamed(context, '/chat-message',
-                        //     arguments: {
-                        //       "roomId": roomId,
-                        //       "roomName": worker.firstName + worker.lastName,
-                        //     });
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const NewChatRoom()),
-                        );
+                        Navigator.pushNamed(context, '/chat-message');
+                        // Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const NewChatRoom()),
+                        // );
                       }
                     },
                   ),

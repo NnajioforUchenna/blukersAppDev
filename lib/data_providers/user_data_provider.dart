@@ -142,13 +142,13 @@ class UserDataProvider {
   static Future<void> updateWorkerInfo(
       Map<String, dynamic> info, String uid) async {
     CollectionReference appUserCollection = firestore.collection('AppUsers');
-    CollectionReference companyCollection = firestore.collection('Workers');
+    CollectionReference companyCollection = firestore.collection('workers');
     await appUserCollection
         .doc(uid)
         .update({"worker": info}).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
-    await companyCollection.doc(uid).update(info).catchError((error) {
+    await companyCollection.doc(uid).set(info).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
   }
@@ -263,7 +263,7 @@ class UserDataProvider {
   }
 
   static Future<String?> uploadImage(
-      {Uint8List? image, String? path, String? extention}) async {
+      {Uint8List? image, String? path}) async {
     // final firebaseStorage = FirebaseStorage.instance;
     // final imagePicker = ImagePicker();
     // PickedFile? image;
@@ -283,9 +283,6 @@ class UserDataProvider {
       print(image?.lengthInBytes.toString());
       final uploadTask = await imagesRef.putData(
         image!,
-        SettableMetadata(
-          contentType: "image/$extention",
-        ),
       );
       print(uploadTask);
       imageUrl = await uploadTask.ref.getDownloadURL();

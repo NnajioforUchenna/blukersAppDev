@@ -90,6 +90,8 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                       ? null
                       : () {
                           _selectDate(context, isStartDate: false);
+                          wp.workExperience[widget.intialIndex]
+                              ['isCurrentlyWorking'] = false;
                         },
                   child: Text(_endDate == null
                       ? "Select End Date"

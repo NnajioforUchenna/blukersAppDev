@@ -1,5 +1,7 @@
 // import 'dart:io';
 
+import 'dart:io';
+
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/models/job_post.dart';
 import 'package:bulkers/providers/chat_provider.dart';
@@ -430,39 +432,39 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<String?> ontapGallery(String storagePath) async {
-    ImagePicker picker = ImagePicker();
-    XFile? gallery =
-        await picker.pickImage(source: ImageSource.gallery);
+    FilePickerResult? gallery = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['png'],
+    );
     if (gallery == null) {
       return "";
     }
+    EasyLoading.show(
+      status: 'Uploading your Profile Pic...',
+      maskType: EasyLoadingMaskType.black,
+    );
 
-    Uint8List bytes = await gallery.readAsBytes();
-    int sizeInBytes = bytes.lengthInBytes;
-    double sizeInMB = sizeInBytes / (1024 * 1024);
-
-    if (sizeInMB > 10) {
-      EasyLoading.dismiss();
-      EasyLoading.showError(
-          'Selected file is more than 10 MB. Please select a smaller file.');
-      return "";
-    }
+ 
     print(appUser!.uid);
+    PlatformFile? filePlatformFile = gallery.files.first;
+    ;
 
     String? result = await UserDataProvider.uploadImage(
-        image:bytes,
-        path: "$storagePath${appUser!.uid}",
-        extention: gallery.name.split('.').last);
+      image: filePlatformFile.bytes!,
+      path: "$storagePath${appUser!.uid}",
+    );
     // If the result is not an error, then update the logoUrl of the Worker.
     if (result != 'error') {
-     // appUser?.photoUrl = result;
+      // appUser?.photoUrl = result;
       EasyLoading.dismiss();
       EasyLoading.showError('Uploaded your profile image successfully.');
-      notifyListeners();
+      return result;
+    
     } else {
       EasyLoading.dismiss();
       EasyLoading.showError(
           'An error occurred while uploading your profile image. Please try again.');
+      return "";
     }
 
     //Get.back();
@@ -485,6 +487,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<String?> ontapCamera(String storagePath) async {
+   // return "";
     ImagePicker picker = ImagePicker();
     XFile? gallery = await picker.pickImage(
         source: ImageSource.camera,
@@ -493,127 +496,61 @@ class UserProvider with ChangeNotifier {
     if (gallery == null) {
       return "";
     }
-       Uint8List bytes = await gallery.readAsBytes();
-    int sizeInBytes = bytes.lengthInBytes;
-    double sizeInMB = sizeInBytes / (1024 * 1024);
+    
 
-    if (sizeInMB > 10) {
-      EasyLoading.dismiss();
-      EasyLoading.showError(
-          'Selected file is more than 10 MB. Please select a smaller file.');
+    //Get.back();
+    EasyLoading.show(
+      status: 'Uploading your Profile Pic...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    String path = gallery.path;
+    File image = File(path);
+    String? imageUrl = await UserDataProvider.uploadImage(
+        image: image.readAsBytesSync(), path: "$storagePath${appUser!.uid}");
+
+    // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
+    //fbImageUrl.value = imageUrl ?? "";
+    await Future.delayed(Duration(seconds: 2));
+
+    EasyLoading.dismiss();
+    return imageUrl;
+    // imagePicker();
+  }
+
+  Future<String?> onTapPdf(String storagePath) async {
+   FilePickerResult? gallery = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+    if (gallery == null) {
       return "";
     }
+    EasyLoading.show(
+      status: 'Uploading your Pdf Resume...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+ 
     print(appUser!.uid);
+    PlatformFile? filePlatformFile = gallery.files.first;
+    ;
 
     String? result = await UserDataProvider.uploadImage(
-        image: bytes,
-        path: "$storagePath${appUser!.uid}",
-        extention: gallery.name.split('.').last);
+      image: filePlatformFile.bytes!,
+      path: "$storagePath${appUser!.uid}",
+    );
     // If the result is not an error, then update the logoUrl of the Worker.
     if (result != 'error') {
-     // appUser?.photoUrl = result;
+      // appUser?.photoUrl = result;
       EasyLoading.dismiss();
       EasyLoading.showError('Uploaded your profile image successfully.');
-    //  notifyListeners();
+      return result;
+    
     } else {
       EasyLoading.dismiss();
       EasyLoading.showError(
           'An error occurred while uploading your profile image. Please try again.');
-    }
-
-    // //Get.back();
-    // EasyLoading.show(
-    //   status: 'Uploading your Profile Pic...',
-    //   maskType: EasyLoadingMaskType.black,
-    // );
-    // String path = gallery.path;
-    // File image = File(path);
-    // String? imageUrl = await UserDataProvider.uploadImage(
-    //     flow: image, path: "$storagePath${appUser!.uid}");
-
-    // // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
-    // //fbImageUrl.value = imageUrl ?? "";
-    // await Future.delayed(Duration(seconds: 2));
-
-    // EasyLoading.dismiss();
-    // return imageUrl;
-   // imagePicker();
-  }
-
-  Future<String?> onTapPdf(String storagePath) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowMultiple: true,
-      allowedExtensions: [
-        'pdf',
-        /* 'xlsx',
-        'xlsm',
-        'xls',
-        'ppt',
-        'pptx',
-        'doc',
-        'docx',
-        'txt',
-        'text',
-        'rtf',
-        'zip',*/
-      ],
-    );
-
-    if (result != null) {
-      PlatformFile file = result.files.first;
-      EasyLoading.show(
-        status: 'Uploading your PDF...',
-        maskType: EasyLoadingMaskType.black,
-      );
-      // List<PlatformFile> fileList = result.files;
-
-      // debugPrint("FILES : $file");
-      // filepath.value = file.name.toString();
-      // final kb = file.size / 1024;
-      // final kbVal = kb.ceil().toInt();
-      // final mb = kb / 1024;
-      // fileSize?.value = kbVal;
-      // filesize = mb;
-
-      // if (kDebugMode) {
-      //   print(filesize);
-      // }
-
-      // debugPrint("filepath $filepath FileSize ${fileSize?.value}  $kbVal");
-      // {
-      //   PlatformFile file = result.files.first;
-      //   // List<PlatformFile> fileList = result.files;
-
-      //   debugPrint("FILES : $file");
-      //   filepath.value = file.name.toString();
-      //   fileSize?.value = file.size.ceil().toInt();
-      //   isPdfUploadError.value = false;
-
-      //   debugPrint("filepath $filepath FileSize $fileSize");
-      // }
-
-   //   final File fileForFirebase = File(file.path!);
-
-    //   print('fileForFirebase');
-    //   print(fileForFirebase);
-
-    //   String? imageUrl = await UserDataProvider.uploadImage(
-    //       flow: fileForFirebase, path: "$storagePath${appUser!.uid}");
-
-    //   print('imageUrl');
-    //   print(imageUrl);
-
-    //   // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
-    //   //fbImageUrl.value = imageUrl ?? "";
-    //   await Future.delayed(const Duration(seconds: 2));
-
-    //   EasyLoading.dismiss();
-    //   return imageUrl;
-    //   // return pdfUrl;
-    // } else {
-    //   // User canceled the picker
       return "";
-     }
+    }
   }
 }

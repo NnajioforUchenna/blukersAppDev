@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import '../../providers/user_provider.dart';
 
 class ChatMessageScreen extends StatefulWidget {
-  const ChatMessageScreen(Object? arguments, {super.key});
+  const ChatMessageScreen({super.key});
 
   @override
   State<ChatMessageScreen> createState() => _ChatMessageScreenState();
@@ -25,14 +25,11 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String roomId = (ModalRoute.of(context)!.settings.arguments
-        as Map<String, String>)["roomId"] as String;
-    String sentToId = (ModalRoute.of(context)!.settings.arguments
-        as Map<String, String>)["sentToId"] as String;
-    String roomName = (ModalRoute.of(context)!.settings.arguments
-        as Map<String, String>)["roomName"] as String;
-    UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
+    String roomId = chatProvider.chatDetails["roomId"] as String;
+    String sentToId = chatProvider.chatDetails["sentToId"] as String;
+    String roomName = chatProvider.chatDetails["roomName"] as String;
+    UserProvider up = Provider.of<UserProvider>(context);
     onSendMessage() async {
       // print(messagesLength);
       _textController.clear();

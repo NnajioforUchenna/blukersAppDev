@@ -74,7 +74,7 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const CompanyChat());
     case '/chat-message':
       return MaterialPageRoute(
-          builder: (context) => ChatMessageScreen(settings.arguments),
+          builder: (context) =>const ChatMessageScreen(),
           settings: settings);
     default:
       return MaterialPageRoute(builder: (context) => LandingPage());
