@@ -171,7 +171,7 @@ class _LoginState extends State<Login> {
                                 email: emailController.text,
                                 password: passwordController.text,
                                 chatProvider: chatProvider);
-                            await chatProvider.getGroups(up.appUser?.uid ?? "");
+                         //   await chatProvider.getGroups(up.appUser?.uid ?? "");
                           }
                         },
                         text: "Sign In",
