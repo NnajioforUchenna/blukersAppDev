@@ -5,20 +5,25 @@ import '../../../../utils/styles/theme_text_styles.dart';
 import 'job_post_page_slider.dart';
 import 'job_post_time_line.dart';
 
+import 'package:bulkers/views/common_views/components/index.dart';
+
 class CreateJobPost extends StatelessWidget {
   const CreateJobPost({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Center(
-          child: Text(
-            'Creating Job Post',
-            style: ThemeTextStyles.headerThemeTextStyle,
-          ),
-        ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   title: const Center(
+      //     child: Text(
+      //       'Creating Job Post',
+      //       style: ThemeTextStyles.headerThemeTextStyle,
+      //     ),
+      //   ),
+      // ),
+      appBar: MyAppBar(
+        title: "Create Job Post",
       ),
       body: Center(
         child: SizedBox(
