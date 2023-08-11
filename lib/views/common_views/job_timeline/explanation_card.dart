@@ -36,7 +36,7 @@ class ExplanationCard extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: isPast
                     ? ThemeColors.secondaryThemeColor
@@ -49,7 +49,7 @@ class ExplanationCard extends StatelessWidget {
             Text(
               briefDescription,
               style: const TextStyle(
-                fontSize: 12,
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
             ),

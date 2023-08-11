@@ -60,11 +60,11 @@ class _RegistrationCongratulationPageState
       children: <Widget>[
         // const Icon(Icons.check_circle, color: Colors.green, size: 100),
         MyAnimation(
-          name: 'congratulationsConfettiBlue',
+          name: 'congratulationsConfetti',
           width: 300,
           height: 300,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         const Text(
           'Congratulations!',
           style: TextStyle(
@@ -84,7 +84,7 @@ class _RegistrationCongratulationPageState
             color: ThemeColors.grey1ThemeColor,
           ),
         ),
-        const SizedBox(height: 40),
+        const SizedBox(height: 20),
         Text.rich(
           TextSpan(
             text: 'Redirecting you to dashboard in ',
