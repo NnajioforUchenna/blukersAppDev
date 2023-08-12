@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../../providers/job_posts_provider.dart';
 import '../../../../utils/styles/index.dart';
@@ -16,28 +17,28 @@ const jobPostSteps = [
 
 const List<Icon> jobPostIcons = [
   Icon(
-    Icons.class_,
-    color: Colors.white,
+    UniconsLine.hard_hat,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.info,
-    color: Colors.white,
+    UniconsLine.exclamation_circle,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.check_box,
-    color: Colors.white,
+    UniconsLine.trophy,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.monetization_on,
-    color: Colors.white,
+    UniconsLine.usd_square,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
   Icon(
-    Icons.note_add,
-    color: Colors.white,
+    UniconsLine.plus_square,
+    color: ThemeColors.secondaryThemeColor,
     size: 30,
   ),
 ];
@@ -60,31 +61,35 @@ class JobPostTimeline extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(8),
       constraints: const BoxConstraints(maxHeight: 140),
-      decoration: BoxDecoration(
-        color: ThemeColors.primaryThemeColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
+      // decoration: BoxDecoration(
+      //   color: ThemeColors.primaryThemeColor,
+      //   borderRadius: BorderRadius.circular(20),
+      // ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         controller: _scrollController,
         itemCount: jobPostSteps.length,
         itemBuilder: (BuildContext context, int index) {
           final step = jobPostSteps[index];
-          var indicatorSize = 30.0;
+          var indicatorSize = 40.0;
           var beforeLineStyle = LineStyle(
-            color: Colors.white.withOpacity(0.8),
+            // color: Colors.white.withOpacity(0.8),
+            color: ThemeColors.secondaryThemeColor,
           );
-          LineStyle afterLineStyle = const LineStyle(color: Color(0xFF747888));
+          LineStyle afterLineStyle =
+              const LineStyle(color: ThemeColors.grey1ThemeColor);
 
           _JobPostStatus status;
 
           if (index < currentStep) {
             status = _JobPostStatus.done;
-            afterLineStyle = const LineStyle(color: Colors.white);
+            afterLineStyle =
+                const LineStyle(color: ThemeColors.secondaryThemeColor);
           } else if (index > currentStep) {
             status = _JobPostStatus.todo;
             indicatorSize = 20;
-            beforeLineStyle = const LineStyle(color: Color(0xFF747888));
+            beforeLineStyle =
+                const LineStyle(color: ThemeColors.grey1ThemeColor);
           } else {
             status = _JobPostStatus.doing;
           }
@@ -143,18 +148,18 @@ class _EndChildJobPost extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                child: Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.sniglet(
-                    fontSize: 14,
-                    color: current
-                        ? ThemeColors.secondaryThemeColor
-                        : Colors.white,
-                  ),
-                ),
-              ),
+              // Flexible(
+              //   child: Text(
+              //     text,
+              //     textAlign: TextAlign.center,
+              //     style: GoogleFonts.sniglet(
+              //       fontSize: 14,
+              //       color: current
+              //           ? ThemeColors.secondaryThemeColor
+              //           : ThemeColors.grey1ThemeColor,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -175,10 +180,10 @@ class _IndicatorJobPost extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white,
+            color: ThemeColors.secondaryThemeColor,
           ),
           child: const Center(
-            child: Icon(Icons.check, color: Color(0xFF5D6173)),
+            child: Icon(Icons.check, color: Colors.white),
           ),
         );
       case _JobPostStatus.doing:
@@ -202,7 +207,7 @@ class _IndicatorJobPost extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Color(0xFF747888),
+            color: ThemeColors.grey1ThemeColor,
           ),
           child: Center(
             child: Container(

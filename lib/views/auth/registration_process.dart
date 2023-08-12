@@ -16,16 +16,16 @@ class RegistrationProcess extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        // title: const Center(
-        //   child: Text(
-        //     'Registration Process',
-        //     style: ThemeTextStyles.headerThemeTextStyle,
-        //   ),
-        // ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   elevation: 0,
+      //   // title: const Center(
+      //   //   child: Text(
+      //   //     'Registration Process',
+      //   //     style: ThemeTextStyles.headerThemeTextStyle,
+      //   //   ),
+      //   // ),
+      // ),
       body: Center(
         child: SizedBox(
           height: height,
@@ -37,7 +37,8 @@ class RegistrationProcess extends StatelessWidget {
               SliverList(
                   delegate: SliverChildListDelegate([
                 SignUpTimeline(),
-                const CompanyLogo(),
+                // const CompanyLogo(),
+                const SizedBox(height: 20),
                 const PageSlider()
               ]))
             ],

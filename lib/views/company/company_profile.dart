@@ -315,7 +315,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                   ProfileSection(
                     heading: "Company Information",
-                    icon: Icons.arrow_forward_ios,
+                    icon: UniconsLine.arrow_right,
+                    showInfoInNewPage: true,
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser!.company != null) {
