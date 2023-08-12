@@ -5,7 +5,7 @@ import 'package:timeline_tile/timeline_tile.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../services/responsive.dart';
-import '../../../utils/styles/theme_colors.dart';
+import '../../../../utils/styles/index.dart';
 
 const workerSteps = [
   'Classification',
@@ -175,19 +175,19 @@ class _EndChildWorker extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                child: Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: current
-                        ? ThemeColors.secondaryThemeColor
-                        : ThemeColors.grey1ThemeColor,
-                  ),
-                ),
-              ),
+              // Flexible(
+              //   child: Text(
+              //     text,
+              //     textAlign: TextAlign.center,
+              //     style: TextStyle(
+              //       fontSize: 14,
+              //       fontWeight: FontWeight.w600,
+              //       color: current
+              //           ? ThemeColors.secondaryThemeColor
+              //           : ThemeColors.grey1ThemeColor,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
