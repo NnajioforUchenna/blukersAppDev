@@ -106,6 +106,8 @@ class UserProvider with ChangeNotifier {
         userRole: userType,
         workerTimelineStep: 1,
         companyTimelineStep: 1,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        modifiedAt: DateTime.now().millisecondsSinceEpoch,
       );
 
       // Set the _appUser
@@ -436,7 +438,7 @@ class UserProvider with ChangeNotifier {
     //   type: FileType.custom,
     //   allowedExtensions: ['png'],
     // );
-     ImagePicker imagePicker = ImagePicker();
+    ImagePicker imagePicker = ImagePicker();
     final XFile? gallery =
         await imagePicker.pickImage(source: ImageSource.gallery);
 
@@ -447,20 +449,20 @@ class UserProvider with ChangeNotifier {
       status: 'Uploading your Profile Pic...',
       maskType: EasyLoadingMaskType.black,
     );
-Uint8List bytes = await gallery.readAsBytes();
-      int sizeInBytes = bytes.lengthInBytes;
-      double sizeInMB = sizeInBytes / (1024 * 1024);
+    Uint8List bytes = await gallery.readAsBytes();
+    int sizeInBytes = bytes.lengthInBytes;
+    double sizeInMB = sizeInBytes / (1024 * 1024);
 
-      if (sizeInMB > 10) {
-        EasyLoading.dismiss();
-        EasyLoading.showError(
-            'Selected file is more than 10 MB. Please select a smaller file.');
-        return "";
-      }
- 
+    if (sizeInMB > 10) {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+          'Selected file is more than 10 MB. Please select a smaller file.');
+      return "";
+    }
+
     print(appUser!.uid);
     //PlatformFile? filePlatformFile = gallery.files.first;
-  //  ;
+    //  ;
 
     String? result = await UserDataProvider.uploadImage(
       image: await gallery.readAsBytes(),
@@ -472,7 +474,6 @@ Uint8List bytes = await gallery.readAsBytes();
       EasyLoading.dismiss();
       EasyLoading.showError('Uploaded your profile image successfully.');
       return result;
-    
     } else {
       EasyLoading.dismiss();
       EasyLoading.showError(
@@ -500,7 +501,7 @@ Uint8List bytes = await gallery.readAsBytes();
   }
 
   Future<String?> ontapCamera(String storagePath) async {
-   // return "";
+    // return "";
     ImagePicker picker = ImagePicker();
     XFile? gallery = await picker.pickImage(
         source: ImageSource.camera,
@@ -509,7 +510,6 @@ Uint8List bytes = await gallery.readAsBytes();
     if (gallery == null) {
       return "";
     }
-    
 
     //Get.back();
     EasyLoading.show(
@@ -531,7 +531,7 @@ Uint8List bytes = await gallery.readAsBytes();
   }
 
   Future<String?> onTapPdf(String storagePath) async {
-   FilePickerResult? gallery = await FilePicker.platform.pickFiles(
+    FilePickerResult? gallery = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf'],
     );
@@ -543,10 +543,8 @@ Uint8List bytes = await gallery.readAsBytes();
       maskType: EasyLoadingMaskType.black,
     );
 
- 
     print(appUser!.uid);
     PlatformFile? filePlatformFile = gallery.files.first;
-    
 
     String? result = await UserDataProvider.uploadImage(
       image: filePlatformFile.bytes!,
@@ -558,7 +556,6 @@ Uint8List bytes = await gallery.readAsBytes();
       EasyLoading.dismiss();
       EasyLoading.showError('Uploaded your profile image successfully.');
       return result;
-    
     } else {
       EasyLoading.dismiss();
       EasyLoading.showError(

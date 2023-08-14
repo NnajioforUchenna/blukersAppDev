@@ -258,7 +258,10 @@ class WorkerProvider with ChangeNotifier {
     newWorker!.onlineResume = text;
     workerProfileNextPage();
     newWorker?.dateCreated = DateTime.now().millisecondsSinceEpoch;
+    newWorker?.createdAt = DateTime.now().millisecondsSinceEpoch;
+    newWorker?.modifiedAt = DateTime.now().millisecondsSinceEpoch;
     WorkerDataProvider.createWorkerProfile(newWorker!);
+    UserDataProvider.updateUserWorkerProfile(appUser!.uid, newWorker!);
     previousParams.clear();
   }
 

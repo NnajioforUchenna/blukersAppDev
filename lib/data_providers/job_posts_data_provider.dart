@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:bulkers/models/job_post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 
 final db = FirebaseFirestore.instance;
 
@@ -74,34 +77,90 @@ class JobPostsDataProvider {
     return jobPosts;
   }
 
-  static searchJobPosts(String nameRelated, String locationRelated) async {
-    CollectionReference jobPosts = db.collection('JobPosts');
+  // static searchJobPosts(String nameRelated, String locationRelated) async {
+  //   CollectionReference jobPosts = db.collection('JobPosts');
+  //
+  //   var queries = [
+  //     jobPosts.where('companyName', isEqualTo: nameRelated),
+  //     jobPosts.where('skills', arrayContains: nameRelated),
+  //     jobPosts.where('jobTitle', isEqualTo: nameRelated),
+  //     jobPosts.where('jobIds', isEqualTo: nameRelated),
+  //     jobPosts.where('addresses.street', isEqualTo: locationRelated),
+  //     jobPosts.where('addresses.city', isEqualTo: locationRelated),
+  //     jobPosts.where('addresses.state', isEqualTo: locationRelated),
+  //     jobPosts.where('addresses.country', isEqualTo: locationRelated),
+  //   ];
+  //
+  //   var allJobPosts = <JobPost>[];
+  //   for (var query in queries) {
+  //     final snapshot = await query.get();
+  //     final jobPosts = snapshot.docs.map((doc) {
+  //       return JobPost.fromMap(doc.data() as Map<String, dynamic>);
+  //     }).toList();
+  //     allJobPosts.addAll(jobPosts);
+  //   }
+  //
+  //   // Optionally, remove duplicates
+  //   var uniqueJobPosts = <JobPost>{};
+  //   uniqueJobPosts.addAll(allJobPosts);
+  //   allJobPosts = uniqueJobPosts.toList();
+  //
+  //   return allJobPosts;
+  // }
 
-    var queries = [
-      jobPosts.where('companyName', isEqualTo: nameRelated),
-      jobPosts.where('skills', arrayContains: nameRelated),
-      jobPosts.where('jobTitle', isEqualTo: nameRelated),
-      jobPosts.where('jobIds', isEqualTo: nameRelated),
-      jobPosts.where('addresses.street', isEqualTo: locationRelated),
-      jobPosts.where('addresses.city', isEqualTo: locationRelated),
-      jobPosts.where('addresses.state', isEqualTo: locationRelated),
-      jobPosts.where('addresses.country', isEqualTo: locationRelated),
-    ];
+  static Future<List<JobPost>> searchJobPosts(
+      String nameRelated, String locationRelated) async {
+    const String url =
+        'https://top-design-395510.ue.r.appspot.com/searchJobPosts'; // Replace with your actual endpoint
 
-    var allJobPosts = <JobPost>[];
-    for (var query in queries) {
-      final snapshot = await query.get();
-      final jobPosts = snapshot.docs.map((doc) {
-        return JobPost.fromMap(doc.data() as Map<String, dynamic>);
-      }).toList();
-      allJobPosts.addAll(jobPosts);
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'nameRelated': nameRelated,
+        'locationRelated': locationRelated,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jobPostData = jsonDecode(response.body);
+      final List<JobPost> jobPosts =
+          jobPostData.map((data) => JobPost.fromMap(data)).toList();
+      return jobPosts;
+    } else {
+      throw Exception('Failed to fetch job posts from the API');
+    }
+  }
+
+  static Future<List<JobPost>> translateJobPosts(
+      String selectedJobPostId, String targetLanguage) async {
+    List<JobPost> translatedJobPosts = [];
+
+    if (selectedJobPostId.isNotEmpty) {
+      final response = await http.post(
+        Uri.parse(
+            'https://top-design-395510.ue.r.appspot.com/getJobPostsByIdAndTargetLanguage'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'jobId': selectedJobPostId,
+          'targetLanguage': targetLanguage,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        if (jsonResponse is List) {
+          translatedJobPosts = jsonResponse
+              .map((data) => JobPost.fromMap(data as Map<String, dynamic>))
+              .toList();
+        }
+      } else {
+        print('Failed to load job posts. Error: ${response.body}');
+      }
     }
 
-    // Optionally, remove duplicates
-    var uniqueJobPosts = <JobPost>{};
-    uniqueJobPosts.addAll(allJobPosts);
-    allJobPosts = uniqueJobPosts.toList();
-
-    return allJobPosts;
+    return translatedJobPosts;
   }
 }

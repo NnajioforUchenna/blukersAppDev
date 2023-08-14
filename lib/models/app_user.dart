@@ -13,7 +13,7 @@ class AppUser {
   String? photoUrl;
   bool? isEmailVerified;
 
-  // New fields added
+  // for Tracking Registration Process
   bool? isLoginInformation;
   String? registeredAs;
   bool? isBasicInformation;
@@ -29,6 +29,10 @@ class AppUser {
   String? userRole;
   int? workerTimelineStep = 0;
   int? companyTimelineStep = 0;
+
+  // Keeping record of time
+  int createdAt = 0;
+  int modifiedAt = 0;
 
   AppUser({
     required this.uid,
@@ -50,6 +54,8 @@ class AppUser {
     this.userRole,
     this.workerTimelineStep,
     this.companyTimelineStep,
+    this.createdAt = 0,
+    this.modifiedAt = 0,
   });
 
   // New constructor for User.fromSignUp
@@ -73,6 +79,8 @@ class AppUser {
     this.userRole,
     this.workerTimelineStep,
     this.companyTimelineStep,
+    this.createdAt = 0,
+    this.modifiedAt = 0,
   });
 
   Map<String, dynamic> toMap() {
@@ -108,6 +116,8 @@ class AppUser {
       data['workerTimelineStep'] = workerTimelineStep;
     if (companyTimelineStep != null)
       data['companyTimelineStep'] = companyTimelineStep;
+    if (createdAt != 0) data['createdAt'] = createdAt;
+    if (modifiedAt != 0) data['modifiedAt'] = modifiedAt;
 
     return data;
   }
@@ -139,6 +149,8 @@ class AppUser {
       address: map['address'] != null
           ? Address.fromMap(map['address'])
           : null, // Convert Map to Address object
+      createdAt: map['createdAt'] ?? 0,
+      modifiedAt: map['modifiedAt'] ?? 0,
     );
   }
 
@@ -165,9 +177,9 @@ class AppUser {
       company: map['company'] != null
           ? Company.fromMap(map['company'])
           : null, // Convert Map to Company object
-      address: map['address'] != null
-          ? Address.fromMap(map['address'])
-          : null, // Convert Map to Address object
+      address: map['address'] != null ? Address.fromMap(map['address']) : null,
+      createdAt: map['createdAt'] ?? 0,
+      modifiedAt: map['modifiedAt'] ?? 0,
     );
   }
 

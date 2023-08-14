@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:bulkers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:http/http.dart' as http;
 
 final FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -166,38 +168,61 @@ class WorkerDataProvider {
     return workers;
   }
 
+  // static Future<List<Worker>> getWorkers(
+  //     String nameRelated, String locationRelated) async {
+  //   final CollectionReference workersCollection =
+  //       FirebaseFirestore.instance.collection('workers');
+  //
+  //   // Query for each field separately
+  //   var queries = [
+  //     workersCollection.where('firstName', isEqualTo: nameRelated),
+  //     workersCollection.where('middleName', isEqualTo: nameRelated),
+  //     workersCollection.where('lastName', isEqualTo: nameRelated),
+  //     workersCollection.where('addresses.street', isEqualTo: locationRelated),
+  //     workersCollection.where('addresses.city', isEqualTo: locationRelated),
+  //     workersCollection.where('addresses.state', isEqualTo: locationRelated),
+  //     workersCollection.where('addresses.country', isEqualTo: locationRelated),
+  //   ];
+  //
+  //   // Execute all queries and combine the results
+  //   var allWorkers = <Worker>[];
+  //   for (var query in queries) {
+  //     final snapshot = await query.get();
+  //     final workers = snapshot.docs.map((doc) {
+  //       return Worker.fromMap(doc.data() as Map<String, dynamic>);
+  //     }).toList();
+  //     allWorkers.addAll(workers);
+  //   }
+  //
+  //   // Optionally, remove duplicates
+  //   var uniqueWorkers = <Worker>{};
+  //   uniqueWorkers.addAll(allWorkers);
+  //   allWorkers = uniqueWorkers.toList();
+  //
+  //   return allWorkers;
+  // }
+
   static Future<List<Worker>> getWorkers(
       String nameRelated, String locationRelated) async {
-    final CollectionReference workersCollection =
-        FirebaseFirestore.instance.collection('workers');
+    final response = await http.post(
+      Uri.parse('https://top-design-395510.ue.r.appspot.com/searchWorkers'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'nameRelated': nameRelated,
+        'locationRelated': locationRelated,
+      }),
+    );
 
-    // Query for each field separately
-    var queries = [
-      workersCollection.where('firstName', isEqualTo: nameRelated),
-      workersCollection.where('middleName', isEqualTo: nameRelated),
-      workersCollection.where('lastName', isEqualTo: nameRelated),
-      workersCollection.where('addresses.street', isEqualTo: locationRelated),
-      workersCollection.where('addresses.city', isEqualTo: locationRelated),
-      workersCollection.where('addresses.state', isEqualTo: locationRelated),
-      workersCollection.where('addresses.country', isEqualTo: locationRelated),
-    ];
-
-    // Execute all queries and combine the results
-    var allWorkers = <Worker>[];
-    for (var query in queries) {
-      final snapshot = await query.get();
-      final workers = snapshot.docs.map((doc) {
-        return Worker.fromMap(doc.data() as Map<String, dynamic>);
-      }).toList();
-      allWorkers.addAll(workers);
+    if (response.statusCode == 200) {
+      final List<dynamic> workerData = jsonDecode(response.body);
+      final List<Worker> workers =
+          workerData.map((data) => Worker.fromMap(data)).toList();
+      return workers;
+    } else {
+      throw Exception('Failed to fetch workers from the API');
     }
-
-    // Optionally, remove duplicates
-    var uniqueWorkers = <Worker>{};
-    uniqueWorkers.addAll(allWorkers);
-    allWorkers = uniqueWorkers.toList();
-
-    return allWorkers;
   }
 
   static getWorkersFromList(List<String> applicantIds) async {

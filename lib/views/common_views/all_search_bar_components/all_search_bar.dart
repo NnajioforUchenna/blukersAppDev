@@ -37,12 +37,12 @@ class _AllSearchBarState extends State<AllSearchBar> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    if (up.userRole == 'company') {
+    if (up.userRole == 'Company') {
       buttonLabel = 'Search Workers';
-      searchName = 'Position, work area or company';
+      searchName = 'Position, Work Area or Company';
     } else {
       buttonLabel = 'Search Jobs';
-      searchName = 'Company name, skill or job title';
+      searchName = 'Company Name, Skill or Job Title';
     }
     return Responsive(
       mobile: _buildMobileSearchBar(),
@@ -66,7 +66,16 @@ class _AllSearchBarState extends State<AllSearchBar> {
               const SizedBox(height: 20.0),
               _buildSearchField(_searchController2, 'Location'),
               const SizedBox(height: 20.0),
-              _buildSearchButton(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildSearchButton(),
+                  const SizedBox(width: 10.0),
+                  Visibility(
+                      visible: wp.isSearching || jp.isSearching,
+                      child: _buildSmallCircleButton()),
+                ],
+              ),
             ],
           ),
         ),

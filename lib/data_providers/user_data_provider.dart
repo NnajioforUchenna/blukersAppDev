@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bulkers/models/address.dart';
 import 'package:bulkers/models/app_user.dart';
 import 'package:bulkers/models/company.dart';
@@ -262,8 +260,7 @@ class UserDataProvider {
     });
   }
 
-  static Future<String?> uploadImage(
-      {Uint8List? image, String? path}) async {
+  static Future<String?> uploadImage({Uint8List? image, String? path}) async {
     // final firebaseStorage = FirebaseStorage.instance;
     // final imagePicker = ImagePicker();
     // PickedFile? image;
@@ -312,5 +309,14 @@ class UserDataProvider {
     //   }
     //   return '';
     // }
+  }
+
+  static void updateUserWorkerProfile(String uid, Worker worker) {
+    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    appUserCollection.doc(uid).update({
+      'worker': worker.toMap(),
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
   }
 }

@@ -121,7 +121,6 @@ class _LoginInformationState extends State<LoginInformation> {
                               color: Colors.grey[300],
                             ),
                             onPressed: () {
-                              print('i was called');
                               setState(() {
                                 isPasswordVisible = !isPasswordVisible;
                               });
@@ -227,7 +226,6 @@ class _LoginInformationState extends State<LoginInformation> {
                     SubmitButton(
                       onTap: () {
                         if (isFormComplete()) {
-                          print("Form is Complete");
                           up.registerUser(
                             email: emailController.text,
                             password: passwordController.text,

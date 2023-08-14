@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../services/responsive.dart';
 import 'animate_job_post_details.dart';
 import 'build_list_view_jobs.dart';
+import 'choose_target_language.dart';
 import 'job_search_bar.dart';
 
 class DisplayJobs extends StatelessWidget {
@@ -43,6 +44,15 @@ class DisplayJobs extends StatelessWidget {
     return Column(
       children: [
         JobSearchBar(),
+        const SizedBox(height: 10),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Spacer(),
+            SizedBox(height: 50, width: 200, child: ChooseTargetLanguage()),
+            SizedBox(width: 30)
+          ],
+        ),
         const SizedBox(height: 10),
         const Expanded(
           child: Row(

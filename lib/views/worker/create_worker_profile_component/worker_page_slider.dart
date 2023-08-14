@@ -72,9 +72,9 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
           MakeResponsiveWeb(
               image: const AssetImage('assets/images/profilePhotoPage.png'),
               child: ProfilePhotoPage()),
-          MakeResponsiveWeb(
-              image: const AssetImage(
-                  'assets/images/professionalCredentialsPage.png'),
+          const MakeResponsiveWeb(
+              image:
+                  AssetImage('assets/images/professionalCredentialsPage.png'),
               child: ProfessionalCredentialsPage()),
           MakeResponsiveWeb(
               image: const AssetImage('assets/images/workExperience.png'),

@@ -84,11 +84,8 @@ class JobPost {
       if (salaryType != SalaryType.hourly) 'salaryType': salaryType.index,
       if (salaryAmount != 0.0) 'salaryAmount': salaryAmount,
       if (addresses.isNotEmpty)
-        'addresses': addresses
-            .map((address) => address.toMap())
-            .toList(), // Assuming Address has a toMap method
-      if (address != null)
-        'address': address!.toMap(), // Assuming Address has a toMap method
+        'addresses': addresses.map((address) => address.toMap()).toList(),
+      if (address != null) 'address': address!.toMap(),
       if (applicantUserIds.isNotEmpty) 'applicantUserIds': applicantUserIds,
       if (declineUserIds.isNotEmpty) 'declineUserIds': declineUserIds,
       if (interviewedUserIds.isNotEmpty)

@@ -12,6 +12,7 @@ class Company {
   List<String> emails;
   List<String> phoneNumbers;
   List<Address> addresses;
+  Address? address;
   int yearFounded;
   String website;
   int totalEmployees;
@@ -39,6 +40,7 @@ class Company {
     this.companyIndustry = '',
     required this.emails,
     required this.phoneNumbers,
+    this.address,
     this.addresses = const [],
     this.yearFounded = 0,
     this.totalEmployees = 0,
@@ -91,6 +93,7 @@ class Company {
     if (addresses.isNotEmpty) {
       map['addresses'] = addresses.map((address) => address.toMap()).toList();
     }
+    if (address != null) map['address'] = address!.toMap();
     if (socialMediaPlatforms.isNotEmpty) {
       map['socialMediaPlatforms'] =
           socialMediaPlatforms.map((platform) => platform.toMap()).toList();
@@ -144,6 +147,7 @@ class Company {
               .map((addressMap) => Address.fromMap(addressMap))
               .toList()
           : [],
+      address: map['address'] != null ? Address.fromMap(map['address']) : null,
       socialMediaPlatforms: map['socialMediaPlatforms'] != null
           ? (map['socialMediaPlatforms'] as List)
               .map((platformMap) => SocialMediaPlatform.fromMap(platformMap))

@@ -6,7 +6,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
 import '../models/job_post.dart';
-import '../services/translate_jobPost.dart';
 import '../views/common_views/please_login_dialog.dart';
 
 class JobPostsProvider with ChangeNotifier {
@@ -19,8 +18,11 @@ class JobPostsProvider with ChangeNotifier {
 
   List<JobPost> selectedJobPosts = [];
   int jobPostCurrentPageIndex = 0;
+  String selectedJobPostId = '';
 
   void getJobPostsByJobID(String jobId) {
+    selectedJobPostId = jobId;
+
     // Get all jobPosts for the job with the given jobId.
     JobPostsDataProvider.getJobPostsByJobID(jobId).then((jobPosts) {
       selectedJobPosts = jobPosts.map((jobPost) {
@@ -31,15 +33,21 @@ class JobPostsProvider with ChangeNotifier {
     });
   }
 
-  void translateJobPosts(targetLanguage) {
+  Future<void> translateJobPosts(targetLanguage) async {
     List<JobPost> translatedJobPosts = [];
-    selectedJobPosts.forEach((jobPost) async {
-      JobPost transLatedJobPost = await TranslateJobPost(
-          jobPost: jobPost, targetLanguage: targetLanguage);
-      translatedJobPosts.add(transLatedJobPost);
-    });
-    selectedJobPosts = translatedJobPosts;
-    notifyListeners();
+    if (selectedJobPostId.isNotEmpty) {
+      translatedJobPosts = await JobPostsDataProvider.translateJobPosts(
+          selectedJobPostId, targetLanguage);
+      if (translatedJobPosts.isEmpty) {
+        EasyLoading.showError('No Jobs Found with $targetLanguage');
+        return;
+      }
+      selectedJobPosts = translatedJobPosts;
+      selectedJobPost = translatedJobPosts.firstWhere((jobPost) {
+        return jobPost.jobPostId == selectedJobPostId;
+      }, orElse: () => translatedJobPosts.first);
+      notifyListeners();
+    }
   }
 
   void setSelectedJobPost(JobPost jobPost) {

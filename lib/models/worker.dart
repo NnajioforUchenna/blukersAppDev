@@ -20,6 +20,7 @@ class Worker {
   List<String> activeMemberships;
   int workStatus;
   List<Address> addresses;
+  Address? address;
   int birthdate;
   int dateCreated;
   List<WorkExperience> workExperiences;
@@ -34,6 +35,8 @@ class Worker {
   bool isVerified;
   bool isBasicProfileCompleted;
   bool isProfileUpdateNeeded;
+  int createdAt;
+  int modifiedAt;
 
   Worker({
     required this.workerId,
@@ -50,6 +53,7 @@ class Worker {
     this.activeMemberships = const [],
     this.workStatus = 0,
     this.addresses = const [],
+    this.address,
     this.birthdate = 0,
     this.dateCreated = 0,
     this.workExperiences = const [],
@@ -64,6 +68,8 @@ class Worker {
     this.isVerified = false,
     this.isBasicProfileCompleted = false,
     this.isProfileUpdateNeeded = false,
+    this.createdAt = 0,
+    this.modifiedAt = 0,
   });
 
   get timeAgo => getTimeAgo(dateCreated.toString());
@@ -89,6 +95,7 @@ class Worker {
       // Assuming addresses have a meaningful toMap method
       if (addresses.isNotEmpty)
         'addresses': addresses.map((address) => address.toMap()).toList(),
+      if (address != null) 'address': address!.toMap(),
       if (dateCreated != 0) 'dateCreated': dateCreated,
       if (birthdate != 0) 'birthdate': birthdate,
       // Assuming workExperiences have a meaningful toMap method
@@ -110,6 +117,8 @@ class Worker {
       if (isBasicProfileCompleted)
         'isBasicProfileCompleted': isBasicProfileCompleted,
       if (isProfileUpdateNeeded) 'isProfileUpdateNeeded': isProfileUpdateNeeded,
+      if (createdAt != 0) 'createdAt': createdAt,
+      if (modifiedAt != 0) 'modifiedAt': modifiedAt,
     };
   }
 
@@ -134,7 +143,8 @@ class Worker {
       addresses: (map['addresses'] as List?)
               ?.map((item) => Address.fromMap(item))
               .toList() ??
-          [], // Assuming an appropriate constructor in Address
+          [],
+      address: map['address'] != null ? Address.fromMap(map['address']) : null,
 
       birthdate:
           map['birthdate'] != null ? int.parse(map['birthdate'].toString()) : 0,
@@ -163,6 +173,11 @@ class Worker {
       isVerified: map['isVerified'] ?? false,
       isBasicProfileCompleted: map['isBasicProfileCompleted'] ?? false,
       isProfileUpdateNeeded: map['isProfileUpdateNeeded'] ?? false,
+      createdAt:
+          map['createdAt'] != null ? int.parse(map['createdAt'].toString()) : 0,
+      modifiedAt: map['modifiedAt'] != null
+          ? int.parse(map['modifiedAt'].toString())
+          : 0,
     );
   }
 

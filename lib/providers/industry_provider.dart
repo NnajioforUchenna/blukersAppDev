@@ -65,11 +65,9 @@ class IndustriesProvider with ChangeNotifier {
     var addressDic = {};
     List<String> parts = prediction.secondaryText.split(',');
     addressDic['street'] = prediction.primaryText;
-    if (parts.length >= 2) {
-      addressDic['city'] = parts[0].trim();
-      addressDic['state'] = parts[1].trim();
-      addressDic['country'] = parts[2].trim();
-    }
+    addressDic['country'] = parts.isNotEmpty ? parts.removeLast().trim() : '';
+    addressDic['state'] = parts.isNotEmpty ? parts.removeLast().trim() : '';
+    addressDic['city'] = parts.isNotEmpty ? parts.removeLast().trim() : '';
 
     return addressDic;
   }
