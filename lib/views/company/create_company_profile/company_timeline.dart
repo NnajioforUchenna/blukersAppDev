@@ -163,19 +163,19 @@ class _EndChildCompany extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                child: Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: current
-                        ? ThemeColors.secondaryThemeColor
-                        : ThemeColors.grey1ThemeColor,
-                  ),
-                ),
-              ),
+              // Flexible(
+              //   child: Text(
+              //     text,
+              //     textAlign: TextAlign.center,
+              //     style: TextStyle(
+              //       fontSize: 14,
+              //       fontWeight: FontWeight.w600,
+              //       color: current
+              //           ? ThemeColors.secondaryThemeColor
+              //           : ThemeColors.grey1ThemeColor,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

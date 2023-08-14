@@ -8,6 +8,8 @@ import 'option_box.dart';
 
 import 'package:bulkers/views/auth/common_widget/label_button.dart';
 
+// import 'package:bulkers/views/common_views/components/animations/index.dart';
+
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class LandingPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // MyAnimation(name: 'circlePulseBlue2'),
             // First and Second sections combined: Logo/Image and Slogan
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.4,

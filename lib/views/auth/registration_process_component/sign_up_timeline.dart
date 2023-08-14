@@ -138,18 +138,18 @@ class _EndChildDelivery extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                child: Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.sniglet(
-                    fontSize: 16,
-                    color: current
-                        ? ThemeColors.secondaryThemeColor
-                        : ThemeColors.grey1ThemeColor,
-                  ),
-                ),
-              ),
+              // Flexible(
+              //   child: Text(
+              //     text,
+              //     textAlign: TextAlign.center,
+              //     style: GoogleFonts.sniglet(
+              //       fontSize: 16,
+              //       color: current
+              //           ? ThemeColors.secondaryThemeColor
+              //           : ThemeColors.grey1ThemeColor,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

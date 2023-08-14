@@ -8,6 +8,8 @@ import 'package:bulkers/views/company/profile_components/company_basic_profile_d
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:bulkers/views/common_views/components/index.dart';
+
 class CompanyBasicInfo extends StatefulWidget {
   const CompanyBasicInfo({super.key});
 
@@ -23,11 +25,8 @@ class _CompanyBasicInfoState extends State<CompanyBasicInfo> {
     UserProvider up = Provider.of<UserProvider>(context);
     Company company = up.appUser!.company!;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Company Profile",
-          style: ThemeTextStyles.informationDisplayPlaceHolderThemeTextStyle,
-        ),
+      appBar: MyAppBar(
+        title: "Company Profile",
       ),
       body: SingleChildScrollView(
         child: Column(

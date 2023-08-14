@@ -11,6 +11,8 @@ import 'my_job_post_component/no_job_posts.dart';
 import 'package:bulkers/views/common_views/components/icon_text_404.dart';
 import 'package:unicons/unicons.dart';
 
+import 'package:bulkers/views/common_views/components/animations/index.dart';
+
 class MyJobPostsTab extends StatelessWidget {
   const MyJobPostsTab({super.key});
 
@@ -24,7 +26,8 @@ class MyJobPostsTab extends StatelessWidget {
           .getMyJobPostsStream(), // Assuming CompanyProvider has a similar function to fetch the job posts stream.
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return LoadingMyJobPosts();
+          // return LoadingMyJobPosts();
+          return MyAnimation(name: 'circlePulseBlue2');
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
