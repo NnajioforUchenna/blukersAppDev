@@ -40,10 +40,18 @@ class WorkerProvider with ChangeNotifier {
     print(jobId);
     // Get all workers for the job with the given jobId.
     WorkerDataProvider.getWorkersByJobID(jobId).then((workers) {
-      selectedWorkers = workers.map((worker) {
-        return Worker.fromMap(worker);
-      }).toList();
-      selectedWorker = selectedWorkers[0];
+      selectedWorkers = workers
+          .map((worker) {
+            return Worker.fromMap(worker);
+          })
+          .where((worker) => worker != null)
+          .cast<Worker>()
+          .toList();
+
+      if (selectedWorkers.isNotEmpty) {
+        selectedWorker = selectedWorkers[0];
+      }
+
       notifyListeners();
     });
   }

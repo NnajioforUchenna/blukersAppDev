@@ -61,19 +61,23 @@ class CompanyDataProvider {
 
   static StreamController<List<Worker>> fetchInterestingWorkers(
       String companyId) {
+    StreamController<List<Worker>> _streamController =
+        StreamController<List<Worker>>();
     db.collection(companyCollections).doc(companyId).get().then((doc) {
       if (doc.exists) {
-        Map<String, dynamic> data = doc.data()
-            as Map<String, dynamic>; // Type casting to Map<String, dynamic>
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         List<dynamic> workerList = data['interestingWorkers'] ?? [];
         List<Worker> returnWorkerList = [];
         Future.forEach(workerList, (workerId) async {
           DocumentSnapshot workerDoc =
               await db.collection(workersCollections).doc(workerId).get();
           if (workerDoc.exists) {
-            Map<String, dynamic> workerData = workerDoc.data()
-                as Map<String, dynamic>; // Type casting to Map<String, dynamic>
-            returnWorkerList.add(Worker.fromMap(workerData));
+            Map<String, dynamic> workerData =
+                workerDoc.data() as Map<String, dynamic>;
+            Worker? worker = Worker.fromMap(workerData);
+            if (worker != null) {
+              returnWorkerList.add(worker); // Only add if not null
+            }
           }
         }).then((_) {
           _streamController.add(returnWorkerList);

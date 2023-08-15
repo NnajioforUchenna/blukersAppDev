@@ -163,7 +163,10 @@ class WorkerDataProvider {
       if (workerSnapshot.exists) {
         Map<String, dynamic> workerData =
             workerSnapshot.data()! as Map<String, dynamic>;
-        workers.add(Worker.fromMap(workerData));
+        Worker? worker = Worker.fromMap(workerData);
+        if (worker != null) {
+          workers.add(worker); // Only add if not null
+        }
       }
     }
 
@@ -219,15 +222,22 @@ class WorkerDataProvider {
 
     if (response.statusCode == 200) {
       final List<dynamic> workerData = jsonDecode(response.body);
-      final List<Worker> workers =
-          workerData.map((data) => Worker.fromMap(data)).toList();
+      final List<Worker> workers = workerData
+          .map((data) {
+            Worker? worker = Worker.fromMap(data);
+            return worker;
+          })
+          .where((worker) => worker != null)
+          .cast<Worker>()
+          .toList();
       return workers;
     } else {
       throw Exception('Failed to fetch workers from the API');
     }
   }
 
-  static getWorkersFromList(List<String> applicantIds) async {
+  static Future<List<Worker>> getWorkersFromList(
+      List<String> applicantIds) async {
     List<Worker> result = [];
 
     final CollectionReference workersRef = db.collection(workersCollections);
@@ -240,8 +250,11 @@ class WorkerDataProvider {
         if (documentSnapshot.exists) {
           Map<String, dynamic> data =
               documentSnapshot.data() as Map<String, dynamic>;
-          result.add(Worker.fromMap(
-              data)); // Using the fromMap method of the Worker class
+          Worker? worker = Worker.fromMap(
+              data); // Using the fromMap method of the Worker class
+          if (worker != null) {
+            result.add(worker); // Only add if not null
+          }
         }
       } catch (e) {
         print("Error fetching worker: $e");

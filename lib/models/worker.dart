@@ -122,63 +122,70 @@ class Worker {
     };
   }
 
-  static Worker fromMap(Map<String, dynamic> map) {
-    return Worker(
-      workerId: map['workerId'],
-      firstName: map['firstName'] ?? '',
-      middleName: map['middleName'] ?? '',
-      lastName: map['lastName'] ?? '',
-      emails: (map['emails'] as List?)?.cast<String>() ?? [],
-      phoneNumber: map['phoneNumber'] ?? '',
-      workerBriefDescription: map['workerBriefDescription'] ?? '',
-      profilePhotoUrl: map['profilePhotoUrl'] ?? '',
-      industryIds: (map['industryIds'] as List?)?.cast<String>() ?? [],
-      jobIds: (map['jobIds'] as List?)?.cast<String>() ?? [],
-      skillIds: (map['skillIds'] as List?)?.cast<String>() ?? [],
-      activeMemberships:
-          (map['activeMemberships'] as List?)?.cast<String>() ?? [],
-      workStatus: map['workStatus'] != null
-          ? int.parse(map['workStatus'].toString())
-          : 0,
-      addresses: (map['addresses'] as List?)
-              ?.map((item) => Address.fromMap(item))
-              .toList() ??
-          [],
-      address: map['address'] != null ? Address.fromMap(map['address']) : null,
-
-      birthdate:
-          map['birthdate'] != null ? int.parse(map['birthdate'].toString()) : 0,
-
-      dateCreated: map['dateCreated'] != null
-          ? int.parse(map['dateCreated'].toString())
-          : 0,
-      workExperiences: (map['workExperiences'] as List?)
-              ?.map((item) => WorkExperience.fromMap(item))
-              .toList() ??
-          [], // Assuming an appropriate constructor in WorkExperience
-      references: (map['references'] as List?)
-              ?.map((item) => Reference.fromMap(item))
-              .toList() ??
-          [], // Assuming an appropriate constructor in Reference
-      savedJobPostIds: (map['savedJobPostIds'] as List?)?.cast<String>() ?? [],
-      appliedJobPostIds:
-          (map['appliedJobPostIds'] as List?)?.cast<String>() ?? [],
-      workerBadgeIds: (map['workerBadgeIds'] as List?)?.cast<String>() ?? [],
-      certificationsIds:
-          (map['certificationsIds'] as List?)?.cast<String>() ?? [],
-      workerVerificationsIds:
-          (map['workerVerificationsIds'] as List?)?.cast<String>() ?? [],
-      pdfResumeUrl: map['pdfResumeUrl'] ?? '',
-      onlineResume: map['onlineResume'] ?? '',
-      isVerified: map['isVerified'] ?? false,
-      isBasicProfileCompleted: map['isBasicProfileCompleted'] ?? false,
-      isProfileUpdateNeeded: map['isProfileUpdateNeeded'] ?? false,
-      createdAt:
-          map['createdAt'] != null ? int.parse(map['createdAt'].toString()) : 0,
-      modifiedAt: map['modifiedAt'] != null
-          ? int.parse(map['modifiedAt'].toString())
-          : 0,
-    );
+  static Worker? fromMap(Map<String, dynamic> map) {
+    try {
+      return Worker(
+        workerId: map['workerId'],
+        firstName: map['firstName'] ?? '',
+        middleName: map['middleName'] ?? '',
+        lastName: map['lastName'] ?? '',
+        emails: (map['emails'] as List?)?.cast<String>() ?? [],
+        phoneNumber: map['phoneNumber'] ?? '',
+        workerBriefDescription: map['workerBriefDescription'] ?? '',
+        profilePhotoUrl: map['profilePhotoUrl'] ?? '',
+        industryIds: (map['industryIds'] as List?)?.cast<String>() ?? [],
+        jobIds: (map['jobIds'] as List?)?.cast<String>() ?? [],
+        skillIds: (map['skillIds'] as List?)?.cast<String>() ?? [],
+        activeMemberships:
+            (map['activeMemberships'] as List?)?.cast<String>() ?? [],
+        workStatus: map['workStatus'] != null
+            ? int.parse(map['workStatus'].toString())
+            : 0,
+        addresses: (map['addresses'] as List?)
+                ?.map((item) => Address.fromMap(item))
+                .toList() ??
+            [],
+        address:
+            map['address'] != null ? Address.fromMap(map['address']) : null,
+        birthdate: map['birthdate'] != null
+            ? int.parse(map['birthdate'].toString())
+            : 0,
+        dateCreated: map['dateCreated'] != null
+            ? int.parse(map['dateCreated'].toString())
+            : 0,
+        workExperiences: (map['workExperiences'] as List?)
+                ?.map((item) => WorkExperience.fromMap(item))
+                .toList() ??
+            [],
+        references: (map['references'] as List?)
+                ?.map((item) => Reference.fromMap(item))
+                .toList() ??
+            [],
+        savedJobPostIds:
+            (map['savedJobPostIds'] as List?)?.cast<String>() ?? [],
+        appliedJobPostIds:
+            (map['appliedJobPostIds'] as List?)?.cast<String>() ?? [],
+        workerBadgeIds: (map['workerBadgeIds'] as List?)?.cast<String>() ?? [],
+        certificationsIds:
+            (map['certificationsIds'] as List?)?.cast<String>() ?? [],
+        workerVerificationsIds:
+            (map['workerVerificationsIds'] as List?)?.cast<String>() ?? [],
+        pdfResumeUrl: map['pdfResumeUrl'] ?? '',
+        onlineResume: map['onlineResume'] ?? '',
+        isVerified: map['isVerified'] ?? false,
+        isBasicProfileCompleted: map['isBasicProfileCompleted'] ?? false,
+        isProfileUpdateNeeded: map['isProfileUpdateNeeded'] ?? false,
+        createdAt: map['createdAt'] != null
+            ? int.parse(map['createdAt'].toString())
+            : 0,
+        modifiedAt: map['modifiedAt'] != null
+            ? int.parse(map['modifiedAt'].toString())
+            : 0,
+      );
+    } catch (e) {
+      print('An error occurred while creating the Worker object: $e');
+      return null;
+    }
   }
 
   @override

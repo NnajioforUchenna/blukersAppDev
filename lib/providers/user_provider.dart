@@ -146,7 +146,7 @@ class UserProvider with ChangeNotifier {
       maskType: EasyLoadingMaskType.black,
     );
 
-    Worker worker = Worker.fromMap({
+    Worker? worker = Worker.fromMap({
       'workerId': appUser!.uid,
       'lastName': lastName,
       'firstName': name,
@@ -155,7 +155,9 @@ class UserProvider with ChangeNotifier {
       'isBasicProfileCompleted': true,
     });
 
-    UserDataProvider.updateWorkerBasicInformation(worker);
+    if (worker != null) {
+      UserDataProvider.updateWorkerBasicInformation(worker);
+    }
     _appUser!.worker = worker;
     _appUser!.isBasicInformation = true;
     EasyLoading.dismiss();
