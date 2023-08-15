@@ -1,3 +1,4 @@
+import 'package:bulkers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,11 +34,13 @@ class BuildListViewJobs extends StatelessWidget {
             jobPostId: jobPost.companyId,
             onTap: () {
               jp.setSelectedJobPost(jobPost);
-              showDialog(
-                  context: context,
-                  builder: (context) => DisplayJobPostDialog(
-                        jobPost: jobPost,
-                      ));
+              if (Responsive.isMobile(context)) {
+                showDialog(
+                    context: context,
+                    builder: (context) => DisplayJobPostDialog(
+                          jobPost: jobPost,
+                        ));
+              }
             });
       },
       separatorBuilder: (BuildContext context, int index) {
