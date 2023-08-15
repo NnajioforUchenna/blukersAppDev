@@ -1,8 +1,7 @@
 import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/views/common_views/page_template/page_template.dart';
 import 'package:bulkers/views/common_views/components/icon_text_404.dart';
+import 'package:bulkers/views/common_views/page_template/page_template.dart';
 import 'package:bulkers/views/company/workers_components/chat_list_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +16,7 @@ class CompanyChat extends StatelessWidget {
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     return PageTemplate(child: LayoutBuilder(
       builder: ((context, constraints) {
-        if(up.appUser != null && chatProvider.chatRooms.isEmpty){
+        if (up.appUser != null && chatProvider.chatRooms.isEmpty) {
           chatProvider.getGroups(up.appUser?.uid ?? "");
         }
         return Container(

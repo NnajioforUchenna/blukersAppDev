@@ -3,12 +3,14 @@ import 'package:bulkers/models/industry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart';
 
+import '../models/job.dart';
 import '../views/common_views/address_form/validate_address.dart';
 
 class IndustriesProvider with ChangeNotifier {
   Map<String, Industry> _industries = {};
-
   Map<String, Industry> get industries => _industries;
+
+  Map<String, Job> jobs = {};
 
   IndustriesProvider() {
     getData();
@@ -18,6 +20,7 @@ class IndustriesProvider with ChangeNotifier {
     IndustriesDataProvider.getAllIndustries().then((data) {
       _industries = data;
       notifyListeners();
+      fillJobs();
     });
   }
 
@@ -70,5 +73,29 @@ class IndustriesProvider with ChangeNotifier {
     addressDic['city'] = parts.isNotEmpty ? parts.removeLast().trim() : '';
 
     return addressDic;
+  }
+
+  getIndustryName(industryIds) {
+    List<String> industryNameList = [];
+    industryIds.forEach((element) {
+      industryNameList.add(_industries[element]?.name ?? '');
+    });
+    return industryNameList.join(', ');
+  }
+
+  getJobName(jobIds) {
+    List<String> listJobsNames = [];
+    jobIds.forEach((element) {
+      listJobsNames.add(jobs[element]?.title ?? '');
+    });
+    return listJobsNames.join(', ');
+  }
+
+  void fillJobs() {
+    _industries.forEach((key, value) {
+      value.jobs.forEach((job) {
+        jobs[job.jobId] = job;
+      });
+    });
   }
 }

@@ -1,11 +1,10 @@
 import 'package:bulkers/models/company.dart';
-import 'package:bulkers/views/common_views/industry_jobs_dropdown.dart';
 import 'package:bulkers/views/common_views/info_display_component.dart';
-import 'package:bulkers/views/common_views/info_display_list_component.dart';
 import 'package:bulkers/views/common_views/profile_dialog.dart';
 import 'package:bulkers/views/company/profile_components/edit_company_basic_info.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/classification_page.dart';
 import 'package:flutter/material.dart';
+
+import '../../common_views/select_industry_components/industry_jobs_dropdown.dart';
 
 class CompanyAdditionalProfileDetail extends StatelessWidget {
   const CompanyAdditionalProfileDetail(

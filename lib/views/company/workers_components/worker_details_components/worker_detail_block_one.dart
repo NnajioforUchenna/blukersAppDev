@@ -173,21 +173,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                                 const DisplayWorkerTimelineDialog());
                       } else {
                         chatProvider.startRoom(up.appUser, worker);
-                        // String? roomId = await chatProvider?.createChatRoom(
-                        //     myUid: up.appUser!.uid,
-                        //     recipientUid: worker.workerId,
-                        //     myName: up.appUser!.displayName ?? "Company",
-                        //     recipientName: worker.firstName + worker.lastName,
-                        //     message: "",
-                        //     myLogo: up.appUser!.photoUrl ?? "",
-                        //     recipientLogo: worker.profilePhotoUrl ?? "");
-                        // chatProvider?.activeRoomId = roomId!;
                         Navigator.pushNamed(context, '/chat-message');
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const NewChatRoom()),
-                        // );
                       }
                     },
                   ),

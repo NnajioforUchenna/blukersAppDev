@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:bulkers/utils/styles/theme_colors.dart';
 import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/common_views/industry_jobs_dropdown.dart';
 import 'package:bulkers/views/common_views/info_display_component.dart';
 import 'package:bulkers/views/common_views/profile_dialog.dart';
 import 'package:bulkers/views/common_views/profile_section.dart';
@@ -21,6 +20,8 @@ import '../auth/common_widget/login_or_register.dart';
 import '../common_views/page_template/page_template.dart';
 
 import 'package:unicons/unicons.dart';
+
+import '../common_views/select_industry_components/industry_jobs_dropdown.dart';
 
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});

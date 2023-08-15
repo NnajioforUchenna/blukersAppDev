@@ -6,13 +6,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 
+import 'data_constants.dart';
+
 final FirebaseFirestore db = FirebaseFirestore.instance;
 
 class WorkerDataProvider {
   static Future<List<Map<String, dynamic>>> getWorkersByJobID(
       String jobId) async {
     // Create a reference to the Firestore collection
-    CollectionReference workers = db.collection('workers');
+    CollectionReference workers = db.collection(workersCollections);
 
     // Query the collection: Fetch documents where jobId is in the jobPositionIds field
     print(jobId);
@@ -52,19 +54,19 @@ class WorkerDataProvider {
 
   static Future<void> updateOrAddUserPhoto(String uid, String photoUrl) async {
     // For AppUsers collection with photoUrl
-    await db.collection('AppUsers').doc(uid).set({
+    await db.collection(appUserCollections).doc(uid).set({
       'photoUrl': photoUrl,
     }, SetOptions(merge: true));
 
     // For AppUsers collection with worker map
-    await db.collection('AppUsers').doc(uid).set({
+    await db.collection(appUserCollections).doc(uid).set({
       'worker': {
         'profilePhotoUrl': photoUrl,
       },
     }, SetOptions(merge: true));
 
     // For workers collection
-    await db.collection('workers').doc(uid).set({
+    await db.collection(workersCollections).doc(uid).set({
       'profilePhotoUrl': photoUrl,
     }, SetOptions(merge: true));
   }
@@ -91,41 +93,41 @@ class WorkerDataProvider {
   static Future<void> updateOrAddUserCredential(
       String uid, String fileUrl) async {
     // For AppUsers collection within worker map
-    await db.collection('AppUsers').doc(uid).set({
+    await db.collection(appUserCollections).doc(uid).set({
       'worker': {
         'certificationsIds': FieldValue.arrayUnion([fileUrl]),
       },
     }, SetOptions(merge: true));
 
     // For workers collection
-    await db.collection('workers').doc(uid).set({
+    await db.collection(workersCollections).doc(uid).set({
       'certificationsIds': FieldValue.arrayUnion([fileUrl]),
     }, SetOptions(merge: true));
   }
 
   static Future<void> updateOrAddUserSkill(String uid, String skillId) async {
     // For AppUsers collection within worker map
-    await db.collection('AppUsers').doc(uid).set({
+    await db.collection(appUserCollections).doc(uid).set({
       'worker': {
         'skillIds': FieldValue.arrayUnion([skillId]),
       },
     }, SetOptions(merge: true));
 
     // For workers collection
-    await db.collection('workers').doc(uid).set({
+    await db.collection(workersCollections).doc(uid).set({
       'skillIds': FieldValue.arrayUnion([skillId]),
     }, SetOptions(merge: true));
   }
 
   static void createWorkerProfile(Worker worker) {
     db
-        .collection('workers')
+        .collection(workersCollections)
         .doc(worker.workerId)
         .set(worker.toMap(), SetOptions(merge: true));
   }
 
   static getWorkerProfile(String uid) async {
-    final DocumentReference docRef = db.collection('workers').doc(uid);
+    final DocumentReference docRef = db.collection(workersCollections).doc(uid);
 
     try {
       final DocumentSnapshot doc = await docRef.get();
@@ -152,11 +154,11 @@ class WorkerDataProvider {
       return [];
     }
 
-    // Fetch the workers from the 'workers' collection based on the workerIds
+    // Fetch the workers from the workersCollections collection based on the workerIds
     List<Worker> workers = [];
     for (String workerId in workerIds) {
       DocumentSnapshot workerSnapshot =
-          await db.collection('workers').doc(workerId).get();
+          await db.collection(workersCollections).doc(workerId).get();
 
       if (workerSnapshot.exists) {
         Map<String, dynamic> workerData =
@@ -171,7 +173,7 @@ class WorkerDataProvider {
   // static Future<List<Worker>> getWorkers(
   //     String nameRelated, String locationRelated) async {
   //   final CollectionReference workersCollection =
-  //       FirebaseFirestore.instance.collection('workers');
+  //       FirebaseFirestore.instance.collection(workersCollections);
   //
   //   // Query for each field separately
   //   var queries = [
@@ -228,7 +230,7 @@ class WorkerDataProvider {
   static getWorkersFromList(List<String> applicantIds) async {
     List<Worker> result = [];
 
-    final CollectionReference workersRef = db.collection('workers');
+    final CollectionReference workersRef = db.collection(workersCollections);
 
     // Iterating through each applicantId and retrieving the corresponding Worker
     for (String applicantId in applicantIds) {

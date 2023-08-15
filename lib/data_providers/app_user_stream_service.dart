@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/app_user.dart';
+import 'data_constants.dart';
 
 class StreamService {
   final String? documentId;
@@ -12,7 +13,7 @@ class StreamService {
       return Stream<AppUser?>.empty();
     }
     return FirebaseFirestore.instance
-        .collection('AppUsers')
+        .collection(appUserCollections)
         .doc(documentId)
         .snapshots()
         .map((snapshot) =>

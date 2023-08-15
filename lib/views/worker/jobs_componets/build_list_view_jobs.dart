@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../common_files/constants.dart';
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
-import '../../../services/responsive.dart';
 import 'display_job_card.dart';
 import 'display_job_post_dialog.dart';
 
@@ -33,15 +32,12 @@ class BuildListViewJobs extends StatelessWidget {
             companyLogo: jobPost.companyLogo ?? 'https://picsum.photos/200/300',
             jobPostId: jobPost.companyId,
             onTap: () {
-              if (Responsive.isDesktop(context)) {
-                jp.setSelectedJobPost(jobPost);
-              } else {
-                showDialog(
-                    context: context,
-                    builder: (context) => DisplayJobPostDialog(
-                          jobPost: jobPost,
-                        ));
-              }
+              jp.setSelectedJobPost(jobPost);
+              showDialog(
+                  context: context,
+                  builder: (context) => DisplayJobPostDialog(
+                        jobPost: jobPost,
+                      ));
             });
       },
       separatorBuilder: (BuildContext context, int index) {

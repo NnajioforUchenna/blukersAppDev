@@ -1,73 +1,64 @@
+import 'package:bulkers/views/auth/common_widget/label_button.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../utils/styles/index.dart';
 import 'option_box.dart';
 
-import 'package:bulkers/views/auth/common_widget/label_button.dart';
-
-// import 'package:bulkers/views/common_views/components/animations/index.dart';
-
 class LandingPage extends StatelessWidget {
+  const LandingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // MyAnimation(name: 'circlePulseBlue2'),
-            // First and Second sections combined: Logo/Image and Slogan
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: MediaQuery.of(context).size.width * 0.8,
+              height: 0.4.sh, // Responsive height
+              width: 0.8.sw, // Responsive width
               child: Image.asset(
                 'assets/images/looking_for_you.png',
                 fit: BoxFit.contain,
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            SizedBox(height: 0.03.sh), // Responsive height
             Transform.translate(
-              offset: const Offset(0, -60),
+              offset: Offset(0, -60.w), // Responsive width
               child: Text(
                 AppLocalizations.of(context)!.dreamBuildConnect,
                 textAlign: TextAlign.center,
-                style: ThemeTextStyles.landingPageSubtitleThemeTextStyle,
+                style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
+                    .copyWith(fontSize: 16.sp), // Responsive font size
               ),
             ),
-            const SizedBox(
-              height: 25,
-            ),
-            // Third section: Question to the user
+            const SizedBox(height: 25),
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.w), // Responsive width
               child: Text(
                 AppLocalizations.of(context)!.whatAreYouLookingFor,
                 textAlign: TextAlign.center,
-                style: ThemeTextStyles.landingPageQuestionThemeTextStyle,
+                style: ThemeTextStyles.landingPageQuestionThemeTextStyle
+                    .copyWith(fontSize: 18.sp), // Responsive font size
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            // Fourth section: Two boxes
+            const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // First box
                 OptionBox(
-                    imgSrc: 'assets/images/worker_icon.png',
-                    title: AppLocalizations.of(context)!.aJob,
-                    onTap: () {
-                      up.userRole = "worker";
-                      Navigator.pushNamed(context, '/jobs');
-                    }),
-                // Space between boxes
-                const SizedBox(width: 20),
-                // Second box
+                  imgSrc: 'assets/images/worker_icon.png',
+                  title: AppLocalizations.of(context)!.aJob,
+                  onTap: () {
+                    up.userRole = "worker";
+                    Navigator.pushNamed(context, '/jobs');
+                  },
+                ),
+                SizedBox(width: 20.w), // Responsive width
                 OptionBox(
                   imgSrc: 'assets/images/company_icon.png',
                   title: AppLocalizations.of(context)!.workers,
@@ -78,7 +69,7 @@ class LandingPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: height * .01),
+            SizedBox(height: 0.01.sh), // Responsive height
             if (up.appUser == null)
               LabelButton(
                 onTap: () {

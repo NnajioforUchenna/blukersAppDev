@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 
+import 'data_constants.dart';
+
 final firestore = FirebaseFirestore.instance;
 
 class UserDataProvider {
@@ -53,7 +55,8 @@ class UserDataProvider {
 
   static void registerUserToDatabase(AppUser appUser) {
     // Reference to the Firestore collection
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     appUserCollection.doc(appUser.uid).set(appUser.toMap()).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
@@ -61,7 +64,8 @@ class UserDataProvider {
 
   static void updateBasicInformation(Company company) {
     // Adding AppUser to Firestore
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     appUserCollection.doc(company.companyId).update({
       'company': company.toMap(),
       'isBasicInformation': true
@@ -69,7 +73,8 @@ class UserDataProvider {
       print("Error adding user to Firestore: $error");
     });
 
-    CollectionReference companiesCollection = firestore.collection('Companies');
+    CollectionReference companiesCollection =
+        firestore.collection(companyCollections);
     company.isBasicProfileCompleted = true;
     companiesCollection
         .doc(company.companyId)
@@ -83,7 +88,8 @@ class UserDataProvider {
 
   static void updateWorkerBasicInformation(Worker worker) {
     // Adding AppUser to Firestore
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     appUserCollection.doc(worker.workerId).update({
       'worker': worker.toMap(),
       'isBasicInformation': true
@@ -92,7 +98,8 @@ class UserDataProvider {
     });
 
     // Adding Worker to Firestore
-    CollectionReference workersCollection = firestore.collection('Workers');
+    CollectionReference workersCollection =
+        firestore.collection(workersCollections);
     workersCollection
         .doc(worker.workerId)
         .set(
@@ -105,7 +112,8 @@ class UserDataProvider {
 
   static void updateContactInformation(
       String completePhoneNumber, Address address, String uid) {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
       'phoneNumber': completePhoneNumber,
       'address': address.toMap(),
@@ -117,7 +125,8 @@ class UserDataProvider {
 
   static Future<void> updateUserBasicInfo(
       Map<String, dynamic> info, String uid) async {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     await appUserCollection.doc(uid).update(info).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
@@ -125,8 +134,10 @@ class UserDataProvider {
 
   static Future<void> updateCompanyInfo(
       Map<String, dynamic> info, String uid) async {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
-    CollectionReference companyCollection = firestore.collection('Companies');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    CollectionReference companyCollection =
+        firestore.collection(companyCollections);
     await appUserCollection
         .doc(uid)
         .update({"company": info}).catchError((error) {
@@ -139,8 +150,10 @@ class UserDataProvider {
 
   static Future<void> updateWorkerInfo(
       Map<String, dynamic> info, String uid) async {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
-    CollectionReference companyCollection = firestore.collection('workers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    CollectionReference companyCollection =
+        firestore.collection(workersCollections);
     await appUserCollection
         .doc(uid)
         .update({"worker": info}).catchError((error) {
@@ -153,7 +166,8 @@ class UserDataProvider {
 
   static Future<void> updateUserProfilePic(
       Map<String, dynamic> info, String uid) async {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
 
     await appUserCollection.doc(uid).update(info).catchError((error) {
       print("Error adding user to Firestore: $error");
@@ -187,7 +201,8 @@ class UserDataProvider {
   }
 
   static Future<AppUser?> getAppUser(String uid) async {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     DocumentSnapshot documentSnapshot = await appUserCollection.doc(uid).get();
 
     if (documentSnapshot.exists) {
@@ -221,7 +236,8 @@ class UserDataProvider {
   }
 
   static void updateTimelineStep(String uid, int step) {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
       'workerTimelineStep': step,
     }).catchError((error) {
@@ -230,7 +246,8 @@ class UserDataProvider {
   }
 
   static void updateWorkerAppliedJobPostIds(List<String> list, String uid) {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
       'worker.appliedJobPostIds': list,
     }).catchError((error) {
@@ -239,7 +256,8 @@ class UserDataProvider {
   }
 
   static void updateWorkerSavedJobPostIds(List<String> list, String uid) {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
       'worker.savedJobPostIds': list,
     }).catchError((error) {
@@ -249,7 +267,7 @@ class UserDataProvider {
 
   static Future<void> addInterestingWorker(String uid, String workerId) async {
     final CollectionReference usersCollection =
-        FirebaseFirestore.instance.collection('AppUsers');
+        FirebaseFirestore.instance.collection(appUserCollections);
 
     // Reference to the user's document
     final DocumentReference userDoc = usersCollection.doc(uid);
@@ -312,7 +330,8 @@ class UserDataProvider {
   }
 
   static void updateUserWorkerProfile(String uid, Worker worker) {
-    CollectionReference appUserCollection = firestore.collection('AppUsers');
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
       'worker': worker.toMap(),
     }).catchError((error) {

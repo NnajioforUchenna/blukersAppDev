@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/industry.dart';
+import 'data_constants.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -9,11 +10,11 @@ class IndustriesDataProvider {
     Map<String, Industry> industriesDict = {};
 
     QuerySnapshot industriesSnapshot =
-        await _firestore.collection('Industries').get();
+        await _firestore.collection(industriesCollections).get();
 
     for (var industryDoc in industriesSnapshot.docs) {
       DocumentReference industryRef =
-          _firestore.collection('Industries').doc(industryDoc.id);
+          _firestore.collection(industriesCollections).doc(industryDoc.id);
       QuerySnapshot jobsSnapshot = await industryRef.collection('jobs').get();
 
       List<Map<String, dynamic>> jobsData = [];

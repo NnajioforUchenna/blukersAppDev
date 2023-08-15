@@ -1,5 +1,7 @@
 import 'package:bulkers/providers/user_provider.dart';
+import 'package:bulkers/services/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../common_files/constants.dart';
@@ -47,43 +49,40 @@ class DetailPageBlockOne extends StatelessWidget {
                       color: isJobSaved
                           ? ThemeColors.secondaryThemeColor
                           : Colors.grey,
+                      size: 30.sp,
                     ))
               ],
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: 15.h),
             Text(jobPost.jobTitle ?? '',
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 20),
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold)),
+            SizedBox(height: 15.h),
             Row(
               children: [
                 Text(
                   jobPost.salaryAmount.toString(),
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w700, fontSize: 18),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w700, fontSize: 13.sp),
                 ),
-                const SizedBox(width: 5),
+                SizedBox(width: 5.h),
                 Text(
                   getSalaryType(jobPost.salaryType) ?? '',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w700, fontSize: 16),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w700, fontSize: 13.sp),
                 ),
               ],
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: 15.h),
             Text(
               getAddressesInStringFormat(jobPost.addresses),
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 11.sp),
             ),
+            SizedBox(height: 15.h),
             Row(
               children: [
                 Container(
-                  width: width < 600
-                      ? 100
-                      : 200, // 300 on mobile, 500 on web or tablet
-                  height: width < 600
-                      ? 40
-                      : 70, // 70 on mobile, 100 on web or tablet
+                  width: 100.sp,
+                  height: 40.sp,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isJobApplied
@@ -117,7 +116,7 @@ class DetailPageBlockOne extends StatelessWidget {
 
                 const Spacer(), // Add space between button and image
                 RoundedImageWidget(
-                  size: 100,
+                  size: Responsive.isMobile(context) ? 50.sp : 100.sp,
                   imageUrl:
                       jobPost.companyLogo ?? 'https://picsum.photos/200/300',
                 ),

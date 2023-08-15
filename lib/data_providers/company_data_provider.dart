@@ -8,12 +8,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/job_post.dart';
+import 'data_constants.dart';
 
 final FirebaseFirestore db = FirebaseFirestore.instance;
 
 class CompanyDataProvider {
   static void addInterestingWorker(AppUser? appUser, Worker worker) {
-    CollectionReference companiesCollection = firestore.collection('Companies');
+    CollectionReference companiesCollection =
+        firestore.collection(companyCollections);
     if (appUser == null) return;
     companiesCollection.doc(appUser!.uid).set(
       {
@@ -32,7 +34,7 @@ class CompanyDataProvider {
       StreamController<List<JobPost>>.broadcast();
 
   static StreamController<List<JobPost>> fetchMyJobPosts(String companyId) {
-    db.collection('Companies').doc(companyId).get().then((doc) {
+    db.collection(companyCollections).doc(companyId).get().then((doc) {
       if (doc.exists) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         List<dynamic> jobPostIdList = data['jobPostIds'] ?? [];
@@ -40,7 +42,7 @@ class CompanyDataProvider {
 
         Future.forEach(jobPostIdList, (jobPostId) async {
           DocumentSnapshot jobPostDoc =
-              await db.collection('JobPosts').doc(jobPostId).get();
+              await db.collection(jobPostsCollections).doc(jobPostId).get();
           if (jobPostDoc.exists) {
             Map<String, dynamic> jobPostData =
                 jobPostDoc.data() as Map<String, dynamic>;
@@ -59,7 +61,7 @@ class CompanyDataProvider {
 
   static StreamController<List<Worker>> fetchInterestingWorkers(
       String companyId) {
-    db.collection('Companies').doc(companyId).get().then((doc) {
+    db.collection(companyCollections).doc(companyId).get().then((doc) {
       if (doc.exists) {
         Map<String, dynamic> data = doc.data()
             as Map<String, dynamic>; // Type casting to Map<String, dynamic>
@@ -67,7 +69,7 @@ class CompanyDataProvider {
         List<Worker> returnWorkerList = [];
         Future.forEach(workerList, (workerId) async {
           DocumentSnapshot workerDoc =
-              await db.collection('workers').doc(workerId).get();
+              await db.collection(workersCollections).doc(workerId).get();
           if (workerDoc.exists) {
             Map<String, dynamic> workerData = workerDoc.data()
                 as Map<String, dynamic>; // Type casting to Map<String, dynamic>
@@ -114,19 +116,19 @@ class CompanyDataProvider {
   }
 
   static updateOrAddUserPhoto(String uid, String photoUrl) async {
-    await db.collection('AppUsers').doc(uid).set({
+    await db.collection(appUserCollections).doc(uid).set({
       'photoUrl': photoUrl,
     }, SetOptions(merge: true));
 
     // For AppUsers collection with worker map
-    await db.collection('AppUsers').doc(uid).set({
+    await db.collection(appUserCollections).doc(uid).set({
       'company': {
         'logoUrl': photoUrl,
       },
     }, SetOptions(merge: true));
 
     // For workers collection
-    await db.collection('Companies').doc(uid).set({
+    await db.collection(companyCollections).doc(uid).set({
       'logoUrl': photoUrl,
     }, SetOptions(merge: true));
   }
@@ -134,17 +136,17 @@ class CompanyDataProvider {
   static Future<void> createCompanyProfile(
       String uid, Map<String, dynamic> createCompanyProfileData) async {
     await db
-        .collection('Companies')
+        .collection(companyCollections)
         .doc(uid)
         .set(createCompanyProfileData, SetOptions(merge: true));
 
-    await db.collection('AppUsers').doc(uid).set({
+    await db.collection(appUserCollections).doc(uid).set({
       'company': createCompanyProfileData,
     }, SetOptions(merge: true));
   }
 
   static void updateCompanyTimelineStep(String uid, int i) {
-    db.collection('AppUsers').doc(uid).set({
+    db.collection(appUserCollections).doc(uid).set({
       'companyTimelineStep': i,
     }, SetOptions(merge: true));
   }

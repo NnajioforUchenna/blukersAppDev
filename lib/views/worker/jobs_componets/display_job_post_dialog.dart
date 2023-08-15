@@ -1,5 +1,6 @@
 import 'package:bulkers/models/job_post.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'animate_job_post_details.dart';
 
@@ -13,16 +14,17 @@ class DisplayJobPostDialog extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Dialog(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(32.0)),
+      ),
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(14.0.sp),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 50,
-                ),
+                Spacer(),
                 ConstrainedBox(
                     constraints: BoxConstraints(
                       maxWidth: width *
@@ -31,6 +33,7 @@ class DisplayJobPostDialog extends StatelessWidget {
                           0.8, // Constrain the height to 70% of the screen
                     ),
                     child: const AnimateJobPostDetails()),
+                Spacer(),
               ],
             ),
           ),

@@ -1,13 +1,11 @@
-import 'dart:io';
 import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/services/on_hover.dart';
 import 'package:bulkers/services/responsive.dart';
 import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/views/common_views/applicant_count.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/industry.dart';
+import '../../../models/industry.dart';
 
 class IndustryHeadPanel extends StatelessWidget {
   final Industry industry;

@@ -2,6 +2,7 @@ import 'package:bulkers/providers/job_posts_provider.dart';
 import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
@@ -53,9 +54,9 @@ class _AllSearchBarState extends State<AllSearchBar> {
   Widget _buildMobileSearchBar() {
     return Container(
       color: ThemeColors.primaryThemeColor,
-      height: 250,
+      height: MediaQuery.of(context).size.height * 0.35,
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 8.0.h),
       child: Center(
         child: SingleChildScrollView(
           // Adding SingleChildScrollView
@@ -63,9 +64,9 @@ class _AllSearchBarState extends State<AllSearchBar> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildSearchField(_searchController1, searchName),
-              const SizedBox(height: 20.0),
+              SizedBox(height: 15.h),
               _buildSearchField(_searchController2, 'Location'),
-              const SizedBox(height: 20.0),
+              SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

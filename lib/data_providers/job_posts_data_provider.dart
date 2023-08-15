@@ -4,13 +4,15 @@ import 'package:bulkers/models/job_post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
+import 'data_constants.dart';
+
 final db = FirebaseFirestore.instance;
 
 class JobPostsDataProvider {
   static Future<List<Map<String, dynamic>>> getJobPostsByJobID(
       String jobId) async {
     // Create a reference to the Firestore collection
-    CollectionReference jobPosts = db.collection('JobPosts');
+    CollectionReference jobPosts = db.collection(jobPostsCollections);
 
     // Query the collection: Fetch documents where jobId is in the jobPositionIds field
     QuerySnapshot querySnapshot =
@@ -24,8 +26,8 @@ class JobPostsDataProvider {
 
   static Future<void> createJobPost(JobPost jobPost) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference jobPosts = db.collection('JobPosts');
-    CollectionReference companies = db.collection('Companies');
+    CollectionReference jobPosts = db.collection(jobPostsCollections);
+    CollectionReference companies = db.collection(companyCollections);
 
     // Create a document reference and get the ID
     DocumentReference jobPostDoc = jobPosts.doc();
@@ -46,19 +48,21 @@ class JobPostsDataProvider {
   }
 
   static void updateJobPostAppliedWorkerIds(String jobPostId, String uid) {
-    CollectionReference jobPosts = db.collection('JobPosts');
+    CollectionReference jobPosts = db.collection(jobPostsCollections);
     jobPosts.doc(jobPostId).update({
       'applicantUserIds': FieldValue.arrayUnion([uid])
     });
   }
 
   static Future<List<String>> getSavedJobPostIds(String uid) async {
-    DocumentSnapshot userDoc = await db.collection('AppUsers').doc(uid).get();
+    DocumentSnapshot userDoc =
+        await db.collection(appUserCollections).doc(uid).get();
     return List<String>.from(userDoc['worker.savedJobPostIds'] ?? []);
   }
 
   static Future<List<String>> getAppliedJobPostIds(String uid) async {
-    DocumentSnapshot userDoc = await db.collection('AppUsers').doc(uid).get();
+    DocumentSnapshot userDoc =
+        await db.collection(appUserCollections).doc(uid).get();
     return List<String>.from(userDoc['worker.appliedJobPostIds'] ?? []);
   }
 
@@ -67,7 +71,7 @@ class JobPostsDataProvider {
     List<JobPost> jobPosts = [];
     for (String id in jobPostIds) {
       QuerySnapshot query = await db
-          .collection('JobPosts')
+          .collection(jobPostsCollections)
           .where('companyId', isEqualTo: id)
           .get();
       jobPosts.addAll(query.docs
@@ -78,7 +82,7 @@ class JobPostsDataProvider {
   }
 
   // static searchJobPosts(String nameRelated, String locationRelated) async {
-  //   CollectionReference jobPosts = db.collection('JobPosts');
+  //   CollectionReference jobPosts = db.collection(jobPostsCollections);
   //
   //   var queries = [
   //     jobPosts.where('companyName', isEqualTo: nameRelated),

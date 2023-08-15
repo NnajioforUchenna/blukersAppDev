@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../models/job_post.dart';
 
@@ -11,20 +12,22 @@ class DetailPageBlockFour extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0), // Add padding around the edges
+      padding: EdgeInsets.all(16.0.r), // Responsive padding
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment:
               CrossAxisAlignment.start, // Align content to start
           children: [
-            const Text("Description",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 15),
+            Text("Description",
+                style: TextStyle(
+                    fontSize: 17.sp,
+                    fontWeight: FontWeight.bold)), // Responsive font size
+            SizedBox(height: 15.h), // Responsive height
             Text(
               jobPost.jobDescription ?? '',
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 13.sp), // Responsive font size
             ),
-            const Divider(),
+            Divider(),
           ],
         ),
       ),
