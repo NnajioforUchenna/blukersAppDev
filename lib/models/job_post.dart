@@ -104,47 +104,54 @@ class JobPost {
     };
   }
 
-  static JobPost fromMap(Map<String, dynamic> map) {
-    return JobPost(
-      jobPostId: map['jobPostId']?.toString() ?? '',
-      companyId: map['companyId']?.toString() ?? '',
-      companyName: map['companyName']?.toString() ?? '',
-      jobTitle: map['jobTitle']?.toString() ?? '',
-      jobDescription: map['jobDescription']?.toString() ?? '',
-      companyLogo: map['companyLogo']?.toString() ?? '',
-      requirements: map['requirements']?.toString() ?? '',
-      skills: map['skills']?.cast<String>() ?? const [],
-      jobType: JobType.values[map['jobType'] ?? JobType.fullTime.index],
-      contractDuration: map['contractDuration']?.toString() ?? '',
-      salaryType:
-          SalaryType.values[map['salaryType'] ?? SalaryType.hourly.index],
-      salaryAmount: map['salaryAmount'] != null
-          ? double.parse(map['salaryAmount'].toString())
-          : 0.0,
-      addresses: map['addresses'] != null
-          ? (map['addresses'] as List)
-              .map((address) => Address.fromMap(address))
-              .toList()
-          : const [],
-      address: map['address'] != null ? Address.fromMap(map['address']) : null,
-      applicantUserIds: map['applicantUserIds']?.cast<String>() ?? const [],
-      declineUserIds: map['declineUserIds']?.cast<String>() ?? const [],
-      interviewedUserIds: map['interviewedUserIds']?.cast<String>() ?? const [],
-      hiredUserIds: map['hiredUserIds']?.cast<String>() ?? const [],
-      numberOfPositionsAvailable: map['numberOfPositionsAvailable'] != null
-          ? int.parse(map['numberOfPositionsAvailable'].toString())
-          : 0,
-      jobUrgencyLevel: JobUrgencyLevel
-          .values[map['jobUrgencyLevel'] ?? JobUrgencyLevel.high.index],
-      jobPostStatus: JobPostStatus
-          .values[map['jobPostStatus'] ?? JobPostStatus.active.index],
-      industryIds: map['industryIds']?.cast<String>() ?? const [],
-      jobIds: map['jobIds']?.cast<String>() ?? const [],
-      dateCreated: map['dateCreated'] != null
-          ? int.parse(map['dateCreated'].toString())
-          : 0,
-      schedule: map['schedule']?.toString() ?? '',
-    );
+  static JobPost? fromMap(Map<String, dynamic> map) {
+    try {
+      return JobPost(
+        jobPostId: map['jobPostId']?.toString() ?? '',
+        companyId: map['companyId']?.toString() ?? '',
+        companyName: map['companyName']?.toString() ?? '',
+        jobTitle: map['jobTitle']?.toString() ?? '',
+        jobDescription: map['jobDescription']?.toString() ?? '',
+        companyLogo: map['companyLogo']?.toString() ?? '',
+        requirements: map['requirements']?.toString() ?? '',
+        skills: map['skills']?.cast<String>() ?? const [],
+        jobType: JobType.values[map['jobType'] ?? JobType.fullTime.index],
+        contractDuration: map['contractDuration']?.toString() ?? '',
+        salaryType:
+            SalaryType.values[map['salaryType'] ?? SalaryType.hourly.index],
+        salaryAmount: map['salaryAmount'] != null
+            ? double.parse(map['salaryAmount'].toString())
+            : 0.0,
+        addresses: map['addresses'] != null
+            ? (map['addresses'] as List)
+                .map((address) => Address.fromMap(address))
+                .toList()
+            : const [],
+        address:
+            map['address'] != null ? Address.fromMap(map['address']) : null,
+        applicantUserIds: map['applicantUserIds']?.cast<String>() ?? const [],
+        declineUserIds: map['declineUserIds']?.cast<String>() ?? const [],
+        interviewedUserIds:
+            map['interviewedUserIds']?.cast<String>() ?? const [],
+        hiredUserIds: map['hiredUserIds']?.cast<String>() ?? const [],
+        numberOfPositionsAvailable: map['numberOfPositionsAvailable'] != null
+            ? int.parse(map['numberOfPositionsAvailable'].toString())
+            : 0,
+        jobUrgencyLevel: JobUrgencyLevel
+            .values[map['jobUrgencyLevel'] ?? JobUrgencyLevel.high.index],
+        jobPostStatus: JobPostStatus
+            .values[map['jobPostStatus'] ?? JobPostStatus.active.index],
+        industryIds: map['industryIds']?.cast<String>() ?? const [],
+        jobIds: map['jobIds']?.cast<String>() ?? const [],
+        dateCreated: map['dateCreated'] != null
+            ? int.parse(map['dateCreated'].toString())
+            : 0,
+        schedule: map['schedule']?.toString() ?? '',
+      );
+    } catch (e) {
+      print("Error creating JobPost: $e");
+      return null;
+    }
   }
 
   @override

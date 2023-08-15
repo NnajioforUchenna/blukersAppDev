@@ -74,9 +74,12 @@ class JobPostsDataProvider {
           .collection(jobPostsCollections)
           .where('companyId', isEqualTo: id)
           .get();
-      jobPosts.addAll(query.docs
-          .map((doc) => JobPost.fromMap(doc.data() as Map<String, dynamic>))
-          .toList());
+      query.docs.forEach((doc) {
+        JobPost? jobPost = JobPost.fromMap(doc.data() as Map<String, dynamic>);
+        if (jobPost != null) {
+          jobPosts.add(jobPost);
+        }
+      });
     }
     return jobPosts;
   }
@@ -130,8 +133,13 @@ class JobPostsDataProvider {
 
     if (response.statusCode == 200) {
       final List<dynamic> jobPostData = jsonDecode(response.body);
-      final List<JobPost> jobPosts =
-          jobPostData.map((data) => JobPost.fromMap(data)).toList();
+      final List<JobPost> jobPosts = [];
+      jobPostData.forEach((data) {
+        JobPost? jobPost = JobPost.fromMap(data);
+        if (jobPost != null) {
+          jobPosts.add(jobPost);
+        }
+      });
       return jobPosts;
     } else {
       throw Exception('Failed to fetch job posts from the API');
@@ -156,9 +164,12 @@ class JobPostsDataProvider {
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
         if (jsonResponse is List) {
-          translatedJobPosts = jsonResponse
-              .map((data) => JobPost.fromMap(data as Map<String, dynamic>))
-              .toList();
+          jsonResponse.forEach((data) {
+            JobPost? jobPost = JobPost.fromMap(data as Map<String, dynamic>);
+            if (jobPost != null) {
+              translatedJobPosts.add(jobPost);
+            }
+          });
         }
       } else {
         print('Failed to load job posts. Error: ${response.body}');

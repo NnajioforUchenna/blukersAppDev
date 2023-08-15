@@ -22,6 +22,7 @@ class DetailPageBlockOne extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     bool isJobApplied = !up.isJobPostApplied(jobPost.jobPostId ?? '');
     bool isJobSaved = up.isJobPostSaved(jobPost.jobPostId ?? '');
+    bool isHideButton = up.appUser?.uid == jobPost.companyId;
 
     return SingleChildScrollView(
       child: Padding(
@@ -33,24 +34,26 @@ class DetailPageBlockOne extends StatelessWidget {
               children: [
                 Text(jobPost.timeAgo ?? ''),
                 const Spacer(),
-                IconButton(
-                    onPressed: () {
-                      if (up.workerTimelineStep < 2) {
-                        showDialog(
-                            context: context,
-                            builder: (context) =>
-                                const DisplayJobTimelineDialog());
-                      } else {
-                        up.saveJobPost(jobPost);
-                      }
-                    },
-                    icon: Icon(
-                      Icons.bookmark_add,
-                      color: isJobSaved
-                          ? ThemeColors.secondaryThemeColor
-                          : Colors.grey,
-                      size: 30.sp,
-                    ))
+                isHideButton
+                    ? SizedBox()
+                    : IconButton(
+                        onPressed: () {
+                          if (up.workerTimelineStep < 2) {
+                            showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    const DisplayJobTimelineDialog());
+                          } else {
+                            up.saveJobPost(jobPost);
+                          }
+                        },
+                        icon: Icon(
+                          Icons.bookmark_add,
+                          color: isJobSaved
+                              ? ThemeColors.secondaryThemeColor
+                              : Colors.grey,
+                          size: 30.sp,
+                        ))
               ],
             ),
             SizedBox(height: 15.h),
@@ -80,39 +83,41 @@ class DetailPageBlockOne extends StatelessWidget {
             SizedBox(height: 15.h),
             Row(
               children: [
-                Container(
-                  width: 100.sp,
-                  height: 40.sp,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: isJobApplied
-                          ? ThemeColors.secondaryThemeColor
-                          : Colors.grey,
-                      elevation: 8,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                isHideButton
+                    ? SizedBox()
+                    : Container(
+                        width: 100.sp,
+                        height: 40.sp,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: isJobApplied
+                                ? ThemeColors.secondaryThemeColor
+                                : Colors.grey,
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (up.workerTimelineStep < 2) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      const DisplayJobTimelineDialog());
+                            } else {
+                              up.applyForJobPost(jobPost);
+                            }
+                          },
+                          child: Center(
+                            // Center the text inside the button
+                            child: Text(
+                              isJobApplied ? "Apply".toUpperCase() : "Applied",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      if (up.workerTimelineStep < 2) {
-                        showDialog(
-                            context: context,
-                            builder: (context) =>
-                                const DisplayJobTimelineDialog());
-                      } else {
-                        up.applyForJobPost(jobPost);
-                      }
-                    },
-                    child: Center(
-                      // Center the text inside the button
-                      child: Text(
-                        isJobApplied ? "Apply".toUpperCase() : "Applied",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                    ),
-                  ),
-                ),
 
                 const Spacer(), // Add space between button and image
                 RoundedImageWidget(

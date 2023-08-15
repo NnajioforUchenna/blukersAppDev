@@ -110,7 +110,7 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
               child: TextFormField(
                 maxLines: 3,
                 controller: _jobDescriptionController,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.newline,
                 onEditingComplete: () => node.nextFocus(),
                 validator: (value) => value!.isEmpty ? "Required" : null,
                 onChanged: (value) {

@@ -14,6 +14,7 @@ class CompanyChat extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
+
     return PageTemplate(child: LayoutBuilder(
       builder: ((context, constraints) {
         if (up.appUser != null && chatProvider.chatRooms.isEmpty) {

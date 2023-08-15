@@ -78,9 +78,8 @@ class ListViewJobs extends StatelessWidget {
             companyLogo: jobPost.companyLogo ?? 'https://picsum.photos/200/300',
             jobPostId: jobPost.companyId,
             onTap: () {
-              if (Responsive.isDesktop(context)) {
-                jp.setSelectedJobPost(jobPost);
-              } else {
+              jp.setSelectedJobPost(jobPost);
+              if (Responsive.isMobile(context)) {
                 showDialog(
                     context: context,
                     builder: (context) => DisplayJobPostDialog(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
@@ -181,7 +180,7 @@ class _BasicInformationState extends State<BasicInformation> {
                       child: TextFormField(
                         maxLines: 5,
                         controller: descriptionController,
-                        textInputAction: TextInputAction.next,
+                        textInputAction: TextInputAction.newline,
                         onChanged: (_) {
                           setState(() {
                             isFormComplete();

@@ -46,7 +46,10 @@ class CompanyDataProvider {
           if (jobPostDoc.exists) {
             Map<String, dynamic> jobPostData =
                 jobPostDoc.data() as Map<String, dynamic>;
-            returnJobPostList.add(JobPost.fromMap(jobPostData));
+            JobPost? jobPost = JobPost.fromMap(jobPostData);
+            if (jobPost != null) {
+              returnJobPostList.add(jobPost);
+            }
           }
         }).then((_) {
           _jobPostStreamController.add(returnJobPostList);

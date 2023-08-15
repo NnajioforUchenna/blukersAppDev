@@ -1,8 +1,6 @@
-import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/responsive.dart';
-import 'common_widget/company_logo.dart';
 import 'registration_process_component/page_slider.dart';
 import 'registration_process_component/sign_up_timeline.dart';
 
@@ -36,7 +34,7 @@ class RegistrationProcess extends StatelessWidget {
             slivers: [
               SliverList(
                   delegate: SliverChildListDelegate([
-                SignUpTimeline(),
+                Center(child: SignUpTimeline()),
                 // const CompanyLogo(),
                 const SizedBox(height: 20),
                 const PageSlider()

@@ -25,10 +25,18 @@ class JobPostsProvider with ChangeNotifier {
 
     // Get all jobPosts for the job with the given jobId.
     JobPostsDataProvider.getJobPostsByJobID(jobId).then((jobPosts) {
-      selectedJobPosts = jobPosts.map((jobPost) {
-        return JobPost.fromMap(jobPost);
-      }).toList();
-      selectedJobPost = selectedJobPosts.first;
+      selectedJobPosts = jobPosts
+          .map((jobPost) {
+            return JobPost.fromMap(jobPost);
+          })
+          .where((jobPost) => jobPost != null)
+          .cast<JobPost>()
+          .toList();
+
+      if (selectedJobPosts.isNotEmpty) {
+        selectedJobPost = selectedJobPosts.first;
+      }
+
       notifyListeners();
     });
   }
@@ -163,20 +171,29 @@ class JobPostsProvider with ChangeNotifier {
 
     newJobPostData['addresses'] = [address.toMap()];
     newJobPostData['address'] = address.toMap();
-    createJopPost();
+    createJobPost();
     setJobPostPageNext();
   }
 
-  Future<void> createJopPost() async {
+  Future<void> createJobPost() async {
     print('newJobPostData: $newJobPostData');
 
     // make sure that the jobPost accepts JobPost Model
-    JobPost jobPost = JobPost.fromMap(newJobPostData);
-    jobPost.dateCreated = DateTime.now().millisecondsSinceEpoch;
-    await JobPostsDataProvider.createJobPost(jobPost);
-    notifyListeners();
-    newJobPostData = {};
-    jobPostCurrentPageIndex = 0;
+    JobPost? jobPost = JobPost.fromMap(newJobPostData);
+    if (jobPost != null) {
+      jobPost.dateCreated = DateTime.now().millisecondsSinceEpoch;
+      await JobPostsDataProvider.createJobPost(jobPost);
+      notifyListeners();
+      // in 20 seconds reset the Used Paramters
+      Future.delayed(const Duration(seconds: 20), () {
+        newJobPostData = {};
+        previousParams = {};
+        jobPostCurrentPageIndex = 0;
+      });
+    } else {
+      // Handle the error case when jobPost is null
+      print('Failed to create JobPost from the provided data');
+    }
   }
 
   Future<List<JobPost>> getAppliedJobPostIds(String uid) {

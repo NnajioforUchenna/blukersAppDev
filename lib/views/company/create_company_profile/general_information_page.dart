@@ -95,7 +95,7 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
                       child: TextFormField(
                         controller: companySloganController,
                         maxLines: 2,
-                        textInputAction: TextInputAction.next,
+                        textInputAction: TextInputAction.newline,
                         validator: (value) =>
                             value!.isEmpty ? "Required" : null,
                         decoration: InputDecoration(
@@ -117,7 +117,7 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
                       child: TextFormField(
                         controller: shortDescriptionController,
                         maxLines: 4,
-                        textInputAction: TextInputAction.next,
+                        textInputAction: TextInputAction.newline,
                         validator: (value) =>
                             value!.isEmpty ? "Required" : null,
                         decoration: InputDecoration(

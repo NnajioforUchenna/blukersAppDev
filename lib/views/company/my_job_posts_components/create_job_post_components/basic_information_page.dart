@@ -91,7 +91,7 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                       child: TextFormField(
                         maxLines: 5,
                         controller: jobDescriptionController,
-                        textInputAction: TextInputAction.next,
+                        textInputAction: TextInputAction.newline,
                         onEditingComplete: () => node.nextFocus(),
                         validator: (value) =>
                             value!.isEmpty ? "Required" : null,
