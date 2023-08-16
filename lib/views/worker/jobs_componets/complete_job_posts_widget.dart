@@ -9,11 +9,25 @@ import 'animate_job_post_details.dart';
 import 'display_job_card.dart';
 import 'display_job_post_dialog.dart';
 
-class CompleteJobPostWidget extends StatelessWidget {
+class CompleteJobPostWidget extends StatefulWidget {
   final List<JobPost> jobPosts;
 
   const CompleteJobPostWidget({Key? key, required this.jobPosts})
       : super(key: key);
+
+  @override
+  State<CompleteJobPostWidget> createState() => _CompleteJobPostWidgetState();
+}
+
+class _CompleteJobPostWidgetState extends State<CompleteJobPostWidget> {
+  @override
+  void initState() {
+    super.initState();
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context, listen: false);
+    if (widget.jobPosts.isNotEmpty) {
+      jp.selectedJobPost = widget.jobPosts.first;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +35,9 @@ class CompleteJobPostWidget extends StatelessWidget {
         constraints:
             BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
         child: Responsive.isDesktop(context)
-            ? buildWebContent(jobPosts)
+            ? buildWebContent(widget.jobPosts)
             : ListViewJobs(
-                jobPosts: jobPosts,
+                jobPosts: widget.jobPosts,
               ));
   }
 }

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import '../views/auth/login.dart';
 import '../views/auth/registration_process.dart';
 import '../views/auth/reset_password.dart';
-import '../views/common_views/landing_page_components/landing_page.dart';
 import '../views/company/company_profile.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
 import '../views/company/my_job_posts.dart';
@@ -74,10 +73,10 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const CompanyChat());
     case '/chat-message':
       return MaterialPageRoute(
-          builder: (context) =>const ChatMessageScreen(),
-          settings: settings);
+          builder: (context) => const ChatMessageScreen(), settings: settings);
     default:
-      return MaterialPageRoute(builder: (context) => LandingPage());
+      return MaterialPageRoute(
+          builder: (context) => const AuthenticationWrapper());
     // return MaterialPageRoute(builder: (context) => const CompanyChat());
   }
 }

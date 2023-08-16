@@ -12,6 +12,9 @@ class JobPostsProvider with ChangeNotifier {
   Map<String, JobPost> _jobPosts = {};
   Map<String, dynamic> newJobPostData = {};
 
+  Map<String, JobPost> searchJobs = {};
+  Map<String, JobPost> recent50Jobs = {};
+
   JobPost? selectedJobPost;
 
   Map<String, JobPost> get jobPosts => _jobPosts;
@@ -19,6 +22,10 @@ class JobPostsProvider with ChangeNotifier {
   List<JobPost> selectedJobPosts = [];
   int jobPostCurrentPageIndex = 0;
   String selectedJobPostId = '';
+
+  JobPostsProvider() {
+    get50LastestJobPosts();
+  }
 
   void getJobPostsByJobID(String jobId) {
     selectedJobPostId = jobId;
@@ -233,7 +240,42 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<List<JobPost>> getSavedJobPostIds(String uid) {
+  bool isWebSearching = false;
+
+  Future<void> getJobsBySearchParameter(
+      String nameSearch, String locationSearch) async {
+    List<JobPost> searchJobPosts =
+        await JobPostsDataProvider.searchJobPosts(nameSearch, locationSearch);
+    if (searchJobPosts.isEmpty) {
+      EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
+    } else {
+      searchJobPosts.forEach((element) {
+        searchJobs[element.jobPostId] = element;
+      });
+      isWebSearching = true;
+      notifyListeners();
+    }
+  }
+
+  void get50LastestJobPosts() async {
+    // Get the 50 most recent job posts.
+    List<Map<String, dynamic>> jobPosts =
+        await JobPostsDataProvider.getRecentJobPosts();
+
+    recent50Jobs = {};
+    for (var jobPost in jobPosts) {
+      if (jobPost['id'] != null) {
+        JobPost? parsedJobPost = JobPost.fromMap(jobPost);
+        if (parsedJobPost != null) {
+          recent50Jobs[jobPost['id']] = parsedJobPost;
+        }
+      }
+    }
+
+    notifyListeners();
+  }
+
+// Future<List<JobPost>> getSavedJobPostIds(String uid) {
   //   return JobPostsDataProvider.getSavedJobPostIds(uid)
   //       .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
   // }
