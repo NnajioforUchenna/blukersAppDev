@@ -21,12 +21,14 @@ import '../views/worker/my_jobs.dart';
 import '../views/worker/worker_profile.dart';
 import 'authentication_wrapper.dart';
 
+import '../views/membership/membership_widget.dart';
+
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      // return MaterialPageRoute(builder: (context) => LandingPage());
-      return MaterialPageRoute(
-          builder: (context) => const AuthenticationWrapper());
+      return MaterialPageRoute(builder: (context) => MembershipWidget());
+    // return MaterialPageRoute(
+    //     builder: (context) => const AuthenticationWrapper());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
