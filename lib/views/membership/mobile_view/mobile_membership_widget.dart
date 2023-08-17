@@ -109,16 +109,13 @@ class MobileMembershipWidget extends StatelessWidget {
                                       } else {
                                         try {
                                           String url = ds.get("url");
-                                          if (kIsWeb) {
-                                            launchUrl(Uri.parse(url));
-                                          } else {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CheckoutScreen(
-                                                            url: url)));
-                                          }
+
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CheckoutScreen(
+                                                          url: url)));
                                         } catch (error) {
                                           print(error);
                                         }
@@ -156,16 +153,13 @@ class MobileMembershipWidget extends StatelessWidget {
                                       } else {
                                         try {
                                           String url = ds.get("url");
-                                          if (kIsWeb) {
-                                            launchUrl(Uri.parse(url));
-                                          } else {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CheckoutScreen(
-                                                            url: url)));
-                                          }
+
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CheckoutScreen(
+                                                          url: url)));
                                         } catch (error) {
                                           print(error);
                                         }
@@ -184,15 +178,12 @@ class MobileMembershipWidget extends StatelessWidget {
                               child: InkWell(
                                 onTap: () async {
                                   var url = await getCustomerPortalUrl();
-                                  if (kIsWeb) {
-                                    launchUrl(Uri.parse(url));
-                                  } else {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                CheckoutScreen(url: url)));
-                                  }
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CheckoutScreen(url: url)));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.symmetric(
@@ -218,6 +209,4 @@ class MobileMembershipWidget extends StatelessWidget {
               });
         });
   }
-
-  
 }

@@ -84,7 +84,7 @@ getCustomerPortalUrl() async {
     HttpsCallable callable = FirebaseFunctions.instance
         .httpsCallable('ext-firestore-stripe-payments-createPortalLink');
     EasyLoading.show(
-      status: 'Creating checkout session...',
+      status: 'Creating Your Portal...',
       maskType: EasyLoadingMaskType.black,
     );
     HttpsCallableResult result = await callable.call({
