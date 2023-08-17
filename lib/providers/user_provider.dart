@@ -6,6 +6,7 @@ import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:bulkers/models/job_post.dart';
 import 'package:bulkers/providers/chat_provider.dart';
 import 'package:bulkers/services/notification_service.dart';
+import 'package:bulkers/services/stripe_data.dart';
 import 'package:bulkers/services/user_shared_preferences_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -564,5 +565,14 @@ class UserProvider with ChangeNotifier {
           'An error occurred while uploading your profile image. Please try again.');
       return "";
     }
+  }
+
+  Future<bool> checkIfSubscribed() async {
+    StripeData stripeData = await fetchStripeData();
+    Stream<SubscriptionStatus> subscriptionStatusStream =
+        checkSubscriptionStatus(appUser!.uid, stripeData);
+    SubscriptionStatus subscriptionStatus =
+        await subscriptionStatusStream.first;
+    return subscriptionStatus.subIsActive;
   }
 }

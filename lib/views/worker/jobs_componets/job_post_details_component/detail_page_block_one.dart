@@ -9,6 +9,7 @@ import '../../../../models/job_post.dart';
 import '../../../../services/rounded_image.dart';
 import '../../../../utils/styles/theme_colors.dart';
 import '../../../common_views/job_timeline/display_job_timeline_dialog.dart';
+import '../../../membership/show_subscription_dialog.dart';
 
 class DetailPageBlockOne extends StatelessWidget {
   final JobPost jobPost;
@@ -111,7 +112,7 @@ class DetailPageBlockOne extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             if (up.workerTimelineStep < 2) {
                               showDialog(
                                   context: context,
@@ -119,6 +120,13 @@ class DetailPageBlockOne extends StatelessWidget {
                                       const DisplayJobTimelineDialog());
                             } else {
                               up.applyForJobPost(jobPost);
+                              bool result = await up.checkIfSubscribed();
+                              if (!result) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        showSubscriptionDialog());
+                              }
                             }
                           },
                           child: Center(
