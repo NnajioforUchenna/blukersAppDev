@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/job_posts_provider.dart';
 import '../providers/user_provider.dart';
-import '../views/common_views/landing_page_components/landing_page.dart';
+import '../views/common_views/splash_screen/splash_screen_main.dart';
 import '../views/company/workers.dart';
 import '../views/worker/jobs.dart';
 import '../views/worker/web_jobs_landing_page/web_search_landing_page.dart';
@@ -38,7 +38,7 @@ class AuthenticationWrapper extends StatelessWidget {
           ? const Workers()
           : const Jobs();
     } else {
-      return LandingPage();
+      return SplashScreen(); //LandingPage() SplashScreen()
     }
   }
 }

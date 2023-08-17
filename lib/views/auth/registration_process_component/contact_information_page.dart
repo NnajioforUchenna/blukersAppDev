@@ -144,7 +144,7 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                         countryController: _countryController,
                         label: "Address",
                         validate: isFormComplete),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                     SubmitButton(
                       onTap: () {
                         up.addingContactInformation(
@@ -160,7 +160,7 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                       text: "Save To Profile",
                       isDisabled: !isValidate,
                     ),
-                    SizedBox(height: height * .05),
+                    const SizedBox(height: 70),
                   ],
                 ),
               ),

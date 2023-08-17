@@ -106,7 +106,7 @@ class _LoginInformationState extends State<LoginInformation> {
                         },
                         validator: ((value) {
                           if (value!.length < 4) {
-                            return "Enter More Than 3 Characters";
+                            return "Enter More Than 6 Characters";
                           } else {
                             return null;
                           }

@@ -144,7 +144,7 @@ class CompanyProvider with ChangeNotifier {
     );
 
     createCompanyProfileData.addAll({
-      'phoneNumbers': ['$ext $phoneNumber'],
+      'phoneNumbers': ['$ext-$phoneNumber'],
       'addresses': [address.toMap()],
     });
     companyProfileNextPage();
