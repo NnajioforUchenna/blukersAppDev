@@ -11,6 +11,6 @@ class MembershipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Responsive.isMobile(context)
         ? MobileMembershipWidget()
-        : const DesktopMembershipWidget();
+        : const MobileMembershipWidget();
   }
 }

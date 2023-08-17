@@ -67,6 +67,9 @@ dependencies:
   flutter_screenutil: ^5.8.4
   carousel_slider: ^4.2.1
   url_strategy: ^0.2.0
+  webview_flutter: ^4.2.2
+  cloud_functions: ^4.4.0
+  url_launcher: ^6.1.12
 
 
 

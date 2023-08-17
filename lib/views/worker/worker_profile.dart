@@ -486,6 +486,17 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       }
                     },
                   ),
+                   ProfileSection(
+                    heading: "Subscriptions",
+                    icon: UniconsLine.arrow_right,
+                    showInfoInNewPage: true,
+                    onClickSection: () {
+                      print("Section clicked/ Edit Clicked");
+                      if (up.appUser!.worker != null) {
+                        Navigator.pushNamed(context, "/payment");
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
