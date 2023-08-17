@@ -158,7 +158,7 @@ class DesktopMembershipCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.black,
               ),
-              child: Text(isSubscribed ? 'manage' : 'Continue',
+              child: Text(isSubscribed ? 'Manage' : 'Continue',
                   style: GoogleFonts.montserrat(
                     color: Colors.white,
                     fontSize: 10.sp,

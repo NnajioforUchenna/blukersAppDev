@@ -38,7 +38,15 @@ class DesktopMembershipWidget extends StatelessWidget {
                 print(subscriptionStatus.subIsActive);
                 return Scaffold(
                   appBar: AppBar(
-                    title: const Text("Subscriptions"),
+                    leading: IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.pop(
+                            context); // This line pops the current route and goes back
+                      },
+                    ),
+                    backgroundColor: Colors.white,
+                    elevation: 0,
                   ),
                   body: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -78,7 +86,9 @@ class DesktopMembershipWidget extends StatelessWidget {
                           ),
                           Center(
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
                               child: Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 50.h, vertical: 5),
