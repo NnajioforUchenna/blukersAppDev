@@ -22,10 +22,12 @@ import '../views/worker/my_jobs.dart';
 import '../views/worker/worker_profile.dart';
 import 'authentication_wrapper.dart';
 
+import '../views/membership/membership_widget.dart';
+
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      // return MaterialPageRoute(builder: (context) => LandingPage());
+      // return MaterialPageRoute(builder: (context) => MembershipWidget());
       return MaterialPageRoute(
           builder: (context) => const AuthenticationWrapper());
     case '/landing':
@@ -54,6 +56,8 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const WorkerProfile());
     case '/companyChat':
       return MaterialPageRoute(builder: (context) => const CompanyChat());
+    case '/payment':
+      return MaterialPageRoute(builder: (context) => const MembershipWidget());
     case 'companyProfile':
       return MaterialPageRoute(builder: (context) => const CompanyProfile());
     case '/login':

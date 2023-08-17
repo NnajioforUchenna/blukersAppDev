@@ -6,12 +6,13 @@ class MyElevatedButton extends StatefulWidget {
   final String firstText;
   final String secondText;
   final String thirdText;
+  final VoidCallback onPress;
 
   const MyElevatedButton(
       {super.key,
       required this.firstText,
       required this.secondText,
-      required this.thirdText});
+      required this.thirdText, required this.onPress});
 
   @override
   _MyElevatedButtonState createState() => _MyElevatedButtonState();
@@ -35,7 +36,7 @@ class _MyElevatedButtonState extends State<MyElevatedButton> {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: widget.onPress,
         child: MouseRegion(
           onEnter: (_) => setState(() => _isHovering = true),
           onExit: (_) => setState(() => _isHovering = false),
