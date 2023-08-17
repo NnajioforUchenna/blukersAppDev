@@ -109,7 +109,7 @@ class MyCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint bluePaint = Paint()..color = const Color(0xFF1c75bb);
-    final Paint orangePaint = Paint()..color = Color(0xFFf06523);
+    final Paint orangePaint = Paint()..color = const Color(0xFFf06523);
     final double borderRadius =
         40; // you can adjust this value relative to width and height
 

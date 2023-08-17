@@ -1,5 +1,6 @@
 import 'package:bulkers/views/common_views/splash_screen/splash_screen_custom_shape.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreenPage extends StatelessWidget {
   final String workerTitle;
@@ -17,12 +18,33 @@ class SplashScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SplashScreenCustomShape(
-        workerTitle: workerTitle,
-        workerSubtitle: workerSubtitle,
-        companyTitle: companyTitle,
-        companySubtitle: companySubtitle,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Center(
+            child: SplashScreenCustomShape(
+              workerTitle: workerTitle,
+              workerSubtitle: workerSubtitle,
+              companyTitle: companyTitle,
+              companySubtitle: companySubtitle,
+            ),
+          ),
+          SizedBox(height: 30.h),
+          // Add skip button
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/landing');
+            },
+            child: Text(
+              'Skip',
+              style: TextStyle(
+                color: Colors.blueGrey,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

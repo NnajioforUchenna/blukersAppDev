@@ -2,6 +2,7 @@ import 'package:bulkers/views/auth/common_widget/label_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
@@ -40,10 +41,14 @@ class LandingPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(16.w), // Responsive width
               child: Text(
-                AppLocalizations.of(context)!.whatAreYouLookingFor,
+                'What do you identify as?',
                 textAlign: TextAlign.center,
-                style: ThemeTextStyles.landingPageQuestionThemeTextStyle
-                    .copyWith(fontSize: 18.sp), // Responsive font size
+                style: GoogleFonts.montserrat(
+                  color: Color(0xFFf06523),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20.sp, // Responsive font size
+                ),
+                // Responsive font size
               ),
             ),
             const SizedBox(height: 15),
@@ -52,7 +57,10 @@ class LandingPage extends StatelessWidget {
               children: [
                 OptionBox(
                   imgSrc: 'assets/images/worker_icon.png',
-                  title: AppLocalizations.of(context)!.aJob,
+                  title: 'I AM A',
+                  color: const Color(0xFF1c75bb),
+                  subtitle: 'WORKER',
+                  thirdLine: 'LOOKING FOR JOBS',
                   onTap: () {
                     up.userRole = "worker";
                     Navigator.pushNamed(context, '/jobs');
@@ -61,7 +69,10 @@ class LandingPage extends StatelessWidget {
                 SizedBox(width: 20.w), // Responsive width
                 OptionBox(
                   imgSrc: 'assets/images/company_icon.png',
-                  title: AppLocalizations.of(context)!.workers,
+                  title: 'I AM A',
+                  color: const Color(0xFFf06523),
+                  subtitle: 'COMPANY',
+                  thirdLine: 'LOOKING FOR WORKERS',
                   onTap: () {
                     up.userRole = "company";
                     Navigator.pushNamed(context, '/workers');

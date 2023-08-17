@@ -1,15 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:bulkers/utils/styles/index.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OptionBox extends StatefulWidget {
   final String imgSrc;
   final String title;
   final Function onTap;
+  final Color color;
+  final String subtitle;
+  final String thirdLine;
   const OptionBox(
       {super.key,
       required this.imgSrc,
       required this.title,
-      required this.onTap});
+      required this.onTap,
+      required this.color,
+      required this.subtitle,
+      required this.thirdLine});
 
   @override
   State<OptionBox> createState() => _OptionBoxState();
@@ -42,33 +49,50 @@ class _OptionBoxState extends State<OptionBox> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
             side: _isHovering
-                ? BorderSide(color: ThemeColors.primaryThemeColor, width: 2.0)
+                ? const BorderSide(
+                    color: ThemeColors.black1ThemeColor, width: 2.0)
                 : BorderSide.none,
           ),
           child: Container(
-            color: Colors.white,
+            color: widget.color,
             width: MediaQuery.of(context).size.height * 0.2,
             height: MediaQuery.of(context).size.height * 0.2,
-            padding: EdgeInsets.all(16.0),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    widget.imgSrc,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    fit: BoxFit.cover,
+            padding: const EdgeInsets.all(16.0),
+            child: Stack(
+              children: [
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.5),
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                      Text(
+                        widget.subtitle,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    widget.thirdLine,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.7),
+                      fontSize: 8.sp,
+                    ),
                   ),
-                  Text(
-                    widget.title,
-                    textAlign: TextAlign.center,
-                    style: ThemeTextStyles.landingPageBtnThemeTextStyle,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:bulkers/views/chat_message_screen.dart';
+import 'package:bulkers/views/common_views/landing_page_components/landing_page.dart';
 import 'package:bulkers/views/company/company_basic_info.dart';
 import 'package:bulkers/views/company_chat.dart';
 import 'package:bulkers/views/worker/create_worker_profile_component/online_resume_additional_detail_screen.dart';
@@ -27,6 +28,8 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       // return MaterialPageRoute(builder: (context) => LandingPage());
       return MaterialPageRoute(
           builder: (context) => const AuthenticationWrapper());
+    case '/landing':
+      return MaterialPageRoute(builder: (context) => LandingPage());
     case '/workers':
       return MaterialPageRoute(builder: (context) => const Workers());
     case '/jobs':
