@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bulkers/main.dart';
-import 'package:bulkers/providers/chat_provider.dart';
+import 'package:blukers/main.dart';
+import 'package:blukers/providers/chat_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class NotificationService {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
       final res = json.decode(message.data["body"]);
-       int index = chatProvider!.chatRooms
+      int index = chatProvider!.chatRooms
           .indexWhere((element) => element.id == res["roomId"]);
       chatProvider!.chatRooms[index].lastMessage = res["message"];
       chatProvider!.notifyListners();

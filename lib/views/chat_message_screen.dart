@@ -1,8 +1,8 @@
-import 'package:bulkers/models/chat_message.dart';
-import 'package:bulkers/providers/chat_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/views/common_views/components/index.dart';
-import 'package:bulkers/views/company/workers_components/chat_component.dart';
+import 'package:blukers/models/chat_message.dart';
+import 'package:blukers/providers/chat_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:blukers/views/common_views/components/index.dart';
+import 'package:blukers/views/company/workers_components/chat_component.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

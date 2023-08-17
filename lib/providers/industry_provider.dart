@@ -1,5 +1,5 @@
-import 'package:bulkers/data_providers/industries_data_provider.dart';
-import 'package:bulkers/models/industry.dart';
+import 'package:blukers/data_providers/industries_data_provider.dart';
+import 'package:blukers/models/industry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart';
 

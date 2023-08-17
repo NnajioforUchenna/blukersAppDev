@@ -1,7 +1,7 @@
-import 'package:bulkers/models/address.dart';
-import 'package:bulkers/models/app_user.dart';
-import 'package:bulkers/models/company.dart';
-import 'package:bulkers/models/worker.dart';
+import 'package:blukers/models/address.dart';
+import 'package:blukers/models/app_user.dart';
+import 'package:blukers/models/company.dart';
+import 'package:blukers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';

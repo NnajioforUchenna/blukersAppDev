@@ -1,4 +1,4 @@
-import 'package:bulkers/models/worker.dart';
+import 'package:blukers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'address.dart';

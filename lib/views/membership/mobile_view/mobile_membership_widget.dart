@@ -1,7 +1,7 @@
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/services/stripe_data.dart';
-import 'package:bulkers/views/common_views/page_template/page_template.dart';
-import 'package:bulkers/views/membership/mobile_view/checkout_screen.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/services/stripe_data.dart';
+import 'package:blukers/views/common_views/page_template/page_template.dart';
+import 'package:blukers/views/membership/mobile_view/checkout_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/utils/styles/index.dart';
 
 import 'carousel_with_cards.dart';
 import 'my_evelated_button.dart';

@@ -1,8 +1,8 @@
-import 'package:bulkers/models/industry.dart';
-import 'package:bulkers/providers/industry_provider.dart';
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/utils/styles/theme_colors.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/models/industry.dart';
+import 'package:blukers/providers/industry_provider.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

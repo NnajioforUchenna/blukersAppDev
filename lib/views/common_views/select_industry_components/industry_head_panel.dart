@@ -1,7 +1,7 @@
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/services/on_hover.dart';
-import 'package:bulkers/services/responsive.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/services/on_hover.dart';
+import 'package:blukers/services/responsive.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

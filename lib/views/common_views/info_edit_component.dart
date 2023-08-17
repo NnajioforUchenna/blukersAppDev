@@ -1,5 +1,5 @@
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/auth/common_widget/auth_input.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/auth/common_widget/auth_input.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class InfoEditComponent extends StatefulWidget {
       required this.onChangeValue,
       this.ext,
       this.onChangeExtValue,
-       this.textInputType = TextInputType.text});
+      this.textInputType = TextInputType.text});
   final String placeHolder;
   final String value;
   final TextInputAction action;

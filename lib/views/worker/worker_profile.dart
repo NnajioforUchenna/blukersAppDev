@@ -1,14 +1,14 @@
 import 'dart:async';
 // import 'dart:io';
 
-import 'package:bulkers/utils/styles/theme_colors.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/common_views/info_display_component.dart';
-import 'package:bulkers/views/common_views/profile_dialog.dart';
-import 'package:bulkers/views/common_views/profile_section.dart';
-import 'package:bulkers/views/common_views/components/icon_text_404.dart';
-import 'package:bulkers/views/company/profile_components/edit_basic_profile.dart';
-import 'package:bulkers/views/company/profile_components/user_basic_profile_details.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/common_views/info_display_component.dart';
+import 'package:blukers/views/common_views/profile_dialog.dart';
+import 'package:blukers/views/common_views/profile_section.dart';
+import 'package:blukers/views/common_views/components/icon_text_404.dart';
+import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
+import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -34,7 +34,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
   bool showBasicInfo = false;
   bool showIndustries = false;
   bool showPdfResume = false;
- 
+
   // Future<File?> viewPdf(String pdfUrl) async {
   //   EasyLoading.show(
   //     status: 'Opening file viewer...',
@@ -180,66 +180,68 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                               .headingThemeTextStyle,
                                         ),
                                         // const SizedBox(height: 20),
-                                        if(!kIsWeb)
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 18, vertical: 18),
-                                          child: Container(
-                                            //  height: 170,
-                                            width: 500,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: const Color(0xffF3ECFF),
+                                        if (!kIsWeb)
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 18, vertical: 18),
+                                            child: Container(
+                                              //  height: 170,
+                                              width: 500,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color:
+                                                      const Color(0xffF3ECFF),
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(5),
+                                                ),
                                               ),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(5),
-                                              ),
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () async {
-                                                    String? imageUrl =
-                                                        await up.ontapCamera(
-                                                            "/profile_images/");
-                                                    if (imageUrl != "") {
-                                                      await up
-                                                          .updateUserProfilePic(
-                                                              imageUrl!);
-                                                    }
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Container(
-                                                    height: 70,
-                                                    width: 70,
-                                                    margin: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 100,
-                                                        vertical: 10),
-                                                    decoration: BoxDecoration(
-                                                      color: ThemeColors
-                                                          .blukersBlueThemeColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              80),
-                                                    ),
-                                                    child: const Icon(
-                                                      Icons.camera_alt,
-                                                      size: 40,
-                                                      color: Colors.white,
+                                              child: Column(
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      String? imageUrl =
+                                                          await up.ontapCamera(
+                                                              "/profile_images/");
+                                                      if (imageUrl != "") {
+                                                        await up
+                                                            .updateUserProfilePic(
+                                                                imageUrl!);
+                                                      }
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Container(
+                                                      height: 70,
+                                                      width: 70,
+                                                      margin: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 100,
+                                                          vertical: 10),
+                                                      decoration: BoxDecoration(
+                                                        color: ThemeColors
+                                                            .blukersBlueThemeColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(80),
+                                                      ),
+                                                      child: const Icon(
+                                                        Icons.camera_alt,
+                                                        size: 40,
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  "Take photo",
-                                                  style: ThemeTextStyles
-                                                      .headingThemeTextStyle,
-                                                ),
-                                              ],
+                                                  Text(
+                                                    "Take photo",
+                                                    style: ThemeTextStyles
+                                                        .headingThemeTextStyle,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 18),
@@ -444,14 +446,14 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         }
                         print('pdfResumeUrl');
                         print(pdfResumeUrl);
-                       // File? file = await viewPdf(pdfResumeUrl);
+                        // File? file = await viewPdf(pdfResumeUrl);
                         //if (file != null) {
-                         // Uint8List bytes = await file.readAsBytes();
-                          Navigator.of(context).pushNamed("/pdfViewScreen",
-                              arguments: {"remotePDFpath": pdfResumeUrl});
-                       // }
+                        // Uint8List bytes = await file.readAsBytes();
+                        Navigator.of(context).pushNamed("/pdfViewScreen",
+                            arguments: {"remotePDFpath": pdfResumeUrl});
+                        // }
                         print('Show PDF File');
-                      //  print(file);
+                        //  print(file);
                       },
                       child: Container(
                         margin: const EdgeInsets.all(12),
@@ -486,7 +488,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       }
                     },
                   ),
-                   ProfileSection(
+                  ProfileSection(
                     heading: "Subscriptions",
                     icon: UniconsLine.arrow_right,
                     showInfoInNewPage: true,

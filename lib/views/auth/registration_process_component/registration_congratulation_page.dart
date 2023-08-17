@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 
-import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/views/common_views/components/animations/index.dart';
-// import 'package:bulkers/views/auth/common_widget/submit_button.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:blukers/views/common_views/components/animations/index.dart';
+// import 'package:blukers/views/auth/common_widget/submit_button.dart';
 
 class RegistrationCongratulationPage extends StatefulWidget {
   const RegistrationCongratulationPage({super.key});

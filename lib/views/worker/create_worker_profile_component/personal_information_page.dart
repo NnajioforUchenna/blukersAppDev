@@ -1,5 +1,5 @@
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/utils/styles/theme_colors.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';

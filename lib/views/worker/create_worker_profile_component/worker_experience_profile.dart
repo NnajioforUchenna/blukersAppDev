@@ -1,9 +1,9 @@
-import 'package:bulkers/models/work_experience.dart';
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/utils/styles/theme_colors.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/work_experience_form.dart';
+import 'package:blukers/models/work_experience.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/work_experience_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/views/common_views/info_edit_component.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:blukers/views/common_views/info_edit_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -92,7 +92,8 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
             GestureDetector(
               onTap: () async {
                 print(ext + phoneNo);
-                await up.updateUserBasicInfo(displayName, "$ext-$phoneNo", language);
+                await up.updateUserBasicInfo(
+                    displayName, "$ext-$phoneNo", language);
                 Navigator.of(context).pop();
               },
               child: Container(

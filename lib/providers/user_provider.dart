@@ -2,11 +2,11 @@
 
 import 'dart:io';
 
-import 'package:bulkers/data_providers/user_data_provider.dart';
-import 'package:bulkers/models/job_post.dart';
-import 'package:bulkers/providers/chat_provider.dart';
-import 'package:bulkers/services/notification_service.dart';
-import 'package:bulkers/services/user_shared_preferences_services.dart';
+import 'package:blukers/data_providers/user_data_provider.dart';
+import 'package:blukers/models/job_post.dart';
+import 'package:blukers/providers/chat_provider.dart';
+import 'package:blukers/services/notification_service.dart';
+import 'package:blukers/services/user_shared_preferences_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';

@@ -1,5 +1,5 @@
-import 'package:bulkers/models/industry.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/models/industry.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 
 import 'industry_body_panel.dart';

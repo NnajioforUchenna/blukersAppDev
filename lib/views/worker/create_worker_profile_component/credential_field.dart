@@ -1,5 +1,5 @@
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/show_pdf_dialog.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/show_pdf_dialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

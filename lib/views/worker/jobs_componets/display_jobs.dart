@@ -1,6 +1,6 @@
-import 'package:bulkers/providers/job_posts_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/views/common_views/loading_page.dart';
+import 'package:blukers/providers/job_posts_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:blukers/views/common_views/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

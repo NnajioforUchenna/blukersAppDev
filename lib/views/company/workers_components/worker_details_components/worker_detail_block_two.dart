@@ -1,4 +1,4 @@
-import 'package:bulkers/services/blur_out.dart';
+import 'package:blukers/services/blur_out.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common_files/constants.dart';

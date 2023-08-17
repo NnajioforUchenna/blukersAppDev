@@ -1,5 +1,5 @@
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/services/stripe_data.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/services/stripe_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -57,8 +57,8 @@ class DesktopCards extends StatelessWidget {
               onPress: () async {
                 print("premium");
                 if (subscriptionStatus.subIsActive) {
-                     var url = await getCustomerPortalUrl();
-                     launchUrl(Uri.parse(url));
+                  var url = await getCustomerPortalUrl();
+                  launchUrl(Uri.parse(url));
                 } else {
                   DocumentReference docRef = await setCheckoutSession(
                       up.appUser!.uid, stripeData.employeePremiumPriceId);

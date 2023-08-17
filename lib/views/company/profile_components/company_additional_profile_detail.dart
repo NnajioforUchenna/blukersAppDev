@@ -1,7 +1,7 @@
-import 'package:bulkers/models/company.dart';
-import 'package:bulkers/views/common_views/info_display_component.dart';
-import 'package:bulkers/views/common_views/profile_dialog.dart';
-import 'package:bulkers/views/company/profile_components/edit_company_basic_info.dart';
+import 'package:blukers/models/company.dart';
+import 'package:blukers/views/common_views/info_display_component.dart';
+import 'package:blukers/views/common_views/profile_dialog.dart';
+import 'package:blukers/views/company/profile_components/edit_company_basic_info.dart';
 import 'package:flutter/material.dart';
 
 import '../../common_views/select_industry_components/industry_jobs_dropdown.dart';

@@ -1,7 +1,7 @@
-import 'package:bulkers/models/worker.dart';
-import 'package:bulkers/providers/chat_provider.dart';
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/services/rounded_image.dart';
+import 'package:blukers/models/worker.dart';
+import 'package:blukers/providers/chat_provider.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/services/rounded_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,5 +1,5 @@
-import 'package:bulkers/models/worker.dart';
-import 'package:bulkers/providers/company_provider.dart';
+import 'package:blukers/models/worker.dart';
+import 'package:blukers/providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,10 +8,10 @@ import '../workers_components/complete_worker_widget.dart';
 import 'interesting_workers_components/loading_interesting_workers.dart';
 import 'interesting_workers_components/no_interesting_worker.dart';
 
-import 'package:bulkers/views/common_views/components/icon_text_404.dart';
+import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:unicons/unicons.dart';
 
-import 'package:bulkers/views/common_views/components/animations/index.dart';
+import 'package:blukers/views/common_views/components/animations/index.dart';
 
 class InterestingWorkersTab extends StatelessWidget {
   const InterestingWorkersTab({super.key});

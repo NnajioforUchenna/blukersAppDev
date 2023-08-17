@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:bulkers/data_providers/company_data_provider.dart';
-import 'package:bulkers/models/social_media_platform.dart';
+import 'package:blukers/data_providers/company_data_provider.dart';
+import 'package:blukers/models/social_media_platform.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';

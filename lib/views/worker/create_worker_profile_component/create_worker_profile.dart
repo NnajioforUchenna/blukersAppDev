@@ -1,5 +1,5 @@
-import 'package:bulkers/views/worker/create_worker_profile_component/worker_page_slider.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/worker_timeline.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/worker_page_slider.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/worker_timeline.dart';
 import 'package:flutter/material.dart';
 
 class CreateWorkerProfile extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';

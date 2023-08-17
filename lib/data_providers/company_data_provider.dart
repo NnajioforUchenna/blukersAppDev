@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:bulkers/data_providers/user_data_provider.dart';
-import 'package:bulkers/models/app_user.dart';
-import 'package:bulkers/models/worker.dart';
+import 'package:blukers/data_providers/user_data_provider.dart';
+import 'package:blukers/models/app_user.dart';
+import 'package:blukers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 

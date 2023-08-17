@@ -1,5 +1,5 @@
-import 'package:bulkers/models/chat_message.dart';
-import 'package:bulkers/models/chat_room.dart';
+import 'package:blukers/models/chat_message.dart';
+import 'package:blukers/models/chat_room.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
@@ -53,8 +53,8 @@ class ChatDataProvider {
     var res = await http.post(
         Uri.parse(
             "https://sendmessagepushnotifications-v2xxr3wlvq-uc.a.run.app"),
-            headers: {
-         // "Accept": "application/json",
+        headers: {
+          // "Accept": "application/json",
           "Access-Control-Allow-Origin": "*"
         },
         body: {
@@ -63,7 +63,7 @@ class ChatDataProvider {
           "sentByName": sentByName,
           "message": chatMessage.message
         });
-    print("res:: "+res.toString());
+    print("res:: " + res.toString());
   }
 
   static updateLastMEssage(String chatMessage, String roomId) async {

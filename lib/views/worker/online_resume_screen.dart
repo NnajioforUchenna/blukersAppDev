@@ -1,16 +1,16 @@
-import 'package:bulkers/models/worker.dart';
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/theme_colors.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/common_views/profile_dialog.dart';
-import 'package:bulkers/views/common_views/profile_section.dart';
+import 'package:blukers/models/worker.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/common_views/profile_dialog.dart';
+import 'package:blukers/views/common_views/profile_section.dart';
 
-import 'package:bulkers/views/common_views/components/index.dart';
-import 'package:bulkers/views/company/profile_components/edit_basic_profile.dart';
-import 'package:bulkers/views/company/profile_components/user_basic_profile_details.dart';
+import 'package:blukers/views/common_views/components/index.dart';
+import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
+import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
 
-import 'package:bulkers/views/worker/create_worker_profile_component/edit_worker_basic_profile.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/worker_basic_profile_detail.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/edit_worker_basic_profile.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/worker_basic_profile_detail.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -98,65 +98,65 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                                         ThemeTextStyles.headingThemeTextStyle,
                                   ),
                                   // const SizedBox(height: 20),
-                                  if(!kIsWeb)
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 18, vertical: 18),
-                                    child: Container(
-                                      //  height: 170,
-                                      width: 500,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: const Color(0xffF3ECFF),
+                                  if (!kIsWeb)
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 18, vertical: 18),
+                                      child: Container(
+                                        //  height: 170,
+                                        width: 500,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: const Color(0xffF3ECFF),
+                                          ),
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(5),
+                                          ),
                                         ),
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(5),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          InkWell(
-                                            onTap: () async {
-                                              String? imageUrl =
-                                                  await up.ontapCamera(
-                                                      "/onlineResume/ProfilePics");
-                                              if (imageUrl != "") {
-                                                worker.profilePhotoUrl =
-                                                    imageUrl!;
-                                                await up
-                                                    .updateWorkerInfo(worker);
-                                              }
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Container(
-                                              height: 70,
-                                              width: 70,
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 100,
-                                                      vertical: 10),
-                                              decoration: BoxDecoration(
-                                                color: ThemeColors
-                                                    .blukersBlueThemeColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(80),
-                                              ),
-                                              child: const Icon(
-                                                Icons.camera_alt,
-                                                size: 40,
-                                                color: Colors.white,
+                                        child: Column(
+                                          children: [
+                                            InkWell(
+                                              onTap: () async {
+                                                String? imageUrl =
+                                                    await up.ontapCamera(
+                                                        "/onlineResume/ProfilePics");
+                                                if (imageUrl != "") {
+                                                  worker.profilePhotoUrl =
+                                                      imageUrl!;
+                                                  await up
+                                                      .updateWorkerInfo(worker);
+                                                }
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Container(
+                                                height: 70,
+                                                width: 70,
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 100,
+                                                        vertical: 10),
+                                                decoration: BoxDecoration(
+                                                  color: ThemeColors
+                                                      .blukersBlueThemeColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(80),
+                                                ),
+                                                child: const Icon(
+                                                  Icons.camera_alt,
+                                                  size: 40,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Text(
-                                            "Take photo",
-                                            style: ThemeTextStyles
-                                                .headingThemeTextStyle,
-                                          ),
-                                        ],
+                                            Text(
+                                              "Take photo",
+                                              style: ThemeTextStyles
+                                                  .headingThemeTextStyle,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 18),
@@ -224,14 +224,14 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                       );
                     },
                     child: const CircleAvatar(
-                            radius: 30,
-                            backgroundColor: ThemeColors.secondaryThemeColor,
-                            child: Icon(
-                              UniconsLine.pen,
-                              size: 30,
-                              color: Colors.white,
-                            ),
-                          ),
+                      radius: 30,
+                      backgroundColor: ThemeColors.secondaryThemeColor,
+                      child: Icon(
+                        UniconsLine.pen,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -261,7 +261,7 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
                 print("Edit clicked");
                 showDialog(
                   context: context,
-                  builder: (context) =>const  ProfileDialog(
+                  builder: (context) => const ProfileDialog(
                     child: EditWorkerBasicProfile(),
                   ),
                 );

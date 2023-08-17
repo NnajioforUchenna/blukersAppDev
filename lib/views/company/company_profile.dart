@@ -1,12 +1,12 @@
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/auth/common_widget/login_or_register.dart';
-import 'package:bulkers/views/common_views/profile_dialog.dart';
-import 'package:bulkers/views/common_views/profile_section.dart';
-import 'package:bulkers/views/company/profile_components/user_basic_profile_details.dart';
-import 'package:bulkers/views/company/profile_components/edit_basic_profile.dart';
-import 'package:bulkers/views/company/workers_components/display_worker_dialog.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/auth/common_widget/login_or_register.dart';
+import 'package:blukers/views/common_views/profile_dialog.dart';
+import 'package:blukers/views/common_views/profile_section.dart';
+import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
+import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
+import 'package:blukers/views/company/workers_components/display_worker_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -130,66 +130,68 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                               .headingThemeTextStyle,
                                         ),
                                         // const SizedBox(height: 20),
-                                        if(!kIsWeb)
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 18, vertical: 18),
-                                          child: Container(
-                                            //  height: 170,
-                                            width: 500,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: const Color(0xffF3ECFF),
+                                        if (!kIsWeb)
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 18, vertical: 18),
+                                            child: Container(
+                                              //  height: 170,
+                                              width: 500,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color:
+                                                      const Color(0xffF3ECFF),
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(5),
+                                                ),
                                               ),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(5),
-                                              ),
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () async {
-                                                    String? imageUrl =
-                                                        await up.ontapCamera(
-                                                            "/profile_images/");
-                                                    if (imageUrl != "") {
-                                                      await up
-                                                          .updateUserProfilePic(
-                                                              imageUrl!);
-                                                    }
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Container(
-                                                    height: 70,
-                                                    width: 70,
-                                                    margin: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 100,
-                                                        vertical: 10),
-                                                    decoration: BoxDecoration(
-                                                      color: ThemeColors
-                                                          .blukersBlueThemeColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              80),
-                                                    ),
-                                                    child: const Icon(
-                                                      Icons.camera_alt,
-                                                      size: 40,
-                                                      color: Colors.white,
+                                              child: Column(
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      String? imageUrl =
+                                                          await up.ontapCamera(
+                                                              "/profile_images/");
+                                                      if (imageUrl != "") {
+                                                        await up
+                                                            .updateUserProfilePic(
+                                                                imageUrl!);
+                                                      }
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Container(
+                                                      height: 70,
+                                                      width: 70,
+                                                      margin: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 100,
+                                                          vertical: 10),
+                                                      decoration: BoxDecoration(
+                                                        color: ThemeColors
+                                                            .blukersBlueThemeColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(80),
+                                                      ),
+                                                      child: const Icon(
+                                                        Icons.camera_alt,
+                                                        size: 40,
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  "Take photo",
-                                                  style: ThemeTextStyles
-                                                      .headingThemeTextStyle,
-                                                ),
-                                              ],
+                                                  Text(
+                                                    "Take photo",
+                                                    style: ThemeTextStyles
+                                                        .headingThemeTextStyle,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 18),

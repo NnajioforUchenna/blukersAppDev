@@ -1,7 +1,7 @@
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/views/common_views/page_template/page_template.dart';
-import 'package:bulkers/views/common_views/select_industry_components/display_industries.dart';
-import 'package:bulkers/views/company/workers_components/worker_search_result_page.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/views/common_views/page_template/page_template.dart';
+import 'package:blukers/views/common_views/select_industry_components/display_industries.dart';
+import 'package:blukers/views/company/workers_components/worker_search_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

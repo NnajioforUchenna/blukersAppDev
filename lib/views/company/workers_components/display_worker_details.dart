@@ -1,4 +1,4 @@
-import 'package:bulkers/views/company/workers_components/worker_details_components/worker_detail_block_four.dart';
+import 'package:blukers/views/company/workers_components/worker_details_components/worker_detail_block_four.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/worker.dart';

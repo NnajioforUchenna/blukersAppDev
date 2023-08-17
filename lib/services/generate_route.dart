@@ -1,10 +1,10 @@
-import 'package:bulkers/views/chat_message_screen.dart';
-import 'package:bulkers/views/common_views/landing_page_components/landing_page.dart';
-import 'package:bulkers/views/company/company_basic_info.dart';
-import 'package:bulkers/views/company_chat.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/online_resume_additional_detail_screen.dart';
-import 'package:bulkers/views/worker/online_resume_screen.dart';
-import 'package:bulkers/views/worker/pdf_view_screen.dart';
+import 'package:blukers/views/chat_message_screen.dart';
+import 'package:blukers/views/common_views/landing_page_components/landing_page.dart';
+import 'package:blukers/views/company/company_basic_info.dart';
+import 'package:blukers/views/company_chat.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/online_resume_additional_detail_screen.dart';
+import 'package:blukers/views/worker/online_resume_screen.dart';
+import 'package:blukers/views/worker/pdf_view_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../views/auth/login.dart';

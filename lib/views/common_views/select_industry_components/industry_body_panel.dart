@@ -1,7 +1,7 @@
-import 'package:bulkers/providers/job_posts_provider.dart';
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/utils/helpers/index.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/providers/job_posts_provider.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/utils/helpers/index.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';

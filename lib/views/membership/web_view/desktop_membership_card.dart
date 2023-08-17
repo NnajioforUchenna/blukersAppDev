@@ -1,4 +1,4 @@
-import 'package:bulkers/views/membership/web_view/web_diagonally_cut_rounded_rectangle.dart';
+import 'package:blukers/views/membership/web_view/web_diagonally_cut_rounded_rectangle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';

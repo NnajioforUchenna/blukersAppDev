@@ -1,6 +1,6 @@
-import 'package:bulkers/providers/job_posts_provider.dart';
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/providers/worker_provider.dart';
+import 'package:blukers/providers/job_posts_provider.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

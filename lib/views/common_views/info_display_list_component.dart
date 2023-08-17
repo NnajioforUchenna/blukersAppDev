@@ -1,4 +1,4 @@
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

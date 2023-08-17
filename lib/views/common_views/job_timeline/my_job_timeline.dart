@@ -1,4 +1,4 @@
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 

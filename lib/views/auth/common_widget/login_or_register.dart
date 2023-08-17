@@ -1,8 +1,8 @@
-import 'package:bulkers/views/auth/common_widget/company_logo.dart';
+import 'package:blukers/views/auth/common_widget/company_logo.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/utils/styles/index.dart';
 
 class LoginOrRegister extends StatelessWidget {
   const LoginOrRegister({Key? key}) : super(key: key);

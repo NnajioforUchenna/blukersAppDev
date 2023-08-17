@@ -1,6 +1,6 @@
-import 'package:bulkers/models/chat_room.dart';
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/models/chat_room.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

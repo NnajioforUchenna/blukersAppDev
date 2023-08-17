@@ -1,4 +1,4 @@
-import 'package:bulkers/views/common_views/components/icon_text_404.dart';
+import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';

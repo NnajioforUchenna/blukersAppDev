@@ -1,14 +1,14 @@
-import 'package:bulkers/models/company.dart';
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/theme_colors.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/common_views/profile_section.dart';
-import 'package:bulkers/views/company/profile_components/company_additional_profile_detail.dart';
-import 'package:bulkers/views/company/profile_components/company_basic_profile_detail.dart';
+import 'package:blukers/models/company.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/common_views/profile_section.dart';
+import 'package:blukers/views/company/profile_components/company_additional_profile_detail.dart';
+import 'package:blukers/views/company/profile_components/company_basic_profile_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:bulkers/views/common_views/components/index.dart';
+import 'package:blukers/views/common_views/components/index.dart';
 
 class CompanyBasicInfo extends StatefulWidget {
   const CompanyBasicInfo({super.key});

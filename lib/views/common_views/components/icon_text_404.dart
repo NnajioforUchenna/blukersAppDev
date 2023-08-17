@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/utils/styles/index.dart';
 
 class IconText404 extends StatelessWidget {
   IconText404({

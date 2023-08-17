@@ -5,7 +5,7 @@ import '../../../../utils/styles/theme_text_styles.dart';
 import 'job_post_page_slider.dart';
 import 'job_post_time_line.dart';
 
-import 'package:bulkers/views/common_views/components/index.dart';
+import 'package:blukers/views/common_views/components/index.dart';
 
 class CreateJobPost extends StatelessWidget {
   const CreateJobPost({super.key});

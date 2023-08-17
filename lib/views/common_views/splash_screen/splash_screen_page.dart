@@ -1,4 +1,4 @@
-import 'package:bulkers/views/common_views/splash_screen/splash_screen_custom_shape.dart';
+import 'package:blukers/views/common_views/splash_screen/splash_screen_custom_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

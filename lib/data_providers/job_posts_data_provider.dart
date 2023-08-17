@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bulkers/models/job_post.dart';
+import 'package:blukers/models/job_post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 

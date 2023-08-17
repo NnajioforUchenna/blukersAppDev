@@ -1,23 +1,20 @@
-import 'package:bulkers/models/worker.dart';
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/views/common_views/info_edit_component.dart';
+import 'package:blukers/models/worker.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:blukers/views/common_views/info_edit_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditWorkerBasicProfile extends StatefulWidget {
-  const EditWorkerBasicProfile(
-      {super.key,});
-
+  const EditWorkerBasicProfile({
+    super.key,
+  });
 
   @override
   State<EditWorkerBasicProfile> createState() => _EditBasicProfileState();
 }
 
 class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
- 
-
-
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);

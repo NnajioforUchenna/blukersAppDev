@@ -1,8 +1,8 @@
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/services/stripe_data.dart';
-import 'package:bulkers/views/membership/mobile_view/carousel_with_cards.dart';
-import 'package:bulkers/views/membership/mobile_view/checkout_screen.dart';
-import 'package:bulkers/views/membership/mobile_view/my_evelated_button.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/services/stripe_data.dart';
+import 'package:blukers/views/membership/mobile_view/carousel_with_cards.dart';
+import 'package:blukers/views/membership/mobile_view/checkout_screen.dart';
+import 'package:blukers/views/membership/mobile_view/my_evelated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

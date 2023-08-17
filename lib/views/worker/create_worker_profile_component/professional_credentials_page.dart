@@ -1,5 +1,5 @@
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/views/common_views/skills_form/skills_form.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/views/common_views/skills_form/skills_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

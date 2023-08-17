@@ -1,8 +1,8 @@
-import 'package:bulkers/services/responsive.dart';
-import 'package:bulkers/utils/styles/index.dart';
-import 'package:bulkers/views/common_views/loading_page.dart';
-import 'package:bulkers/views/company/workers_components/Worker_search_bar.dart';
-import 'package:bulkers/views/company/workers_components/build_list_view_workers.dart';
+import 'package:blukers/services/responsive.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:blukers/views/common_views/loading_page.dart';
+import 'package:blukers/views/company/workers_components/Worker_search_bar.dart';
+import 'package:blukers/views/company/workers_components/build_list_view_workers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

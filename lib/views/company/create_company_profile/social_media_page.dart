@@ -1,4 +1,4 @@
-import 'package:bulkers/providers/company_provider.dart';
+import 'package:blukers/providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';

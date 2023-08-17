@@ -1,5 +1,5 @@
-import 'package:bulkers/providers/company_provider.dart';
-import 'package:bulkers/services/make_responsive_web.dart';
+import 'package:blukers/providers/company_provider.dart';
+import 'package:blukers/services/make_responsive_web.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

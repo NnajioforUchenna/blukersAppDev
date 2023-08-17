@@ -1,9 +1,9 @@
-import 'package:bulkers/models/reference.dart';
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/providers/worker_provider.dart';
-import 'package:bulkers/utils/styles/theme_colors.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/worker/create_worker_profile_component/reference_form.dart';
+import 'package:blukers/models/reference.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/reference_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,11 +52,11 @@ class WorkerReferenceProfile extends StatelessWidget {
                     name: wp.references[i]["name"],
                     phoneNumber: wp.references[i]["phoneNumber"],
                     email: wp.references[i]["email"],
-                    relationship:  wp.references[i]["relationship"]));
+                    relationship: wp.references[i]["relationship"]));
               }
               up.appUser!.worker!.references = ref;
               await up.updateWorkerInfo(up.appUser!.worker!);
-             Navigator.of(context).pop();
+              Navigator.of(context).pop();
               print(wp.references);
             },
             child: Container(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 // USE:
-// import 'package:bulkers/views/common_views/components/animations/index.dart';
+// import 'package:blukers/views/common_views/components/animations/index.dart';
 // MyAnimation(name: 'defaultAnimation'),
 
 class MyAnimation extends StatelessWidget {

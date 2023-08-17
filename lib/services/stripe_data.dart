@@ -5,7 +5,7 @@
 // AppUsers
 // But we also use this file to get our stripe product memberships data.
 
-import 'package:bulkers/data_providers/chat_data_provider.dart';
+import 'package:blukers/data_providers/chat_data_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
@@ -41,7 +41,7 @@ Future<DocumentReference> setCheckoutSession(String uid, String priceId) async {
       .add({
     "price": priceId,
     "success_url": kIsWeb ? "http://localhost:50246/" : "https://success.com",
-    "cancel_url":kIsWeb ? "http://localhost:50246/" : "https://cancel.com",
+    "cancel_url": kIsWeb ? "http://localhost:50246/" : "https://cancel.com",
   });
 
   EasyLoading.dismiss();
@@ -81,22 +81,21 @@ SubscriptionStatus _checkUserHaveActiveSubscription(
 }
 
 getCustomerPortalUrl() async {
-    HttpsCallable callable = FirebaseFunctions.instance
-        .httpsCallable('ext-firestore-stripe-payments-createPortalLink');
-    EasyLoading.show(
-      status: 'Creating Your Portal...',
-      maskType: EasyLoadingMaskType.black,
-    );
-    HttpsCallableResult result = await callable.call({
-      'returnUrl': kIsWeb ? 'http://localhost:50246/' : "https://cancel.com"
-    });
-    EasyLoading.dismiss();
-    print(result.data);
-    if (result.data != null) {
-      var url = result.data["url"];
-      return url;
-    }
+  HttpsCallable callable = FirebaseFunctions.instance
+      .httpsCallable('ext-firestore-stripe-payments-createPortalLink');
+  EasyLoading.show(
+    status: 'Creating Your Portal...',
+    maskType: EasyLoadingMaskType.black,
+  );
+  HttpsCallableResult result = await callable.call(
+      {'returnUrl': kIsWeb ? 'http://localhost:50246/' : "https://cancel.com"});
+  EasyLoading.dismiss();
+  print(result.data);
+  if (result.data != null) {
+    var url = result.data["url"];
+    return url;
   }
+}
 
 class StripeData {
   String employeePremiumPriceId;

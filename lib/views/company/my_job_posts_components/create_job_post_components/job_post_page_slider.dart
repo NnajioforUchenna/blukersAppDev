@@ -1,4 +1,4 @@
-import 'package:bulkers/providers/job_posts_provider.dart';
+import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

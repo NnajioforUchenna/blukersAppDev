@@ -1,4 +1,4 @@
-import 'package:bulkers/providers/industry_provider.dart';
+import 'package:blukers/providers/industry_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

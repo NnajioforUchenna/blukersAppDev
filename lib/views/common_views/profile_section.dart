@@ -1,7 +1,7 @@
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/utils/styles/index.dart';
 
 class ProfileSection extends StatelessWidget {
   const ProfileSection(

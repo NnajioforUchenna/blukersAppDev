@@ -1,4 +1,4 @@
-import 'package:bulkers/views/auth/common_widget/label_button.dart';
+import 'package:blukers/views/auth/common_widget/label_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

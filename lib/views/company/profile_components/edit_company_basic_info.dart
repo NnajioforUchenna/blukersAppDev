@@ -1,8 +1,8 @@
-import 'package:bulkers/providers/user_provider.dart';
-import 'package:bulkers/utils/styles/theme_colors.dart';
-import 'package:bulkers/utils/styles/theme_text_styles.dart';
-import 'package:bulkers/views/common_views/InfoEditListComponent.dart';
-import 'package:bulkers/views/common_views/info_edit_component.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/common_views/InfoEditListComponent.dart';
+import 'package:blukers/views/common_views/info_edit_component.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

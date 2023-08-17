@@ -1,4 +1,4 @@
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -25,8 +25,8 @@ class ChatComponent extends StatelessWidget {
           isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
         Row(
-             mainAxisAlignment:
-             isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+          mainAxisAlignment:
+              isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
           children: [
             Flexible(
               child: Container(
@@ -35,8 +35,9 @@ class ChatComponent extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    color:
-                        isMe ? ThemeColors.chatScreenBackgroundColor : Colors.white,
+                    color: isMe
+                        ? ThemeColors.chatScreenBackgroundColor
+                        : Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(42),
                       topRight: const Radius.circular(42),

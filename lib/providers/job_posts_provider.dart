@@ -1,5 +1,5 @@
-import 'package:bulkers/models/app_user.dart';
-import 'package:bulkers/views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
+import 'package:blukers/models/app_user.dart';
+import 'package:blukers/views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bulkers/utils/styles/index.dart';
+import 'package:blukers/utils/styles/index.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

@@ -1,5 +1,5 @@
-import 'package:bulkers/models/job_post.dart';
-import 'package:bulkers/providers/worker_provider.dart';
+import 'package:blukers/models/job_post.dart';
+import 'package:blukers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
