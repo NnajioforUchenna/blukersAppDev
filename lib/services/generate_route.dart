@@ -16,13 +16,12 @@ import '../views/company/my_job_posts.dart';
 import '../views/company/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
 import '../views/company/workers.dart';
+import '../views/membership/membership_widget.dart';
 import '../views/worker/create_worker_profile_component/create_worker_profile.dart';
 import '../views/worker/jobs.dart';
 import '../views/worker/my_jobs.dart';
 import '../views/worker/worker_profile.dart';
 import 'authentication_wrapper.dart';
-
-import '../views/membership/membership_widget.dart';
 
 MaterialPageRoute generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -58,6 +57,7 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const CompanyChat());
     case '/payment':
       return MaterialPageRoute(builder: (context) => const MembershipWidget());
+
     case 'companyProfile':
       return MaterialPageRoute(builder: (context) => const CompanyProfile());
     case '/login':
