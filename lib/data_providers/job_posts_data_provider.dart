@@ -72,7 +72,7 @@ class JobPostsDataProvider {
     for (String id in jobPostIds) {
       QuerySnapshot query = await db
           .collection(jobPostsCollections)
-          .where('companyId', isEqualTo: id)
+          .where('jobPostId', isEqualTo: id)
           .get();
       query.docs.forEach((doc) {
         JobPost? jobPost = JobPost.fromMap(doc.data() as Map<String, dynamic>);

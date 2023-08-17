@@ -46,7 +46,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
     return Container(
       width: Responsive.isDesktop(context)
           ? MediaQuery.of(context).size.width * 0.3
-          : MediaQuery.of(context).size.width,
+          : MediaQuery.of(context).size.width * 0.9,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
         child: Column(
@@ -150,7 +150,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
           ],
         ),
       ),

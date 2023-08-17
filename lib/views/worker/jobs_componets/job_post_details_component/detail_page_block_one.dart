@@ -83,6 +83,19 @@ class DetailPageBlockOne extends StatelessWidget {
             SizedBox(height: 15.h),
             Row(
               children: [
+                const Spacer(),
+                Responsive.isMobile(context)
+                    ? RoundedImageWidget(
+                        size: Responsive.isMobile(context) ? 50.sp : 100.sp,
+                        imageUrl: jobPost.companyLogo ??
+                            'https://picsum.photos/200/300',
+                      )
+                    : Container(),
+              ],
+            ),
+            SizedBox(height: 15.h),
+            Row(
+              children: [
                 isHideButton
                     ? SizedBox()
                     : Container(
@@ -112,19 +125,21 @@ class DetailPageBlockOne extends StatelessWidget {
                             // Center the text inside the button
                             child: Text(
                               isJobApplied ? "Apply".toUpperCase() : "Applied",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16.sp),
                             ),
                           ),
                         ),
                       ),
 
                 const Spacer(), // Add space between button and image
-                RoundedImageWidget(
-                  size: Responsive.isMobile(context) ? 50.sp : 100.sp,
-                  imageUrl:
-                      jobPost.companyLogo ?? 'https://picsum.photos/200/300',
-                ),
+                Responsive.isMobile(context)
+                    ? Container()
+                    : RoundedImageWidget(
+                        size: Responsive.isMobile(context) ? 50.sp : 100.sp,
+                        imageUrl: jobPost.companyLogo ??
+                            'https://picsum.photos/200/300',
+                      ),
               ],
             ),
             const Divider(),

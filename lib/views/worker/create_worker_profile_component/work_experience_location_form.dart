@@ -26,12 +26,16 @@ class _WorkExperienceLocationFormState
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
-      cityController.text = wp.workExperience[widget.intialIndex]['city'] ?? '';
-      stateController.text =
-          wp.workExperience[widget.intialIndex]['state'] ?? '';
-      countryController.text =
-          wp.workExperience[widget.intialIndex]['country'] ?? '';
+      // Check if the widget is still in the widget tree
+      if (mounted) {
+        WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
+        cityController.text =
+            wp.workExperience[widget.intialIndex]['city'] ?? '';
+        stateController.text =
+            wp.workExperience[widget.intialIndex]['state'] ?? '';
+        countryController.text =
+            wp.workExperience[widget.intialIndex]['country'] ?? '';
+      }
     });
   }
 

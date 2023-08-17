@@ -20,7 +20,6 @@ class AuthenticationWrapper extends StatelessWidget {
     // Get the current URL
     String urlEx = Uri.base.toString();
     Uri uri = Uri.parse(urlEx);
-    print(urlEx);
 
     // Check for the query parameters
     String? nameSearch = uri.queryParameters['nameSearch'];

@@ -32,7 +32,10 @@ class CreateWorkerProfile extends StatelessWidget {
                 const SizedBox(
                   height: 30.0,
                 ),
-                WorkerPageSlider()
+                WorkerPageSlider(),
+                const SizedBox(
+                  height: 30.0,
+                ),
               ]))
             ],
           ),

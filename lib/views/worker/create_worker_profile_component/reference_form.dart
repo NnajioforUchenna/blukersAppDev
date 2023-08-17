@@ -26,13 +26,16 @@ class _ReferenceFormState extends State<ReferenceForm> {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
-      _nameController.text = wp.references[widget.index]['name'] ?? '';
-      _phoneNumberController.text =
-          wp.references[widget.index]['phoneNumber'] ?? '';
-      _emailController.text = wp.references[widget.index]['email'] ?? '';
-      _relationshipController.text =
-          wp.references[widget.index]['relationship'] ?? '';
+      // Check if the widget is still in the widget tree
+      if (mounted) {
+        WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
+        _nameController.text = wp.references[widget.index]['name'] ?? '';
+        _phoneNumberController.text =
+            wp.references[widget.index]['phoneNumber'] ?? '';
+        _emailController.text = wp.references[widget.index]['email'] ?? '';
+        _relationshipController.text =
+            wp.references[widget.index]['relationship'] ?? '';
+      }
     });
   }
 

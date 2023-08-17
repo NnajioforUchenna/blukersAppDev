@@ -1,7 +1,8 @@
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:bulkers/data_providers/user_data_provider.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
@@ -177,7 +178,7 @@ class WorkerProvider with ChangeNotifier {
   }
 
   // Uploading Worker Credential
-  Future<Map<String, dynamic>> uploadCredential() async {
+  Future<Map<String, dynamic>> uploadCredentialWeb() async {
     Map<String, dynamic> returnFile = {};
     PlatformFile? filePlatformFile;
     String result = '';
@@ -188,14 +189,14 @@ class WorkerProvider with ChangeNotifier {
     );
 
     if (resultFile != null) {
-      returnFile['file'] = resultFile?.files.first;
+      returnFile['file'] = resultFile.files.first;
       filePlatformFile = resultFile.files.first;
       EasyLoading.show(
         status: 'Uploading Your Credential...',
         maskType: EasyLoadingMaskType.black,
       );
       String resultUrl =
-          await WorkerDataProvider.uploadCredentialToFirebaseStorage(
+          await WorkerDataProvider.uploadCredentialToFirebaseStorageWeb(
               appUser!.uid, filePlatformFile.bytes!, filePlatformFile.name);
       if (resultUrl != 'error') {
         appUser?.worker?.certificationsIds?.add(resultUrl);
@@ -213,6 +214,46 @@ class WorkerProvider with ChangeNotifier {
     }
 
     returnFile['url'] = result;
+    return returnFile;
+  }
+
+  Future<Map<String, dynamic>> uploadCredentialMobile() async {
+    Map<String, dynamic> returnFile = {};
+    // Pick a PDF file
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      withData: true,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (result != null && !kIsWeb) {
+      EasyLoading.show(
+        status: 'Uploading Your Credential...',
+        maskType: EasyLoadingMaskType.black,
+      );
+
+      returnFile['file'] = result.files.first;
+      // get File path
+      File file = File(result.files.single.path!);
+      String resultUrl =
+          await WorkerDataProvider.uploadCredentialToFirebaseStorageMobile(
+              appUser!.uid, file, result.files.single.name);
+
+      if (resultUrl != 'error') {
+        appUser?.worker?.certificationsIds?.add(resultUrl);
+
+        EasyLoading.dismiss();
+        EasyLoading.showError('Uploaded your credential successfully.',
+            duration: Duration(seconds: 3));
+        notifyListeners();
+        returnFile['url'] = resultUrl;
+      } else {
+        EasyLoading.dismiss();
+        EasyLoading.showError(
+            'An error occurred while uploading your credential. Please try again.',
+            duration: const Duration(seconds: 3));
+      }
+    }
     return returnFile;
   }
 
@@ -251,10 +292,10 @@ class WorkerProvider with ChangeNotifier {
   }
 
   void setReference() {
-    references.forEach((element) {
+    for (var element in references) {
       newWorker!.references = [];
-      newWorker!.references?.add(Reference.fromMap(element));
-    });
+      newWorker!.references.add(Reference.fromMap(element));
+    }
     workerProfileNextPage();
   }
 

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:bulkers/models/worker.dart';
@@ -71,7 +72,7 @@ class WorkerDataProvider {
     }, SetOptions(merge: true));
   }
 
-  static Future<String> uploadCredentialToFirebaseStorage(
+  static Future<String> uploadCredentialToFirebaseStorageWeb(
       String uid, Uint8List uint8list, String name) async {
     final storageRef = FirebaseStorage.instance.ref();
     Reference? fileRef = storageRef.child("Credentials/$uid/$name");
@@ -83,6 +84,24 @@ class WorkerDataProvider {
       fileUrl = await uploadTaskSnapshot.ref.getDownloadURL();
 
       // Set the logoUrl in the database
+      await updateOrAddUserCredential(uid, fileUrl);
+    } catch (e) {
+      print(e);
+    }
+    return fileUrl;
+  }
+
+  static Future<String> uploadCredentialToFirebaseStorageMobile(
+      String uid, File file, String name) async {
+    final storageRef = FirebaseStorage.instance.ref();
+    Reference fileRef = storageRef.child("Credentials/$uid/$name");
+    String fileUrl = 'error';
+
+    try {
+      UploadTask uploadTask = fileRef.putFile(file);
+      TaskSnapshot snapshot = await uploadTask;
+      fileUrl = await snapshot.ref.getDownloadURL();
+      // Set the URL in the database
       await updateOrAddUserCredential(uid, fileUrl);
     } catch (e) {
       print(e);

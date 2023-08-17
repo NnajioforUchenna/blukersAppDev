@@ -19,18 +19,28 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
   final TextEditingController _jobTitleController = TextEditingController();
   final TextEditingController _jobDescriptionController =
       TextEditingController();
+  late WorkerProvider wp;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
-      _companyNameController.text =
-          wp.workExperience[widget.index]['companyName'] ?? '';
-      _jobTitleController.text =
-          wp.workExperience[widget.index]['jobTitle'] ?? '';
-      _jobDescriptionController.text =
-          wp.workExperience[widget.index]['jobDescription'] ?? '';
+      if (mounted) {
+        // Check if the widget is still in the tree
+        wp = Provider.of<WorkerProvider>(context, listen: false);
+        if (wp.workExperience[widget.index]['companyName'] != null) {
+          _companyNameController.text =
+              wp.workExperience[widget.index]['companyName'] ?? '';
+        }
+        if (wp.workExperience[widget.index]['jobTitle'] != null) {
+          _jobTitleController.text =
+              wp.workExperience[widget.index]['jobTitle'] ?? '';
+        }
+        if (wp.workExperience[widget.index]['jobDescription'] != null) {
+          _jobDescriptionController.text =
+              wp.workExperience[widget.index]['jobDescription'] ?? '';
+        }
+      }
     });
   }
 

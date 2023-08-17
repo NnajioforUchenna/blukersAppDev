@@ -29,6 +29,8 @@ class SplashScreenPage extends StatelessWidget {
             SizedBox(height: 20.h),
             Center(
               child: SplashScreenCustomShape(
+                width: width > 370 ? 370 : width * 0.9,
+                height: height > 650 ? 650 : height * 0.8,
                 workerTitle: workerTitle,
                 workerSubtitle: workerSubtitle,
                 companyTitle: companyTitle,
