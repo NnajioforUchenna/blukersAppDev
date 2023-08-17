@@ -10,15 +10,18 @@ class DesktopMembershipCard extends StatelessWidget {
   final String period;
   final List<String> features;
   final Color color;
-  const DesktopMembershipCard({
-    super.key,
-    required this.headerTitle,
-    required this.headerSubtitle,
-    required this.amount,
-    required this.period,
-    required this.features,
-    required this.color,
-  });
+  final VoidCallback onPress;
+  final bool isSubscribed;
+  const DesktopMembershipCard(
+      {super.key,
+      required this.headerTitle,
+      required this.headerSubtitle,
+      required this.amount,
+      required this.period,
+      required this.features,
+      required this.color,
+      required this.isSubscribed,
+      required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -147,18 +150,21 @@ class DesktopMembershipCard extends StatelessWidget {
         Positioned(
           bottom:
               0, // Aligns the bottom of the custom choice chip with the bottom of the container
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.black,
+          child: InkWell(
+            onTap: onPress,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.black,
+              ),
+              child: Text(isSubscribed ? 'manage' : 'Continue',
+                  style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w600,
+                  )),
             ),
-            child: Text('Continue',
-                style: GoogleFonts.montserrat(
-                  color: Colors.white,
-                  fontSize: 10.sp,
-                  fontWeight: FontWeight.w600,
-                )),
           ),
         ),
       ],

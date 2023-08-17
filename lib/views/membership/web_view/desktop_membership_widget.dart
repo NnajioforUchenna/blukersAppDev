@@ -45,24 +45,13 @@ class DesktopMembershipWidget extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: Text('Apply to Unlimited Jobs',
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 23.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black)),
-                              ),
-                              const Expanded(
-                                flex: 2,
-                                child: SizedBox(),
-                              )
-                            ],
-                          ),
+                          Text('Apply to Unlimited Jobs',
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 23.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black)),
                           const SizedBox(
                             height: 5,
                           ),
@@ -77,114 +66,35 @@ class DesktopMembershipWidget extends StatelessWidget {
                           SizedBox(
                             height: 18.sp,
                           ),
-                          CarouselWithCards(),
+                          DesktopCards(
+                            stripeData: stripeData,
+                            subscriptionStatus: subscriptionStatus,
+                          ),
                           SizedBox(
                             height: 18.sp,
                           ),
-                          if (subscriptionStatus.subIsActive == false)
-                            MyElevatedButton(
-                              firstText: 'Premium',
-                              secondText: '',
-                              thirdText: '\$4.99/Monthly',
-                              onPress: () async {
-                                print("premium");
-
-                                DocumentReference docRef =
-                                    await setCheckoutSession(up.appUser!.uid,
-                                        stripeData.employeePremiumPriceId);
-
-                                docRef.snapshots().listen(
-                                  (ds) {
-                                    if (ds.exists) {
-                                      var error;
-                                      try {
-                                        error = ds.get("error");
-                                      } catch (e) {
-                                        error = null;
-                                      }
-                                      if (error != null) {
-                                        print("error: " + error.toString());
-                                      } else {
-                                        try {
-                                          String url = ds.get("url");
-
-                                          launchUrl(Uri.parse(url));
-                                        } catch (error) {
-                                          print(error);
-                                        }
-                                      }
-                                    }
-                                  },
-                                );
-                                print("data set");
-                              },
-                            ),
                           SizedBox(
                             height: 18.sp,
                           ),
-                          if (subscriptionStatus.subIsActive == false)
-                            MyElevatedButton(
-                              firstText: 'Premium',
-                              secondText: 'Plus',
-                              thirdText: '\$19.99/Monthly',
-                              onPress: () async {
-                                print("premium plus");
-                                DocumentReference docRef =
-                                    await setCheckoutSession(up.appUser!.uid,
-                                        stripeData.employeePremiumPlusPriceId);
-                                docRef.snapshots().listen(
-                                  (ds) {
-                                    if (ds.exists) {
-                                      var error;
-                                      try {
-                                        error = ds.get("error");
-                                      } catch (e) {
-                                        error = null;
-                                      }
-                                      if (error != null) {
-                                        print("error: " + error.toString());
-                                      } else {
-                                        try {
-                                          String url = ds.get("url");
-
-                                          launchUrl(Uri.parse(url));
-                                        } catch (error) {
-                                          print(error);
-                                        }
-                                      }
-                                    }
-                                  },
-                                );
-                                print("data set");
-                              },
-                            ),
-                          SizedBox(
-                            height: 18.sp,
-                          ),
-                          if (subscriptionStatus.subIsActive)
-                            Center(
-                              child: InkWell(
-                                onTap: () async {
-                                  var url = await getCustomerPortalUrl();
-
-                                  launchUrl(Uri.parse(url));
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 20),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.grey[300],
-                                  ),
-                                  child: Text('Manage Your Subscription',
-                                      style: GoogleFonts.montserrat(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                      )),
+                          Center(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 50.h, vertical: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.grey[300],
                                 ),
+                                child: Text('Skip',
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.black,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w600,
+                                    )),
                               ),
                             ),
+                          ),
                         ],
                       ),
                     ),

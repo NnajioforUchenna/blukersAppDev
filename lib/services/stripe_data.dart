@@ -40,8 +40,8 @@ Future<DocumentReference> setCheckoutSession(String uid, String priceId) async {
       .collection("checkout_sessions")
       .add({
     "price": priceId,
-    "success_url": kIsWeb ? "http://localhost:63273/" : "https://success.com",
-    "cancel_url":kIsWeb ? "http://localhost:63273/" : "https://cancel.com",
+    "success_url": kIsWeb ? "http://localhost:50246/" : "https://success.com",
+    "cancel_url":kIsWeb ? "http://localhost:50246/" : "https://cancel.com",
   });
 
   EasyLoading.dismiss();
@@ -88,7 +88,7 @@ getCustomerPortalUrl() async {
       maskType: EasyLoadingMaskType.black,
     );
     HttpsCallableResult result = await callable.call({
-      'returnUrl': kIsWeb ? 'http://localhost:63273/' : "https://cancel.com"
+      'returnUrl': kIsWeb ? 'http://localhost:50246/' : "https://cancel.com"
     });
     EasyLoading.dismiss();
     print(result.data);
