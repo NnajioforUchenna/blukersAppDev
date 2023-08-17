@@ -18,33 +18,40 @@ class SplashScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Center(
-            child: SplashScreenCustomShape(
-              workerTitle: workerTitle,
-              workerSubtitle: workerSubtitle,
-              companyTitle: companyTitle,
-              companySubtitle: companySubtitle,
-            ),
-          ),
-          SizedBox(height: 30.h),
-          // Add skip button
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/landing');
-            },
-            child: Text(
-              'Skip',
-              style: TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w300,
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 20.h),
+            Center(
+              child: SplashScreenCustomShape(
+                workerTitle: workerTitle,
+                workerSubtitle: workerSubtitle,
+                companyTitle: companyTitle,
+                companySubtitle: companySubtitle,
               ),
             ),
-          ),
-        ],
+            SizedBox(height: 30.h),
+            // Add skip button
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/landing');
+              },
+              child: Text(
+                'Skip',
+                style: TextStyle(
+                  color: Colors.blueGrey,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

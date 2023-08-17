@@ -1,4 +1,3 @@
-import 'package:bulkers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,6 +26,14 @@ class _OptionBoxState extends State<OptionBox> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      // hide splash color
+      splashColor: Colors.transparent,
+      // hide highlight color
+      highlightColor: Colors.transparent,
+      customBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+
       onTap: () {
         widget.onTap();
       },
@@ -49,8 +56,7 @@ class _OptionBoxState extends State<OptionBox> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
             side: _isHovering
-                ? const BorderSide(
-                    color: ThemeColors.black1ThemeColor, width: 2.0)
+                ? const BorderSide(color: Colors.white, width: 2.0)
                 : BorderSide.none,
           ),
           child: Container(
@@ -88,7 +94,7 @@ class _OptionBoxState extends State<OptionBox> {
                     widget.thirdLine,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.7),
-                      fontSize: 8.sp,
+                      fontSize: 7.sp,
                     ),
                   ),
                 ),

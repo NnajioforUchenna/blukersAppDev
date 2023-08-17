@@ -11,7 +11,7 @@ class SplashScreenCustomShape extends StatelessWidget {
 
   SplashScreenCustomShape({
     this.width = 400,
-    this.height = 700,
+    this.height = 650,
     required this.workerTitle,
     required this.workerSubtitle,
     required this.companyTitle,
