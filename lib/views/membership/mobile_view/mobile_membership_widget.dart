@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:bulkers/utils/styles/index.dart';
 
 import 'carousel_with_cards.dart';
 import 'my_evelated_button.dart';
@@ -40,7 +41,18 @@ class MobileMembershipWidget extends StatelessWidget {
                 print(subscriptionStatus.subIsActive);
                 return Scaffold(
                   appBar: AppBar(
-                    title: const Text("Subscriptions"),
+                    leading: IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.pop(
+                            context); // This line pops the current route and goes back
+                      },
+                    ),
+                    backgroundColor: Colors.white,
+                    iconTheme: const IconThemeData(
+                      color: ThemeColors.primaryThemeColor,
+                    ),
+                    elevation: 0,
                   ),
                   body: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
