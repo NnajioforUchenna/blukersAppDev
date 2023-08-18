@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../models/address.dart';
 import '../models/job_post.dart';
 
@@ -18,11 +21,11 @@ final List<String> routesCompany = [
   '/login'
 ];
 
-String getAddressesInStringFormat(List<Address>? addresses) {
-  if (addresses == null || addresses.isEmpty) {
-    return 'No addresses available';
+String getAddressesInStringFormat(Address? address) {
+  if (address == null) {
+    return 'Not specified';
   }
-  return addresses.map((address) => address.displayAddress()).join('\n');
+  return address.displayAddress();
 }
 
 String getSalaryType(SalaryType? salaryType) {
@@ -58,6 +61,10 @@ String getJobType(JobType jobType) {
       return 'Contract';
     case JobType.specifiedTime:
       return 'Specified Time';
+    case JobType.fullTimePermanent:
+      return 'Full Time, Permanent';
+    case JobType.fullTimeTemporary:
+      return 'Full Time, Seasonal';
     default:
       return 'N/A';
   }
@@ -67,4 +74,29 @@ void prettyPrintMap(Map<String, dynamic> map) {
   JsonEncoder encoder = const JsonEncoder.withIndent('  ');
   String prettyPrint = encoder.convert(map);
   print(prettyPrint);
+}
+
+String toTitleCase(String text) {
+  return text
+      .trim()
+      .split(' ')
+      .map((word) => word.isNotEmpty
+          ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+          : '')
+      .join(' ');
+}
+
+Widget displayParagraph(String text) {
+  // Adding two newlines after every period
+  String formattedText = text.replaceAll('. ', '.\n\n');
+
+  return Text(
+    formattedText,
+    style: TextStyle(
+      fontSize: 13.0.sp, // Adjust the font size as needed
+      color: Colors.black,
+      height: 1.5, // Adjust line height for better readability
+    ),
+    textAlign: TextAlign.left, // Align text to the left
+  );
 }

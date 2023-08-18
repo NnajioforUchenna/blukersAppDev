@@ -11,17 +11,20 @@ final db = FirebaseFirestore.instance;
 class JobPostsDataProvider {
   static Future<List<Map<String, dynamic>>> getJobPostsByJobID(
       String jobId) async {
-    // Create a reference to the Firestore collection
-    CollectionReference jobPosts = db.collection(jobPostsCollections);
+    List<JobPost> jobPosts = await searchJobPosts(jobId, '');
+    return jobPosts.map((jobPost) => jobPost.toMap()).toList();
 
-    // Query the collection: Fetch documents where jobId is in the jobPositionIds field
-    QuerySnapshot querySnapshot =
-        await jobPosts.where('jobIds', arrayContains: jobId).get();
-
-    // Convert the documents to a list of maps and return
-    return querySnapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
+    // // Create a reference to the Firestore collection
+    // CollectionReference jobPosts = db.collection(jobPostsCollections);
+    //
+    // // Query the collection: Fetch documents where jobId is in the jobPositionIds field
+    // QuerySnapshot querySnapshot =
+    //     await jobPosts.where('jobIds', arrayContains: jobId).get();
+    //
+    // // Convert the documents to a list of maps and return
+    // return querySnapshot.docs
+    //     .map((doc) => doc.data() as Map<String, dynamic>)
+    //     .toList();
   }
 
   static Future<void> createJobPost(JobPost jobPost) async {
@@ -182,6 +185,23 @@ class JobPostsDataProvider {
   static Future<List<Map<String, dynamic>>> getRecentJobPosts() async {
     // Create a reference to the Firestore collection
     CollectionReference jobPosts = db.collection(jobPostsCollections);
+
+    // Query the collection: Order by dateCreated descending and limit to 50
+    QuerySnapshot querySnapshot =
+        await jobPosts.orderBy('dateCreated', descending: true).limit(50).get();
+
+    // Convert the documents to a list of maps, adding the document ID
+    return querySnapshot.docs
+        .map((doc) => {
+              'id': doc.id, // Add the document ID
+              ...doc.data() as Map<String, dynamic>,
+            })
+        .toList();
+  }
+
+  static getRealJobPosts() async {
+    // Create a reference to the Firestore collection
+    CollectionReference jobPosts = db.collection('RealJobPosts');
 
     // Query the collection: Order by dateCreated descending and limit to 50
     QuerySnapshot querySnapshot =

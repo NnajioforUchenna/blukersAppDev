@@ -3,8 +3,10 @@ import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/common_views/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../services/responsive.dart';
+import '../../common_views/components/icon_text_404.dart';
 import 'animate_job_post_details.dart';
 import 'build_list_view_jobs.dart';
 import 'choose_target_language.dart';
@@ -33,7 +35,12 @@ class DisplayJobs extends StatelessWidget {
           )),
       backgroundColor: const Color(0xFFF5F5F8),
       body: jp.selectedJobPosts.isEmpty
-          ? LoadingPage()
+          ? jp.searchComplete
+              ? IconText404(
+                  icon: UniconsLine.file_edit_alt,
+                  text: "No job posts found",
+                )
+              : LoadingPage()
           : Responsive.isDesktop(context)
               ? buildWebContent()
               : const BuildListViewJobs(),

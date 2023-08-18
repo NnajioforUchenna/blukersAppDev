@@ -18,16 +18,24 @@ class JobPostsProvider with ChangeNotifier {
   JobPost? selectedJobPost;
 
   Map<String, JobPost> get jobPosts => _jobPosts;
+  bool isReal = false;
 
   List<JobPost> selectedJobPosts = [];
   int jobPostCurrentPageIndex = 0;
   String selectedJobPostId = '';
 
+  Map<String, JobPost> realJobPosts = {};
+
   JobPostsProvider() {
     get50LastestJobPosts();
+    getRealJobPosts();
   }
 
+  bool searchComplete = false;
+
   void getJobPostsByJobID(String jobId) {
+    print('getJobPostsByJobID: $jobId');
+    searchComplete = false;
     selectedJobPostId = jobId;
 
     // Get all jobPosts for the job with the given jobId.
@@ -44,6 +52,7 @@ class JobPostsProvider with ChangeNotifier {
         selectedJobPost = selectedJobPosts.first;
       }
 
+      searchComplete = true;
       notifyListeners();
     });
   }
@@ -270,6 +279,28 @@ class JobPostsProvider with ChangeNotifier {
           recent50Jobs[jobPost['id']] = parsedJobPost;
         }
       }
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> getRealJobPosts() async {
+    // Get the 50 most recent job posts.
+    List<Map<String, dynamic>> jobPosts =
+        await JobPostsDataProvider.getRealJobPosts();
+
+    realJobPosts = {};
+    for (var jobPost in jobPosts) {
+      if (jobPost['id'] != null) {
+        JobPost? parsedJobPost = JobPost.fromMap(jobPost);
+        if (parsedJobPost != null) {
+          realJobPosts[jobPost['id']] = parsedJobPost;
+        }
+      }
+    }
+
+    if (realJobPosts.isNotEmpty) {
+      selectedJobPost = realJobPosts.values.first;
     }
 
     notifyListeners();

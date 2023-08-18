@@ -28,9 +28,9 @@ class DisplayJobPostDialog extends StatelessWidget {
                 ConstrainedBox(
                     constraints: BoxConstraints(
                       maxWidth: width *
-                          0.8, // Constrain the width to 80% of the screen
+                          0.9, // Constrain the width to 80% of the screen
                       maxHeight: height *
-                          0.8, // Constrain the height to 70% of the screen
+                          0.9, // Constrain the height to 70% of the screen
                     ),
                     child: const AnimateJobPostDetails()),
                 Spacer(),

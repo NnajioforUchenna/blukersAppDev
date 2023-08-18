@@ -35,7 +35,9 @@ class DetailPageBlockTwo extends StatelessWidget {
                     text: "Industry: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
                 TextSpan(
-                    text: "${ip.getIndustryName(jobPost.industryIds ?? '')}"),
+                    text: jobPost.industryIds.isNotEmpty
+                        ? jobPost.industryIds.join(', ')
+                        : "Not Specified"),
               ],
             ),
           ),
@@ -48,7 +50,10 @@ class DetailPageBlockTwo extends StatelessWidget {
                 TextSpan(
                     text: "Job Position: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
-                TextSpan(text: "${ip.getJobName(jobPost.jobIds ?? '')}"),
+                TextSpan(
+                    text: jobPost.jobIds.isNotEmpty
+                        ? jobPost.jobIds.join(', ')
+                        : "Not Specified"),
               ],
             ),
           ),
@@ -61,7 +66,10 @@ class DetailPageBlockTwo extends StatelessWidget {
                 TextSpan(
                     text: "Skills: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
-                TextSpan(text: jobPost.skills.join(', ')),
+                TextSpan(
+                    text: jobPost.skills.isNotEmpty
+                        ? jobPost.skills.join(', ')
+                        : "Not Specified"),
               ],
             ),
           ),
