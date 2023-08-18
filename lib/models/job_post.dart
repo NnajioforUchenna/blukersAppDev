@@ -5,7 +5,15 @@ enum JobUrgencyLevel { low, medium, high }
 
 enum JobPostStatus { active, inactive }
 
-enum JobType { fullTime, partTime, contract, specifiedTime }
+enum JobType {
+  fullTime,
+  partTime,
+  contract,
+  specifiedTime,
+  fullTimePermanent,
+  fullTimeTemporary,
+  internship,
+}
 
 enum SalaryType { hourly, daily, weekly, biWeekly, monthly, yearly }
 
@@ -22,7 +30,6 @@ class JobPost {
   String contractDuration;
   SalaryType salaryType;
   double salaryAmount;
-  List<Address> addresses;
   Address? address;
   List<String> applicantUserIds;
   List<String> declineUserIds;
@@ -50,7 +57,6 @@ class JobPost {
     this.contractDuration = '',
     this.salaryType = SalaryType.hourly,
     this.salaryAmount = 0.0,
-    this.addresses = const [],
     this.applicantUserIds = const [],
     this.declineUserIds = const [],
     this.interviewedUserIds = const [],
@@ -83,8 +89,6 @@ class JobPost {
       if (contractDuration.isNotEmpty) 'contractDuration': contractDuration,
       if (salaryType != SalaryType.hourly) 'salaryType': salaryType.index,
       if (salaryAmount != 0.0) 'salaryAmount': salaryAmount,
-      if (addresses.isNotEmpty)
-        'addresses': addresses.map((address) => address.toMap()).toList(),
       if (address != null) 'address': address!.toMap(),
       if (applicantUserIds.isNotEmpty) 'applicantUserIds': applicantUserIds,
       if (declineUserIds.isNotEmpty) 'declineUserIds': declineUserIds,
@@ -122,11 +126,6 @@ class JobPost {
         salaryAmount: map['salaryAmount'] != null
             ? double.parse(map['salaryAmount'].toString())
             : 0.0,
-        addresses: map['addresses'] != null
-            ? (map['addresses'] as List)
-                .map((address) => Address.fromMap(address))
-                .toList()
-            : const [],
         address:
             map['address'] != null ? Address.fromMap(map['address']) : null,
         applicantUserIds: map['applicantUserIds']?.cast<String>() ?? const [],
@@ -148,8 +147,9 @@ class JobPost {
             : 0,
         schedule: map['schedule']?.toString() ?? '',
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       print("Error creating JobPost: $e");
+      print("Stack trace: $stackTrace");
       return null;
     }
   }

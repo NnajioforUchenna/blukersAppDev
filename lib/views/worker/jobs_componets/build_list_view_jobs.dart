@@ -2,7 +2,6 @@ import 'package:bulkers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../common_files/constants.dart';
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import 'display_job_card.dart';
@@ -24,14 +23,7 @@ class BuildListViewJobs extends StatelessWidget {
         JobPost jobPost = jobPosts[index];
         // Todo Remember to remove the default values
         return DisplayJobCard(
-            timeAgo: jobPost.timeAgo,
-            title: jobPost.jobTitle,
-            salaryRange: jobPost.salaryAmount.toString(),
-            salaryType: getSalaryType(jobPost.salaryType) ?? 'Salary Type',
-            companyName: jobPost.companyName ?? 'Company Name',
-            location: jobPost.location ?? 'Location',
-            companyLogo: jobPost.companyLogo ?? 'https://picsum.photos/200/300',
-            jobPostId: jobPost.companyId,
+            jobPost: jobPost,
             onTap: () {
               jp.setSelectedJobPost(jobPost);
               if (Responsive.isMobile(context)) {

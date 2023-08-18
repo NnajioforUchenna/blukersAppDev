@@ -2,6 +2,7 @@ import 'package:bulkers/providers/user_provider.dart';
 import 'package:bulkers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../common_files/constants.dart';
@@ -58,9 +59,14 @@ class DetailPageBlockOne extends StatelessWidget {
               ],
             ),
             SizedBox(height: 15.h),
-            Text(jobPost.jobTitle ?? '',
-                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15.h),
+            Text(
+              toTitleCase(jobPost.jobTitle),
+              style: GoogleFonts.montserrat(
+                fontWeight: FontWeight.bold,
+                fontSize: 18.sp,
+              ),
+            ),
+            SizedBox(height: 5.h),
             Row(
               children: [
                 Text(
@@ -77,10 +83,29 @@ class DetailPageBlockOne extends StatelessWidget {
               ],
             ),
             SizedBox(height: 15.h),
-            Text(
-              getAddressesInStringFormat(jobPost.addresses),
-              style: TextStyle(fontSize: 11.sp),
+            Wrap(
+              children: [
+                Text("Company: ",
+                    style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
+                Text(
+                  jobPost.companyName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
+            SizedBox(height: 5.h),
+            jobPost.address == null
+                ? Text('Not Specified',
+                    style: TextStyle(fontSize: 11.sp, color: Colors.grey))
+                : Text(
+                    jobPost.address!.location ?? '',
+                    style: TextStyle(fontSize: 11.sp),
+                  ),
             SizedBox(height: 15.h),
             Row(
               children: [

@@ -75,22 +75,6 @@ class IndustriesProvider with ChangeNotifier {
     return addressDic;
   }
 
-  getIndustryName(industryIds) {
-    List<String> industryNameList = [];
-    industryIds.forEach((element) {
-      industryNameList.add(_industries[element]?.name ?? '');
-    });
-    return industryNameList.join(', ');
-  }
-
-  getJobName(jobIds) {
-    List<String> listJobsNames = [];
-    jobIds.forEach((element) {
-      listJobsNames.add(jobs[element]?.title ?? '');
-    });
-    return listJobsNames.join(', ');
-  }
-
   void fillJobs() {
     _industries.forEach((key, value) {
       value.jobs.forEach((job) {

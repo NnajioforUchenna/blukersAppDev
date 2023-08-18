@@ -1,32 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../common_files/constants.dart';
+import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../services/rounded_image.dart';
 import '../../../utils/styles/theme_colors.dart';
 
 class DisplayJobCard extends StatefulWidget {
-  final String? timeAgo;
-  final String? title;
-  final String? salaryRange;
-  final String? salaryType;
-  final String? companyName;
-  final String? location;
-  final String? companyLogo;
-  final String? jobPostId;
+  final JobPost jobPost;
   final VoidCallback? onTap;
 
   const DisplayJobCard({
     Key? key,
-    this.timeAgo,
-    this.title,
-    this.salaryRange,
-    this.salaryType,
-    this.companyName,
-    this.location,
-    this.companyLogo,
     this.onTap,
-    this.jobPostId,
+    required this.jobPost,
   }) : super(key: key);
 
   @override
@@ -44,7 +34,7 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
 
     bool isJobPostSelected() {
-      return jp.selectedJobPost?.companyId == widget.jobPostId;
+      return jp.selectedJobPost?.jobPostId == widget.jobPost.jobPostId;
     }
 
     return MouseRegion(
@@ -74,29 +64,27 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
               ),
               duration: const Duration(milliseconds: 500),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [Text(widget.timeAgo!)],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Text(
-                        widget.title!,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
+                  Text(widget.jobPost.timeAgo!),
+                  SizedBox(height: 10.sp),
+                  Text(
+                    toTitleCase(widget.jobPost.jobTitle),
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.sp,
+                    ),
                   ),
                   SizedBox(height: 5),
-                  Row(
-                    children: [
-                      Text(widget.salaryRange!),
-                      Text(widget.salaryType!),
-                    ],
-                  ),
+                  widget.jobPost.salaryAmount == 0
+                      ? const Text('Not Specified')
+                      : Row(
+                          children: [
+                            Text(widget.jobPost.salaryAmount.toString()),
+                            SizedBox(width: 5),
+                            Text(getSalaryType(widget.jobPost.salaryType)),
+                          ],
+                        ),
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -106,7 +94,7 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.title!,
+                              widget.jobPost.companyName,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -115,7 +103,7 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              widget.location!,
+                              widget.jobPost.location!,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -124,7 +112,7 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                       ),
                       if (width > 600) // Show logo only on larger screens
                         RoundedImageWidget(
-                          imageUrl: widget.companyLogo!,
+                          imageUrl: widget.jobPost.companyLogo,
                         ),
                     ],
                   ),
@@ -133,7 +121,7 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                       children: [
                         Spacer(),
                         RoundedImageWidget(
-                          imageUrl: widget.companyLogo!,
+                          imageUrl: widget.jobPost.companyLogo,
                         ),
                       ],
                     ),

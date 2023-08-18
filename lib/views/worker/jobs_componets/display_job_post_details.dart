@@ -10,6 +10,7 @@ import 'job_post_details_component/detail_page_block_four.dart';
 import 'job_post_details_component/detail_page_block_one.dart';
 import 'job_post_details_component/detail_page_block_three.dart';
 import 'job_post_details_component/detail_page_block_two.dart';
+import 'job_post_details_component/detail_page_book_six.dart';
 
 class JobPostDetailsWidget extends StatefulWidget {
   final JobPost? jobPost;
@@ -61,11 +62,11 @@ class _JobPostDetailsWidgetState extends State<JobPostDetailsWidget>
     return jobPost == null
         ? Center(child: SizedBox(height: 100, width: 100, child: LoadingPage()))
         : Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Card(
               elevation: 5,
               child: Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
                   border: Border(
                     top: BorderSide(
@@ -84,6 +85,7 @@ class _JobPostDetailsWidgetState extends State<JobPostDetailsWidget>
                         DetailPageBlockTwo(jobPost: jobPost),
                         DetailPageBlockThree(jobPost: jobPost),
                         DetailPageBlockFour(jobPost: jobPost),
+                        DetailPageBlockSix(jobPost: jobPost),
                         if (up.appUser != null &&
                             up.appUser!.uid == jobPost.companyId)
                           DetailPageBlockFive(jobPost: jobPost),

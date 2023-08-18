@@ -8,6 +8,7 @@ import '../common_views/all_search_bar_components/all_search_bar.dart';
 import '../common_views/loading_page.dart';
 import '../common_views/page_template/page_template.dart';
 import '../common_views/select_industry_components/display_industries.dart';
+import 'jobs_componets/display_real_job_posts.dart';
 import 'jobs_componets/job_search_result_page.dart';
 
 class Jobs extends StatelessWidget {
@@ -25,9 +26,11 @@ class Jobs extends StatelessWidget {
             SizedBox(height: 10.w),
             const Divider(),
             AnimatedCrossFade(
-              firstChild: ip.industries.isEmpty
-                  ? LoadingPage()
-                  : const DisplayIndustries(),
+              firstChild: jp.isReal
+                  ? DisplayRealJobPosts()
+                  : ip.industries.isEmpty
+                      ? LoadingPage()
+                      : const DisplayIndustries(),
               secondChild: const JobSearchResultPage(),
               crossFadeState: jp.isSearching
                   ? CrossFadeState.showSecond

@@ -15,18 +15,30 @@ class RoundedImageWidget extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black
-                .withOpacity(0.2), // Adjust opacity for a more prominent shadow
-            spreadRadius: 2, // Increase spread for a more noticeable elevation
-            blurRadius: 10, // Increase blur for a softer shadow
-            offset: Offset(0,
-                5), // Increase vertical offset to enhance the elevation effect
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 10,
+            offset: Offset(0, 5),
           ),
         ],
-        borderRadius: BorderRadius.circular(10.0), // Rounded corners
-        image: DecorationImage(
-          image: NetworkImage(imageUrl),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: Image.network(
+          imageUrl,
           fit: BoxFit.cover,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+            return Center(child: CircularProgressIndicator());
+          },
+          errorBuilder: (context, error, stackTrace) {
+            return Center(
+                child: Image.network(
+              'https://picsum.photos/200/300',
+              fit: BoxFit.cover,
+            )); // Or any placeholder widget
+          },
         ),
       ),
     );

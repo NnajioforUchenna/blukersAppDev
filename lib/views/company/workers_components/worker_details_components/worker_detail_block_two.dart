@@ -75,7 +75,7 @@ class WorkerDetailBlockTwo extends StatelessWidget {
                 child: BlurOut(
                   isBlur: isBlur,
                   child: Text(
-                    getAddressesInStringFormat(worker.addresses),
+                    getAddressesInStringFormat(worker.address),
                     style: const TextStyle(fontSize: 18),
                   ),
                 ),
