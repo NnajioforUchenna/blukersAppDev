@@ -2,6 +2,8 @@ import 'package:blukers/views/common_views/splash_screen/splash_screen_custom_sh
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../landing_page_components/landing_page.dart';
+
 class SplashScreenPage extends StatelessWidget {
   final String workerTitle;
   final String workerSubtitle;
@@ -41,7 +43,10 @@ class SplashScreenPage extends StatelessWidget {
             // Add skip button
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/landing');
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LandingPage()));
               },
               child: Text(
                 'Skip',

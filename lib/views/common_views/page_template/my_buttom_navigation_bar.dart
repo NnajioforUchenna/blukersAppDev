@@ -40,11 +40,11 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
               Icon(UniconsLine.chat, color: ThemeColors.primaryThemeColor),
           label: 'Chat',
         ),
-        const NavigationDestination(
+        NavigationDestination(
           icon: Icon(UniconsLine.user, color: ThemeColors.grey1ThemeColor),
           selectedIcon:
               Icon(UniconsLine.user, color: ThemeColors.primaryThemeColor),
-          label: 'Profile',
+          label: up.appUser == null ? "Login/Register" : 'Profile',
         ),
       ],
       onDestinationSelected: (int index) {
