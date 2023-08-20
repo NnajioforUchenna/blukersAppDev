@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/industry.dart';
+import '../../../utils/localization/localized_industries.dart';
 
 class IndustryHeadPanel extends StatelessWidget {
   final Industry industry;
@@ -28,7 +29,7 @@ class IndustryHeadPanel extends StatelessWidget {
           Expanded(
             child: RichText(
               text: TextSpan(
-                text: industry.name,
+                text: LocalizedIndustries.get(context, industry.industryId),
                 style: TextStyle(
                   fontSize: Responsive.isDesktop(context) ? 30 : 20,
                   fontWeight: FontWeight.w500,

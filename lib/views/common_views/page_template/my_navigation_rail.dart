@@ -2,6 +2,7 @@ import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/user_provider.dart';
 
@@ -51,11 +52,12 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
       ),
       // trailing: const MyTrailingWidget(),
       destinations: <NavigationRailDestination>[
-        const NavigationRailDestination(
-          icon: Icon(UniconsLine.estate, color: ThemeColors.grey1ThemeColor),
-          selectedIcon:
-              Icon(UniconsLine.estate, color: ThemeColors.primaryThemeColor),
-          label: Text('Home'),
+        NavigationRailDestination(
+          icon: const Icon(UniconsLine.estate,
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.estate,
+              color: ThemeColors.primaryThemeColor),
+          label: Text(AppLocalizations.of(context)!.home),
           // padding: EdgeInsets.all(16.0),
         ),
         NavigationRailDestination(
@@ -64,20 +66,24 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
           selectedIcon: const Icon(UniconsLine.briefcase_alt,
               color: ThemeColors.primaryThemeColor),
           label: up.userRole == 'company'
-              ? const Text('Jobs')
-              : const Text('Jobs'),
+              ? Text(AppLocalizations.of(context)!.jobs)
+              : Text(AppLocalizations.of(context)!.jobs),
         ),
-        const NavigationRailDestination(
-          icon: Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
-          selectedIcon:
-              Icon(UniconsLine.chat, color: ThemeColors.primaryThemeColor),
-          label: Text('Chat'),
+        NavigationRailDestination(
+          icon:
+              const Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.chat,
+              color: ThemeColors.primaryThemeColor),
+          label: Text(AppLocalizations.of(context)!.chat),
         ),
-        const NavigationRailDestination(
-          icon: Icon(UniconsLine.user, color: ThemeColors.grey1ThemeColor),
-          selectedIcon:
-              Icon(UniconsLine.user, color: ThemeColors.primaryThemeColor),
-          label: Text('Profile'),
+        NavigationRailDestination(
+          icon:
+              const Icon(UniconsLine.user, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.user,
+              color: ThemeColors.primaryThemeColor),
+          label: up.appUser == null
+              ? Text(AppLocalizations.of(context)!.loginRegister)
+              : Text(AppLocalizations.of(context)!.profile),
         ),
       ],
     );

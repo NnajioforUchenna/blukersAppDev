@@ -4,7 +4,10 @@ import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import '../../../utils/localization/localized_industries.dart';
+import '../../../utils/localization/localized_jobs.dart';
 
 class IndustryJobsDropdownComponent extends StatefulWidget {
   const IndustryJobsDropdownComponent(
@@ -58,10 +61,10 @@ class _IndustryJobsDropdownComponentState
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Text(
-          "Select Your Industries and Jobs",
+        Text(
+          AppLocalizations.of(context)!.selectYourIndustriesAndJobs,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.deepOrangeAccent,
             fontSize: 25,
             fontWeight: FontWeight.w600,
@@ -75,13 +78,15 @@ class _IndustryJobsDropdownComponentState
           return Column(
             children: [
               CheckboxListTile(
-                title: Text(industry.name,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      height: 1.25,
-                    )),
+                title: Text(
+                  LocalizedIndustries.get(context, industry.industryId),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    height: 1.25,
+                  ),
+                ),
                 value: selectedIndustries.contains(industry.industryId),
                 onChanged: (bool? value) {
                   if (value != null && value) {
@@ -101,13 +106,15 @@ class _IndustryJobsDropdownComponentState
                   return Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: CheckboxListTile(
-                      title: Text(job.title,
-                          style: TextStyle(
-                            color: Colors.blueGrey[700],
-                            fontSize: 20,
-                            fontWeight: FontWeight.w200,
-                            height: 1.25,
-                          )),
+                      title: Text(
+                        LocalizedJobs.get(context, job.jobId),
+                        style: TextStyle(
+                          color: Colors.blueGrey[700],
+                          fontSize: 20,
+                          fontWeight: FontWeight.w200,
+                          height: 1.25,
+                        ),
+                      ),
                       value: selectedJobs.contains(job.jobId),
                       onChanged: (bool? value) {
                         if (value != null && value) {

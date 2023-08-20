@@ -1,6 +1,7 @@
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/user_provider.dart';
@@ -79,7 +80,7 @@ class _LoginState extends State<Login> {
                                   });
                                 },
                                 decoration: InputDecoration(
-                                  hintText: "Email",
+                                  hintText: AppLocalizations.of(context)!.email,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                     borderSide: const BorderSide(
@@ -110,7 +111,8 @@ class _LoginState extends State<Login> {
                                   });
                                 },
                                 decoration: InputDecoration(
-                                    hintText: "Password",
+                                    hintText:
+                                        AppLocalizations.of(context)!.password,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0),
                                       borderSide: const BorderSide(
@@ -148,9 +150,9 @@ class _LoginState extends State<Login> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           alignment: Alignment.centerRight,
-                          child: const Text(
-                            "Forgot Password?",
-                            style: TextStyle(
+                          child: Text(
+                            AppLocalizations.of(context)!.forgotPassword,
+                            style: const TextStyle(
                               color: Color(0xFF8A8A8E),
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
@@ -174,15 +176,15 @@ class _LoginState extends State<Login> {
                             //   await chatProvider.getGroups(up.appUser?.uid ?? "");
                           }
                         },
-                        text: "Sign In",
+                        text: AppLocalizations.of(context)!.signIn,
                       ),
                       const SizedBox(height: 10),
                       LabelButton(
                         onTap: () {
                           Navigator.pushNamed(context, '/register');
                         },
-                        title: "Don't have an account?",
-                        subTitle: "Register",
+                        title: AppLocalizations.of(context)!.dontHaveAnAccount,
+                        subTitle: AppLocalizations.of(context)!.register,
                       ),
                     ],
                   ),

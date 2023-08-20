@@ -5,10 +5,12 @@ import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/job.dart';
 import '../../../providers/user_provider.dart';
 import '../../../services/on_hover.dart';
+import '../../../utils/localization/localized_jobs.dart';
 import '../../company/workers_components/display_workers.dart';
 import '../../worker/jobs_componets/display_jobs.dart';
 import '../applicant_count.dart';
@@ -71,7 +73,7 @@ class IndustryBodyPanel extends StatelessWidget {
                           Expanded(
                             child: RichText(
                               text: TextSpan(
-                                text: job.title,
+                                text: LocalizedJobs.get(context, job.jobId),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -99,7 +101,7 @@ class IndustryBodyPanel extends StatelessWidget {
                       subtitle: Padding(
                         padding: const EdgeInsets.only(top: 4.0, bottom: 6.0),
                         child: Text(
-                          'Salary: ${NumberFormatHelper().doubleToStrSimpleCurrency(job.lowRange)} - ${NumberFormatHelper().doubleToStrSimpleCurrency(job.highRange)}',
+                          '${AppLocalizations.of(context)!.salary}: ${NumberFormatHelper().doubleToStrSimpleCurrency(job.lowRange)} - ${NumberFormatHelper().doubleToStrSimpleCurrency(job.highRange)}',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
