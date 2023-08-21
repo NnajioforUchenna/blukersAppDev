@@ -85,7 +85,7 @@ class _BasicInformationState extends State<BasicInformation> {
                           },
                           validator: ((value) {
                             if (value!.isEmpty) {
-                              return "Required";
+                              return AppLocalizations.of(context)!.required;
                             } else {
                               return null;
                             }
@@ -118,7 +118,7 @@ class _BasicInformationState extends State<BasicInformation> {
                           },
                           validator: ((value) {
                             if (value!.isEmpty) {
-                              return "Required";
+                              return AppLocalizations.of(context)!.required;
                             } else {
                               return null;
                             }
@@ -154,7 +154,7 @@ class _BasicInformationState extends State<BasicInformation> {
                           },
                           validator: ((value) {
                             if (value!.isEmpty) {
-                              return "Required";
+                              return AppLocalizations.of(context)!.required;
                             } else {
                               return null;
                             }
@@ -190,7 +190,7 @@ class _BasicInformationState extends State<BasicInformation> {
                         },
                         validator: ((value) {
                           if (value!.isEmpty) {
-                            return "Required";
+                            return AppLocalizations.of(context)!.required;
                           } else {
                             return null;
                           }

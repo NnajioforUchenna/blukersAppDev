@@ -153,6 +153,8 @@
     "required": "Required",
     "tenDigitsRequired": "Ten Digits Required",
 
+    "congratulations": "Congratulations!",
+
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",
     "workers": "Workers",
