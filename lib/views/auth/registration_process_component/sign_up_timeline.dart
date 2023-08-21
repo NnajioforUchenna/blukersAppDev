@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../../providers/user_provider.dart';
 import '../../../../utils/styles/index.dart';
+import '../../../services/responsive.dart';
 
 const deliverySteps = [
   'Login Information',
@@ -46,64 +46,67 @@ class SignUpTimeline extends StatelessWidget {
       _scrollController.jumpTo(currentStep * 120.0);
     });
 
-    return Container(
-      margin: const EdgeInsets.all(8),
-      constraints: const BoxConstraints(maxHeight: 140),
-      // decoration: BoxDecoration(
-      //   color: ThemeColors
-      //       .primaryThemeColor, // Set the background color of the container
-      //   borderRadius: BorderRadius.circular(20), // Set the border radius
-      // ),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        controller: _scrollController,
-        itemCount: deliverySteps.length,
-        itemBuilder: (BuildContext context, int index) {
-          final step = deliverySteps[index];
-          var indicatorSize = 30.0;
-          var beforeLineStyle = const LineStyle(
-            // color: Colors.white.withOpacity(0.8),
-            color: ThemeColors.secondaryThemeColor,
-          );
-          LineStyle afterLineStyle =
-              const LineStyle(color: ThemeColors.grey1ThemeColor);
-
-          _DeliveryStatus status;
-
-          if (index < currentStep) {
-            status = _DeliveryStatus.done;
-            afterLineStyle =
-                const LineStyle(color: ThemeColors.secondaryThemeColor);
-          } else if (index > currentStep) {
-            status = _DeliveryStatus.todo;
-            indicatorSize = 20;
-            beforeLineStyle =
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.all(8),
+        constraints: BoxConstraints(
+            maxHeight: 140, maxWidth: MediaQuery.of(context).size.width * 0.8),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          controller: _scrollController,
+          itemCount: deliverySteps.length,
+          itemBuilder: (BuildContext context, int index) {
+            final step = deliverySteps[index];
+            var indicatorSize = 30.0;
+            var beforeLineStyle = const LineStyle(
+              // color: Colors.white.withOpacity(0.8),
+              color: ThemeColors.secondaryThemeColor,
+            );
+            LineStyle afterLineStyle =
                 const LineStyle(color: ThemeColors.grey1ThemeColor);
-          } else {
-            // afterLineStyle = const LineStyle(color: Colors.white);
-            status = _DeliveryStatus.doing;
-          }
 
-          return TimelineTile(
-            axis: TimelineAxis.horizontal,
-            alignment: TimelineAlign.manual,
-            lineXY: 0.6,
-            isFirst: index == 0,
-            isLast: index == deliverySteps.length - 1,
-            beforeLineStyle: beforeLineStyle,
-            afterLineStyle: afterLineStyle,
-            indicatorStyle: IndicatorStyle(
-              width: indicatorSize,
-              height: indicatorSize,
-              indicator: _IndicatorDelivery(status: status),
-            ),
-            startChild: _StartChildDelivery(index: index),
-            endChild: _EndChildDelivery(
-              text: step,
-              current: index == currentStep,
-            ),
-          );
-        },
+            _DeliveryStatus status;
+
+            if (index < currentStep) {
+              status = _DeliveryStatus.done;
+              afterLineStyle =
+                  const LineStyle(color: ThemeColors.secondaryThemeColor);
+            } else if (index > currentStep) {
+              status = _DeliveryStatus.todo;
+              indicatorSize = 20;
+              beforeLineStyle =
+                  const LineStyle(color: ThemeColors.grey1ThemeColor);
+            } else {
+              // afterLineStyle = const LineStyle(color: Colors.white);
+              status = _DeliveryStatus.doing;
+            }
+
+            return SizedBox(
+              width: Responsive.isDesktop(context)
+                  ? MediaQuery.of(context).size.width / 4
+                  : null,
+              child: TimelineTile(
+                axis: TimelineAxis.horizontal,
+                alignment: TimelineAlign.manual,
+                lineXY: 0.6,
+                isFirst: index == 0,
+                isLast: index == deliverySteps.length - 1,
+                beforeLineStyle: beforeLineStyle,
+                afterLineStyle: afterLineStyle,
+                indicatorStyle: IndicatorStyle(
+                  width: indicatorSize,
+                  height: indicatorSize,
+                  indicator: _IndicatorDelivery(status: status),
+                ),
+                startChild: _StartChildDelivery(index: index),
+                endChild: _EndChildDelivery(
+                  text: step,
+                  current: index == currentStep,
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

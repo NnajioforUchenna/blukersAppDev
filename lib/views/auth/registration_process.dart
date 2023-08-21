@@ -22,7 +22,7 @@ class RegistrationProcess extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            Center(child: SignUpTimeline()),
+            SignUpTimeline(),
             // const CompanyLogo(),
             const SizedBox(height: 20),
             const PageSlider()

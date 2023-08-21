@@ -22,9 +22,6 @@ class CreateCompanyProfile extends StatelessWidget {
       body: Center(
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
-          // width: Responsive.isDesktop(context)
-          //     ? MediaQuery.of(context).size.width * 0.3
-          //     : MediaQuery.of(context).size.width,
           child: CustomScrollView(
             slivers: [
               SliverList(
