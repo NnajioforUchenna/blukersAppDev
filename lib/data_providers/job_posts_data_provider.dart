@@ -201,7 +201,7 @@ class JobPostsDataProvider {
 
   static getRealJobPosts() async {
     // Create a reference to the Firestore collection
-    CollectionReference jobPosts = db.collection('RealJobPosts');
+    CollectionReference jobPosts = db.collection(jobPostsCollections);
 
     // Query the collection: Order by dateCreated descending and limit to 50
     QuerySnapshot querySnapshot =
