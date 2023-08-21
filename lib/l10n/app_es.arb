@@ -77,6 +77,26 @@
     "youHaveNotSavedAnyWorker": "No has guardado ningún trabajador",
     "youHaveNotCreatedAnyJobPost": "No has creado ningún trabajo",
 
+    "basicInformation": "Información Básica",
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "description": "Descripción",
+    "saveProfile": "Guardar Perfil",
+
+    "contactInformation": "Información de Contacto",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "street": "Calle",
+    "city": "Ciudad",
+    "state": "Estado",
+    "postalCode": "Código Postal",
+    "country": "País",
+
+    "companyName": "Nombre de la Compañía",
+
+    "required": "Requerido",
+    "tenDigitsRequired": "Se Requiren 10 Dígitos",
+
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",
     "workers": "Trabajadores",

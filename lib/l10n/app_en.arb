@@ -133,6 +133,26 @@
     "youHaveNotSavedAnyWorker": "You have not saved any worker",
     "youHaveNotCreatedAnyJobPost": "You have not created any job post",
 
+    "basicInformation": "Basic Information",
+    "name": "Name",
+    "lastName": "Last Name",
+    "description": "Description",
+    "saveProfile": "Save Profile",
+
+    "contactInformation": "Contact Information",
+    "phone": "Phone",
+    "address": "Address",
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "postalCode": "Postal Code",
+    "country": "Country",
+
+    "companyName": "Company Name",
+
+    "required": "Required",
+    "tenDigitsRequired": "Ten Digits Required",
+
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",
     "workers": "Workers",
