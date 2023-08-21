@@ -10,8 +10,75 @@
         }
     },
     "dreamBuildConnect": "Sueña. Conecta. Construye.",
+    "whatDoYouIdentifyAs": "¿Como te identificas?",
+
+    "home": "Inicio",
+    "jobs": "Trabajos",
+    "chat": "Chat",
+    "profile": "Perfil",
+    "loginRegister": "Iniciar/Registro",
+
+    "iAmA": "Soy un",
+    "iAmA2": "Soy una",
+    "worker": "Trabajador",
+    "company": "Compañía",
+    "lookingForJobs": "Busco trabajos",
+    "lookingForWorkers": "Busco trabajadores",
+    "alreadyHaveAnAccount": "¿Ya tienes una cuenta?",
+    "signIn": "Inicia Sesión",
+    "register": "Regístrate",
+
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "dontHaveAnAccount": "¿No tienes una cuenta?",
+
+    "createYourAccount": "Crea tu cuenta",
+
+    "selectYourIndustriesAndJobs": "Selecciona tus industrias y trabajos",
+
+    "agriculture": "Agricultura",
+    "commercialfishing": "Pesca Comercial",
+    "construction": "Construcción",
+    "custodialwork": "Trabajo de Limpieza",
+    "foodandbeverages": "Alimentos y Bebidas",
+    "foodprocessing": "Procesamiento de Alimentos",
+    "forestry": "Silvicultura",
+    "industrialconstruction": "Construcción Industrial",
+    "landscaping": "Paisajismo",
+    "manufacturing": "Manufactura",
+    "transportation": "Transporte",
+    "warehousing": "Almacenamiento",
+
+    "carpenter": "Carpintero",
+    "electrician": "Electricista",
+    "mason": "Masón",
+    "painter": "Pintor",
+    "plumber": "Plomero",
+
+    "selectAJobPosition": "Selecciona un trabajo",
+    "salary": "Salario",
+
+    "workerSearchBarInput1Placeholder": "Industria, trabajo...",
+    "workerSearchBarInput2Placeholder": "Ubicación",
+    "companySearchBarInput1Placeholder": "Industria, trabajo...",
+    "companySearchBarInput2Placeholder": "Ubicación",
+    "searchJobs": "Buscar",
+    "searchWorkers": "Buscar",
+
+    "applied": "Aplicaciones",
+    "saved": "Guardado",
+    "youHaveNotAppliedToAnyJobPost": "No has aplicado a ningún trabajo",
+    "youHaveNotSavedAnyJobPost": "No has guardado ningún trabajo",
+    "youHaveNoChats": "No tienes chats",
+
+    "savedWorkers": "Trabajadores Guardados",
+    "myJobs": "Mis Trabajos",
+    "youHaveNotSavedAnyWorker": "No has guardado ningún trabajador",
+    "youHaveNotCreatedAnyJobPost": "No has creado ningún trabajo",
+
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",
     "workers": "Trabajadores",
-    "selectAnIndustry": "Seleccione una Industria"
+    "selectAnIndustry": "Selecciona una Industria"
 }

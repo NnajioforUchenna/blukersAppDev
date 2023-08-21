@@ -1,5 +1,6 @@
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../services/validation.dart';
@@ -47,10 +48,10 @@ class _LoginInformationState extends State<LoginInformation> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  "Create Your Account",
+                Text(
+                  AppLocalizations.of(context)!.createYourAccount.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.deepOrangeAccent,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -72,7 +73,7 @@ class _LoginInformationState extends State<LoginInformation> {
                       return Validation().validateEmail(value);
                     }),
                     decoration: InputDecoration(
-                      hintText: "Email",
+                      hintText: AppLocalizations.of(context)!.email,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: const BorderSide(
@@ -105,7 +106,7 @@ class _LoginInformationState extends State<LoginInformation> {
                       }
                     }),
                     decoration: InputDecoration(
-                      hintText: "Password",
+                      hintText: AppLocalizations.of(context)!.password,
                       suffixIcon: IconButton(
                         icon: Icon(
                           isPasswordVisible
@@ -132,10 +133,10 @@ class _LoginInformationState extends State<LoginInformation> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  "Are you a worker or a company? ",
+                Text(
+                  AppLocalizations.of(context)!.whatDoYouIdentifyAs,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: ThemeColors.secondaryThemeColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -167,7 +168,9 @@ class _LoginInformationState extends State<LoginInformation> {
                           contentPadding: const EdgeInsets.all(0),
                           dense: true,
                           title: Text(
-                            "Individual",
+                            AppLocalizations.of(context)!.iAmA +
+                                " " +
+                                AppLocalizations.of(context)!.worker,
                             style: TextStyle(
                               color: Colors.grey.shade600,
                               fontSize: 14,
@@ -192,7 +195,9 @@ class _LoginInformationState extends State<LoginInformation> {
                           contentPadding: const EdgeInsets.all(0),
                           dense: true,
                           title: Text(
-                            "Company",
+                            AppLocalizations.of(context)!.iAmA2 +
+                                " " +
+                                AppLocalizations.of(context)!.company,
                             style: TextStyle(
                               color: Colors.grey.shade600,
                               fontSize: 14,
@@ -227,7 +232,7 @@ class _LoginInformationState extends State<LoginInformation> {
                       );
                     }
                   },
-                  text: "Register Now",
+                  text: AppLocalizations.of(context)!.register,
                   isDisabled: !isFormComplete(),
                 ),
                 SizedBox(height: height * .01),
@@ -235,8 +240,8 @@ class _LoginInformationState extends State<LoginInformation> {
                   onTap: () {
                     Navigator.pushNamed(context, "/login");
                   },
-                  title: "Already Have An Account?",
-                  subTitle: "Sign In",
+                  title: AppLocalizations.of(context)!.alreadyHaveAnAccount,
+                  subTitle: AppLocalizations.of(context)!.signIn,
                 ),
               ],
             ),

@@ -41,7 +41,7 @@ class LandingPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(16.w), // Responsive width
               child: Text(
-                'What do you identify as?',
+                AppLocalizations.of(context)!.whatDoYouIdentifyAs,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserrat(
                   color: Color(0xFFf06523),
@@ -57,10 +57,12 @@ class LandingPage extends StatelessWidget {
               children: [
                 OptionBox(
                   imgSrc: 'assets/images/worker_icon.png',
-                  title: 'I AM A',
+                  title: AppLocalizations.of(context)!.iAmA.toUpperCase(),
                   color: const Color(0xFF1c75bb),
-                  subtitle: 'WORKER',
-                  thirdLine: 'LOOKING FOR JOBS',
+                  subtitle: AppLocalizations.of(context)!.worker.toUpperCase(),
+                  thirdLine: AppLocalizations.of(context)!
+                      .lookingForJobs
+                      .toUpperCase(),
                   onTap: () {
                     up.userRole = "worker";
                     Navigator.pushNamed(context, '/jobs');
@@ -69,10 +71,12 @@ class LandingPage extends StatelessWidget {
                 SizedBox(width: 20.w), // Responsive width
                 OptionBox(
                   imgSrc: 'assets/images/company_icon.png',
-                  title: 'I AM A',
+                  title: AppLocalizations.of(context)!.iAmA2.toUpperCase(),
                   color: const Color(0xFFf06523),
-                  subtitle: 'COMPANY',
-                  thirdLine: 'LOOKING FOR WORKERS',
+                  subtitle: AppLocalizations.of(context)!.company.toUpperCase(),
+                  thirdLine: AppLocalizations.of(context)!
+                      .lookingForWorkers
+                      .toUpperCase(),
                   onTap: () {
                     up.userRole = "company";
                     Navigator.pushNamed(context, '/workers');
@@ -86,8 +90,8 @@ class LandingPage extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(context, "/login");
                 },
-                title: "Already Have An Account?",
-                subTitle: "Sign In",
+                title: AppLocalizations.of(context)!.alreadyHaveAnAccount,
+                subTitle: AppLocalizations.of(context)!.signIn,
               ),
           ],
         ),
