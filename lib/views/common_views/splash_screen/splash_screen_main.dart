@@ -47,42 +47,39 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (page) {
-                setState(() {
-                  _currentPage = page;
-                });
-                _startTimer();
-              },
-              children: const [
-                SplashScreenPage(
-                  workerTitle: 'Search',
-                  workerSubtitle:
-                      'Explore Opportunities and find the perfect job that matches your skills and ambitions.',
-                  companyTitle: 'Post',
-                  companySubtitle:
-                      'Post your job and connect with qualified candidates today.',
-                ),
-                SplashScreenPage(
-                  workerTitle: 'Apply',
-                  workerSubtitle:
-                      'Submit Your Application to Take the first leap towards your career.',
-                  companyTitle: 'Review',
-                  companySubtitle:
-                      'Review Candidates easily and make informed decisions.',
-                ),
-                SplashScreenPage(
-                  workerTitle: 'Get Hired',
-                  workerSubtitle: 'Ace The Interview and Showcase your Skills.',
-                  companyTitle: 'Hire',
-                  companySubtitle:
-                      'Make the right hire with confidence and choose the perfect Candidate.',
-                ),
-              ],
-            ),
+          PageView(
+            controller: _pageController,
+            onPageChanged: (page) {
+              setState(() {
+                _currentPage = page;
+              });
+              _startTimer();
+            },
+            children: const [
+              SplashScreenPage(
+                workerTitle: 'Search',
+                workerSubtitle:
+                    'Explore Opportunities and find the perfect job that matches your skills and ambitions.',
+                companyTitle: 'Post',
+                companySubtitle:
+                    'Post your job and connect with qualified candidates today.',
+              ),
+              SplashScreenPage(
+                workerTitle: 'Apply',
+                workerSubtitle:
+                    'Submit Your Application to Take the first leap towards your career.',
+                companyTitle: 'Review',
+                companySubtitle:
+                    'Review Candidates easily and make informed decisions.',
+              ),
+              SplashScreenPage(
+                workerTitle: 'Get Hired',
+                workerSubtitle: 'Ace The Interview and Showcase your Skills.',
+                companyTitle: 'Hire',
+                companySubtitle:
+                    'Make the right hire with confidence and choose the perfect Candidate.',
+              ),
+            ],
           ),
           Positioned(
             bottom: 20,

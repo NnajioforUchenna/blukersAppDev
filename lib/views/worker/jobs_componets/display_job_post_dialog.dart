@@ -22,20 +22,14 @@ class DisplayJobPostDialog extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(14.0.sp),
-            child: Column(
-              children: [
-                Spacer(),
-                ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: width *
-                          0.9, // Constrain the width to 80% of the screen
-                      maxHeight: height *
-                          0.9, // Constrain the height to 70% of the screen
-                    ),
-                    child: const AnimateJobPostDetails()),
-                Spacer(),
-              ],
-            ),
+            child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth:
+                      width * 0.9, // Constrain the width to 80% of the screen
+                  maxHeight:
+                      height * 0.9, // Constrain the height to 70% of the screen
+                ),
+                child: const AnimateJobPostDetails()),
           ),
           Row(
             children: [
