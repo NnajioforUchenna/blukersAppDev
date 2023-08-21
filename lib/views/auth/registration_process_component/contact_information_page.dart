@@ -63,10 +63,10 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Contact Information Page",
+                  Text(
+                    AppLocalizations.of(context)!.contactInformation,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.deepOrangeAccent,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -106,10 +106,12 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                             textInputAction: TextInputAction.next,
                             validator: ((value) {
                               if (value!.length < 10) {
-                                return "Ten Digits Required";
+                                return AppLocalizations.of(context)!
+                                    .tenDigitsRequired;
                               }
                               if (value.length > 10) {
-                                return "Ten Digits Required";
+                                return AppLocalizations.of(context)!
+                                    .tenDigitsRequired;
                               }
                               return null;
                             }),
@@ -120,7 +122,7 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                               });
                             },
                             decoration: InputDecoration(
-                                hintText: "Phone",
+                                hintText: AppLocalizations.of(context)!.phone,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: const BorderSide(
@@ -142,7 +144,7 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                       stateController: _stateController,
                       postalCodeController: _postalCodeController,
                       countryController: _countryController,
-                      label: "Address",
+                      label: AppLocalizations.of(context)!.address,
                       validate: isFormComplete),
                   const SizedBox(height: 20),
                   SubmitButton(
@@ -157,7 +159,7 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                         _countryController.text,
                       );
                     },
-                    text: "Save To Profile",
+                    text: AppLocalizations.of(context)!.saveProfile,
                     isDisabled: !isValidate,
                   ),
                   const SizedBox(height: 70),

@@ -96,8 +96,13 @@
 
     "required": "Requerido",
     "tenDigitsRequired": "Se Requiren 10 Dígitos",
+    "pleaseEnterYourEmail": "Ingresa tu correo electrónico",
 
-    "congratulations": "Felicitaciones!",
+    "congratulations": "Felicidades!",
+    "youHaveSuccessfullySignedUp": "Te has registrado exitosamente",
+
+    "resetPassword": "Reestablecer Contraseña",
+    "resetPasswordDescription": "Introduce la dirección de correo electrónico asociada a tu cuenta. Recibirás un enlace para restablecer tu contraseña a la dirección de correo electrónico ingresada.",
 
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",

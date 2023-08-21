@@ -76,9 +76,9 @@ class _RegistrationCongratulationPageState
           ),
         ),
         const SizedBox(height: 10),
-        const Text(
-          'You have successfully signed up.',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.youHaveSuccessfullySignedUp,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             fontFamily: 'Montserrat',

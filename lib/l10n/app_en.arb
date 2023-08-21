@@ -152,8 +152,13 @@
 
     "required": "Required",
     "tenDigitsRequired": "Ten Digits Required",
+    "pleaseEnterYourEmail": "Please enter your email",
 
     "congratulations": "Congratulations!",
+    "youHaveSuccessfullySignedUp": "You have successfully signed up",
+
+    "resetPassword": "Reset Password",
+    "resetPasswordDescription": "Enter the email address associated with your account. A link to reset your password will be sent to your email address.",
 
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",
