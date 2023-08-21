@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/styles/theme_colors.dart';
 
@@ -16,7 +17,7 @@ class _WorkerSearchBarState extends State<WorkerSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ThemeColors.primaryThemeColor,
+      color: ThemeColors.searchBarPrimaryThemeColor,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Column(
@@ -32,7 +33,8 @@ class _WorkerSearchBarState extends State<WorkerSearchBar> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Position, work area or company',
+                    hintText: AppLocalizations.of(context)!
+                        .workerSearchBarInput1Placeholder,
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.close),
@@ -59,7 +61,8 @@ class _WorkerSearchBarState extends State<WorkerSearchBar> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Location',
+                    hintText: AppLocalizations.of(context)!
+                        .workerSearchBarInput2Placeholder,
                     prefixIcon: const Icon(Icons.location_on),
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.close),
@@ -87,14 +90,15 @@ class _WorkerSearchBarState extends State<WorkerSearchBar> {
                     // Action for the button
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: ThemeColors.secondaryThemeColor, // Red color
+                    primary:
+                        ThemeColors.searchBarSecondaryThemeColor, // Red color
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      'Search Jobs',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      AppLocalizations.of(context)!.searchJobs,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                   ),
                 ),

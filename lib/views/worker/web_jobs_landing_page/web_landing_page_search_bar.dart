@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/job_posts_provider.dart';
 import '../../../services/responsive.dart';
@@ -46,7 +47,7 @@ class _WebSearchBarState extends State<WebSearchBar> {
 
   Widget _buildMobileSearchBar() {
     return Container(
-      color: ThemeColors.primaryThemeColor,
+      color: ThemeColors.searchBarPrimaryThemeColor,
       height: MediaQuery.of(context).size.height * 0.35,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 8.0.h),
@@ -56,9 +57,15 @@ class _WebSearchBarState extends State<WebSearchBar> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildSearchField(_searchController1, searchName),
+              _buildSearchField(
+                  _searchController1,
+                  AppLocalizations.of(context)!
+                      .workerSearchBarInput2Placeholder),
               SizedBox(height: 15.h),
-              _buildSearchField(_searchController2, 'Location'),
+              _buildSearchField(
+                  _searchController2,
+                  AppLocalizations.of(context)!
+                      .workerSearchBarInput2Placeholder),
               SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -79,16 +86,18 @@ class _WebSearchBarState extends State<WebSearchBar> {
 
   Widget _buildDesktopSearchBar() {
     return Container(
-      color: ThemeColors.primaryThemeColor,
+      color: ThemeColors.searchBarPrimaryThemeColor,
       height: 150,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildSearchField(_searchController1, searchName),
+          _buildSearchField(_searchController1,
+              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder),
           const SizedBox(width: 20.0),
-          _buildSearchField(_searchController2, 'Location'),
+          _buildSearchField(_searchController2,
+              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder),
           const SizedBox(width: 20.0),
           _buildSearchButton(),
           const SizedBox(width: 10.0),
@@ -174,7 +183,8 @@ class _WebSearchBarState extends State<WebSearchBar> {
           });
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: ThemeColors.secondaryThemeColor, // Red color
+          backgroundColor:
+              ThemeColors.searchBarSecondaryThemeColor, // Red color
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -187,7 +197,7 @@ class _WebSearchBarState extends State<WebSearchBar> {
                   ),
                 )
               : Text(
-                  buttonLabel,
+                  AppLocalizations.of(context)!.searchJobs,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: fontSize,

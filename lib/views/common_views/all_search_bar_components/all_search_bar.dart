@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
@@ -39,11 +40,13 @@ class _AllSearchBarState extends State<AllSearchBar> {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     if (up.userRole == 'Company') {
-      buttonLabel = 'Search Workers';
-      searchName = 'Position, Work Area or Company';
+      buttonLabel = AppLocalizations.of(context)!.searchWorkers;
+      searchName =
+          AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
     } else {
-      buttonLabel = 'Search Jobs';
-      searchName = 'Company Name, Skill or Job Title';
+      buttonLabel = AppLocalizations.of(context)!.searchJobs;
+      searchName =
+          AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
     }
     return Responsive(
       mobile: _buildMobileSearchBar(),
@@ -53,7 +56,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
 
   Widget _buildMobileSearchBar() {
     return Container(
-      color: ThemeColors.primaryThemeColor,
+      color: ThemeColors.searchBarPrimaryThemeColor,
       height: MediaQuery.of(context).size.height * 0.35,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 8.0.h),
@@ -65,7 +68,10 @@ class _AllSearchBarState extends State<AllSearchBar> {
             children: [
               _buildSearchField(_searchController1, searchName),
               SizedBox(height: 15.h),
-              _buildSearchField(_searchController2, 'Location'),
+              _buildSearchField(
+                  _searchController2,
+                  AppLocalizations.of(context)!
+                      .workerSearchBarInput2Placeholder),
               SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +92,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
 
   Widget _buildDesktopSearchBar() {
     return Container(
-      color: ThemeColors.primaryThemeColor,
+      color: ThemeColors.searchBarPrimaryThemeColor,
       height: 150,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
@@ -95,7 +101,8 @@ class _AllSearchBarState extends State<AllSearchBar> {
         children: [
           _buildSearchField(_searchController1, searchName),
           const SizedBox(width: 20.0),
-          _buildSearchField(_searchController2, 'Location'),
+          _buildSearchField(_searchController2,
+              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder),
           const SizedBox(width: 20.0),
           _buildSearchButton(),
           const SizedBox(width: 10.0),
@@ -190,7 +197,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
           });
         },
         style: ElevatedButton.styleFrom(
-          primary: ThemeColors.secondaryThemeColor, // Red color
+          primary: ThemeColors.searchBarSecondaryThemeColor, // Red color
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -203,7 +210,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
                   ),
                 )
               : Text(
-                  buttonLabel,
+                  AppLocalizations.of(context)!.searchJobs,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: fontSize,

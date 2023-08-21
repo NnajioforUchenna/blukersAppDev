@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../services/responsive.dart';
@@ -83,7 +84,7 @@ class _BasicInformationState extends State<BasicInformation> {
                         },
                         validator: ((value) {
                           if (value!.isEmpty) {
-                            return "Required";
+                            return AppLocalizations.of(context)!.required;
                           } else {
                             return null;
                           }
