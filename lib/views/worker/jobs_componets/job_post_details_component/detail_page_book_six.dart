@@ -1,8 +1,8 @@
-import 'package:bulkers/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common_files/constants.dart';
+import '../../../../models/job_post.dart';
 
 class DetailPageBlockSix extends StatelessWidget {
   final JobPost jobPost;

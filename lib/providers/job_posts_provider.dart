@@ -18,7 +18,7 @@ class JobPostsProvider with ChangeNotifier {
   JobPost? selectedJobPost;
 
   Map<String, JobPost> get jobPosts => _jobPosts;
-  bool isReal = false;
+  bool isReal = true;
 
   List<JobPost> selectedJobPosts = [];
   int jobPostCurrentPageIndex = 0;
