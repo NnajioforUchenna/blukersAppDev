@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../services/responsive.dart';
@@ -23,8 +24,8 @@ class WorkerTimeline extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'JOIN NOW!',
-                style: TextStyle(
+                AppLocalizations.of(context)!.companyJourneyTitle,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: ThemeColors.primaryThemeColor,
@@ -38,21 +39,56 @@ class WorkerTimeline extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             itemCount: workerRecords.length,
             itemBuilder: (context, index) {
+              String title = "";
+              String description = "";
+              if (index == 0) {
+                title = AppLocalizations.of(context)!.companyJourneyStep1Title;
+                description =
+                    AppLocalizations.of(context)!.companyJourneyStep1Text;
+              }
+              if (index == 1) {
+                title = AppLocalizations.of(context)!.companyJourneyStep2Title;
+                description =
+                    AppLocalizations.of(context)!.companyJourneyStep2Text;
+              }
+              if (index == 2) {
+                title = AppLocalizations.of(context)!.companyJourneyStep3Title;
+                description =
+                    AppLocalizations.of(context)!.companyJourneyStep3Text;
+              }
+              if (index == 3) {
+                title = AppLocalizations.of(context)!.companyJourneyStep4Title;
+                description =
+                    AppLocalizations.of(context)!.companyJourneyStep4Text;
+              }
               final record = workerRecords[index];
               return MyWorkerTimeLine(
                 // You might need to create or adapt MyJobTimeLine for worker flow
                 isFirst: index == 0,
                 isLast: index == workerRecords.length - 1,
                 isPast: index <= currentStep,
-                title: record['title']!,
-                briefDescription: record['description']!,
+                // title: record['title']!,
+                // briefDescription: record['description']!,
+                title: title,
+                briefDescription: description,
               );
             },
           ),
           const SizedBox(height: 10),
-          if (currentStep == 0) BuildButton(width, "Register", context),
+          if (currentStep == 0)
+            BuildButton(
+              width,
+              currentStep,
+              AppLocalizations.of(context)!.register,
+              context,
+            ),
           if (currentStep == 1)
-            BuildButton(width, "Create Company Profile", context),
+            BuildButton(
+              width,
+              currentStep,
+              AppLocalizations.of(context)!.createCompanyProfile,
+              context,
+            ),
           const SizedBox(height: 20),
         ],
       ),
@@ -82,7 +118,7 @@ class WorkerTimeline extends StatelessWidget {
   ];
 }
 
-Widget BuildButton(double width, String text, context) {
+Widget BuildButton(double width, int currentStep, String text, context) {
   return Center(
     child: Container(
       width: width < 600 ? 250 : 400, // 300 on mobile, 500 on web or tablet
@@ -97,9 +133,14 @@ Widget BuildButton(double width, String text, context) {
         ),
         onPressed: () {
           // Add the functionality here
-          if (text == "Register") {
+          // if (text == "Register") {
+          //   Navigator.pushNamed(context, '/register');
+          // } else if (text == "Create Company Profile") {
+          //   Navigator.pushNamed(context, '/createCompanyProfile');
+          // }
+          if (currentStep == 0) {
             Navigator.pushNamed(context, '/register');
-          } else if (text == "Create Company Profile") {
+          } else if (currentStep == 1) {
             Navigator.pushNamed(context, '/createCompanyProfile');
           }
         }, // Add the functionality here

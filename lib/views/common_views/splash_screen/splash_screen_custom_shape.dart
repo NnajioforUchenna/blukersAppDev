@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashScreenCustomShape extends StatelessWidget {
   final double width;
@@ -23,7 +24,7 @@ class SplashScreenCustomShape extends StatelessWidget {
     return Center(
       child: CustomPaint(
         painter: MyCustomPainter(width, height, workerTitle, workerSubtitle,
-            companyTitle, companySubtitle),
+            companyTitle, companySubtitle, context),
         child: Container(
           width: width,
           height: height,
@@ -40,9 +41,16 @@ class MyCustomPainter extends CustomPainter {
   final String workerSubtitle;
   final String companyTitle;
   final String companySubtitle;
+  dynamic context;
 
-  MyCustomPainter(this.width, this.height, this.workerTitle,
-      this.workerSubtitle, this.companyTitle, this.companySubtitle);
+  MyCustomPainter(
+      this.width,
+      this.height,
+      this.workerTitle,
+      this.workerSubtitle,
+      this.companyTitle,
+      this.companySubtitle,
+      this.context);
 
   Path createRoundedRectPath(double x, double y) {
     final double rectWidth = width * 0.5;
@@ -147,7 +155,7 @@ class MyCustomPainter extends CustomPainter {
     // Centered "Worker" text
     final TextPainter workerTextPainter = TextPainter(
       text: TextSpan(
-          text: 'Worker',
+          text: AppLocalizations.of(context)!.worker,
           style: GoogleFonts.montserrat(
             color: Colors.white,
             fontWeight: FontWeight.w700,
@@ -172,7 +180,7 @@ class MyCustomPainter extends CustomPainter {
     // Centered "Company" text
     final TextPainter companyTextPainter = TextPainter(
       text: TextSpan(
-          text: 'Company',
+          text: AppLocalizations.of(context)!.company,
           style: GoogleFonts.montserrat(
             color: Colors.white,
             fontWeight: FontWeight.w700,

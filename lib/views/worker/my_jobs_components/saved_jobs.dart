@@ -2,6 +2,7 @@ import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
@@ -43,14 +44,15 @@ class _SavedJobsState extends State<SavedJobs> {
           List<JobPost> jobPosts = snapshot.data!;
           return jobPosts.isEmpty
               ? IconText404(
-                  text: "No job posts found",
+                  text: AppLocalizations.of(context)!.youHaveNotSavedAnyJobPost,
                   icon: UniconsLine.file_bookmark_alt)
               : CompleteJobPostWidget(
                   jobPosts: snapshot.data!,
                 );
         }
         return IconText404(
-            text: "No job posts found", icon: UniconsLine.file_bookmark_alt);
+            text: AppLocalizations.of(context)!.youHaveNotSavedAnyJobPost,
+            icon: UniconsLine.file_bookmark_alt);
       },
     );
   }
