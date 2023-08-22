@@ -52,11 +52,67 @@
     "transportation": "Transporte",
     "warehousing": "Almacenamiento",
 
+    "agriculturaltechnician": "Técnico Agrícola",
+    "cropconsultant": "Consultor de Cultivos",
+    "farmer": "Agricultor",
+    "farmlaborer": "Trabajador Agrícola",
+
+    "deckhand": "Marinero",
+    "fisherman": "Pescador",
+    "fishingvesselcaptain": "Capitán de Barco de Pesca",
+    "fishprocessingworker": "Trabajador de Procesamiento de Pescado",
+
     "carpenter": "Carpintero",
     "electrician": "Electricista",
     "mason": "Masón",
     "painter": "Pintor",
     "plumber": "Plomero",
+
+    "cleaner": "Limpiador",
+    "floortechnician": "Técnico de Piso",
+    "housekeepingsupervisor": "Supervisor de Limpieza",
+    "janitor": "Conserje",
+
+    "bartender": "Camarero",
+    "cashier": "Cajero",
+    "cook": "Cocinero",
+    "cookhelper": "Ayudante de Cocina",
+    "dishwasher": "Lavavajillas",
+    "host": "Anfitrión",
+
+    "foodtechnologist": "Tecnólogo de Comida",
+    "packagingoperator": "Operador de Embalaje",
+    "productionsupervisor": "Supervisor de Producción",
+    "qualityassuranceinspector": "Inspector de Aseguramiento de la Calidad",
+
+    "forester": "Guardabosque",
+    "loggingequipmentoperator": "Operador de Equipos Madereros",
+    "timbercruiser": "Crucero de Madera",
+    "treeplanter": "Plantador de Arboles",
+
+    "pipefitter": "Instalador de Tuberías",
+    "sandblaster": "Mezclador de Arena",
+    "structuralwelder": "Soldador Estructural",
+
+    "gardener": "Jardinero",
+    "irrigationspecialist": "Especialista en Riego",
+    "landscapedesigner": "Diseñador de Paisajes",
+    "treesurgeon": "Podador de Arboles",
+
+    "assemblylineworker": "Trabajador de Línea de Montaje",
+    "machineoperator": "Operador de Maquina",
+    "qualitycontrolinspector": "Inspector de Control de Calidad",
+
+    "courier": "Mensajero",
+    "deliverydriver": "Conductor de Entrega",
+    "dispatcher": "Despachador",
+    "taxidriver": "Conductor de Taxi",
+    "truckdriver": "Conductor de Camión",
+
+    "forkliftoperator": "Operador de Carretilla Elevadora",
+    "inventoryclerk": "Empleado de Inventario",
+    "packer": "Envasador",
+    "warehousemanager": "Jefe de Almacén",
 
     "selectAJobPosition": "Selecciona un trabajo",
     "salary": "Salario",
