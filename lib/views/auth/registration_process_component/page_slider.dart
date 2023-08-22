@@ -1,3 +1,4 @@
+import 'package:blukers/services/make_responsive_web.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,8 +36,8 @@ class _PageSliderState extends State<PageSlider> {
     if (_currentPageIndex < 3) {
       _pageController.animateToPage(
         _currentPageIndex + 1,
-        duration:
-            Duration(seconds: 1), // Set the animation duration to 5 seconds
+        duration: const Duration(
+            seconds: 1), // Set the animation duration to 5 seconds
         curve: Curves.easeInOut,
       );
     }
@@ -57,10 +58,16 @@ class _PageSliderState extends State<PageSlider> {
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          const LoginInformation(),
-          BasicInformation(),
-          const ContantInformationPage(),
-          RegistrationCongratulationPage(),
+          const MakeResponsiveWeb(
+              image: AssetImage('assets/images/createAccount.png'),
+              child: LoginInformation()),
+          MakeResponsiveWeb(
+              image: const AssetImage('assets/images/basicInfo.png'),
+              child: BasicInformation()),
+          const MakeResponsiveWeb(
+              image: AssetImage('assets/images/contactInfo.png'),
+              child: ContantInformationPage()),
+          const RegistrationCongratulationPage(),
         ],
       ),
     );

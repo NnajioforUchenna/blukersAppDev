@@ -60,21 +60,6 @@ class CompanyTimeLine extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(8),
       constraints: const BoxConstraints(maxHeight: 140),
-      decoration: BoxDecoration(
-          // color: ThemeColors.primaryThemeColor,
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.grey,
-          //     offset: Offset(0.0, 1.0), //(x,y)
-          //     blurRadius: 6.0,
-          //   ),
-          // ],
-          // borderRadius: BorderRadius.circular(10),
-          // border: Border.all(
-          //   color: ThemeColors.secondaryThemeColor,
-          //   width: 2,
-          // )
-          ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         controller: _scrollController,

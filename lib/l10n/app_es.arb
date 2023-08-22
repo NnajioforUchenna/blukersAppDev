@@ -34,6 +34,8 @@
     "dontHaveAnAccount": "¿No tienes una cuenta?",
 
     "createYourAccount": "Crea tu cuenta",
+    "createYourProfile": "Crea tu perfil",
+    "createCompanyProfile": "Crear perfil de compańía",
 
     "selectYourIndustriesAndJobs": "Selecciona tus industrias y trabajos",
 
@@ -50,11 +52,67 @@
     "transportation": "Transporte",
     "warehousing": "Almacenamiento",
 
+    "agriculturaltechnician": "Técnico Agrícola",
+    "cropconsultant": "Consultor de Cultivos",
+    "farmer": "Agricultor",
+    "farmlaborer": "Trabajador Agrícola",
+
+    "deckhand": "Marinero",
+    "fisherman": "Pescador",
+    "fishingvesselcaptain": "Capitán de Barco de Pesca",
+    "fishprocessingworker": "Trabajador de Procesamiento de Pescado",
+
     "carpenter": "Carpintero",
     "electrician": "Electricista",
     "mason": "Masón",
     "painter": "Pintor",
     "plumber": "Plomero",
+
+    "cleaner": "Limpiador",
+    "floortechnician": "Técnico de Piso",
+    "housekeepingsupervisor": "Supervisor de Limpieza",
+    "janitor": "Conserje",
+
+    "bartender": "Camarero",
+    "cashier": "Cajero",
+    "cook": "Cocinero",
+    "cookhelper": "Ayudante de Cocina",
+    "dishwasher": "Lavavajillas",
+    "host": "Anfitrión",
+
+    "foodtechnologist": "Tecnólogo de Comida",
+    "packagingoperator": "Operador de Embalaje",
+    "productionsupervisor": "Supervisor de Producción",
+    "qualityassuranceinspector": "Inspector de Aseguramiento de la Calidad",
+
+    "forester": "Guardabosque",
+    "loggingequipmentoperator": "Operador de Equipos Madereros",
+    "timbercruiser": "Crucero de Madera",
+    "treeplanter": "Plantador de Arboles",
+
+    "pipefitter": "Instalador de Tuberías",
+    "sandblaster": "Mezclador de Arena",
+    "structuralwelder": "Soldador Estructural",
+
+    "gardener": "Jardinero",
+    "irrigationspecialist": "Especialista en Riego",
+    "landscapedesigner": "Diseñador de Paisajes",
+    "treesurgeon": "Podador de Arboles",
+
+    "assemblylineworker": "Trabajador de Línea de Montaje",
+    "machineoperator": "Operador de Maquina",
+    "qualitycontrolinspector": "Inspector de Control de Calidad",
+
+    "courier": "Mensajero",
+    "deliverydriver": "Conductor de Entrega",
+    "dispatcher": "Despachador",
+    "taxidriver": "Conductor de Taxi",
+    "truckdriver": "Conductor de Camión",
+
+    "forkliftoperator": "Operador de Carretilla Elevadora",
+    "inventoryclerk": "Empleado de Inventario",
+    "packer": "Envasador",
+    "warehousemanager": "Jefe de Almacén",
 
     "selectAJobPosition": "Selecciona un trabajo",
     "salary": "Salario",
@@ -76,6 +134,75 @@
     "myJobs": "Mis Trabajos",
     "youHaveNotSavedAnyWorker": "No has guardado ningún trabajador",
     "youHaveNotCreatedAnyJobPost": "No has creado ningún trabajo",
+
+    "loadingSavedWorkers": "Cargando trabajadores guardados",
+
+    "basicInformation": "Información Básica",
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "description": "Descripción",
+    "saveProfile": "Guardar Perfil",
+
+    "contactInformation": "Información de Contacto",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "street": "Calle",
+    "city": "Ciudad",
+    "state": "Estado",
+    "postalCode": "Código Postal",
+    "country": "País",
+
+    "companyName": "Nombre de la Compañía",
+
+    "required": "Requerido",
+    "tenDigitsRequired": "Se Requiren 10 Dígitos",
+    "pleaseEnterYourEmail": "Ingresa tu correo electrónico",
+
+    "congratulations": "Felicidades!",
+    "youHaveSuccessfullySignedUp": "Te has registrado exitosamente",
+
+    "resetPassword": "Reestablecer Contraseña",
+    "resetPasswordDescription": "Introduce la dirección de correo electrónico asociada a tu cuenta. Recibirás un enlace para restablecer tu contraseña a la dirección de correo electrónico ingresada.",
+
+    "skip": "Omitir",
+    "newJob": "Nuevo",
+
+    "joinNow": "Únete ya!",
+    
+    "companyJourneyTitle": "Únete ya!",
+    "companyJourneyStep1Title": "Regístrate",
+    "companyJourneyStep1Text": "Únete hoy y descubre nuevas oportunidades",
+    "companyJourneyStep2Title": "Crea el Perfil de tu Compañía",
+    "companyJourneyStep2Text": "Haz crecer tu marca en nuestra plataforma",
+    "companyJourneyStep3Title": "Conecta con Trabajadores",
+    "companyJourneyStep3Text": "Ve y chatea con cientos de profesionales",
+    "companyJourneyStep4Title": "Contrata",
+    "companyJourneyStep4Text": "Envía ofertas a los candidatos correctos",
+
+    "workerJourneyTitle": "El Trabajo Soñado!",
+    "workerJourneyStep1Title": "Regístrate",
+    "workerJourneyStep1Text": "Obtén acceso a cientos de oportunidades de trabajo",
+    "workerJourneyStep2Title": "Crea Tu Perfil",
+    "workerJourneyStep2Text": "Muestra tus habilidades y se descubierto por empleadores",
+    "workerJourneyStep3Title": "Aplica o Guarda Trabajos",
+    "workerJourneyStep3Text": "Lista larga de trabajos soñados a solo un clic de distancia",
+    "workerJourneyStep4Title": "Se Contratado",
+    "workerJourneyStep4Text": "Comienza el trabajo de tus sueños, se contratado por empresas top",
+
+    "s1WTitle": "Busca",
+    "s1WSubtitle": "Explora oportunidades y encuentra el trabajo perfecto que coincida con tus habilidades y ambiciones.",
+    "s1CTitle": "Publica",
+    "s1CSubtitle": "Publica tu trabajo y conéctate con candidatos calificados hoy.",
+    
+    "s2WTitle": "Aplica",
+    "s2WSubtitle": "Envía tu solicitud para dar el primer salto hacia tu carrera.",
+    "s2CTitle": "Revisa",
+    "s2CSubtitle": "Revisa candidatos fácilmente y toma decisiones informadas.",
+
+    "s3WTitle": "Se Contratado",
+    "s3WSubtitle": "Completa la entrevista y muestra tus habilidades.",
+    "s3CTitle": "Contrata",
+    "s3CSubtitle": "Realiza la contratación correcta y elije al Candidato perfecto.",
 
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",

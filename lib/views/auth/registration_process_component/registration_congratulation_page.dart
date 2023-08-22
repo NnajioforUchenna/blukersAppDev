@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/user_provider.dart';
 
@@ -65,9 +66,9 @@ class _RegistrationCongratulationPageState
           height: 300,
         ),
         const SizedBox(height: 10),
-        const Text(
-          'Congratulations!',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.congratulations,
+          style: const TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,
             fontFamily: 'Montserrat',
@@ -75,9 +76,9 @@ class _RegistrationCongratulationPageState
           ),
         ),
         const SizedBox(height: 10),
-        const Text(
-          'You have successfully signed up.',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.youHaveSuccessfullySignedUp,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             fontFamily: 'Montserrat',

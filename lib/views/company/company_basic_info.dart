@@ -7,6 +7,7 @@ import 'package:blukers/views/company/profile_components/company_additional_prof
 import 'package:blukers/views/company/profile_components/company_basic_profile_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:blukers/views/common_views/components/index.dart';
 
@@ -231,7 +232,7 @@ class _CompanyBasicInfoState extends State<CompanyBasicInfo> {
               height: 30,
             ),
             ProfileSection(
-              heading: "Basic Information",
+              heading: AppLocalizations.of(context)!.basicInformation,
               icon: Icons.edit_outlined,
               showBasicInfo: showBasicInfo,
               showEditIcon: false,

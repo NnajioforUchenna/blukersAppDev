@@ -2,8 +2,10 @@ import 'package:blukers/views/common_views/address_form/address_form.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/user_provider.dart';
+import '../../../services/responsive.dart';
 import '../common_widget/auth_input.dart';
 import '../common_widget/submit_button.dart';
 
@@ -44,129 +46,128 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
     final height = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
     String initialSelection = up.userRole == 'company' ? '+1' : '+52';
-    return SizedBox(
-      height: height,
-      child: Stack(
-        children: [
-          Positioned(
-            top: -MediaQuery.of(context).size.height * .15,
-            right: -MediaQuery.of(context).size.width * .4,
-            child: Container(),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Contact Information Page",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.deepOrangeAccent,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25,
-                      ),
+    return Container(
+      width: Responsive.isDesktop(context)
+          ? MediaQuery.of(context).size.width * 0.3
+          : MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Form(
+        key: _formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height * 0.7),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.contactInformation,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.deepOrangeAccent,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      height: 1.25,
                     ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            height: 50,
-                            child: AuthInput(
-                              child: Center(
-                                child: CountryCodePicker(
-                                  onChanged: (value) {
-                                    ext = value.toString();
-                                    _onCountryChange(value);
-                                  },
-                                  initialSelection: initialSelection,
-                                  favorite: const ['+1', '+52', 'FR'],
-                                  showCountryOnly: false,
-                                  showOnlyCountryWhenClosed: false,
-                                  alignLeft: false,
-                                ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          height: 50,
+                          child: AuthInput(
+                            child: Center(
+                              child: CountryCodePicker(
+                                onChanged: (value) {
+                                  ext = value.toString();
+                                  _onCountryChange(value);
+                                },
+                                initialSelection: initialSelection,
+                                favorite: const ['+1', '+52', 'FR'],
+                                showCountryOnly: false,
+                                showOnlyCountryWhenClosed: false,
+                                alignLeft: false,
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 20),
-                        Expanded(
-                          flex: 4,
-                          child: AuthInput(
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              textInputAction: TextInputAction.next,
-                              validator: ((value) {
-                                if (value!.length < 10) {
-                                  return "Ten Digits Required";
-                                }
-                                if (value.length > 10) {
-                                  return "Ten Digits Required";
-                                }
-                                return null;
-                              }),
-                              controller: _phoneController,
-                              onChanged: (value) {
-                                setState(() {
-                                  isFormComplete();
-                                });
-                              },
-                              decoration: InputDecoration(
-                                  hintText: "Phone",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: const BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        flex: 4,
+                        child: AuthInput(
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            validator: ((value) {
+                              if (value!.length < 10) {
+                                return AppLocalizations.of(context)!
+                                    .tenDigitsRequired;
+                              }
+                              if (value.length > 10) {
+                                return AppLocalizations.of(context)!
+                                    .tenDigitsRequired;
+                              }
+                              return null;
+                            }),
+                            controller: _phoneController,
+                            onChanged: (value) {
+                              setState(() {
+                                isFormComplete();
+                              });
+                            },
+                            decoration: InputDecoration(
+                                hintText: AppLocalizations.of(context)!.phone,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                    width: 0,
+                                    style: BorderStyle.none,
                                   ),
-                                  fillColor: Colors.white,
-                                  filled: true),
-                            ),
+                                ),
+                                fillColor: Colors.white,
+                                filled: true),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                    AddressForm(
-                        streetController: _streetController,
-                        cityController: _cityController,
-                        stateController: _stateController,
-                        postalCodeController: _postalCodeController,
-                        countryController: _countryController,
-                        label: "Address",
-                        validate: isFormComplete),
-                    const SizedBox(height: 20),
-                    SubmitButton(
-                      onTap: () {
-                        up.addingContactInformation(
-                          ext,
-                          _phoneController.text,
-                          _streetController.text,
-                          _cityController.text,
-                          _stateController.text,
-                          _postalCodeController.text,
-                          _countryController.text,
-                        );
-                      },
-                      text: "Save To Profile",
-                      isDisabled: !isValidate,
-                    ),
-                    const SizedBox(height: 70),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  AddressForm(
+                      streetController: _streetController,
+                      cityController: _cityController,
+                      stateController: _stateController,
+                      postalCodeController: _postalCodeController,
+                      countryController: _countryController,
+                      label: AppLocalizations.of(context)!.address,
+                      validate: isFormComplete),
+                  const SizedBox(height: 20),
+                  SubmitButton(
+                    onTap: () {
+                      up.addingContactInformation(
+                        ext,
+                        _phoneController.text,
+                        _streetController.text,
+                        _cityController.text,
+                        _stateController.text,
+                        _postalCodeController.text,
+                        _countryController.text,
+                      );
+                    },
+                    text: AppLocalizations.of(context)!.saveProfile,
+                    isDisabled: !isValidate,
+                  ),
+                  const SizedBox(height: 70),
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

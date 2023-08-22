@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../landing_page_components/landing_page.dart';
 import 'splash_screen_page.dart';
@@ -47,42 +48,58 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (page) {
-                setState(() {
-                  _currentPage = page;
-                });
-                _startTimer();
-              },
-              children: const [
-                SplashScreenPage(
-                  workerTitle: 'Search',
-                  workerSubtitle:
-                      'Explore Opportunities and find the perfect job that matches your skills and ambitions.',
-                  companyTitle: 'Post',
-                  companySubtitle:
-                      'Post your job and connect with qualified candidates today.',
-                ),
-                SplashScreenPage(
-                  workerTitle: 'Apply',
-                  workerSubtitle:
-                      'Submit Your Application to Take the first leap towards your career.',
-                  companyTitle: 'Review',
-                  companySubtitle:
-                      'Review Candidates easily and make informed decisions.',
-                ),
-                SplashScreenPage(
-                  workerTitle: 'Get Hired',
-                  workerSubtitle: 'Ace The Interview and Showcase your Skills.',
-                  companyTitle: 'Hire',
-                  companySubtitle:
-                      'Make the right hire with confidence and choose the perfect Candidate.',
-                ),
-              ],
-            ),
+          PageView(
+            controller: _pageController,
+            onPageChanged: (page) {
+              setState(() {
+                _currentPage = page;
+              });
+              _startTimer();
+            },
+            // children: const [
+            //   SplashScreenPage(
+            //     workerTitle: 'Search',
+            //     workerSubtitle:
+            //         'Explore Opportunities and find the perfect job that matches your skills and ambitions.',
+            //     companyTitle: 'Post',
+            //     companySubtitle:
+            //         'Post your job and connect with qualified candidates today.',
+            //   ),
+            //   SplashScreenPage(
+            //     workerTitle: 'Apply',
+            //     workerSubtitle:
+            //         'Submit Your Application to Take the first leap towards your career.',
+            //     companyTitle: 'Review',
+            //     companySubtitle:
+            //         'Review Candidates easily and make informed decisions.',
+            //   ),
+            //   SplashScreenPage(
+            //     workerTitle: 'Get Hired',
+            //     workerSubtitle: 'Ace The Interview and Showcase your Skills.',
+            //     companyTitle: 'Hire',
+            //     companySubtitle:
+            //         'Make the right hire with confidence and choose the perfect Candidate.',
+            //   ),
+            children: [
+              SplashScreenPage(
+                workerTitle: AppLocalizations.of(context)!.s1WTitle,
+                workerSubtitle: AppLocalizations.of(context)!.s1WSubtitle,
+                companyTitle: AppLocalizations.of(context)!.s1CTitle,
+                companySubtitle: AppLocalizations.of(context)!.s1CSubtitle,
+              ),
+              SplashScreenPage(
+                workerTitle: AppLocalizations.of(context)!.s2WTitle,
+                workerSubtitle: AppLocalizations.of(context)!.s2WSubtitle,
+                companyTitle: AppLocalizations.of(context)!.s2CTitle,
+                companySubtitle: AppLocalizations.of(context)!.s2CSubtitle,
+              ),
+              SplashScreenPage(
+                workerTitle: AppLocalizations.of(context)!.s3WTitle,
+                workerSubtitle: AppLocalizations.of(context)!.s3WSubtitle,
+                companyTitle: AppLocalizations.of(context)!.s3CTitle,
+                companySubtitle: AppLocalizations.of(context)!.s3CSubtitle,
+              ),
+            ],
           ),
           Positioned(
             bottom: 20,

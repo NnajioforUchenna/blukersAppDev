@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
 import 'package:blukers/utils/styles/index.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginOrRegister extends StatelessWidget {
   const LoginOrRegister({Key? key}) : super(key: key);

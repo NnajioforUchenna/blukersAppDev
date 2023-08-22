@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoadingInterestingWorkers extends StatelessWidget {
   const LoadingInterestingWorkers({super.key});
@@ -28,17 +29,17 @@ class LoadingInterestingWorkers extends StatelessWidget {
               ),
             ],
           ),
-          child: const Column(
+          child: Column(
             mainAxisSize:
                 MainAxisSize.min, // So it doesn't take the full height
             children: <Widget>[
-              CircularProgressIndicator(
+              const CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Text(
-                'Getting Interesting Workers',
-                style: TextStyle(
+                AppLocalizations.of(context)!.loadingSavedWorkers,
+                style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,

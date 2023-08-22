@@ -120,10 +120,15 @@ class UserProvider with ChangeNotifier {
       // Store the user data in the database.
       UserDataProvider.registerUserToDatabase(appUser);
       //
+
+      // call a function after 30 seconds
+
       if (!kIsWeb) {
-        await NotificationService.registerNotification(
-            _appUser!.uid, chatProvider);
-        NotificationService.configLocalNotification();
+        Future.delayed(Duration(seconds: 30), () async {
+          await NotificationService.registerNotification(
+              _appUser!.uid, chatProvider);
+          NotificationService.configLocalNotification();
+        });
       }
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
@@ -322,11 +327,15 @@ class UserProvider with ChangeNotifier {
       if (appUser4DB != null) {
         UserSharedPreferencesServices.create(appUser4DB);
       }
+
       if (!kIsWeb) {
-        await NotificationService.registerNotification(
-            _appUser!.uid, chatProvider);
-        NotificationService.configLocalNotification();
+        Future.delayed(const Duration(seconds: 30), () async {
+          await NotificationService.registerNotification(
+              _appUser!.uid, chatProvider);
+          NotificationService.configLocalNotification();
+        });
       }
+
       notifyListeners();
 
       // Dismiss the loading indicator.
