@@ -35,9 +35,10 @@ class LoginOrRegister extends StatelessWidget {
                 color: ThemeColors.grey1ThemeColor,
               ),
               children: <TextSpan>[
-                const TextSpan(text: 'Please '),
+                // const TextSpan(text: 'Please '),
+                TextSpan(text: AppLocalizations.of(context)!.please + ' '),
                 TextSpan(
-                    text: 'Login',
+                    text: AppLocalizations.of(context)!.login2,
                     style:
                         const TextStyle(color: ThemeColors.primaryThemeColor),
                     recognizer: TapGestureRecognizer()
@@ -47,9 +48,9 @@ class LoginOrRegister extends StatelessWidget {
                         Navigator.pushNamedAndRemoveUntil(
                             context, '/login', (Route<dynamic> route) => false);
                       }),
-                const TextSpan(text: ' or '),
+                TextSpan(text: ' ' + AppLocalizations.of(context)!.or + ' '),
                 TextSpan(
-                    text: 'Register',
+                    text: AppLocalizations.of(context)!.register,
                     style:
                         const TextStyle(color: ThemeColors.primaryThemeColor),
                     recognizer: TapGestureRecognizer()
@@ -60,7 +61,8 @@ class LoginOrRegister extends StatelessWidget {
                             (Route<dynamic> route) => false);
                       }),
                 const TextSpan(text: '\n'),
-                const TextSpan(text: 'to display this details.'),
+                TextSpan(
+                    text: AppLocalizations.of(context)!.toAccessYourProfile),
               ],
             ),
           )
