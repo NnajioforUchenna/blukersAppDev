@@ -17,6 +17,8 @@
     "chat": "Chat",
     "profile": "Profile",
     "loginRegister": "Login/Register",
+    "login": "Login",
+    "login2": "Login",
 
     "iAmA": "I am a",
     "iAmA2": "I am a",
@@ -203,6 +205,10 @@
     "s3WSubtitle": "Ace The Interview and Showcase your Skills.",
     "s3CTitle": "Hire",
     "s3CSubtitle": "Make the right hire with confidence and choose the perfect Candidate.",
+
+    "please": "Please",
+    "or": "or",
+    "toAccessYourProfile": "To access your profile",
 
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",

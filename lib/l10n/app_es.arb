@@ -17,6 +17,8 @@
     "chat": "Chat",
     "profile": "Perfil",
     "loginRegister": "Iniciar/Registro",
+    "login": "Iniciar Sesión",
+    "login2": "Inicia Sesión",
 
     "iAmA": "Soy un",
     "iAmA2": "Soy una",
@@ -203,6 +205,10 @@
     "s3WSubtitle": "Completa la entrevista y muestra tus habilidades.",
     "s3CTitle": "Contrata",
     "s3CSubtitle": "Realiza la contratación correcta y elije al Candidato perfecto.",
+
+    "please": "Por favor",
+    "or": "o",
+    "toAccessYourProfile": "Para acceder a tu perfil",
 
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",
