@@ -21,7 +21,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Only call clearSavedSettings() during testing to reset internal values.
- // await Upgrader.clearSavedSettings(); // REMOVE this for release builds
+  // await Upgrader.clearSavedSettings(); // REMOVE this for release builds
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -56,10 +56,12 @@ class MyApp extends StatelessWidget {
                 previous!..update(user.appUser)),
       ],
       child: UpgradeAlert(
-          upgrader: Upgrader(
-        //  durationUntilAlertAgain: Duration(seconds: 2),
-         // debugDisplayAlways: true,
-          debugLogging: true,
+        upgrader: Upgrader(
+          //  durationUntilAlertAgain: Duration(seconds: 2),
+          // debugDisplayAlways: true,
+          // debugLogging: true,
+          showIgnore: false,
+          showLater: false,
         ),
         child: ScreenUtilInit(
           designSize: const Size(360, 690),
