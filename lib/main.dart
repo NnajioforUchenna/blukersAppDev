@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
       ],
       child: UpgradeAlert(
         upgrader: Upgrader(
-          //  durationUntilAlertAgain: Duration(seconds: 2),
+          // durationUntilAlertAgain: Duration(seconds: 2),
           // debugDisplayAlways: true,
           // debugLogging: true,
           showIgnore: false,
