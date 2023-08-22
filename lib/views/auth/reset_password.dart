@@ -2,6 +2,7 @@ import 'package:blukers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'common_widget/company_logo.dart';
 import 'common_widget/submit_button.dart';
@@ -28,7 +29,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: MyAppBar(
-        title: "Reset Password",
+        title: AppLocalizations.of(context)!.resetPassword,
       ),
       body: Center(
         child: Container(
@@ -39,11 +40,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CompanyLogo(),
+              // CompanyLogo(),
               const SizedBox(height: 20),
-              const Text(
-                "Enter the email address associated with your account. A link to reset your password will be sent to your email address.",
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.resetPasswordDescription,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: ThemeColors.grey1ThemeColor,
@@ -64,7 +65,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return TextFormField(
       controller: emailController,
       decoration: InputDecoration(
-        labelText: "Email",
+        labelText: AppLocalizations.of(context)!.email,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -76,7 +77,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return "Please enter your email";
+          return AppLocalizations.of(context)!.pleaseEnterYourEmail;
         }
         // You can add additional email validation logic here if needed
         return null;
@@ -96,6 +97,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             up.resetPassword(context, emailController.text);
           }
         },
-        text: "Reset Password");
+        text: AppLocalizations.of(context)!.resetPassword);
   }
 }

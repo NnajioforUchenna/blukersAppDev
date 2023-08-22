@@ -1,6 +1,7 @@
 import 'package:blukers/views/common_views/address_form/show_suggestions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/industry_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
@@ -90,7 +91,7 @@ class _AddressFormState extends State<AddressForm> {
                   },
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    hintText: "Street",
+                    hintText: AppLocalizations.of(context)!.street,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(
@@ -113,15 +114,17 @@ class _AddressFormState extends State<AddressForm> {
             ],
           ),
           const SizedBox(height: 20),
-          _buildTextField("City", TextInputType.text, widget.cityController),
+          _buildTextField(AppLocalizations.of(context)!.city,
+              TextInputType.text, widget.cityController),
           const SizedBox(height: 20),
-          _buildTextField("State", TextInputType.text, widget.stateController),
+          _buildTextField(AppLocalizations.of(context)!.state,
+              TextInputType.text, widget.stateController),
           const SizedBox(height: 20),
-          _buildTextField(
-              "Postal Code", TextInputType.number, widget.postalCodeController),
+          _buildTextField(AppLocalizations.of(context)!.postalCode,
+              TextInputType.number, widget.postalCodeController),
           const SizedBox(height: 20),
-          _buildTextField(
-              "Country", TextInputType.text, widget.countryController),
+          _buildTextField(AppLocalizations.of(context)!.country,
+              TextInputType.text, widget.countryController),
         ],
       ),
     );

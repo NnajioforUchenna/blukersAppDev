@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../providers/job_posts_provider.dart';
 import '../../providers/user_provider.dart';
@@ -22,19 +23,23 @@ class MyJobs extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: const Text(
-              'Jobs',
-              style: TextStyle(
+            title: Text(
+              AppLocalizations.of(context)!.jobs,
+              style: const TextStyle(
                   color: ThemeColors.primaryThemeColor,
                   fontWeight: FontWeight.bold),
             ),
-            bottom: const TabBar(
+            bottom: TabBar(
               indicatorColor: ThemeColors.primaryThemeColor,
               labelColor: ThemeColors.primaryThemeColor,
               unselectedLabelColor: ThemeColors.grey1ThemeColor,
               tabs: [
-                Tab(text: 'Applied', icon: Icon(UniconsLine.file_edit_alt)),
-                Tab(text: 'Saved', icon: Icon(UniconsLine.file_bookmark_alt)),
+                Tab(
+                    text: AppLocalizations.of(context)!.applied,
+                    icon: const Icon(UniconsLine.file_edit_alt)),
+                Tab(
+                    text: AppLocalizations.of(context)!.saved,
+                    icon: const Icon(UniconsLine.file_bookmark_alt)),
               ],
             ),
           ),

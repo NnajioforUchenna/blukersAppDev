@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NoInterestingWorkers extends StatelessWidget {
   const NoInterestingWorkers({super.key});
@@ -28,9 +29,9 @@ class NoInterestingWorkers extends StatelessWidget {
               ),
             ],
           ),
-          child: const Text(
-            'No interesting workers found.',
-            style: TextStyle(
+          child: Text(
+            AppLocalizations.of(context)!.youHaveNotSavedAnyWorker,
+            style: const TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
               color: Colors.white,

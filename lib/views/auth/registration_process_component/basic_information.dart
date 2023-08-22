@@ -60,10 +60,10 @@ class _BasicInformationState extends State<BasicInformation> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
-                    "Basic Information",
+                  Text(
+                    AppLocalizations.of(context)!.basicInformation,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.deepOrangeAccent,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -93,7 +93,7 @@ class _BasicInformationState extends State<BasicInformation> {
                           nameController.text = name!;
                         },
                         decoration: InputDecoration(
-                            hintText: "Name",
+                            hintText: AppLocalizations.of(context)!.name,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: const BorderSide(
@@ -117,7 +117,7 @@ class _BasicInformationState extends State<BasicInformation> {
                         },
                         validator: ((value) {
                           if (value!.isEmpty) {
-                            return "Required";
+                            return AppLocalizations.of(context)!.required;
                           } else {
                             return null;
                           }
@@ -126,7 +126,7 @@ class _BasicInformationState extends State<BasicInformation> {
                           lastNameController.text = lastName!;
                         },
                         decoration: InputDecoration(
-                            hintText: "LastName",
+                            hintText: AppLocalizations.of(context)!.lastName,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: const BorderSide(
@@ -153,7 +153,7 @@ class _BasicInformationState extends State<BasicInformation> {
                         },
                         validator: ((value) {
                           if (value!.isEmpty) {
-                            return "Required";
+                            return AppLocalizations.of(context)!.required;
                           } else {
                             return null;
                           }
@@ -162,7 +162,7 @@ class _BasicInformationState extends State<BasicInformation> {
                           companyNameController.text = companyName!;
                         },
                         decoration: InputDecoration(
-                            hintText: "Company Name",
+                            hintText: AppLocalizations.of(context)!.companyName,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: const BorderSide(
@@ -188,7 +188,7 @@ class _BasicInformationState extends State<BasicInformation> {
                       },
                       validator: ((value) {
                         if (value!.isEmpty) {
-                          return "Required";
+                          return AppLocalizations.of(context)!.required;
                         } else {
                           return null;
                         }
@@ -197,7 +197,7 @@ class _BasicInformationState extends State<BasicInformation> {
                         descriptionController.text = description!;
                       },
                       decoration: InputDecoration(
-                        hintText: "Description",
+                        hintText: AppLocalizations.of(context)!.description,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: const BorderSide(
@@ -229,7 +229,7 @@ class _BasicInformationState extends State<BasicInformation> {
                         }
                       }
                     },
-                    text: "Save To Profile",
+                    text: AppLocalizations.of(context)!.saveProfile,
                     isDisabled: !isFormComplete(),
                   ),
                   SizedBox(height: height * .05),

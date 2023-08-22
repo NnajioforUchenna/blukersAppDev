@@ -1,6 +1,7 @@
 import 'package:blukers/views/common_views/splash_screen/splash_screen_custom_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../landing_page_components/landing_page.dart';
 
@@ -45,7 +46,7 @@ class SplashScreenPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const LandingPage()));
             },
             child: Text(
-              'Skip',
+              AppLocalizations.of(context)!.skip,
               style: TextStyle(
                 color: Colors.blueGrey,
                 fontSize: 16.sp,

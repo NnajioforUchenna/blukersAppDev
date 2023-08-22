@@ -1,6 +1,7 @@
 import 'package:blukers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
@@ -22,7 +23,7 @@ class JobTimeline extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'Journey to Your Dream Job',
+                AppLocalizations.of(context)!.workerJourneyTitle,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -37,20 +38,55 @@ class JobTimeline extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             itemCount: jobRecords.length,
             itemBuilder: (context, index) {
+              String title = "";
+              String description = "";
+              if (index == 0) {
+                title = AppLocalizations.of(context)!.workerJourneyStep1Title;
+                description =
+                    AppLocalizations.of(context)!.workerJourneyStep1Text;
+              }
+              if (index == 1) {
+                title = AppLocalizations.of(context)!.workerJourneyStep2Title;
+                description =
+                    AppLocalizations.of(context)!.workerJourneyStep2Text;
+              }
+              if (index == 2) {
+                title = AppLocalizations.of(context)!.workerJourneyStep3Title;
+                description =
+                    AppLocalizations.of(context)!.workerJourneyStep3Text;
+              }
+              if (index == 3) {
+                title = AppLocalizations.of(context)!.workerJourneyStep4Title;
+                description =
+                    AppLocalizations.of(context)!.workerJourneyStep4Text;
+              }
               final record = jobRecords[index];
               return MyJobTimeLine(
                 isFirst: index == 0,
                 isLast: index == jobRecords.length - 1,
                 isPast: index <= currentStep,
-                title: record['title']!,
-                briefDescription: record['description']!,
+                // title: record['title']!,
+                // briefDescription: record['description']!,
+                title: title,
+                briefDescription: description,
               );
             },
           ),
           const SizedBox(height: 10),
-          if (currentStep == 0) buildButton(width, "Register", context),
+          if (currentStep == 0)
+            buildButton(
+              width,
+              currentStep,
+              AppLocalizations.of(context)!.register,
+              context,
+            ),
           if (currentStep == 1)
-            buildButton(width, "Create Your Profile", context),
+            buildButton(
+              width,
+              currentStep,
+              AppLocalizations.of(context)!.createYourProfile,
+              context,
+            ),
           const SizedBox(height: 20),
         ],
       ),
@@ -82,7 +118,7 @@ final jobRecords = [
   },
 ];
 
-Widget buildButton(double width, String text, context) {
+Widget buildButton(double width, int currentStep, String text, context) {
   return Center(
     child: Container(
       width: width < 600 ? 250 : 400, // 300 on mobile, 500 on web or tablet
@@ -97,9 +133,14 @@ Widget buildButton(double width, String text, context) {
         ),
         onPressed: () {
           // Add the functionality here
-          if (text == "Register") {
+          // if (text == "Register") {
+          //   Navigator.pushNamed(context, '/register');
+          // } else if (text == "Create Your Profile") {
+          //   Navigator.pushNamed(context, '/createWorkerProfile');
+          // }
+          if (currentStep == 0) {
             Navigator.pushNamed(context, '/register');
-          } else if (text == "Create Your Profile") {
+          } else if (currentStep == 1) {
             Navigator.pushNamed(context, '/createWorkerProfile');
           }
         }, // Add the functionality here

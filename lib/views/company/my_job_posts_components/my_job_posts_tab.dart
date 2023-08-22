@@ -4,6 +4,7 @@ import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:blukers/views/worker/jobs_componets/complete_job_posts_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'my_job_post_component/loading_my_job_posts.dart';
 import 'my_job_post_component/no_job_posts.dart';
@@ -33,7 +34,7 @@ class MyJobPostsTab extends StatelessWidget {
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           // return NoMyJobPosts();
           return IconText404(
-              text: "You have not created any job post",
+              text: AppLocalizations.of(context)!.youHaveNotCreatedAnyJobPost,
               icon: UniconsLine.file_alt);
         } else {
           List<JobPost> jobPosts = snapshot.data!;
