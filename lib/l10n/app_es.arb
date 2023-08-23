@@ -210,6 +210,21 @@
     "or": "o",
     "toAccessYourProfile": "Para acceder a tu perfil",
 
+    "changeProfilePicture": "Cambar foto de perfil",
+    "fromGallery": "Elegir de Galería",
+    "takePhoto": "Tomar Foto",
+
+    "companyInformation": "Información de la Compañía",
+    "industriesSlashJobs": "Industrias / Trabajos",
+
+    "pdfResume": "CV en PDF",
+    "onlineResume": "CV en Línea",
+
+    "subscriptions": "Suscripciones",
+
+    "exit": "Salir",
+    "logout": "Cerrar Sesión",
+
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",
     "workers": "Trabajadores",

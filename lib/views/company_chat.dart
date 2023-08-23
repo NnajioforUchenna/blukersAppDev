@@ -6,6 +6,7 @@ import 'package:blukers/views/company/workers_components/chat_list_component.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CompanyChat extends StatelessWidget {
   const CompanyChat({super.key});
@@ -22,7 +23,9 @@ class CompanyChat extends StatelessWidget {
         }
         return Container(
           child: chatProvider.chatRooms.isEmpty
-              ? IconText404(text: "You have no chats", icon: UniconsLine.chat)
+              ? IconText404(
+                  text: AppLocalizations.of(context)!.youHaveNoChats,
+                  icon: UniconsLine.chat)
               : ListView.builder(
                   itemCount: chatProvider.chatRooms.length,
                   itemBuilder: (BuildContext context, int index) {
