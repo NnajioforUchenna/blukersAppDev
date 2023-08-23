@@ -10,6 +10,7 @@ import 'package:blukers/views/company/workers_components/display_worker_dialog.d
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../common_views/page_template/page_template.dart';
 
@@ -33,39 +34,14 @@ class _CompanyProfileState extends State<CompanyProfile> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          await up.signOut();
-                          Navigator.of(context)
-                              .pushNamedAndRemoveUntil("/", (route) => false);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(12),
-                          // padding: const EdgeInsets.symmetric(
-                          //     vertical: 12, horizontal: 16),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(1000)),
-                          child: const Icon(
-                            UniconsLine.sign_out_alt,
-                            size: 60,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Text(
-                    "Profile",
-                    style: TextStyle(
-                      color: ThemeColors.primaryThemeColor,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  // const Text(
+                  //   "Profile",
+                  //   style: TextStyle(
+                  //     color: ThemeColors.primaryThemeColor,
+                  //     fontSize: 30,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -77,8 +53,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                           // decoration: BoxDecoration(
                           //   color: Colors.red,
                           // ),
-                          width: 250,
-                          height: 250,
+                          width: 200,
+                          height: 200,
                           child: up.appUser!.photoUrl != null &&
                                   up.appUser!.photoUrl != ""
                               ? FadeInImage.assetNetwork(
@@ -125,7 +101,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                       children: <Widget>[
                                         const SizedBox(height: 30),
                                         Text(
-                                          'Change Avatar',
+                                          AppLocalizations.of(context)!
+                                              .changeProfilePicture,
                                           style: ThemeTextStyles
                                               .headingThemeTextStyle,
                                         ),
@@ -184,7 +161,9 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    "Take photo",
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .takePhoto,
                                                     style: ThemeTextStyles
                                                         .headingThemeTextStyle,
                                                   ),
@@ -244,7 +223,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "Form gallery",
+                                                  AppLocalizations.of(context)!
+                                                      .fromGallery,
                                                   style: ThemeTextStyles
                                                       .headingThemeTextStyle,
                                                 ),
@@ -284,7 +264,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     height: 30,
                   ),
                   ProfileSection(
-                    heading: "Basic Information",
+                    heading: AppLocalizations.of(context)!.basicInformation,
                     icon: UniconsLine.pen,
                     showBasicInfo: showBasicInfo,
                     onClickSection: () {
@@ -318,7 +298,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       ),
                     ),
                   ProfileSection(
-                    heading: "Company Information",
+                    heading: AppLocalizations.of(context)!.companyInformation,
                     icon: UniconsLine.arrow_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
@@ -328,13 +308,50 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       }
                     },
                   ),
-                  // Positioned(
-                  //   bottom: 10,
-                  //   right: 10,
-                  //   child: Container(
-                  //     child: Text("Logout"),
-                  //   ),
-                  // ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          await up.signOut();
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil("/", (route) => false);
+                        },
+                        child: Container(
+                          // color: Colors.amber,
+                          // margin: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 24,
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(1000)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.logout,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              const Icon(
+                                UniconsLine.sign_out_alt,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),

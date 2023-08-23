@@ -210,6 +210,21 @@
     "or": "or",
     "toAccessYourProfile": "To access your profile",
 
+    "changeProfilePicture": "Change profile picture",
+    "fromGallery": "From Gallery",
+    "takePhoto": "Take Photo",
+
+    "companyInformation": "Company Information",
+    "industriesSlashJobs": "Industries / Jobs",
+
+    "pdfResume": "PDF Resume",
+    "onlineResume": "Online Resume",
+
+    "subscriptions": "Subscriptions",
+
+    "exit": "Exit",
+    "logout": "Logout",
+
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",
     "workers": "Workers",

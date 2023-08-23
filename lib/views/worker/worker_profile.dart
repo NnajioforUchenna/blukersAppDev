@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../providers/user_provider.dart';
 import '../auth/common_widget/login_or_register.dart';
@@ -83,39 +84,14 @@ class _WorkerProfileState extends State<WorkerProfile> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          await up.signOut();
-                          Navigator.of(context)
-                              .pushNamedAndRemoveUntil("/", (route) => false);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(12),
-                          // padding: const EdgeInsets.symmetric(
-                          //     vertical: 12, horizontal: 16),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(1000)),
-                          child: const Icon(
-                            UniconsLine.sign_out_alt,
-                            size: 60,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Text(
-                    "Profile",
-                    style: TextStyle(
-                      color: ThemeColors.primaryThemeColor,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  // const Text(
+                  //   "Profile",
+                  //   style: TextStyle(
+                  //     color: ThemeColors.primaryThemeColor,
+                  //     fontSize: 30,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -127,8 +103,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                           // decoration: BoxDecoration(
                           //   color: Colors.red,
                           // ),
-                          width: 250,
-                          height: 250,
+                          width: 200,
+                          height: 200,
                           child: up.appUser!.photoUrl != null &&
                                   up.appUser!.photoUrl != ""
                               ? FadeInImage.assetNetwork(
@@ -175,7 +151,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                       children: <Widget>[
                                         const SizedBox(height: 30),
                                         Text(
-                                          'Change Avatar',
+                                          AppLocalizations.of(context)!
+                                              .changeProfilePicture,
                                           style: ThemeTextStyles
                                               .headingThemeTextStyle,
                                         ),
@@ -234,7 +211,9 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    "Take photo",
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .takePhoto,
                                                     style: ThemeTextStyles
                                                         .headingThemeTextStyle,
                                                   ),
@@ -294,7 +273,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "Form gallery",
+                                                  AppLocalizations.of(context)!
+                                                      .fromGallery,
                                                   style: ThemeTextStyles
                                                       .headingThemeTextStyle,
                                                 ),
@@ -334,7 +314,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     height: 30,
                   ),
                   ProfileSection(
-                    heading: "Basic Information",
+                    heading: AppLocalizations.of(context)!.basicInformation,
                     icon: UniconsLine.pen,
                     showBasicInfo: showBasicInfo,
                     onClickSection: () {
@@ -368,7 +348,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       ),
                     ),
                   ProfileSection(
-                    heading: "Industries / Jobs",
+                    heading: AppLocalizations.of(context)!.industriesSlashJobs,
                     icon: UniconsLine.pen,
                     showBasicInfo: showIndustries,
                     showEditIcon: false,
@@ -383,7 +363,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: InfoDisplayComponent(
-                        placeHolder: "Industries / Jobs",
+                        placeHolder:
+                            AppLocalizations.of(context)!.industriesSlashJobs,
                         value:
                             "Industries: ${up.appUser!.worker!.industryIds != null ? up.appUser!.worker!.industryIds!.join(", ") : ""}\n\nJobs: ${up.appUser!.worker!.jobIds != null ? up.appUser!.worker!.jobIds!.join(", ") : ""}",
                         icon: GestureDetector(
@@ -419,7 +400,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       ),
                     ),
                   ProfileSection(
-                    heading: "Pdf Resume",
+                    heading: AppLocalizations.of(context)!.pdfResume,
                     icon: UniconsLine.file_upload,
                     showBasicInfo: showPdfResume,
                     onClickSection: () {
@@ -478,7 +459,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       ),
                     ),
                   ProfileSection(
-                    heading: "Online Resume",
+                    heading: AppLocalizations.of(context)!.onlineResume,
                     icon: UniconsLine.arrow_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
@@ -489,7 +470,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     },
                   ),
                   ProfileSection(
-                    heading: "Subscriptions",
+                    heading: AppLocalizations.of(context)!.subscriptions,
                     icon: UniconsLine.arrow_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
@@ -499,6 +480,50 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       }
                     },
                   ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          await up.signOut();
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil("/", (route) => false);
+                        },
+                        child: Container(
+                          // color: Colors.amber,
+                          // margin: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 24,
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(1000)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.logout,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              const Icon(
+                                UniconsLine.sign_out_alt,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
