@@ -193,7 +193,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                       height: 70,
                                                       width: 70,
                                                       margin: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           horizontal: 100,
                                                           vertical: 10),
                                                       decoration: BoxDecoration(
@@ -255,7 +255,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                     height: 70,
                                                     width: 70,
                                                     margin: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         horizontal: 100,
                                                         vertical: 10),
                                                     decoration: BoxDecoration(
@@ -477,6 +477,18 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser!.worker != null) {
                         Navigator.pushNamed(context, "/payment");
+                      }
+                    },
+                  ),
+                  ProfileSection(
+                    heading: "Delete Account",
+                    icon: UniconsLine.trash,
+                    showInfoInNewPage: true,
+                    onClickSection: () {
+                      print("Section clicked/ Edit Clicked");
+                      if (up.appUser != null) {
+                        print("delete user");
+                        up.deleteUser(up.appUser!.uid);
                       }
                     },
                   ),

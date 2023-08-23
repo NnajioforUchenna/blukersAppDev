@@ -54,6 +54,9 @@ class UserProvider with ChangeNotifier {
   void initializeAppUser(String uid) {
     streamService = StreamService(uid);
     streamService.appUser.listen((updatedAppUser) {
+      if (updatedAppUser == null) {
+        return;
+      }
       _appUser = updatedAppUser;
       updateNavigationVariables();
       notifyListeners();
@@ -70,6 +73,23 @@ class UserProvider with ChangeNotifier {
     await _auth.signOut();
     _appUser = null;
     notifyListeners();
+  }
+
+  Future<void> deleteUser(String uid) async {
+    EasyLoading.show(
+      status: 'Deleting your Account...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    //delete collection data
+    await UserDataProvider.deleteUser(uid, _appUser!.userRole == "company");
+    if (_user != null) {
+      //delete user from firebase auth
+     await _user!.delete();
+    }
+    //signout
+    await signOut();
+
+    EasyLoading.dismiss();
   }
 
   void setJobTimelineStep(int step) {
