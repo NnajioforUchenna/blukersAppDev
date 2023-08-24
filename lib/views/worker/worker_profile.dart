@@ -488,7 +488,55 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser != null) {
                         print("delete user");
-                        up.deleteUser(up.appUser!.uid);
+                        showDialog(
+                          context: context,
+                          builder: (context) => ProfileDialog(
+                              child: Column(
+                            children: [
+                              Text(
+                                "Are you sure you want to delete your account?",
+                                style:
+                                    ThemeTextStyles.headingThemeTextStyle.apply(
+                                  color: ThemeColors.blukersOrangeThemeColor,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              const Text(
+                                "All your account information will be deleted, this action cannot be undone.",
+                                style: ThemeTextStyles.bodyThemeTextStyle,
+                              ),
+                              const SizedBox(
+                                height: 35,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () async {
+                                      Navigator.of(context).pop();
+                                      up.deleteUser(up.appUser!.uid);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(16),
+                                      decoration: BoxDecoration(
+                                          color: ThemeColors.primaryThemeColor,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Text(
+                                        "Delete",
+                                        style: ThemeTextStyles
+                                            .informationDisplayPlaceHolderThemeTextStyle
+                                            .apply(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )),
+                        );
                       }
                     },
                   ),
