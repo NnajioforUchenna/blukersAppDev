@@ -1,6 +1,7 @@
 import 'package:blukers/providers/industry_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/job_post.dart';
@@ -20,7 +21,7 @@ class DetailPageBlockTwo extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text("About Job",
+              Text(AppLocalizations.of(context)!.aboutTheJob,
                   style:
                       TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold)),
             ],
@@ -32,12 +33,12 @@ class DetailPageBlockTwo extends StatelessWidget {
                   fontSize: 14.sp, color: Colors.black), // Default style
               children: [
                 TextSpan(
-                    text: "Industry: ",
+                    text: "${AppLocalizations.of(context)!.industry}: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
                 TextSpan(
                     text: jobPost.industryIds.isNotEmpty
                         ? jobPost.industryIds.join(', ')
-                        : "Not Specified"),
+                        : AppLocalizations.of(context)!.notSpecified),
               ],
             ),
           ),
@@ -48,12 +49,12 @@ class DetailPageBlockTwo extends StatelessWidget {
                   fontSize: 14.sp, color: Colors.black), // Default style
               children: [
                 TextSpan(
-                    text: "Job Position: ",
+                    text: "${AppLocalizations.of(context)!.jobPosition}: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
                 TextSpan(
                     text: jobPost.jobIds.isNotEmpty
                         ? jobPost.jobIds.join(', ')
-                        : "Not Specified"),
+                        : AppLocalizations.of(context)!.notSpecified),
               ],
             ),
           ),
@@ -64,15 +65,16 @@ class DetailPageBlockTwo extends StatelessWidget {
                   fontSize: 14.sp, color: Colors.black), // Default style
               children: [
                 TextSpan(
-                    text: "Skills: ",
+                    text: "${AppLocalizations.of(context)!.skills}: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
                 TextSpan(
                     text: jobPost.skills.isNotEmpty
                         ? jobPost.skills.join(', ')
-                        : "Not Specified"),
+                        : AppLocalizations.of(context)!.notSpecified),
               ],
             ),
           ),
+          SizedBox(height: 15.h),
           const Divider(),
         ],
       ),

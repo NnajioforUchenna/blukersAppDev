@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common_files/constants.dart';
 import '../../../models/job_post.dart';
@@ -75,17 +76,17 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                       fontSize: 18.sp,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   widget.jobPost.salaryAmount == 0
-                      ? const Text('Not Specified')
+                      ? Text(AppLocalizations.of(context)!.notSpecified)
                       : Row(
                           children: [
                             Text(widget.jobPost.salaryAmount.toString()),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text(getSalaryType(widget.jobPost.salaryType)),
                           ],
                         ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

@@ -1,6 +1,7 @@
 import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/common_views/info_display_component.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserBasicProfileDetail extends StatelessWidget {
   const UserBasicProfileDetail(
@@ -27,19 +28,19 @@ class UserBasicProfileDetail extends StatelessWidget {
         //   height: 20,
         // ),
         InfoDisplayComponent(
-          placeHolder: "Display Name",
+          placeHolder: AppLocalizations.of(context)!.displayName,
           value: displayName,
         ),
         InfoDisplayComponent(
-          placeHolder: "Email",
+          placeHolder: AppLocalizations.of(context)!.email,
           value: email,
         ),
         InfoDisplayComponent(
-          placeHolder: "Phone No",
+          placeHolder: AppLocalizations.of(context)!.phoneNumber,
           value: phoneNo,
         ),
         InfoDisplayComponent(
-          placeHolder: "language",
+          placeHolder: AppLocalizations.of(context)!.language,
           value: language,
         ),
       ],

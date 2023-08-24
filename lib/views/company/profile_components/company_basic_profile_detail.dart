@@ -5,6 +5,7 @@ import 'package:blukers/views/common_views/info_display_list_component.dart';
 import 'package:blukers/views/common_views/profile_dialog.dart';
 import 'package:blukers/views/company/profile_components/edit_company_basic_info.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CompanyBasicProfileDetail extends StatelessWidget {
   const CompanyBasicProfileDetail(
@@ -25,7 +26,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
         //   height: 20,
         // ),
         InfoDisplayComponent(
-          placeHolder: "Display Name",
+          placeHolder: AppLocalizations.of(context)!.displayName,
           value: company.name,
           icon: GestureDetector(
             onTap: () {
@@ -34,7 +35,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
                 context: context,
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
-                    placeHolder: "Name",
+                    placeHolder: AppLocalizations.of(context)!.name,
                     value: company.name,
                     onPressUpdate: (value, values) {
                       print(value);
@@ -55,7 +56,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
           ),
         ),
         InfoDisplayListComponent(
-          placeHolder: "Email",
+          placeHolder: AppLocalizations.of(context)!.email,
           value: company.emails,
           icon: GestureDetector(
             onTap: () {
@@ -64,7 +65,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
                 context: context,
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
-                    placeHolder: "Emails",
+                    placeHolder: AppLocalizations.of(context)!.email,
                     textInputType: TextInputType.emailAddress,
                     //value: name,
                     values: company.emails, //["+92-317 7936365"],
@@ -86,7 +87,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
           ),
         ),
         InfoDisplayListComponent(
-          placeHolder: "Phone No",
+          placeHolder: AppLocalizations.of(context)!.phoneNumber,
           value: company.phoneNumbers,
           icon: GestureDetector(
             onTap: () {
@@ -95,7 +96,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
                 context: context,
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
-                    placeHolder: "Phone Numbers",
+                    placeHolder: AppLocalizations.of(context)!.phoneNumber,
                     textInputType: TextInputType.phone,
                     //value: name,
                     values: company.phoneNumbers,
@@ -117,7 +118,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
           ),
         ),
         InfoDisplayComponent(
-          placeHolder: "Description",
+          placeHolder: AppLocalizations.of(context)!.description,
           value: company.companyDescription!,
           icon: GestureDetector(
             onTap: () {
@@ -126,7 +127,7 @@ class CompanyBasicProfileDetail extends StatelessWidget {
                 context: context,
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
-                    placeHolder: "Description",
+                    placeHolder: AppLocalizations.of(context)!.description,
                     value: company.companyDescription,
                     onPressUpdate: (value, values) {
                       company.companyDescription = value!;

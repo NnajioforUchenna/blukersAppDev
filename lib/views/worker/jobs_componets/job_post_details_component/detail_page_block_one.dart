@@ -2,8 +2,10 @@ import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
@@ -85,7 +87,7 @@ class DetailPageBlockOne extends StatelessWidget {
             SizedBox(height: 15.h),
             Wrap(
               children: [
-                Text("Company: ",
+                Text("${AppLocalizations.of(context)!.company}: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
                 Text(
                   jobPost.companyName,
@@ -100,7 +102,7 @@ class DetailPageBlockOne extends StatelessWidget {
             ),
             SizedBox(height: 5.h),
             jobPost.address == null
-                ? Text('Not Specified',
+                ? Text(AppLocalizations.of(context)!.notSpecified,
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey))
                 : Text(
                     jobPost.address!.location ?? '',
@@ -157,7 +159,12 @@ class DetailPageBlockOne extends StatelessWidget {
                           child: Center(
                             // Center the text inside the button
                             child: Text(
-                              isJobApplied ? "Apply".toUpperCase() : "Applied",
+                              isJobApplied
+                                  ? AppLocalizations.of(context)!
+                                      .apply
+                                      .toUpperCase()
+                                  : AppLocalizations.of(context)!
+                                      .alreadyApplied,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16.sp),
                             ),
@@ -175,6 +182,7 @@ class DetailPageBlockOne extends StatelessWidget {
                       ),
               ],
             ),
+            SizedBox(height: 15.h),
             const Divider(),
           ],
         ),

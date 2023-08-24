@@ -3,6 +3,7 @@ import 'package:blukers/views/common_views/info_display_component.dart';
 import 'package:blukers/views/common_views/profile_dialog.dart';
 import 'package:blukers/views/company/profile_components/edit_company_basic_info.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../common_views/select_industry_components/industry_jobs_dropdown.dart';
 
@@ -25,7 +26,7 @@ class CompanyAdditionalProfileDetail extends StatelessWidget {
         //   height: 20,
         // ),
         InfoDisplayComponent(
-          placeHolder: "Year Founded",
+          placeHolder: AppLocalizations.of(context)!.yearFounded,
           value:
               company.yearFounded != null ? company.yearFounded.toString() : "",
           icon: GestureDetector(
@@ -35,7 +36,7 @@ class CompanyAdditionalProfileDetail extends StatelessWidget {
                 context: context,
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
-                    placeHolder: "Year Founded",
+                    placeHolder: AppLocalizations.of(context)!.yearFounded,
                     textInputType: TextInputType.number,
                     value: company.yearFounded != null
                         ? company.yearFounded.toString()
@@ -119,7 +120,7 @@ class CompanyAdditionalProfileDetail extends StatelessWidget {
         //   ),
         // ),
         InfoDisplayComponent(
-          placeHolder: "No of Employees",
+          placeHolder: AppLocalizations.of(context)!.noOfEmployees,
           value: company.totalEmployees != null
               ? company.totalEmployees.toString()
               : "",
@@ -130,7 +131,7 @@ class CompanyAdditionalProfileDetail extends StatelessWidget {
                 context: context,
                 builder: (context) => ProfileDialog(
                   child: EditCompanyBasicInfo(
-                    placeHolder: "No of Employees",
+                    placeHolder: AppLocalizations.of(context)!.noOfEmployees,
                     textInputType: TextInputType.number,
                     value: company.totalEmployees != null
                         ? company.totalEmployees.toString()
@@ -153,9 +154,9 @@ class CompanyAdditionalProfileDetail extends StatelessWidget {
           ),
         ),
         InfoDisplayComponent(
-          placeHolder: "Industires / Jobs",
+          placeHolder: AppLocalizations.of(context)!.industriesSlashJobs,
           value:
-              "Industries: ${company.industryIds != null ? company.industryIds!.join(", ") : ""}\n\nJobs: ${company.jobPostIds != null ? company.jobPostIds!.join(", ") : ""}",
+              "${AppLocalizations.of(context)!.industries}: ${company.industryIds != null ? company.industryIds!.join(", ") : ""}\n\n${AppLocalizations.of(context)!.jobs}: ${company.jobPostIds != null ? company.jobPostIds!.join(", ") : ""}",
           icon: GestureDetector(
             onTap: () {
               print("Edit clicked");

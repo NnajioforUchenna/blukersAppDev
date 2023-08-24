@@ -314,7 +314,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     height: 30,
                   ),
                   ProfileSection(
-                    heading: AppLocalizations.of(context)!.basicInformation,
+                    heading: AppLocalizations.of(context)!.userInformation,
                     icon: UniconsLine.pen,
                     showBasicInfo: showBasicInfo,
                     onClickSection: () {
@@ -366,7 +366,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         placeHolder:
                             AppLocalizations.of(context)!.industriesSlashJobs,
                         value:
-                            "Industries: ${up.appUser!.worker!.industryIds != null ? up.appUser!.worker!.industryIds!.join(", ") : ""}\n\nJobs: ${up.appUser!.worker!.jobIds != null ? up.appUser!.worker!.jobIds!.join(", ") : ""}",
+                            "${AppLocalizations.of(context)!.industries} ${up.appUser!.worker!.industryIds != null ? up.appUser!.worker!.industryIds!.join(", ") : ""}\n\n${AppLocalizations.of(context)!.jobs}: ${up.appUser!.worker!.jobIds != null ? up.appUser!.worker!.jobIds!.join(", ") : ""}",
                         icon: GestureDetector(
                           onTap: () {
                             print("Edit clicked");
@@ -450,11 +450,13 @@ class _WorkerProfileState extends State<WorkerProfile> {
                             up.appUser!.worker!.pdfResumeUrl!.toString().isEmpty
                                 ? IconText404(
                                     icon: UniconsLine.file_times,
-                                    text: 'You have not uploaded a PDF resume',
+                                    text: AppLocalizations.of(context)!
+                                        .youHaveNotUploadedAPDFResume,
                                   )
                                 : IconText404(
                                     icon: UniconsLine.file,
-                                    text: 'Click here to view your PDF resume',
+                                    text: AppLocalizations.of(context)!
+                                        .clickHereToViewYourPDFResume,
                                   ),
                       ),
                     ),
