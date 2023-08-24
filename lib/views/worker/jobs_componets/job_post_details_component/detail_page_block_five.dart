@@ -1,6 +1,8 @@
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/views/common_views/applicant_count.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/job_post.dart';
@@ -22,15 +24,15 @@ class _DetailPageBlockFiveState extends State<DetailPageBlockFive> {
     return widget.jobPost.applicantUserIds!.isEmpty
         ? Container()
         : Padding(
-            padding: EdgeInsets.all(16.0), // Add padding around the edges
+            padding: const EdgeInsets.all(16.0), // Add padding around the edges
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment:
                     CrossAxisAlignment.start, // Align content to start
                 children: [
-                  const Text("Applicants",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(AppLocalizations.of(context)!.applicants,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
                   InkWell(
                     onTap: () async {
                       setState(() {
@@ -48,10 +50,10 @@ class _DetailPageBlockFiveState extends State<DetailPageBlockFive> {
                     },
                     child: Row(
                       children: [
-                        const Text("New Applicants",
-                            style: TextStyle(
+                        Text(AppLocalizations.of(context)!.newApplicants,
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         if (widget.jobPost.applicantUserIds!.isNotEmpty)
                           ApplicantCount(
                               count: widget.jobPost.applicantUserIds!.length,
@@ -59,6 +61,7 @@ class _DetailPageBlockFiveState extends State<DetailPageBlockFive> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 15.h),
                   Divider(),
                 ],
               ),

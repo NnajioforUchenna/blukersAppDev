@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>25989559034-1lsi7v885ju8hgsj8qcc2r974o05n2b7.apps.googleusercontent.com</string>
+	<string>1059320284686-h4j3nd86vdgrj9sfg6s6ed8tepsditfd.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.25989559034-1lsi7v885ju8hgsj8qcc2r974o05n2b7</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>25989559034-b9mmbu1eoap949r2dmkgh4m8ocm4dhrj.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.1059320284686-h4j3nd86vdgrj9sfg6s6ed8tepsditfd</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDDCHe61XTkxnjePSE6U6vJvHB3exzjHpk</string>
+	<string>AIzaSyB50wjWkOigQ6ZATZDz-Jt2hRHjUZmCEdU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>25989559034</string>
+	<string>1059320284686</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.blukers</string>
+	<string>com.terralabor.blukers</string>
 	<key>PROJECT_ID</key>
-	<string>blukers-development</string>
+	<string>blukers-app</string>
 	<key>STORAGE_BUCKET</key>
-	<string>blukers-development.appspot.com</string>
+	<string>blukers-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:25989559034:ios:5266ff3de7f2eb3564cf43</string>
+	<string>1:1059320284686:ios:80e0550170973d20eb5e5f</string>
 	<key>DATABASE_URL</key>
-	<string>https://blukers-development-default-rtdb.firebaseio.com</string>
+	<string>https://blukers-app-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

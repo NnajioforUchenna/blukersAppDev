@@ -16,7 +16,7 @@
     "jobs": "Trabajos",
     "chat": "Chat",
     "profile": "Perfil",
-    "loginRegister": "Iniciar/Registro",
+    "loginRegister": "Únete",
     "login": "Iniciar Sesión",
     "login2": "Inicia Sesión",
 
@@ -127,10 +127,17 @@
     "searchWorkers": "Buscar",
 
     "applied": "Aplicaciones",
+    "alreadyApplied": "Aplicaste",
     "saved": "Guardado",
     "youHaveNotAppliedToAnyJobPost": "No has aplicado a ningún trabajo",
     "youHaveNotSavedAnyJobPost": "No has guardado ningún trabajo",
     "youHaveNoChats": "No tienes chats",
+    "schedule": "Horario",
+    "jobType": "Tipo de Trabajo",
+    "payment": "Pago",
+    "applicants": "Aplicantes",
+    "newApplicants": "Nuevos Aplicantes",
+    "requirements": "Requisitos",
 
     "savedWorkers": "Trabajadores Guardados",
     "myJobs": "Mis Trabajos",
@@ -224,6 +231,31 @@
 
     "exit": "Salir",
     "logout": "Cerrar Sesión",
+
+    "userInformation": "Información del Usuario",
+    "industries": "Industrias",
+    "update": "Actualizar",
+    "save": "Guardar",
+    "displayName": "Nombre para Mostrar",
+    "phoneNumber": "Número de Teléfono",
+    "language": "Idioma",
+
+    "additionalInformation": "Información Adicional",
+    "editBasicInformation": "Editar Información Básica",
+
+    "youHaveNotUploadedAPDFResume": "No has subido ningún CV en PDF",
+    "clickHereToViewYourPDFResume": "Haz click aqui para ver tu CV en PDF",
+
+    "yearFounded": "Año de Fundación",
+    "noOfEmployees": "Número de Empleados",
+
+    "aboutTheJob": "Sobre el trabajo",
+    "apply": "Aplica",
+    "details": "Detalles",
+    "industry": "Industria",
+    "notSpecified": "No Especificado",
+    "jobPosition": "Puesto de Trabajo",
+    "skills": "Habilidades",
 
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",

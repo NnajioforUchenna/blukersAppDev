@@ -6,6 +6,7 @@ import 'package:blukers/views/common_views/info_edit_component.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditCompanyBasicInfo extends StatefulWidget {
   const EditCompanyBasicInfo(
@@ -55,12 +56,7 @@ class _EditCompanyBasicInfoState extends State<EditCompanyBasicInfo> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Basic Information",
-          style:
-              ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
-        ),
-        Text(
-          "Edit",
+          AppLocalizations.of(context)!.editBasicInformation,
           style:
               ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
         ),
@@ -109,7 +105,7 @@ class _EditCompanyBasicInfoState extends State<EditCompanyBasicInfo> {
                     color: ThemeColors.primaryThemeColor,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text(
-                  "Update",
+                  AppLocalizations.of(context)!.save,
                   style: ThemeTextStyles
                       .informationDisplayPlaceHolderThemeTextStyle
                       .apply(color: Colors.white),

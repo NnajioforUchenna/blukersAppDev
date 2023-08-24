@@ -3,6 +3,7 @@ import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/common_views/info_edit_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditBasicProfile extends StatefulWidget {
   const EditBasicProfile(
@@ -43,12 +44,7 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Basic Information",
-          style:
-              ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
-        ),
-        Text(
-          "Edit",
+          AppLocalizations.of(context)!.editBasicInformation,
           style:
               ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
         ),
@@ -56,7 +52,7 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
           height: 20,
         ),
         InfoEditComponent(
-          placeHolder: "Display Name",
+          placeHolder: AppLocalizations.of(context)!.displayName,
           value: displayName,
           action: TextInputAction.next,
           onChangeValue: (value) {
@@ -64,7 +60,7 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
           },
         ),
         InfoEditComponent(
-          placeHolder: "Phone No",
+          placeHolder: AppLocalizations.of(context)!.phoneNumber,
           value: phoneNo,
           action: TextInputAction.next,
           onChangeValue: (value) {
@@ -76,7 +72,7 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
           },
         ),
         InfoEditComponent(
-          placeHolder: "language",
+          placeHolder: AppLocalizations.of(context)!.language,
           value: language,
           action: TextInputAction.done,
           onChangeValue: (value) {
@@ -102,7 +98,7 @@ class _EditBasicProfileState extends State<EditBasicProfile> {
                     color: ThemeColors.primaryThemeColor,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text(
-                  "Update",
+                  AppLocalizations.of(context)!.save,
                   style: ThemeTextStyles
                       .informationDisplayPlaceHolderThemeTextStyle
                       .apply(color: Colors.white),

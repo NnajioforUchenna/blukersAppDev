@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
@@ -17,7 +18,7 @@ class DetailPageBlockThree extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Align content to start
         children: [
-          Text("Details",
+          Text(AppLocalizations.of(context)!.details,
               style: TextStyle(
                   fontSize: 17.sp,
                   fontWeight: FontWeight.bold)), // Responsive font size
@@ -27,7 +28,7 @@ class DetailPageBlockThree extends StatelessWidget {
               style: TextStyle(fontSize: 14.sp, color: Colors.black),
               children: [
                 TextSpan(
-                    text: "Schedule: ",
+                    text: "${AppLocalizations.of(context)!.schedule}: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
                 TextSpan(text: "${jobPost.schedule}"),
               ],
@@ -39,7 +40,7 @@ class DetailPageBlockThree extends StatelessWidget {
               style: TextStyle(fontSize: 14.sp, color: Colors.black),
               children: [
                 TextSpan(
-                    text: "Job Type: ",
+                    text: "${AppLocalizations.of(context)!.jobType}: ",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
                 TextSpan(text: "${getJobType(jobPost.jobType)}"),
               ],
@@ -51,7 +52,7 @@ class DetailPageBlockThree extends StatelessWidget {
               style: TextStyle(fontSize: 14.sp, color: Colors.black),
               children: [
                 TextSpan(
-                    text: "Pay:",
+                    text: "${AppLocalizations.of(context)!.payment}:",
                     style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
                 TextSpan(
                     text:
@@ -59,6 +60,7 @@ class DetailPageBlockThree extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 15.h),
           const Divider(),
         ],
       ),

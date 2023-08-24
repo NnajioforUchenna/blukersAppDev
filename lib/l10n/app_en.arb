@@ -16,7 +16,7 @@
     "jobs": "Jobs",
     "chat": "Chat",
     "profile": "Profile",
-    "loginRegister": "Login/Register",
+    "loginRegister": "Join",
     "login": "Login",
     "login2": "Login",
 
@@ -127,10 +127,17 @@
     "searchWorkers": "Search",
 
     "applied": "Applied",
+    "alreadyApplied": "Applied",
     "saved": "Saved",
     "youHaveNotAppliedToAnyJobPost": "You have not applied to any job post",
     "youHaveNotSavedAnyJobPost": "You have not saved any job post",
     "youHaveNoChats": "You have no chats",
+    "schedule": "Schedule",
+    "jobType": "Job Type",
+    "payment": "Payment",
+    "applicants": "Applicants",
+    "newApplicants": "New Applicants",
+    "requirements": "Requirements",
 
     "savedWorkers": "Saved Workers",
     "myJobs": "My Jobs",
@@ -224,6 +231,31 @@
 
     "exit": "Exit",
     "logout": "Logout",
+
+    "userInformation": "User Information",
+    "industries": "Industries",
+    "update": "Update",
+    "save": "Save",
+    "displayName": "Display Name",
+    "phoneNumber": "Phone Number",
+    "language": "Language",
+
+    "additionalInformation": "Additional Information",
+    "editBasicInformation": "Edit Basic Information",
+
+    "youHaveNotUploadedAPDFResume": "You have not uploaded a PDF resume",
+    "clickHereToViewYourPDFResume": "Click here to view your PDF resume",
+
+    "yearFounded": "Year Founded",
+    "noOfEmployees": "Number of Employees",
+
+    "aboutTheJob": "About the job",
+    "apply": "Apply",
+    "details": "Details",
+    "industry": "Industry",
+    "notSpecified": "Not Specified",
+    "jobPosition": "Job Position",
+    "skills": "Skills",
 
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",

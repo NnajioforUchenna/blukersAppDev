@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
@@ -17,12 +18,13 @@ class DetailPageBlockSix extends StatelessWidget {
           crossAxisAlignment:
               CrossAxisAlignment.start, // Align content to start
           children: [
-            Text("Requirements",
+            Text(AppLocalizations.of(context)!.requirements,
                 style: TextStyle(
                     fontSize: 17.sp,
                     fontWeight: FontWeight.bold)), // Responsive font size
             SizedBox(height: 15.h), // Responsive height
             displayParagraph(jobPost.requirements ?? ''),
+            SizedBox(height: 15.h),
             Divider(),
           ],
         ),
