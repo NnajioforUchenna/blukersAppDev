@@ -1,3 +1,4 @@
+import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
@@ -28,6 +29,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
+    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     return PageTemplate(
       child: up.appUser == null
           ? LoginOrRegister()
@@ -316,6 +318,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser != null) {
                         print("delete user");
+                         chatProvider.clearGroups();
                         up.deleteUser(up.appUser!.uid);
                       }
                     },
@@ -326,6 +329,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     children: [
                       GestureDetector(
                         onTap: () async {
+                          chatProvider.clearGroups();
                           await up.signOut();
                           Navigator.of(context)
                               .pushNamedAndRemoveUntil("/", (route) => false);
