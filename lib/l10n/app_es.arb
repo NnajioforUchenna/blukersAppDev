@@ -262,6 +262,9 @@
     "writeSomethingAboutYou": "Escribe un poco sobre ti",
     "writeSomethingAboutYourCompany": "Escribe un poco sobre tu compañía",
 
+    "updateRequired": "Actualización Requerida",
+    "updateRequiredDescription": "Por favor actualiza la applicación para continuar.",
+
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",
     "workers": "Trabajadores",

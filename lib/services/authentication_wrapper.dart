@@ -14,6 +14,7 @@ import '../views/worker/jobs.dart';
 import '../views/worker/web_jobs_landing_page/web_search_landing_page.dart';
 
 import 'package:blukers/views/common_views/components/update_app_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AuthenticationWrapper extends StatefulWidget {
   const AuthenticationWrapper({super.key});
@@ -29,6 +30,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
   //this function is called in build and build gets updated very frequently but we need to call this fuction only once
   //else it will stuck in a loop
   bool callUpdater = true;
+
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
@@ -63,19 +65,20 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
     if (gettingVersion && !kIsWeb) {
       return const Scaffold(
         body: Center(
-          child: Text("Checking App Version!"),
+          child: Text("..."),
         ),
       );
     }
     //the control has fetched the version and update is required.
     //at this stage, an slert will be shown to user
     if (shouldUpdate && !kIsWeb) {
-      return const Scaffold(
+      return Scaffold(
         body: Center(
-          child: Text("Update required!"),
+          child: Text(AppLocalizations.of(context)!.updateRequired),
         ),
       );
     }
+
     // Get the current URL
     String urlEx = Uri.base.toString();
     Uri uri = Uri.parse(urlEx);
