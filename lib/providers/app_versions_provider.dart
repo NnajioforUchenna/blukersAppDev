@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:blukers/utils/helpers/app_version.dart';
+import 'package:blukers/views/common_views/components/update_app_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:blukers/data_providers/app_versions_data_provider.dart';
@@ -15,7 +18,7 @@ class AppVersionsProvider with ChangeNotifier {
   String? get iOSUrl => _iOSUrl;
   bool? get shouldUpdate => _shouldUpdate;
 
-  Future<bool?> shouldUpdateApp() async {
+  Future<bool?> _shouldUpdateApp() async {
     // bool shouldShowUpdateDialog = false;
 
     _latestVersion = '';
@@ -40,6 +43,27 @@ class AppVersionsProvider with ChangeNotifier {
     }
 
     return _shouldUpdate;
+  }
+
+  void checkForUpdate(BuildContext context) {
+    //_latestversion ==null means the update never checked before since the app is open
+    if (_latestVersion == null) {
+      _shouldUpdateApp().then((value) {
+        print("update: " + value!.toString());
+        if (value) {
+          showDialog(
+            context: context,
+            barrierDismissible:
+                false, // Dialog cannot be dismissed by tapping outside
+            builder: (BuildContext context) {
+              return UpdateAppDialog(
+                url: Platform.isAndroid ? _androidUrl ?? "" : _iOSUrl ?? "",
+              );
+            },
+          );
+        }
+      });
+    }
   }
 
   void notifyListners() {
