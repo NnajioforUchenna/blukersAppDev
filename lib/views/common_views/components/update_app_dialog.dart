@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/data_providers/app_versions_data_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // class UpdateAppDialog extends StatelessWidget {
 //   @override
@@ -40,51 +41,37 @@ import 'package:blukers/data_providers/app_versions_data_provider.dart';
 // }
 
 class UpdateAppDialog extends StatelessWidget {
-  UpdateAppDialog({super.key});
+  const UpdateAppDialog({super.key, required this.url});
+  final String url;
 
-  shouldUpdateApp() async {
-    bool shouldShowUpdateDialog = false;
-    Map shouldUpdateApp = await AppVersionsDataProvider().shouldUpdateApp();
-    if (shouldUpdateApp.containsKey('answer') &&
-        shouldUpdateApp['answer'] == true) {
-      shouldShowUpdateDialog = true;
-    }
-    print('shouldShowUpdateDialog');
-    print(shouldShowUpdateDialog);
-    return shouldShowUpdateDialog;
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
-    if (shouldUpdateApp()) {
-      showDialog(
-        context: context,
-        barrierDismissible:
-            false, // Dialog cannot be dismissed by tapping outside
-        builder: (BuildContext context) {
-          return WillPopScope(
-            onWillPop: () async =>
-                false, // Prevent dialog from being closed using back button
-            child: AlertDialog(
-              title: Text('Update App'),
-              content: Text('Please update the app to continue.'),
-              actions: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    // You can add actions here when the user presses the update button
-                    // For example, launch the app store or exit the app
-                  },
-                  child: Text('Update'),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-      return Container();
-    } else {
-      return Container();
-    }
+    return WillPopScope(
+      onWillPop: () async =>
+          false, // Prevent dialog from being closed using back button
+      child: AlertDialog(
+        title:const Text('Update App'),
+        content:const Text('Please update the app to continue.'),
+        actions: <Widget>[
+          ElevatedButton(
+            onPressed: () {
+              // You can add actions here when the user presses the update button
+              // For example, launch the app store or exit the app
+              print("url: " + url);
+              if (url != "") {
+                launchUrl(
+                  Uri.parse(url),
+                  mode: LaunchMode.externalApplication,
+                );
+              }
+            },
+            child:const Text('Update'),
+          ),
+        ],
+      ),
+    );
   }
   //
 }
