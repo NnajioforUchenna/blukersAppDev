@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,9 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
                 false, // Dialog cannot be dismissed by tapping outside
             builder: (BuildContext context) {
               return UpdateAppDialog(
-                url: avp.androidUrl ?? "",
+                url: Platform.isAndroid
+                    ? avp.androidUrl ?? ""
+                    : avp.iOSUrl ?? "",
               );
             },
           );
