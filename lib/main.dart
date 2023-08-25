@@ -1,5 +1,6 @@
 import 'package:blukers/firebase_options.dart';
 import 'package:blukers/l10n/l10n.dart';
+import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/company_provider.dart';
 import 'package:blukers/providers/industry_provider.dart';
@@ -22,9 +23,11 @@ Future<void> main() async {
 
   // Only call clearSavedSettings() during testing to reset internal values.
   // await Upgrader.clearSavedSettings(); // REMOVE this for release builds
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   setPathUrlStrategy();
   runApp(MyApp());
 }
@@ -39,12 +42,14 @@ class MyApp extends StatelessWidget {
     // final appcastURL =
     //     'https://raw.githubusercontent.com/larryaasen/upgrader/master/test/testappcast.xml';
     // final cfg = AppcastConfiguration(url: appcastURL, supportedOS: ['android']);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => IndustriesProvider()),
         ChangeNotifierProvider(create: (context) => JobPostsProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
+        ChangeNotifierProvider(create: (context) => AppVersionsProvider()),
         ChangeNotifierProxyProvider<UserProvider, CompanyProvider>(
           create: (context) => CompanyProvider(),
           update: (_, user, CompanyProvider? previous) =>

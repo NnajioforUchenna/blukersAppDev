@@ -806,7 +806,7 @@ packages:
     source: hosted
     version: "2.0.1"
   package_info_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: package_info_plus
       sha256: "6ff267fcd9d48cb61c8df74a82680e8b82e940231bb5f68356672fde0397334a"
@@ -965,6 +965,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
+  pub_semver:
+    dependency: "direct main"
+    description:
+      name: pub_semver
+      sha256: "40d3ab1bbd474c4c2328c91e3a7df8c6dd629b79ece4c4bd04bee496a224fb0c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
   rxdart:
     dependency: transitive
     description:

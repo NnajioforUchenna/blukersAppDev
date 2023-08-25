@@ -217,7 +217,7 @@
     "or": "o",
     "toAccessYourProfile": "Para acceder a tu perfil",
 
-    "changeProfilePicture": "Cambar foto de perfil",
+    "changeProfilePicture": "Cambiar foto de perfil",
     "fromGallery": "Elegir de Galería",
     "takePhoto": "Tomar Foto",
 
@@ -256,6 +256,11 @@
     "notSpecified": "No Especificado",
     "jobPosition": "Puesto de Trabajo",
     "skills": "Habilidades",
+
+    "aboutYou": "Acerca de Ti",
+    "aboutYourCompany": "Acerca de tu Compañía",
+    "writeSomethingAboutYou": "Escribe un poco sobre ti",
+    "writeSomethingAboutYourCompany": "Escribe un poco sobre tu compañía",
 
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",

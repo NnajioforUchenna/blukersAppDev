@@ -22,7 +22,7 @@ class ChatProvider with ChangeNotifier {
       String myLogo = "",
       String recipientLogo = ""}) async {
     EasyLoading.show(
-      status: 'Setting up your chat',
+      status: '',
       maskType: EasyLoadingMaskType.black,
     );
     int chat = _chatRooms.indexWhere((element) =>
@@ -51,7 +51,7 @@ class ChatProvider with ChangeNotifier {
 
   getGroups(String uid) async {
     EasyLoading.show(
-      status: 'Setting up your chat',
+      status: '',
       maskType: EasyLoadingMaskType.black,
     );
     final List<Map<String, dynamic>> res =
