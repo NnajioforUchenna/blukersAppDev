@@ -35,15 +35,18 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
     if (callUpdater && !kIsWeb) {
       avp.shouldUpdateApp().then((value) {
         print("update: " + value!.toString());
-
-        showDialog(
-          context: context,
-          barrierDismissible:
-              false, // Dialog cannot be dismissed by tapping outside
-          builder: (BuildContext context) {
-            return UpdateAppDialog(url: avp.androidUrl ?? "",);
-          },
-        );
+        if (value) {
+          showDialog(
+            context: context,
+            barrierDismissible:
+                false, // Dialog cannot be dismissed by tapping outside
+            builder: (BuildContext context) {
+              return UpdateAppDialog(
+                url: avp.androidUrl ?? "",
+              );
+            },
+          );
+        }
         setState(() {
           shouldUpdate = value;
           gettingVersion = false;
@@ -53,7 +56,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
         callUpdater = false;
       });
     }
-   //while the controll is fetching the version and checking if update is required or not
+    //while the controll is fetching the version and checking if update is required or not
     if (gettingVersion && !kIsWeb) {
       return const Scaffold(
         body: Center(
