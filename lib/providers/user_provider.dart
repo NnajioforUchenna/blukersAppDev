@@ -546,6 +546,7 @@ class UserProvider with ChangeNotifier {
     FilePickerResult? gallery = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf'],
+      withData: true
     );
     if (gallery == null) {
       return "";
@@ -557,7 +558,6 @@ class UserProvider with ChangeNotifier {
 
     print(appUser!.uid);
     PlatformFile? filePlatformFile = gallery.files.first;
-
     String? result = await UserDataProvider.uploadImage(
       image: filePlatformFile.bytes!,
       path: "$storagePath${appUser!.uid}",
