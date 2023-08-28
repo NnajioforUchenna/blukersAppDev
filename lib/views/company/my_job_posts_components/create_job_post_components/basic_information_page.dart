@@ -189,7 +189,7 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                                 jobTitleController.text,
                                 jobDescriptionController.text,
                                 positionsAvailableController.text,
-                                int.parse(urgencyValue.toString()),
+                                urgencyValue.round(),
                               );
                             }
                           },
