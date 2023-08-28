@@ -1,21 +1,35 @@
 import 'dart:core';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/job_posts_provider.dart';
 import '../providers/user_provider.dart';
+import '../providers/app_versions_provider.dart';
 import '../views/common_views/splash_screen/splash_screen_main.dart';
 import '../views/company/workers.dart';
 import '../views/worker/jobs.dart';
 import '../views/worker/web_jobs_landing_page/web_search_landing_page.dart';
 
+import 'package:blukers/views/common_views/components/update_app_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class AuthenticationWrapper extends StatelessWidget {
   const AuthenticationWrapper({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
+    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+    if ( !kIsWeb) {
+      avp.checkForUpdate(context);
+     
+    }
+  
 
     // Get the current URL
     String urlEx = Uri.base.toString();

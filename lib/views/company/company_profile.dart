@@ -4,6 +4,7 @@ import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/auth/common_widget/login_or_register.dart';
 import 'package:blukers/views/common_views/profile_dialog.dart';
 import 'package:blukers/views/common_views/profile_section.dart';
+import 'package:blukers/views/common_views/components/app_version_display.dart';
 import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
 import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
 import 'package:blukers/views/company/workers_components/display_worker_dialog.dart';
@@ -351,6 +352,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 40),
+                  AppVersionDisplay(),
                   const SizedBox(height: 30),
                 ],
               ),

@@ -7,6 +7,7 @@ import 'package:blukers/views/common_views/info_display_component.dart';
 import 'package:blukers/views/common_views/profile_dialog.dart';
 import 'package:blukers/views/common_views/profile_section.dart';
 import 'package:blukers/views/common_views/components/icon_text_404.dart';
+import 'package:blukers/views/common_views/components/app_version_display.dart';
 import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
 import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
 import 'package:flutter/foundation.dart';
@@ -525,6 +526,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 40),
+                  AppVersionDisplay(),
                   const SizedBox(height: 30),
                 ],
               ),
