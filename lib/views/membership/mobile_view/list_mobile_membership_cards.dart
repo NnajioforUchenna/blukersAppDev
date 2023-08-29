@@ -38,3 +38,38 @@ const List<MobileMembershipCard> memberShipCards = [
     isNormalArrangement: true,
   ),
 ];
+
+const List<MobileMembershipCard> backMemberShipCards = [
+  MobileMembershipCard(
+    headerTitle: '',
+    headerSubtitle: '',
+    bodyTitle: '',
+    bodySubtitle: '',
+    color: Color(0xffF16523),
+    isNormalArrangement: false,
+  ),
+  MobileMembershipCard(
+    headerTitle: '',
+    headerSubtitle: '',
+    bodyTitle: '',
+    bodySubtitle: '',
+    color: Color(0xff1a75bb),
+    isNormalArrangement: true,
+  ),
+  MobileMembershipCard(
+    headerTitle: '',
+    headerSubtitle: '',
+    bodyTitle: '',
+    bodySubtitle: '',
+    color: Color(0xffF16523),
+    isNormalArrangement: true,
+  ),
+  MobileMembershipCard(
+    headerTitle: '',
+    headerSubtitle: '',
+    bodyTitle: '',
+    bodySubtitle: '',
+    color: Color(0xff1a75bb),
+    isNormalArrangement: true,
+  ),
+];

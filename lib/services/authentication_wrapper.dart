@@ -7,7 +7,7 @@ import '../providers/job_posts_provider.dart';
 import '../providers/user_provider.dart';
 import '../views/common_views/splash_screen/splash_screen_main.dart';
 import '../views/company/workers.dart';
-import '../views/worker/jobs.dart';
+import '../views/membership/mobile_view/carousel_with_cards.dart';
 import '../views/worker/web_jobs_landing_page/web_search_landing_page.dart';
 
 class AuthenticationWrapper extends StatelessWidget {
@@ -34,8 +34,8 @@ class AuthenticationWrapper extends StatelessWidget {
 
     if (up.user != null) {
       return up.appUser != null && up.appUser?.registeredAs == 'company'
-          ? const Workers()
-          : const Jobs();
+          ? const Workers() //Workers()
+          : CarouselWithCards(); //Jobs();
     } else {
       return SplashScreen(); //LandingPage() SplashScreen()
     }
