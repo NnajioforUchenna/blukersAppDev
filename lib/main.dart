@@ -17,8 +17,16 @@ import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:upgrader/upgrader.dart';
 
+import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:blukers/config/revenue_cat_constants.dart';
+
+final _revenueCatConfiguration =
+    PurchasesConfiguration(revenueCatConstants["APP_API_KEY"]);
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Purchases.configure(_revenueCatConfiguration);
 
   // Only call clearSavedSettings() during testing to reset internal values.
   // await Upgrader.clearSavedSettings(); // REMOVE this for release builds

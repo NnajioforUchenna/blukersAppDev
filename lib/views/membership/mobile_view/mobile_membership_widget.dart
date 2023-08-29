@@ -16,6 +16,10 @@ import 'package:blukers/utils/styles/index.dart';
 import 'carousel_with_cards.dart';
 import 'my_evelated_button.dart';
 
+import 'dart:io';
+import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:blukers/config/app_store_in_app_subscriptions.dart';
+
 class MobileMembershipWidget extends StatelessWidget {
   const MobileMembershipWidget({super.key});
 
@@ -103,6 +107,20 @@ class MobileMembershipWidget extends StatelessWidget {
                               onPress: () async {
                                 print("premium");
 
+                                // Revenue Cat - iOS in-app subscription
+                                if (Platform.isIOS) {
+                                  try {
+                                    await Purchases.purchaseProduct(
+                                      appStoreInAppSubscriptions[
+                                          "employeePremiumProductID"],
+                                    );
+                                  } catch (e) {
+                                    print("subscription purchase failed");
+                                    print(e);
+                                  }
+                                  return;
+                                }
+
                                 DocumentReference docRef =
                                     await setCheckoutSession(up.appUser!.uid,
                                         stripeData.employeePremiumPriceId);
@@ -148,6 +166,21 @@ class MobileMembershipWidget extends StatelessWidget {
                               thirdText: '\$19.99/Monthly',
                               onPress: () async {
                                 print("premium plus");
+
+                                // Revenue Cat - iOS in-app subscription
+                                if (Platform.isIOS) {
+                                  try {
+                                    await Purchases.purchaseProduct(
+                                      appStoreInAppSubscriptions[
+                                          "employeePremiumPlusProductID"],
+                                    );
+                                  } catch (e) {
+                                    print("subscription purchase failed");
+                                    print(e);
+                                  }
+                                  return;
+                                }
+
                                 DocumentReference docRef =
                                     await setCheckoutSession(up.appUser!.uid,
                                         stripeData.employeePremiumPlusPriceId);
