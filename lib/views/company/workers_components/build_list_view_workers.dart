@@ -29,10 +29,10 @@ class BuildListViewWorkers extends StatelessWidget {
         return DisplayWorkerCard(
             worker: worker,
             onTap: () {
-              if (Responsive.isDesktop(context)) {
-                wp.setSelectedWorker(worker);
+              wp.setSelectedWorker(worker);
+              if (!Responsive.isDesktop(context)) {
                 //
-              } else {
+                // } else {
                 showDialog(
                     context: context,
                     builder: (context) => DisplayWorkerDialog(

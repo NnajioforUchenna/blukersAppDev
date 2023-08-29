@@ -60,11 +60,16 @@ class ChatProvider with ChangeNotifier {
       _chatRooms.add(ChatRoom.fromMap(res[i]));
     }
     EasyLoading.dismiss();
-    // notifyListeners(); This is create an endless loop
+     notifyListeners();// This is create an endless loop
   }
 
   void notifyListners() {
     notifyListeners();
+  }
+
+  void clearGroups() {
+    _chatRooms.clear();
+    activeRoomId = "";
   }
 
   sendMessage(String message, String sentById, String roomId, String sentToId,

@@ -338,4 +338,156 @@ class UserDataProvider {
       print("Error adding user to Firestore: $error");
     });
   }
+
+  static Future<void> _deleteUserMessages(String roomId) async {
+    // Reference to the main document
+    DocumentReference mainDocRef =
+        FirebaseFirestore.instance.collection("ChatMessages").doc(roomId);
+
+// Reference to the sub-collection
+    CollectionReference subCollectionRef = mainDocRef.collection("messages");
+
+// Delete all documents within the sub-collection
+    QuerySnapshot messagesSnapshot = await subCollectionRef.get();
+    for (QueryDocumentSnapshot docSnapshot in messagesSnapshot.docs) {
+      await docSnapshot.reference.delete();
+    }
+
+// Delete the main document
+    await mainDocRef.delete();
+  }
+
+  static Future<void> _deleteUserChats(String uid) async {
+    var snapshot = await firestore
+        .collection('ChatRooms')
+        .where("members", arrayContains: uid)
+        .get();
+    for (int i = 0; i < snapshot.docs.length; i++) {
+      Map<String, dynamic> res = snapshot.docs[i].data();
+      //print(snapshot.docs[i].data());
+
+      await firestore.collection("ChatRooms").doc(res["id"]).delete();
+      await _deleteUserMessages(res["id"]);
+    }
+  }
+
+  static Future<void> _removeFieldFromDocuments(String collection, String field,
+      String companyId, String workerId) async {
+    try {
+      DocumentReference companyRef =
+          firestore.collection(collection).doc(companyId);
+      DocumentSnapshot companySnapshot = await companyRef.get();
+
+      if (companySnapshot.exists && companySnapshot.data() != null) {
+        List<dynamic> interestingWorkersIds = companySnapshot.get(field);
+
+        if (interestingWorkersIds.contains(workerId)) {
+          interestingWorkersIds.remove(workerId);
+          await companyRef.update({field: interestingWorkersIds});
+          print('Worker ID removed from interestingWorkersIds if existed.');
+        }
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  static Future<void> _removeField(
+      {required String documentIdName,
+      required String collection,
+      required String field,
+      required String workerId}) async {
+    var snapshot = await firestore
+        .collection(collection)
+        .where(field, arrayContains: workerId)
+        .get();
+    for (int i = 0; i < snapshot.docs.length; i++) {
+      Map<String, dynamic> res = snapshot.docs[i].data();
+      //print(snapshot.docs[i].data());
+
+      await _removeFieldFromDocuments(
+          collection, field, res[documentIdName], workerId);
+    }
+  }
+
+  static Future<void> _deleteWorker(String uid) async {
+    await firestore.collection(workersCollections).doc(uid).delete();
+    await firestore.collection(appUserCollections).doc(uid).delete();
+  }
+
+  static Future<void> _deleteCompany(String uid) async {
+    await firestore.collection(companyCollections).doc(uid).delete();
+    await firestore.collection(appUserCollections).doc(uid).delete();
+  }
+
+  static Future<void> _removeWorkerFromAllCollections(String workerId) async {
+    await _removeField(
+        documentIdName: "companyId",
+        collection: companyCollections,
+        field: "interestingWorkersIds",
+        workerId: workerId);
+    print("intrested worker deleted");
+    await _removeField(
+        documentIdName: "jobPostId",
+        collection: jobPostsCollections,
+        field: "applicantUserIds",
+        workerId: workerId);
+    print("applied job posts deleted deleted");
+    await _removeField(
+        documentIdName: "jobPostId",
+        collection: jobPostsCollections,
+        field: "declineUserIds",
+        workerId: workerId);
+    print("decline job posts deleted deleted");
+    await _removeField(
+        documentIdName: "jobPostId",
+        collection: jobPostsCollections,
+        field: "interviewedUserIds",
+        workerId: workerId);
+    print("interview job posts deleted deleted");
+    await _removeField(
+        documentIdName: "jobPostId",
+        collection: jobPostsCollections,
+        field: "hiredUserIds",
+        workerId: workerId);
+    print("hired job posts deleted deleted");
+    await _deleteWorker(workerId);
+  }
+
+  static Future<void> _deleteJobPosts(String uid) async {
+    var snapshot = await firestore
+        .collection(jobPostsCollections)
+        .where("companyId", isEqualTo: uid)
+        .get();
+    for (int i = 0; i < snapshot.docs.length; i++) {
+      Map<String, dynamic> res = snapshot.docs[i].data();
+      //print(snapshot.docs[i].data());
+
+      await firestore
+          .collection(jobPostsCollections)
+          .doc(res["jobPostId"])
+          .delete();
+      await _removeField(
+          documentIdName: "workerId",
+          collection: workersCollections,
+          field: "savedJobPostIds",
+          workerId: res["jobPostId"]);
+    }
+  }
+
+  static Future<void> _removeCompanyFromAllCollections(String companyId) async {
+    await _deleteJobPosts(companyId);
+    print("jobPosts deleted");
+    await _deleteCompany(companyId);
+  }
+
+  static Future<void> deleteUser(String uid, bool isCompany) async {
+    await _deleteUserChats(uid);
+    print("chats deleted");
+    if (isCompany) {
+      await _removeCompanyFromAllCollections(uid);
+    } else {
+      await _removeWorkerFromAllCollections(uid);
+    }
+  }
 }
