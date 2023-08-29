@@ -75,6 +75,8 @@ dependencies:
   upgrader: ^8.1.0
   package_info_plus: ^4.1.0
   pub_semver: ^2.1.4
+  purchases_flutter: ^4.1.1
+
 
 
 
