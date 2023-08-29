@@ -1,21 +1,19 @@
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
-import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/auth/common_widget/login_or_register.dart';
+import 'package:blukers/views/common_views/components/app_version_display.dart';
 import 'package:blukers/views/common_views/profile_dialog.dart';
 import 'package:blukers/views/common_views/profile_section.dart';
-import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
 import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
-import 'package:blukers/views/company/workers_components/display_worker_dialog.dart';
+import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 import '../common_views/page_template/page_template.dart';
-
-import 'package:unicons/unicons.dart';
 
 class CompanyProfile extends StatefulWidget {
   const CompanyProfile({super.key});
@@ -145,7 +143,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                       height: 70,
                                                       width: 70,
                                                       margin: const EdgeInsets
-                                                          .symmetric(
+                                                              .symmetric(
                                                           horizontal: 100,
                                                           vertical: 10),
                                                       decoration: BoxDecoration(
@@ -207,7 +205,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                     height: 70,
                                                     width: 70,
                                                     margin: const EdgeInsets
-                                                        .symmetric(
+                                                            .symmetric(
                                                         horizontal: 100,
                                                         vertical: 10),
                                                     decoration: BoxDecoration(
@@ -318,8 +316,59 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser != null) {
                         print("delete user");
-                         chatProvider.clearGroups();
+
+                        chatProvider.clearGroups();
                         up.deleteUser(up.appUser!.uid);
+
+                        showDialog(
+                          context: context,
+                          builder: (context) => ProfileDialog(
+                              child: Column(
+                            children: [
+                              Text(
+                                "Are you sure you want to delete your account?",
+                                style:
+                                    ThemeTextStyles.headingThemeTextStyle.apply(
+                                  color: ThemeColors.blukersOrangeThemeColor,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              const Text(
+                                "All your account information will be deleted, this action cannot be undone.",
+                                style: ThemeTextStyles.bodyThemeTextStyle,
+                              ),
+                              const SizedBox(
+                                height: 35,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () async {
+                                      Navigator.of(context).pop();
+                                      up.deleteUser(up.appUser!.uid);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(16),
+                                      decoration: BoxDecoration(
+                                          color: ThemeColors.primaryThemeColor,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Text(
+                                        "Delete",
+                                        style: ThemeTextStyles
+                                            .informationDisplayPlaceHolderThemeTextStyle
+                                            .apply(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )),
+                        );
                       }
                     },
                   ),
@@ -367,6 +416,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 40),
+                  AppVersionDisplay(),
                   const SizedBox(height: 30),
                 ],
               ),

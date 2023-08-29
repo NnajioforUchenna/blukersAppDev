@@ -197,7 +197,11 @@ class _BasicInformationState extends State<BasicInformation> {
                         descriptionController.text = description!;
                       },
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.description,
+                        hintText: userRole == "worker"
+                            ? AppLocalizations.of(context)!
+                                .writeSomethingAboutYou
+                            : AppLocalizations.of(context)!
+                                .writeSomethingAboutYourCompany,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: const BorderSide(

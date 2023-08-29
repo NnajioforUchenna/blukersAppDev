@@ -257,6 +257,14 @@
     "jobPosition": "Job Position",
     "skills": "Skills",
 
+    "aboutYou": "About You",
+    "aboutYourCompany": "About Your Company",
+    "writeSomethingAboutYou": "Write something about you",
+    "writeSomethingAboutYourCompany": "Write something about your company",
+
+    "updateRequired": "Update Required",
+    "updateRequiredDescription": "Please update the app to continue.",
+
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",
     "workers": "Workers",
