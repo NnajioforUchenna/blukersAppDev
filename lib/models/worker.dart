@@ -74,7 +74,7 @@ class Worker {
 
   get timeAgo => getTimeAgo(dateCreated.toString());
   get location =>
-      addresses!.isNotEmpty ? addresses?.first.location : 'Location not set';
+      addresses.isNotEmpty ? addresses.first.location : 'Location not set';
 
   Map<String, dynamic> toMap() {
     return {

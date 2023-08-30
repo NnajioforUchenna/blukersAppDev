@@ -286,7 +286,7 @@ class WorkerProvider with ChangeNotifier {
     workExperience.forEach((element) {
       print(element);
       newWorker!.workExperiences = [];
-      newWorker!.workExperiences?.add(WorkExperience.fromMap(element));
+      newWorker!.workExperiences.add(WorkExperience.fromMap(element));
     });
     workerProfileNextPage();
   }
@@ -325,12 +325,12 @@ class WorkerProvider with ChangeNotifier {
   List<Worker> appliedWorkers = [];
 
   Future<void> setDisplayLists(JobPost jobPost) async {
-    if (jobPost.jobPostId!.isEmpty) {
+    if (jobPost.jobPostId.isEmpty) {
       return;
     }
 
     appliedWorkers = await WorkerDataProvider.getWorkerLists(
-        jobPost!.jobPostId!, 'applicantUserIds');
+        jobPost.jobPostId, 'applicantUserIds');
     notifyListeners();
   }
 

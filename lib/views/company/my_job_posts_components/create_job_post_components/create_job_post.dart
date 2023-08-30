@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../services/responsive.dart';
-import '../../../../utils/styles/theme_text_styles.dart';
 import 'job_post_page_slider.dart';
 import 'job_post_time_line.dart';
 
