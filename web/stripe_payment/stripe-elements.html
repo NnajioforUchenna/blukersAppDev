@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stripe Elements</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        #counter-loader {
+            font-size: 24px;
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- Countdown logic for the loader -->
+<div class="loading-container" id="loading-container">
+    <div class="loading-text">
+        Loading…...Getting Stripe for Payment
+    </div>
+    <div class="counter" id="counter">0</div>
+    <div class="slider-container">
+        <div class="slider" id="slider"></div>
+    </div>
+</div>
+<link rel="stylesheet" href="loadingAnimation/animationStyle.css" />
+<script src="loadingAnimation/animationJS.js"></script>
+<!-- Stripe Payments logic -->
+<script src="stripe_payments.js"></script>
+</body>
+</html>
