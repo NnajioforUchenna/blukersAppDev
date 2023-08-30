@@ -1,0 +1,50 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%; /* make sure the container takes up the full width of the viewport */
+  font-family: Arial, sans-serif;
+}
+
+.loading-text {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+  animation: loading-text 3s infinite;
+  text-align: center; /* center align the text */
+}
+
+@keyframes loading-text {
+  0% {
+    color: #333;
+  }
+  50% {
+    color: #888;
+  }
+  100% {
+    color: #333;
+  }
+}
+
+.counter {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.slider-container {
+  width: 60%;
+  height: 5px;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin: 0 auto; /* center the slider */
+}
+
+.slider {
+  height: 5px;
+  width: 0%;
+  background-color: #333;
+  border-radius: 5px;
+}

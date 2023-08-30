@@ -12,7 +12,8 @@ class MyElevatedButton extends StatefulWidget {
       {super.key,
       required this.firstText,
       required this.secondText,
-      required this.thirdText, required this.onPress});
+      required this.thirdText,
+      required this.onPress});
 
   @override
   _MyElevatedButtonState createState() => _MyElevatedButtonState();
@@ -65,32 +66,34 @@ class _MyElevatedButtonState extends State<MyElevatedButton> {
                 ),
 
                 const SizedBox(width: 20),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: widget.firstText.toUpperCase(),
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 17.sp,
-                          fontWeight: FontWeight.w700,
+                Flexible(
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: widget.firstText.toUpperCase(),
+                          style: GoogleFonts.montserrat(
+                            color: Colors.black,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text: " ${widget.secondText}  ",
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 16.sp,
+                        TextSpan(
+                          text: " ${widget.secondText}  ",
+                          style: GoogleFonts.montserrat(
+                            color: Colors.black,
+                            fontSize: 16.sp,
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text: widget.thirdText,
-                        style: GoogleFonts.montserrat(
-                          color: Colors.grey,
-                          fontSize: 11.sp,
+                        TextSpan(
+                          text: widget.thirdText,
+                          style: GoogleFonts.montserrat(
+                            color: Colors.grey,
+                            fontSize: 11.sp,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ), // Subtitle
               ],

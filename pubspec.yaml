@@ -31,8 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+  flutter_localization: ^0.1.13
   intl: any
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,6 +43,7 @@ dependencies:
   cloud_firestore: ^4.8.3
   firebase_auth: ^4.7.1
   firebase_storage: ^11.2.5
+  google_sign_in: ^6.1.4
   googleapis: ^11.4.0
   flutter_form_builder: ^9.1.0
   flutter_easyloading: ^3.0.5
@@ -63,24 +63,21 @@ dependencies:
   flutter_pdfview: ^1.0.1
   permission_handler:
   http: ^1.1.0
-  flutter_google_places_sdk: ^0.3.2+5
+  flutter_google_places_sdk: ^0.3.6
   lottie: ^2.6.0
   flutter_screenutil: ^5.8.4
   carousel_slider: ^4.2.1
   url_strategy: ^0.2.0
   webview_flutter: ^4.2.2
+  webview_flutter_web: ^0.2.2+1
   cloud_functions: ^4.4.0
   url_launcher: ^6.1.12
   change_app_package_name: ^1.1.0
   upgrader: ^8.1.0
   package_info_plus: ^4.1.0
   pub_semver: ^2.1.4
-  purchases_flutter: ^4.1.1
-
-
-
-
-
+  in_app_purchase: ^3.1.8
+#  purchases_flutter: ^4.1.1
 
 
 
@@ -114,6 +111,7 @@ flutter:
     # - assets/icons/
     - assets/fonts/
     - assets/animations/
+    - web/stripe_payment/
 
   fonts:
     - family: Montserrat

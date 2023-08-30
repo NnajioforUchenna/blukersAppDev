@@ -5,6 +5,7 @@ import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/company_provider.dart';
 import 'package:blukers/providers/industry_provider.dart';
 import 'package:blukers/providers/job_posts_provider.dart';
+import 'package:blukers/providers/payments_provider.dart';
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/services/generate_route.dart';
@@ -15,22 +16,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:url_strategy/url_strategy.dart';
 import 'package:upgrader/upgrader.dart';
-
-import 'package:purchases_flutter/purchases_flutter.dart';
-import 'package:blukers/config/revenue_cat_constants.dart';
-
-final _revenueCatConfiguration =
-    PurchasesConfiguration(revenueCatConstants["APP_API_KEY"]);
+import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Purchases.configure(_revenueCatConfiguration);
-
-  // Only call clearSavedSettings() during testing to reset internal values.
-  // await Upgrader.clearSavedSettings(); // REMOVE this for release builds
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -58,6 +48,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
         ChangeNotifierProvider(create: (context) => AppVersionsProvider()),
+        ChangeNotifierProxyProvider<UserProvider, PaymentsProvider>(
+          create: (context) => PaymentsProvider(),
+          update: (_, user, PaymentsProvider? previous) =>
+              previous!..update(user.appUser),
+        ),
         ChangeNotifierProxyProvider<UserProvider, CompanyProvider>(
           create: (context) => CompanyProvider(),
           update: (_, user, CompanyProvider? previous) =>
