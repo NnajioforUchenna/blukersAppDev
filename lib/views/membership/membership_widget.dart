@@ -10,7 +10,7 @@ class MembershipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Responsive.isMobile(context)
-        ? MobileMembershipWidget()
+        ? const MobileMembershipWidget()
         : const DesktopMembershipWidget();
   }
 }
