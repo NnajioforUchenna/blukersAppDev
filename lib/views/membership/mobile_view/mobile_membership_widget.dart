@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:blukers/services/stripe_data.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/membership/mobile_view/checkout_screen.dart';
@@ -80,7 +78,9 @@ class MobileMembershipWidget extends StatelessWidget {
                   firstText: 'Premium',
                   secondText: '',
                   thirdText: '\$4.99/Monthly',
-                  onPress: () async {},
+                  onPress: () async {
+                    pp.pay4Subscription(context, 'premium');
+                  },
                 ),
               SizedBox(
                 height: 18.sp,
@@ -89,16 +89,9 @@ class MobileMembershipWidget extends StatelessWidget {
                 MyElevatedButton(
                   firstText: 'Premium',
                   secondText: 'Plus',
-                  thirdText: '\$19.99/Monthly',
+                  thirdText: '\$9.99/Monthly',
                   onPress: () async {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //   builder: (context) => const ProcessStripePayment(),
-                    // ));
-                    String checkOutUrl = await pp.payPremiumPlus();
-                    if (checkOutUrl != 'error') {
-                      print(checkOutUrl);
-                      window.location.assign(checkOutUrl);
-                    }
+                    pp.pay4Subscription(context, 'premiumPlus');
                   },
                 ),
               SizedBox(

@@ -1,14 +1,28 @@
-import 'dart:io'; // if (dart.library.html) 'dart:html'
+import 'dart:io';
 
+import 'package:blukers/common_files/mock_data.dart';
 import 'package:blukers/models/app_user.dart';
 import 'package:blukers/services/stripe_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../models/subscription_model.dart';
+import '../views/membership/subscription_components/countdown_waiting_page.dart';
+
+part 'apple_payment_provider.dart';
 
 class PaymentsProvider with ChangeNotifier {
   AppUser? appUser;
+
+  // In-app Purchase parameters
+  late final InAppPurchase _iap;
+  late final Stream<List<PurchaseDetails>> purchaseUpdated;
+  final Set<String> _kProductIds = <String>{'blukers_499_1m'};
+  List<ProductDetails> products = mockProducts; // [];
 
   late Stream<SubscriptionStatus> status;
   late StripeData stripeData;
@@ -22,6 +36,7 @@ class PaymentsProvider with ChangeNotifier {
     } else {
       if (Platform.isIOS) {
         // In-app Purchase Code
+        initializeApplePayment();
       } else if (Platform.isAndroid) {
         // Stripe Purchase Code
       }
@@ -88,16 +103,16 @@ class PaymentsProvider with ChangeNotifier {
     }
   }
 
-  Future<String> payPremiumPlus() async {
+  Future<String> getCheckOutUrl(priceId, successUrl, failedUrl) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     DocumentReference docRef = await firestore
         .collection("AppUsers")
         .doc(appUser!.uid)
         .collection("checkout_sessions")
         .add({
-      "price": stripeData.employeePremiumPlusPriceId,
-      "success_url": kIsWeb ? "http://localhost:50246/" : "https://success.com",
-      "cancel_url": kIsWeb ? "http://localhost:50246/" : "https://cancel.com",
+      "price": priceId,
+      "success_url": successUrl,
+      "cancel_url": failedUrl,
     });
 
     int attempts = 0;
@@ -117,16 +132,82 @@ class PaymentsProvider with ChangeNotifier {
       }
 
       attempts++;
-      print(attempts);
       if (attempts < maxAttempts) {
         await Future.delayed(
             delayBetweenAttempts); // Wait before the next attempt
       }
     }
 
-    print(
-        "Document does not contain the expected data after $maxAttempts attempts.");
     return 'error';
+  }
+
+  String getPaymentPlatformName() {
+    if (kIsWeb) {
+      return "Stripe";
+    } else {
+      if (Platform.isIOS) {
+        return "Apple";
+      } else if (Platform.isAndroid) {
+        return "Google";
+      }
+    }
+    return "Stripe";
+  }
+
+  Future<void> pay4Subscription(
+      BuildContext context, String subscriptionType) async {
+    // Determine User's Platform
+    String paymentPlatform = getPaymentPlatformName();
+    // Show Countdown Waiting Page
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => CountDown(
+                platform: paymentPlatform,
+              )),
+    );
+    // connect the payment platform
+    if (paymentPlatform == "Stripe") {
+      getStripePayment(context, subscriptionType);
+    } else if (paymentPlatform == "Apple") {
+      // In-app Purchase Code
+      getApplePayment(context, subscriptionType);
+    } else if (paymentPlatform == "Google") {
+      // Stripe Purchase Code
+    }
+  }
+
+  Future<void> getStripePayment(
+      BuildContext context, String subscriptionType) async {
+    String priceId = "";
+    if (subscriptionType == "premium") {
+      priceId = stripeData.employeePremiumPriceId;
+    } else {
+      priceId = stripeData.employeePremiumPlusPriceId;
+    }
+
+    String urlEx = Uri.base.toString();
+    String baseUrl = Uri.parse(urlEx).removeFragment().toString();
+    String successUrl = baseUrl + 'paymentSuccess';
+    String failedUrl = baseUrl + 'paymentFailed';
+
+    String checkOutUrl = await getCheckOutUrl(priceId, successUrl, failedUrl);
+
+    if (checkOutUrl == 'error') {
+      EasyLoading.show(
+        status: 'An Error Occurred While Getting Stripe Payment...',
+        maskType: EasyLoadingMaskType.black,
+      );
+
+      // Delay for 5 seconds
+      await Future.delayed(const Duration(seconds: 3));
+      Navigator.pop(context);
+      EasyLoading.dismiss();
+    } else {
+      if (kIsWeb) {
+        html.window.location.assign(checkOutUrl);
+      }
+    }
   }
 
 // Add other functions as needed (e.g., verify, restore, etc.)
