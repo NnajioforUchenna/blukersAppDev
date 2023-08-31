@@ -1,11 +1,14 @@
+import 'dart:html';
+
 import 'package:blukers/services/stripe_data.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/membership/mobile_view/checkout_screen.dart';
-import 'package:blukers/views/membership/process_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/payments_provider.dart';
 import 'carousel_with_cards.dart';
 import 'my_evelated_button.dart';
 
@@ -15,7 +18,7 @@ class MobileMembershipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // UserProvider up = Provider.of<UserProvider>(context);
-    // PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
+    PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -72,54 +75,62 @@ class MobileMembershipWidget extends StatelessWidget {
               SizedBox(
                 height: 18.sp,
               ),
-              MyElevatedButton(
-                firstText: 'Premium',
-                secondText: '',
-                thirdText: '\$4.99/Monthly',
-                onPress: () async {},
-              ),
+              if (!pp.isActiveMember)
+                MyElevatedButton(
+                  firstText: 'Premium',
+                  secondText: '',
+                  thirdText: '\$4.99/Monthly',
+                  onPress: () async {},
+                ),
               SizedBox(
                 height: 18.sp,
               ),
-              MyElevatedButton(
-                firstText: 'Premium',
-                secondText: 'Plus',
-                thirdText: '\$19.99/Monthly',
-                onPress: () async {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ProcessStripePayment(),
-                  ));
-                },
-              ),
-              SizedBox(
-                height: 18.sp,
-              ),
-              Center(
-                child: InkWell(
-                  onTap: () async {
-                    var url = await getCustomerPortalUrl();
-
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CheckoutScreen(url: url);
-                    }));
+              if (!pp.isActiveMember)
+                MyElevatedButton(
+                  firstText: 'Premium',
+                  secondText: 'Plus',
+                  thirdText: '\$19.99/Monthly',
+                  onPress: () async {
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //   builder: (context) => const ProcessStripePayment(),
+                    // ));
+                    String checkOutUrl = await pp.payPremiumPlus();
+                    if (checkOutUrl != 'error') {
+                      print(checkOutUrl);
+                      window.location.assign(checkOutUrl);
+                    }
                   },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[300],
+                ),
+              SizedBox(
+                height: 18.sp,
+              ),
+              if (pp.isActiveMember)
+                Center(
+                  child: InkWell(
+                    onTap: () async {
+                      var url = await getCustomerPortalUrl();
+
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CheckoutScreen(url: url);
+                      }));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.grey[300],
+                      ),
+                      child: Text('Manage Your Subscription',
+                          style: GoogleFonts.montserrat(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          )),
                     ),
-                    child: Text('Manage Your Subscription',
-                        style: GoogleFonts.montserrat(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        )),
                   ),
                 ),
-              ),
             ],
           ),
         ),

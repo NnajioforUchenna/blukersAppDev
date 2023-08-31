@@ -5,7 +5,6 @@
 // AppUsers
 // But we also use this file to get our stripe product memberships data.
 
-import 'package:blukers/data_providers/chat_data_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
