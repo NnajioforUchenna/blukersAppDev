@@ -1,9 +1,9 @@
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyButtomNavigationBar extends StatefulWidget {
   const MyButtomNavigationBar({super.key});
@@ -43,6 +43,13 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
           selectedIcon: const Icon(UniconsLine.chat,
               color: ThemeColors.primaryThemeColor),
           label: AppLocalizations.of(context)!.chat,
+        ),
+        const NavigationDestination(
+          icon:
+              Icon(UniconsLine.house_user, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: Icon(UniconsLine.house_user,
+              color: ThemeColors.primaryThemeColor),
+          label: 'Services',
         ),
         NavigationDestination(
           icon:
