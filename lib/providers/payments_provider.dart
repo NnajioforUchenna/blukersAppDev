@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:blukers/common_files/mock_data.dart';
 import 'package:blukers/models/app_user.dart';
 import 'package:blukers/services/stripe_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,8 +20,8 @@ class PaymentsProvider with ChangeNotifier {
   // In-app Purchase parameters
   late final InAppPurchase _iap;
   late final Stream<List<PurchaseDetails>> purchaseUpdated;
-  final Set<String> _kProductIds = <String>{'blukers_499_1m'};
-  List<ProductDetails> products = mockProducts; // [];
+  final Set<String> _subscriptionIds = {'blukers_499_1m', 'blukers_999_1m'};
+  List<ProductDetails> _subscriptions = [];
 
   late Stream<SubscriptionStatus> status;
   late StripeData stripeData;

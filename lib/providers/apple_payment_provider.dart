@@ -5,15 +5,20 @@ extension ApplePaymentProvider on PaymentsProvider {
     print("Initializing Apple Payment");
     _iap = InAppPurchase.instance;
     purchaseUpdated = _iap.purchaseStream;
+
     final ProductDetailsResponse response =
-        await _iap.queryProductDetails(_kProductIds);
-    products = response.productDetails;
-    print("Products: $products");
+        await _iap.queryProductDetails(_subscriptionIds);
+    if (response.notFoundIDs.isNotEmpty) {
+      // Handle missing IDs.
+      print("Missing IDs: ${response.notFoundIDs}");
+    }
+    _subscriptions = response.productDetails;
+    print("Subscriptions: $_subscriptions");
   }
 
   void getApplePayment(BuildContext context, String subscriptionType) {
     final PurchaseParam purchaseParam =
-        PurchaseParam(productDetails: products[0]);
+        PurchaseParam(productDetails: _subscriptions[0]);
     _iap.buyNonConsumable(purchaseParam: purchaseParam);
 
     _initializePurchaseUpdate();
