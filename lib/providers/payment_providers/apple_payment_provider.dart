@@ -1,4 +1,4 @@
-part of 'payments_provider.dart';
+part of '../payments_provider.dart';
 
 extension ApplePaymentProvider on PaymentsProvider {
   Future<void> initializeApplePayment() async {

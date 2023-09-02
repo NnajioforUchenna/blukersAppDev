@@ -1,8 +1,8 @@
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers/user_provider.dart';
 
@@ -20,6 +20,7 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     _selectedIndex = up.currentPageIndex;
+
     return NavigationRail(
       selectedIndex: _selectedIndex,
       onDestinationSelected: (int index) {
@@ -75,6 +76,13 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
           selectedIcon: const Icon(UniconsLine.chat,
               color: ThemeColors.primaryThemeColor),
           label: Text(AppLocalizations.of(context)!.chat),
+        ),
+        NavigationRailDestination(
+          icon: const Icon(UniconsLine.house_user,
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.house_user,
+              color: ThemeColors.primaryThemeColor),
+          label: Text('Services'),
         ),
         NavigationRailDestination(
           icon:

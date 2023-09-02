@@ -10,6 +10,7 @@ final List<String> routesWorker = [
   '/jobs',
   '/myJobs',
   '/companyChat',
+  '/offers',
   '/workerProfile',
   '/login'
 ];
@@ -17,6 +18,7 @@ final List<String> routesCompany = [
   '/workers',
   '/myJobPosts',
   '/companyChat',
+  '/offers',
   'companyProfile',
   '/login'
 ];
@@ -99,4 +101,42 @@ Widget displayParagraph(String text) {
     ),
     textAlign: TextAlign.left, // Align text to the left
   );
+}
+
+final List<Map<String, String>> listOffers = [
+  {
+    'title': 'Subscription',
+    'description':
+        'Stay updated with the latest job opportunities in the USA tailored for international talents.',
+    'route': '/membership'
+  },
+  {
+    'title': 'Services',
+    'description':
+        'Our comprehensive suite of services ensures that international workers transition smoothly into their new roles in the USA.',
+    'route': '/services'
+  },
+  // {
+  //   'title': 'Exams',
+  //   'description':
+  //       'Prepare for relevant certifications and evaluations required for specific job roles in the USA.',
+  //   'route': '/exams'
+  // },
+  // {
+  //   'title': 'Courses',
+  //   'description':
+  //       'Skill-enhancement courses designed to make you more marketable to employers in the USA.',
+  //   'route': '/courses'
+  // },
+  // {
+  //   'title': 'Practicals',
+  //   'description':
+  //       'Real-world practical experiences to familiarize international talents with the US work environment.',
+  //   'route': '/practicals'
+  // },
+];
+
+List<List<Widget>> combineLists(List<Widget> list1, List<Widget> list2) {
+  return List<List<Widget>>.generate(
+      list1.length, (index) => [list1[index], list2[index]]);
 }
