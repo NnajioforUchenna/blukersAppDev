@@ -10,8 +10,28 @@ import '../../../providers/payments_provider.dart';
 import 'carousel_with_cards.dart';
 import 'my_evelated_button.dart';
 
-class MobileMembershipWidget extends StatelessWidget {
+class MobileMembershipWidget extends StatefulWidget {
   const MobileMembershipWidget({super.key});
+
+  @override
+  State<MobileMembershipWidget> createState() => _MobileMembershipWidgetState();
+}
+
+class _MobileMembershipWidgetState extends State<MobileMembershipWidget> {
+  late PaymentsProvider pp;
+
+  @override
+  void initState() {
+    pp = Provider.of<PaymentsProvider>(context, listen: false);
+    pp.appleInitialize();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pp.appleDispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

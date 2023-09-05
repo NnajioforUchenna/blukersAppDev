@@ -9,13 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:universal_html/html.dart' as html;
 
 import '../models/subscription_model.dart';
 import '../views/membership/subscription_components/countdown_waiting_page_pulse.dart';
 import '../views/services/mobile_view/display_stripe_url_mobile.dart';
 
-part 'payment_providers/apple_payment_provider.dart';
+part 'payment_providers/in_app_purchase_payment_provider.dart';
 part 'payment_providers/stripe_payment_provider.dart';
 
 // Firestore instance
@@ -47,12 +49,7 @@ class PaymentsProvider with ChangeNotifier {
       // Initialize Stripe
       initializeStripe();
     } else {
-      if (Platform.isIOS) {
-        // In-app Purchase Code
-        initializeApplePayment();
-      } else if (Platform.isAndroid) {
-        // Stripe Purchase Code
-      }
+      initializeInAppPurchasePayment();
     }
   }
 
@@ -142,10 +139,10 @@ class PaymentsProvider with ChangeNotifier {
     if (paymentPlatform == "Stripe") {
       getStripePayment(context, subscriptionType);
     } else if (paymentPlatform == "Apple") {
-      // In-app Purchase Code
+      // In-app Purchase Code for Apple
       getApplePayment(context, subscriptionType);
     } else if (paymentPlatform == "Google") {
-      // Stripe Purchase Code
+      // In-app Purchase Code for Google
     }
   }
 

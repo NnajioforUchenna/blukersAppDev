@@ -43,7 +43,7 @@
               "client_id": "25989559034-04q0n9so1pot5u4s25i3naj3qldptv40.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.blukers.RunnerTests"
+                "bundle_id": "com.terralabor.blukers.RunnerTests"
               }
             }
           ]
@@ -54,7 +54,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:25989559034:android:9aecae48d1e0513364cf43",
         "android_client_info": {
-          "package_name": "com.example.blukers"
+          "package_name": "com.terralabor.blukers"
         }
       },
       "oauth_client": [
@@ -79,7 +79,7 @@
               "client_id": "25989559034-04q0n9so1pot5u4s25i3naj3qldptv40.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.blukers.RunnerTests"
+                "bundle_id": "com.terralabor.blukers.RunnerTests"
               }
             }
           ]

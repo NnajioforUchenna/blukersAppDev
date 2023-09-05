@@ -1,4 +1,4 @@
-package com.example.blukers
+package com.terralabor.blukers
 
 import io.flutter.embedding.android.FlutterActivity
 

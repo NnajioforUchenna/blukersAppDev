@@ -17,12 +17,34 @@ part of '../payments_provider.dart';
 //     }
 //   }
 
-extension ApplePaymentProvider on PaymentsProvider {
-  Future<void> initializeApplePayment() async {
-    print("Initializing Apple Payment");
-    _iap = InAppPurchase.instance;
+extension InAppPurchasePaymentProvider on PaymentsProvider {
+  Future<void> initializeInAppPurchasePayment() async {
+    print("Initializing In App Payment");
+
+    try {
+      _iap = InAppPurchase.instance;
+      final bool isAvailable = await _iap.isAvailable();
+
+      if (isAvailable) {
+        print("In App Payment is available");
+      } else {
+        print("In App Payment is not available");
+      }
+    } catch (error) {
+      print('IAP Error: $error');
+    }
+
+    // _iap = InAppPurchase.instance;
+    // final bool isAvailable = await _iap.isAvailable();
+    //
+    // if (isAvailable) {
+    //   print("In App Payment is available");
+    // } else {
+    //   print("In App  Payment is not available");
+    // }
     purchaseUpdated = _iap.purchaseStream;
 
+    // Trying to get the products from Store
     final ProductDetailsResponse response =
         await _iap.queryProductDetails(_subscriptionIds);
 
@@ -36,6 +58,7 @@ extension ApplePaymentProvider on PaymentsProvider {
   }
 
   void getApplePayment(BuildContext context, String subscriptionType) {
+    print('Getting Apple Payment');
     final PurchaseParam purchaseParam =
         PurchaseParam(productDetails: _subscriptions[0]);
     _iap.buyNonConsumable(purchaseParam: purchaseParam);
@@ -63,5 +86,39 @@ extension ApplePaymentProvider on PaymentsProvider {
       // Handle other purchase statuses if needed, such as:
       // PurchaseStatus.error, PurchaseStatus.pending, etc.
     }
+  }
+
+  Future<void> appleInitialize() async {
+    if (Platform.isIOS) {
+      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
+          _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
+    }
+  }
+
+  void appleDispose() {
+    if (Platform.isIOS) {
+      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
+          _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      iosPlatformAddition.setDelegate(null);
+    }
+  }
+}
+
+/// Example implementation of the
+/// [`SKPaymentQueueDelegate`](https://developer.apple.com/documentation/storekit/skpaymentqueuedelegate?language=objc).
+///
+/// The payment queue delegate can be implementated to provide information
+/// needed to complete transactions.s
+class ExamplePaymentQueueDelegate implements SKPaymentQueueDelegateWrapper {
+  @override
+  bool shouldContinueTransaction(
+      SKPaymentTransactionWrapper transaction, SKStorefrontWrapper storefront) {
+    return true;
+  }
+
+  @override
+  bool shouldShowPriceConsent() {
+    return false;
   }
 }
