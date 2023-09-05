@@ -15,13 +15,13 @@ class DisplayJobPostDialog extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Dialog(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(14.0.sp),
+            padding: EdgeInsets.all(0.sp),
             child: ConstrainedBox(
                 constraints: BoxConstraints(
                   maxWidth:
@@ -35,7 +35,7 @@ class DisplayJobPostDialog extends StatelessWidget {
             children: [
               const Spacer(),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(0),
                 child: FloatingActionButton(
                   child: const Icon(Icons.close),
                   onPressed: () => Navigator.of(context).pop(),

@@ -24,16 +24,24 @@ class ProfileSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2),
       child: Row(
         children: [
+          const Icon(
+            UniconsLine.user_circle,
+            // color: Colors.grey[700],
+            color: ThemeColors.black3ThemeColor,
+            size: 30,
+          ),
+          SizedBox(width: 10),
           Expanded(
             child: GestureDetector(
               onTap: onClickSection,
               child: Text(
                 heading,
-                style: ThemeTextStyles.headingThemeTextStyle
-                    .apply(color: Colors.black),
+                style: ThemeTextStyles.headingThemeTextStyle.apply(
+                  color: ThemeColors.black3ThemeColor,
+                ),
               ),
             ),
           ),

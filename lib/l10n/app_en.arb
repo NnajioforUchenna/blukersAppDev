@@ -265,6 +265,11 @@
     "updateRequired": "Update Required",
     "updateRequiredDescription": "Please update the app to continue.",
 
+    "members": "Members",
+    "deleteAccount": "Delete Account",
+
+    "connecting": "Connecting",
+
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",
     "workers": "Workers",

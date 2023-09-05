@@ -65,7 +65,7 @@ abstract class ThemeTextStyles {
   static const TextStyle headingThemeTextStyle = TextStyle(
     fontFamily: 'Montserrat',
     color: ThemeColors.secondaryThemeColor,
-    fontSize: 20,
+    fontSize: 18,
     height: 1.5,
     fontWeight: FontWeight.w700,
   );
