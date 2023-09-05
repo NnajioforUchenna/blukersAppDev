@@ -78,11 +78,11 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
           label: Text(AppLocalizations.of(context)!.chat),
         ),
         NavigationRailDestination(
-          icon: const Icon(UniconsLine.house_user,
+          icon: const Icon(UniconsLine.plus_circle,
               color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.house_user,
+          selectedIcon: const Icon(UniconsLine.plus_circle,
               color: ThemeColors.primaryThemeColor),
-          label: Text('Services'),
+          label: Text(AppLocalizations.of(context)!.members),
         ),
         NavigationRailDestination(
           icon:

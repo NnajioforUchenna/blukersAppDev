@@ -1,5 +1,22 @@
 part of '../payments_provider.dart';
 
+// // In iOS there is an error when you close or cancel the in-app subscription
+// // purchase and then you try purchasing it again.
+// // ERROR:
+// // Unhandled Exception: PlatformException(storekit_duplicate_product_object,
+// // There is a pending transaction for the same product identifier. Please
+// // either wait for it to be finished or finish it manually using
+// // `completePurchase` to avoid edge cases., {applicationUsername: null,
+// // requestData: null, quantity: 1, productIdentifier: blukers_workers_premium,
+// // simulatesAskToBuyInSandbox: false, paymentDiscount: null}, null)
+// // A Solution that might work:
+// // Complete all pending purchases to avoid errors
+//   for (var purchaseDetails in purchaseDetailsList) {
+//     if (purchaseDetails.pendingCompletePurchase) {
+//       await _iap.completePurchase(purchaseDetails);
+//     }
+//   }
+
 extension ApplePaymentProvider on PaymentsProvider {
   Future<void> initializeApplePayment() async {
     print("Initializing Apple Payment");
@@ -8,10 +25,12 @@ extension ApplePaymentProvider on PaymentsProvider {
 
     final ProductDetailsResponse response =
         await _iap.queryProductDetails(_subscriptionIds);
+
     if (response.notFoundIDs.isNotEmpty) {
       // Handle missing IDs.
       print("Missing IDs: ${response.notFoundIDs}");
     }
+
     _subscriptions = response.productDetails;
     print("Subscriptions: $_subscriptions");
   }
@@ -32,7 +51,7 @@ extension ApplePaymentProvider on PaymentsProvider {
     });
   }
 
-  void _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList) {
+  void _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList) async {
     for (var purchaseDetails in purchaseDetailsList) {
       // Handle your purchase logic here - for example, unlocking content, updating the UI, etc.
 

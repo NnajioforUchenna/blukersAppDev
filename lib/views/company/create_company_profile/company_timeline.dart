@@ -120,7 +120,7 @@ class CompanyTimeLine extends StatelessWidget {
 }
 
 class _StartChildCompany extends StatelessWidget {
-  const _StartChildCompany({super.key, required this.index});
+  const _StartChildCompany({required this.index});
   final int index;
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,6 @@ class _StartChildCompany extends StatelessWidget {
 
 class _EndChildCompany extends StatelessWidget {
   const _EndChildCompany({
-    super.key,
     required this.text,
     required this.current,
   });
@@ -170,7 +169,7 @@ class _EndChildCompany extends StatelessWidget {
 }
 
 class _IndicatorCompany extends StatelessWidget {
-  const _IndicatorCompany({super.key, required this.status});
+  const _IndicatorCompany({required this.status});
 
   final _CompanyStatus status;
 

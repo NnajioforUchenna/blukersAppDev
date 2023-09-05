@@ -1,5 +1,5 @@
 String getTimeAgo(String dateCreated) {
-  if (dateCreated == null || dateCreated.isEmpty) {
+  if (dateCreated.isEmpty) {
     return "Date not provided";
   }
 

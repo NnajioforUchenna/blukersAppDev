@@ -5,6 +5,7 @@ import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';
 import 'package:blukers/views/common_views/components/icon_text_404.dart';
+import 'package:blukers/views/common_views/components/profile_divider.dart';
 import 'package:blukers/views/common_views/info_display_component.dart';
 import 'package:blukers/views/common_views/profile_dialog.dart';
 import 'package:blukers/views/common_views/profile_section.dart';
@@ -73,6 +74,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     return PageTemplate(
@@ -190,7 +193,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                       height: 70,
                                                       width: 70,
                                                       margin: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           horizontal: 100,
                                                           vertical: 10),
                                                       decoration: BoxDecoration(
@@ -252,7 +255,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                     height: 70,
                                                     width: 70,
                                                     margin: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         horizontal: 100,
                                                         vertical: 10),
                                                     decoration: BoxDecoration(
@@ -344,6 +347,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         language: up.appUser!.language ?? "Not Available",
                       ),
                     ),
+                  const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.industriesSlashJobs,
                     icon: UniconsLine.pen,
@@ -396,6 +400,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         ),
                       ),
                     ),
+                  const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.pdfResume,
                     icon: UniconsLine.file_upload,
@@ -457,6 +462,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                   ),
                       ),
                     ),
+                  const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.onlineResume,
                     icon: UniconsLine.arrow_right,
@@ -468,6 +474,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       }
                     },
                   ),
+                  const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.subscriptions,
                     icon: UniconsLine.arrow_right,
@@ -479,9 +486,10 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       }
                     },
                   ),
+                  const ProfileDivider(),
                   ProfileSection(
-                    heading: "Delete Account",
-                    icon: UniconsLine.trash,
+                    heading: AppLocalizations.of(context)!.deleteAccount,
+                    icon: UniconsLine.trash_alt,
                     showInfoInNewPage: true,
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
@@ -543,7 +551,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       }
                     },
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -557,13 +565,14 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         child: Container(
                           // color: Colors.amber,
                           // margin: const EdgeInsets.all(12),
+                          width: width * .90,
                           padding: const EdgeInsets.symmetric(
                             vertical: 8,
                             horizontal: 24,
                           ),
                           decoration: BoxDecoration(
                               color: Colors.red,
-                              borderRadius: BorderRadius.circular(1000)),
+                              borderRadius: BorderRadius.circular(5)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

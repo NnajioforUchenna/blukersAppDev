@@ -44,12 +44,12 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
               color: ThemeColors.primaryThemeColor),
           label: AppLocalizations.of(context)!.chat,
         ),
-        const NavigationDestination(
-          icon:
-              Icon(UniconsLine.house_user, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: Icon(UniconsLine.house_user,
+        NavigationDestination(
+          icon: const Icon(UniconsLine.plus_circle,
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.plus_circle,
               color: ThemeColors.primaryThemeColor),
-          label: 'Services',
+          label: AppLocalizations.of(context)!.members,
         ),
         NavigationDestination(
           icon:
