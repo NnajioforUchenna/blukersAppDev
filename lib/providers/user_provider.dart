@@ -446,7 +446,7 @@ class UserProvider with ChangeNotifier {
   }
 
   bool isWorkerSaved(String workerId) {
-    return appUser?.company?.interestingWorkersIds?.contains(workerId) ??
+    return appUser?.company?.interestingWorkersIds.contains(workerId) ??
         false; // Change to JobPostId
   }
 
@@ -461,7 +461,7 @@ class UserProvider with ChangeNotifier {
   }
 
   void updateUI(String workerId) {
-    appUser?.company?.interestingWorkersIds?.add(workerId);
+    appUser?.company?.interestingWorkersIds.add(workerId);
     notifyListeners();
   }
 

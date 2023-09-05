@@ -113,7 +113,7 @@ class SignUpTimeline extends StatelessWidget {
 }
 
 class _StartChildDelivery extends StatelessWidget {
-  const _StartChildDelivery({super.key, required this.index});
+  const _StartChildDelivery({required this.index});
   final int index;
   @override
   Widget build(BuildContext context) {
@@ -123,7 +123,6 @@ class _StartChildDelivery extends StatelessWidget {
 
 class _EndChildDelivery extends StatelessWidget {
   const _EndChildDelivery({
-    super.key,
     required this.text,
     required this.current,
   });
@@ -162,7 +161,7 @@ class _EndChildDelivery extends StatelessWidget {
 }
 
 class _IndicatorDelivery extends StatelessWidget {
-  const _IndicatorDelivery({super.key, required this.status});
+  const _IndicatorDelivery({required this.status});
 
   final _DeliveryStatus status;
 

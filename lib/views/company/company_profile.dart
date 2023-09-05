@@ -143,7 +143,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                       height: 70,
                                                       width: 70,
                                                       margin: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           horizontal: 100,
                                                           vertical: 10),
                                                       decoration: BoxDecoration(
@@ -205,7 +205,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                                     height: 70,
                                                     width: 70,
                                                     margin: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         horizontal: 100,
                                                         vertical: 10),
                                                     decoration: BoxDecoration(
@@ -309,8 +309,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     },
                   ),
                   ProfileSection(
-                    heading: "Delete Account",
-                    icon: UniconsLine.trash,
+                    heading: AppLocalizations.of(context)!.deleteAccount,
+                    icon: UniconsLine.trash_alt,
                     showInfoInNewPage: true,
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
@@ -372,7 +372,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       }
                     },
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

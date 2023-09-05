@@ -60,7 +60,7 @@ class ChatProvider with ChangeNotifier {
       _chatRooms.add(ChatRoom.fromMap(res[i]));
     }
     EasyLoading.dismiss();
-     notifyListeners();// This is create an endless loop
+    // notifyListeners();// This is create an endless loop
   }
 
   void notifyListners() {

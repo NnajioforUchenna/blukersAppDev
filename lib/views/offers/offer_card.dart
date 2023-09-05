@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:unicons/unicons.dart';
+import 'package:blukers/utils/styles/index.dart';
 
 class OfferCard extends StatelessWidget {
   final String title;
   final String description;
   final String route;
 
-  const OfferCard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.route});
+  const OfferCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.route,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class OfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -35,27 +38,38 @@ class OfferCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                      const Center(
+                        child: Icon(
+                          UniconsLine.user_plus,
+                          size: 30,
+                          color: ThemeColors.blukersOrangeThemeColor,
                         ),
                       ),
-                      SizedBox(height: 8.0),
+                      Center(
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                            color: ThemeColors.blukersOrangeThemeColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8.0),
                       Text(
                         description,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16.0,
-                          color: Colors.black.withOpacity(0.7),
+                          color: ThemeColors.grey1ThemeColor,
                         ),
                       ),
                     ],
                   ),
                 ),
-                Icon(Icons.arrow_forward_ios,
-                    color: Colors.black) // Pointer icon at the trailing end
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  color: ThemeColors.grey1ThemeColor,
+                ) // Pointer icon at the trailing end
               ],
             ),
           ),

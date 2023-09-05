@@ -120,7 +120,7 @@ class JobPostTimeline extends StatelessWidget {
 }
 
 class _StartChildJobPost extends StatelessWidget {
-  const _StartChildJobPost({super.key, required this.index});
+  const _StartChildJobPost({required this.index});
   final int index;
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,6 @@ class _StartChildJobPost extends StatelessWidget {
 
 class _EndChildJobPost extends StatelessWidget {
   const _EndChildJobPost({
-    super.key,
     required this.text,
     required this.current,
   });
@@ -169,7 +168,7 @@ class _EndChildJobPost extends StatelessWidget {
 }
 
 class _IndicatorJobPost extends StatelessWidget {
-  const _IndicatorJobPost({super.key, required this.status});
+  const _IndicatorJobPost({required this.status});
 
   final _JobPostStatus status;
 

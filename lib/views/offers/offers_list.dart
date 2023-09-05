@@ -5,6 +5,9 @@ import '../../common_files/constants.dart';
 import '../common_views/page_template/page_template.dart';
 import 'offer_card.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:blukers/utils/styles/index.dart';
+
 class OffersList extends StatelessWidget {
   const OffersList({Key? key}) : super(key: key);
 
@@ -18,10 +21,12 @@ class OffersList extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text(
-                'Offers List',
+                AppLocalizations.of(context)!.members,
                 style: GoogleFonts.montserrat(
                   fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
+                  // fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
+                  color: ThemeColors.blukersBlueThemeColor,
                 ),
               ),
             ),

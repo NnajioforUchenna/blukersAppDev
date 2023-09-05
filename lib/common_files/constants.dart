@@ -105,7 +105,7 @@ Widget displayParagraph(String text) {
 
 final List<Map<String, String>> listOffers = [
   {
-    'title': 'Subscription',
+    'title': 'Subscriptions',
     'description':
         'Stay updated with the latest job opportunities in the USA tailored for international talents.',
     'route': '/membership'
@@ -128,12 +128,12 @@ final List<Map<String, String>> listOffers = [
   //       'Skill-enhancement courses designed to make you more marketable to employers in the USA.',
   //   'route': '/courses'
   // },
-  // {
-  //   'title': 'Practicals',
-  //   'description':
-  //       'Real-world practical experiences to familiarize international talents with the US work environment.',
-  //   'route': '/practicals'
-  // },
+  {
+    'title': 'Certifications',
+    'description':
+        'Real-world practical experiences to familiarize international talents with the US work environment.',
+    'route': '/practicals'
+  },
 ];
 
 List<List<Widget>> combineLists(List<Widget> list1, List<Widget> list2) {

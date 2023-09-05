@@ -66,7 +66,9 @@ extension StripePaymentProvider on PaymentsProvider {
   }
 
   Future<void> getStripePayment(
-      BuildContext context, String subscriptionType) async {
+    BuildContext context,
+    String subscriptionType,
+  ) async {
     String priceId = "";
     if (subscriptionType == "premium") {
       priceId = stripeData.employeePremiumPriceId;

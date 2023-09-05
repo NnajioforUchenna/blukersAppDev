@@ -147,7 +147,7 @@ class WorkerTimeLine extends StatelessWidget {
 }
 
 class _StartChildWorker extends StatelessWidget {
-  const _StartChildWorker({super.key, required this.index});
+  const _StartChildWorker({required this.index});
   final int index;
   @override
   Widget build(BuildContext context) {
@@ -157,7 +157,6 @@ class _StartChildWorker extends StatelessWidget {
 
 class _EndChildWorker extends StatelessWidget {
   const _EndChildWorker({
-    super.key,
     required this.text,
     required this.current,
   });
@@ -197,7 +196,7 @@ class _EndChildWorker extends StatelessWidget {
 }
 
 class _IndicatorWorker extends StatelessWidget {
-  const _IndicatorWorker({super.key, required this.status});
+  const _IndicatorWorker({required this.status});
 
   final _WorkerStatus status;
 

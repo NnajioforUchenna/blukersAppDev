@@ -12,7 +12,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:universal_html/html.dart' as html;
 
 import '../models/subscription_model.dart';
-import '../views/membership/subscription_components/countdown_waiting_page.dart';
+import '../views/membership/subscription_components/countdown_waiting_page_pulse.dart';
 import '../views/services/mobile_view/display_stripe_url_mobile.dart';
 
 part 'payment_providers/apple_payment_provider.dart';
@@ -84,7 +84,9 @@ class PaymentsProvider with ChangeNotifier {
   }
 
   SubscriptionStatus _checkUserHaveActiveSubscription(
-      QuerySnapshot qs, StripeData stripeData) {
+    QuerySnapshot qs,
+    StripeData stripeData,
+  ) {
     for (var ds in qs.docs) {
       var status = ds.get("status");
       if (status == "trialing" || status == "active") {
@@ -123,7 +125,9 @@ class PaymentsProvider with ChangeNotifier {
   }
 
   Future<void> pay4Subscription(
-      BuildContext context, String subscriptionType) async {
+    BuildContext context,
+    String subscriptionType,
+  ) async {
     // Determine User's Platform
     String paymentPlatform = getPaymentPlatformName();
     // Show Countdown Waiting Page

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'common_widget/company_logo.dart';
 import 'common_widget/submit_button.dart';
 
 import 'package:blukers/views/common_views/components/index.dart';

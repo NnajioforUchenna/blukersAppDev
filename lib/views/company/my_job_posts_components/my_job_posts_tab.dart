@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'my_job_post_component/loading_my_job_posts.dart';
-import 'my_job_post_component/no_job_posts.dart';
 
 import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:unicons/unicons.dart';
