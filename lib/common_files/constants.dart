@@ -140,3 +140,7 @@ List<List<Widget>> combineLists(List<Widget> list1, List<Widget> list2) {
   return List<List<Widget>>.generate(
       list1.length, (index) => [list1[index], list2[index]]);
 }
+
+String sanitizeJson(String jsonString) {
+  return jsonString.replaceAll('NaN', 'null');
+}

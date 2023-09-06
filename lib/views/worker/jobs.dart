@@ -18,7 +18,6 @@ class Jobs extends StatelessWidget {
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-
     return PageTemplate(
       child: SingleChildScrollView(
         child: Column(

@@ -227,8 +227,6 @@ extension StripePaymentProvider on PaymentsProvider {
     final response =
         await _makeStripeRequest(productName, amount, successUrl, failedUrl);
 
-    print(response.body);
-
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       if (jsonResponse.containsKey('checkout_url')) {
@@ -242,11 +240,6 @@ extension StripePaymentProvider on PaymentsProvider {
 
   Future<http.Response> _makeStripeRequest(
       String productName, double amount, String successUrl, String failedUrl) {
-    print(productName);
-    print(amount);
-    print(successUrl);
-    print(failedUrl);
-
     return http.post(
       Uri.parse(
           'https://top-design-395510.ue.r.appspot.com/payments/one-time-checkout'),

@@ -148,7 +148,6 @@ class PaymentsProvider with ChangeNotifier {
   }
 
   Future<void> pay4Services(BuildContext context, String service) async {
-    print("pay4Services");
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -158,8 +157,6 @@ class PaymentsProvider with ChangeNotifier {
     );
 
     String serviceCheckOutUrl = await getStripeCheckOutUrl(context, service);
-    print('This is what i got for Service CheckOut Url');
-    print('This is the CheckOutURL $serviceCheckOutUrl');
 
     if (serviceCheckOutUrl.isNotEmpty) {
       if (kIsWeb) {

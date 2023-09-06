@@ -84,7 +84,7 @@ class UserProvider with ChangeNotifier {
     await UserDataProvider.deleteUser(uid, _appUser!.userRole == "company");
     if (_user != null) {
       //delete user from firebase auth
-     await _user!.delete();
+      await _user!.delete();
     }
     //signout
     await signOut();
@@ -308,12 +308,12 @@ class UserProvider with ChangeNotifier {
 
   void navigate(BuildContext context, int index) {
     currentPageIndex = index;
-    if (userRole == "worker") {
-      Navigator.pushNamedAndRemoveUntil(
-          context, routesWorker[index], (Route<dynamic> route) => false);
-    } else {
+    if (userRole == "company") {
       Navigator.pushNamedAndRemoveUntil(
           context, routesCompany[index], (Route<dynamic> route) => false);
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
+          context, routesWorker[index], (Route<dynamic> route) => false);
     }
 
     // notifyListeners();
@@ -564,10 +564,7 @@ class UserProvider with ChangeNotifier {
 
   Future<String?> onTapPdf(String storagePath) async {
     FilePickerResult? gallery = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-      withData: true
-    );
+        type: FileType.custom, allowedExtensions: ['pdf'], withData: true);
     if (gallery == null) {
       return "";
     }
