@@ -1,97 +1,93 @@
 part of '../payments_provider.dart';
 
-// // In iOS there is an error when you close or cancel the in-app subscription
-// // purchase and then you try purchasing it again.
-// // ERROR:
-// // Unhandled Exception: PlatformException(storekit_duplicate_product_object,
-// // There is a pending transaction for the same product identifier. Please
-// // either wait for it to be finished or finish it manually using
-// // `completePurchase` to avoid edge cases., {applicationUsername: null,
-// // requestData: null, quantity: 1, productIdentifier: blukers_workers_premium,
-// // simulatesAskToBuyInSandbox: false, paymentDiscount: null}, null)
-// // A Solution that might work:
-// // Complete all pending purchases to avoid errors
-//   for (var purchaseDetails in purchaseDetailsList) {
-//     if (purchaseDetails.pendingCompletePurchase) {
-//       await _iap.completePurchase(purchaseDetails);
-//     }
-//   }
-
 extension InAppPurchasePaymentProvider on PaymentsProvider {
+  /// Initializes the in-app purchase payment system.
   Future<void> initializeInAppPurchasePayment() async {
-    print("Initializing In App Payment");
+    // 1. In-App Purchase Initialization
+    _iap = InAppPurchase.instance;
 
-    try {
-      _iap = InAppPurchase.instance;
-      final bool isAvailable = await _iap.isAvailable();
-      if (isAvailable) {
-        print("In App Payment is available");
-      } else {
-        print("In App Payment is not available");
+    // 2. Checking In-App Purchase Availability
+    final bool isAvailable = await _iap.isAvailable();
+
+    // 3. Handling Available In-App Purchases
+    if (isAvailable) {
+      // 4. Listening to Purchase Updates
+      purchaseUpdated = _iap.purchaseStream;
+      _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+        _handlePurchaseUpdates(purchaseDetailsList);
+      }, onDone: () {
+        _subscription.cancel();
+      }, onError: (error) {
+        // handle error here.
+      });
+
+      // 5. Querying Product Details
+      final ProductDetailsResponse response =
+          await _iap.queryProductDetails(_subscriptionIds);
+
+      // 6. Handling Missing Product IDs
+      if (response.notFoundIDs.isNotEmpty) {
+        print("Missing IDs: ${response.notFoundIDs}");
       }
-    } catch (error) {
-      print('IAP Error: $error');
+
+      // 7. Storing Product Details
+      _listSubscriptionDetails = response.productDetails;
+      print("Subscriptions: $_listSubscriptionDetails");
     }
-    // purchaseUpdated = _iap.purchaseStream;
-
-    // Trying to get the products from Store
-    final ProductDetailsResponse response =
-        await _iap.queryProductDetails(_subscriptionIds);
-
-    if (response.notFoundIDs.isNotEmpty) {
-      // Handle missing IDs.
-      print("Missing IDs: ${response.notFoundIDs}");
-    }
-
-    _subscriptions = response.productDetails;
-    print("Subscriptions: $_subscriptions");
   }
 
   Future<void> getApplePayment(
       BuildContext context, String subscriptionType) async {
-    print('Getting Apple Payment');
-    // final PurchaseParam purchaseParam =
-    //     PurchaseParam(productDetails: _subscriptions[0]);
+    // Set Current Context For Navigation
+    currentContext = context;
+
+    // Determine subscription type
+    int indexSubType = subscriptionType == 'premium' ? 0 : 1;
 
     PurchaseParam purchaseParam = PurchaseParam(
-      productDetails: _subscriptions[1],
+      productDetails: _listSubscriptionDetails[indexSubType],
+    );
+    await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+  }
+
+  getGooglePayment(BuildContext context, String subscriptionType) async {
+    // Set Current Context For Navigation
+    currentContext = context;
+
+    // Determine subscription type
+    int indexSubType = subscriptionType == 'premium' ? 0 : 2;
+
+    PurchaseParam purchaseParam = PurchaseParam(
+      productDetails: _listSubscriptionDetails[indexSubType],
     );
 
     await _iap.buyNonConsumable(purchaseParam: purchaseParam);
-
-    purchaseUpdated = _iap.purchaseStream;
-    purchaseUpdated.listen((purchaseDetailsList) {
-      _handlePurchaseUpdates(purchaseDetailsList);
-    });
-
-    _initializePurchaseUpdate();
   }
 
-  void _initializePurchaseUpdate() {
-    _iap.purchaseStream.listen((purchaseDetailsList) {
-      _handlePurchaseUpdates(purchaseDetailsList);
-    }, onError: (error) {
-      // Handle errors here.
-    });
-  }
-
-  void _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList) async {
-    for (var purchaseDetails in purchaseDetailsList) {
-      // Handle your purchase logic here - for example, unlocking content, updating the UI, etc.
-
-      if (purchaseDetails.status == PurchaseStatus.purchased) {
-        // Complete the purchase, this is important especially on Android.
-        _iap.completePurchase(purchaseDetails);
+  void _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList) {
+    for (var purchase in purchaseDetailsList) {
+      if (purchase.status == PurchaseStatus.pending) {
+        // Notify the user or show a loading spinner.
+        handlePendingTransaction(purchase);
+      } else if (purchase.status == PurchaseStatus.error) {
+        // Notify the user about the error.
+        handleErrorTransaction(purchase.error!);
+        _iap.completePurchase(purchase);
+      } else if (purchase.status == PurchaseStatus.purchased ||
+          purchase.status == PurchaseStatus.restored) {
+        // Verify the purchase (preferably on your server).
+        // Then, deliver the product or unlock the feature.
+        verifyAndDeliverProduct(purchase);
+        _iap.completePurchase(purchase);
       }
-
-      // Handle other purchase statuses if needed, such as:
-      // PurchaseStatus.error, PurchaseStatus.pending, etc.
+      if (purchase.pendingCompletePurchase) {
+        _iap.completePurchase(purchase);
+      }
     }
   }
 
   Future<void> appleInitialize() async {
     if (Platform.isIOS) {
-      print("Initializing Apple Payment from initialize");
       final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
           _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
@@ -103,6 +99,55 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
       final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
           _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       iosPlatformAddition.setDelegate(null);
+    }
+  }
+
+  void handleErrorTransaction(IAPError error) {
+    // 1. Extract error details.
+    final String errorCode = error.code;
+    final String errorMessage = error.message;
+
+    // 2. Log the error for debugging and analysis.
+    print('Error Code: $errorCode');
+    print('Error Message: $errorMessage');
+
+    // 3. Navigate the user to the paymentFailed page.
+    if (currentContext != null) {
+      Navigator.push(
+        currentContext!,
+        MaterialPageRoute(
+          builder: (context) => PaymentFailedWidget(),
+        ),
+      );
+    }
+  }
+
+  void verifyAndDeliverProduct(PurchaseDetails purchase) {
+    if (currentContext != null) {
+      Navigator.push(
+        currentContext!,
+        MaterialPageRoute(
+          builder: (context) => PaymentSuccessfulWidget(),
+        ),
+      );
+    }
+  }
+
+  void handlePendingTransaction(PurchaseDetails purchase) {
+    // 1. Check the specifics of the purchase if necessary.
+    final String productId = purchase.productID;
+
+    // 2. Log the transaction for debugging and analysis.
+    print('Pending transaction for product ID: $productId');
+
+    if (currentContext != null) {
+      Navigator.push(
+        currentContext!,
+        MaterialPageRoute(
+            builder: (context) => CountDown(
+                  platform: productId,
+                )),
+      );
     }
   }
 }
