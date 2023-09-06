@@ -60,6 +60,7 @@ Page resource error:
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://success.com')) {
               Navigator.of(context).pop();
+              Navigator.pushNamed(context, '/paymentSuccess');
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Payment Successful'),
@@ -70,6 +71,7 @@ Page resource error:
             }
             if (request.url.startsWith('https://www.cancel.com')) {
               Navigator.of(context).pop();
+              Navigator.pushNamed(context, '/paymentFailed');
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Payment Cancelled'),

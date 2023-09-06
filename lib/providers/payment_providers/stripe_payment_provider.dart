@@ -212,12 +212,22 @@ extension StripePaymentProvider on PaymentsProvider {
       return '';
     }
 
-    final baseUrl = Uri.base.removeFragment().toString();
-    final successUrl = baseUrl + 'paymentSuccess';
-    final failedUrl = baseUrl + 'paymentFailed';
+    String successUrl = '';
+    String failedUrl = '';
+
+    if (kIsWeb) {
+      final baseUrl = Uri.base.removeFragment().toString();
+      successUrl = baseUrl + 'paymentSuccess';
+      failedUrl = baseUrl + 'paymentFailed';
+    } else {
+      successUrl = 'https://success.com';
+      failedUrl = 'https://www.cancel.com';
+    }
 
     final response =
         await _makeStripeRequest(productName, amount, successUrl, failedUrl);
+
+    print(response.body);
 
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
@@ -232,6 +242,11 @@ extension StripePaymentProvider on PaymentsProvider {
 
   Future<http.Response> _makeStripeRequest(
       String productName, double amount, String successUrl, String failedUrl) {
+    print(productName);
+    print(amount);
+    print(successUrl);
+    print(failedUrl);
+
     return http.post(
       Uri.parse(
           'https://top-design-395510.ue.r.appspot.com/payments/one-time-checkout'),

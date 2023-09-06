@@ -143,10 +143,12 @@ class PaymentsProvider with ChangeNotifier {
       getApplePayment(context, subscriptionType);
     } else if (paymentPlatform == "Google") {
       // In-app Purchase Code for Google
+      getApplePayment(context, subscriptionType);
     }
   }
 
   Future<void> pay4Services(BuildContext context, String service) async {
+    print("pay4Services");
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -156,18 +158,21 @@ class PaymentsProvider with ChangeNotifier {
     );
 
     String serviceCheckOutUrl = await getStripeCheckOutUrl(context, service);
-    print(serviceCheckOutUrl);
+    print('This is what i got for Service CheckOut Url');
+    print('This is the CheckOutURL $serviceCheckOutUrl');
 
-    if (kIsWeb) {
-      html.window.location.assign(serviceCheckOutUrl);
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => DisplayStripeUrlMobile(
-                  checkOutUrl: serviceCheckOutUrl,
-                )),
-      );
+    if (serviceCheckOutUrl.isNotEmpty) {
+      if (kIsWeb) {
+        html.window.location.assign(serviceCheckOutUrl);
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => DisplayStripeUrlMobile(
+                    checkOutUrl: serviceCheckOutUrl,
+                  )),
+        );
+      }
     }
   }
 }

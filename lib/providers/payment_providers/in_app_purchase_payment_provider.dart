@@ -24,7 +24,6 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
     try {
       _iap = InAppPurchase.instance;
       final bool isAvailable = await _iap.isAvailable();
-
       if (isAvailable) {
         print("In App Payment is available");
       } else {
@@ -33,16 +32,7 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
     } catch (error) {
       print('IAP Error: $error');
     }
-
-    // _iap = InAppPurchase.instance;
-    // final bool isAvailable = await _iap.isAvailable();
-    //
-    // if (isAvailable) {
-    //   print("In App Payment is available");
-    // } else {
-    //   print("In App  Payment is not available");
-    // }
-    purchaseUpdated = _iap.purchaseStream;
+    // purchaseUpdated = _iap.purchaseStream;
 
     // Trying to get the products from Store
     final ProductDetailsResponse response =
@@ -57,11 +47,22 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
     print("Subscriptions: $_subscriptions");
   }
 
-  void getApplePayment(BuildContext context, String subscriptionType) {
+  Future<void> getApplePayment(
+      BuildContext context, String subscriptionType) async {
     print('Getting Apple Payment');
-    final PurchaseParam purchaseParam =
-        PurchaseParam(productDetails: _subscriptions[0]);
-    _iap.buyNonConsumable(purchaseParam: purchaseParam);
+    // final PurchaseParam purchaseParam =
+    //     PurchaseParam(productDetails: _subscriptions[0]);
+
+    PurchaseParam purchaseParam = PurchaseParam(
+      productDetails: _subscriptions[1],
+    );
+
+    await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+
+    purchaseUpdated = _iap.purchaseStream;
+    purchaseUpdated.listen((purchaseDetailsList) {
+      _handlePurchaseUpdates(purchaseDetailsList);
+    });
 
     _initializePurchaseUpdate();
   }
@@ -90,6 +91,7 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
 
   Future<void> appleInitialize() async {
     if (Platform.isIOS) {
+      print("Initializing Apple Payment from initialize");
       final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
           _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());

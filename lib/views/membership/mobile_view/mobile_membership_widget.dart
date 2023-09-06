@@ -35,7 +35,6 @@ class _MobileMembershipWidgetState extends State<MobileMembershipWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // UserProvider up = Provider.of<UserProvider>(context);
     PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
     return Scaffold(
       appBar: AppBar(

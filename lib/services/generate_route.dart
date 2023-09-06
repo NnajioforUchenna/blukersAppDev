@@ -17,6 +17,8 @@ import '../views/company/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
 import '../views/company/workers.dart';
 import '../views/membership/membership_widget.dart';
+import '../views/membership/subscription_components/payment_failed_widget.dart';
+import '../views/membership/subscription_components/payment_successful_widget.dart';
 import '../views/offers/offers_list.dart';
 import '../views/services/services.dart';
 import '../views/worker/create_worker_profile_component/create_worker_profile.dart';
@@ -59,7 +61,10 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const CompanyChat());
     case '/payment':
       return MaterialPageRoute(builder: (context) => const MembershipWidget());
-
+    case '/paymentFailed':
+      return MaterialPageRoute(builder: (context) => PaymentFailedWidget());
+    case '/paymentSuccess':
+      return MaterialPageRoute(builder: (context) => PaymentSuccessfulWidget());
     case 'companyProfile':
       return MaterialPageRoute(builder: (context) => const CompanyProfile());
     case '/login':
