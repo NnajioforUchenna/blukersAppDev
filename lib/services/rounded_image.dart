@@ -1,3 +1,4 @@
+import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class RoundedImageWidget extends StatelessWidget {
@@ -34,9 +35,11 @@ class RoundedImageWidget extends StatelessWidget {
           },
           errorBuilder: (context, error, stackTrace) {
             return Center(
-                child: Image.network(
-              'https://picsum.photos/200/300',
-              fit: BoxFit.cover,
+                child: Icon(
+              //building icon if no image
+              Icons.apartment,
+              size: size,
+              color: ThemeColors.blukersOrangeThemeColor,
             )); // Or any placeholder widget
           },
         ),
