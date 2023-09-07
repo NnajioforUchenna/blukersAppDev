@@ -13,17 +13,17 @@ class RoundedImageWidget extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 10,
-            offset: Offset(0, 5),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10.0),
-      ),
+      // decoration: BoxDecoration(
+      //   boxShadow: [
+      //     BoxShadow(
+      //       color: Colors.black.withOpacity(0.2),
+      //       spreadRadius: 2,
+      //       blurRadius: 10,
+      //       offset: Offset(0, 5),
+      //     ),
+      //   ],
+      //   borderRadius: BorderRadius.circular(10.0),
+      // ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Image.network(
