@@ -3,6 +3,7 @@ import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/data_providers/app_versions_data_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:unicons/unicons.dart';
 
 class UpdateAppDialog extends StatelessWidget {
   const UpdateAppDialog({super.key, required this.url});
@@ -10,6 +11,8 @@ class UpdateAppDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String updateRequiredDescriptionText =
+        AppLocalizations.of(context)!.updateRequiredDescription;
     return WillPopScope(
       onWillPop: () async =>
           false, // Prevent dialog from being closed using back button
@@ -26,9 +29,26 @@ class UpdateAppDialog extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        content: Text(
-          AppLocalizations.of(context)!.updateRequiredDescription,
-          style: const TextStyle(color: ThemeColors.grey1ThemeColor),
+        content: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                updateRequiredDescriptionText,
+                style: const TextStyle(color: ThemeColors.grey1ThemeColor),
+              ),
+              const Icon(
+                UniconsLine.sync,
+                // UniconsLine.constructor,
+                // UniconsLine.android,
+                // UniconsLine.android_alt,
+                // UniconsLine.apple,
+                // UniconsLine.apple_alt,
+                size: 50,
+                color: ThemeColors.grey2ThemeColor,
+              ),
+            ],
+          ),
         ),
         actions: <Widget>[
           ElevatedButton(
