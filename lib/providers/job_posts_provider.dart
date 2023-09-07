@@ -235,6 +235,8 @@ class JobPostsProvider with ChangeNotifier {
     selectedJobPosts = [];
     selectedJobPosts =
         await JobPostsDataProvider.searchJobPosts(nameRelated, locationRelated);
+    print('selectedJobPosts: ${selectedJobPosts.length}');
+
     if (selectedJobPosts.isEmpty) {
       EasyLoading.showError('No Jobs Found with $nameRelated $locationRelated');
     } else {

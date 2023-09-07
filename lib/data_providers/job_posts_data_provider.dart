@@ -4,6 +4,7 @@ import 'package:blukers/models/job_post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
+import '../common_files/constants.dart';
 import 'data_constants.dart';
 
 final db = FirebaseFirestore.instance;
@@ -135,7 +136,8 @@ class JobPostsDataProvider {
     );
 
     if (response.statusCode == 200) {
-      final List<dynamic> jobPostData = jsonDecode(response.body);
+      final sanitizedResponseBody = sanitizeJson(response.body);
+      final List<dynamic> jobPostData = jsonDecode(sanitizedResponseBody);
       final List<JobPost> jobPosts = [];
       jobPostData.forEach((data) {
         JobPost? jobPost = JobPost.fromMap(data);

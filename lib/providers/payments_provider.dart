@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -15,6 +16,8 @@ import 'package:universal_html/html.dart' as html;
 
 import '../models/subscription_model.dart';
 import '../views/membership/subscription_components/countdown_waiting_page_pulse.dart';
+import '../views/membership/subscription_components/payment_failed_widget.dart';
+import '../views/membership/subscription_components/payment_successful_widget.dart';
 import '../views/services/mobile_view/display_stripe_url_mobile.dart';
 
 part 'payment_providers/in_app_purchase_payment_provider.dart';
@@ -37,7 +40,9 @@ class PaymentsProvider with ChangeNotifier {
     'blukers_workers_premium',
     'blukers_workers_premium_plus'
   };
-  List<ProductDetails> _subscriptions = [];
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
+  List<ProductDetails> _listSubscriptionDetails = [];
+  BuildContext? currentContext;
 
   late Stream<SubscriptionStatus> status;
   late StripeData stripeData;
@@ -143,12 +148,11 @@ class PaymentsProvider with ChangeNotifier {
       getApplePayment(context, subscriptionType);
     } else if (paymentPlatform == "Google") {
       // In-app Purchase Code for Google
-      getApplePayment(context, subscriptionType);
+      getGooglePayment(context, subscriptionType);
     }
   }
 
   Future<void> pay4Services(BuildContext context, String service) async {
-    print("pay4Services");
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -158,8 +162,6 @@ class PaymentsProvider with ChangeNotifier {
     );
 
     String serviceCheckOutUrl = await getStripeCheckOutUrl(context, service);
-    print('This is what i got for Service CheckOut Url');
-    print('This is the CheckOutURL $serviceCheckOutUrl');
 
     if (serviceCheckOutUrl.isNotEmpty) {
       if (kIsWeb) {
