@@ -4,3 +4,6 @@ const String industriesCollections = "Industries";
 const String jobPostsCollections = "JobPosts"; //"""JobPosts";
 const String companyCollections = "Companies";
 const String appVersionsCollection = "AppVersions";
+const String ordersCollection = "Orders";
+const String appleCollection = "AppleSubscriptionsPaymentDetails";
+const String googleCollection = "GoogleSubscriptionsPaymentDetails";

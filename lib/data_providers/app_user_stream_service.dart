@@ -17,6 +17,6 @@ class StreamService {
         .doc(documentId)
         .snapshots()
         .map((snapshot) =>
-            snapshot.exists ? AppUser.fromDocument(snapshot) : null);
+            snapshot.exists ? AppUser.fromMap(snapshot.data()!) : null);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
@@ -22,7 +22,7 @@ class DetailPageBlockFour extends StatelessWidget {
           children: [
             Text(AppLocalizations.of(context)!.description,
                 style: TextStyle(
-                    fontSize: 17.sp,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold)), // Responsive font size
             SizedBox(height: 15.h), // Responsive height
             displayParagraph(jobPost.jobDescription ?? ''),

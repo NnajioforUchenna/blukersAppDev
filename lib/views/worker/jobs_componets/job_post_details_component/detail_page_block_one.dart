@@ -1,11 +1,10 @@
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
@@ -56,7 +55,7 @@ class DetailPageBlockOne extends StatelessWidget {
                           color: isJobSaved
                               ? ThemeColors.secondaryThemeColor
                               : Colors.grey,
-                          size: 30.sp,
+                          size: 30,
                         ))
               ],
             ),
@@ -65,7 +64,7 @@ class DetailPageBlockOne extends StatelessWidget {
               toTitleCase(jobPost.jobTitle),
               style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold,
-                fontSize: 18.sp,
+                fontSize: 20,
               ),
             ),
             SizedBox(height: 5.h),
@@ -73,14 +72,12 @@ class DetailPageBlockOne extends StatelessWidget {
               children: [
                 Text(
                   jobPost.salaryAmount.toString(),
-                  style:
-                      TextStyle(fontWeight: FontWeight.w700, fontSize: 13.sp),
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
                 ),
                 SizedBox(width: 5.h),
                 Text(
                   getSalaryType(jobPost.salaryType) ?? '',
-                  style:
-                      TextStyle(fontWeight: FontWeight.w700, fontSize: 13.sp),
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
                 ),
               ],
             ),
@@ -88,7 +85,7 @@ class DetailPageBlockOne extends StatelessWidget {
             Wrap(
               children: [
                 Text("${AppLocalizations.of(context)!.company}: ",
-                    style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
+                    style: TextStyle(fontSize: 11, color: Colors.grey)),
                 Text(
                   jobPost.companyName,
                   style: const TextStyle(
@@ -103,10 +100,10 @@ class DetailPageBlockOne extends StatelessWidget {
             SizedBox(height: 5.h),
             jobPost.address == null
                 ? Text(AppLocalizations.of(context)!.notSpecified,
-                    style: TextStyle(fontSize: 11.sp, color: Colors.grey))
+                    style: TextStyle(fontSize: 11, color: Colors.grey))
                 : Text(
                     jobPost.address!.location ?? '',
-                    style: TextStyle(fontSize: 11.sp),
+                    style: TextStyle(fontSize: 11),
                   ),
             SizedBox(height: 15.h),
             Row(
@@ -114,7 +111,7 @@ class DetailPageBlockOne extends StatelessWidget {
                 const Spacer(),
                 Responsive.isMobile(context)
                     ? RoundedImageWidget(
-                        size: Responsive.isMobile(context) ? 50.sp : 100.sp,
+                        size: Responsive.isMobile(context) ? 50 : 100,
                         imageUrl: jobPost.companyLogo ??
                             'https://picsum.photos/200/300',
                       )
@@ -127,8 +124,8 @@ class DetailPageBlockOne extends StatelessWidget {
                 isHideButton
                     ? SizedBox()
                     : Container(
-                        width: 100.sp,
-                        height: 40.sp,
+                        width: 100,
+                        height: 40,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: isJobApplied
@@ -166,7 +163,7 @@ class DetailPageBlockOne extends StatelessWidget {
                                   : AppLocalizations.of(context)!
                                       .alreadyApplied,
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16.sp),
+                                  fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                           ),
                         ),
@@ -176,7 +173,7 @@ class DetailPageBlockOne extends StatelessWidget {
                 Responsive.isMobile(context)
                     ? Container()
                     : RoundedImageWidget(
-                        size: Responsive.isMobile(context) ? 50.sp : 100.sp,
+                        size: Responsive.isMobile(context) ? 50 : 100,
                         imageUrl: jobPost.companyLogo ??
                             'https://picsum.photos/200/300',
                       ),

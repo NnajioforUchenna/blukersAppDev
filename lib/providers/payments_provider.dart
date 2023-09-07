@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:blukers/data_providers/payments_data_provider.dart';
 import 'package:blukers/models/app_user.dart';
 import 'package:blukers/services/stripe_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,7 +14,10 @@ import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../models/payment_model/payment_order.dart';
 import '../models/subscription_model.dart';
+import '../services/platform_check.dart';
+import '../views/common_views/please_login_dialog.dart';
 import '../views/membership/subscription_components/countdown_waiting_page_pulse.dart';
 import '../views/membership/subscription_components/payment_failed_widget.dart';
 import '../views/membership/subscription_components/payment_successful_widget.dart';
@@ -66,9 +69,9 @@ class PaymentsProvider with ChangeNotifier {
   Future<void> purchaseSubscription(SubscriptionModel subscription) async {
     if (kIsWeb) {
     } else {
-      if (Platform.isIOS) {
+      if (isIOS()) {
         // In-app Purchase Code
-      } else if (Platform.isAndroid) {
+      } else if (isAndroid()) {
         // Stripe Purchase Code
       }
     }
@@ -117,9 +120,9 @@ class PaymentsProvider with ChangeNotifier {
     if (kIsWeb) {
       return "Stripe";
     } else {
-      if (Platform.isIOS) {
+      if (isIOS()) {
         return "Apple";
-      } else if (Platform.isAndroid) {
+      } else if (isAndroid()) {
         return "Google";
       }
     }
@@ -130,6 +133,12 @@ class PaymentsProvider with ChangeNotifier {
     BuildContext context,
     String subscriptionType,
   ) async {
+    if (appUser == null) {
+      showDialog(
+          context: context, builder: (context) => const PleaseLoginDialog());
+      return;
+    }
+
     // Determine User's Platform
     String paymentPlatform = getPaymentPlatformName();
     // Show Countdown Waiting Page
@@ -140,6 +149,17 @@ class PaymentsProvider with ChangeNotifier {
                 platform: paymentPlatform,
               )),
     );
+    // Create a new Payment Order
+    PaymentOrder pOrder = PaymentOrder(
+      userId: appUser!.uid,
+      orderType: 'subscription',
+      platform: paymentPlatform,
+      paymentProcessor: paymentPlatform,
+      amount: subscriptionType == 'premium' ? 4.99 : 9.99,
+    );
+    // Save the Payment Order to Firestore
+    pOrder.save();
+
     // connect the payment platform
     if (paymentPlatform == "Stripe") {
       getStripePayment(context, subscriptionType);
@@ -153,6 +173,12 @@ class PaymentsProvider with ChangeNotifier {
   }
 
   Future<void> pay4Services(BuildContext context, String service) async {
+    if (appUser == null) {
+      showDialog(
+          context: context, builder: (context) => const PleaseLoginDialog());
+      return;
+    }
+
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -160,6 +186,16 @@ class PaymentsProvider with ChangeNotifier {
                 platform: "Stripe",
               )),
     );
+
+    // Create a new Payment Order
+    PaymentOrder pOrder = PaymentOrder(
+        userId: appUser!.uid,
+        orderType: 'service',
+        platform: 'Stripe',
+        paymentProcessor: 'Stripe',
+        amount: service == 'foia' ? 299.99 : 99.99);
+    // Save the Payment Order to Firestore
+    pOrder.save();
 
     String serviceCheckOutUrl = await getStripeCheckOutUrl(context, service);
 

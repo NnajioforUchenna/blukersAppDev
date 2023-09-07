@@ -1,7 +1,7 @@
 import 'package:blukers/providers/industry_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/job_post.dart';
@@ -22,19 +22,18 @@ class DetailPageBlockTwo extends StatelessWidget {
           Row(
             children: [
               Text(AppLocalizations.of(context)!.aboutTheJob,
-                  style:
-                      TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold)),
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
             ],
           ),
           SizedBox(height: 15.h),
           RichText(
             text: TextSpan(
-              style: TextStyle(
-                  fontSize: 14.sp, color: Colors.black), // Default style
+              style:
+                  TextStyle(fontSize: 14, color: Colors.black), // Default style
               children: [
                 TextSpan(
                     text: "${AppLocalizations.of(context)!.industry}: ",
-                    style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
+                    style: TextStyle(fontSize: 11, color: Colors.grey)),
                 TextSpan(
                     text: jobPost.industryIds.isNotEmpty
                         ? jobPost.industryIds.join(', ')
@@ -45,12 +44,12 @@ class DetailPageBlockTwo extends StatelessWidget {
           SizedBox(height: 15.h),
           RichText(
             text: TextSpan(
-              style: TextStyle(
-                  fontSize: 14.sp, color: Colors.black), // Default style
+              style:
+                  TextStyle(fontSize: 14, color: Colors.black), // Default style
               children: [
                 TextSpan(
                     text: "${AppLocalizations.of(context)!.jobPosition}: ",
-                    style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
+                    style: TextStyle(fontSize: 11, color: Colors.grey)),
                 TextSpan(
                     text: jobPost.jobIds.isNotEmpty
                         ? jobPost.jobIds.join(', ')
@@ -61,12 +60,12 @@ class DetailPageBlockTwo extends StatelessWidget {
           SizedBox(height: 15.h),
           RichText(
             text: TextSpan(
-              style: TextStyle(
-                  fontSize: 14.sp, color: Colors.black), // Default style
+              style:
+                  TextStyle(fontSize: 14, color: Colors.black), // Default style
               children: [
                 TextSpan(
                     text: "${AppLocalizations.of(context)!.skills}: ",
-                    style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
+                    style: TextStyle(fontSize: 11, color: Colors.grey)),
                 TextSpan(
                     text: jobPost.skills.isNotEmpty
                         ? jobPost.skills.join(', ')

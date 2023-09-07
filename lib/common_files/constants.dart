@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../models/address.dart';
 import '../models/job_post.dart';
@@ -95,7 +94,7 @@ Widget displayParagraph(String text) {
   return Text(
     formattedText,
     style: TextStyle(
-      fontSize: 13.0.sp, // Adjust the font size as needed
+      fontSize: 13.0, // Adjust the font size as needed
       color: Colors.black,
       height: 1.5, // Adjust line height for better readability
     ),

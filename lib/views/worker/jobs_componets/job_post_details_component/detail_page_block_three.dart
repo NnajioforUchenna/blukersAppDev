@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
@@ -20,16 +20,16 @@ class DetailPageBlockThree extends StatelessWidget {
         children: [
           Text(AppLocalizations.of(context)!.details,
               style: TextStyle(
-                  fontSize: 17.sp,
+                  fontSize: 17,
                   fontWeight: FontWeight.bold)), // Responsive font size
           SizedBox(height: 15.h), // Responsive height
           RichText(
             text: TextSpan(
-              style: TextStyle(fontSize: 14.sp, color: Colors.black),
+              style: TextStyle(fontSize: 14, color: Colors.black),
               children: [
                 TextSpan(
                     text: "${AppLocalizations.of(context)!.schedule}: ",
-                    style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
+                    style: TextStyle(fontSize: 11, color: Colors.grey)),
                 TextSpan(text: "${jobPost.schedule}"),
               ],
             ),
@@ -37,11 +37,11 @@ class DetailPageBlockThree extends StatelessWidget {
           SizedBox(height: 20.h), // Responsive height
           RichText(
             text: TextSpan(
-              style: TextStyle(fontSize: 14.sp, color: Colors.black),
+              style: TextStyle(fontSize: 14, color: Colors.black),
               children: [
                 TextSpan(
                     text: "${AppLocalizations.of(context)!.jobType}: ",
-                    style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
+                    style: TextStyle(fontSize: 11, color: Colors.grey)),
                 TextSpan(text: "${getJobType(jobPost.jobType)}"),
               ],
             ),
@@ -49,11 +49,11 @@ class DetailPageBlockThree extends StatelessWidget {
           SizedBox(height: 15.h), // Responsive height
           RichText(
             text: TextSpan(
-              style: TextStyle(fontSize: 14.sp, color: Colors.black),
+              style: TextStyle(fontSize: 14, color: Colors.black),
               children: [
                 TextSpan(
                     text: "${AppLocalizations.of(context)!.payment}:",
-                    style: TextStyle(fontSize: 11.sp, color: Colors.grey)),
+                    style: TextStyle(fontSize: 11, color: Colors.grey)),
                 TextSpan(
                     text:
                         " \$${jobPost.salaryAmount.toString()} ${getSalaryType(jobPost.salaryType)}"),

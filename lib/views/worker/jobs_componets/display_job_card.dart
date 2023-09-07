@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common_files/constants.dart';
 import '../../../models/job_post.dart';
@@ -73,7 +73,7 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                     toTitleCase(widget.jobPost.jobTitle),
                     style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18.sp,
+                      fontSize: 20,
                     ),
                   ),
                   const SizedBox(height: 5),

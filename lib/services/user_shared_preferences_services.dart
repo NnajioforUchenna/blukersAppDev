@@ -10,7 +10,7 @@ class UserSharedPreferencesServices {
   // Create
   static Future<void> create(AppUser userMap) async {
     final prefs = await SharedPreferences.getInstance();
-    String userString = json.encode(userMap.toSp());
+    String userString = json.encode(userMap.toMap());
     prefs.setString(USER_KEY, userString);
   }
 
@@ -21,7 +21,7 @@ class UserSharedPreferencesServices {
     if (userString != null) {
       Map<String, String> userMap =
           Map<String, String>.from(json.decode(userString));
-      return AppUser.fromSp(userMap);
+      return AppUser.fromMap(userMap);
     }
     return null;
   }

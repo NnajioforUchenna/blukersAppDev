@@ -118,18 +118,20 @@ class UserProvider with ChangeNotifier {
 
     // Check if registration was successful.
     if (result['success']) {
-      // Prepare the user data for storage.
-      AppUser appUser = AppUser.fromSignUp(
-        uid: result['userCredential'].user!.uid,
-        email: email,
-        isLoginInformation: true,
-        registeredAs: userType,
-        userRole: userType,
-        workerTimelineStep: 1,
-        companyTimelineStep: 1,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        modifiedAt: DateTime.now().millisecondsSinceEpoch,
-      );
+      Map<String, dynamic> userData = {
+        'uid': result['userCredential'].user!.uid,
+        'email': email,
+        'isLoginInformation': true,
+        'registeredAs': userType,
+        'userRole': userType,
+        'workerTimelineStep': 1,
+        'companyTimelineStep': 1,
+        'createdAt': DateTime.now().millisecondsSinceEpoch,
+        'modifiedAt': DateTime.now().millisecondsSinceEpoch,
+        // you can add other key-value pairs if needed
+      };
+
+      AppUser appUser = AppUser.fromMap(userData);
 
       // Set the _appUser
       _appUser = appUser;

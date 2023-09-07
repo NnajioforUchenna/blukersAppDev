@@ -87,7 +87,7 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
   }
 
   Future<void> appleInitialize() async {
-    if (Platform.isIOS) {
+    if (isIOS()) {
       final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
           _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
@@ -95,7 +95,7 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
   }
 
   void appleDispose() {
-    if (Platform.isIOS) {
+    if (isIOS()) {
       final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
           _iap.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       iosPlatformAddition.setDelegate(null);
@@ -123,6 +123,9 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
   }
 
   void verifyAndDeliverProduct(PurchaseDetails purchase) {
+    // Updates Records in Firestore
+    updateSubscriptionPaymentRecords(purchase);
+
     if (currentContext != null) {
       Navigator.push(
         currentContext!,
@@ -149,6 +152,19 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
                 )),
       );
     }
+  }
+
+  void updateSubscriptionPaymentRecords(PurchaseDetails purchase) {
+    print(purchase);
+    // 1. Update User's Subscription Status
+
+    // 2. Update UserPaymentDetails
+    // 3. Update UserSubscriptionDetails
+
+    // 4. Update Payment Plaform Details
+    PaymentsDataProvider.updatePlatformDetails(purchase);
+
+    // 5.Update Order Records
   }
 }
 

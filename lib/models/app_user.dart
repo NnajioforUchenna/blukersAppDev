@@ -1,12 +1,11 @@
 import 'package:blukers/models/worker.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'address.dart';
 import 'company.dart';
 
 class AppUser {
   String uid;
-  String? email;
+  String email;
   String? language;
   String? displayName;
   String? phoneNumber;
@@ -36,7 +35,7 @@ class AppUser {
 
   AppUser({
     required this.uid,
-    this.email,
+    required this.email,
     this.language,
     this.displayName,
     this.phoneNumber,
@@ -58,36 +57,9 @@ class AppUser {
     this.modifiedAt = 0,
   });
 
-  // New constructor for User.fromSignUp
-  AppUser.fromSignUp({
-    required this.uid,
-    this.email,
-    this.isLoginInformation = false,
-    this.registeredAs,
-    this.isBasicInformation = false,
-    this.isContactInformation = false,
-    this.isRegistrationComplete = false,
-    this.language,
-    this.displayName,
-    this.phoneNumber,
-    this.photoUrl,
-    this.isEmailVerified,
-    this.worker, // Added Worker parameter
-    this.company, // Added Company parameter
-    this.address,
-    this.deviceTokenU,
-    this.userRole,
-    this.workerTimelineStep,
-    this.companyTimelineStep,
-    this.createdAt = 0,
-    this.modifiedAt = 0,
-  });
-
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
-
     data['uid'] = uid; // Assuming uid will always be non-null
-
     if (email != null) data['email'] = email;
     if (language != null) data['language'] = language;
     if (displayName != null) data['displayName'] = displayName;
@@ -122,62 +94,34 @@ class AppUser {
     return data;
   }
 
-  factory AppUser.fromDocument(DocumentSnapshot<Map<String, dynamic>> doc) {
-    Map<String, dynamic> map = doc.data()!;
-    return AppUser(
-      uid: map['uid'],
-      email: map['email'],
-      language: map['language'],
-      displayName: map['displayName'],
-      phoneNumber: map['phoneNumber'],
-      photoUrl: map['photoUrl'],
-      isEmailVerified: map['isEmailVerified'],
-      isLoginInformation: map['isLoginInformation'],
-      registeredAs: map['registeredAs'],
-      isBasicInformation: map['isBasicInformation'],
-      isContactInformation: map['isContactInformation'],
-      isRegistrationComplete: map['isRegistrationComplete'],
-      userRole: map['userRole'],
-      workerTimelineStep: map['workerTimelineStep'],
-      companyTimelineStep: map['companyTimelineStep'],
-      worker: map['worker'] != null
-          ? Worker.fromMap(map['worker'])
-          : null, // Convert Map to Worker object
-      company: map['company'] != null
-          ? Company.fromMap(map['company'])
-          : null, // Convert Map to Company object
-      address: map['address'] != null
-          ? Address.fromMap(map['address'])
-          : null, // Convert Map to Address object
-      createdAt: map['createdAt'] ?? 0,
-      modifiedAt: map['modifiedAt'] ?? 0,
-    );
-  }
-
   static AppUser fromMap(Map<String, dynamic> map) {
     return AppUser(
-      uid: map['uid'],
-      email: map['email'],
-      language: map['language'],
-      displayName: map['displayName'],
-      phoneNumber: map['phoneNumber'],
-      photoUrl: map['photoUrl'],
-      isEmailVerified: map['isEmailVerified'],
-      isLoginInformation: map['isLoginInformation'],
-      registeredAs: map['registeredAs'],
-      isBasicInformation: map['isBasicInformation'],
-      isContactInformation: map['isContactInformation'],
-      isRegistrationComplete: map['isRegistrationComplete'],
-      userRole: map['userRole'],
-      workerTimelineStep: map['workerTimelineStep'],
-      companyTimelineStep: map['companyTimelineStep'],
-      worker: map['worker'] != null
+      uid: map['uid'] ?? '',
+      email: map['email'] ?? '',
+      language: map['language'] as String?,
+      displayName: map['displayName'] as String?,
+      phoneNumber: map['phoneNumber'] as String?,
+      photoUrl: map['photoUrl'] as String?,
+      isEmailVerified: map['isEmailVerified'] as bool?,
+      isLoginInformation: map['isLoginInformation'] as bool?,
+      registeredAs: map['registeredAs'] as String?,
+      isBasicInformation: map['isBasicInformation'] as bool?,
+      isContactInformation: map['isContactInformation'] as bool?,
+      isRegistrationComplete: map['isRegistrationComplete'] as bool?,
+      userRole: map['userRole'] as String?,
+      workerTimelineStep: map['workerTimelineStep'] as int?,
+      companyTimelineStep: map['companyTimelineStep'] as int?,
+      worker: (map['worker'] != null && map['worker'] is Map<String, dynamic>)
           ? Worker.fromMap(map['worker'])
           : null, // Convert Map to Worker object
-      company: map['company'] != null
-          ? Company.fromMap(map['company'])
-          : null, // Convert Map to Company object
-      address: map['address'] != null ? Address.fromMap(map['address']) : null,
+      company:
+          (map['company'] != null && map['company'] is Map<String, dynamic>)
+              ? Company.fromMap(map['company'])
+              : null, // Convert Map to Company object
+      address:
+          (map['address'] != null && map['address'] is Map<String, dynamic>)
+              ? Address.fromMap(map['address'])
+              : null,
       createdAt: map['createdAt'] ?? 0,
       modifiedAt: map['modifiedAt'] ?? 0,
     );
@@ -186,35 +130,5 @@ class AppUser {
   @override
   String toString() {
     return toMap().toString();
-  }
-
-  // Convert AppUser object to Map<String, String>
-  Map<String, String> toSp() {
-    return {
-      'uid': uid ?? "",
-      'email': email ?? "",
-      'language': language ?? "",
-      'displayName': displayName ?? "",
-      'photoUrl': photoUrl ?? "",
-      'deviceTokenU': deviceTokenU ?? "",
-      'userRole': userRole ?? '',
-      'workerTimelineStep': workerTimelineStep.toString(),
-      'companyTimelineStep': companyTimelineStep.toString(),
-    };
-  }
-
-  // Convert Map<String, String> to AppUser object
-  static Future<AppUser?> fromSp(Map<String, String> userMap) async {
-    return AppUser(
-      uid: userMap['uid'] ?? "",
-      email: userMap['email'],
-      language: userMap['language'],
-      displayName: userMap['displayName'],
-      photoUrl: userMap['photoUrl'],
-      deviceTokenU: userMap['deviceTokenU'],
-      userRole: userMap['userRole'],
-      workerTimelineStep: int.parse(userMap['workerTimelineStep'] ?? '0'),
-      companyTimelineStep: int.parse(userMap['companyTimelineStep'] ?? '0'),
-    );
   }
 }
