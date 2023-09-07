@@ -14,8 +14,22 @@ class UpdateAppDialog extends StatelessWidget {
       onWillPop: () async =>
           false, // Prevent dialog from being closed using back button
       child: AlertDialog(
-        title: Text(AppLocalizations.of(context)!.updateRequired),
-        content: Text(AppLocalizations.of(context)!.updateRequiredDescription),
+        backgroundColor: ThemeColors.blukersBlueThemeColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        ),
+        actionsAlignment: MainAxisAlignment.center,
+        title: Text(
+          AppLocalizations.of(context)!.updateRequired,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: Text(
+          AppLocalizations.of(context)!.updateRequiredDescription,
+          style: const TextStyle(color: Colors.white),
+        ),
         actions: <Widget>[
           ElevatedButton(
             onPressed: () {
@@ -29,6 +43,18 @@ class UpdateAppDialog extends StatelessWidget {
                 );
               }
             },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ThemeColors.blukersOrangeThemeColor,
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+              textStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Montserrat',
+              ),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+              ),
+            ),
             child: Text(AppLocalizations.of(context)!.update),
           ),
         ],
