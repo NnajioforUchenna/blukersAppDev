@@ -37,6 +37,27 @@ class _BasicInformationState extends State<BasicInformation> {
     return false;
   }
 
+  ScrollController scrollCtrl = ScrollController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      //added this listner to dismiss keyboard when scroll
+      scrollCtrl.addListener(() {
+        print('scrolling');
+      });
+      scrollCtrl.position.isScrollingNotifier.addListener(() {
+        if (!scrollCtrl.position.isScrollingNotifier.value) {
+          print('scroll is stopped');
+          FocusManager.instance.primaryFocus?.unfocus();
+        } else {
+          print('scroll is started');
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -52,6 +73,7 @@ class _BasicInformationState extends State<BasicInformation> {
       child: Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: SingleChildScrollView(
+          controller: scrollCtrl,
           child: ConstrainedBox(
             constraints: BoxConstraints(
                 minHeight: MediaQuery.of(context).size.height * 0.7),

@@ -127,12 +127,12 @@ final List<Map<String, String>> listOffers = [
   //       'Skill-enhancement courses designed to make you more marketable to employers in the USA.',
   //   'route': '/courses'
   // },
-  {
-    'title': 'Certifications',
-    'description':
-        'Real-world practical experiences to familiarize international talents with the US work environment.',
-    'route': '/practicals'
-  },
+  // {
+  //   'title': 'Certifications',
+  //   'description':
+  //       'Real-world practical experiences to familiarize international talents with the US work environment.',
+  //   'route': '/practicals'
+  // },
 ];
 
 List<List<Widget>> combineLists(List<Widget> list1, List<Widget> list2) {

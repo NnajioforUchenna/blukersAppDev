@@ -66,7 +66,7 @@ class AuthenticationWrapper extends StatelessWidget {
     if (up.user != null) {
       return up.appUser != null && up.appUser?.registeredAs == 'company'
           ? const Workers() //Workers()
-          : Jobs(); //Jobs(); //Jobs();
+          : const Jobs(); //Jobs(); //Jobs();
     } else {
       return const OffersList(); // SplashScreen(); // SplashScreen(); //LandingPage() SplashScreen()
     }

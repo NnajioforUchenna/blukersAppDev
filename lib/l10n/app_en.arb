@@ -269,6 +269,12 @@
     "deleteAccount": "Delete Account",
 
     "connecting": "Connecting",
+    "processing": "Processing",
+
+    "orders": "Orders",
+    "myOrders": "My Orders",
+
+    "youDoNotHaveAnyOrder": "You do not have any order",
 
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",

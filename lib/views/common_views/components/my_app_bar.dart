@@ -31,9 +31,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       flexibleSpace: Container(),
       backgroundColor: Colors.white,
-      elevation: 2,
+      elevation: 1,
       shape: const Border(
-        bottom: BorderSide(width: 2, color: Colors.black12),
+        bottom: BorderSide(width: 2, color: Color.fromARGB(15, 0, 0, 0)),
       ),
       iconTheme: const IconThemeData(
         color: ThemeColors.primaryThemeColor,

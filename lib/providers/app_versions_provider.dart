@@ -28,13 +28,15 @@ class AppVersionsProvider with ChangeNotifier {
 
     Map shouldUpdateApp = await AppVersionsDataProvider().shouldUpdateApp();
     _latestVersion = shouldUpdateApp['version'] ?? "";
+
     String currentAppVersion = AppVersionHelper().get();
+
     if (shouldUpdateApp.containsKey('version') &&
         _latestVersion != "" &&
         Version.parse(_latestVersion!) > Version.parse(currentAppVersion)) {
       // print('versions are not the same');
       // print('current version: $currentAppVersion');
-      // print('latest version: ' + latestVersionData["version"]);
+      // print('latest version: ' + shouldUpdateApp["version"]);
 
       _shouldUpdate = true;
       _iOSUrl = shouldUpdateApp['iOSUrl'];
@@ -46,8 +48,9 @@ class AppVersionsProvider with ChangeNotifier {
   }
 
   void checkForUpdate(BuildContext context) {
-    //_latestversion ==null means the update never checked before since the app is open
-    if (_latestVersion == null) {
+    if (!kIsWeb) {
+      //_latestversion ==null means the update never checked before since the app is open
+      // if (_latestVersion == null) {
       _shouldUpdateApp().then((value) {
         print("update: " + value!.toString());
         if (value) {
@@ -63,6 +66,7 @@ class AppVersionsProvider with ChangeNotifier {
           );
         }
       });
+      // }
     }
   }
 

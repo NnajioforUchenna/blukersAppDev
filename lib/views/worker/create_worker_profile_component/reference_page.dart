@@ -6,19 +6,47 @@ import '../../../providers/worker_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'reference_form.dart';
 
-class ReferencePage extends StatelessWidget {
+class ReferencePage extends StatefulWidget {
   ReferencePage({Key? key}) : super(key: key);
+
+  @override
+  State<ReferencePage> createState() => _ReferencePageState();
+}
+
+class _ReferencePageState extends State<ReferencePage> {
   List<ReferenceForm> referenceForms = [];
+  ScrollController scrollCtrl = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      //added this listner to dismiss keyboard when scroll
+      scrollCtrl.addListener(() {
+        print('scrolling');
+      });
+      scrollCtrl.position.isScrollingNotifier.addListener(() {
+        if (!scrollCtrl.position.isScrollingNotifier.value) {
+          print('scroll is stopped');
+          FocusManager.instance.primaryFocus?.unfocus();
+        } else {
+          print('scroll is started');
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
-    for (int i = 0; i < wp.references.length; i++) {
-      referenceForms.add(ReferenceForm(index: i));
+    if (referenceForms.isEmpty) {
+      for (int i = 0; i < wp.references.length; i++) {
+        referenceForms.add(ReferenceForm(index: i));
+      }
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SingleChildScrollView(
+        controller: scrollCtrl,
         child: Column(
           children: [
             ...referenceForms,
