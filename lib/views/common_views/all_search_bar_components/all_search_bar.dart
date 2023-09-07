@@ -66,12 +66,12 @@ class _AllSearchBarState extends State<AllSearchBar> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildSearchField(_searchController1, searchName),
+              _buildSearchField(_searchController1, searchName,Icons.search),
               SizedBox(height: 15.h),
               _buildSearchField(
                   _searchController2,
                   AppLocalizations.of(context)!
-                      .workerSearchBarInput2Placeholder),
+                      .workerSearchBarInput2Placeholder, Icons.location_on),
               SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -99,10 +99,10 @@ class _AllSearchBarState extends State<AllSearchBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildSearchField(_searchController1, searchName),
+          _buildSearchField(_searchController1, searchName,Icons.search),
           const SizedBox(width: 20.0),
           _buildSearchField(_searchController2,
-              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder),
+              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder,Icons.location_on),
           const SizedBox(width: 20.0),
           _buildSearchButton(),
           const SizedBox(width: 10.0),
@@ -112,7 +112,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
     );
   }
 
-  Widget _buildSearchField(TextEditingController controller, String hintText) {
+  Widget _buildSearchField(TextEditingController controller, String hintText, IconData icon) {
     double widthFactor = Responsive.isMobile(context)
         ? 0.80
         : 0.28; // 80% for mobile, 28% for desktop
@@ -134,9 +134,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
           filled: true,
           fillColor: Colors.white,
           hintText: hintText,
-          prefixIcon: hintText.contains('company')
-              ? const Icon(Icons.search)
-              : const Icon(Icons.location_on),
+          prefixIcon: Icon(icon),
           suffixIcon: IconButton(
             icon: const Icon(Icons.close),
             onPressed: controller.text.isEmpty
