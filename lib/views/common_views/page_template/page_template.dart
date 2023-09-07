@@ -6,14 +6,32 @@ import 'package:provider/provider.dart';
 import 'my_buttom_navigation_bar.dart';
 import 'my_navigation_rail.dart';
 
+import 'package:blukers/views/common_views/components/my_app_bar.dart';
+
 class PageTemplate extends StatelessWidget {
   final Widget child;
-  const PageTemplate({Key? key, required this.child}) : super(key: key);
+  PageTemplate({
+    Key? key,
+    required this.child,
+    this.showAppBar = false,
+    this.showAppBarBackButton = true,
+    this.appBarTitle = '',
+  }) : super(key: key);
+
+  bool showAppBar;
+  bool showAppBarBackButton;
+  String appBarTitle;
 
   @override
   Widget build(BuildContext context) {
     IndustriesProvider up = Provider.of<IndustriesProvider>(context);
     return Scaffold(
+      appBar: showAppBar
+          ? MyAppBar(
+              title: appBarTitle,
+              showLeading: showAppBarBackButton,
+            )
+          : null,
       bottomNavigationBar:
           Responsive.isDesktop(context) ? null : const MyButtomNavigationBar(),
       body: SafeArea(

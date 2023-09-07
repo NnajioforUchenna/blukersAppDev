@@ -20,6 +20,7 @@ import '../views/membership/membership_widget.dart';
 import '../views/membership/subscription_components/payment_failed_widget.dart';
 import '../views/membership/subscription_components/payment_successful_widget.dart';
 import '../views/offers/offers_list.dart';
+import '../views/orders/orders_list.dart';
 import '../views/services/services.dart';
 import '../views/worker/create_worker_profile_component/create_worker_profile.dart';
 import '../views/worker/jobs.dart';
@@ -86,6 +87,8 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const Services());
     case '/offers':
       return MaterialPageRoute(builder: (context) => const OffersList());
+    case '/orders':
+      return MaterialPageRoute(builder: (context) => const OrdersList());
     case '/createCompanyProfile':
       return MaterialPageRoute(
           builder: (context) => const CreateCompanyProfile());
