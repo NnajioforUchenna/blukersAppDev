@@ -28,6 +28,7 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
         shortDescriptionController.text.isNotEmpty;
   }
 
+  ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -36,6 +37,20 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
     companySloganController.text = cp.previousParams["companySlogan"] ?? "";
     shortDescriptionController.text =
         cp.previousParams["shortDescription"] ?? "";
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      //added this listner to dismiss keyboard when scroll
+      scrollCtrl.addListener(() {
+        print('scrolling');
+      });
+      scrollCtrl.position.isScrollingNotifier.addListener(() {
+        if (!scrollCtrl.position.isScrollingNotifier.value) {
+          print('scroll is stopped');
+          FocusManager.instance.primaryFocus?.unfocus();
+        } else {
+          print('scroll is started');
+        }
+      });
+    });
   }
 
   @override
@@ -52,6 +67,7 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
           Container(
             padding: const EdgeInsets.all(20),
             child: SingleChildScrollView(
+              controller: scrollCtrl,
               child: Form(
                 key: _formKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -56,42 +56,45 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
       _currentPageIndex = wp.workerProfileCurrentPageIndex;
     }
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.7,
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            MakeResponsiveWeb(
-                image: const AssetImage('assets/images/classificationPage.png'),
-                child: ClassificationPage()),
-            MakeResponsiveWeb(
-                image: const AssetImage(
-                    'assets/images/personalInformationPage.png'),
-                child: PersonalInformationPage()),
-            MakeResponsiveWeb(
-                image: const AssetImage('assets/images/profilePhotoPage.png'),
-                child: ProfilePhotoPage()),
-            const MakeResponsiveWeb(
-                image:
-                    AssetImage('assets/images/professionalCredentialsPage.png'),
-                child: ProfessionalCredentialsPage()),
-            MakeResponsiveWeb(
-                image: const AssetImage('assets/images/workExperience.png'),
-                child: WorkExperiencePage()),
-            MakeResponsiveWeb(
-                image: const AssetImage('assets/images/referencePage.png'),
-                child: ReferencePage()),
-            const MakeResponsiveWeb(
-                image: AssetImage('assets/images/resumePage.png'),
-                child: ResumePage()),
-            const MakeResponsiveWeb(
-                image: AssetImage('assets/images/workerCongratulationPage.png'),
-                child:
-                    WorkerCongratulationPage()), // Name can be adjusted based on your actual page name
-          ],
+    return GestureDetector(
+       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.7,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              MakeResponsiveWeb(
+                  image: const AssetImage('assets/images/classificationPage.png'),
+                  child: ClassificationPage()),
+              MakeResponsiveWeb(
+                  image: const AssetImage(
+                      'assets/images/personalInformationPage.png'),
+                  child: PersonalInformationPage()),
+              MakeResponsiveWeb(
+                  image: const AssetImage('assets/images/profilePhotoPage.png'),
+                  child: ProfilePhotoPage()),
+              const MakeResponsiveWeb(
+                  image:
+                      AssetImage('assets/images/professionalCredentialsPage.png'),
+                  child: ProfessionalCredentialsPage()),
+              MakeResponsiveWeb(
+                  image: const AssetImage('assets/images/workExperience.png'),
+                  child: WorkExperiencePage()),
+              MakeResponsiveWeb(
+                  image: const AssetImage('assets/images/referencePage.png'),
+                  child: ReferencePage()),
+              const MakeResponsiveWeb(
+                  image: AssetImage('assets/images/resumePage.png'),
+                  child: ResumePage()),
+              const MakeResponsiveWeb(
+                  image: AssetImage('assets/images/workerCongratulationPage.png'),
+                  child:
+                      WorkerCongratulationPage()), // Name can be adjusted based on your actual page name
+            ],
+          ),
         ),
       ),
     );

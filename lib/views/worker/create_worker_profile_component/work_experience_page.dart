@@ -7,15 +7,43 @@ import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'work_experience_form.dart';
 
-class WorkExperiencePage extends StatelessWidget {
+class WorkExperiencePage extends StatefulWidget {
   WorkExperiencePage({super.key});
+
+  @override
+  State<WorkExperiencePage> createState() => _WorkExperiencePageState();
+}
+
+class _WorkExperiencePageState extends State<WorkExperiencePage> {
   List<WorkExperienceForm> workExperienceForms = [];
+  ScrollController scrollCtrl = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      //added this listner to dismiss keyboard when scroll
+      scrollCtrl.addListener(() {
+        print('scrolling');
+      });
+      scrollCtrl.position.isScrollingNotifier.addListener(() {
+        if (!scrollCtrl.position.isScrollingNotifier.value) {
+          print('scroll is stopped');
+          FocusManager.instance.primaryFocus?.unfocus();
+        } else {
+          print('scroll is started');
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
-    for (int i = 0; i < wp.workExperience.length; i++) {
-      workExperienceForms.add(WorkExperienceForm(index: i));
+    if (workExperienceForms.isEmpty) {
+      for (int i = 0; i < wp.workExperience.length; i++) {
+        workExperienceForms.add(WorkExperienceForm(index: i));
+      }
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -23,6 +51,7 @@ class WorkExperiencePage extends StatelessWidget {
           ? MediaQuery.of(context).size.width * 0.3
           : MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
+        controller: scrollCtrl,
         child: Column(
           children: [
             ...workExperienceForms,

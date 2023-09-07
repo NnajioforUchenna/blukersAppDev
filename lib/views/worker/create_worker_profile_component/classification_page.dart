@@ -32,6 +32,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
     });
   }
 
+  ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -39,6 +40,20 @@ class _ClassificationPageState extends State<ClassificationPage> {
     selectedIndustries = wp.previousParams['industries'] ?? [];
     selectedJobs = wp.previousParams['jobs'] ?? {};
     isSelect(); // Check if something is selected on initialization
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      //added this listner to dismiss keyboard when scroll
+      scrollCtrl.addListener(() {
+        print('scrolling');
+      });
+      scrollCtrl.position.isScrollingNotifier.addListener(() {
+        if (!scrollCtrl.position.isScrollingNotifier.value) {
+          print('scroll is stopped');
+          FocusManager.instance.primaryFocus?.unfocus();
+        } else {
+          print('scroll is started');
+        }
+      });
+    });
   }
 
   @override
@@ -52,6 +67,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
           : MediaQuery.of(context).size.width * 0.9,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
+        controller: scrollCtrl,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

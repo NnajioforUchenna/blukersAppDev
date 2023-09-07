@@ -52,33 +52,36 @@ class _CompanyPageSliderState extends State<CompanyPageSlider> {
       _currentPageIndex = cp.companyProfileCurrentPageIndex;
     }
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.7,
-      child: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          MakeResponsiveWeb(
-              image:
-                  const AssetImage('assets/images/generalInformationPage.png'),
-              child: GeneralInformationPage()),
-          MakeResponsiveWeb(
-              image: const AssetImage('assets/images/companyLogoPage.png'),
-              child: CompanyLogoPage()),
-          const MakeResponsiveWeb(
-              image: AssetImage('assets/images/contactDetailsPage.png'),
-              child: ContactDetailsPage()),
-          MakeResponsiveWeb(
-              image: const AssetImage('assets/images/socialMediaPage.png'),
-              child: SocialMediaPage()),
-          MakeResponsiveWeb(
-              image: const AssetImage(
-                  'assets/images/companyCharacteristicsPage.png'),
-              child: CompanyCharacteristicsPage()),
-          const MakeResponsiveWeb(
-              image: AssetImage('assets/images/workerCongratulationPage.png'),
-              child: CompanyCongratulationPage()),
-        ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.7,
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            MakeResponsiveWeb(
+                image: const AssetImage(
+                    'assets/images/generalInformationPage.png'),
+                child: GeneralInformationPage()),
+            MakeResponsiveWeb(
+                image: const AssetImage('assets/images/companyLogoPage.png'),
+                child: CompanyLogoPage()),
+            const MakeResponsiveWeb(
+                image: AssetImage('assets/images/contactDetailsPage.png'),
+                child: ContactDetailsPage()),
+            MakeResponsiveWeb(
+                image: const AssetImage('assets/images/socialMediaPage.png'),
+                child: SocialMediaPage()),
+            MakeResponsiveWeb(
+                image: const AssetImage(
+                    'assets/images/companyCharacteristicsPage.png'),
+                child: CompanyCharacteristicsPage()),
+            const MakeResponsiveWeb(
+                image: AssetImage('assets/images/workerCongratulationPage.png'),
+                child: CompanyCongratulationPage()),
+          ],
+        ),
       ),
     );
   }

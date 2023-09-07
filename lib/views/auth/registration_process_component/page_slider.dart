@@ -52,23 +52,26 @@ class _PageSliderState extends State<PageSlider> {
       _currentPageIndex = up.registerCurrentPageIndex;
     }
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.7,
-      child: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const MakeResponsiveWeb(
-              image: AssetImage('assets/images/createAccount.png'),
-              child: LoginInformation()),
-          MakeResponsiveWeb(
-              image: const AssetImage('assets/images/basicInfo.png'),
-              child: BasicInformation()),
-          const MakeResponsiveWeb(
-              image: AssetImage('assets/images/contactInfo.png'),
-              child: ContantInformationPage()),
-          const RegistrationCongratulationPage(),
-        ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.7,
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            const MakeResponsiveWeb(
+                image: AssetImage('assets/images/createAccount.png'),
+                child: LoginInformation()),
+            MakeResponsiveWeb(
+                image: const AssetImage('assets/images/basicInfo.png'),
+                child: BasicInformation()),
+            const MakeResponsiveWeb(
+                image: AssetImage('assets/images/contactInfo.png'),
+                child: ContantInformationPage()),
+            const RegistrationCongratulationPage(),
+          ],
+        ),
       ),
     );
   }
