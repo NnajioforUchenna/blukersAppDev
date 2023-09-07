@@ -18,7 +18,7 @@ class DisplayJobPostDialog extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: Stack(
-        alignment: Alignment.topCenter,
+        //  alignment: Alignment.topCenter,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(0.sp),
@@ -31,16 +31,24 @@ class DisplayJobPostDialog extends StatelessWidget {
                 ),
                 child: const AnimateJobPostDetails()),
           ),
-          Row(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(0),
-                child: FloatingActionButton(
-                  child: const Icon(Icons.close),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
+              Row(
+                children: [
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: FloatingActionButton(
+                      child: const Icon(Icons.close),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ),
+                  const Spacer(),
+                ],
               ),
+             const SizedBox(height: 10,)
             ],
           ),
         ],
