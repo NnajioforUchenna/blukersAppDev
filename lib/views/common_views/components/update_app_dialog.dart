@@ -14,7 +14,7 @@ class UpdateAppDialog extends StatelessWidget {
       onWillPop: () async =>
           false, // Prevent dialog from being closed using back button
       child: AlertDialog(
-        backgroundColor: ThemeColors.blukersBlueThemeColor,
+        // backgroundColor: ThemeColors.blukersBlueThemeColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
@@ -22,13 +22,13 @@ class UpdateAppDialog extends StatelessWidget {
         title: Text(
           AppLocalizations.of(context)!.updateRequired,
           style: const TextStyle(
-            color: Colors.white,
+            color: ThemeColors.blukersBlueThemeColor,
             fontWeight: FontWeight.bold,
           ),
         ),
         content: Text(
           AppLocalizations.of(context)!.updateRequiredDescription,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: ThemeColors.grey1ThemeColor),
         ),
         actions: <Widget>[
           ElevatedButton(
