@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:blukers/views/common_views/components/index.dart';
 
 class ResumeScreen extends StatefulWidget {
   const ResumeScreen({Key? key}) : super(key: key);
@@ -33,8 +34,8 @@ class _ResumeScreenState extends State<ResumeScreen> {
     //docFile = DefaultCacheManager().getSingleFile("https://firebasestorage.googleapis.com/v0/b/Blukers-5275d.appspot.com/o/files%2FDocument%20from%20Jyot%20Vavadiya?alt=media&token=e8da4c45-8050-4022-bc4d-32b6b6703634");
     return Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          title: Text("Resume"),
+        appBar: MyAppBar(
+          title: "Resume",
         ),
         body: Container(
           width: MediaQuery.of(context).size.width,

@@ -269,6 +269,12 @@
     "deleteAccount": "Eliminar Cuenta",
 
     "connecting": "Conectando",
+    "processing": "Procesando",
+
+    "orders": "Pedidos",
+    "myOrders": "Mis Pedidos",
+
+    "youDoNotHaveAnyOrder": "No tienes ningún pedido",
 
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",

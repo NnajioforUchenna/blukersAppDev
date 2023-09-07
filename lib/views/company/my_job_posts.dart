@@ -25,6 +25,7 @@ class MyJobPosts extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
+            centerTitle: true,
             title: Text(
               AppLocalizations.of(context)!.jobs,
               style: const TextStyle(

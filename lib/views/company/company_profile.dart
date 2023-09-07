@@ -1,5 +1,6 @@
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/auth/common_widget/login_or_register.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';
@@ -28,6 +29,12 @@ class _CompanyProfileState extends State<CompanyProfile> {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
+    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+
+    if (!kIsWeb) {
+      avp.checkForUpdate(context);
+    }
+
     return PageTemplate(
       child: up.appUser == null
           ? LoginOrRegister()

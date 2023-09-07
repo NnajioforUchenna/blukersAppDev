@@ -1,6 +1,8 @@
 // import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 import 'package:blukers/providers/chat_provider.dart';
+import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';
@@ -78,6 +80,12 @@ class _WorkerProfileState extends State<WorkerProfile> {
     final width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
+    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+
+    if (!kIsWeb) {
+      avp.checkForUpdate(context);
+    }
+
     return PageTemplate(
       child: up.appUser == null
           ? LoginOrRegister()
@@ -483,6 +491,17 @@ class _WorkerProfileState extends State<WorkerProfile> {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser!.worker != null) {
                         Navigator.pushNamed(context, "/payment");
+                      }
+                    },
+                  ),
+                  const ProfileDivider(),
+                  ProfileSection(
+                    heading: AppLocalizations.of(context)!.orders,
+                    icon: UniconsLine.arrow_right,
+                    showInfoInNewPage: true,
+                    onClickSection: () {
+                      if (up.appUser!.worker != null) {
+                        Navigator.pushNamed(context, "/orders");
                       }
                     },
                   ),

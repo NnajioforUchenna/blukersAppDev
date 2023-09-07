@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:blukers/providers/app_versions_provider.dart';
 
 import '../../providers/industry_provider.dart';
 import '../../providers/job_posts_provider.dart';
@@ -18,6 +21,12 @@ class Jobs extends StatelessWidget {
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+
+    if (!kIsWeb) {
+      avp.checkForUpdate(context);
+    }
+
     return PageTemplate(
       child: SingleChildScrollView(
         child: Column(

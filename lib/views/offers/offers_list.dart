@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,11 +9,20 @@ import 'offer_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:blukers/utils/styles/index.dart';
 
+import 'package:provider/provider.dart';
+import 'package:blukers/providers/app_versions_provider.dart';
+
 class OffersList extends StatelessWidget {
   const OffersList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+
+    if (!kIsWeb) {
+      avp.checkForUpdate(context);
+    }
+
     return PageTemplate(
       child: SingleChildScrollView(
         child: Column(
