@@ -1,3 +1,4 @@
+import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class RoundedImageWidget extends StatelessWidget {
@@ -12,17 +13,17 @@ class RoundedImageWidget extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 10,
-            offset: Offset(0, 5),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10.0),
-      ),
+      // decoration: BoxDecoration(
+      //   boxShadow: [
+      //     BoxShadow(
+      //       color: Colors.black.withOpacity(0.2),
+      //       spreadRadius: 2,
+      //       blurRadius: 10,
+      //       offset: Offset(0, 5),
+      //     ),
+      //   ],
+      //   borderRadius: BorderRadius.circular(10.0),
+      // ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Image.network(
@@ -34,9 +35,11 @@ class RoundedImageWidget extends StatelessWidget {
           },
           errorBuilder: (context, error, stackTrace) {
             return Center(
-                child: Image.network(
-              'https://picsum.photos/200/300',
-              fit: BoxFit.cover,
+                child: Icon(
+              //building icon if no image
+              Icons.apartment,
+              size: size,
+              color: ThemeColors.blukersOrangeThemeColor,
             )); // Or any placeholder widget
           },
         ),

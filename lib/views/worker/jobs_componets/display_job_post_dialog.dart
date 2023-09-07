@@ -1,4 +1,5 @@
 import 'package:blukers/models/job_post.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,8 +18,9 @@ class DisplayJobPostDialog extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
+      insetPadding:const EdgeInsets.symmetric(horizontal: 16,vertical: 26),
       child: Stack(
-        alignment: Alignment.topCenter,
+          alignment: Alignment.topCenter,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(0.sp),
@@ -31,16 +33,25 @@ class DisplayJobPostDialog extends StatelessWidget {
                 ),
                 child: const AnimateJobPostDetails()),
           ),
-          Row(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(0),
-                child: FloatingActionButton(
-                  child: const Icon(Icons.close),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
+              Row(
+                children: [
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: FloatingActionButton(
+                      backgroundColor: ThemeColors.blukersOrangeThemeColor,
+                      child: const Icon(Icons.close),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ),
+                  const Spacer(),
+                ],
               ),
+             const SizedBox(height: 10,)
             ],
           ),
         ],

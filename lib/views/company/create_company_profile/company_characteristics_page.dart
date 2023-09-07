@@ -28,7 +28,7 @@ class _CompanyCharacteristicsPageState
         industryController.text.isNotEmpty &&
         yearFoundedController.text.isNotEmpty;
   }
-
+  ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -37,6 +37,18 @@ class _CompanyCharacteristicsPageState
       companySizeController.text = cp.previousParams['companySize'] ?? '';
       industryController.text = cp.previousParams['industry'] ?? '';
       yearFoundedController.text = cp.previousParams['yearFounded'] ?? '';
+       //added this listner to dismiss keyboard when scroll
+      scrollCtrl.addListener(() {
+        print('scrolling');
+      });
+      scrollCtrl.position.isScrollingNotifier.addListener(() {
+        if (!scrollCtrl.position.isScrollingNotifier.value) {
+          print('scroll is stopped');
+          FocusManager.instance.primaryFocus?.unfocus();
+        } else {
+          print('scroll is started');
+        }
+      });
     });
   }
 
@@ -56,6 +68,7 @@ class _CompanyCharacteristicsPageState
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
+              controller: scrollCtrl,
               child: Form(
                 key: _formKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,

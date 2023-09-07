@@ -33,7 +33,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
         birthMonthController.text.isNotEmpty &&
         birthYearController.text.isNotEmpty;
   }
-
+  ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -45,6 +45,18 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
       birthDayController.text = wp.previousParams["birthDay"] ?? "";
       birthMonthController.text = wp.previousParams["birthMonth"] ?? "";
       birthYearController.text = wp.previousParams["birthYear"] ?? "";
+      //added this listner to dismiss keyboard when scroll
+      scrollCtrl.addListener(() {
+        print('scrolling');
+      });
+      scrollCtrl.position.isScrollingNotifier.addListener(() {
+        if (!scrollCtrl.position.isScrollingNotifier.value) {
+          print('scroll is stopped');
+          FocusManager.instance.primaryFocus?.unfocus();
+        } else {
+          print('scroll is started');
+        }
+      });
     });
   }
 
@@ -63,6 +75,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
+              controller: scrollCtrl,
               child: Form(
                 key: _formKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
