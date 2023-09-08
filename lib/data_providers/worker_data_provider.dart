@@ -229,7 +229,7 @@ class WorkerDataProvider {
   static Future<List<Worker>> getWorkers(
       String nameRelated, String locationRelated) async {
     final response = await http.post(
-      Uri.parse('https://top-design-395510.ue.r.appspot.com/searchWorkers'),
+      Uri.parse(baseUrlAppEngineFunctions + '/searchWorkers'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

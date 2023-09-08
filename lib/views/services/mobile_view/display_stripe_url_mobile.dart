@@ -1,4 +1,6 @@
+import 'package:blukers/providers/payments_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
@@ -13,6 +15,19 @@ class DisplayStripeUrlMobile extends StatefulWidget {
 
 class _DisplayStripeUrlMobileState extends State<DisplayStripeUrlMobile> {
   late final WebViewController _controller;
+  late PaymentsProvider pp;
+
+  bool _isInitialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isInitialized) {
+      pp = Provider.of<PaymentsProvider>(context);
+      // Other logic...
+      _isInitialized = true;
+    }
+  }
 
   @override
   void initState() {
@@ -60,7 +75,9 @@ Page resource error:
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://success.com')) {
               Navigator.of(context).pop();
+              pp.verifyMobileStripePayment(checkOutUrl: widget.checkOutUrl);
               Navigator.pushNamed(context, '/paymentSuccess');
+
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Payment Successful'),
@@ -71,6 +88,7 @@ Page resource error:
             }
             if (request.url.startsWith('https://www.cancel.com')) {
               Navigator.of(context).pop();
+              pp.verifyMobileStripePayment(checkOutUrl: widget.checkOutUrl);
               Navigator.pushNamed(context, '/paymentFailed');
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(

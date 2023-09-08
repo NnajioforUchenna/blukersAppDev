@@ -143,3 +143,16 @@ List<List<Widget>> combineLists(List<Widget> list1, List<Widget> list2) {
 String sanitizeJson(String jsonString) {
   return jsonString.replaceAll('NaN', 'null');
 }
+
+String extractSessionId(String checkoutUrl) {
+  Uri uri = Uri.parse(checkoutUrl);
+  String path = uri.path;
+  RegExp regExp = RegExp(r'cs_test_[\w]+');
+  Match? match = regExp.firstMatch(path);
+
+  if (match != null) {
+    return match.group(0) ?? '';
+  } else {
+    return '';
+  }
+}

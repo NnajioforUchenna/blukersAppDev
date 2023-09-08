@@ -43,11 +43,12 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
 
     // Determine subscription type
     int indexSubType = subscriptionType == 'premium' ? 0 : 1;
-
-    PurchaseParam purchaseParam = PurchaseParam(
-      productDetails: _listSubscriptionDetails[indexSubType],
-    );
-    await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+    if (_listSubscriptionDetails.length > 1) {
+      PurchaseParam purchaseParam = PurchaseParam(
+        productDetails: _listSubscriptionDetails[indexSubType],
+      );
+      await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+    }
   }
 
   getGooglePayment(BuildContext context, String subscriptionType) async {
@@ -57,11 +58,15 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
     // Determine subscription type
     int indexSubType = subscriptionType == 'premium' ? 0 : 2;
 
-    PurchaseParam purchaseParam = PurchaseParam(
-      productDetails: _listSubscriptionDetails[indexSubType],
-    );
+    if (_listSubscriptionDetails.length > 3) {
+      PurchaseParam purchaseParam = PurchaseParam(
+        productDetails: _listSubscriptionDetails[indexSubType],
+      );
 
-    await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+      await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+    } else {
+      print('No Google Subscription Available');
+    }
   }
 
   void _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList) {
@@ -116,7 +121,9 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
       Navigator.push(
         currentContext!,
         MaterialPageRoute(
-          builder: (context) => PaymentFailedWidget(),
+          builder: (context) => PaymentFailedWidget(
+            urlInfo: UrlInfo.empty(),
+          ),
         ),
       );
     }
@@ -130,7 +137,9 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
       Navigator.push(
         currentContext!,
         MaterialPageRoute(
-          builder: (context) => PaymentSuccessfulWidget(),
+          builder: (context) => PaymentSuccessfulWidget(
+            urlInfo: UrlInfo.empty(),
+          ),
         ),
       );
     }
@@ -155,8 +164,8 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
   }
 
   void updateSubscriptionPaymentRecords(PurchaseDetails purchase) {
-    print(purchase);
     // 1. Update User's Subscription Status
+    PaymentsDataProvider.updateUserSubscriptionStatus(appUser?.uid, purchase);
 
     // 2. Update UserPaymentDetails
     // 3. Update UserSubscriptionDetails

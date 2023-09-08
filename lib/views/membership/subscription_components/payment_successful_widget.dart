@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../models/payment_model/url_info.dart';
+import '../../../providers/payments_provider.dart';
 
 class PaymentSuccessfulWidget extends StatelessWidget {
+  final UrlInfo urlInfo;
+  const PaymentSuccessfulWidget({super.key, required this.urlInfo});
+
   @override
   Widget build(BuildContext context) {
+    PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
+    if (urlInfo.sessionId != null) {
+      pp.verifyPayment(urlInfo, 'success');
+    }
     return Center(
       child: Container(
         padding: const EdgeInsets.all(16.0),

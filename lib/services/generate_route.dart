@@ -1,3 +1,4 @@
+import 'package:blukers/models/payment_model/url_info.dart';
 import 'package:blukers/views/chat_message_screen.dart';
 import 'package:blukers/views/common_views/landing_page_components/landing_page.dart';
 import 'package:blukers/views/company/company_basic_info.dart';
@@ -63,9 +64,15 @@ MaterialPageRoute generateRoute(RouteSettings settings) {
     case '/payment':
       return MaterialPageRoute(builder: (context) => const MembershipWidget());
     case '/paymentFailed':
-      return MaterialPageRoute(builder: (context) => PaymentFailedWidget());
+      return MaterialPageRoute(
+          builder: (context) => PaymentFailedWidget(
+                urlInfo: UrlInfo.empty(),
+              ));
     case '/paymentSuccess':
-      return MaterialPageRoute(builder: (context) => PaymentSuccessfulWidget());
+      return MaterialPageRoute(
+          builder: (context) => PaymentSuccessfulWidget(
+                urlInfo: UrlInfo.empty(),
+              ));
     case 'companyProfile':
       return MaterialPageRoute(builder: (context) => const CompanyProfile());
     case '/login':

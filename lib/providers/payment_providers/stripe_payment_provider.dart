@@ -26,8 +26,21 @@ extension StripePaymentProvider on PaymentsProvider {
     );
   }
 
-  Future<String> getCheckOutUrl(priceId, successUrl, failedUrl) async {
-    print("Getting Checkout Url");
+  Future<String> getCheckOutUrl(
+      priceId, successUrl, failedUrl, productName) async {
+    Map<String, dynamic> metadata = {
+      "user_email": appUser!.email,
+      "user_id": appUser!.uid,
+      "product_id": productName,
+      "payment_type": "subscription"
+    };
+
+    print('successUrl: $successUrl');
+    print('failedUrl: $failedUrl');
+
+    successUrl = successUrl + "/success?session_id={CHECKOUT_SESSION_ID}";
+    failedUrl = failedUrl + "/failed?session_id={CHECKOUT_SESSION_ID}";
+
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     DocumentReference docRef = await firestore
         .collection("AppUsers")
@@ -37,6 +50,7 @@ extension StripePaymentProvider on PaymentsProvider {
       "price": priceId,
       "success_url": successUrl,
       "cancel_url": failedUrl,
+      "metadata": metadata,
     });
 
     int attempts = 0;
@@ -70,10 +84,13 @@ extension StripePaymentProvider on PaymentsProvider {
     String subscriptionType,
   ) async {
     String priceId = "";
+    String productName = "";
     if (subscriptionType == "premium") {
       priceId = stripeData.employeePremiumPriceId;
+      productName = 'blukers_workers_premium';
     } else {
       priceId = stripeData.employeePremiumPlusPriceId;
+      productName = 'blukers_workers_premium_plus';
     }
 
     String urlEx = Uri.base.toString();
@@ -81,7 +98,8 @@ extension StripePaymentProvider on PaymentsProvider {
     String successUrl = baseUrl + 'paymentSuccess';
     String failedUrl = baseUrl + 'paymentFailed';
 
-    String checkOutUrl = await getCheckOutUrl(priceId, successUrl, failedUrl);
+    String checkOutUrl =
+        await getCheckOutUrl(priceId, successUrl, failedUrl, productName);
 
     if (checkOutUrl == 'error') {
       notifyUserError(context);
@@ -151,48 +169,57 @@ extension StripePaymentProvider on PaymentsProvider {
     EasyLoading.dismiss();
   }
 
-  getServiceCheckOutUrl(
-      String priceId, String successUrl, String failedUrl) async {
-    print("Getting Checkout Url");
-    print(priceId);
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    DocumentReference docRef = await firestore
-        .collection("AppUsers")
-        .doc(appUser!.uid)
-        .collection("checkout_sessions")
-        .add({
-      "price": priceId,
-      "quantity": 1,
-      "mode": "payment",
-      "success_url": successUrl,
-      "cancel_url": failedUrl,
-    });
-
-    int attempts = 0;
-    const maxAttempts = 3;
-    const delayBetweenAttempts = Duration(seconds: 5); // Adjust as needed
-
-    while (attempts < maxAttempts) {
-      DocumentSnapshot snapshot = await docRef.snapshots().first;
-
-      if (snapshot.exists) {
-        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
-        if (data != null && data['url'] != null) {
-          String checkOutUrl = data['url'];
-          print(checkOutUrl);
-          return checkOutUrl;
-        }
-      }
-      print("Attempt: $attempts");
-      attempts++;
-      if (attempts < maxAttempts) {
-        await Future.delayed(
-            delayBetweenAttempts); // Wait before the next attempt
-      }
-    }
-
-    return 'error';
-  }
+  // getServiceCheckOutUrl(
+  //     String priceId, String successUrl, String failedUrl) async {
+  //   print("Getting Checkout Url");
+  //   print(priceId);
+  //
+  //   // Map<String, dynamic> metadata = {
+  //   //   "user_email": appUser!.email,
+  //   //   "user_id": appUser!.uid,
+  //   //   "product_id": service,
+  //   //   "payment_type": "subscription"
+  //   // };
+  //
+  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  //   DocumentReference docRef = await firestore
+  //       .collection("AppUsers")
+  //       .doc(appUser!.uid)
+  //       .collection("checkout_sessions")
+  //       .add({
+  //     "price": priceId,
+  //     "quantity": 1,
+  //     "mode": "payment",
+  //     "success_url": successUrl,
+  //     "cancel_url": failedUrl,
+  //     // "metadata": metadata,
+  //   });
+  //
+  //   int attempts = 0;
+  //   const maxAttempts = 3;
+  //   const delayBetweenAttempts = Duration(seconds: 5); // Adjust as needed
+  //
+  //   while (attempts < maxAttempts) {
+  //     DocumentSnapshot snapshot = await docRef.snapshots().first;
+  //
+  //     if (snapshot.exists) {
+  //       Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+  //       if (data != null && data['url'] != null) {
+  //         String checkOutUrl = data['url'];
+  //         print(checkOutUrl);
+  //         return checkOutUrl;
+  //       }
+  //     }
+  //     print("Attempt: $attempts");
+  //     attempts++;
+  //     if (attempts < maxAttempts) {
+  //       await Future.delayed(
+  //           delayBetweenAttempts); // Wait before the next attempt
+  //     }
+  //   }
+  //
+  //   return 'error';
+  // }
 
   Future<String> getStripeCheckOutUrl(
       BuildContext context, String service) async {
@@ -208,7 +235,7 @@ extension StripePaymentProvider on PaymentsProvider {
     }
 
     if (productName.isEmpty || amount <= 0) {
-      _notifyUserError(context);
+      notifyUserError(context);
       return '';
     }
 
@@ -224,8 +251,15 @@ extension StripePaymentProvider on PaymentsProvider {
       failedUrl = 'https://www.cancel.com';
     }
 
-    final response =
-        await _makeStripeRequest(productName, amount, successUrl, failedUrl);
+    Map<String, dynamic> metadata = {
+      "user_email": appUser!.email,
+      "user_id": appUser!.uid,
+      "product_id": service,
+      "payment_type": "service"
+    };
+
+    final response = await _makeStripeRequest(
+        productName, amount, successUrl, failedUrl, metadata);
 
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
@@ -234,26 +268,31 @@ extension StripePaymentProvider on PaymentsProvider {
       }
     }
 
-    _notifyUserError(context);
+    notifyUserError(context);
     return '';
   }
 
-  Future<http.Response> _makeStripeRequest(
-      String productName, double amount, String successUrl, String failedUrl) {
+  Future<http.Response> _makeStripeRequest(String productName, double amount,
+      String successUrl, String failedUrl, Map<String, dynamic> metadata) {
     return http.post(
-      Uri.parse(
-          'https://top-design-395510.ue.r.appspot.com/payments/one-time-checkout'),
+      Uri.parse('$baseUrlAppEngineFunctions/payments/one-time-checkout'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'product_name': productName,
         'amount': amount,
         'success_url': successUrl,
         'cancel_url': failedUrl,
+        "user_email": appUser!.email,
+        "metadata": metadata,
       }),
     );
   }
 
-  void _notifyUserError(BuildContext context) {
-    // Whatever your notifyUserError function does
+  Future<void> verifyPayment(UrlInfo urlInfo, String from) async {
+    if (urlInfo.sessionId != null) {
+      Map<String, dynamic> result =
+          await PaymentsDataProvider().verifyStripePayment(urlInfo.sessionId!);
+      print(result);
+    }
   }
 }

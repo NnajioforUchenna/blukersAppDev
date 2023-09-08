@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/payment_model/url_info.dart';
 import '../providers/app_versions_provider.dart';
 import '../providers/job_posts_provider.dart';
 import '../providers/user_provider.dart';
@@ -44,12 +45,16 @@ class AuthenticationWrapper extends StatelessWidget {
 
     // Display the Failed Payment Page
     if (urlEx.contains('/paymentFailed')) {
-      return PaymentFailedWidget();
+      UrlInfo urlInfo = UrlInfo.parseUrl(urlEx);
+
+      return PaymentFailedWidget(urlInfo: urlInfo);
     }
 
     // Display the Success Payment Page
     if (urlEx.contains('/paymentSuccess')) {
-      return PaymentSuccessfulWidget();
+      UrlInfo urlInfo = UrlInfo.parseUrl(urlEx);
+      print(urlInfo);
+      return PaymentSuccessfulWidget(urlInfo: urlInfo);
     }
 
     // Check for the query parameters

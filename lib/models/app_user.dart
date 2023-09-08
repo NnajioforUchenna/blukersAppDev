@@ -33,6 +33,11 @@ class AppUser {
   int createdAt = 0;
   int modifiedAt = 0;
 
+  // Varibles for Tracking Payments
+  bool isSubscriptionActive = false;
+  String activeSubscriptionId = '';
+  List<String> listActiveServices = [];
+
   AppUser({
     required this.uid,
     required this.email,
@@ -53,9 +58,11 @@ class AppUser {
     this.userRole,
     this.workerTimelineStep,
     this.companyTimelineStep,
-    this.createdAt = 0,
-    this.modifiedAt = 0,
-  });
+    this.activeSubscriptionId = '',
+    this.isSubscriptionActive = false,
+    this.listActiveServices = const [],
+  })  : createdAt = DateTime.now().millisecondsSinceEpoch,
+        modifiedAt = DateTime.now().millisecondsSinceEpoch;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
@@ -90,12 +97,16 @@ class AppUser {
       data['companyTimelineStep'] = companyTimelineStep;
     if (createdAt != 0) data['createdAt'] = createdAt;
     if (modifiedAt != 0) data['modifiedAt'] = modifiedAt;
+    if (activeSubscriptionId != '')
+      data['activeSubscriptionId'] = activeSubscriptionId;
+    data['isSubscriptionActive'] = isSubscriptionActive;
+    data['listActiveServices'] = listActiveServices;
 
     return data;
   }
 
   static AppUser fromMap(Map<String, dynamic> map) {
-    return AppUser(
+    AppUser user = AppUser(
       uid: map['uid'] ?? '',
       email: map['email'] ?? '',
       language: map['language'] as String?,
@@ -122,9 +133,19 @@ class AppUser {
           (map['address'] != null && map['address'] is Map<String, dynamic>)
               ? Address.fromMap(map['address'])
               : null,
-      createdAt: map['createdAt'] ?? 0,
-      modifiedAt: map['modifiedAt'] ?? 0,
+      isSubscriptionActive: map['isSubscriptionActive'] ?? false,
+      activeSubscriptionId: map['activeSubscriptionId'] ?? '',
     );
+
+    if (map['listActiveServices'] != null) {
+      List<dynamic> list = map['listActiveServices'];
+      user.listActiveServices = list.map((e) => e.toString()).toList();
+    }
+
+    user.createdAt = map['createdAt'] ?? 0;
+    user.modifiedAt = map['modifiedAt'] ?? 0;
+
+    return user;
   }
 
   @override

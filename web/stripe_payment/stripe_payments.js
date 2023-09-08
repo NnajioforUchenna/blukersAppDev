@@ -12,7 +12,7 @@ const stripe = Stripe('pk_test_51Nfo0yAwqpCFthEvKId5qvHpXpCbLEUR6j6xwU52gzjWxXAU
 async function redirectToCheckout(successUrl, cancelUrl) {
     try {
         // Call your backend to create the checkout session
-        const response = await fetch('https://top-design-395510.ue.r.appspot.com/payments/create-checkout-session', {
+        const response = await fetch(baseUrlAppEngineFunctions + '/payments/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

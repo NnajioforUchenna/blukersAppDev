@@ -121,8 +121,8 @@ class JobPostsDataProvider {
 
   static Future<List<JobPost>> searchJobPosts(
       String nameRelated, String locationRelated) async {
-    const String url =
-        'https://top-design-395510.ue.r.appspot.com/searchJobPosts'; // Replace with your actual endpoint
+    const String url = baseUrlAppEngineFunctions +
+        '/searchJobPosts'; // Replace with your actual endpoint
 
     final response = await http.post(
       Uri.parse(url),
@@ -158,7 +158,7 @@ class JobPostsDataProvider {
     if (selectedJobPostId.isNotEmpty) {
       final response = await http.post(
         Uri.parse(
-            'https://top-design-395510.ue.r.appspot.com/getJobPostsByIdAndTargetLanguage'),
+            baseUrlAppEngineFunctions + '/getJobPostsByIdAndTargetLanguage'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'jobId': selectedJobPostId,

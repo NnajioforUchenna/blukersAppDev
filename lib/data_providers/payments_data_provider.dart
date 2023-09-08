@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:blukers/models/payment_model/payment_order.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
@@ -64,6 +67,39 @@ class PaymentsDataProvider {
           .set({"Purchase Wrapper": purchaseWrapper}, SetOptions(merge: true));
     } else {
       print('Unsupported purchase details provided.');
+    }
+  }
+
+  Future<Map<String, dynamic>> verifyStripePayment(
+      String checkoutSessionId) async {
+    const String apiUrl =
+        baseUrlAppEngineFunctions + '/payments/verify-stripe-payment';
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'checkout_session_id': checkoutSessionId,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to verify payment');
+    }
+  }
+
+  static void updateUserSubscriptionStatus(
+      String? uid, PurchaseDetails purchase) {
+    String productID = purchase.productID;
+    if (uid != null) {
+      db.collection('AppUsers').doc(uid).set({
+        'isSubscriptionActive': true,
+        'activeSubscriptionId': productID,
+      }, SetOptions(merge: true));
     }
   }
 }

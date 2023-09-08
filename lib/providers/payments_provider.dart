@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:blukers/data_providers/payments_data_provider.dart';
 import 'package:blukers/models/app_user.dart';
+import 'package:blukers/models/payment_model/url_info.dart';
 import 'package:blukers/services/stripe_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +15,8 @@ import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../common_files/constants.dart';
+import '../data_providers/data_constants.dart';
 import '../models/payment_model/payment_order.dart';
 import '../models/subscription_model.dart';
 import '../services/platform_check.dart';
@@ -199,6 +202,8 @@ class PaymentsProvider with ChangeNotifier {
 
     String serviceCheckOutUrl = await getStripeCheckOutUrl(context, service);
 
+    print(serviceCheckOutUrl);
+
     if (serviceCheckOutUrl.isNotEmpty) {
       if (kIsWeb) {
         html.window.location.assign(serviceCheckOutUrl);
@@ -212,5 +217,18 @@ class PaymentsProvider with ChangeNotifier {
         );
       }
     }
+  }
+
+  Future<void> verifyMobileStripePayment({required String checkOutUrl}) async {
+    // get sessionID from checkOutUrl
+    String sessionId = extractSessionId(checkOutUrl);
+    print(sessionId);
+    if (sessionId.isEmpty) {
+      print("Session ID is empty");
+      return;
+    }
+    Map<String, dynamic> result =
+        await PaymentsDataProvider().verifyStripePayment(sessionId);
+    print(result);
   }
 }
