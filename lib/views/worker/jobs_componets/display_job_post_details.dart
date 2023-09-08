@@ -1,4 +1,5 @@
 import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/services/platform_specfic_imports.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,7 @@ class _JobPostDetailsWidgetState extends State<JobPostDetailsWidget>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
       vsync: this,
     );
     _animation = CurvedAnimation(
@@ -89,6 +90,7 @@ class _JobPostDetailsWidgetState extends State<JobPostDetailsWidget>
                         if (up.appUser != null &&
                             up.appUser!.uid == jobPost.companyId)
                           DetailPageBlockFive(jobPost: jobPost),
+                        if (!kIsWeb) const SizedBox(height: 50),
                       ],
                     ),
                   ),

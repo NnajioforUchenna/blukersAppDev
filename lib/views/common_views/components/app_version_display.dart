@@ -30,18 +30,19 @@ class AppVersionDisplay extends StatelessWidget {
         Container(
           // height: double.infinity,
           alignment: Alignment.center, // This is needed
+          padding: const EdgeInsets.all(3.0),
           child: Image.asset(
             "assets/images/logo.png",
             fit: BoxFit.contain,
-            width: 60,
+            width: 35,
           ),
         ),
         Text(
-          "v" + AppVersionHelper().get(),
+          "VERSION " + AppVersionHelper().get(),
           style: const TextStyle(
             fontFamily: 'Montserrat',
-            color: ThemeColors.blukersOrangeThemeColor,
-            fontSize: 14,
+            color: ThemeColors.grey2ThemeColor,
+            fontSize: 12,
             height: 1.5,
             fontWeight: FontWeight.bold,
           ),

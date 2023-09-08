@@ -2,12 +2,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../auth/common_widget/company_logo.dart';
+import '../auth/common_widget/login_or_register.dart';
 
 class PleaseLogin extends StatelessWidget {
   const PleaseLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return LoginOrRegister();
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

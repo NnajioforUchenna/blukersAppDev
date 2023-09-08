@@ -4,17 +4,20 @@ import 'package:unicons/unicons.dart';
 import 'package:blukers/utils/styles/index.dart';
 
 class ProfileSection extends StatelessWidget {
-  const ProfileSection(
-      {super.key,
-      required this.heading,
-      required this.icon,
-      required this.onClickSection,
-      this.onClickEdit,
-      this.showBasicInfo,
-      this.showInfoInNewPage = false,
-      this.showEditIcon = true});
+  ProfileSection({
+    super.key,
+    required this.heading,
+    required this.icon,
+    this.menuIcon = UniconsLine.circle,
+    required this.onClickSection,
+    this.onClickEdit,
+    this.showBasicInfo,
+    this.showInfoInNewPage = false,
+    this.showEditIcon = true,
+  });
   final String heading;
   final IconData icon;
+  final IconData menuIcon;
   final VoidCallback onClickSection;
   final VoidCallback? onClickEdit;
   final bool? showInfoInNewPage;
@@ -27,20 +30,26 @@ class ProfileSection extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2),
       child: Row(
         children: [
-          const Icon(
-            UniconsLine.user_circle,
+          Icon(
+            menuIcon,
             // color: Colors.grey[700],
             color: ThemeColors.black3ThemeColor,
             size: 30,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: GestureDetector(
               onTap: onClickSection,
               child: Text(
                 heading,
-                style: ThemeTextStyles.headingThemeTextStyle.apply(
+                // style: ThemeTextStyles.headingThemeTextStyle.apply(
+                //   color: ThemeColors.black3ThemeColor,
+                // ),
+                style: const TextStyle(
+                  fontFamily: 'Montserrat',
                   color: ThemeColors.black3ThemeColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
