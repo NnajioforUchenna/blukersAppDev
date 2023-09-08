@@ -19,7 +19,7 @@ class ThemeColors {
 
   static const black1ThemeColor = Color.fromRGBO(25, 25, 25, 0.95); // #
   static const black2ThemeColor = Color.fromRGBO(0, 0, 0, 0.85); // #
-  static const black3ThemeColor = Color.fromRGBO(49, 49, 53, 0.941); // #
+  static const black3ThemeColor = Color.fromRGBO(58, 58, 63, 1); // #
   // static const black3ThemeColor = Color.fromRGBO(44, 44, 47, 0.945); // #
 
   static const grey1ThemeColor = Color.fromRGBO(157, 159, 161, 1); // #9D9FA1

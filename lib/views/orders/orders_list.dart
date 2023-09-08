@@ -26,8 +26,9 @@ class OrdersList extends StatelessWidget {
       avp.checkForUpdate(context);
     }
 
+    // dynamic ordersList = null;
+    // dynamic ordersList = [];
     dynamic ordersList = listOrdersSampleData;
-    // dynamic ordersList = listOrdersSampleDataEmpty;
 
     return ordersList != null && ordersList.isEmpty == false
         ? PageTemplate(
@@ -53,6 +54,7 @@ class OrdersList extends StatelessWidget {
                                 order['productSubcategoryName']!,
                             paymentPlatformName: order['paymentPlatformName']!,
                             orderNumber: order['orderNumber']!,
+                            orderTotalAmount: order['orderTotalAmount']!,
                           )
                       ],
                     ),
@@ -87,6 +89,7 @@ final List<Map<String, dynamic>> listOrdersSampleData = [
     'productSubcategoryName': 'Immigration',
     'paymentPlatformName': 'stripe',
     'orderNumber': 'AB9102',
+    'orderTotalAmount': 9203.50,
   },
   {
     'id': '2',
@@ -97,25 +100,28 @@ final List<Map<String, dynamic>> listOrdersSampleData = [
     'productSubcategoryName': 'Jobs',
     'paymentPlatformName': 'apple',
     'orderNumber': 'ZK9302',
+    'orderTotalAmount': 7203.21,
   },
   {
     'id': '3',
     'createdAt': 1692202834058,
-    'orderStatus': 'canceled', // pending, canceled, completed, processing,
+    'orderStatus': 'pending', // pending, canceled, completed, processing,
     'productName': 'WS145 Welders',
     'productCategoryName': 'Certifications',
     'productSubcategoryName': 'Welding',
     'paymentPlatformName': 'android',
     'orderNumber': 'IE02KS',
+    'orderTotalAmount': 5203.34,
   },
   {
     'id': '4',
     'createdAt': 1692202834058,
-    'orderStatus': 'pending', // pending, canceled, completed, processing,
+    'orderStatus': 'canceled', // pending, canceled, completed, processing,
     'productName': 'Strucutral Welding Principles',
     'productCategoryName': 'Courses',
     'productSubcategoryName': 'Welders',
     'paymentPlatformName': 'stripe',
     'orderNumber': 'IE02KS',
+    'orderTotalAmount': 4203.98,
   },
 ];

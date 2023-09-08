@@ -100,9 +100,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   //     fontWeight: FontWeight.bold,
                   //   ),
                   // ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Stack(
                     children: [
                       ClipRRect(
@@ -315,14 +313,17 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   ),
                   Text(
                     up.appUser!.displayName ?? "Display Name",
-                    style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
-                        .apply(color: Colors.black),
+                    style:
+                        ThemeTextStyles.landingPageSubtitleThemeTextStyle.apply(
+                      color: ThemeColors.blukersBlueThemeColor,
+                    ),
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.userInformation,
+                    menuIcon: UniconsLine.user_circle,
                     icon: UniconsLine.pen,
                     showBasicInfo: showBasicInfo,
                     onClickSection: () {
@@ -358,6 +359,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.industriesSlashJobs,
+                    menuIcon: UniconsLine.hard_hat,
                     icon: UniconsLine.pen,
                     showBasicInfo: showIndustries,
                     showEditIcon: false,
@@ -411,6 +413,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.pdfResume,
+                    menuIcon: UniconsLine.file_plus,
                     icon: UniconsLine.file_upload,
                     showBasicInfo: showPdfResume,
                     onClickSection: () {
@@ -473,6 +476,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.onlineResume,
+                    menuIcon: UniconsLine.cloud_bookmark,
                     icon: UniconsLine.arrow_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
@@ -485,6 +489,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.subscriptions,
+                    menuIcon: UniconsLine.user_plus,
                     icon: UniconsLine.arrow_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
@@ -497,6 +502,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.orders,
+                    menuIcon: UniconsLine.receipt_alt,
                     icon: UniconsLine.arrow_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
@@ -508,6 +514,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   const ProfileDivider(),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.deleteAccount,
+                    menuIcon: UniconsLine.user_times,
                     icon: UniconsLine.trash_alt,
                     showInfoInNewPage: true,
                     onClickSection: () {
@@ -582,23 +589,24 @@ class _WorkerProfileState extends State<WorkerProfile> {
                               .pushNamedAndRemoveUntil("/", (route) => false);
                         },
                         child: Container(
-                          // color: Colors.amber,
                           // margin: const EdgeInsets.all(12),
-                          width: width * .90,
                           padding: const EdgeInsets.symmetric(
                             vertical: 8,
                             horizontal: 24,
                           ),
+                          width: width * .90,
                           decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(5)),
+                            // color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.red, width: 2),
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 AppLocalizations.of(context)!.logout,
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.red,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -607,7 +615,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                               const Icon(
                                 UniconsLine.sign_out_alt,
                                 size: 40,
-                                color: Colors.white,
+                                color: Colors.red,
                               ),
                             ],
                           ),
