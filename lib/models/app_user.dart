@@ -1,3 +1,4 @@
+import 'package:blukers/models/payment_model/paid_order.dart';
 import 'package:blukers/models/worker.dart';
 
 import 'address.dart';
@@ -36,7 +37,7 @@ class AppUser {
   // Varibles for Tracking Payments
   bool isSubscriptionActive = false;
   String activeSubscriptionId = '';
-  List<String> listActiveServices = [];
+  Map<String, PaidOrder> listActiveOrders = {};
 
   AppUser({
     required this.uid,
@@ -60,7 +61,7 @@ class AppUser {
     this.companyTimelineStep,
     this.activeSubscriptionId = '',
     this.isSubscriptionActive = false,
-    this.listActiveServices = const [],
+    this.listActiveOrders = const {},
   })  : createdAt = DateTime.now().millisecondsSinceEpoch,
         modifiedAt = DateTime.now().millisecondsSinceEpoch;
 
@@ -100,7 +101,10 @@ class AppUser {
     if (activeSubscriptionId != '')
       data['activeSubscriptionId'] = activeSubscriptionId;
     data['isSubscriptionActive'] = isSubscriptionActive;
-    data['listActiveServices'] = listActiveServices;
+    if (listActiveOrders.isNotEmpty) {
+      data['listActiveOrders'] =
+          listActiveOrders.map((key, value) => MapEntry(key, value.toMap()));
+    }
 
     return data;
   }
@@ -137,9 +141,10 @@ class AppUser {
       activeSubscriptionId: map['activeSubscriptionId'] ?? '',
     );
 
-    if (map['listActiveServices'] != null) {
-      List<dynamic> list = map['listActiveServices'];
-      user.listActiveServices = list.map((e) => e.toString()).toList();
+    if (map['listActiveOrders'] != null) {
+      Map<String, dynamic> ordersMap = map['listActiveOrders'];
+      user.listActiveOrders = ordersMap
+          .map((key, value) => MapEntry(key, PaidOrder.fromMap(value)));
     }
 
     user.createdAt = map['createdAt'] ?? 0;

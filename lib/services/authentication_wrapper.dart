@@ -53,7 +53,6 @@ class AuthenticationWrapper extends StatelessWidget {
     // Display the Success Payment Page
     if (urlEx.contains('/paymentSuccess')) {
       UrlInfo urlInfo = UrlInfo.parseUrl(urlEx);
-      print(urlInfo);
       return PaymentSuccessfulWidget(urlInfo: urlInfo);
     }
 

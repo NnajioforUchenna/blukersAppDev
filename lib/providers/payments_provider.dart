@@ -17,8 +17,7 @@ import 'package:universal_html/html.dart' as html;
 
 import '../common_files/constants.dart';
 import '../data_providers/data_constants.dart';
-import '../models/payment_model/payment_order.dart';
-import '../models/subscription_model.dart';
+import '../models/payment_model/transaction_record.dart';
 import '../services/platform_check.dart';
 import '../views/common_views/please_login_dialog.dart';
 import '../views/membership/subscription_components/countdown_waiting_page_pulse.dart';
@@ -69,17 +68,6 @@ class PaymentsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> purchaseSubscription(SubscriptionModel subscription) async {
-    if (kIsWeb) {
-    } else {
-      if (isIOS()) {
-        // In-app Purchase Code
-      } else if (isAndroid()) {
-        // Stripe Purchase Code
-      }
-    }
-  }
-
   Stream<SubscriptionStatus> checkSubscriptionStatus(
       String uid, StripeData stripeData) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -120,57 +108,38 @@ class PaymentsProvider with ChangeNotifier {
   }
 
   String getPaymentPlatformName() {
-    if (kIsWeb) {
-      return "Stripe";
-    } else {
-      if (isIOS()) {
-        return "Apple";
-      } else if (isAndroid()) {
-        return "Google";
-      }
-    }
+    if (kIsWeb) return "Stripe";
+    if (isIOS()) return "Apple";
+    if (isAndroid()) return "Google";
     return "Stripe";
   }
 
   Future<void> pay4Subscription(
-    BuildContext context,
-    String subscriptionType,
-  ) async {
+      BuildContext context, String subscriptionType) async {
     if (appUser == null) {
       showDialog(
           context: context, builder: (context) => const PleaseLoginDialog());
       return;
     }
 
-    // Determine User's Platform
     String paymentPlatform = getPaymentPlatformName();
-    // Show Countdown Waiting Page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => CountDown(
-                platform: paymentPlatform,
-              )),
-    );
-    // Create a new Payment Order
-    PaymentOrder pOrder = PaymentOrder(
-      userId: appUser!.uid,
-      orderType: 'subscription',
-      platform: paymentPlatform,
-      paymentProcessor: paymentPlatform,
-      amount: subscriptionType == 'premium' ? 4.99 : 9.99,
-    );
-    // Save the Payment Order to Firestore
-    pOrder.save();
 
-    // connect the payment platform
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CountDown(platform: paymentPlatform)));
+
+    String transactionId = recordTransaction(
+        transactionType: 'subscription',
+        paymentPlatform: paymentPlatform,
+        selectedProduct: subscriptionType,
+        amount: subscriptionType == 'premium' ? 4.99 : 9.99);
+
     if (paymentPlatform == "Stripe") {
-      getStripePayment(context, subscriptionType);
+      getStripePayment(context, subscriptionType, transactionId);
     } else if (paymentPlatform == "Apple") {
-      // In-app Purchase Code for Apple
       getApplePayment(context, subscriptionType);
     } else if (paymentPlatform == "Google") {
-      // In-app Purchase Code for Google
       getGooglePayment(context, subscriptionType);
     }
   }
@@ -183,52 +152,53 @@ class PaymentsProvider with ChangeNotifier {
     }
 
     Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => const CountDown(
-                platform: "Stripe",
-              )),
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) => const CountDown(platform: "Stripe")));
 
-    // Create a new Payment Order
-    PaymentOrder pOrder = PaymentOrder(
-        userId: appUser!.uid,
-        orderType: 'service',
-        platform: 'Stripe',
-        paymentProcessor: 'Stripe',
+    String transactionId = recordTransaction(
+        transactionType: 'service',
+        paymentPlatform: 'Stripe',
+        selectedProduct: service,
         amount: service == 'foia' ? 299.99 : 99.99);
-    // Save the Payment Order to Firestore
-    pOrder.save();
 
-    String serviceCheckOutUrl = await getStripeCheckOutUrl(context, service);
-
-    print(serviceCheckOutUrl);
+    String serviceCheckOutUrl =
+        await getStripeCheckOutUrl(context, service, transactionId);
 
     if (serviceCheckOutUrl.isNotEmpty) {
       if (kIsWeb) {
         html.window.location.assign(serviceCheckOutUrl);
       } else {
         Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => DisplayStripeUrlMobile(
-                    checkOutUrl: serviceCheckOutUrl,
-                  )),
-        );
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    DisplayStripeUrlMobile(checkOutUrl: serviceCheckOutUrl)));
       }
     }
   }
 
   Future<void> verifyMobileStripePayment({required String checkOutUrl}) async {
-    // get sessionID from checkOutUrl
     String sessionId = extractSessionId(checkOutUrl);
-    print(sessionId);
-    if (sessionId.isEmpty) {
-      print("Session ID is empty");
-      return;
+    if (sessionId.isNotEmpty) {
+      await PaymentsDataProvider().verifyStripePayment(sessionId);
     }
-    Map<String, dynamic> result =
-        await PaymentsDataProvider().verifyStripePayment(sessionId);
-    print(result);
+  }
+
+  String recordTransaction(
+      {required String transactionType,
+      required String paymentPlatform,
+      required String selectedProduct,
+      required double amount}) {
+    TransactionRecord tr = TransactionRecord(
+      userId: appUser!.uid,
+      orderType: transactionType,
+      platform: paymentPlatform,
+      paymentProcessor: paymentPlatform,
+      amount: amount,
+    );
+    tr.save();
+
+    return tr.transactionId;
   }
 }

@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:blukers/data_providers/payments_data_provider.dart';
 
-class PaymentOrder {
-  String orderId;
+class TransactionRecord {
+  String transactionId;
   String userId;
   String orderType;
   String platform;
@@ -15,14 +15,15 @@ class PaymentOrder {
   String? paymentProcessorId;
   String? documentId;
 
-  PaymentOrder({
+  TransactionRecord({
     required this.userId,
     required this.orderType,
     required this.platform,
     required this.paymentProcessor,
     required this.amount,
     this.status = 'pending',
-  }) : orderId = generateOrderId(); // Initializing orderId at instance creation
+  }) : transactionId =
+            generateOrderId(); // Initializing orderId at instance creation
 
   Future<void> save() async {
     // Logic to save order to Firestore
@@ -39,7 +40,7 @@ class PaymentOrder {
 
   Map<String, dynamic> toMap() {
     return {
-      'orderId': orderId,
+      'transactionId': transactionId,
       'userId': userId,
       'orderType': orderType,
       'platform': platform,

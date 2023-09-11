@@ -1,19 +1,15 @@
+import 'package:blukers/models/payment_model/paid_order.dart';
+import 'package:blukers/providers/app_versions_provider.dart';
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../common_files/constants.dart';
 import '../common_views/page_template/page_template.dart';
 import 'order_card.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:blukers/utils/styles/index.dart';
-
-import 'package:provider/provider.dart';
-import 'package:blukers/providers/app_versions_provider.dart';
-
-import 'package:blukers/views/common_views/components/icon_text_404.dart';
 
 class OrdersList extends StatelessWidget {
   const OrdersList({Key? key}) : super(key: key);
@@ -21,6 +17,7 @@ class OrdersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
 
     if (!kIsWeb) {
       avp.checkForUpdate(context);
@@ -28,7 +25,8 @@ class OrdersList extends StatelessWidget {
 
     // dynamic ordersList = null;
     // dynamic ordersList = [];
-    dynamic ordersList = listOrdersSampleData;
+    // dynamic ordersList = listOrdersSampleData;
+    List<PaidOrder>? ordersList = up.appUser?.listActiveOrders.values.toList();
 
     return ordersList != null && ordersList.isEmpty == false
         ? PageTemplate(
@@ -45,16 +43,16 @@ class OrdersList extends StatelessWidget {
                       children: [
                         for (var order in ordersList)
                           OrderCard(
-                            orderId: order['id']!,
-                            createdAt: order['createdAt']!,
-                            orderStatus: order['orderStatus']!,
-                            productName: order['productName']!,
-                            productCategoryName: order['productCategoryName']!,
+                            orderId: order.id,
+                            createdAt: order.createdAt,
+                            orderStatus: order.orderStatus,
+                            productName: order.productName,
+                            productCategoryName: order.productCategoryName,
                             productSubcategoryName:
-                                order['productSubcategoryName']!,
-                            paymentPlatformName: order['paymentPlatformName']!,
-                            orderNumber: order['orderNumber']!,
-                            orderTotalAmount: order['orderTotalAmount']!,
+                                order.productSubcategoryName,
+                            paymentPlatformName: order.paymentPlatformName,
+                            orderNumber: order.orderNumber,
+                            orderTotalAmount: order.orderTotalAmount,
                           )
                       ],
                     ),

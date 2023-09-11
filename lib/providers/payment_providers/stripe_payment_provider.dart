@@ -26,17 +26,15 @@ extension StripePaymentProvider on PaymentsProvider {
     );
   }
 
-  Future<String> getCheckOutUrl(
-      priceId, successUrl, failedUrl, productName) async {
+  Future<String> getCheckOutUrl4SubScription(
+      priceId, successUrl, failedUrl, productName, transactionId) async {
     Map<String, dynamic> metadata = {
       "user_email": appUser!.email,
       "user_id": appUser!.uid,
       "product_id": productName,
-      "payment_type": "subscription"
+      "payment_type": "subscription",
+      "transactionId": transactionId,
     };
-
-    print('successUrl: $successUrl');
-    print('failedUrl: $failedUrl');
 
     successUrl = successUrl + "/success?session_id={CHECKOUT_SESSION_ID}";
     failedUrl = failedUrl + "/failed?session_id={CHECKOUT_SESSION_ID}";
@@ -64,7 +62,10 @@ extension StripePaymentProvider on PaymentsProvider {
         Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
         if (data != null && data['url'] != null) {
           String checkOutUrl = data['url'];
-          print(checkOutUrl);
+
+          // Using a Stream to listen to changes in the document
+          listenForTransactionUpdates(transactionId);
+
           return checkOutUrl;
         }
       }
@@ -79,10 +80,8 @@ extension StripePaymentProvider on PaymentsProvider {
     return 'error';
   }
 
-  Future<void> getStripePayment(
-    BuildContext context,
-    String subscriptionType,
-  ) async {
+  Future<void> getStripePayment(BuildContext context, String subscriptionType,
+      String transactionId) async {
     String priceId = "";
     String productName = "";
     if (subscriptionType == "premium") {
@@ -98,8 +97,8 @@ extension StripePaymentProvider on PaymentsProvider {
     String successUrl = baseUrl + 'paymentSuccess';
     String failedUrl = baseUrl + 'paymentFailed';
 
-    String checkOutUrl =
-        await getCheckOutUrl(priceId, successUrl, failedUrl, productName);
+    String checkOutUrl = await getCheckOutUrl4SubScription(
+        priceId, successUrl, failedUrl, productName, transactionId);
 
     if (checkOutUrl == 'error') {
       notifyUserError(context);
@@ -121,43 +120,8 @@ extension StripePaymentProvider on PaymentsProvider {
     }
   }
 
-  // Future<void> setServiceKeys() async {
-  //   // Set 'foia' key
-  //   await stripeDataDB.doc('foia').set({
-  //     'key': 'price_1Nld4yAwqpCFthEvVUxE4AmP',
-  //   });
-  //
-  //   // Set 'employmentVerification' key
-  //   await stripeDataDB.doc('employmentVerification').set({
-  //     'key': 'price_1Nld6tAwqpCFthEv5Gl6Ixo4',
-  //   });
-  // }
-
-  // Future<String> getStripeCheckOutUrl(
-  //     BuildContext context, String service) async {
-  //   String priceId = servicesKey[service] ?? '';
-  //   if (priceId.isEmpty) {
-  //     notifyUserError(context);
-  //     return '';
-  //   }
-  //   String urlEx = Uri.base.toString();
-  //   String baseUrl = Uri.parse(urlEx).removeFragment().toString();
-  //   String successUrl = baseUrl + 'paymentSuccess';
-  //   String failedUrl = baseUrl + 'paymentFailed';
-  //
-  //   String checkOutUrl =
-  //       await getServiceCheckOutUrl(priceId, successUrl, failedUrl);
-  //
-  //   if (checkOutUrl == 'error') {
-  //     notifyUserError(context);
-  //   } else {
-  //     return checkOutUrl;
-  //   }
-  //
-  //   return '';
-  // }
-
   Future<void> notifyUserError(BuildContext context) async {
+    // Display Error Message to User
     EasyLoading.show(
       status: 'An Error Occurred While Getting Stripe Payment...',
       maskType: EasyLoadingMaskType.black,
@@ -165,64 +129,14 @@ extension StripePaymentProvider on PaymentsProvider {
 
     // Delay for 5 seconds
     await Future.delayed(const Duration(seconds: 3));
+
+    // Dismiss Loading
     Navigator.pop(context);
     EasyLoading.dismiss();
   }
 
-  // getServiceCheckOutUrl(
-  //     String priceId, String successUrl, String failedUrl) async {
-  //   print("Getting Checkout Url");
-  //   print(priceId);
-  //
-  //   // Map<String, dynamic> metadata = {
-  //   //   "user_email": appUser!.email,
-  //   //   "user_id": appUser!.uid,
-  //   //   "product_id": service,
-  //   //   "payment_type": "subscription"
-  //   // };
-  //
-  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //   DocumentReference docRef = await firestore
-  //       .collection("AppUsers")
-  //       .doc(appUser!.uid)
-  //       .collection("checkout_sessions")
-  //       .add({
-  //     "price": priceId,
-  //     "quantity": 1,
-  //     "mode": "payment",
-  //     "success_url": successUrl,
-  //     "cancel_url": failedUrl,
-  //     // "metadata": metadata,
-  //   });
-  //
-  //   int attempts = 0;
-  //   const maxAttempts = 3;
-  //   const delayBetweenAttempts = Duration(seconds: 5); // Adjust as needed
-  //
-  //   while (attempts < maxAttempts) {
-  //     DocumentSnapshot snapshot = await docRef.snapshots().first;
-  //
-  //     if (snapshot.exists) {
-  //       Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
-  //       if (data != null && data['url'] != null) {
-  //         String checkOutUrl = data['url'];
-  //         print(checkOutUrl);
-  //         return checkOutUrl;
-  //       }
-  //     }
-  //     print("Attempt: $attempts");
-  //     attempts++;
-  //     if (attempts < maxAttempts) {
-  //       await Future.delayed(
-  //           delayBetweenAttempts); // Wait before the next attempt
-  //     }
-  //   }
-  //
-  //   return 'error';
-  // }
-
   Future<String> getStripeCheckOutUrl(
-      BuildContext context, String service) async {
+      BuildContext context, String service, String transactionId) async {
     String productName = 'FOIA Request';
     double amount = 100.0;
 
@@ -255,7 +169,8 @@ extension StripePaymentProvider on PaymentsProvider {
       "user_email": appUser!.email,
       "user_id": appUser!.uid,
       "product_id": service,
-      "payment_type": "service"
+      "payment_type": "service",
+      "transaction_Id": transactionId,
     };
 
     final response = await _makeStripeRequest(
@@ -290,9 +205,30 @@ extension StripePaymentProvider on PaymentsProvider {
 
   Future<void> verifyPayment(UrlInfo urlInfo, String from) async {
     if (urlInfo.sessionId != null) {
-      Map<String, dynamic> result =
-          await PaymentsDataProvider().verifyStripePayment(urlInfo.sessionId!);
-      print(result);
+      await PaymentsDataProvider().verifyStripePayment(urlInfo.sessionId!);
     }
+  }
+
+  void listenForTransactionUpdates(String transactionId) {
+    final firestore = FirebaseFirestore.instance;
+
+    firestore
+        .collection("AppUsers")
+        .doc(appUser!.uid)
+        .collection("subscriptions")
+        .snapshots()
+        .listen((querySnapshot) {
+      print("Record changed as I was Listening...");
+      for (var docChange in querySnapshot.docChanges) {
+        if (docChange.type == DocumentChangeType.added) {
+          UpdateSuccesfulTransaction(transactionId);
+        }
+      }
+    });
+  }
+
+  void UpdateSuccesfulTransaction(String transactionId) {
+    // Your implementation for this function here.
+    print("Transaction Successful, TransactionId: $transactionId");
   }
 }

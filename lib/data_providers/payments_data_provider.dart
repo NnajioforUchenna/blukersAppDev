@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:blukers/models/payment_model/payment_order.dart';
+import 'package:blukers/models/payment_model/transaction_record.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -15,7 +15,7 @@ import 'data_constants.dart';
 final db = FirebaseFirestore.instance;
 
 class PaymentsDataProvider {
-  static Future<String> saveOrder(PaymentOrder pOrder) async {
+  static Future<String> saveOrder(TransactionRecord pOrder) async {
     final ordCol = db.collection(ordersCollection);
     DocumentReference documentRef = ordCol.doc();
     String newDocumentId = documentRef.id;
@@ -88,7 +88,8 @@ class PaymentsDataProvider {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('Failed to verify payment');
+      print('Failed to verify payment.');
+      return {};
     }
   }
 
