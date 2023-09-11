@@ -2,6 +2,7 @@ import 'package:blukers/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/user_provider.dart';
@@ -150,7 +151,7 @@ class _LoginState extends State<Login> {
                         InkWell(
                           key: const Key('forgotPasswordButton'),
                           onTap: () {
-                            Navigator.pushNamed(context, '/forgot-password');
+                            context.go('/forgot-password');
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -186,7 +187,7 @@ class _LoginState extends State<Login> {
                         const SizedBox(height: 10),
                         LabelButton(
                           onTap: () {
-                            Navigator.pushNamed(context, '/register');
+                            context.go('/register');
                           },
                           title:
                               AppLocalizations.of(context)!.dontHaveAnAccount,

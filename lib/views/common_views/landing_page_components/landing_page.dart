@@ -2,6 +2,7 @@ import 'package:blukers/views/auth/common_widget/label_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -65,7 +66,7 @@ class LandingPage extends StatelessWidget {
                       .toUpperCase(),
                   onTap: () {
                     up.userRole = "worker";
-                    Navigator.pushNamed(context, '/jobs');
+                    context.go('/jobs');
                   },
                 ),
                 SizedBox(width: 20.w), // Responsive width
@@ -79,7 +80,7 @@ class LandingPage extends StatelessWidget {
                       .toUpperCase(),
                   onTap: () {
                     up.userRole = "company";
-                    Navigator.pushNamed(context, '/workers');
+                    context.go('/workers');
                   },
                 ),
               ],
@@ -88,7 +89,7 @@ class LandingPage extends StatelessWidget {
             if (up.appUser == null)
               LabelButton(
                 onTap: () {
-                  Navigator.pushNamed(context, "/login");
+                  context.go("/login");
                 },
                 title: AppLocalizations.of(context)!.alreadyHaveAnAccount,
                 subTitle: AppLocalizations.of(context)!.signIn,

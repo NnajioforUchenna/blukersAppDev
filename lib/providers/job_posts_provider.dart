@@ -2,6 +2,7 @@ import 'package:blukers/models/app_user.dart';
 import 'package:blukers/views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
@@ -89,7 +90,7 @@ class JobPostsProvider with ChangeNotifier {
       newJobPostData['companyId'] = appUser.uid;
       newJobPostData['companyName'] = appUser.company?.name;
       newJobPostData['companyLogo'] = appUser.company?.logoUrl;
-      Navigator.pushNamed(context, '/createJobPost');
+      context.go('/createJobPost');
     }
   }
 

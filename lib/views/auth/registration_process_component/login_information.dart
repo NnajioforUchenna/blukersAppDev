@@ -1,6 +1,7 @@
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../services/validation.dart';
@@ -246,7 +247,7 @@ class _LoginInformationState extends State<LoginInformation> {
                   SizedBox(height: height * .01),
                   LabelButton(
                     onTap: () {
-                      Navigator.pushNamed(context, "/login");
+                      context.go("/login");
                     },
                     title: AppLocalizations.of(context)!.alreadyHaveAnAccount,
                     subTitle: AppLocalizations.of(context)!.signIn,

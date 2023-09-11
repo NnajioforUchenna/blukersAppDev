@@ -121,9 +121,7 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
       Navigator.push(
         currentContext!,
         MaterialPageRoute(
-          builder: (context) => PaymentFailedWidget(
-            urlInfo: UrlInfo.empty(),
-          ),
+          builder: (context) => PaymentFailedWidget(),
         ),
       );
     }
@@ -137,9 +135,7 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
       Navigator.push(
         currentContext!,
         MaterialPageRoute(
-          builder: (context) => PaymentSuccessfulWidget(
-            urlInfo: UrlInfo.empty(),
-          ),
+          builder: (context) => PaymentSuccessfulWidget(),
         ),
       );
     }

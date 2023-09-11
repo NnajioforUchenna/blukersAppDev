@@ -76,8 +76,9 @@ class MyApp extends StatelessWidget {
           minTextAdapt: true,
           splitScreenMode: true,
           builder: (context, child) {
-            return MaterialApp(
+            return MaterialApp.router(
               title: "Blukers",
+              routerConfig: goRouter,
               debugShowCheckedModeBanner: false,
               // LOCALIZATION
               // - Manually set a locale:
@@ -116,9 +117,9 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'Montserrat',
               ),
               // home: AuthenticationWrapper(),
-              onGenerateRoute: generateRoute,
-              initialRoute: "/",
-              navigatorKey: navigatorKey,
+              // onGenerateRoute: generateRoute,
+              // initialRoute: "/",
+              // navigatorKey: navigatorKey,
             );
           },
         ),

@@ -30,7 +30,7 @@ MaterialPageRoute(
 );
 
 # Navigate to Named Route
-Navigator.pushNamed(context, '/workers');
+context.go( '/workers');
 
 # Showing a Dialog Box
 showDialog(

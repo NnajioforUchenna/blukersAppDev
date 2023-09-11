@@ -1,9 +1,9 @@
-import 'package:blukers/views/auth/common_widget/company_logo.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:unicons/unicons.dart';
-import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:unicons/unicons.dart';
 
 class LoginOrRegister extends StatelessWidget {
   const LoginOrRegister({Key? key}) : super(key: key);
@@ -47,8 +47,7 @@ class LoginOrRegister extends StatelessWidget {
                         ..onTap = () {
                           // Navigate to login page or perform login action here
                           print('Login clicked');
-                          Navigator.pushNamedAndRemoveUntil(context, '/login',
-                              (Route<dynamic> route) => false);
+                          context.go('/login');
                         }),
                   TextSpan(text: ' ' + AppLocalizations.of(context)!.or + ' '),
                   TextSpan(
@@ -59,8 +58,7 @@ class LoginOrRegister extends StatelessWidget {
                         ..onTap = () {
                           // Navigate to register page or perform register action here
                           print('Register clicked');
-                          Navigator.pushNamedAndRemoveUntil(context,
-                              '/register', (Route<dynamic> route) => false);
+                          context.go('/register');
                         }),
                   const TextSpan(text: '\n'),
                   TextSpan(

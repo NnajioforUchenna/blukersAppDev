@@ -1,33 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../models/payment_model/url_info.dart';
-import '../../../providers/payments_provider.dart';
 import '../membership_widget.dart';
 
-class PaymentFailedWidget extends StatefulWidget {
-  final UrlInfo urlInfo;
-  const PaymentFailedWidget({super.key, required this.urlInfo});
-
-  @override
-  State<PaymentFailedWidget> createState() => _PaymentFailedWidgetState();
-}
-
-class _PaymentFailedWidgetState extends State<PaymentFailedWidget> {
-  bool haveVerified = false;
-
-  @override
-  void initState() {
-    PaymentsProvider pp = Provider.of<PaymentsProvider>(context, listen: false);
-    if (!haveVerified) {
-      if (widget.urlInfo.sessionId != null) {
-        pp.verifyPayment(widget.urlInfo, 'failed');
-      }
-      haveVerified = true;
-    }
-    super.initState();
-  }
-
+class PaymentFailedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(

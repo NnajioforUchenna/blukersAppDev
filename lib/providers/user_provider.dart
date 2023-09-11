@@ -13,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../common_files/constants.dart';
@@ -310,15 +311,9 @@ class UserProvider with ChangeNotifier {
 
   void navigate(BuildContext context, int index) {
     currentPageIndex = index;
-    if (userRole == "company") {
-      Navigator.pushNamedAndRemoveUntil(
-          context, routesCompany[index], (Route<dynamic> route) => false);
-    } else {
-      Navigator.pushNamedAndRemoveUntil(
-          context, routesWorker[index], (Route<dynamic> route) => false);
-    }
-
-    // notifyListeners();
+    String targetRoute =
+        userRole == "company" ? routesCompany[index] : routesWorker[index];
+    context.go(targetRoute);
   }
 
   Future<void> loginAppUser(
@@ -365,11 +360,9 @@ class UserProvider with ChangeNotifier {
 
       // Navigate to the home page.
       if (userRole == "worker") {
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/jobs', (Route<dynamic> route) => false);
+        context.go('/jobs');
       } else {
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/workers', (Route<dynamic> route) => false);
+        context.go('/workers');
       }
     } else {
       // Print and display any errors that occurred during login.
@@ -404,8 +397,7 @@ class UserProvider with ChangeNotifier {
         result['message'],
         duration: const Duration(seconds: 3),
       );
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/login', (Route<dynamic> route) => false);
+      context.go('/login');
     } else {
       // Print and display any errors that occurred during the password reset attempt.
       print("Error: ${result['error']}");
@@ -454,11 +446,9 @@ class UserProvider with ChangeNotifier {
 
   void navigateBasedOnRole(BuildContext context) {
     if (userRole == "worker") {
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/jobs', (Route<dynamic> route) => false);
+      context.go('/jobs');
     } else {
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/workers', (Route<dynamic> route) => false);
+      context.go('/workers');
     }
   }
 

@@ -23,7 +23,7 @@ class MobileMembershipCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.45.h,
+      height: MediaQuery.of(context).size.height * 0.40.h,
       width: MediaQuery.of(context).size.width * 0.75.w,
       margin: EdgeInsets.symmetric(horizontal: 5.w),
       child: Card(

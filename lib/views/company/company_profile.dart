@@ -1,6 +1,6 @@
+import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/user_provider.dart';
-import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/auth/common_widget/login_or_register.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';
@@ -11,6 +11,7 @@ import 'package:blukers/views/company/profile_components/user_basic_profile_deta
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
@@ -311,7 +312,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser!.company != null) {
-                        Navigator.pushNamed(context, "/companyBasicInfo");
+                        context.go("/companyBasicInfo");
                       }
                     },
                   ),

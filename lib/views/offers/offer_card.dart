@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:unicons/unicons.dart';
 import 'package:blukers/utils/styles/index.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:unicons/unicons.dart';
 
 class OfferCard extends StatelessWidget {
   final String title;
@@ -18,7 +19,7 @@ class OfferCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, route);
+        context.go(route);
       },
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 8.0),

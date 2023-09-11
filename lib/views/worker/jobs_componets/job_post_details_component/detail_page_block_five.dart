@@ -1,8 +1,9 @@
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/views/common_views/applicant_count.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/job_post.dart';
@@ -44,7 +45,7 @@ class _DetailPageBlockFiveState extends State<DetailPageBlockFive> {
                         isGetApplicant = !isGetApplicant;
                       });
                       if (result) {
-                        Navigator.pushNamed(context, '/applicants');
+                        context.go('/applicants');
                       }
                       ;
                     },

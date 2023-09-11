@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:unicons/unicons.dart';
-import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/utils/helpers/index.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
 
 class OrderCard extends StatelessWidget {
@@ -58,7 +57,7 @@ class OrderCard extends StatelessWidget {
     // *** USE THIS TO NAVIGATE TO ANOTHER SCREEN WHEN CLICKING ON CARD
     // return InkWell(
     //   onTap: () {
-    //     // Navigator.pushNamed(context, route);
+    //     // context.go( route);
     //   },
     //   child: buildCard(context, iconData, iconColor),
     // );

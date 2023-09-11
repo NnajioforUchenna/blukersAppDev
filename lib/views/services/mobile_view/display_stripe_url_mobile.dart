@@ -1,5 +1,6 @@
 import 'package:blukers/providers/payments_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -76,7 +77,7 @@ class _DisplayStripeUrlMobileState extends State<DisplayStripeUrlMobile> {
             if (request.url.startsWith('https://success.com')) {
               Navigator.of(context).pop();
               pp.verifyMobileStripePayment(checkOutUrl: widget.checkOutUrl);
-              Navigator.pushNamed(context, '/paymentSuccess');
+              context.go('/paymentSuccess');
 
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -89,7 +90,7 @@ class _DisplayStripeUrlMobileState extends State<DisplayStripeUrlMobile> {
             if (request.url.startsWith('https://www.cancel.com')) {
               Navigator.of(context).pop();
               pp.verifyMobileStripePayment(checkOutUrl: widget.checkOutUrl);
-              Navigator.pushNamed(context, '/paymentFailed');
+              context.go('/paymentFailed');
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Payment Cancelled'),

@@ -73,3 +73,30 @@ const List<MobileMembershipCard> backMemberShipCards = [
     isNormalArrangement: true,
   ),
 ];
+
+List<Map<String, dynamic>> membershipButtonsMap = [
+  {
+    'firstText': 'Premium',
+    'secondText': '',
+    'thirdText': '\$4.99/Monthly',
+    'onPress': 'premium'
+  },
+  {
+    'firstText': 'Premium',
+    'secondText': '',
+    'thirdText': '\$4.99/Monthly',
+    'onPress': 'premium'
+  },
+  {
+    'firstText': 'Premium',
+    'secondText': 'Plus',
+    'thirdText': '\$9.99/Monthly',
+    'onPress': 'premiumPlus',
+  },
+  {
+    'firstText': 'Premium',
+    'secondText': 'Plus',
+    'thirdText': '\$9.99/Monthly',
+    'onPress': 'premiumPlus',
+  },
+];

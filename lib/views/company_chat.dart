@@ -4,9 +4,10 @@ import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:blukers/views/common_views/page_template/page_template.dart';
 import 'package:blukers/views/company/workers_components/chat_list_component.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CompanyChat extends StatelessWidget {
   const CompanyChat({super.key});
@@ -47,7 +48,7 @@ class CompanyChat extends StatelessWidget {
                                     chatProvider.chatRooms[index].members[0]
                                 ? chatProvider.chatRooms[index].names[1]
                                 : chatProvider.chatRooms[index].names[0];
-                        Navigator.pushNamed(context, '/chat-message');
+                        context.go('/chat-message');
                       },
                     );
                   }),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../services/responsive.dart';
@@ -134,14 +134,14 @@ Widget BuildButton(double width, int currentStep, String text, context) {
         onPressed: () {
           // Add the functionality here
           // if (text == "Register") {
-          //   Navigator.pushNamed(context, '/register');
+          //   context.go( '/register');
           // } else if (text == "Create Company Profile") {
-          //   Navigator.pushNamed(context, '/createCompanyProfile');
+          //   context.go( '/createCompanyProfile');
           // }
           if (currentStep == 0) {
-            Navigator.pushNamed(context, '/register');
+            context.go('/register');
           } else if (currentStep == 1) {
-            Navigator.pushNamed(context, '/createCompanyProfile');
+            context.go('/createCompanyProfile');
           }
         }, // Add the functionality here
         child: Center(

@@ -1,7 +1,7 @@
 import 'package:blukers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
@@ -134,14 +134,14 @@ Widget buildButton(double width, int currentStep, String text, context) {
         onPressed: () {
           // Add the functionality here
           // if (text == "Register") {
-          //   Navigator.pushNamed(context, '/register');
+          //   context.go( '/register');
           // } else if (text == "Create Your Profile") {
-          //   Navigator.pushNamed(context, '/createWorkerProfile');
+          //   context.go( '/createWorkerProfile');
           // }
           if (currentStep == 0) {
-            Navigator.pushNamed(context, '/register');
+            context.go('/register');
           } else if (currentStep == 1) {
-            Navigator.pushNamed(context, '/createWorkerProfile');
+            context.go('/createWorkerProfile');
           }
         }, // Add the functionality here
         child: Center(

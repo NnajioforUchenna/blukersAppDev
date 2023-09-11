@@ -1,9 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common_files/constants.dart';
+import '../../../providers/payments_provider.dart';
 import 'flip_card.dart';
 import 'list_mobile_membership_cards.dart';
+import 'my_evelated_button.dart';
 
 class CarouselWithCards extends StatefulWidget {
   @override
@@ -19,16 +22,35 @@ class _CarouselWithCardsState extends State<CarouselWithCards> {
 
     List<List<Widget>> combinedList =
         combineLists(memberShipCards, backMemberShipCards);
+    PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
 
     return Center(
         child: CarouselSlider(
       items: combinedList.asMap().entries.map((entry) {
         int index = entry.key;
         var pair = entry.value;
-        return FlipCard(
-          front: pair[0],
-          back: pair[1],
-          shouldFlip: _currentIndex == index, // Flip only the current card
+        return Column(
+          children: [
+            FlipCard(
+              front: pair[0],
+              back: pair[1],
+              shouldFlip: _currentIndex == index, // Flip only the current card
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            MyElevatedButton(
+              firstText: membershipButtonsMap[index]!['firstText'],
+              secondText: membershipButtonsMap[index]!['secondText'],
+              thirdText: membershipButtonsMap[index]!['thirdText'],
+              onPress: () async {
+                pp.pay4Subscription(
+                  context,
+                  membershipButtonsMap[index]!['onPress'],
+                );
+              },
+            )
+          ],
         );
       }).toList(),
       options: CarouselOptions(
@@ -37,7 +59,7 @@ class _CarouselWithCardsState extends State<CarouselWithCards> {
             _currentIndex = index; // update the current index
           });
         },
-        height: MediaQuery.of(context).size.height * 0.5,
+        height: MediaQuery.of(context).size.height * 0.85,
         viewportFraction: 0.75,
         enableInfiniteScroll: true,
         autoPlay: true,

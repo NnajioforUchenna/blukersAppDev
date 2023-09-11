@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../auth/common_widget/company_logo.dart';
 import '../auth/common_widget/login_or_register.dart';
@@ -32,8 +33,7 @@ class PleaseLogin extends StatelessWidget {
                       ..onTap = () {
                         // Navigate to login page or perform login action here
 
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, '/login', (Route<dynamic> route) => false);
+                        context.go('/login');
                       }),
                 const TextSpan(text: ' or '),
                 TextSpan(
@@ -43,8 +43,7 @@ class PleaseLogin extends StatelessWidget {
                       ..onTap = () {
                         // Navigate to register page or perform register action here
 
-                        Navigator.pushNamedAndRemoveUntil(context, '/register',
-                            (Route<dynamic> route) => false);
+                        context.go('/register');
                       }),
                 const TextSpan(text: ' to perform this action.'),
               ],

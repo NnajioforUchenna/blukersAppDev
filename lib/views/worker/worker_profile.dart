@@ -1,8 +1,6 @@
 // import 'dart:io';
-import 'package:flutter/foundation.dart';
-
-import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/app_versions_provider.dart';
+import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';
@@ -16,6 +14,7 @@ import 'package:blukers/views/company/profile_components/user_basic_profile_deta
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
@@ -482,7 +481,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser!.worker != null) {
-                        Navigator.pushNamed(context, "/onlineResumeScreen");
+                        context.go("/onlineResumeScreen");
                       }
                     },
                   ),
@@ -495,7 +494,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser!.worker != null) {
-                        Navigator.pushNamed(context, "/payment");
+                        context.go("/payment");
                       }
                     },
                   ),
@@ -507,7 +506,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     showInfoInNewPage: true,
                     onClickSection: () {
                       if (up.appUser!.worker != null) {
-                        Navigator.pushNamed(context, "/orders");
+                        context.go("/orders");
                       }
                     },
                   ),

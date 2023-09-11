@@ -1,4 +1,4 @@
-import 'package:blukers/models/payment_model/url_info.dart';
+import 'package:blukers/providers/payments_provider.dart';
 import 'package:blukers/views/chat_message_screen.dart';
 import 'package:blukers/views/common_views/landing_page_components/landing_page.dart';
 import 'package:blukers/views/company/company_basic_info.dart';
@@ -6,8 +6,9 @@ import 'package:blukers/views/company_chat.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/online_resume_additional_detail_screen.dart';
 import 'package:blukers/views/worker/online_resume_screen.dart';
 import 'package:blukers/views/worker/pdf_view_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../models/payment_model/url_info.dart';
 import '../views/auth/login.dart';
 import '../views/auth/registration_process.dart';
 import '../views/auth/reset_password.dart';
@@ -29,84 +30,90 @@ import '../views/worker/my_jobs.dart';
 import '../views/worker/worker_profile.dart';
 import 'authentication_wrapper.dart';
 
-MaterialPageRoute generateRoute(RouteSettings settings) {
-  switch (settings.name) {
-    case '/':
-      // return MaterialPageRoute(builder: (context) => MembershipWidget());
-      return MaterialPageRoute(
-          builder: (context) => const AuthenticationWrapper());
-    case '/landing':
-      return MaterialPageRoute(builder: (context) => LandingPage());
-    case '/workers':
-      return MaterialPageRoute(builder: (context) => const Workers());
-    case '/jobs':
-      return MaterialPageRoute(builder: (context) => const Jobs());
-    case '/myJobs':
-      return MaterialPageRoute(builder: (context) => const MyJobs());
-    case '/myJobPosts':
-      return MaterialPageRoute(builder: (context) => const MyJobPosts());
-    case '/companyBasicInfo':
-      return MaterialPageRoute(builder: (context) => const CompanyBasicInfo());
-    case '/onlineResumeScreen':
-      return MaterialPageRoute(
-          builder: (context) => const OnlineResumeScreen());
-    case '/onlineResumeAdditionalDetailScreen':
-      return MaterialPageRoute(
-          builder: (context) => const OnlineResumeAdditionalDetailScreen(),
-          settings: settings);
-    case '/pdfViewScreen':
-      return MaterialPageRoute(
-          builder: (context) => const ResumeScreen(), settings: settings);
-    case '/workerProfile':
-      return MaterialPageRoute(builder: (context) => const WorkerProfile());
-    case '/companyChat':
-      return MaterialPageRoute(builder: (context) => const CompanyChat());
-    case '/payment':
-      return MaterialPageRoute(builder: (context) => const MembershipWidget());
-    case '/paymentFailed':
-      return MaterialPageRoute(
-          builder: (context) => PaymentFailedWidget(
-                urlInfo: UrlInfo.empty(),
-              ));
-    case '/paymentSuccess':
-      return MaterialPageRoute(
-          builder: (context) => PaymentSuccessfulWidget(
-                urlInfo: UrlInfo.empty(),
-              ));
-    case 'companyProfile':
-      return MaterialPageRoute(builder: (context) => const CompanyProfile());
-    case '/login':
-      return MaterialPageRoute(builder: (context) => const Login());
-    case '/register':
-      return MaterialPageRoute(builder: (context) => RegistrationProcess());
-    case '/forgot-password':
-      return MaterialPageRoute(builder: (context) => ResetPasswordPage());
-    case '/createJobPost':
-      return MaterialPageRoute(builder: (context) => const CreateJobPost());
-    case '/createWorkerProfile':
-      return MaterialPageRoute(
-          builder: (context) => const CreateWorkerProfile());
-    case '/applicants':
-      return MaterialPageRoute(builder: (context) => const Applicants());
-    case '/membership':
-      return MaterialPageRoute(builder: (context) => const MembershipWidget());
-    case '/services':
-      return MaterialPageRoute(builder: (context) => const Services());
-    case '/offers':
-      return MaterialPageRoute(builder: (context) => const OffersList());
-    case '/orders':
-      return MaterialPageRoute(builder: (context) => const OrdersList());
-    case '/createCompanyProfile':
-      return MaterialPageRoute(
-          builder: (context) => const CreateCompanyProfile());
-    case '/company-chat':
-      return MaterialPageRoute(builder: (context) => const CompanyChat());
-    case '/chat-message':
-      return MaterialPageRoute(
-          builder: (context) => const ChatMessageScreen(), settings: settings);
-    default:
-      return MaterialPageRoute(
-          builder: (context) => const AuthenticationWrapper());
-    // return MaterialPageRoute(builder: (context) => const CompanyChat());
+final goRouter = GoRouter(routes: routes, initialLocation: '/');
+
+final routes = [
+  GoRoute(
+      path: '/', builder: (context, state) => const AuthenticationWrapper()),
+  GoRoute(path: '/landing', builder: (context, state) => LandingPage()),
+  GoRoute(path: '/workers', builder: (context, state) => const Workers()),
+  GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
+  GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),
+  GoRoute(path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
+  GoRoute(
+      path: '/companyBasicInfo',
+      builder: (context, state) => const CompanyBasicInfo()),
+  GoRoute(
+      path: '/onlineResumeScreen',
+      builder: (context, state) => const OnlineResumeScreen()),
+  GoRoute(
+    path: '/onlineResumeAdditionalDetailScreen',
+    builder: (context, state) {
+      Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+      return OnlineResumeAdditionalDetailScreen(
+          isReference: extra['isReference']);
+    },
+  ),
+  GoRoute(
+      path: '/pdfViewScreen',
+      builder: (context, state) => const ResumeScreen()),
+  GoRoute(
+      path: '/workerProfile',
+      builder: (context, state) => const WorkerProfile()),
+  GoRoute(
+      path: '/companyChat', builder: (context, state) => const CompanyChat()),
+  GoRoute(
+      path: '/payment', builder: (context, state) => const MembershipWidget()),
+  GoRoute(
+      path: '/paymentFailed/:sessionId',
+      builder: (context, state) {
+        verifyCurrentPath();
+        return PaymentFailedWidget();
+      }),
+  GoRoute(
+      path: '/paymentSuccess/:sessionId',
+      builder: (context, state) {
+        verifyCurrentPath();
+        return PaymentSuccessfulWidget();
+      }),
+  GoRoute(
+      path: '/companyProfile',
+      builder: (context, state) => const CompanyProfile()),
+  GoRoute(path: '/login', builder: (context, state) => const Login()),
+  GoRoute(
+      path: '/register', builder: (context, state) => RegistrationProcess()),
+  GoRoute(
+      path: '/forgot-password',
+      builder: (context, state) => ResetPasswordPage()),
+  GoRoute(
+      path: '/createJobPost',
+      builder: (context, state) => const CreateJobPost()),
+  GoRoute(
+      path: '/createWorkerProfile',
+      builder: (context, state) => const CreateWorkerProfile()),
+  GoRoute(path: '/applicants', builder: (context, state) => const Applicants()),
+  GoRoute(
+      path: '/membership',
+      builder: (context, state) => const MembershipWidget()),
+  GoRoute(path: '/services', builder: (context, state) => const Services()),
+  GoRoute(path: '/offers', builder: (context, state) => const OffersList()),
+  GoRoute(path: '/orders', builder: (context, state) => const OrdersList()),
+  GoRoute(
+      path: '/createCompanyProfile',
+      builder: (context, state) => const CreateCompanyProfile()),
+  GoRoute(
+      path: '/company-chat', builder: (context, state) => const CompanyChat()),
+  GoRoute(
+      path: '/chat-message',
+      builder: (context, state) => const ChatMessageScreen())
+];
+
+void verifyCurrentPath() {
+  PaymentsProvider pp = PaymentsProvider();
+  String urlEx = Uri.base.toString();
+  UrlInfo urlInfo = UrlInfo.parseUrl(urlEx);
+  print(urlInfo);
+  if (urlInfo.sessionId != null) {
+    pp.verifyPayment(urlInfo, 'success');
   }
 }

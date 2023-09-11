@@ -1,33 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../models/payment_model/url_info.dart';
-import '../../../providers/payments_provider.dart';
-
-class PaymentSuccessfulWidget extends StatefulWidget {
-  final UrlInfo urlInfo;
-  PaymentSuccessfulWidget({super.key, required this.urlInfo});
-
-  @override
-  State<PaymentSuccessfulWidget> createState() =>
-      _PaymentSuccessfulWidgetState();
-}
-
-class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
-  bool haveVerified = false;
-
-  @override
-  void initState() {
-    PaymentsProvider pp = Provider.of<PaymentsProvider>(context, listen: false);
-    if (!haveVerified) {
-      if (widget.urlInfo.sessionId != null) {
-        pp.verifyPayment(widget.urlInfo, 'success');
-      }
-      haveVerified = true;
-    }
-    super.initState();
-  }
-
+class PaymentSuccessfulWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -76,7 +50,7 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
             ElevatedButton(
               onPressed: () {
                 // Navigate to Jobs page
-                Navigator.pushNamed(context, '/jobs');
+                context.go('/jobs');
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               child: const Text('Continue'),

@@ -3,6 +3,7 @@ import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/services/rounded_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider.dart';
@@ -173,7 +174,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                                 const DisplayWorkerTimelineDialog());
                       } else {
                         chatProvider.startRoom(up.appUser, worker);
-                        Navigator.pushNamed(context, '/chat-message');
+                        context.go('/chat-message');
                       }
                     },
                   ),

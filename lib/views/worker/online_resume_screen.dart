@@ -2,19 +2,15 @@ import 'package:blukers/models/worker.dart';
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/views/common_views/components/index.dart';
 import 'package:blukers/views/common_views/profile_dialog.dart';
 import 'package:blukers/views/common_views/profile_section.dart';
-
-import 'package:blukers/views/common_views/components/index.dart';
-import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
-import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
-
 import 'package:blukers/views/worker/create_worker_profile_component/edit_worker_basic_profile.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/worker_basic_profile_detail.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 import 'package:unicons/unicons.dart';
 
 class OnlineResumeScreen extends StatefulWidget {
@@ -282,11 +278,9 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
               icon: UniconsLine.arrow_right,
               showInfoInNewPage: true,
               onClickSection: () {
-                print("Section clicked/ Edit Clicked");
                 if (up.appUser!.worker != null) {
-                  Navigator.pushNamed(
-                      context, "/onlineResumeAdditionalDetailScreen",
-                      arguments: {"isReference": true});
+                  context.go("/onlineResumeAdditionalDetailScreen",
+                      extra: {"isReference": true});
                 }
               },
             ),
@@ -297,9 +291,8 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
               onClickSection: () {
                 print("Section clicked/ Edit Clicked");
                 if (up.appUser!.worker != null) {
-                  Navigator.pushNamed(
-                      context, "/onlineResumeAdditionalDetailScreen",
-                      arguments: {"isReference": false});
+                  context.go("/onlineResumeAdditionalDetailScreen",
+                      extra: {"isReference": false});
                 }
               },
             ),

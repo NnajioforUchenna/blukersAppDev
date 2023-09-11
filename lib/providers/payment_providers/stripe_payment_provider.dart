@@ -92,10 +92,10 @@ extension StripePaymentProvider on PaymentsProvider {
       productName = 'blukers_workers_premium_plus';
     }
 
-    String urlEx = Uri.base.toString();
+    String urlEx = Uri.base.origin.toString();
     String baseUrl = Uri.parse(urlEx).removeFragment().toString();
-    String successUrl = baseUrl + 'paymentSuccess';
-    String failedUrl = baseUrl + 'paymentFailed';
+    String successUrl = baseUrl + '/paymentSuccess';
+    String failedUrl = baseUrl + '/paymentFailed';
 
     String checkOutUrl = await getCheckOutUrl4SubScription(
         priceId, successUrl, failedUrl, productName, transactionId);
@@ -157,9 +157,10 @@ extension StripePaymentProvider on PaymentsProvider {
     String failedUrl = '';
 
     if (kIsWeb) {
-      final baseUrl = Uri.base.removeFragment().toString();
-      successUrl = baseUrl + 'paymentSuccess';
-      failedUrl = baseUrl + 'paymentFailed';
+      final baseUrl = Uri.base.origin.toString();
+      print('This is the Base URl $baseUrl');
+      successUrl = baseUrl + '/paymentSuccess';
+      failedUrl = baseUrl + '/paymentFailed';
     } else {
       successUrl = 'https://success.com';
       failedUrl = 'https://www.cancel.com';

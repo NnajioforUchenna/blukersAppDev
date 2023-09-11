@@ -5,7 +5,6 @@ import 'package:blukers/main.dart';
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 final firebaseMessaging = FirebaseMessaging.instance;
@@ -46,7 +45,7 @@ class NotificationService {
         "roomId": res["roomId"].toString(),
         "roomName": res["sendByNamy"].toString(),
       });
-      // Navigator.pushNamed(context, '/message',
+      // context.go( '/message',
       //     arguments: MessageArguments(message, true));
     });
 

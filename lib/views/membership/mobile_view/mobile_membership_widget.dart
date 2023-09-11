@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/payments_provider.dart';
 import 'carousel_with_cards.dart';
-import 'my_evelated_button.dart';
 
 class MobileMembershipWidget extends StatefulWidget {
   const MobileMembershipWidget({super.key});
@@ -89,33 +88,6 @@ class _MobileMembershipWidgetState extends State<MobileMembershipWidget> {
                 height: 18.sp,
               ),
               CarouselWithCards(),
-              SizedBox(
-                height: 18.sp,
-              ),
-              if (!pp.isActiveMember)
-                MyElevatedButton(
-                  firstText: 'Premium',
-                  secondText: '',
-                  thirdText: '\$4.99/Monthly',
-                  onPress: () async {
-                    pp.pay4Subscription(context, 'premium');
-                  },
-                ),
-              SizedBox(
-                height: 18.sp,
-              ),
-              if (!pp.isActiveMember)
-                MyElevatedButton(
-                  firstText: 'Premium',
-                  secondText: 'Plus',
-                  thirdText: '\$9.99/Monthly',
-                  onPress: () async {
-                    pp.pay4Subscription(context, 'premiumPlus');
-                  },
-                ),
-              SizedBox(
-                height: 18.sp,
-              ),
               if (pp.isActiveMember)
                 Center(
                   child: InkWell(
