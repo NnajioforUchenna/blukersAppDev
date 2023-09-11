@@ -5,16 +5,31 @@ import '../../../models/payment_model/url_info.dart';
 import '../../../providers/payments_provider.dart';
 import '../membership_widget.dart';
 
-class PaymentFailedWidget extends StatelessWidget {
+class PaymentFailedWidget extends StatefulWidget {
   final UrlInfo urlInfo;
   const PaymentFailedWidget({super.key, required this.urlInfo});
 
   @override
-  Widget build(BuildContext context) {
-    PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
-    if (urlInfo.sessionId != null) {
-      pp.verifyPayment(urlInfo, 'failed');
+  State<PaymentFailedWidget> createState() => _PaymentFailedWidgetState();
+}
+
+class _PaymentFailedWidgetState extends State<PaymentFailedWidget> {
+  bool haveVerified = false;
+
+  @override
+  void initState() {
+    PaymentsProvider pp = Provider.of<PaymentsProvider>(context, listen: false);
+    if (!haveVerified) {
+      if (widget.urlInfo.sessionId != null) {
+        pp.verifyPayment(widget.urlInfo, 'failed');
+      }
+      haveVerified = true;
     }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Container(
         padding: const EdgeInsets.all(16.0),
