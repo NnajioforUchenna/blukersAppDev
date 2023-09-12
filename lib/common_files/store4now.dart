@@ -248,3 +248,28 @@
 //         });
 //   }
 // }
+
+// Center(
+// child: InkWell(
+// onTap: () async {
+// var url = await getCustomerPortalUrl();
+//
+// Navigator.push(context,
+// MaterialPageRoute(builder: (context) {
+// return CheckoutScreen(url: url);
+// }));
+// },
+// child: Container(
+// decoration: BoxDecoration(
+// borderRadius: BorderRadius.circular(20),
+// color: Colors.grey[300],
+// ),
+// child: Text('Manage Your Subscription',
+// style: GoogleFonts.montserrat(
+// color: Colors.black,
+// fontSize: 14,
+// fontWeight: FontWeight.w600,
+// )),
+// ),
+// ),
+// ),

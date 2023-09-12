@@ -82,13 +82,17 @@ SubscriptionStatus _checkUserHaveActiveSubscription(
 getCustomerPortalUrl() async {
   HttpsCallable callable = FirebaseFunctions.instance
       .httpsCallable('ext-firestore-stripe-payments-createPortalLink');
+
   EasyLoading.show(
     status: 'Creating Your Portal...',
     maskType: EasyLoadingMaskType.black,
   );
+
   HttpsCallableResult result = await callable.call(
       {'returnUrl': kIsWeb ? 'http://localhost:50246/' : "https://cancel.com"});
+
   EasyLoading.dismiss();
+
   print(result.data);
   if (result.data != null) {
     var url = result.data["url"];

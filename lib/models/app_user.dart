@@ -1,3 +1,4 @@
+import 'package:blukers/models/payment_model/active_subscription.dart';
 import 'package:blukers/models/payment_model/paid_order.dart';
 import 'package:blukers/models/worker.dart';
 
@@ -36,7 +37,7 @@ class AppUser {
 
   // Varibles for Tracking Payments
   bool isSubscriptionActive = false;
-  String activeSubscriptionId = '';
+  ActiveSubscription? activeSubscription;
   Map<String, PaidOrder> listActiveOrders = {};
 
   AppUser({
@@ -59,7 +60,7 @@ class AppUser {
     this.userRole,
     this.workerTimelineStep,
     this.companyTimelineStep,
-    this.activeSubscriptionId = '',
+    this.activeSubscription,
     this.isSubscriptionActive = false,
     this.listActiveOrders = const {},
   })  : createdAt = DateTime.now().millisecondsSinceEpoch,
@@ -98,8 +99,9 @@ class AppUser {
       data['companyTimelineStep'] = companyTimelineStep;
     if (createdAt != 0) data['createdAt'] = createdAt;
     if (modifiedAt != 0) data['modifiedAt'] = modifiedAt;
-    if (activeSubscriptionId != '')
-      data['activeSubscriptionId'] = activeSubscriptionId;
+    if (activeSubscription != null) {
+      data['activeSubscription'] = activeSubscription?.toMap();
+    }
     data['isSubscriptionActive'] = isSubscriptionActive;
     if (listActiveOrders.isNotEmpty) {
       data['listActiveOrders'] =
@@ -138,7 +140,9 @@ class AppUser {
               ? Address.fromMap(map['address'])
               : null,
       isSubscriptionActive: map['isSubscriptionActive'] ?? false,
-      activeSubscriptionId: map['activeSubscriptionId'] ?? '',
+      activeSubscription: map['activeSubscription'] != null
+          ? ActiveSubscription.fromMap(map['activeSubscription'])
+          : null,
     );
 
     if (map['listActiveOrders'] != null) {

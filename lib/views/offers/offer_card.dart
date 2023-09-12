@@ -19,7 +19,7 @@ class OfferCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.go(route);
+        context.push(route);
       },
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 8.0),

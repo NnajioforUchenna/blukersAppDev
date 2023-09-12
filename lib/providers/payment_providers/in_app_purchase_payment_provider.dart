@@ -63,7 +63,9 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
         productDetails: _listSubscriptionDetails[indexSubType],
       );
 
-      await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+      await _iap.buyNonConsumable(
+        purchaseParam: purchaseParam,
+      );
     } else {
       print('No Google Subscription Available');
     }
