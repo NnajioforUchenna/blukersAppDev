@@ -309,6 +309,23 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void loadMoreJobPosts() {
+    // Get the 50 most recent job posts.
+    JobPostsDataProvider.getRecentJobPosts2().then((jobPosts) {
+      for (var jobPost in jobPosts) {
+        if (jobPost['id'] != null) {
+          print('jobPost: ${jobPost['id']}');
+          JobPost? parsedJobPost = JobPost.fromMap(jobPost);
+          if (parsedJobPost != null) {
+            recent50Jobs[jobPost['id']] = parsedJobPost;
+          }
+        }
+      }
+
+      notifyListeners();
+    });
+  }
+
 // Future<List<JobPost>> getSavedJobPostIds(String uid) {
   //   return JobPostsDataProvider.getSavedJobPostIds(uid)
   //       .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
