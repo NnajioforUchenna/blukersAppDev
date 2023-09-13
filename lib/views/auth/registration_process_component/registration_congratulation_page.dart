@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../providers/user_provider.dart';
-
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/common_views/components/animations/index.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/user_provider.dart';
 // import 'package:blukers/views/auth/common_widget/submit_button.dart';
 
 class RegistrationCongratulationPage extends StatefulWidget {
@@ -48,9 +48,9 @@ class _RegistrationCongratulationPageState
     Future.delayed(Duration(seconds: countdownValue), () {
       _timer.cancel(); // Cancel the timer if it's still active
       if (up.userRole == "company") {
-        Navigator.pushReplacementNamed(context, '/workers');
+        context.go('/workers');
       } else {
-        Navigator.pushReplacementNamed(context, '/jobs');
+        context.go('/jobs');
       }
     });
   }
