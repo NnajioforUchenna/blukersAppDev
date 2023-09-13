@@ -9,6 +9,8 @@ import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
+import '../common_files/constants.dart';
+import '../models/payment_model/active_subscription.dart';
 import '../services/platform_check.dart';
 import 'data_constants.dart';
 
@@ -16,7 +18,7 @@ final db = FirebaseFirestore.instance;
 
 class PaymentsDataProvider {
   static Future<String> saveOrder(TransactionRecord pOrder) async {
-    final ordCol = db.collection(ordersCollection);
+    final ordCol = db.collection(transactionsCollection);
     DocumentReference documentRef = ordCol.doc();
     String newDocumentId = documentRef.id;
     pOrder.documentId = newDocumentId;
@@ -95,12 +97,79 @@ class PaymentsDataProvider {
 
   static void updateUserSubscriptionStatus(
       String? uid, PurchaseDetails purchase) {
-    String productID = purchase.productID;
+    // Create ActiveSubscription object from purchase details
+    print('purchase.productID: ${purchase.productID}');
+
+    ActiveSubscription activeSubscription = ActiveSubscription(
+      subscribeDate: DateTime.now().millisecondsSinceEpoch,
+      // add 30 days to the current date
+      renewDate: DateTime.now().millisecondsSinceEpoch + 2592000000,
+      subscriptionId: purchase.productID,
+      subscriptionName: ProductNames[purchase.productID] ?? '',
+      amountPaid: ProductPrices[purchase.productID] ?? 0.0,
+      paymentPlatform: isIOS() ? 'Apple' : 'Google',
+    );
+
+    print(activeSubscription.toMap().toString());
+
     if (uid != null) {
       db.collection('AppUsers').doc(uid).set({
         'isSubscriptionActive': true,
-        'activeSubscriptionId': productID,
+        'activeSubscription': activeSubscription.toMap(),
       }, SetOptions(merge: true));
+    }
+  }
+
+  verifyStripePaymentOnFirebase(String transactionId, String userId) async {
+    DocumentSnapshot? subscription =
+        await getSubscriptionByTransactionId(userId, transactionId);
+    if (subscription != null) {
+      Map<String, dynamic> subscriptionData =
+          subscription.data() as Map<String, dynamic>;
+      Map<String, dynamic> metadata = subscriptionData['metadata'];
+      String? productId = metadata['product_id'];
+      String productName = ProductNames[productId] ?? '';
+
+      ActiveSubscription activeSubscription = ActiveSubscription(
+        subscribeDate: DateTime.now().millisecondsSinceEpoch,
+        // add 30 days to the current date
+        renewDate: DateTime.now().millisecondsSinceEpoch + 2592000000,
+        subscriptionId: productId ?? '',
+        subscriptionName: productName,
+        amountPaid: ProductPrices[productId] ?? 0.0,
+        paymentPlatform: 'Stripe',
+      );
+
+      print(activeSubscription.toMap().toString());
+
+      db.collection('AppUsers').doc(userId).set({
+        'isSubscriptionActive': true,
+        'activeSubscription': activeSubscription.toMap(),
+      }, SetOptions(merge: true));
+    }
+  }
+
+  static Future<DocumentSnapshot?> getSubscriptionByTransactionId(
+      String userId, String transactionId) async {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      QuerySnapshot querySnapshot = await firestore
+          .collection("AppUsers")
+          .doc(userId)
+          .collection("subscriptions")
+          .where("metadata.transactionId", isEqualTo: transactionId)
+          .get();
+
+      // Check if a matching document is found.
+      if (querySnapshot.docs.isNotEmpty) {
+        return querySnapshot.docs.first; // Return the first matching document
+      }
+
+      return null; // Return null if no matching document is found.
+    } catch (error) {
+      print("Error fetching subscription: $error");
+      return null;
     }
   }
 }

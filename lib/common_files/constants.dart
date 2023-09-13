@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../models/address.dart';
 import '../models/job_post.dart';
@@ -155,4 +156,32 @@ String extractSessionId(String checkoutUrl) {
   } else {
     return '';
   }
+}
+
+Map<String, String?> extractIds(String text) {
+  RegExp userIdRegExp = RegExp(r"user_id=([^?]+)");
+  RegExp transactionIdRegExp = RegExp(r"transaction_Id=(\d+)");
+
+  String? userId = userIdRegExp.firstMatch(text)?.group(1);
+  String? transactionId = transactionIdRegExp.firstMatch(text)?.group(1);
+
+  return {
+    'user_id': userId,
+    'transaction_Id': transactionId,
+  };
+}
+
+const ProductNames = {
+  'blukers_workers_premium': 'Premium',
+  'blukers_workers_premium_plus': 'Premium Plus',
+};
+
+const ProductPrices = {
+  'blukers_workers_premium': 4.99,
+  'blukers_workers_premium_plus': 9.99,
+};
+
+String formatDate(int timestamp) {
+  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return DateFormat('MMM d, y').format(date);
 }

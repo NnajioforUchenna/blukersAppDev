@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../common_files/constants.dart';
 import '../../../providers/payments_provider.dart';
+import '../../../providers/user_provider.dart';
 import 'flip_card.dart';
 import 'list_mobile_membership_cards.dart';
 import 'my_evelated_button.dart';
@@ -23,6 +24,7 @@ class _CarouselWithCardsState extends State<CarouselWithCards> {
     List<List<Widget>> combinedList =
         combineLists(memberShipCards, backMemberShipCards);
     PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
 
     return Center(
         child: CarouselSlider(
@@ -39,17 +41,18 @@ class _CarouselWithCardsState extends State<CarouselWithCards> {
             const SizedBox(
               height: 40,
             ),
-            MyElevatedButton(
-              firstText: membershipButtonsMap[index]!['firstText'],
-              secondText: membershipButtonsMap[index]!['secondText'],
-              thirdText: membershipButtonsMap[index]!['thirdText'],
-              onPress: () async {
-                pp.pay4Subscription(
-                  context,
-                  membershipButtonsMap[index]!['onPress'],
-                );
-              },
-            )
+            if (up.appUser == null || !up.appUser!.isSubscriptionActive)
+              MyElevatedButton(
+                firstText: membershipButtonsMap[index]!['firstText'],
+                secondText: membershipButtonsMap[index]!['secondText'],
+                thirdText: membershipButtonsMap[index]!['thirdText'],
+                onPress: () async {
+                  pp.pay4Subscription(
+                    context,
+                    membershipButtonsMap[index]!['onPress'],
+                  );
+                },
+              )
           ],
         );
       }).toList(),

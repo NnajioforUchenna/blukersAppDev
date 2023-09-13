@@ -1,6 +1,5 @@
-import 'package:blukers/services/stripe_data.dart';
+import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
-import 'package:blukers/views/membership/mobile_view/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/payments_provider.dart';
 import 'carousel_with_cards.dart';
+import 'manageMembershipButton.dart';
 
 class MobileMembershipWidget extends StatefulWidget {
   const MobileMembershipWidget({super.key});
@@ -35,6 +35,7 @@ class _MobileMembershipWidgetState extends State<MobileMembershipWidget> {
   @override
   Widget build(BuildContext context) {
     PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -87,34 +88,18 @@ class _MobileMembershipWidgetState extends State<MobileMembershipWidget> {
               SizedBox(
                 height: 18.sp,
               ),
-              CarouselWithCards(),
-              if (pp.isActiveMember)
-                Center(
-                  child: InkWell(
-                    onTap: () async {
-                      var url = await getCustomerPortalUrl();
-
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return CheckoutScreen(url: url);
-                      }));
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.grey[300],
-                      ),
-                      child: Text('Manage Your Subscription',
-                          style: GoogleFonts.montserrat(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          )),
+              Stack(
+                children: <Widget>[
+                  CarouselWithCards(),
+                  if (up.appUser != null && up.appUser!.isSubscriptionActive)
+                    const Positioned(
+                      bottom: 200,
+                      left: 0,
+                      right: 0,
+                      child: Center(child: ManageMembershipButton()),
                     ),
-                  ),
-                ),
+                ],
+              )
             ],
           ),
         ),

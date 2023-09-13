@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../membership_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentFailedWidget extends StatelessWidget {
   @override
@@ -50,10 +49,7 @@ class PaymentFailedWidget extends StatelessWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MembershipWidget()),
-                );
+                context.go('/membership');
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
               child: const Text('Retry Payment'),
