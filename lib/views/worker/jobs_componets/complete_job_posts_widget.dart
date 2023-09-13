@@ -48,7 +48,7 @@ Widget buildWebContent(jobPosts) {
       // 1st column
       Expanded(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: ListViewJobs(
             jobPosts: jobPosts,
           ),
@@ -66,33 +66,65 @@ Widget buildWebContent(jobPosts) {
   );
 }
 
-class ListViewJobs extends StatelessWidget {
+class ListViewJobs extends StatefulWidget {
   final List<JobPost> jobPosts;
   const ListViewJobs({super.key, required this.jobPosts});
+
+  @override
+  State<ListViewJobs> createState() => _ListViewJobsState();
+}
+
+class _ListViewJobsState extends State<ListViewJobs> {
+  final ScrollController controller = ScrollController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    controller.addListener(() {
+      if (controller.position.pixels == controller.position.maxScrollExtent) {
+        JobPostsProvider jp =
+            Provider.of<JobPostsProvider>(context, listen: false);
+        jp.loadMoreJobPosts();
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     return ListView.separated(
+      controller: controller,
       shrinkWrap: true,
       padding:
           const EdgeInsets.all(10), // Added to give some space around cards
-      itemCount: jobPosts.length,
+      itemCount: widget.jobPosts.length + 1,
       itemBuilder: (context, index) {
-        JobPost jobPost = jobPosts[index];
-        // Todo Remember to remove the default values
-        return DisplayJobCard(
-            jobPost: jobPost,
-            onTap: () {
-              jp.setSelectedJobPost(jobPost);
-              if (Responsive.isMobile(context)) {
-                showDialog(
-                    context: context,
-                    builder: (context) => DisplayJobPostDialog(
-                          jobPost: jobPost,
-                        ));
-              }
-            });
+        if (index < widget.jobPosts.length) {
+          JobPost jobPost = widget.jobPosts[index];
+          return DisplayJobCard(
+              jobPost: jobPost,
+              onTap: () {
+                jp.setSelectedJobPost(jobPost);
+                if (Responsive.isMobile(context)) {
+                  showDialog(
+                      context: context,
+                      builder: (context) => DisplayJobPostDialog(
+                            jobPost: jobPost,
+                          ));
+                }
+              });
+        } else {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 32.0),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
       },
       separatorBuilder: (BuildContext context, int index) {
         return const SizedBox(
