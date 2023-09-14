@@ -6,6 +6,9 @@ import 'package:provider/provider.dart';
 
 import '../../../../models/job_post.dart';
 
+import 'package:blukers/views/common_views/components/shaped_icon.dart';
+import 'package:unicons/unicons.dart';
+
 class DetailPageBlockTwo extends StatelessWidget {
   final JobPost jobPost;
 
@@ -26,52 +29,106 @@ class DetailPageBlockTwo extends StatelessWidget {
             ],
           ),
           SizedBox(height: 15.h),
-          RichText(
-            text: TextSpan(
-              style:
-                  TextStyle(fontSize: 14, color: Colors.black), // Default style
-              children: [
-                TextSpan(
-                    text: "${AppLocalizations.of(context)!.industry}: ",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
-                TextSpan(
-                    text: jobPost.industryIds.isNotEmpty
-                        ? jobPost.industryIds.join(', ')
-                        : AppLocalizations.of(context)!.notSpecified),
-              ],
-            ),
+          Row(
+            children: [
+              const ShapedIcon(icon: UniconsLine.hard_hat),
+              SizedBox(width: 1.h),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                  ), // Default style
+                  children: [
+                    TextSpan(
+                        text: "${AppLocalizations.of(context)!.industry}: ",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 62, 62, 62),
+                          fontFamily: 'Montserrat',
+                        )),
+                    TextSpan(
+                        text: jobPost.industryIds.isNotEmpty
+                            ? jobPost.industryIds.join(', ')
+                            : AppLocalizations.of(context)!.notSpecified,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        )),
+                  ],
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 15.h),
-          RichText(
-            text: TextSpan(
-              style:
-                  TextStyle(fontSize: 14, color: Colors.black), // Default style
-              children: [
-                TextSpan(
-                    text: "${AppLocalizations.of(context)!.jobPosition}: ",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
-                TextSpan(
-                    text: jobPost.jobIds.isNotEmpty
-                        ? jobPost.jobIds.join(', ')
-                        : AppLocalizations.of(context)!.notSpecified),
-              ],
-            ),
+          Row(
+            children: [
+              const ShapedIcon(icon: UniconsLine.constructor),
+              SizedBox(width: 1.h),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                  ), // Default style
+                  children: [
+                    TextSpan(
+                        text: "${AppLocalizations.of(context)!.jobPosition}: ",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 62, 62, 62),
+                          fontFamily: 'Montserrat',
+                        )),
+                    TextSpan(
+                        text: jobPost.jobIds.isNotEmpty
+                            ? jobPost.jobIds.join(', ')
+                            : AppLocalizations.of(context)!.notSpecified,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        )),
+                  ],
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 15.h),
-          RichText(
-            text: TextSpan(
-              style:
-                  TextStyle(fontSize: 14, color: Colors.black), // Default style
-              children: [
-                TextSpan(
-                    text: "${AppLocalizations.of(context)!.skills}: ",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
-                TextSpan(
-                    text: jobPost.skills.isNotEmpty
-                        ? jobPost.skills.join(', ')
-                        : AppLocalizations.of(context)!.notSpecified),
-              ],
-            ),
+          Row(
+            children: [
+              const ShapedIcon(icon: UniconsLine.jackhammer),
+              SizedBox(width: 1.h),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                  ), // Default style
+                  children: [
+                    TextSpan(
+                        text: "${AppLocalizations.of(context)!.skills}: ",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 62, 62, 62),
+                          fontFamily: 'Montserrat',
+                        )),
+                    TextSpan(
+                        text: jobPost.skills.isNotEmpty
+                            ? jobPost.skills.join(', ')
+                            : AppLocalizations.of(context)!.notSpecified,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        )),
+                  ],
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 15.h),
           const Divider(),

@@ -34,18 +34,18 @@ class OrderCard extends StatelessWidget {
     Color iconColor;
 
     // Check the value of orderStatus and set the icon accordingly
-    if (orderStatus == 'completed') {
+    if (orderStatus.toLowerCase() == 'completed') {
       iconData = UniconsLine.check_circle;
       iconColor = Colors.green;
-    } else if (orderStatus == 'processing') {
+    } else if (orderStatus.toLowerCase() == 'processing') {
       iconData = Icons.hourglass_top_outlined;
       // iconData = UniconsLine.process;
       // iconData = UniconsLine.hourglass;
       iconColor = Colors.blue.shade400;
-    } else if (orderStatus == 'pending') {
+    } else if (orderStatus.toLowerCase() == 'pending') {
       iconData = Icons.access_time;
       iconColor = Colors.amber;
-    } else if (orderStatus == 'canceled') {
+    } else if (orderStatus.toLowerCase() == 'canceled') {
       iconData = UniconsLine.times_circle;
       iconColor = Colors.red;
     } else {
@@ -177,7 +177,7 @@ class OrderCard extends StatelessWidget {
                                   // '\$' + orderTotalAmount.toString(),
                                   NumberFormatHelper()
                                       .doubleToStrSimpleCurrency(
-                                          orderTotalAmount),
+                                          orderTotalAmount / 100),
                                   style: const TextStyle(
                                     color: Colors.green,
                                     fontWeight: FontWeight.bold,
@@ -341,8 +341,8 @@ class OrderCard extends StatelessWidget {
                             Alignment.centerRight, // Align content to the right
                         child: Text(
                           // '\$' + orderTotalAmount.toString(),
-                          NumberFormatHelper()
-                              .doubleToStrSimpleCurrency(orderTotalAmount),
+                          NumberFormatHelper().doubleToStrSimpleCurrency(
+                              orderTotalAmount / 100),
                           style: const TextStyle(
                             color: Colors.green,
                             fontWeight: FontWeight.bold,

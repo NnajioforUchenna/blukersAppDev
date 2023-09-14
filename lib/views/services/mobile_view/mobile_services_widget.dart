@@ -46,10 +46,10 @@ class MobileServicesWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: Colors.black)),
                   ),
-                  const Expanded(
-                    flex: 1,
-                    child: SizedBox(),
-                  )
+                  // const Expanded(
+                  //   flex: 1,
+                  //   child: SizedBox(),
+                  // )
                 ],
               ),
               const SizedBox(
@@ -59,7 +59,7 @@ class MobileServicesWidget extends StatelessWidget {
                 'These services are designed to help you get a job faster',
                 textAlign: TextAlign.start,
                 style: GoogleFonts.montserrat(
-                    fontSize: 11.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey),
               ),
@@ -73,7 +73,7 @@ class MobileServicesWidget extends StatelessWidget {
               MyElevatedButton(
                 firstText: 'FOIA',
                 secondText: '',
-                thirdText: '\$299.99/Monthly',
+                thirdText: '\$299.99 Service Fee',
                 onPress: () async {
                   pp.pay4Services(context, 'foia');
                 },
@@ -84,7 +84,7 @@ class MobileServicesWidget extends StatelessWidget {
               MyElevatedButton(
                 firstText: 'Employment',
                 secondText: 'Verification',
-                thirdText: '\$99.99/Monthly',
+                thirdText: '\$99.99 Service Fee',
                 onPress: () async {
                   pp.pay4Services(context, 'employmentVerification');
                 },
