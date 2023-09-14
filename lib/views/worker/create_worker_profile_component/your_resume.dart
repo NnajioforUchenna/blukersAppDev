@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../../../providers/worker_provider.dart';
 import 'ShowPDF.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class YourResume extends StatefulWidget {
   YourResume({Key? key}) : super(key: key);
 
@@ -65,10 +67,11 @@ class _YourResumeState extends State<YourResume> {
                   height: 150,
                   width: 150,
                   child: !isFileUploaded
-                      ? const Center(
+                      ? Center(
                           child: Text(
-                            'Tap to select a resume',
-                            style: TextStyle(
+                            AppLocalizations.of(context)!
+                                .tapToSelectAndUploadAFile,
+                            style: const TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.bold,
                             ),

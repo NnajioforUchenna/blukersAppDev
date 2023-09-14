@@ -88,7 +88,7 @@ class _RegistrationCongratulationPageState
         const SizedBox(height: 20),
         Text.rich(
           TextSpan(
-            text: 'Redirecting you to dashboard in ',
+            text: 'Wait/Espere ',
             style: const TextStyle(
                 fontSize: 16,
                 color: ThemeColors.primaryThemeColor,
@@ -102,7 +102,7 @@ class _RegistrationCongratulationPageState
                     fontWeight: FontWeight
                         .bold), // Increased font size for countdown value
               ),
-              const TextSpan(text: ' seconds...'),
+              const TextSpan(text: '...'),
             ],
           ),
         ),

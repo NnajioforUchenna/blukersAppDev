@@ -81,12 +81,15 @@ class UserProvider with ChangeNotifier {
       status: 'Deleting your Account...',
       maskType: EasyLoadingMaskType.black,
     );
+
     //delete collection data
     await UserDataProvider.deleteUser(uid, _appUser!.userRole == "company");
+
     if (_user != null) {
       //delete user from firebase auth
       await _user!.delete();
     }
+
     //signout
     await signOut();
 

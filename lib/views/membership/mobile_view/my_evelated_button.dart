@@ -45,7 +45,7 @@ class _MyElevatedButtonState extends State<MyElevatedButton> {
             width:
                 MediaQuery.of(context).size.width * 0.7, // 70% of screen size
             padding: const EdgeInsets.symmetric(
-                vertical: 15, horizontal: 15), // Padding
+                vertical: 15, horizontal: 6), // Padding
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

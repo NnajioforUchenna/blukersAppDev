@@ -12,8 +12,8 @@ class LoadingAnimation extends StatelessWidget {
   final String text;
 
   LoadingAnimation({
-    this.width = 150,
-    this.height = 150,
+    this.width = 250,
+    this.height = 250,
     this.text = '',
   });
 
@@ -25,7 +25,7 @@ class LoadingAnimation extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MyAnimation(
-            name: 'circlePulseBlue',
+            name: 'blukersLoadingDots',
             width: width,
             height: height,
           ),

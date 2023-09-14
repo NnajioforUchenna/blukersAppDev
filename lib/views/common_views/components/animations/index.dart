@@ -19,6 +19,10 @@ class MyAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const Map<String, String> animationPaths = {
+      'blukersLoadingDots': 'assets/animations/7PG5wnfHDZ.json',
+      'loadingDots1': 'assets/animations/animation_lme8mh67.json',
+      'loadingDots2': 'assets/animations/animation_lme8my5u.json',
+      'loadingDots3': 'assets/animations/animation_lme8nbea.json',
       'loadingCircleLightBlue': 'assets/animations/animation_ll6sgldm.json',
       'loadingCircleBlue': 'assets/animations/animation_ll6szhsm.json',
       'circleCheckmarkBlue': 'assets/animations/animation_ll6st86s.json',

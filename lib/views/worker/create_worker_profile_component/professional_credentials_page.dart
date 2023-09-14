@@ -7,6 +7,8 @@ import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'credential_field.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ProfessionalCredentialsPage extends StatefulWidget {
   const ProfessionalCredentialsPage({super.key});
 
@@ -45,10 +47,10 @@ class _ProfessionalCredentialsPageState
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              "Professional Credentials",
+            Text(
+              AppLocalizations.of(context)!.certifications,
               textAlign: TextAlign.start,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.deepOrangeAccent,
                 fontSize: 25,
                 fontWeight: FontWeight.w600,
@@ -58,10 +60,10 @@ class _ProfessionalCredentialsPageState
             const SizedBox(height: 30),
 
             // Qualification and Certification Label
-            const Text(
-              "Qualification and Certification",
+            Text(
+              AppLocalizations.of(context)!.certification,
               textAlign: TextAlign.start,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black87,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -73,7 +75,7 @@ class _ProfessionalCredentialsPageState
             Align(
               alignment: Alignment.centerRight,
               child: Tooltip(
-                message: "Add more credentials",
+                message: AppLocalizations.of(context)!.addMoreCertifications,
                 child: IconButton(
                   icon: const Icon(Icons.add),
                   onPressed: () {
@@ -85,6 +87,7 @@ class _ProfessionalCredentialsPageState
               ),
             ),
 
+            const SizedBox(height: 20),
             Divider(thickness: 1, color: Colors.grey[400]),
             const SizedBox(height: 20),
             SkillsForm(selectedSkills: selectedSkills),
@@ -101,7 +104,7 @@ class _ProfessionalCredentialsPageState
                     backgroundColor: MaterialStateProperty.all<Color>(
                         ThemeColors.secondaryThemeColor),
                   ),
-                  child: const Text("Previous"),
+                  child: Text(AppLocalizations.of(context)!.previous),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -111,7 +114,7 @@ class _ProfessionalCredentialsPageState
                     backgroundColor: MaterialStateProperty.all<Color>(
                         ThemeColors.secondaryThemeColor),
                   ),
-                  child: const Text("Next"),
+                  child: Text(AppLocalizations.of(context)!.next),
                 ),
               ],
             ),

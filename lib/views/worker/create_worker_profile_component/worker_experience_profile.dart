@@ -7,6 +7,8 @@ import 'package:blukers/views/worker/create_worker_profile_component/work_experi
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WorkerExperienceProfile extends StatelessWidget {
   const WorkerExperienceProfile({super.key});
 
@@ -73,7 +75,7 @@ class WorkerExperienceProfile extends StatelessWidget {
                   color: ThemeColors.primaryThemeColor,
                   borderRadius: BorderRadius.circular(15)),
               child: Text(
-                "Update",
+                AppLocalizations.of(context)!.update,
                 style: ThemeTextStyles
                     .informationDisplayPlaceHolderThemeTextStyle
                     .apply(color: Colors.white),

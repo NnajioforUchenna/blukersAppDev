@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WorkExperienceDate extends StatefulWidget {
   final int intialIndex;
   const WorkExperienceDate({super.key, required this.intialIndex});
@@ -78,8 +80,9 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                     _selectDate(context);
                   },
                   child: Text(_startDate == null
-                      ? "Select Start Date"
-                      : "Start Date: ${DateFormat('EEEE, d MMMM, y').format(_startDate!)}"),
+                      ? AppLocalizations.of(context)!.startDate
+                      : AppLocalizations.of(context)!.startDate +
+                          ": ${DateFormat('EEEE, d MMMM, y').format(_startDate!)}"),
                 ),
               ),
             ),
@@ -96,8 +99,9 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                               ['isCurrentlyWorking'] = false;
                         },
                   child: Text(_endDate == null
-                      ? "Select End Date"
-                      : "End Date: ${DateFormat('EEEE, d MMMM, y').format(_endDate!)}"),
+                      ? AppLocalizations.of(context)!.endDate
+                      : AppLocalizations.of(context)!.endDate +
+                          ": ${DateFormat('EEEE, d MMMM, y').format(_endDate!)}"),
                 ),
               ),
             ),
@@ -106,7 +110,7 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
         Row(
           children: [
             const Spacer(),
-            const Text("Currently Working Here?"),
+            Text(AppLocalizations.of(context)!.areYouCurrentlyWorkingHere),
             Checkbox(
               value: _isCurrentlyWorking,
               onChanged: (bool? value) {

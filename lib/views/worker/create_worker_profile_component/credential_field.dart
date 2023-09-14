@@ -1,9 +1,12 @@
 import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/show_pdf_dialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:googleapis/docs/v1.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CredentialField extends StatefulWidget {
   final int index;
@@ -47,7 +50,7 @@ class _CredentialFieldState extends State<CredentialField> {
                   wp.professionalCredentials[widget.index]['name'] = value;
                 },
                 decoration: InputDecoration(
-                  labelText: "Credential Name",
+                  labelText: AppLocalizations.of(context)!.name,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -55,49 +58,60 @@ class _CredentialFieldState extends State<CredentialField> {
               ),
             ),
             const SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: () async {
-                // Upload logic
-                Map<String, dynamic> result = {
-                  'url': '',
-                };
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () async {
+                  // Upload logic
+                  Map<String, dynamic> result = {
+                    'url': '',
+                  };
 
-                if (kIsWeb) {
-                  result = await wp.uploadCredentialWeb();
-                } else {
-                  result = await wp.uploadCredentialMobile();
-                }
+                  if (kIsWeb) {
+                    result = await wp.uploadCredentialWeb();
+                  } else {
+                    result = await wp.uploadCredentialMobile();
+                  }
 
-                String url = result['url'];
+                  String url = result['url'];
 
-                if (url.isNotEmpty) {
-                  setState(() {
-                    fileNameUrl = url;
-                    isFileUploaded = true;
-                    filePlatformFile = result['file'];
-                  });
-                  wp.professionalCredentials[widget.index]['url'] = url;
-                  wp.professionalCredentials[widget.index]['isFileUploaded'] =
-                      true;
-                  wp.professionalCredentials[widget.index]['filePlatformFile'] =
-                      result['file'];
-                }
-              },
-              child: const Text('Upload'),
+                  if (url.isNotEmpty) {
+                    setState(() {
+                      fileNameUrl = url;
+                      isFileUploaded = true;
+                      filePlatformFile = result['file'];
+                    });
+                    wp.professionalCredentials[widget.index]['url'] = url;
+                    wp.professionalCredentials[widget.index]['isFileUploaded'] =
+                        true;
+                    wp.professionalCredentials[widget.index]
+                        ['filePlatformFile'] = result['file'];
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ThemeColors.blukersOrangeThemeColor,
+                ),
+                child: Text(AppLocalizations.of(context)!.upload),
+              ),
             ),
             const SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: isFileUploaded
-                  ? () {
-                      print(filePlatformFile!.name);
-                      showDialog(
-                          context: context,
-                          builder: (_) => ShowPdfDialog(
-                                pdfFile: filePlatformFile!,
-                              ));
-                    }
-                  : null,
-              child: const Text('View'),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: isFileUploaded
+                    ? () {
+                        print(filePlatformFile!.name);
+                        showDialog(
+                            context: context,
+                            builder: (_) => ShowPdfDialog(
+                                  pdfFile: filePlatformFile!,
+                                ));
+                      }
+                    : null,
+                child: Text(AppLocalizations.of(context)!.view),
+              ),
             ),
           ],
         ),

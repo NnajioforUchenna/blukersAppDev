@@ -13,6 +13,9 @@ import '../../../../utils/styles/theme_colors.dart';
 import '../../../common_views/job_timeline/display_job_timeline_dialog.dart';
 import '../../../membership/show_subscription_dialog.dart';
 
+import 'package:blukers/views/common_views/components/shaped_icon.dart';
+import 'package:unicons/unicons.dart';
+
 class DetailPageBlockOne extends StatelessWidget {
   final JobPost jobPost;
 
@@ -70,41 +73,62 @@ class DetailPageBlockOne extends StatelessWidget {
             SizedBox(height: 5.h),
             Row(
               children: [
+                const ShapedIcon(icon: UniconsLine.money_bill),
+                SizedBox(width: 5.h),
                 Text(
-                  jobPost.salaryAmount.toString(),
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                  '\$ ' + jobPost.salaryAmount.toString(),
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
                 ),
                 SizedBox(width: 5.h),
                 Text(
                   getSalaryType(jobPost.salaryType) ?? '',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
                 ),
               ],
             ),
             SizedBox(height: 15.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const ShapedIcon(icon: UniconsLine.building),
+                SizedBox(width: 5.h),
+                Text("${AppLocalizations.of(context)!.company}: ",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                      color: ThemeColors.black3ThemeColor,
+                      fontFamily: 'Montserrat',
+                    )),
+              ],
+            ),
+            SizedBox(height: 5.h),
             Wrap(
               children: [
-                Text("${AppLocalizations.of(context)!.company}: ",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
                 Text(
                   jobPost.companyName,
                   style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 24,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
-            SizedBox(height: 5.h),
-            jobPost.address == null
-                ? Text(AppLocalizations.of(context)!.notSpecified,
-                    style: TextStyle(fontSize: 11, color: Colors.grey))
-                : Text(
-                    jobPost.address!.location ?? '',
-                    style: TextStyle(fontSize: 11),
-                  ),
+            SizedBox(height: 15.h),
+            Row(
+              children: [
+                const ShapedIcon(icon: UniconsLine.map_marker_alt),
+                SizedBox(width: 5.h),
+                jobPost.address == null
+                    ? Text(AppLocalizations.of(context)!.notSpecified,
+                        style: TextStyle(fontSize: 18, color: Colors.grey))
+                    : Text(
+                        jobPost.address!.location ?? '',
+                        style: TextStyle(fontSize: 18),
+                      ),
+              ],
+            ),
             SizedBox(height: 15.h),
             Row(
               children: [

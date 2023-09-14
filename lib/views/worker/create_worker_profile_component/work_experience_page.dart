@@ -7,6 +7,8 @@ import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'work_experience_form.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WorkExperiencePage extends StatefulWidget {
   WorkExperiencePage({super.key});
 
@@ -56,7 +58,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
           children: [
             ...workExperienceForms,
             Tooltip(
-              message: "Add more Work Experience",
+              message: AppLocalizations.of(context)!.addMoreWorkExperience,
               child: InkWell(
                 onTap: () {
                   wp.addWorkExperience();
@@ -71,8 +73,8 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
                       },
                     ),
                     const SizedBox(width: 10),
-                    const Text(
-                      "Add more Work Experience",
+                    Text(
+                      AppLocalizations.of(context)!.addMoreWorkExperience,
                     )
                   ],
                 ),
@@ -90,7 +92,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         ThemeColors.secondaryThemeColor),
                   ),
-                  child: const Text("Previous"),
+                  child: Text(AppLocalizations.of(context)!.previous),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -100,7 +102,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         ThemeColors.secondaryThemeColor),
                   ),
-                  child: const Text("Next"),
+                  child: Text(AppLocalizations.of(context)!.next),
                 ),
               ],
             ),

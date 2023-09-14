@@ -4,6 +4,7 @@ import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/common_views/info_edit_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditWorkerBasicProfile extends StatefulWidget {
   const EditWorkerBasicProfile({
@@ -24,12 +25,12 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Basic Information",
+          AppLocalizations.of(context)!.basicInformation,
           style:
               ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
         ),
         Text(
-          "Edit",
+          AppLocalizations.of(context)!.edit,
           style:
               ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
         ),
@@ -37,7 +38,7 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
           height: 20,
         ),
         InfoEditComponent(
-          placeHolder: "First Name",
+          placeHolder: AppLocalizations.of(context)!.firstName,
           value: worker.firstName,
           action: TextInputAction.next,
           onChangeValue: (value) {
@@ -45,7 +46,7 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
           },
         ),
         InfoEditComponent(
-          placeHolder: "Middle Name",
+          placeHolder: AppLocalizations.of(context)!.middleName,
           value: worker.middleName ?? "",
           action: TextInputAction.next,
           onChangeValue: (value) {
@@ -57,7 +58,7 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
           // },
         ),
         InfoEditComponent(
-          placeHolder: "Last Name",
+          placeHolder: AppLocalizations.of(context)!.lastName,
           value: worker.lastName,
           action: TextInputAction.done,
           onChangeValue: (value) {
@@ -65,7 +66,7 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
           },
         ),
         InfoEditComponent(
-          placeHolder: "Description",
+          placeHolder: AppLocalizations.of(context)!.description,
           value: worker.workerBriefDescription ?? "",
           action: TextInputAction.done,
           onChangeValue: (value) {
@@ -89,7 +90,7 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
                     color: ThemeColors.primaryThemeColor,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text(
-                  "Update",
+                  AppLocalizations.of(context)!.update,
                   style: ThemeTextStyles
                       .informationDisplayPlaceHolderThemeTextStyle
                       .apply(color: Colors.white),

@@ -1,7 +1,7 @@
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AppVersionHelper {
-  String hardCodedVersion = "1.0.0";
+  String hardCodedVersion = "1.0.2";
 
   getAppName() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();

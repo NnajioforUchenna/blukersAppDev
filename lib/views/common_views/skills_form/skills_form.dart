@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/localization/deviceLocale.dart';
+import '../../../utils/styles/index.dart';
 import '../../../utils/styles/theme_text_styles.dart';
 import 'const_list_skills.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SkillsForm extends StatefulWidget {
   final List<String> selectedSkills;
@@ -19,9 +22,10 @@ class _SkillsFormState extends State<SkillsForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text("Select Skills",
+        Text(AppLocalizations.of(context)!.selectSkills,
             textAlign: TextAlign.center,
-            style: ThemeTextStyles.landingPageBtnThemeTextStyle),
+            style: ThemeTextStyles.landingPageBtnThemeTextStyle
+                .apply(color: ThemeColors.blukersOrangeThemeColor)),
         const SizedBox(height: 20),
         Container(
             height: MediaQuery.of(context).size.height * 0.4,
@@ -55,8 +59,8 @@ class _SkillsFormState extends State<SkillsForm> {
                             }
                           });
                         },
-                        backgroundColor: Colors.lightBlue[100],
-                        selectedColor: Colors.blue[700],
+                        backgroundColor: Color.fromARGB(255, 226, 226, 226),
+                        selectedColor: Color.fromARGB(255, 255, 174, 137),
                       ),
                     );
                   }).toList(),

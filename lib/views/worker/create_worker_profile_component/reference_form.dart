@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../auth/common_widget/auth_input.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ReferenceForm extends StatefulWidget {
   final int index;
 
@@ -52,7 +54,8 @@ class _ReferenceFormState extends State<ReferenceForm> {
           children: <Widget>[
             const SizedBox(height: 20),
             Text(
-              "Reference Form ${widget.index + 1}",
+              AppLocalizations.of(context)!.personalReferences +
+                  " #${widget.index + 1}",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.deepOrangeAccent,
@@ -68,12 +71,14 @@ class _ReferenceFormState extends State<ReferenceForm> {
                 controller: _nameController,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => node.nextFocus(),
-                validator: (value) => value!.isEmpty ? "Required" : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context)!.required
+                    : null,
                 onChanged: (value) {
                   wp.references[widget.index]['name'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: "Name",
+                  hintText: AppLocalizations.of(context)!.name,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
@@ -92,12 +97,14 @@ class _ReferenceFormState extends State<ReferenceForm> {
                 controller: _phoneNumberController,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => node.nextFocus(),
-                validator: (value) => value!.isEmpty ? "Required" : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context)!.required
+                    : null,
                 onChanged: (value) {
                   wp.references[widget.index]['phoneNumber'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: "Phone Number",
+                  hintText: AppLocalizations.of(context)!.phoneNumber,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
@@ -116,12 +123,14 @@ class _ReferenceFormState extends State<ReferenceForm> {
                 controller: _emailController,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => node.nextFocus(),
-                validator: (value) => value!.isEmpty ? "Required" : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context)!.required
+                    : null,
                 onChanged: (value) {
                   wp.references[widget.index]['email'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: "Email",
+                  hintText: AppLocalizations.of(context)!.email,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
@@ -140,12 +149,14 @@ class _ReferenceFormState extends State<ReferenceForm> {
                 controller: _relationshipController,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => node.nextFocus(),
-                validator: (value) => value!.isEmpty ? "Required" : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context)!.required
+                    : null,
                 onChanged: (value) {
                   wp.references[widget.index]['relationship'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: "Relationship",
+                  hintText: AppLocalizations.of(context)!.relationship,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(

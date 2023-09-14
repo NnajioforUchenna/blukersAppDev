@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ProfilePhotoPage extends StatefulWidget {
   ProfilePhotoPage({Key? key}) : super(key: key);
 
@@ -31,10 +33,10 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                "Upload Profile Photo",
+              Text(
+                AppLocalizations.of(context)!.uploadProfilePhoto,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.deepOrangeAccent,
                   fontSize: 25,
                   fontWeight: FontWeight.w600,
@@ -53,7 +55,7 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
                         onPressed: () {
                           wp.workerProfileBackPage();
                         },
-                        child: Text("Previous"),
+                        child: Text(AppLocalizations.of(context)!.previous),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               ThemeColors.secondaryThemeColor),
@@ -70,7 +72,7 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
                           backgroundColor: MaterialStateProperty.all<Color>(
                               ThemeColors.secondaryThemeColor),
                         ),
-                        child: const Text("Next"),
+                        child: Text(AppLocalizations.of(context)!.next),
                       ),
                     ],
                   ),

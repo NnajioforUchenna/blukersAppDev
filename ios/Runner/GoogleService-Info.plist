@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>25989559034-1lsi7v885ju8hgsj8qcc2r974o05n2b7.apps.googleusercontent.com</string>
+	<string>25989559034-r6fcqrbm3pv35ja8qef5f9p0q2hs1vh2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.25989559034-1lsi7v885ju8hgsj8qcc2r974o05n2b7</string>
+	<string>com.googleusercontent.apps.25989559034-r6fcqrbm3pv35ja8qef5f9p0q2hs1vh2</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>25989559034-b9mmbu1eoap949r2dmkgh4m8ocm4dhrj.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:25989559034:ios:5266ff3de7f2eb3564cf43</string>
+	<string>1:25989559034:ios:64a2b3282bec97b564cf43</string>
 	<key>DATABASE_URL</key>
 	<string>https://blukers-development-default-rtdb.firebaseio.com</string>
 </dict>
