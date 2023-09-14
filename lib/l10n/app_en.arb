@@ -148,9 +148,17 @@
 
     "basicInformation": "Basic Information",
     "name": "Name",
+    "firstName": "First Name",
+    "middleName": "Middle Name",
     "lastName": "Last Name",
     "description": "Description",
     "saveProfile": "Save Profile",
+
+    "birthdate": "Birthdate",
+    "birthday": "Birthday",
+    "day": "Day",
+    "month": "Month",
+    "year": "Year",
 
     "contactInformation": "Contact Information",
     "phone": "Phone",
@@ -169,12 +177,18 @@
 
     "congratulations": "Congratulations!",
     "youHaveSuccessfullySignedUp": "You have successfully signed up",
+    "workerOnlineProfileCongratulationsDescription": "You have successfully created your online profile",
 
     "resetPassword": "Reset Password",
     "resetPasswordDescription": "Enter the email address associated with your account. A link to reset your password will be sent to your email address.",
 
     "skip": "Skip",
     "newJob": "New",
+    "previous": "Previous",
+    "next": "Next",
+    "continueStr": "Continue",
+    "done": "Done",
+    "finish": "Finish",
 
     "joinNow": "Join Now!",
     
@@ -243,6 +257,8 @@
 
     "additionalInformation": "Additional Information",
     "editBasicInformation": "Edit Basic Information",
+    "edit": "Edit",
+    "tapToSelectAndUploadAFile": "Tap to select and upload a file",
 
     "youHaveNotUploadedAPDFResume": "You have not uploaded a PDF resume",
     "clickHereToViewYourPDFResume": "Click here to view your PDF resume",
@@ -274,8 +290,43 @@
 
     "orders": "Orders",
     "myOrders": "My Orders",
+    "orderStatus": "Order Status",
 
     "youDoNotHaveAnyOrder": "You do not have any order",
+
+    "personalInformation": "Personal Information",
+    "uploadProfilePhoto": "Upload Profile Photo",
+    "certification": "Certification",
+    "certifications": "Certifications",
+    "upload": "Upload",
+    "view": "View",
+    "selectSkills": "Select Skills",
+    "workExperience": "Work Experience",
+    "jobTitle": "Job Title",
+    "jobDescription": "Job Description",
+    "selectStartDate": "Select Start Date",
+    "selectEndDate": "Select End Date",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "areYouCurrentlyWorkingHere": "Are You Currently Working Here?",
+    "addMoreWorkExperience": "Add more work experience",
+    "addAnotherWorkExperience": "Add another work experience",
+    "addWorkExperience": "Add work experience",
+    "personalReference": "Personal Reference",
+    "personalReferences": "Personal References",
+    "addPersonalReference": "Add personal reference",
+    "addAnotherPersonalReference": "Add another personal reference",
+    "addMorePersonalReferences": "Add more personal references",
+    "relationship": "Relationship",
+    "uploadYourResume": "Upload Your Resume",
+    "addMoreCertifications": "Add more certifications",
+
+    "areYouSureYouWantToLogOut": "Are you sure you want to logout?",
+    "areYouSureYouWantToDeleteYourAccount": "Are you sure you want to delete your account? Your account will be deleted permanently.",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "deleteMyAccount": "Delete my account",
+    "delete": "Delete",
 
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",

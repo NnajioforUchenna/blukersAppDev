@@ -148,9 +148,17 @@
 
     "basicInformation": "Información Básica",
     "name": "Nombre",
+    "firstName": "Nombre",
+    "middleName": "Segundo Nombre",
     "lastName": "Apellido",
     "description": "Descripción",
     "saveProfile": "Guardar Perfil",
+
+    "birthdate": "Fecha de Nacimiento",
+    "birthday": "Cumpleaños",
+    "day": "Día",
+    "month": "Mes",
+    "year": "Año",
 
     "contactInformation": "Información de Contacto",
     "phone": "Teléfono",
@@ -169,12 +177,18 @@
 
     "congratulations": "Felicidades!",
     "youHaveSuccessfullySignedUp": "Te has registrado exitosamente",
+    "workerOnlineProfileCongratulationsDescription": "Has creado exitosamente tu perfil en línea",
 
     "resetPassword": "Reestablecer Contraseña",
     "resetPasswordDescription": "Introduce la dirección de correo electrónico asociada a tu cuenta. Recibirás un enlace para restablecer tu contraseña a la dirección de correo electrónico ingresada.",
 
     "skip": "Omitir",
     "newJob": "Nuevo",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "continueStr": "Continuar",
+    "done": "Hecho",
+    "finish": "Finalizar",
 
     "joinNow": "Únete ya!",
     
@@ -243,6 +257,8 @@
 
     "additionalInformation": "Información Adicional",
     "editBasicInformation": "Editar Información Básica",
+    "edit": "Editar",
+    "tapToSelectAndUploadAFile": "Click aquí para seleccionar y subir un archivo",
 
     "youHaveNotUploadedAPDFResume": "No has subido ningún CV en PDF",
     "clickHereToViewYourPDFResume": "Haz click aqui para ver tu CV en PDF",
@@ -274,9 +290,44 @@
 
     "orders": "Pedidos",
     "myOrders": "Mis Pedidos",
+    "orderStatus": "Status del Pedido",
 
     "youDoNotHaveAnyOrder": "No tienes ningún pedido",
 
+"personalInformation": "Información Personal",
+    "uploadProfilePhoto": "Subir Foto de Perfil",
+    "certification": "Certificación",
+    "certifications": "Certificaciones",
+    "upload": "Subir",
+    "view": "Ver",
+    "selectSkills": "Seleccionar Habilidades",
+    "workExperience": "Experiencia Laboral",
+    "jobTitle": "Nombre del Puesto de Trabajo",
+    "jobDescription": "Descripción del Trabajo",
+    "selectStartDate": "Seleccionar Fecha de Inicio",
+    "selectEndDate": "Seleccionar Fecha de Finalización",
+    "startDate": "Fecha de Inicio",
+    "endDate": "Fecha de Finalización",
+    "areYouCurrentlyWorkingHere": "¿Actualmente trabajas aquí?",
+    "addMoreWorkExperience": "Agregar más experiencia laboral",
+    "addAnotherWorkExperience": "Agregar otra experiencia laboral",
+    "addWorkExperience": "Agregar experiencia laboral",
+    "personalReference": "Referencia Personal",
+    "personalReferences": "Referencias Personales",
+    "addPersonalReference": "Agregar referencia personal",
+    "addAnotherPersonalReference": "Agregar otra referencia personal",
+    "addMorePersonalReferences": "Agregar mas referencias personales",
+    "relationship": "Relación",
+    "uploadYourResume": "Sube tu Currículum",
+    "addMoreCertifications": "Agregar mas certificaciones",
+
+    "areYouSureYouWantToLogOut": "¿Estas seguro de que quieres cerrar sesión?",
+    "areYouSureYouWantToDeleteYourAccount": "¿Estas seguro de que quieres eliminar tu cuenta? Tu cuenta se eliminará de manera permanente.",
+    "cancel": "Cancelar",
+    "yes": "Si",
+    "deleteMyAccount": "Eliminar mi cuenta",
+    "delete": "Eliminar",
+    
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",
     "workers": "Trabajadores",

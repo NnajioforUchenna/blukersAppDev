@@ -6,6 +6,8 @@ import '../../../providers/worker_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'reference_form.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ReferencePage extends StatefulWidget {
   ReferencePage({Key? key}) : super(key: key);
 
@@ -51,7 +53,7 @@ class _ReferencePageState extends State<ReferencePage> {
           children: [
             ...referenceForms,
             Tooltip(
-              message: "Add more References",
+              message: AppLocalizations.of(context)!.addMorePersonalReferences,
               child: InkWell(
                 onTap: () {
                   wp.addReference();
@@ -66,8 +68,8 @@ class _ReferencePageState extends State<ReferencePage> {
                       },
                     ),
                     const SizedBox(width: 10),
-                    const Text(
-                      "Add more References",
+                    Text(
+                      AppLocalizations.of(context)!.addMorePersonalReferences,
                     )
                   ],
                 ),
@@ -87,7 +89,7 @@ class _ReferencePageState extends State<ReferencePage> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           ThemeColors.secondaryThemeColor),
                     ),
-                    child: const Text("Previous"),
+                    child: Text(AppLocalizations.of(context)!.previous),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -97,7 +99,7 @@ class _ReferencePageState extends State<ReferencePage> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           ThemeColors.secondaryThemeColor),
                     ),
-                    child: const Text("Next"),
+                    child: Text(AppLocalizations.of(context)!.next),
                   ),
                 ],
               ),

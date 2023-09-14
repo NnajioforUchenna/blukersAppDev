@@ -35,7 +35,7 @@ class LandingPage extends StatelessWidget {
                 AppLocalizations.of(context)!.dreamBuildConnect,
                 textAlign: TextAlign.center,
                 style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
-                    .copyWith(fontSize: 16.sp), // Responsive font size
+                    .copyWith(fontSize: 18.sp), // Responsive font size
               ),
             ),
             const SizedBox(height: 25),

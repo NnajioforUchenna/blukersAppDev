@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/worker_provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class YourProfilePhoto extends StatelessWidget {
   const YourProfilePhoto({
     Key? key,
@@ -35,10 +37,11 @@ class YourProfilePhoto extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: logoUrl == null || logoUrl.isEmpty
-                        ? const Center(
+                        ? Center(
                             child: Text(
-                              'Tap to select a logo',
-                              style: TextStyle(
+                              AppLocalizations.of(context)!
+                                  .tapToSelectAndUploadAFile,
+                              style: const TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold,
                               ),

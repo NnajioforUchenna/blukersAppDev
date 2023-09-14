@@ -12,6 +12,8 @@ import '../views/company/workers.dart';
 import '../views/offers/offers_list.dart';
 import '../views/worker/jobs.dart';
 import '../views/worker/web_jobs_landing_page/web_search_landing_page.dart';
+import 'package:blukers/views/common_views/splash_screen/splash_screen_main.dart';
+import 'package:blukers/views/common_views/landing_page_components/landing_page.dart';
 
 class AuthenticationWrapper extends StatefulWidget {
   const AuthenticationWrapper({super.key});
@@ -61,7 +63,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
           ? const Workers() //Workers()
           : const Jobs(); //Jobs(); //Jobs();
     } else {
-      return const OffersList(); // SplashScreen(); // SplashScreen(); //LandingPage() SplashScreen()
+      return SplashScreen(); // SplashScreen(); // SplashScreen(); //LandingPage() SplashScreen()
     }
   }
 }

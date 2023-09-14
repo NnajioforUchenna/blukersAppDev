@@ -5,14 +5,14 @@ import 'mobile_membership_card.dart';
 // Color(0xffF29500)
 
 const List<MobileMembershipCard> memberShipCards = [
-  MobileMembershipCard(
-    headerTitle: 'Premium',
-    headerSubtitle: '',
-    bodyTitle: '10 Jobs Daily',
-    bodySubtitle: 'Apply to',
-    color: Color(0xffF16523),
-    isNormalArrangement: false,
-  ),
+  // MobileMembershipCard(
+  //   headerTitle: 'Premium',
+  //   headerSubtitle: '',
+  //   bodyTitle: '10 Jobs Daily',
+  //   bodySubtitle: 'Apply to',
+  //   color: Color(0xffF16523),
+  //   isNormalArrangement: false,
+  // ),
   MobileMembershipCard(
     headerTitle: 'Premium',
     headerSubtitle: '',
@@ -29,14 +29,14 @@ const List<MobileMembershipCard> memberShipCards = [
     color: Color(0xffF16523),
     isNormalArrangement: true,
   ),
-  MobileMembershipCard(
-    headerTitle: 'Premium',
-    headerSubtitle: 'Plus',
-    bodyTitle: 'Get Employment verified',
-    bodySubtitle: '',
-    color: Color(0xff1a75bb),
-    isNormalArrangement: true,
-  ),
+  // MobileMembershipCard(
+  //   headerTitle: 'Premium',
+  //   headerSubtitle: 'Plus',
+  //   bodyTitle: 'Get Employment verified',
+  //   bodySubtitle: '',
+  //   color: Color(0xff1a75bb),
+  //   isNormalArrangement: true,
+  // ),
 ];
 
 const List<MobileMembershipCard> backMemberShipCards = [

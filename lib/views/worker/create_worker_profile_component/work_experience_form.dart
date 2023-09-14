@@ -6,6 +6,8 @@ import '../../auth/common_widget/auth_input.dart';
 import 'work_experience_date.dart';
 import 'work_experience_location_form.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WorkExperienceForm extends StatefulWidget {
   final int index;
   WorkExperienceForm({Key? key, required this.index}) : super(key: key);
@@ -57,7 +59,8 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
           children: <Widget>[
             const SizedBox(height: 20),
             Text(
-              "Work Experience ${widget.index + 1}",
+              AppLocalizations.of(context)!.workExperience +
+                  " #${widget.index + 1}",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.deepOrangeAccent,
@@ -73,12 +76,14 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
                 controller: _companyNameController,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => node.nextFocus(),
-                validator: (value) => value!.isEmpty ? "Required" : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context)!.required
+                    : null,
                 onChanged: (value) {
                   wp.workExperience[widget.index]['companyName'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: "Company Name",
+                  hintText: AppLocalizations.of(context)!.companyName,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
@@ -97,12 +102,14 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
                 controller: _jobTitleController,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => node.nextFocus(),
-                validator: (value) => value!.isEmpty ? "Required" : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context)!.required
+                    : null,
                 onChanged: (value) {
                   wp.workExperience[widget.index]['jobTitle'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: "Job Title",
+                  hintText: AppLocalizations.of(context)!.jobTitle,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
@@ -122,12 +129,14 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
                 controller: _jobDescriptionController,
                 textInputAction: TextInputAction.newline,
                 onEditingComplete: () => node.nextFocus(),
-                validator: (value) => value!.isEmpty ? "Required" : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context)!.required
+                    : null,
                 onChanged: (value) {
                   wp.workExperience[widget.index]['jobDescription'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: "Job Description",
+                  hintText: AppLocalizations.of(context)!.jobDescription,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(

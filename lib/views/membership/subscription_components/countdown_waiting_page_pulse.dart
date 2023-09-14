@@ -25,7 +25,8 @@ class _CountDownState extends State<CountDown> {
     return Center(
       child: LoadingAnimation(
         // text: widget.platform,
-        text: AppLocalizations.of(context)!.connecting + '...',
+        // text: AppLocalizations.of(context)!.connecting + '...',
+        text: '',
       ),
     );
   }

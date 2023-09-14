@@ -22,7 +22,7 @@ class LabelButton extends StatelessWidget {
               title,
               style: const TextStyle(
                 color: Color(0xFF8A8A8E),
-                fontSize: 13,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -33,7 +33,7 @@ class LabelButton extends StatelessWidget {
               subTitle,
               style: const TextStyle(
                 color: Colors.deepOrangeAccent,
-                fontSize: 13,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
             ),
