@@ -85,11 +85,14 @@ class _ListViewJobsState extends State<ListViewJobs> {
 
   @override
   void initState() {
-    controller.addListener(() {
+    controller.addListener(() async {
       if (controller.position.pixels == controller.position.maxScrollExtent) {
         JobPostsProvider jp =
             Provider.of<JobPostsProvider>(context, listen: false);
-        jp.loadMoreJobPosts();
+        Map<String, JobPost> newJobs = await jp.loadMoreJobPosts();
+        setState(() {
+          widget.jobPosts.addAll(newJobs.values.toList());
+        });
       }
     });
     super.initState();

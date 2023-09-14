@@ -46,7 +46,6 @@ class LoginOrRegister extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           // Navigate to login page or perform login action here
-                          print('Login clicked');
                           context.go('/login');
                         }),
                   TextSpan(text: ' ' + AppLocalizations.of(context)!.or + ' '),
@@ -57,7 +56,6 @@ class LoginOrRegister extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           // Navigate to register page or perform register action here
-                          print('Register clicked');
                           context.go('/register');
                         }),
                   const TextSpan(text: '\n'),

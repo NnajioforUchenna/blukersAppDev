@@ -20,6 +20,7 @@ import '../data_providers/data_constants.dart';
 import '../models/payment_model/transaction_record.dart';
 import '../services/platform_check.dart';
 import '../views/common_views/please_login_dialog.dart';
+import '../views/membership/mobile_view/manageSubscriptionComponents/already_premium_plus_dialog.dart';
 import '../views/membership/subscription_components/countdown_waiting_page_pulse.dart';
 import '../views/membership/subscription_components/payment_failed_widget.dart';
 import '../views/membership/subscription_components/payment_successful_widget.dart';
@@ -200,5 +201,15 @@ class PaymentsProvider with ChangeNotifier {
     tr.save();
 
     return tr.transactionId;
+  }
+
+  Future<void> upgradeSubscription(context) async {
+    if (appUser?.activeSubscription?.subscriptionId ==
+        'blukers_workers_premium_plus') {
+      showDialog(
+          context: context, builder: (context) => const AlreadyPremiumPlus());
+    } else {
+      pay4Subscription(context, 'premium_plus');
+    }
   }
 }

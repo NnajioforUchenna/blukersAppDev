@@ -1,11 +1,14 @@
+import 'package:blukers/providers/payments_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class UpgradeSubscriptionCard extends StatelessWidget {
   const UpgradeSubscriptionCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
     return Card(
       elevation: 8,
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
@@ -46,6 +49,7 @@ class UpgradeSubscriptionCard extends StatelessWidget {
               ),
               onPressed: () {
                 // TODO: Add action for upgrade
+                pp.upgradeSubscription(context);
               },
               child: Text(
                 'UPGRADE NOW',

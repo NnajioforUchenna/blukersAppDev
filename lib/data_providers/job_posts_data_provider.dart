@@ -203,7 +203,7 @@ class JobPostsDataProvider {
 
   static Future<List<Map<String, dynamic>>> getRecentJobPosts2() async {
     // Create a reference to the Firestore collection
-    CollectionReference jobPosts = db.collection("jobPosts");
+    CollectionReference jobPosts = db.collection("ScrappedJobs");
 
     // Query the collection: Order by dateCreated descending and limit to 50
     QuerySnapshot querySnapshot =

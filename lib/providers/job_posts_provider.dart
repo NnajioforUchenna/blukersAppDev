@@ -309,21 +309,22 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void loadMoreJobPosts() {
+  Future<Map<String, JobPost>> loadMoreJobPosts() async {
     // Get the 50 most recent job posts.
-    JobPostsDataProvider.getRecentJobPosts2().then((jobPosts) {
+    Map<String, JobPost> newJobs = {};
+    await JobPostsDataProvider.getRecentJobPosts2().then((jobPosts) {
       for (var jobPost in jobPosts) {
         if (jobPost['id'] != null) {
           print('jobPost: ${jobPost['id']}');
           JobPost? parsedJobPost = JobPost.fromMap(jobPost);
           if (parsedJobPost != null) {
-            recent50Jobs[jobPost['id']] = parsedJobPost;
+            print('I got a healthy JobPOSt');
+            newJobs[jobPost['id']] = parsedJobPost;
           }
         }
       }
-
-      notifyListeners();
     });
+    return newJobs;
   }
 
 // Future<List<JobPost>> getSavedJobPostIds(String uid) {
