@@ -16,7 +16,7 @@ extension StripePaymentProvider on PaymentsProvider {
     // prod: Zh9frPRhBEPlSnlxdJyI
     var ds = await firestore
         .collection('stripe_data')
-        .doc('Zh9frPRhBEPlSnlxdJyI')
+        .doc('1t9JfNnPqitkZFHkTL8x')
         .get();
 
     return StripeData(
