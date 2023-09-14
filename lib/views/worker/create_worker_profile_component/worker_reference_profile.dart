@@ -6,6 +6,7 @@ import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/reference_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WorkerReferenceProfile extends StatelessWidget {
   const WorkerReferenceProfile({super.key});
@@ -66,7 +67,7 @@ class WorkerReferenceProfile extends StatelessWidget {
                   color: ThemeColors.primaryThemeColor,
                   borderRadius: BorderRadius.circular(15)),
               child: Text(
-                "Update",
+                AppLocalizations.of(context)!.update,
                 style: ThemeTextStyles
                     .informationDisplayPlaceHolderThemeTextStyle
                     .apply(color: Colors.white),

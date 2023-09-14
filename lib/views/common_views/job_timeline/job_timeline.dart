@@ -7,6 +7,8 @@ import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'my_job_timeline.dart';
 
+import 'package:go_router/go_router.dart';
+
 class JobTimeline extends StatelessWidget {
   const JobTimeline({Key? key}) : super(key: key);
 
@@ -79,6 +81,9 @@ class JobTimeline extends StatelessWidget {
               currentStep,
               AppLocalizations.of(context)!.register,
               context,
+              () {
+                context.go('/register');
+              },
             ),
           if (currentStep == 1)
             buildButton(
@@ -86,6 +91,9 @@ class JobTimeline extends StatelessWidget {
               currentStep,
               AppLocalizations.of(context)!.createYourProfile,
               context,
+              () {
+                context.go('/createWorkerProfile');
+              },
             ),
           const SizedBox(height: 20),
         ],
@@ -118,7 +126,8 @@ final jobRecords = [
   },
 ];
 
-Widget buildButton(double width, int currentStep, String text, context) {
+Widget buildButton(
+    double width, int currentStep, String text, context, onClick) {
   return Center(
     child: Container(
       width: width < 600 ? 250 : 400, // 300 on mobile, 500 on web or tablet
@@ -138,11 +147,12 @@ Widget buildButton(double width, int currentStep, String text, context) {
           // } else if (text == "Create Your Profile") {
           //   context.go( '/createWorkerProfile');
           // }
-          if (currentStep == 0) {
-            context.go('/register');
-          } else if (currentStep == 1) {
-            context.go('/createWorkerProfile');
-          }
+          onClick();
+          // if (currentStep == 0) {
+          //   context.go('/register');
+          // } else if (currentStep == 1) {
+          //   context.go('/createWorkerProfile');
+          // }
         }, // Add the functionality here
         child: Center(
           // Center the text inside the button

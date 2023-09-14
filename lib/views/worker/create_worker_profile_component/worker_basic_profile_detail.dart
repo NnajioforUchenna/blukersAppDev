@@ -2,6 +2,8 @@ import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/common_views/info_display_component.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WorkerBasicProfileDetail extends StatelessWidget {
   const WorkerBasicProfileDetail(
       {super.key,
@@ -19,7 +21,7 @@ class WorkerBasicProfileDetail extends StatelessWidget {
     return Column(
       children: [
         // Text(
-        //   "Basic Information",
+        //   AppLocalizations.of(context)!.basicInformation,
         //   style:
         //       ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
         // ),
@@ -27,19 +29,19 @@ class WorkerBasicProfileDetail extends StatelessWidget {
         //   height: 20,
         // ),
         InfoDisplayComponent(
-          placeHolder: "First Name",
+          placeHolder: AppLocalizations.of(context)!.firstName,
           value: firstName,
         ),
         InfoDisplayComponent(
-          placeHolder: "Middle Name",
+          placeHolder: AppLocalizations.of(context)!.middleName,
           value: middleName,
         ),
         InfoDisplayComponent(
-          placeHolder: "last Name",
+          placeHolder: AppLocalizations.of(context)!.lastName,
           value: lastName,
         ),
         InfoDisplayComponent(
-          placeHolder: "Description",
+          placeHolder: AppLocalizations.of(context)!.description,
           value: description,
         ),
       ],

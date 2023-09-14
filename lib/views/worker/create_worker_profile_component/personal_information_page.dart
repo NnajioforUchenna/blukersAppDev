@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../services/responsive.dart';
 import '../../auth/common_widget/auth_input.dart';
 
-// Import other necessary packages here if required.
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PersonalInformationPage extends StatefulWidget {
   PersonalInformationPage({Key? key}) : super(key: key);
@@ -33,6 +33,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
         birthMonthController.text.isNotEmpty &&
         birthYearController.text.isNotEmpty;
   }
+
   ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
@@ -83,10 +84,10 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
-                      "Personal Information",
+                    Text(
+                      AppLocalizations.of(context)!.personalInformation,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
@@ -99,10 +100,11 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         controller: firstNameController,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) =>
-                            value!.isEmpty ? "Required" : null,
+                        validator: (value) => value!.isEmpty
+                            ? AppLocalizations.of(context)!.required
+                            : null,
                         decoration: InputDecoration(
-                          hintText: "First Name",
+                          hintText: AppLocalizations.of(context)!.firstName,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -121,10 +123,11 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         controller: middleNameController,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) =>
-                            value!.isEmpty ? "Required" : null,
+                        validator: (value) => value!.isEmpty
+                            ? AppLocalizations.of(context)!.required
+                            : null,
                         decoration: InputDecoration(
-                          hintText: "Middle Name",
+                          hintText: AppLocalizations.of(context)!.middleName,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -143,10 +146,11 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         controller: lastNameController,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) =>
-                            value!.isEmpty ? "Required" : null,
+                        validator: (value) => value!.isEmpty
+                            ? AppLocalizations.of(context)!.required
+                            : null,
                         decoration: InputDecoration(
-                          hintText: "Last Name",
+                          hintText: AppLocalizations.of(context)!.lastName,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -162,10 +166,10 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                     SizedBox(height: height * 0.05),
                     // Add birthdate inputs (Day, Month, Year)
                     // You can adjust these fields based on your design preferences.
-                    const Text(
-                      "Birthdate",
+                    Text(
+                      AppLocalizations.of(context)!.birthdate,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
@@ -183,7 +187,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               onEditingComplete: () => node.nextFocus(),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return "Required";
+                                  return AppLocalizations.of(context)!.required;
                                 }
                                 final int? day = int.tryParse(value);
                                 if (day == null || day < 1 || day > 31) {
@@ -192,7 +196,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                hintText: "Day",
+                                hintText: AppLocalizations.of(context)!.day,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: const BorderSide(
@@ -216,7 +220,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               onEditingComplete: () => node.nextFocus(),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return "Required";
+                                  return AppLocalizations.of(context)!.required;
                                 }
                                 final int? month = int.tryParse(value);
                                 if (month == null || month < 1 || month > 12) {
@@ -225,7 +229,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                hintText: "Month",
+                                hintText: AppLocalizations.of(context)!.month,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: const BorderSide(
@@ -249,7 +253,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               onEditingComplete: () => node.nextFocus(),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return "Required";
+                                  return AppLocalizations.of(context)!.required;
                                 }
                                 final int currentYear = DateTime.now().year;
                                 final int? year = int.tryParse(value);
@@ -261,7 +265,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                hintText: "Year",
+                                hintText: AppLocalizations.of(context)!.year,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: const BorderSide(
@@ -287,7 +291,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                           onPressed: () {
                             wp.workerProfileBackPage();
                           },
-                          child: Text("Previous"),
+                          child: Text(AppLocalizations.of(context)!.previous),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ThemeColors.secondaryThemeColor),
@@ -315,7 +319,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ThemeColors.secondaryThemeColor),
                           ),
-                          child: const Text("Next"),
+                          child: Text(AppLocalizations.of(context)!.next),
                         ),
                       ],
                     ),

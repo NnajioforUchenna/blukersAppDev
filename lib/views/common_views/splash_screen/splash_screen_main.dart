@@ -6,6 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../landing_page_components/landing_page.dart';
 import 'splash_screen_page.dart';
 
+import 'package:go_router/go_router.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -29,8 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
         _pageController.nextPage(
             duration: const Duration(milliseconds: 300), curve: Curves.ease);
       } else {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const LandingPage()));
+        context.go('/landing');
         _timer?.cancel();
       }
     });

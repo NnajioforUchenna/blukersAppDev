@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../auth/common_widget/auth_input.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WorkExperienceLocationForm extends StatefulWidget {
   final int intialIndex;
   const WorkExperienceLocationForm({Key? key, required this.intialIndex})
@@ -53,12 +55,14 @@ class _WorkExperienceLocationFormState
               controller: cityController,
               textInputAction: TextInputAction.next,
               onEditingComplete: () => node.nextFocus(),
-              validator: (value) => value!.isEmpty ? "Required" : null,
+              validator: (value) => value!.isEmpty
+                  ? AppLocalizations.of(context)!.required
+                  : null,
               onChanged: (value) {
                 wp.workExperience[widget.intialIndex]['city'] = value;
               },
               decoration: InputDecoration(
-                hintText: "City",
+                hintText: AppLocalizations.of(context)!.city,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: const BorderSide(
@@ -80,12 +84,14 @@ class _WorkExperienceLocationFormState
               controller: stateController,
               textInputAction: TextInputAction.next,
               onEditingComplete: () => node.nextFocus(),
-              validator: (value) => value!.isEmpty ? "Required" : null,
+              validator: (value) => value!.isEmpty
+                  ? AppLocalizations.of(context)!.required
+                  : null,
               onChanged: (value) {
                 wp.workExperience[widget.intialIndex]['state'] = value;
               },
               decoration: InputDecoration(
-                hintText: "State",
+                hintText: AppLocalizations.of(context)!.state,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: const BorderSide(
@@ -107,12 +113,14 @@ class _WorkExperienceLocationFormState
               controller: countryController,
               textInputAction: TextInputAction.done,
               onEditingComplete: () => node.unfocus(),
-              validator: (value) => value!.isEmpty ? "Required" : null,
+              validator: (value) => value!.isEmpty
+                  ? AppLocalizations.of(context)!.required
+                  : null,
               onChanged: (value) {
                 wp.workExperience[widget.intialIndex]['country'] = value;
               },
               decoration: InputDecoration(
-                hintText: "Country",
+                hintText: AppLocalizations.of(context)!.country,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: const BorderSide(

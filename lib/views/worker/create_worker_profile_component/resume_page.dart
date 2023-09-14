@@ -7,6 +7,8 @@ import '../../../utils/styles/theme_colors.dart';
 import '../../auth/common_widget/auth_input.dart';
 import 'your_resume.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ResumePage extends StatelessWidget {
   const ResumePage({Key? key}) : super(key: key);
 
@@ -22,10 +24,10 @@ class ResumePage extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            const Text(
-              "Upload Profile Your Resume",
+            Text(
+              AppLocalizations.of(context)!.uploadYourResume,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.deepOrangeAccent,
                 fontSize: 25,
                 fontWeight: FontWeight.w600,
@@ -39,7 +41,9 @@ class ResumePage extends StatelessWidget {
               child: TextFormField(
                 controller: linkedInUrlController,
                 textInputAction: TextInputAction.done,
-                validator: (value) => value!.isEmpty ? "Required" : null,
+                validator: (value) => value!.isEmpty
+                    ? AppLocalizations.of(context)!.required
+                    : null,
                 decoration: InputDecoration(
                   hintText: "LinkedIn URL",
                   border: OutlineInputBorder(
@@ -68,7 +72,7 @@ class ResumePage extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           ThemeColors.secondaryThemeColor),
                     ),
-                    child: const Text("Previous"),
+                    child: Text(AppLocalizations.of(context)!.previous),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -80,12 +84,12 @@ class ResumePage extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           ThemeColors.secondaryThemeColor),
                     ),
-                    child: const Text("Next"),
+                    child: Text(AppLocalizations.of(context)!.next),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 50)
+            const SizedBox(height: 50)
           ],
         ),
       ),

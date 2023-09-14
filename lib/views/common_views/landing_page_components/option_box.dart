@@ -94,7 +94,7 @@ class _OptionBoxState extends State<OptionBox> {
                     widget.thirdLine,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.7),
-                      fontSize: 7.sp,
+                      fontSize: 10.sp,
                     ),
                   ),
                 ),

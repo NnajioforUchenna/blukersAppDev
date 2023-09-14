@@ -43,7 +43,7 @@
               "client_id": "25989559034-04q0n9so1pot5u4s25i3naj3qldptv40.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.terralabor.blukers.RunnerTests"
+                "bundle_id": "com.example.blukers.RunnerTests"
               }
             }
           ]
@@ -53,6 +53,42 @@
     {
       "client_info": {
         "mobilesdk_app_id": "1:25989559034:android:9aecae48d1e0513364cf43",
+        "android_client_info": {
+          "package_name": "com.example.blukers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25989559034-jit1skch7hpli0in2r8lcn2tdvjhjeks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZnBA1yI928GjU892Q0_z3IrisrPB00CM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25989559034-jit1skch7hpli0in2r8lcn2tdvjhjeks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "25989559034-04q0n9so1pot5u4s25i3naj3qldptv40.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blukers.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25989559034:android:9d0ff9f7910a037664cf43",
         "android_client_info": {
           "package_name": "com.terralabor.blukers"
         }
@@ -79,7 +115,7 @@
               "client_id": "25989559034-04q0n9so1pot5u4s25i3naj3qldptv40.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.terralabor.blukers.RunnerTests"
+                "bundle_id": "com.example.blukers.RunnerTests"
               }
             }
           ]

@@ -1,6 +1,9 @@
 // import 'dart:io';
-import 'package:blukers/providers/app_versions_provider.dart';
+import 'package:blukers/views/company/workers_components/confirmation_dialog.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:blukers/providers/chat_provider.dart';
+import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';
@@ -14,14 +17,16 @@ import 'package:blukers/views/company/profile_components/user_basic_profile_deta
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
+import 'package:blukers/views/common_views/components/confirmation_dialog.dart';
 
 import '../../providers/user_provider.dart';
 import '../auth/common_widget/login_or_register.dart';
 import '../common_views/page_template/page_template.dart';
 import '../common_views/select_industry_components/industry_jobs_dropdown.dart';
+
+import 'package:go_router/go_router.dart';
 
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
@@ -481,7 +486,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser!.worker != null) {
-                        context.go("/onlineResumeScreen");
+                        // Navigator.pushNamed(context, "/onlineResumeScreen");
+                        context.push('/onlineResumeScreen');
                       }
                     },
                   ),
@@ -494,7 +500,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
                       if (up.appUser!.worker != null) {
-                        context.go("/payment");
+                        // Navigator.pushNamed(context, "/payment");
+                        context.push('/payment');
                       }
                     },
                   ),
@@ -506,7 +513,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     showInfoInNewPage: true,
                     onClickSection: () {
                       if (up.appUser!.worker != null) {
-                        context.go("/orders");
+                        // Navigator.pushNamed(context, "/orders");
+                        context.push('/orders');
                       }
                     },
                   ),
@@ -517,62 +525,69 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     icon: UniconsLine.trash_alt,
                     showInfoInNewPage: true,
                     onClickSection: () {
-                      print("Section clicked/ Edit Clicked");
+                      // print("Section clicked/ Edit Clicked");
                       if (up.appUser != null) {
-                        print("delete user");
-
-                        chatProvider.clearGroups();
-                        up.deleteUser(up.appUser!.uid);
-
-                        showDialog(
+                        // print("delete user");
+                        // chatProvider.clearGroups();
+                        // up.deleteUser(up.appUser!.uid);
+                        confirmationDialog(
                           context: context,
-                          builder: (context) => ProfileDialog(
-                              child: Column(
-                            children: [
-                              Text(
-                                "Are you sure you want to delete your account?",
-                                style:
-                                    ThemeTextStyles.headingThemeTextStyle.apply(
-                                  color: ThemeColors.blukersOrangeThemeColor,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 25,
-                              ),
-                              const Text(
-                                "All your account information will be deleted, this action cannot be undone.",
-                                style: ThemeTextStyles.bodyThemeTextStyle,
-                              ),
-                              const SizedBox(
-                                height: 35,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () async {
-                                      Navigator.of(context).pop();
-                                      up.deleteUser(up.appUser!.uid);
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.all(16),
-                                      decoration: BoxDecoration(
-                                          color: ThemeColors.primaryThemeColor,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: Text(
-                                        "Delete",
-                                        style: ThemeTextStyles
-                                            .informationDisplayPlaceHolderThemeTextStyle
-                                            .apply(color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )),
+                          stringsTemplate: 'deleteAccount',
+                          onConfirm: () async {
+                            // Navigator.of(context).pushReplacementNamed('/');
+                            await up.deleteUser(up.appUser!.uid);
+                            Navigator.of(context).pushReplacementNamed('/');
+                          },
                         );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (context) => ProfileDialog(
+                        //       child: Column(
+                        //     children: [
+                        //       Text(
+                        //         "Are you sure you want to delete your account?",
+                        //         style:
+                        //             ThemeTextStyles.headingThemeTextStyle.apply(
+                        //           color: ThemeColors.blukersOrangeThemeColor,
+                        //         ),
+                        //       ),
+                        //       const SizedBox(
+                        //         height: 25,
+                        //       ),
+                        //       const Text(
+                        //         "All your account information will be deleted, this action cannot be undone.",
+                        //         style: ThemeTextStyles.bodyThemeTextStyle,
+                        //       ),
+                        //       const SizedBox(
+                        //         height: 35,
+                        //       ),
+                        //       Row(
+                        //         mainAxisAlignment: MainAxisAlignment.end,
+                        //         children: [
+                        //           GestureDetector(
+                        //             onTap: () async {
+                        //               Navigator.of(context).pop();
+                        //               up.deleteUser(up.appUser!.uid);
+                        //             },
+                        //             child: Container(
+                        //               padding: EdgeInsets.all(16),
+                        //               decoration: BoxDecoration(
+                        //                   color: ThemeColors.primaryThemeColor,
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(20)),
+                        //               child: Text(
+                        //                 "Delete",
+                        //                 style: ThemeTextStyles
+                        //                     .informationDisplayPlaceHolderThemeTextStyle
+                        //                     .apply(color: Colors.white),
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ],
+                        //   )),
+                        // );
                       }
                     },
                   ),
@@ -582,13 +597,22 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          chatProvider.clearGroups();
-                          await up.signOut();
-                          Navigator.of(context)
-                              .pushNamedAndRemoveUntil("/", (route) => false);
+                          confirmationDialog(
+                            context: context,
+                            stringsTemplate: 'logout',
+                            onConfirm: () async {
+                              chatProvider.clearGroups();
+                              await up.signOut();
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                "/",
+                                (route) => false,
+                              );
+                            },
+                          );
                         },
                         child: Container(
                           // margin: const EdgeInsets.all(12),
+                          constraints: const BoxConstraints(maxWidth: 350),
                           padding: const EdgeInsets.symmetric(
                             vertical: 8,
                             horizontal: 24,

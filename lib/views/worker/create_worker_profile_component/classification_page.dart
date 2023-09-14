@@ -169,7 +169,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         isSelected ? Colors.deepOrangeAccent : Colors.grey),
                   ),
-                  child: const Text("Next"),
+                  child: Text(AppLocalizations.of(context)!.next),
                 ),
               ],
             ),

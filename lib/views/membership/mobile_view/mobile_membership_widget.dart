@@ -64,14 +64,14 @@ class _MobileMembershipWidgetState extends State<MobileMembershipWidget> {
                     flex: 3,
                     child: Text('Apply to Unlimited Jobs',
                         style: GoogleFonts.montserrat(
-                            fontSize: 23.sp,
+                            fontSize: 22.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)),
                   ),
-                  const Expanded(
-                    flex: 2,
-                    child: SizedBox(),
-                  )
+                  // const Expanded(
+                  //   flex: 2,
+                  //   child: SizedBox(),
+                  // )
                 ],
               ),
               const SizedBox(
@@ -81,7 +81,7 @@ class _MobileMembershipWidgetState extends State<MobileMembershipWidget> {
                 'Apply without any restrictions',
                 textAlign: TextAlign.start,
                 style: GoogleFonts.montserrat(
-                    fontSize: 11.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey),
               ),
