@@ -12,9 +12,9 @@ class PaymentSuccessfulWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.green.withOpacity(0.2),
-              spreadRadius: 5,
-              blurRadius: 7,
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2.5,
+              blurRadius: 3.5,
               offset: const Offset(0, 3),
             ),
           ],
@@ -52,8 +52,20 @@ class PaymentSuccessfulWidget extends StatelessWidget {
                 // Navigate to Jobs page
                 context.go('/jobs');
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-              child: const Text('Continue'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: const Text(
+                'Continue',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ],
         ),

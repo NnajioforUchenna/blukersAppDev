@@ -481,7 +481,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.onlineResume,
                     menuIcon: UniconsLine.cloud_bookmark,
-                    icon: UniconsLine.arrow_right,
+                    icon: UniconsLine.angle_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
@@ -495,7 +495,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.subscriptions,
                     menuIcon: UniconsLine.user_plus,
-                    icon: UniconsLine.arrow_right,
+                    icon: UniconsLine.angle_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
                       print("Section clicked/ Edit Clicked");
@@ -509,7 +509,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.orders,
                     menuIcon: UniconsLine.receipt_alt,
-                    icon: UniconsLine.arrow_right,
+                    icon: UniconsLine.angle_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
                       if (up.appUser!.worker != null) {

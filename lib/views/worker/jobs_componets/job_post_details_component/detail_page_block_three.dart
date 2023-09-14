@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
 
+import 'package:blukers/views/common_views/components/shaped_icon.dart';
+import 'package:unicons/unicons.dart';
+
 class DetailPageBlockThree extends StatelessWidget {
   final JobPost jobPost;
 
@@ -23,43 +26,104 @@ class DetailPageBlockThree extends StatelessWidget {
                   fontSize: 17,
                   fontWeight: FontWeight.bold)), // Responsive font size
           SizedBox(height: 15.h), // Responsive height
-          RichText(
-            text: TextSpan(
-              style: TextStyle(fontSize: 14, color: Colors.black),
-              children: [
-                TextSpan(
-                    text: "${AppLocalizations.of(context)!.schedule}: ",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
-                TextSpan(text: "${jobPost.schedule}"),
-              ],
-            ),
+          Row(
+            children: [
+              const ShapedIcon(icon: UniconsLine.clock),
+              SizedBox(width: 1.h),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                  ),
+                  children: [
+                    TextSpan(
+                        text: "${AppLocalizations.of(context)!.schedule}: ",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 62, 62, 62),
+                          fontFamily: 'Montserrat',
+                        )),
+                    TextSpan(
+                        text: "${jobPost.schedule}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        )),
+                  ],
+                ),
+              ),
+            ],
           ),
+
           SizedBox(height: 20.h), // Responsive height
-          RichText(
-            text: TextSpan(
-              style: TextStyle(fontSize: 14, color: Colors.black),
-              children: [
-                TextSpan(
-                    text: "${AppLocalizations.of(context)!.jobType}: ",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
-                TextSpan(text: "${getJobType(jobPost.jobType)}"),
-              ],
-            ),
+          Row(
+            children: [
+              const ShapedIcon(icon: UniconsLine.calender),
+              SizedBox(width: 1.h),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                  ),
+                  children: [
+                    TextSpan(
+                        text: "${AppLocalizations.of(context)!.jobType}: ",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 62, 62, 62),
+                          fontFamily: 'Montserrat',
+                        )),
+                    TextSpan(
+                        text: "${getJobType(jobPost.jobType)}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        )),
+                  ],
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 15.h), // Responsive height
-          RichText(
-            text: TextSpan(
-              style: TextStyle(fontSize: 14, color: Colors.black),
-              children: [
-                TextSpan(
-                    text: "${AppLocalizations.of(context)!.payment}:",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
-                TextSpan(
-                    text:
-                        " \$${jobPost.salaryAmount.toString()} ${getSalaryType(jobPost.salaryType)}"),
-              ],
-            ),
+          Row(
+            children: [
+              const ShapedIcon(icon: UniconsLine.money_bill),
+              SizedBox(width: 1.h),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                  ),
+                  children: [
+                    TextSpan(
+                        text: "${AppLocalizations.of(context)!.payment}:",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 62, 62, 62),
+                          fontFamily: 'Montserrat',
+                        )),
+                    TextSpan(
+                        text:
+                            " \$${jobPost.salaryAmount.toString()} ${getSalaryType(jobPost.salaryType)}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        )),
+                  ],
+                ),
+              ),
+            ],
           ),
+
           SizedBox(height: 15.h),
           const Divider(),
         ],

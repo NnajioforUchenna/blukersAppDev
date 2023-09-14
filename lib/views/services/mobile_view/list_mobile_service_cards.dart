@@ -7,7 +7,8 @@ const List<MobileMembershipCard> servicesCards = [
     headerTitle: 'FOIA',
     headerSubtitle: '',
     bodyTitle: 'Get Your FOIA Report',
-    bodySubtitle: 'Know What the Government Knows About You',
+    bodySubtitle:
+        'Know What the Government Knows About You. You will receive your FOIA results by mail.',
     color: Color(0xffF16523),
     isNormalArrangement: true,
   ),
@@ -15,7 +16,8 @@ const List<MobileMembershipCard> servicesCards = [
     headerTitle: 'Employment',
     headerSubtitle: 'Verification',
     bodyTitle: 'Get Employment verified',
-    bodySubtitle: 'Let employers know you are a trusted candidate',
+    bodySubtitle:
+        'We will verify that you are a trusted candidate. You will receive your employment verification certificate by mail.',
     color: Color(0xff1a75bb),
     isNormalArrangement: true,
   ),

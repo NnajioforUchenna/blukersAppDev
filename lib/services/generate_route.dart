@@ -65,10 +65,22 @@ final routes = [
   GoRoute(
       path: '/payment', builder: (context, state) => const MembershipWidget()),
   GoRoute(
+      path: '/paymentFailed',
+      builder: (context, state) {
+        verifyCurrentPath();
+        return PaymentFailedWidget();
+      }),
+  GoRoute(
       path: '/paymentFailed/:sessionId',
       builder: (context, state) {
         verifyCurrentPath();
         return PaymentFailedWidget();
+      }),
+  GoRoute(
+      path: '/paymentSuccess',
+      builder: (context, state) {
+        verifyCurrentPath();
+        return PaymentSuccessfulWidget();
       }),
   GoRoute(
       path: '/paymentSuccess/:sessionId',

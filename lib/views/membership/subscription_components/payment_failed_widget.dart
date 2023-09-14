@@ -13,8 +13,8 @@ class PaymentFailedWidget extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
+              spreadRadius: 2.5,
+              blurRadius: 3.5,
               offset: const Offset(0, 3),
             ),
           ],
@@ -30,7 +30,8 @@ class PaymentFailedWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             const Text(
-              'Payment Failed',
+              'Payment Cancelled or Failed',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
@@ -49,10 +50,23 @@ class PaymentFailedWidget extends StatelessWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                context.go('/membership');
+                // context.go('/membership');
+                context.go('/offers');
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: const Text('Retry Payment'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: const Text(
+                'Continue',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ],
         ),
