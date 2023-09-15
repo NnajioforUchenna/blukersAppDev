@@ -59,6 +59,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
     return Responsive(
       // mobile: _buildMobileSearchBar(),
       mobile: Column(
+        // crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           // AnimatedOpacity(
           //   // If the widget is visible, animate to 0.0 (invisible).
@@ -89,19 +90,24 @@ class _AllSearchBarState extends State<AllSearchBar> {
           // ),
           //
           //
-          FloatingActionButton(
-            onPressed: () {
-              // toggleMobileSearchBarVisible(); // Toggle container visibility when the button is pressed.
+          GestureDetector(
+            onTap: () {
+              toggleMobileSearchBarVisible();
             },
-            child: CircleAvatar(
-              radius: 30,
-              backgroundColor: ThemeColors.blukersOrangeThemeColor,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: ThemeColors.blukersOrangeThemeColor,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0)),
+              ),
               child: IconButton(
                 icon: Icon(
                   isMobileSearchBarVisible
-                      ? Icons.search_off_outlined
+                      ? Icons.arrow_upward_outlined
                       : Icons.search_outlined,
                   color: Colors.white,
+                  size: isMobileSearchBarVisible ? 15 : 30,
                 ),
                 onPressed: () {
                   toggleMobileSearchBarVisible();
@@ -109,6 +115,53 @@ class _AllSearchBarState extends State<AllSearchBar> {
               ),
             ),
           ),
+          //
+          // FloatingActionButton(
+          //   onPressed: () {
+          //     // toggleMobileSearchBarVisible(); // Toggle container visibility when the button is pressed.
+          //   },
+          //   child: Container(
+          //     decoration: const BoxDecoration(
+          //       color: ThemeColors.blukersOrangeThemeColor,
+          //       borderRadius: BorderRadius.only(
+          //           bottomLeft: Radius.circular(30.0),
+          //           bottomRight: Radius.circular(30.0)),
+          //     ),
+          //     child: IconButton(
+          //       icon: Icon(
+          //         isMobileSearchBarVisible
+          //             ? Icons.search_off_outlined
+          //             : Icons.search_outlined,
+          //         color: Colors.white,
+          //       ),
+          //       onPressed: () {
+          //         toggleMobileSearchBarVisible();
+          //       },
+          //     ),
+          //   ),
+          // ),
+          //
+          //
+          // FloatingActionButton(
+          //   onPressed: () {
+          //     // toggleMobileSearchBarVisible(); // Toggle container visibility when the button is pressed.
+          //   },
+          //   child: CircleAvatar(
+          //     radius: 30,
+          //     backgroundColor: ThemeColors.blukersOrangeThemeColor,
+          //     child: IconButton(
+          //       icon: Icon(
+          //         isMobileSearchBarVisible
+          //             ? Icons.search_off_outlined
+          //             : Icons.search_outlined,
+          //         color: Colors.white,
+          //       ),
+          //       onPressed: () {
+          //         toggleMobileSearchBarVisible();
+          //       },
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       desktop: _buildDesktopSearchBar(),
