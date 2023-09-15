@@ -107,7 +107,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
                       ? Icons.arrow_upward_outlined
                       : Icons.search_outlined,
                   color: Colors.white,
-                  size: isMobileSearchBarVisible ? 15 : 30,
+                  size: isMobileSearchBarVisible ? 25 : 30,
                 ),
                 onPressed: () {
                   toggleMobileSearchBarVisible();
