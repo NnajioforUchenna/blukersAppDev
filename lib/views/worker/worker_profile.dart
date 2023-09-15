@@ -447,9 +447,11 @@ class _WorkerProfileState extends State<WorkerProfile> {
                         // File? file = await viewPdf(pdfResumeUrl);
                         //if (file != null) {
                         // Uint8List bytes = await file.readAsBytes();
+                        //
                         Navigator.of(context).pushNamed("/pdfViewScreen",
                             arguments: {"remotePDFpath": pdfResumeUrl});
                         // }
+                        //
                         print('Show PDF File');
                         //  print(file);
                       },

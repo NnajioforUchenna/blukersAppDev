@@ -25,6 +25,14 @@ class _AllSearchBarState extends State<AllSearchBar> {
   late UserProvider up;
   bool _isLoading = false;
 
+  bool isMobileSearchBarVisible = false;
+
+  void toggleMobileSearchBarVisible() {
+    setState(() {
+      isMobileSearchBarVisible = !isMobileSearchBarVisible;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -49,7 +57,60 @@ class _AllSearchBarState extends State<AllSearchBar> {
           AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
     }
     return Responsive(
-      mobile: _buildMobileSearchBar(),
+      // mobile: _buildMobileSearchBar(),
+      mobile: Column(
+        children: [
+          // AnimatedOpacity(
+          //   // If the widget is visible, animate to 0.0 (invisible).
+          //   // If the widget is hidden, animate to 1.0 (fully visible).
+          //   opacity: isMobileSearchBarVisible ? 1.0 : 0.0,
+          //   duration: const Duration(milliseconds: 500),
+          //   // The green box must be a child of the AnimatedOpacity widget.
+          //   child: _buildMobileSearchBar(),
+          // ),
+          //
+          //
+          Visibility(
+            visible: isMobileSearchBarVisible,
+            maintainAnimation: true,
+            maintainState: true,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.fastOutSlowIn,
+              opacity: isMobileSearchBarVisible ? 1 : 0,
+              child: _buildMobileSearchBar(),
+            ),
+          ),
+          //
+          //
+          // Visibility(
+          //   visible: isMobileSearchBarVisible,
+          //   child: _buildMobileSearchBar(),
+          // ),
+          //
+          //
+          FloatingActionButton(
+            onPressed: () {
+              // toggleMobileSearchBarVisible(); // Toggle container visibility when the button is pressed.
+            },
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: ThemeColors.blukersOrangeThemeColor,
+              child: IconButton(
+                icon: Icon(
+                  isMobileSearchBarVisible
+                      ? Icons.search_off_outlined
+                      : Icons.search_outlined,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  toggleMobileSearchBarVisible();
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
       desktop: _buildDesktopSearchBar(),
     );
   }

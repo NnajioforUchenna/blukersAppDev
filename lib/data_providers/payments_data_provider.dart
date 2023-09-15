@@ -19,23 +19,23 @@ final db = FirebaseFirestore.instance;
 class PaymentsDataProvider {
   static Future<String> saveOrder(TransactionRecord pOrder) async {
     // Save document to 'Transactions' collection
-    final ordCol = db.collection(transactionsCollection);
-    DocumentReference documentRef = ordCol.doc();
-    String newDocumentId = documentRef.id;
-    pOrder.documentId = newDocumentId;
-    DocumentReference orderDocRef = ordCol.doc(pOrder.documentId);
+    final transactionsCol = db.collection(transactionsCollection);
+    DocumentReference transactionDocRef = transactionsCol.doc();
+    String newTransactionDocId = transactionDocRef.id;
+    pOrder.documentId = newTransactionDocId;
+    DocumentReference orderDocRef = transactionsCol.doc(pOrder.documentId);
     await orderDocRef.set(pOrder.toMap(), SetOptions(merge: true));
 
     // Save document to 'TransactionsByUID' collection
-    final ordByUIDCol = db.collection(transactionsByUIDCollection);
-    DocumentReference documentByUIDRef = ordByUIDCol.doc();
-    String newDocumentByUIDId = documentByUIDRef.id;
-    pOrder.documentId = newDocumentByUIDId;
-    DocumentReference orderDocByUIDRef = ordByUIDCol.doc(pOrder.userId);
+    final orderByUIDCol = db.collection(transactionsByUIDCollection);
+    // DocumentReference documentByUIDRef = orderByUIDCol.doc();
+    // String newTransactionByUIDDocId = documentByUIDRef.id;
+    // pOrder.documentId = newTransactionByUIDDocId;
+    DocumentReference orderDocByUIDRef = orderByUIDCol.doc(pOrder.userId);
     await orderDocByUIDRef
-        .set({newDocumentByUIDId: pOrder.toMap()}, SetOptions(merge: true));
+        .set({newTransactionDocId: pOrder.toMap()}, SetOptions(merge: true));
 
-    return newDocumentId;
+    return newTransactionDocId;
   }
 
   static updatePlatformDetails(PurchaseDetails purchaseDetails) {
