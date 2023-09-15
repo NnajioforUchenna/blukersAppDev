@@ -56,23 +56,31 @@ class _AllSearchBarState extends State<AllSearchBar> {
 
   Widget _buildMobileSearchBar() {
     return Container(
-      color: ThemeColors.searchBarPrimaryThemeColor,
-      height: MediaQuery.of(context).size.height * 0.35,
+      // color: ThemeColors.searchBarPrimaryThemeColor,
+      height: MediaQuery.of(context).size.height * 0.30,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 8.0.h),
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 6, 76, 173),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30.0),
+          bottomRight: Radius.circular(30.0),
+        ),
+      ),
       child: Center(
         child: SingleChildScrollView(
           // Adding SingleChildScrollView
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildSearchField(_searchController1, searchName,Icons.search),
-              SizedBox(height: 15.h),
+              _buildSearchField(_searchController1, searchName, Icons.search),
+              SizedBox(height: 10.h),
               _buildSearchField(
                   _searchController2,
                   AppLocalizations.of(context)!
-                      .workerSearchBarInput2Placeholder, Icons.location_on),
-              SizedBox(height: 15.h),
+                      .workerSearchBarInput2Placeholder,
+                  Icons.location_on),
+              SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -99,10 +107,12 @@ class _AllSearchBarState extends State<AllSearchBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildSearchField(_searchController1, searchName,Icons.search),
+          _buildSearchField(_searchController1, searchName, Icons.search),
           const SizedBox(width: 20.0),
-          _buildSearchField(_searchController2,
-              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder,Icons.location_on),
+          _buildSearchField(
+              _searchController2,
+              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder,
+              Icons.location_on),
           const SizedBox(width: 20.0),
           _buildSearchButton(),
           const SizedBox(width: 10.0),
@@ -112,7 +122,8 @@ class _AllSearchBarState extends State<AllSearchBar> {
     );
   }
 
-  Widget _buildSearchField(TextEditingController controller, String hintText, IconData icon) {
+  Widget _buildSearchField(
+      TextEditingController controller, String hintText, IconData icon) {
     double widthFactor = Responsive.isMobile(context)
         ? 0.80
         : 0.28; // 80% for mobile, 28% for desktop
@@ -151,10 +162,10 @@ class _AllSearchBarState extends State<AllSearchBar> {
           ),
           border: const OutlineInputBorder(),
           enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: BorderSide(color: Colors.white),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: BorderSide(color: ThemeColors.blukersOrangeThemeColor),
           ),
         ),
       ),
@@ -163,7 +174,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
 
   Widget _buildSearchButton() {
     double widthFactor = Responsive.isMobile(context)
-        ? 0.60
+        ? 0.80
         : 0.15; // 60% for mobile, 15% for desktop
     double heightFactor = Responsive.isMobile(context)
         ? 0.06
@@ -195,7 +206,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
           });
         },
         style: ElevatedButton.styleFrom(
-          primary: ThemeColors.searchBarSecondaryThemeColor, // Red color
+          primary: const Color.fromARGB(255, 243, 85, 7), // Red color
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
