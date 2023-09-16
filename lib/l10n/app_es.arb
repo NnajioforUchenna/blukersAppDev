@@ -327,6 +327,11 @@
     "yes": "Si",
     "deleteMyAccount": "Eliminar mi cuenta",
     "delete": "Eliminar",
+
+    "privacyPolicy": "Política de Privacidad",
+    "termsAndConditions": "Términos y Condiciones",
+    "termsOfService": "Términos de Servicio",
+    "read": "Leer",
     
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",

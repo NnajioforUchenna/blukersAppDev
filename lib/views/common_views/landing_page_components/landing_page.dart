@@ -1,4 +1,5 @@
 import 'package:blukers/views/auth/common_widget/label_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,8 @@ import 'package:provider/provider.dart';
 import '../../../providers/user_provider.dart';
 import '../../../utils/styles/index.dart';
 import 'option_box.dart';
+
+import 'package:blukers/views/common_views/components/privacy_policy_terms_and_conditions.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -94,6 +97,8 @@ class LandingPage extends StatelessWidget {
                 title: AppLocalizations.of(context)!.alreadyHaveAnAccount,
                 subTitle: AppLocalizations.of(context)!.signIn,
               ),
+            if (!kIsWeb && up.appUser != null) SizedBox(height: 0.03.sh),
+            if (!kIsWeb) PrivacyPolicyTermsAndConditions(),
           ],
         ),
       ),

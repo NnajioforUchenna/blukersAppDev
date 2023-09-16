@@ -328,6 +328,11 @@
     "deleteMyAccount": "Delete my account",
     "delete": "Delete",
 
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms and Conditions",
+    "termsOfService": "Terms of Service",
+    "read": "Read",
+
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",
     "workers": "Workers",

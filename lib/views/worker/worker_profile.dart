@@ -27,6 +27,7 @@ import '../common_views/page_template/page_template.dart';
 import '../common_views/select_industry_components/industry_jobs_dropdown.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:blukers/views/common_views/components/privacy_policy_terms_and_conditions.dart';
 
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
@@ -649,6 +650,8 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     ],
                   ),
                   const SizedBox(height: 40),
+                  if (!kIsWeb) PrivacyPolicyTermsAndConditions(),
+                  if (!kIsWeb) const SizedBox(height: 30),
                   AppVersionDisplay(),
                   const SizedBox(height: 30),
                 ],
