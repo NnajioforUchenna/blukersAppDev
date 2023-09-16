@@ -18,14 +18,24 @@ final db = FirebaseFirestore.instance;
 
 class PaymentsDataProvider {
   static Future<String> saveOrder(TransactionRecord pOrder) async {
-    final ordCol = db.collection(transactionsCollection);
-    DocumentReference documentRef = ordCol.doc();
-    String newDocumentId = documentRef.id;
-    pOrder.documentId = newDocumentId;
-    DocumentReference orderDocRef = ordCol.doc(pOrder.userId);
-    await orderDocRef
-        .set({newDocumentId: pOrder.toMap()}, SetOptions(merge: true));
-    return newDocumentId;
+    // Save document to 'Transactions' collection
+    final transactionsCol = db.collection(transactionsCollection);
+    DocumentReference transactionDocRef = transactionsCol.doc();
+    String newTransactionDocId = transactionDocRef.id;
+    pOrder.documentId = newTransactionDocId;
+    DocumentReference orderDocRef = transactionsCol.doc(pOrder.documentId);
+    await orderDocRef.set(pOrder.toMap(), SetOptions(merge: true));
+
+    // Save document to 'TransactionsByUID' collection
+    final orderByUIDCol = db.collection(transactionsByUIDCollection);
+    // DocumentReference documentByUIDRef = orderByUIDCol.doc();
+    // String newTransactionByUIDDocId = documentByUIDRef.id;
+    // pOrder.documentId = newTransactionByUIDDocId;
+    DocumentReference orderDocByUIDRef = orderByUIDCol.doc(pOrder.userId);
+    await orderDocByUIDRef
+        .set({newTransactionDocId: pOrder.toMap()}, SetOptions(merge: true));
+
+    return newTransactionDocId;
   }
 
   static updatePlatformDetails(PurchaseDetails purchaseDetails) {

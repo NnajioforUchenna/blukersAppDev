@@ -25,6 +25,14 @@ class _AllSearchBarState extends State<AllSearchBar> {
   late UserProvider up;
   bool _isLoading = false;
 
+  bool isMobileSearchBarVisible = false;
+
+  void toggleMobileSearchBarVisible() {
+    setState(() {
+      isMobileSearchBarVisible = !isMobileSearchBarVisible;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -49,30 +57,144 @@ class _AllSearchBarState extends State<AllSearchBar> {
           AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
     }
     return Responsive(
-      mobile: _buildMobileSearchBar(),
+      // mobile: _buildMobileSearchBar(),
+      mobile: Column(
+        // crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          // AnimatedOpacity(
+          //   // If the widget is visible, animate to 0.0 (invisible).
+          //   // If the widget is hidden, animate to 1.0 (fully visible).
+          //   opacity: isMobileSearchBarVisible ? 1.0 : 0.0,
+          //   duration: const Duration(milliseconds: 500),
+          //   // The green box must be a child of the AnimatedOpacity widget.
+          //   child: _buildMobileSearchBar(),
+          // ),
+          //
+          //
+          Visibility(
+            visible: isMobileSearchBarVisible,
+            maintainAnimation: true,
+            maintainState: true,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.fastOutSlowIn,
+              opacity: isMobileSearchBarVisible ? 1 : 0,
+              child: _buildMobileSearchBar(),
+            ),
+          ),
+          //
+          //
+          // Visibility(
+          //   visible: isMobileSearchBarVisible,
+          //   child: _buildMobileSearchBar(),
+          // ),
+          //
+          //
+          GestureDetector(
+            onTap: () {
+              toggleMobileSearchBarVisible();
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                color: ThemeColors.blukersOrangeThemeColor,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0)),
+              ),
+              child: IconButton(
+                icon: Icon(
+                  isMobileSearchBarVisible
+                      ? Icons.arrow_upward_outlined
+                      : Icons.search_outlined,
+                  color: Colors.white,
+                  size: isMobileSearchBarVisible ? 25 : 30,
+                ),
+                onPressed: () {
+                  toggleMobileSearchBarVisible();
+                },
+              ),
+            ),
+          ),
+          //
+          // FloatingActionButton(
+          //   onPressed: () {
+          //     // toggleMobileSearchBarVisible(); // Toggle container visibility when the button is pressed.
+          //   },
+          //   child: Container(
+          //     decoration: const BoxDecoration(
+          //       color: ThemeColors.blukersOrangeThemeColor,
+          //       borderRadius: BorderRadius.only(
+          //           bottomLeft: Radius.circular(30.0),
+          //           bottomRight: Radius.circular(30.0)),
+          //     ),
+          //     child: IconButton(
+          //       icon: Icon(
+          //         isMobileSearchBarVisible
+          //             ? Icons.search_off_outlined
+          //             : Icons.search_outlined,
+          //         color: Colors.white,
+          //       ),
+          //       onPressed: () {
+          //         toggleMobileSearchBarVisible();
+          //       },
+          //     ),
+          //   ),
+          // ),
+          //
+          //
+          // FloatingActionButton(
+          //   onPressed: () {
+          //     // toggleMobileSearchBarVisible(); // Toggle container visibility when the button is pressed.
+          //   },
+          //   child: CircleAvatar(
+          //     radius: 30,
+          //     backgroundColor: ThemeColors.blukersOrangeThemeColor,
+          //     child: IconButton(
+          //       icon: Icon(
+          //         isMobileSearchBarVisible
+          //             ? Icons.search_off_outlined
+          //             : Icons.search_outlined,
+          //         color: Colors.white,
+          //       ),
+          //       onPressed: () {
+          //         toggleMobileSearchBarVisible();
+          //       },
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
       desktop: _buildDesktopSearchBar(),
     );
   }
 
   Widget _buildMobileSearchBar() {
     return Container(
-      color: ThemeColors.searchBarPrimaryThemeColor,
-      height: MediaQuery.of(context).size.height * 0.35,
+      // color: ThemeColors.searchBarPrimaryThemeColor,
+      height: MediaQuery.of(context).size.height * 0.30,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 8.0.h),
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 6, 76, 173),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30.0),
+          bottomRight: Radius.circular(30.0),
+        ),
+      ),
       child: Center(
         child: SingleChildScrollView(
           // Adding SingleChildScrollView
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildSearchField(_searchController1, searchName,Icons.search),
-              SizedBox(height: 15.h),
+              _buildSearchField(_searchController1, searchName, Icons.search),
+              SizedBox(height: 10.h),
               _buildSearchField(
                   _searchController2,
                   AppLocalizations.of(context)!
-                      .workerSearchBarInput2Placeholder, Icons.location_on),
-              SizedBox(height: 15.h),
+                      .workerSearchBarInput2Placeholder,
+                  Icons.location_on),
+              SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -99,10 +221,12 @@ class _AllSearchBarState extends State<AllSearchBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildSearchField(_searchController1, searchName,Icons.search),
+          _buildSearchField(_searchController1, searchName, Icons.search),
           const SizedBox(width: 20.0),
-          _buildSearchField(_searchController2,
-              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder,Icons.location_on),
+          _buildSearchField(
+              _searchController2,
+              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder,
+              Icons.location_on),
           const SizedBox(width: 20.0),
           _buildSearchButton(),
           const SizedBox(width: 10.0),
@@ -112,7 +236,8 @@ class _AllSearchBarState extends State<AllSearchBar> {
     );
   }
 
-  Widget _buildSearchField(TextEditingController controller, String hintText, IconData icon) {
+  Widget _buildSearchField(
+      TextEditingController controller, String hintText, IconData icon) {
     double widthFactor = Responsive.isMobile(context)
         ? 0.80
         : 0.28; // 80% for mobile, 28% for desktop
@@ -151,10 +276,10 @@ class _AllSearchBarState extends State<AllSearchBar> {
           ),
           border: const OutlineInputBorder(),
           enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: BorderSide(color: Colors.white),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: BorderSide(color: ThemeColors.blukersOrangeThemeColor),
           ),
         ),
       ),
@@ -163,7 +288,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
 
   Widget _buildSearchButton() {
     double widthFactor = Responsive.isMobile(context)
-        ? 0.60
+        ? 0.80
         : 0.15; // 60% for mobile, 15% for desktop
     double heightFactor = Responsive.isMobile(context)
         ? 0.06
@@ -195,7 +320,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
           });
         },
         style: ElevatedButton.styleFrom(
-          primary: ThemeColors.searchBarSecondaryThemeColor, // Red color
+          primary: const Color.fromARGB(255, 243, 85, 7), // Red color
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
