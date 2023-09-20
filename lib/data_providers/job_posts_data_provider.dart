@@ -11,21 +11,13 @@ final db = FirebaseFirestore.instance;
 
 class JobPostsDataProvider {
   static Future<List<Map<String, dynamic>>> getJobPostsByJobID(
-      String jobId) async {
-    List<JobPost> jobPosts = await searchJobPosts(jobId, '');
+      String jobId, String targetLanguage) async {
+    List<JobPost> jobPosts = await searchJobPosts(
+        nameRelated: jobId,
+        locationRelated: '',
+        pageNumber: 0,
+        targetLanguage: targetLanguage);
     return jobPosts.map((jobPost) => jobPost.toMap()).toList();
-
-    // // Create a reference to the Firestore collection
-    // CollectionReference jobPosts = db.collection(jobPostsCollections);
-    //
-    // // Query the collection: Fetch documents where jobId is in the jobPositionIds field
-    // QuerySnapshot querySnapshot =
-    //     await jobPosts.where('jobIds', arrayContains: jobId).get();
-    //
-    // // Convert the documents to a list of maps and return
-    // return querySnapshot.docs
-    //     .map((doc) => doc.data() as Map<String, dynamic>)
-    //     .toList();
   }
 
   static Future<void> createJobPost(JobPost jobPost) async {
@@ -120,9 +112,12 @@ class JobPostsDataProvider {
   // }
 
   static Future<List<JobPost>> searchJobPosts(
-      String nameRelated, String locationRelated) async {
+      {required String nameRelated,
+      required String locationRelated,
+      required int pageNumber,
+      required String targetLanguage}) async {
     const String url = baseUrlAppEngineFunctions +
-        '/searchJobPosts'; // Replace with your actual endpoint
+        '/search/get-job-posts'; // Replace with your actual endpoint
 
     final response = await http.post(
       Uri.parse(url),
@@ -130,8 +125,10 @@ class JobPostsDataProvider {
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
-        'nameRelated': nameRelated,
-        'locationRelated': locationRelated,
+        "query_name": nameRelated,
+        "query_location": locationRelated,
+        "page_number": pageNumber,
+        "target_language": targetLanguage,
       }),
     );
 
@@ -218,20 +215,32 @@ class JobPostsDataProvider {
         .toList();
   }
 
-  static getRealJobPosts() async {
-    // Create a reference to the Firestore collection
-    CollectionReference jobPosts = db.collection(jobPostsCollections);
+  static Future<List<Map<String, dynamic>>> getAiJobPosts({
+    required String queryName,
+    required String queryLocation,
+    required int pageNumber,
+    required String targetLanguage,
+  }) async {
+    // Define the payload using the provided parameters
+    var body = jsonEncode({
+      "query_name": queryName,
+      "query_location": queryLocation,
+      "page_number": pageNumber,
+      "target_language": targetLanguage,
+    });
 
-    // Query the collection: Order by dateCreated descending and limit to 50
-    QuerySnapshot querySnapshot =
-        await jobPosts.orderBy('dateCreated', descending: true).limit(50).get();
+    // Make the HTTP request
+    var response = await http.post(
+        Uri.parse(baseUrlAppEngineFunctions + '/search/get-job-posts'),
+        headers: {"Content-Type": "application/json"},
+        body: body);
 
-    // Convert the documents to a list of maps, adding the document ID
-    return querySnapshot.docs
-        .map((doc) => {
-              'id': doc.id, // Add the document ID
-              ...doc.data() as Map<String, dynamic>,
-            })
-        .toList();
+    // If the call to the server was successful, parse the JSON
+    if (response.statusCode == 200) {
+      String sanitizedBody = sanitizeJson(response.body);
+      return List<Map<String, dynamic>>.from(json.decode(sanitizedBody));
+    } else {
+      throw Exception('Failed to load AI job posts');
+    }
   }
 }

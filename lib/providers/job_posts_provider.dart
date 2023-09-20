@@ -10,6 +10,7 @@ import '../models/job_post.dart';
 import '../views/common_views/please_login_dialog.dart';
 
 class JobPostsProvider with ChangeNotifier {
+  AppUser? appUser;
   Map<String, JobPost> _jobPosts = {};
   Map<String, dynamic> newJobPostData = {};
 
@@ -27,6 +28,19 @@ class JobPostsProvider with ChangeNotifier {
 
   Map<String, JobPost> realJobPosts = {};
 
+  // Job Query Parameters
+  String nameSearch = '';
+  String locationSearch = '';
+  String language = 'en';
+
+  update(AppUser? user) {
+    appUser = user;
+    if (appUser != null && appUser!.language != null) {
+      language = appUser!.language ?? 'en';
+    }
+    notifyListeners();
+  }
+
   JobPostsProvider() {
     get50LastestJobPosts();
     getRealJobPosts();
@@ -34,13 +48,17 @@ class JobPostsProvider with ChangeNotifier {
 
   bool searchComplete = false;
 
-  void getJobPostsByJobID(String jobId) {
+  void getJobPostsByJobID(String jobId, String targetLanguage) {
     print('getJobPostsByJobID: $jobId');
+    print('targetLanguage: $targetLanguage');
     searchComplete = false;
     selectedJobPostId = jobId;
+    nameSearch = jobId;
+    language = targetLanguage;
 
     // Get all jobPosts for the job with the given jobId.
-    JobPostsDataProvider.getJobPostsByJobID(jobId).then((jobPosts) {
+    JobPostsDataProvider.getJobPostsByJobID(jobId, targetLanguage)
+        .then((jobPosts) {
       selectedJobPosts = jobPosts
           .map((jobPost) {
             return JobPost.fromMap(jobPost);
@@ -59,6 +77,8 @@ class JobPostsProvider with ChangeNotifier {
   }
 
   Future<void> translateJobPosts(targetLanguage) async {
+    language = targetLanguage;
+    getRealJobPosts();
     List<JobPost> translatedJobPosts = [];
     if (selectedJobPostId.isNotEmpty) {
       translatedJobPosts = await JobPostsDataProvider.translateJobPosts(
@@ -233,9 +253,14 @@ class JobPostsProvider with ChangeNotifier {
   bool isSearching = false;
   Future<void> searchJobPosts(
       String nameRelated, String locationRelated) async {
+    nameSearch = nameRelated;
+    locationSearch = locationRelated;
     selectedJobPosts = [];
-    selectedJobPosts =
-        await JobPostsDataProvider.searchJobPosts(nameRelated, locationRelated);
+    selectedJobPosts = await JobPostsDataProvider.searchJobPosts(
+        nameRelated: nameRelated,
+        locationRelated: locationRelated,
+        pageNumber: 0,
+        targetLanguage: language);
     print('selectedJobPosts: ${selectedJobPosts.length}');
 
     if (selectedJobPosts.isEmpty) {
@@ -252,12 +277,23 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearSearchParameters() {
+    nameSearch = '';
+    locationSearch = '';
+    notifyListeners();
+  }
+
   bool isWebSearching = false;
 
   Future<void> getJobsBySearchParameter(
       String nameSearch, String locationSearch) async {
-    List<JobPost> searchJobPosts =
-        await JobPostsDataProvider.searchJobPosts(nameSearch, locationSearch);
+    nameSearch = nameSearch;
+    locationSearch = locationSearch;
+    List<JobPost> searchJobPosts = await JobPostsDataProvider.searchJobPosts(
+        nameRelated: nameSearch,
+        locationRelated: locationSearch,
+        pageNumber: 0,
+        targetLanguage: language);
     if (searchJobPosts.isEmpty) {
       EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
     } else {
@@ -289,15 +325,24 @@ class JobPostsProvider with ChangeNotifier {
 
   Future<void> getRealJobPosts() async {
     // Get the 50 most recent job posts.
+
+    if (appUser != null && appUser!.language != null) {
+      language = appUser!.language ?? 'en';
+    }
+
     List<Map<String, dynamic>> jobPosts =
-        await JobPostsDataProvider.getRealJobPosts();
+        await JobPostsDataProvider.getAiJobPosts(
+            queryName: "",
+            queryLocation: "",
+            pageNumber: 0,
+            targetLanguage: language);
 
     realJobPosts = {};
     for (var jobPost in jobPosts) {
-      if (jobPost['id'] != null) {
+      if (jobPost['jobPostId'] != null) {
         JobPost? parsedJobPost = JobPost.fromMap(jobPost);
         if (parsedJobPost != null) {
-          realJobPosts[jobPost['id']] = parsedJobPost;
+          realJobPosts[jobPost['jobPostId']] = parsedJobPost;
         }
       }
     }
@@ -309,21 +354,31 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<Map<String, JobPost>> loadMoreJobPosts() async {
+  Future<Map<String, JobPost>> loadMoreJobPosts({
+    required String queryName,
+    required String queryLocation,
+    required int pageNumber,
+    required String targetLanguage,
+  }) async {
     // Get the 50 most recent job posts.
     Map<String, JobPost> newJobs = {};
-    await JobPostsDataProvider.getRecentJobPosts2().then((jobPosts) {
-      for (var jobPost in jobPosts) {
-        if (jobPost['id'] != null) {
-          print('jobPost: ${jobPost['id']}');
-          JobPost? parsedJobPost = JobPost.fromMap(jobPost);
-          if (parsedJobPost != null) {
-            print('I got a healthy JobPOSt');
-            newJobs[jobPost['id']] = parsedJobPost;
-          }
+
+    List<Map<String, dynamic>> jobPosts =
+        await JobPostsDataProvider.getAiJobPosts(
+            queryName: queryName,
+            queryLocation: queryLocation,
+            pageNumber: pageNumber,
+            targetLanguage: targetLanguage);
+
+    for (var jobPost in jobPosts) {
+      if (jobPost['jobPostId'] != null) {
+        JobPost? parsedJobPost = JobPost.fromMap(jobPost);
+        if (parsedJobPost != null) {
+          newJobs[jobPost['jobPostId']] = parsedJobPost;
         }
       }
-    });
+    }
+
     return newJobs;
   }
 

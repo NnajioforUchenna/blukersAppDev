@@ -1,9 +1,8 @@
+import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:blukers/providers/app_versions_provider.dart';
 
 import '../../providers/industry_provider.dart';
 import '../../providers/job_posts_provider.dart';
@@ -11,6 +10,7 @@ import '../common_views/all_search_bar_components/all_search_bar.dart';
 import '../common_views/loading_page.dart';
 import '../common_views/page_template/page_template.dart';
 import '../common_views/select_industry_components/display_industries.dart';
+import 'jobs_componets/choose_target_language.dart';
 import 'jobs_componets/display_real_job_posts.dart';
 import 'jobs_componets/job_search_result_page.dart';
 
@@ -33,10 +33,19 @@ class Jobs extends StatelessWidget {
           children: [
             const AllSearchBar(),
             SizedBox(height: 10.w),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Spacer(),
+                SizedBox(height: 50, width: 200, child: ChooseTargetLanguage()),
+                SizedBox(width: 30)
+              ],
+            ),
+            SizedBox(height: 10.w),
             const Divider(),
             AnimatedCrossFade(
               firstChild: jp.isReal
-                  ? DisplayRealJobPosts()
+                  ? const DisplayRealJobPosts()
                   : ip.industries.isEmpty
                       ? LoadingPage()
                       : const DisplayIndustries(),

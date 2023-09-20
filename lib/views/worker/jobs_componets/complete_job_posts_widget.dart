@@ -1,3 +1,4 @@
+import 'package:blukers/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -76,6 +77,7 @@ class ListViewJobs extends StatefulWidget {
 
 class _ListViewJobsState extends State<ListViewJobs> {
   final ScrollController controller = ScrollController();
+  int pageNumber = 1;
 
   @override
   void dispose() {
@@ -89,9 +91,16 @@ class _ListViewJobsState extends State<ListViewJobs> {
       if (controller.position.pixels == controller.position.maxScrollExtent) {
         JobPostsProvider jp =
             Provider.of<JobPostsProvider>(context, listen: false);
-        Map<String, JobPost> newJobs = await jp.loadMoreJobPosts();
+        UserProvider up = Provider.of<UserProvider>(context, listen: false);
+        String targetLanguage = up.userLanguage;
+        Map<String, JobPost> newJobs = await jp.loadMoreJobPosts(
+            pageNumber: pageNumber,
+            targetLanguage: targetLanguage,
+            queryName: jp.nameSearch,
+            queryLocation: jp.locationSearch);
         setState(() {
           widget.jobPosts.addAll(newJobs.values.toList());
+          pageNumber++;
         });
       }
     });

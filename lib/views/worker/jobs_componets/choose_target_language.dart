@@ -4,6 +4,8 @@ import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/user_provider.dart';
+
 class ChooseTargetLanguage extends StatefulWidget {
   const ChooseTargetLanguage({super.key});
 
@@ -15,30 +17,31 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
   String? selectedLanguageCode;
 
   String jsonString = '''
-  {
-    "en": "English",
-    "zh": "Chinese (Simplified)",
+{
+  "en": "English",
     "es": "Spanish",
-    "hi": "Hindi",
-    "ar": "Arabic",
-    "pt": "Portuguese",
-    "bn": "Bengali",
-    "ru": "Russian",
-    "ja": "Japanese",
-    "fr": "French",
-    "de": "German",
-    "ko": "Korean",
-    "it": "Italian",
-    "jv": "Javanese",
-    "tr": "Turkish",
-    "ig": "Igbo"
-  }
-  ''';
+  "ar": "Arabic",
+  "bn": "Bengali",
+  "zh": "Chinese (Simplified)",
+  "fr": "French",
+  "de": "German",
+  "hi": "Hindi",
+  "ig": "Igbo",
+  "it": "Italian",
+  "ja": "Japanese",
+  "jv": "Javanese",
+  "ko": "Korean",
+  "pt": "Portuguese",
+  "ru": "Russian",
+  "tr": "Turkish"
+}
+''';
 
   @override
   Widget build(BuildContext context) {
     var languageMap = jsonDecode(jsonString);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -53,6 +56,7 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
           setState(() {
             selectedLanguageCode = newValue;
             print(newValue);
+            up.updateTargetLanguage(newValue);
             jp.translateJobPosts(newValue);
           });
         },

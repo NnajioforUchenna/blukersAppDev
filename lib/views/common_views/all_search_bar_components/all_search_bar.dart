@@ -66,12 +66,13 @@ class _AllSearchBarState extends State<AllSearchBar> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildSearchField(_searchController1, searchName,Icons.search),
+              _buildSearchField(_searchController1, searchName, Icons.search),
               SizedBox(height: 15.h),
               _buildSearchField(
                   _searchController2,
                   AppLocalizations.of(context)!
-                      .workerSearchBarInput2Placeholder, Icons.location_on),
+                      .workerSearchBarInput2Placeholder,
+                  Icons.location_on),
               SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -99,10 +100,12 @@ class _AllSearchBarState extends State<AllSearchBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildSearchField(_searchController1, searchName,Icons.search),
+          _buildSearchField(_searchController1, searchName, Icons.search),
           const SizedBox(width: 20.0),
-          _buildSearchField(_searchController2,
-              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder,Icons.location_on),
+          _buildSearchField(
+              _searchController2,
+              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder,
+              Icons.location_on),
           const SizedBox(width: 20.0),
           _buildSearchButton(),
           const SizedBox(width: 10.0),
@@ -112,7 +115,8 @@ class _AllSearchBarState extends State<AllSearchBar> {
     );
   }
 
-  Widget _buildSearchField(TextEditingController controller, String hintText, IconData icon) {
+  Widget _buildSearchField(
+      TextEditingController controller, String hintText, IconData icon) {
     double widthFactor = Responsive.isMobile(context)
         ? 0.80
         : 0.28; // 80% for mobile, 28% for desktop
@@ -231,6 +235,7 @@ class _AllSearchBarState extends State<AllSearchBar> {
                   _searchController2.clear();
                   wp.setSearching(false);
                   jp.setSearching(false);
+                  jp.clearSearchParameters();
                 });
               },
               style: ElevatedButton.styleFrom(

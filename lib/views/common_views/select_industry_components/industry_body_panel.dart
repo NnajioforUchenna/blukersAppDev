@@ -3,9 +3,9 @@ import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/utils/helpers/index.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/job.dart';
 import '../../../providers/user_provider.dart';
@@ -45,7 +45,7 @@ class IndustryBodyPanel extends StatelessWidget {
               );
             } else {
               // navigate anonymously to the DisplayWorkers page
-              jp.getJobPostsByJobID(job.jobId);
+              jp.getJobPostsByJobID(job.title, up.userLanguage);
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => DisplayJobs(
