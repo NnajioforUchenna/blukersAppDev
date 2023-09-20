@@ -5,6 +5,7 @@ const String jobPostsCollections = "JobPosts"; //"""JobPosts";
 const String companyCollections = "Companies";
 const String appVersionsCollection = "AppVersions";
 const String transactionsCollection = "Transactions";
+const String transactionsByUIDCollection = "TransactionsByUID";
 const String appleCollection = "AppleSubscriptionsPaymentDetails";
 const String googleCollection = "GoogleSubscriptionsPaymentDetails";
 const String baseUrlAppEngineFunctions =
