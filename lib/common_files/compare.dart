@@ -1,104 +1,61 @@
-// import 'package:blukers/views/common_views/landing_page_components/landing_page.dart';
-// import 'package:blukers/views/company/company_basic_info.dart';
-// import 'package:blukers/views/company_chat.dart';
-// import 'package:blukers/views/worker/create_worker_profile_component/online_resume_additional_detail_screen.dart';
-// import 'package:blukers/views/worker/online_resume_screen.dart';
-// import 'package:blukers/views/worker/pdf_view_screen.dart';
+// import 'package:blukers/models/job_post.dart';
+// import 'package:blukers/utils/styles/theme_colors.dart';
 // import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 //
-// import '../views/auth/login.dart';
-// import '../views/auth/registration_process.dart';
-// import '../views/auth/reset_password.dart';
-// import '../views/company/company_profile.dart';
-// import '../views/company/create_company_profile/create_company_profile.dart';
-// import '../views/company/my_job_posts.dart';
-// import '../views/company/my_job_posts_components/applicants/applicants.dart';
-// import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
-// import '../views/company/workers.dart';
-// import '../views/membership/membership_widget.dart';
-// import '../views/membership/subscription_components/payment_failed_widget.dart';
-// import '../views/membership/subscription_components/payment_successful_widget.dart';
-// import '../views/offers/offers_list.dart';
-// import '../views/orders/orders_list.dart';
-// import '../views/services/services.dart';
-// import '../views/worker/create_worker_profile_component/create_worker_profile.dart';
-// import '../views/worker/jobs.dart';
-// import '../views/worker/my_jobs.dart';
-// import '../views/worker/worker_profile.dart';
-// import 'authentication_wrapper.dart';
+// import 'animate_job_post_details.dart';
 //
-// MaterialPageRoute generateRoute(RouteSettings settings) {
-//   switch (settings.name) {
-//     case '/':
-//     // return MaterialPageRoute(builder: (context) => MembershipWidget());
-//       return MaterialPageRoute(
-//           builder: (context) => const AuthenticationWrapper());
-//     case '/landing':
-//       return MaterialPageRoute(builder: (context) => LandingPage());
-//     case '/workers':
-//       return MaterialPageRoute(builder: (context) => const Workers());
-//     case '/jobs':
-//       return MaterialPageRoute(builder: (context) => const Jobs());
-//     case '/myJobs':
-//       return MaterialPageRoute(builder: (context) => const MyJobs());
-//     case '/myJobPosts':
-//       return MaterialPageRoute(builder: (context) => const MyJobPosts());
-//     case '/companyBasicInfo':
-//       return MaterialPageRoute(builder: (context) => const CompanyBasicInfo());
-//     case '/onlineResumeScreen':
-//       return MaterialPageRoute(
-//           builder: (context) => const OnlineResumeScreen());
-//     case '/onlineResumeAdditionalDetailScreen':
-//       return MaterialPageRoute(
-//           builder: (context) => const OnlineResumeAdditionalDetailScreen(),
-//           settings: settings);
-//     case '/pdfViewScreen':
-//       return MaterialPageRoute(
-//           builder: (context) => const ResumeScreen(), settings: settings);
-//     case '/workerProfile':
-//       return MaterialPageRoute(builder: (context) => const WorkerProfile());
-//     case '/companyChat':
-//       return MaterialPageRoute(builder: (context) => const CompanyChat());
-//     case '/payment':
-//       return MaterialPageRoute(builder: (context) => const MembershipWidget());
-//     case '/paymentFailed':
-//       return MaterialPageRoute(builder: (context) => PaymentFailedWidget());
-//     case '/paymentSuccess':
-//       return MaterialPageRoute(builder: (context) => PaymentSuccessfulWidget());
-//     case 'companyProfile':
-//       return MaterialPageRoute(builder: (context) => const CompanyProfile());
-//     case '/login':
-//       return MaterialPageRoute(builder: (context) => const Login());
-//     case '/register':
-//       return MaterialPageRoute(builder: (context) => RegistrationProcess());
-//     case '/forgot-password':
-//       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
-//     case '/createJobPost':
-//       return MaterialPageRoute(builder: (context) => const CreateJobPost());
-//     case '/createWorkerProfile':
-//       return MaterialPageRoute(
-//           builder: (context) => const CreateWorkerProfile());
-//     case '/applicants':
-//       return MaterialPageRoute(builder: (context) => const Applicants());
-//     case '/membership':
-//       return MaterialPageRoute(builder: (context) => const MembershipWidget());
-//     case '/services':
-//       return MaterialPageRoute(builder: (context) => const Services());
-//     case '/offers':
-//       return MaterialPageRoute(builder: (context) => const OffersList());
-//     case '/orders':
-//       return MaterialPageRoute(builder: (context) => const OrdersList());
-//     case '/createCompanyProfile':
-//       return MaterialPageRoute(
-//           builder: (context) => const CreateCompanyProfile());
-//     case '/company-chat':
-//       return MaterialPageRoute(builder: (context) => const CompanyChat());
-//     case '/chat-message':
-//       return MaterialPageRoute(
-//           builder: (context) => const ChatMessageScreen(), settings: settings);
-//     default:
-//       return MaterialPageRoute(
-//           builder: (context) => const AuthenticationWrapper());
-//   // return MaterialPageRoute(builder: (context) => const CompanyChat());
+// class DisplayJobPostDialog extends StatelessWidget {
+//   final JobPost jobPost;
+//   const DisplayJobPostDialog({super.key, required this.jobPost});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // Determine screen size for responsive design
+//     double width = MediaQuery.of(context).size.width;
+//     double height = MediaQuery.of(context).size.height;
+//     return Dialog(
+//       shape: const RoundedRectangleBorder(
+//         borderRadius: BorderRadius.all(Radius.circular(5)),
+//       ),
+//       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 26),
+//       child: Stack(
+//         alignment: Alignment.topCenter,
+//         children: <Widget>[
+//           Padding(
+//             padding: EdgeInsets.all(0.sp),
+//             child: ConstrainedBox(
+//                 constraints: BoxConstraints(
+//                   maxWidth:
+//                   width * 0.9, // Constrain the width to 80% of the screen
+//                   maxHeight:
+//                   height * 0.9, // Constrain the height to 70% of the screen
+//                 ),
+//                 child: const AnimateJobPostDetails()),
+//           ),
+//           Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               const Spacer(),
+//               Row(
+//                 children: [
+//                   const Spacer(),
+//                   Padding(
+//                     padding: const EdgeInsets.all(0),
+//                     child: FloatingActionButton(
+//                       backgroundColor: ThemeColors.blukersOrangeThemeColor,
+//                       child: const Icon(Icons.close),
+//                       onPressed: () => Navigator.of(context).pop(),
+//                     ),
+//                   ),
+//                   const Spacer(),
+//                 ],
+//               ),
+//               const SizedBox(height: 10)
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
 //   }
 // }

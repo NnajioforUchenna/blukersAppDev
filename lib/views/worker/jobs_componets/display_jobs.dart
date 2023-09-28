@@ -20,30 +20,38 @@ class DisplayJobs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: ThemeColors.primaryThemeColor,
-          iconTheme: const IconThemeData(
-            color: Colors.white,
-          ),
-          elevation: 0,
-          title: Text(
-            '$title (Jobs)',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-          )),
-      backgroundColor: const Color(0xFFF5F5F8),
-      body: jp.selectedJobPosts.isEmpty
-          ? jp.searchComplete
-              ? IconText404(
-                  icon: UniconsLine.file_edit_alt,
-                  text: "No job posts found",
-                )
-              : LoadingPage()
-          : Responsive.isDesktop(context)
-              ? buildWebContent()
-              : const BuildListViewJobs(),
+    return WillPopScope(
+      onWillPop: () {
+        jp.clearSearchParameters();
+        return Future.value(true);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: ThemeColors.primaryThemeColor,
+            iconTheme: const IconThemeData(
+              color: Colors.white,
+            ),
+            elevation: 0,
+            title: Text(
+              '$title (Jobs)',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            )),
+        backgroundColor: const Color(0xFFF5F5F8),
+        body: jp.displayedJobPosts.isEmpty
+            ? jp.searchComplete
+                ? IconText404(
+                    icon: UniconsLine.file_edit_alt,
+                    text: "No job posts found",
+                  )
+                : LoadingPage()
+            : Responsive.isDesktop(context)
+                ? buildWebContent()
+                : const BuildListViewJobs(),
+      ),
     );
   }
 

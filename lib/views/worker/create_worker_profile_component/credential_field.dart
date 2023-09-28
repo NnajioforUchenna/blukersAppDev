@@ -4,9 +4,8 @@ import 'package:blukers/views/worker/create_worker_profile_component/show_pdf_di
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:googleapis/docs/v1.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class CredentialField extends StatefulWidget {
   final int index;
@@ -60,6 +59,7 @@ class _CredentialFieldState extends State<CredentialField> {
             const SizedBox(width: 10),
           ],
         ),
+        const SizedBox(height: 10),
         Row(
           children: [
             Expanded(

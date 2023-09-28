@@ -185,3 +185,14 @@ String formatDate(int timestamp) {
   DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   return DateFormat('MMM d, y').format(date);
 }
+
+String getFirstChar(String input) {
+  if (input.isEmpty) {
+    return "#";
+  }
+  return input[0];
+}
+
+bool isWellFormedUrl(String url) {
+  return Uri.tryParse(url)?.hasAbsolutePath ?? false;
+}

@@ -55,7 +55,6 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
         onChanged: (String? newValue) {
           setState(() {
             selectedLanguageCode = newValue;
-            print(newValue);
             up.updateTargetLanguage(newValue);
             jp.translateJobPosts(newValue);
           });

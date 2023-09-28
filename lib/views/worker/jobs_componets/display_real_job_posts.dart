@@ -11,7 +11,7 @@ class DisplayRealJobPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    List<JobPost> jobPosts = jp.realJobPosts.values.toList();
+    List<JobPost> jobPosts = jp.displayedJobPosts.values.toList();
 
     return CompleteJobPostWidget(jobPosts: jobPosts);
   }

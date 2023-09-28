@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../common_files/constants.dart';
 import '../../../../providers/user_provider.dart';
 import '../../../../services/responsive.dart';
 import '../../../../utils/styles/theme_colors.dart';
@@ -32,8 +33,10 @@ class WorkerDetailBlockOne extends StatelessWidget {
           children: [
             Center(
               child: RoundedImageWidget(
-                  imageUrl: worker.profilePhotoUrl,
-                  size: Responsive.isMobile(context) ? 80 : 100),
+                imageUrl: worker.profilePhotoUrl,
+                size: Responsive.isMobile(context) ? 80 : 100,
+                firstChar: getFirstChar(worker.lastName ?? ''),
+              ),
             ),
             const SizedBox(height: 15),
             Row(

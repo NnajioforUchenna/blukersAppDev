@@ -1,20 +1,18 @@
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/services/responsive.dart';
+import 'package:blukers/views/common_views/components/shaped_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
 import '../../../../services/rounded_image.dart';
 import '../../../../utils/styles/theme_colors.dart';
-import '../../../common_views/job_timeline/display_job_timeline_dialog.dart';
-import '../../../membership/show_subscription_dialog.dart';
-
-import 'package:blukers/views/common_views/components/shaped_icon.dart';
-import 'package:unicons/unicons.dart';
+import '../time_ago_and_bookmark_row.dart';
 
 class DetailPageBlockOne extends StatelessWidget {
   final JobPost jobPost;
@@ -36,32 +34,7 @@ class DetailPageBlockOne extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Text(jobPost.timeAgo ?? ''),
-                const Spacer(),
-                isHideButton
-                    ? SizedBox()
-                    : IconButton(
-                        onPressed: () {
-                          if (up.workerTimelineStep < 2) {
-                            showDialog(
-                                context: context,
-                                builder: (context) =>
-                                    const DisplayJobTimelineDialog());
-                          } else {
-                            up.saveJobPost(jobPost);
-                          }
-                        },
-                        icon: Icon(
-                          Icons.bookmark_add,
-                          color: isJobSaved
-                              ? ThemeColors.secondaryThemeColor
-                              : Colors.grey,
-                          size: 30,
-                        ))
-              ],
-            ),
+            TimeAgoAndBookMarkRow(jobPost: jobPost),
             SizedBox(height: 15.h),
             Text(
               toTitleCase(jobPost.jobTitle),
@@ -77,12 +50,14 @@ class DetailPageBlockOne extends StatelessWidget {
                 SizedBox(width: 5.h),
                 Text(
                   '\$ ' + jobPost.salaryAmount.toString(),
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, fontSize: 14),
                 ),
                 SizedBox(width: 5.h),
                 Text(
                   getSalaryType(jobPost.salaryType) ?? '',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, fontSize: 14),
                 ),
               ],
             ),
@@ -122,31 +97,19 @@ class DetailPageBlockOne extends StatelessWidget {
                 SizedBox(width: 5.h),
                 jobPost.address == null
                     ? Text(AppLocalizations.of(context)!.notSpecified,
-                        style: TextStyle(fontSize: 18, color: Colors.grey))
+                        style:
+                            const TextStyle(fontSize: 18, color: Colors.grey))
                     : Text(
                         jobPost.address!.location ?? '',
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
               ],
             ),
             SizedBox(height: 15.h),
             Row(
               children: [
-                const Spacer(),
-                Responsive.isMobile(context)
-                    ? RoundedImageWidget(
-                        size: Responsive.isMobile(context) ? 50 : 100,
-                        imageUrl: jobPost.companyLogo ??
-                            'https://picsum.photos/200/300',
-                      )
-                    : Container(),
-              ],
-            ),
-            SizedBox(height: 15.h),
-            Row(
-              children: [
                 isHideButton
-                    ? SizedBox()
+                    ? const SizedBox()
                     : Container(
                         width: 100,
                         height: 40,
@@ -161,21 +124,7 @@ class DetailPageBlockOne extends StatelessWidget {
                             ),
                           ),
                           onPressed: () async {
-                            if (up.workerTimelineStep < 2) {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) =>
-                                      const DisplayJobTimelineDialog());
-                            } else {
-                              up.applyForJobPost(jobPost);
-                              bool result = await up.checkIfSubscribed();
-                              if (!result) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        showSubscriptionDialog());
-                              }
-                            }
+                            up.checkAndApplyJobPost(context, jobPost);
                           },
                           child: Center(
                             // Center the text inside the button
@@ -186,21 +135,20 @@ class DetailPageBlockOne extends StatelessWidget {
                                       .toUpperCase()
                                   : AppLocalizations.of(context)!
                                       .alreadyApplied,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                           ),
                         ),
                       ),
 
-                const Spacer(), // Add space between button and image
-                Responsive.isMobile(context)
-                    ? Container()
-                    : RoundedImageWidget(
-                        size: Responsive.isMobile(context) ? 50 : 100,
-                        imageUrl: jobPost.companyLogo ??
-                            'https://picsum.photos/200/300',
-                      ),
+                const Spacer(),
+                RoundedImageWidget(
+                  size: Responsive.isMobile(context) ? 50 : 100,
+                  imageUrl:
+                      jobPost.companyLogo ?? 'https://picsum.photos/200/300',
+                  firstChar: getFirstChar(jobPost.companyName ?? ''),
+                ), // Add space between button and image
               ],
             ),
             SizedBox(height: 15.h),

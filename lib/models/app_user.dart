@@ -2,8 +2,10 @@ import 'package:blukers/models/payment_model/active_subscription.dart';
 import 'package:blukers/models/payment_model/paid_order.dart';
 import 'package:blukers/models/worker.dart';
 
+import '../data_providers/user_data_provider.dart';
 import 'address.dart';
 import 'company.dart';
+import 'job_application_tracker.dart';
 
 class AppUser {
   String uid;
@@ -40,6 +42,9 @@ class AppUser {
   ActiveSubscription? activeSubscription;
   Map<String, PaidOrder> listActiveOrders = {};
 
+  // Tracking Applied Jobs
+  JobApplicationTracker? jobApplicationTracker;
+
   AppUser({
     required this.uid,
     required this.email,
@@ -64,7 +69,8 @@ class AppUser {
     this.isSubscriptionActive = false,
     this.listActiveOrders = const {},
   })  : createdAt = DateTime.now().millisecondsSinceEpoch,
-        modifiedAt = DateTime.now().millisecondsSinceEpoch;
+        modifiedAt = DateTime.now().millisecondsSinceEpoch,
+        jobApplicationTracker = JobApplicationTracker();
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
@@ -106,6 +112,10 @@ class AppUser {
     if (listActiveOrders.isNotEmpty) {
       data['listActiveOrders'] =
           listActiveOrders.map((key, value) => MapEntry(key, value.toMap()));
+    }
+
+    if (jobApplicationTracker != null) {
+      data['jobApplicationTracker'] = jobApplicationTracker?.toMap();
     }
 
     return data;
@@ -151,6 +161,11 @@ class AppUser {
           .map((key, value) => MapEntry(key, PaidOrder.fromMap(value)));
     }
 
+    if (map['jobApplicationTracker'] != null) {
+      user.jobApplicationTracker =
+          JobApplicationTracker.fromMap(map['jobApplicationTracker']);
+    }
+
     user.createdAt = map['createdAt'] ?? 0;
     user.modifiedAt = map['modifiedAt'] ?? 0;
 
@@ -160,5 +175,16 @@ class AppUser {
   @override
   String toString() {
     return toMap().toString();
+  }
+
+  bool? checkIfEligible() {
+    return jobApplicationTracker
+        ?.checkIfEligible(activeSubscription?.subscriptionId ?? 'basic');
+  }
+
+  void updateNumOfJobsAppliedToday() {
+    jobApplicationTracker?.keepRecordOfNumberOfJobPostApplied();
+    // Persist data to database
+    UserDataProvider.updateNumOfJobsAppliedToday(jobApplicationTracker, uid);
   }
 }

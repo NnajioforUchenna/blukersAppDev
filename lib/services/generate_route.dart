@@ -124,7 +124,6 @@ void verifyCurrentPath() {
   PaymentsProvider pp = PaymentsProvider();
   String urlEx = Uri.base.toString();
   UrlInfo urlInfo = UrlInfo.parseUrl(urlEx);
-  print(urlInfo);
   if (urlInfo.sessionId != null) {
     pp.verifyPayment(urlInfo, 'success');
   }

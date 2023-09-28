@@ -5,9 +5,11 @@ import 'package:provider/provider.dart';
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../services/responsive.dart';
+import '../../common_views/components/animations/index.dart';
 import 'animate_job_post_details.dart';
 import 'display_job_card.dart';
 import 'display_job_post_dialog.dart';
+import 'no_more_jobs_found_card.dart';
 
 class CompleteJobPostWidget extends StatefulWidget {
   final List<JobPost> jobPosts;
@@ -77,7 +79,8 @@ class ListViewJobs extends StatefulWidget {
 
 class _ListViewJobsState extends State<ListViewJobs> {
   final ScrollController controller = ScrollController();
-  int pageNumber = 1;
+  bool isRefilling = false;
+  late JobPostsProvider jp;
 
   @override
   void dispose() {
@@ -85,23 +88,34 @@ class _ListViewJobsState extends State<ListViewJobs> {
     super.dispose();
   }
 
+  refill() async {
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context, listen: false);
+    UserProvider up = Provider.of<UserProvider>(context, listen: false);
+
+    Map<String, JobPost> newJobs = await jp.loadMoreJobPosts(
+        pageNumber: widget.jobPosts.isEmpty ? 0 : widget.jobPosts.length ~/ 10,
+        targetLanguage: up.userLanguage,
+        queryName: jp.nameSearch,
+        queryLocation: jp.locationSearch);
+
+    setState(() {
+      widget.jobPosts.addAll(newJobs.values.toList());
+    });
+
+    isRefilling = false;
+  }
+
   @override
   void initState() {
+    jp = Provider.of<JobPostsProvider>(context, listen: false);
     controller.addListener(() async {
       if (controller.position.pixels == controller.position.maxScrollExtent) {
-        JobPostsProvider jp =
-            Provider.of<JobPostsProvider>(context, listen: false);
-        UserProvider up = Provider.of<UserProvider>(context, listen: false);
-        String targetLanguage = up.userLanguage;
-        Map<String, JobPost> newJobs = await jp.loadMoreJobPosts(
-            pageNumber: pageNumber,
-            targetLanguage: targetLanguage,
-            queryName: jp.nameSearch,
-            queryLocation: jp.locationSearch);
-        setState(() {
-          widget.jobPosts.addAll(newJobs.values.toList());
-          pageNumber++;
-        });
+        if (jp.hasMore) {
+          if (!isRefilling) {
+            isRefilling = true;
+            refill();
+          }
+        }
       }
     });
     super.initState();
@@ -114,7 +128,7 @@ class _ListViewJobsState extends State<ListViewJobs> {
       controller: controller,
       shrinkWrap: true,
       padding:
-          const EdgeInsets.all(10), // Added to give some space around cards
+          const EdgeInsets.all(15), // Added to give some space around cards
       itemCount: widget.jobPosts.length + 1,
       itemBuilder: (context, index) {
         if (index < widget.jobPosts.length) {
@@ -132,10 +146,30 @@ class _ListViewJobsState extends State<ListViewJobs> {
                 }
               });
         } else {
-          return const Padding(
-            padding: EdgeInsets.symmetric(vertical: 32.0),
-            child: Center(child: CircularProgressIndicator()),
-          );
+          if (jp.hasMore) {
+            if (!isRefilling) {
+              isRefilling = true;
+              refill();
+            }
+          }
+
+          return jp.hasMore
+              ? Center(
+                  child: SizedBox(
+                    height: 400,
+                    child: Padding(
+                      padding: EdgeInsets.all(32.0),
+                      child: Center(
+                          child: MyAnimation(
+                        name: 'blukersLoadingDots',
+                      )),
+                    ),
+                  ),
+                )
+              : NoJobsFoundCard(
+                  nameSearch: jp.nameSearch,
+                  locationSearch: jp.locationSearch,
+                );
         }
       },
       separatorBuilder: (BuildContext context, int index) {

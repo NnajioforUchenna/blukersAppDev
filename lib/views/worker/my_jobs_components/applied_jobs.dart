@@ -2,12 +2,12 @@ import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/job_post.dart';
-import '../jobs_componets/complete_job_posts_widget.dart';
+import 'list_job_posts_widget.dart';
 
 class AppliedJobs extends StatefulWidget {
   const AppliedJobs({Key? key}) : super(key: key); // Corrected here
@@ -46,7 +46,7 @@ class _AppliedJobsState extends State<AppliedJobs> {
         } else if (snapshot.hasData) {
           List<JobPost> jobPosts = snapshot.data!;
           return jobPosts.isNotEmpty
-              ? CompleteJobPostWidget(
+              ? ListJobPostsWidget(
                   jobPosts: jobPosts,
                 )
               : IconText404(

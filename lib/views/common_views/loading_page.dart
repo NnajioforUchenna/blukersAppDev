@@ -1,6 +1,8 @@
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 
+import 'components/animations/index.dart';
+
 class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,11 @@ class LoadingPage extends StatelessWidget {
           children: [
             Transform.scale(
               scale: 2.0, // adjust the scale value to make it bigger or smaller
-              child: const CircularProgressIndicator(
-                strokeWidth: 5,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    ThemeColors.primaryThemeColor),
+              child: MyAnimation(
+                name: 'blukersLoadingDots',
               ),
             ),
-            const SizedBox(height: 50), // space between progress bar and text
+            const SizedBox(height: 25), // space between progress bar and text
             const Text(
               'Loading...',
               style: TextStyle(

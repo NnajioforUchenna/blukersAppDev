@@ -23,6 +23,9 @@ import '../models/address.dart';
 import '../models/app_user.dart';
 import '../models/company.dart';
 import '../models/worker.dart';
+import '../views/common_views/display_job_post_eligibility_dialog.dart';
+import '../views/common_views/job_timeline/display_job_timeline_dialog.dart';
+import '../views/membership/show_subscription_dialog.dart';
 
 part "user_provider_parts/authentication_authorization.dart";
 part "user_provider_parts/creating_user_profile.dart";
@@ -86,5 +89,18 @@ class UserProvider with ChangeNotifier {
     SubscriptionStatus subscriptionStatus =
         await subscriptionStatusStream.first;
     return subscriptionStatus.subIsActive;
+  }
+
+  void applyForJobPost(JobPost jobPost) {
+    // print(jobPost.toString());
+    // Update UI interFace
+    appUser?.worker?.appliedJobPostIds?.add(jobPost!.jobPostId!);
+    notifyListeners();
+    // Persist data to database
+    UserDataProvider.updateWorkerAppliedJobPostIds(
+        appUser!.worker!.appliedJobPostIds!, appUser!.uid);
+    // update JobPost Records
+    JobPostsDataProvider.updateJobPostAppliedWorkerIds(
+        jobPost!.jobPostId!, appUser!.uid);
   }
 }

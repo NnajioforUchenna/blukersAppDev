@@ -1,13 +1,13 @@
 import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../providers/user_provider.dart';
-import '../jobs_componets/complete_job_posts_widget.dart';
+import 'list_job_posts_widget.dart';
 
 class SavedJobs extends StatefulWidget {
   const SavedJobs({super.key});
@@ -46,7 +46,7 @@ class _SavedJobsState extends State<SavedJobs> {
               ? IconText404(
                   text: AppLocalizations.of(context)!.youHaveNotSavedAnyJobPost,
                   icon: UniconsLine.file_bookmark_alt)
-              : CompleteJobPostWidget(
+              : ListJobPostsWidget(
                   jobPosts: snapshot.data!,
                 );
         }

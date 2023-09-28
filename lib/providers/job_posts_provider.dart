@@ -11,27 +11,25 @@ import '../views/common_views/please_login_dialog.dart';
 
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;
-  Map<String, JobPost> _jobPosts = {};
+
   Map<String, dynamic> newJobPostData = {};
 
   Map<String, JobPost> searchJobs = {};
   Map<String, JobPost> recent50Jobs = {};
 
+  // Controls Displayed Job Posts
+  Map<String, JobPost> displayedJobPosts = {};
   JobPost? selectedJobPost;
 
-  Map<String, JobPost> get jobPosts => _jobPosts;
-  bool isReal = true;
-
-  List<JobPost> selectedJobPosts = [];
+  // List<JobPost> selectedJobPosts = displayedJobPosts.values.toList();
   int jobPostCurrentPageIndex = 0;
   String selectedJobPostId = '';
-
-  Map<String, JobPost> realJobPosts = {};
 
   // Job Query Parameters
   String nameSearch = '';
   String locationSearch = '';
   String language = 'en';
+  bool hasMore = true;
 
   update(AppUser? user) {
     appUser = user;
@@ -42,8 +40,8 @@ class JobPostsProvider with ChangeNotifier {
   }
 
   JobPostsProvider() {
-    get50LastestJobPosts();
-    getRealJobPosts();
+    // get50LastestJobPosts();
+    // getRealJobPosts();
   }
 
   bool searchComplete = false;
@@ -59,7 +57,8 @@ class JobPostsProvider with ChangeNotifier {
     // Get all jobPosts for the job with the given jobId.
     JobPostsDataProvider.getJobPostsByJobID(jobId, targetLanguage)
         .then((jobPosts) {
-      selectedJobPosts = jobPosts
+      List<JobPost> listJobPosts = [];
+      listJobPosts = jobPosts
           .map((jobPost) {
             return JobPost.fromMap(jobPost);
           })
@@ -67,9 +66,11 @@ class JobPostsProvider with ChangeNotifier {
           .cast<JobPost>()
           .toList();
 
-      if (selectedJobPosts.isNotEmpty) {
-        selectedJobPost = selectedJobPosts.first;
+      if (listJobPosts.isNotEmpty) {
+        selectedJobPost = listJobPosts.first;
       }
+
+      displayedJobPosts = fillDisplayedJobPosts(listJobPosts);
 
       searchComplete = true;
       notifyListeners();
@@ -78,21 +79,9 @@ class JobPostsProvider with ChangeNotifier {
 
   Future<void> translateJobPosts(targetLanguage) async {
     language = targetLanguage;
+
     getRealJobPosts();
-    List<JobPost> translatedJobPosts = [];
-    if (selectedJobPostId.isNotEmpty) {
-      translatedJobPosts = await JobPostsDataProvider.translateJobPosts(
-          selectedJobPostId, targetLanguage);
-      if (translatedJobPosts.isEmpty) {
-        EasyLoading.showError('No Jobs Found with $targetLanguage');
-        return;
-      }
-      selectedJobPosts = translatedJobPosts;
-      selectedJobPost = translatedJobPosts.firstWhere((jobPost) {
-        return jobPost.jobPostId == selectedJobPostId;
-      }, orElse: () => translatedJobPosts.first);
-      notifyListeners();
-    }
+    notifyListeners();
   }
 
   void setSelectedJobPost(JobPost jobPost) {
@@ -255,18 +244,22 @@ class JobPostsProvider with ChangeNotifier {
       String nameRelated, String locationRelated) async {
     nameSearch = nameRelated;
     locationSearch = locationRelated;
-    selectedJobPosts = [];
-    selectedJobPosts = await JobPostsDataProvider.searchJobPosts(
+
+    List<JobPost> listJobPosts = [];
+    displayedJobPosts.clear();
+
+    listJobPosts = await JobPostsDataProvider.searchJobPosts(
         nameRelated: nameRelated,
         locationRelated: locationRelated,
         pageNumber: 0,
         targetLanguage: language);
-    print('selectedJobPosts: ${selectedJobPosts.length}');
+    hasMore = listJobPosts.isNotEmpty;
 
-    if (selectedJobPosts.isEmpty) {
+    if (listJobPosts.isEmpty) {
       EasyLoading.showError('No Jobs Found with $nameRelated $locationRelated');
     } else {
-      selectedJobPost = selectedJobPosts.first;
+      displayedJobPosts = fillDisplayedJobPosts(listJobPosts);
+      selectedJobPost = listJobPosts.first;
       isSearching = true;
       notifyListeners();
     }
@@ -280,6 +273,7 @@ class JobPostsProvider with ChangeNotifier {
   void clearSearchParameters() {
     nameSearch = '';
     locationSearch = '';
+    isSearching = false;
     notifyListeners();
   }
 
@@ -294,6 +288,7 @@ class JobPostsProvider with ChangeNotifier {
         locationRelated: locationSearch,
         pageNumber: 0,
         targetLanguage: language);
+    hasMore = searchJobPosts.isNotEmpty;
     if (searchJobPosts.isEmpty) {
       EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
     } else {
@@ -308,8 +303,12 @@ class JobPostsProvider with ChangeNotifier {
   void get50LastestJobPosts() async {
     // Get the 50 most recent job posts.
     List<Map<String, dynamic>> jobPosts =
-        await JobPostsDataProvider.getRecentJobPosts();
-
+        await JobPostsDataProvider.getAiJobPosts(
+            queryName: "",
+            queryLocation: "",
+            pageNumber: 0,
+            targetLanguage: language);
+    hasMore = jobPosts.isNotEmpty;
     recent50Jobs = {};
     for (var jobPost in jobPosts) {
       if (jobPost['id'] != null) {
@@ -337,18 +336,21 @@ class JobPostsProvider with ChangeNotifier {
             pageNumber: 0,
             targetLanguage: language);
 
-    realJobPosts = {};
+    hasMore = jobPosts.isNotEmpty;
+
+    displayedJobPosts = {};
+
     for (var jobPost in jobPosts) {
       if (jobPost['jobPostId'] != null) {
         JobPost? parsedJobPost = JobPost.fromMap(jobPost);
         if (parsedJobPost != null) {
-          realJobPosts[jobPost['jobPostId']] = parsedJobPost;
+          displayedJobPosts[jobPost['jobPostId']] = parsedJobPost;
         }
       }
     }
 
-    if (realJobPosts.isNotEmpty) {
-      selectedJobPost = realJobPosts.values.first;
+    if (displayedJobPosts.isNotEmpty) {
+      selectedJobPost = displayedJobPosts.values.first;
     }
 
     notifyListeners();
@@ -360,6 +362,11 @@ class JobPostsProvider with ChangeNotifier {
     required int pageNumber,
     required String targetLanguage,
   }) async {
+    print('queryName: $queryName');
+    print('queryLocation: $queryLocation');
+    print('pageNumber: $pageNumber');
+    print('targetLanguage: $targetLanguage');
+
     // Get the 50 most recent job posts.
     Map<String, JobPost> newJobs = {};
 
@@ -369,6 +376,8 @@ class JobPostsProvider with ChangeNotifier {
             queryLocation: queryLocation,
             pageNumber: pageNumber,
             targetLanguage: targetLanguage);
+
+    hasMore = jobPosts.isNotEmpty;
 
     for (var jobPost in jobPosts) {
       if (jobPost['jobPostId'] != null) {
@@ -380,6 +389,14 @@ class JobPostsProvider with ChangeNotifier {
     }
 
     return newJobs;
+  }
+
+  Map<String, JobPost> fillDisplayedJobPosts(List<JobPost> listJobPosts) {
+    Map<String, JobPost> newDisplayedJobPosts = {};
+    for (var jobPost in listJobPosts) {
+      newDisplayedJobPosts[jobPost.jobPostId] = jobPost;
+    }
+    return newDisplayedJobPosts;
   }
 
 // Future<List<JobPost>> getSavedJobPostIds(String uid) {

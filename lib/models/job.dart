@@ -40,8 +40,9 @@ class Job {
       requirements: map['requirements'],
       highRange: double.parse(map['highRange'].toString()),
       lowRange: double.parse(map['lowRange'].toString()),
-      numberOfApplicants: map['numberOfApplicants'],
-      numberOfJobPosts: map['numberOfJobPosts'], // Extract from map
+      numberOfApplicants: int.parse(map['numberOfApplicants'].toString()),
+      numberOfJobPosts:
+          int.parse(map['numberOfJobPosts'].toString()), // Extract from map
     );
   }
 

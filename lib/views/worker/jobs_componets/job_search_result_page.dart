@@ -11,7 +11,7 @@ class JobSearchResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    List<JobPost> jobPosts = jp.selectedJobPosts;
+    List<JobPost> jobPosts = jp.displayedJobPosts.values.toList();
     return CompleteJobPostWidget(jobPosts: jobPosts);
   }
 }

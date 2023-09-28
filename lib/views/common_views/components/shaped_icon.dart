@@ -1,6 +1,6 @@
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
-import 'package:blukers/utils/styles/index.dart';
 
 class ShapedIcon extends StatelessWidget {
   final String iconShape; // "none", "circle", ... later add: "square"
@@ -20,7 +20,7 @@ class ShapedIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(
       icon,
-      size: 30,
+      size: 15,
       color: ThemeColors.black3ThemeColor,
     );
     return CircleAvatar(

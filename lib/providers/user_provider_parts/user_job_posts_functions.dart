@@ -15,22 +15,37 @@ extension UserJobPostsFunctions on UserProvider {
         false; // Change to JobPostId
   }
 
-  void applyForJobPost(JobPost jobPost) {
-    print(jobPost.toString());
-    // Update UI interFace
-    appUser?.worker?.appliedJobPostIds?.add(jobPost!.jobPostId!);
-    notifyListeners();
-    // Persist data to database
-    UserDataProvider.updateWorkerAppliedJobPostIds(
-        appUser!.worker!.appliedJobPostIds!, appUser!.uid);
-    // update JobPost Records
-    JobPostsDataProvider.updateJobPostAppliedWorkerIds(
-        jobPost!.jobPostId!, appUser!.uid);
-  }
-
   bool isJobPostSaved(String jobPostId) {
     return appUser?.worker?.savedJobPostIds?.contains(jobPostId) ??
         false; // Change to JobPostId
+  }
+
+  Future<void> checkAndApplyJobPost(
+      BuildContext context, JobPost jobPost) async {
+    if (workerTimelineStep < 2) {
+      showDialog(
+          context: context,
+          builder: (context) => const DisplayJobTimelineDialog());
+    } else {
+      bool result = await checkIfSubscribed();
+      if (!result) {
+        showDialog(
+            context: context,
+            builder: (context) => const showSubscriptionDialog());
+      } else {
+        bool? isEligible = appUser?.checkIfEligible();
+
+        if (isEligible ?? false) {
+          appUser?.updateNumOfJobsAppliedToday();
+          print("${appUser?.jobApplicationTracker?.toMap()}");
+          applyForJobPost(jobPost);
+        } else {
+          showDialog(
+              context: context,
+              builder: (context) => const DisplayJobPostEligibilityDialog());
+        }
+      }
+    }
   }
 
   void saveJobPost(JobPost jobPost) {

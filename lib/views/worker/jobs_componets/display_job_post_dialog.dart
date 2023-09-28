@@ -1,7 +1,5 @@
 import 'package:blukers/models/job_post.dart';
-import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'animate_job_post_details.dart';
 
@@ -19,43 +17,13 @@ class DisplayJobPostDialog extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 26),
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(0.sp),
-            child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth:
-                      width * 0.9, // Constrain the width to 80% of the screen
-                  maxHeight:
-                      height * 0.9, // Constrain the height to 70% of the screen
-                ),
-                child: const AnimateJobPostDetails()),
+      child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: width * 0.9, // Constrain the width to 80% of the screen
+            maxHeight:
+                height * 0.9, // Constrain the height to 70% of the screen
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(),
-              Row(
-                children: [
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(0),
-                    child: FloatingActionButton(
-                      backgroundColor: ThemeColors.blukersOrangeThemeColor,
-                      child: const Icon(Icons.close),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-              const SizedBox(height: 10)
-            ],
-          ),
-        ],
-      ),
+          child: const AnimateJobPostDetails()),
     );
   }
 }

@@ -1,13 +1,12 @@
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/views/common_views/skills_form/skills_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'credential_field.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfessionalCredentialsPage extends StatefulWidget {
   const ProfessionalCredentialsPage({super.key});
@@ -72,6 +71,7 @@ class _ProfessionalCredentialsPageState
             ),
             const SizedBox(height: 10),
             ...credentialForms,
+
             Align(
               alignment: Alignment.centerRight,
               child: Tooltip(
