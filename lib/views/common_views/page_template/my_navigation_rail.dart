@@ -1,8 +1,8 @@
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
 
 import '../../../providers/user_provider.dart';
 
@@ -38,7 +38,6 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
       useIndicator: false,
       backgroundColor: Colors.white,
       indicatorColor: Colors.white,
-
       leading: Column(
         children: [
           Image.asset(
@@ -51,43 +50,39 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
           ),
         ],
       ),
-      // trailing: const MyTrailingWidget(),
       destinations: <NavigationRailDestination>[
         NavigationRailDestination(
-          icon: const Icon(UniconsLine.estate,
+          icon: SvgPicture.asset('assets/icons/homeIcon.svg',
               color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.estate,
+          selectedIcon: SvgPicture.asset('assets/icons/homeIcon.svg',
               color: ThemeColors.primaryThemeColor),
           label: Text(AppLocalizations.of(context)!.home),
-          // padding: EdgeInsets.all(16.0),
         ),
         NavigationRailDestination(
-          icon: const Icon(UniconsLine.briefcase_alt,
+          icon: SvgPicture.asset('assets/icons/jobsIcon.svg',
               color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.briefcase_alt,
+          selectedIcon: SvgPicture.asset('assets/icons/jobsIcon.svg',
               color: ThemeColors.primaryThemeColor),
-          label: up.userRole == 'company'
-              ? Text(AppLocalizations.of(context)!.jobs)
-              : Text(AppLocalizations.of(context)!.jobs),
+          label: Text(AppLocalizations.of(context)!.jobs),
         ),
         NavigationRailDestination(
-          icon:
-              const Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.chat,
+          icon: SvgPicture.asset('assets/icons/chatIcon.svg',
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: SvgPicture.asset('assets/icons/chatIcon.svg',
               color: ThemeColors.primaryThemeColor),
           label: Text(AppLocalizations.of(context)!.chat),
         ),
         NavigationRailDestination(
-          icon: const Icon(UniconsLine.plus_circle,
+          icon: SvgPicture.asset('assets/icons/servicesIcon.svg',
               color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.plus_circle,
+          selectedIcon: SvgPicture.asset('assets/icons/servicesIcon.svg',
               color: ThemeColors.primaryThemeColor),
-          label: Text(AppLocalizations.of(context)!.members),
+          label: Text("Services"),
         ),
         NavigationRailDestination(
-          icon:
-              const Icon(UniconsLine.user, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.user,
+          icon: SvgPicture.asset('assets/icons/profileIcon.svg',
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: SvgPicture.asset('assets/icons/profileIcon.svg',
               color: ThemeColors.primaryThemeColor),
           label: up.appUser == null
               ? Text(AppLocalizations.of(context)!.loginRegister)

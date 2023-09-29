@@ -111,10 +111,10 @@ final List<Map<String, String>> listOffers = [
     'route': '/membership'
   },
   {
-    'title': 'Services',
+    'title': 'Products',
     'description':
         'Our comprehensive suite of services ensures that international workers transition smoothly into their new roles in the USA.',
-    'route': '/services'
+    'route': '/products'
   },
   // {
   //   'title': 'Exams',
@@ -172,6 +172,7 @@ Map<String, String?> extractIds(String text) {
 }
 
 const ProductNames = {
+  'basic': 'Basic',
   'blukers_workers_premium': 'Premium',
   'blukers_workers_premium_plus': 'Premium Plus',
 };

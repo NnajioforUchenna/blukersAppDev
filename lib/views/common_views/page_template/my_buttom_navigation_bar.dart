@@ -2,8 +2,8 @@ import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
 
 class MyButtomNavigationBar extends StatefulWidget {
   const MyButtomNavigationBar({super.key});
@@ -23,40 +23,42 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
       animationDuration: const Duration(milliseconds: 1000),
       destinations: <Widget>[
         NavigationDestination(
-          icon: const Icon(UniconsLine.estate,
-              color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.estate,
+          icon: SvgPicture.asset(
+            'assets/icons/homeIcon.svg',
+          ),
+          selectedIcon: SvgPicture.asset('assets/icons/homeIcon.svg',
               color: ThemeColors.primaryThemeColor),
           label: AppLocalizations.of(context)!.home,
         ),
         NavigationDestination(
-          icon: const Icon(UniconsLine.briefcase_alt,
-              color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.briefcase_alt,
+          icon: SvgPicture.asset(
+            'assets/icons/jobsIcon.svg',
+          ),
+          selectedIcon: SvgPicture.asset('assets/icons/jobsIcon.svg',
               color: ThemeColors.primaryThemeColor),
-          // label: up.userRole == 'company' ? 'Jobs' : 'Jobs',
-          label: AppLocalizations.of(context)!.jobs,
+          label: "Saved",
         ),
         NavigationDestination(
-          icon:
-              const Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.chat,
+          icon: SvgPicture.asset(
+            'assets/icons/chatIcon.svg',
+          ),
+          selectedIcon: SvgPicture.asset('assets/icons/chatIcon.svg',
               color: ThemeColors.primaryThemeColor),
           label: AppLocalizations.of(context)!.chat,
         ),
         NavigationDestination(
-          icon: const Icon(UniconsLine.plus_circle,
-              color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.plus_circle,
-              color: ThemeColors.primaryThemeColor),
-          label: AppLocalizations.of(context)!.members,
-        ),
+            icon: SvgPicture.asset(
+              'assets/icons/servicesIcon.svg',
+            ),
+            selectedIcon: SvgPicture.asset('assets/icons/servicesIcon.svg',
+                color: ThemeColors.primaryThemeColor),
+            label: "Services"),
         NavigationDestination(
-          icon:
-              const Icon(UniconsLine.user, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.user,
+          icon: SvgPicture.asset(
+            'assets/icons/profileIcon.svg',
+          ),
+          selectedIcon: SvgPicture.asset('assets/icons/profileIcon.svg',
               color: ThemeColors.primaryThemeColor),
-          // label: up.appUser == null ? "Login/Register" : 'Profile',
           label: up.appUser == null
               ? AppLocalizations.of(context)!.loginRegister
               : AppLocalizations.of(context)!.profile,
@@ -70,7 +72,6 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
       selectedIndex: currentPageIndex,
       backgroundColor: Colors.white,
       elevation: 10,
-      // surfaceTintColor: Colors.blue,
       indicatorColor: Colors.white,
     );
   }

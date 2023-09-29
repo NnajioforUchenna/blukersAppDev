@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../services/responsive.dart';
-import 'mobile_view/mobile_membership_widget.dart';
+import 'new_mobile_view/mobile_new_membership_widget.dart';
 import 'web_view/desktop_membership_widget.dart';
 
 class MembershipWidget extends StatelessWidget {
@@ -10,7 +10,7 @@ class MembershipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Responsive.isMobile(context)
-        ? const MobileMembershipWidget()
+        ? const MobileNewMembershipWidget()
         : const DesktopMembershipWidget();
   }
 }

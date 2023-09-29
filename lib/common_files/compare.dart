@@ -1,61 +1,77 @@
-// import 'package:blukers/models/job_post.dart';
-// import 'package:blukers/utils/styles/theme_colors.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-//
-// import 'animate_job_post_details.dart';
-//
-// class DisplayJobPostDialog extends StatelessWidget {
-//   final JobPost jobPost;
-//   const DisplayJobPostDialog({super.key, required this.jobPost});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // Determine screen size for responsive design
-//     double width = MediaQuery.of(context).size.width;
-//     double height = MediaQuery.of(context).size.height;
-//     return Dialog(
-//       shape: const RoundedRectangleBorder(
-//         borderRadius: BorderRadius.all(Radius.circular(5)),
-//       ),
-//       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 26),
-//       child: Stack(
-//         alignment: Alignment.topCenter,
-//         children: <Widget>[
-//           Padding(
-//             padding: EdgeInsets.all(0.sp),
-//             child: ConstrainedBox(
-//                 constraints: BoxConstraints(
-//                   maxWidth:
-//                   width * 0.9, // Constrain the width to 80% of the screen
-//                   maxHeight:
-//                   height * 0.9, // Constrain the height to 70% of the screen
-//                 ),
-//                 child: const AnimateJobPostDetails()),
-//           ),
-//           Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               const Spacer(),
-//               Row(
-//                 children: [
-//                   const Spacer(),
-//                   Padding(
-//                     padding: const EdgeInsets.all(0),
-//                     child: FloatingActionButton(
-//                       backgroundColor: ThemeColors.blukersOrangeThemeColor,
-//                       child: const Icon(Icons.close),
-//                       onPressed: () => Navigator.of(context).pop(),
-//                     ),
-//                   ),
-//                   const Spacer(),
-//                 ],
-//               ),
-//               const SizedBox(height: 10)
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
+
+class MyButtomNavigationBar extends StatefulWidget {
+  const MyButtomNavigationBar({super.key});
+
+  @override
+  State<MyButtomNavigationBar> createState() => _MyButtomNavigationBarState();
+}
+
+class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
+  int currentPageIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
+    currentPageIndex = up.currentPageIndex;
+    return NavigationBar(
+      animationDuration: const Duration(milliseconds: 1000),
+      destinations: <Widget>[
+        NavigationDestination(
+          icon: const Icon(UniconsLine.estate,
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.estate,
+              color: ThemeColors.primaryThemeColor),
+          label: AppLocalizations.of(context)!.home,
+        ),
+        NavigationDestination(
+          icon: const Icon(UniconsLine.briefcase_alt,
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.briefcase_alt,
+              color: ThemeColors.primaryThemeColor),
+          // label: up.userRole == 'company' ? 'Jobs' : 'Jobs',
+          label: AppLocalizations.of(context)!.jobs,
+        ),
+        NavigationDestination(
+          icon:
+              const Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.chat,
+              color: ThemeColors.primaryThemeColor),
+          label: AppLocalizations.of(context)!.chat,
+        ),
+        NavigationDestination(
+          icon: const Icon(UniconsLine.plus_circle,
+              color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.plus_circle,
+              color: ThemeColors.primaryThemeColor),
+          label: AppLocalizations.of(context)!.members,
+        ),
+        NavigationDestination(
+          icon:
+              const Icon(UniconsLine.user, color: ThemeColors.grey1ThemeColor),
+          selectedIcon: const Icon(UniconsLine.user,
+              color: ThemeColors.primaryThemeColor),
+          // label: up.appUser == null ? "Login/Register" : 'Profile',
+          label: up.appUser == null
+              ? AppLocalizations.of(context)!.loginRegister
+              : AppLocalizations.of(context)!.profile,
+        ),
+      ],
+      onDestinationSelected: (int index) {
+        setState(() {
+          up.navigate(context, index);
+        });
+      },
+      selectedIndex: currentPageIndex,
+      backgroundColor: Colors.white,
+      elevation: 10,
+      // surfaceTintColor: Colors.blue,
+      indicatorColor: Colors.white,
+    );
+  }
+}

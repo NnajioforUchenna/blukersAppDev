@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
 
+import '../membership/show_subscription_dialog.dart';
+
 class OfferCard extends StatelessWidget {
   final String title;
   final String description;
@@ -19,7 +21,13 @@ class OfferCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push(route);
+        if (route == "/membership") {
+          showDialog(
+              context: context,
+              builder: (context) => const ShowSubscriptionDialog());
+        } else {
+          context.push(route);
+        }
       },
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 8.0),

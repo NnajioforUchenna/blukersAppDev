@@ -1,19 +1,16 @@
-import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../common_files/constants.dart';
 import '../../providers/user_provider.dart';
-import '../membership/show_subscription_dialog.dart';
 
-class DisplayJobPostEligibilityDialog extends StatelessWidget {
-  const DisplayJobPostEligibilityDialog({super.key});
+class JobPostEligibilityDialog extends StatelessWidget {
+  const JobPostEligibilityDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Determine screen size for responsive design
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
     String subscriptionType =
         up.appUser?.activeSubscription?.subscriptionId ?? '';
@@ -21,77 +18,79 @@ class DisplayJobPostEligibilityDialog extends StatelessWidget {
             .appUser?.jobApplicationTracker?.numberOfAppliedJobsToday
             .toString() ??
         '0';
-    return Dialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-      ),
-      insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 26),
+
+    return Center(
       child: Container(
-        width: width * 0.9,
-        height: height * 0.9,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 26),
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2.5,
+              blurRadius: 3.5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        width: width * 0.8,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Icon(
+              Icons.info_outline,
+              size: 60.0,
+              color: Colors.redAccent,
+            ),
+            const SizedBox(height: 16.0),
             Text(
-              "Subscription: $subscriptionType",
-              style: GoogleFonts.montserrat(
+              "Your Active Subscription:  ${ProductNames[subscriptionType]}",
+              style: const TextStyle(
+                fontSize: 18.0,
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 10.0),
             Text(
               "You've applied for $numberOfJobsAppliedToday jobs today.",
-              style: GoogleFonts.montserrat(fontSize: 16),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.grey[700],
+              ),
             ),
-            const SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10.0),
+            const Text(
               "Based on your current subscription, you can't apply for more jobs today.",
               textAlign: TextAlign.center,
-              style: GoogleFonts.montserrat(
+              style: TextStyle(
+                fontSize: 16.0,
                 color: Colors.redAccent,
-                fontSize: 16,
               ),
             ),
-            const SizedBox(height: 10),
-            Text(
-              "Upgrade your subscription for more benefits!",
-              style: GoogleFonts.montserrat(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                // Logic for button press
+                context.go('/managePayment');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
-            ),
-            const SizedBox(height: 20), // Spacer between text and button
-            Row(
-              children: [
-                const Spacer(), // Spacer between button and text
-                SizedBox(
-                  width: width * 0.6,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      showDialog(
-                          context: context,
-                          builder: (context) => const showSubscriptionDialog());
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          ThemeColors.secondaryThemeColor, // Background color
-
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: Text('Upgrade Subscription',
-                        style: GoogleFonts.montserrat(
-                            fontSize: 16, color: Colors.white)),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Upgrade Subscription',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
                 ),
-                const Spacer(), // Spacer between button and text
-              ],
+              ),
             ),
           ],
         ),

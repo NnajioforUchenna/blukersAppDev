@@ -19,6 +19,8 @@ import '../views/company/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
 import '../views/company/workers.dart';
 import '../views/membership/membership_widget.dart';
+import '../views/membership/mobile_view/manage_payment_page.dart';
+import '../views/membership/show_subscription_dialog.dart';
 import '../views/membership/subscription_components/payment_failed_widget.dart';
 import '../views/membership/subscription_components/payment_successful_widget.dart';
 import '../views/offers/offers_list.dart';
@@ -106,7 +108,10 @@ final routes = [
   GoRoute(path: '/applicants', builder: (context, state) => const Applicants()),
   GoRoute(
       path: '/membership',
-      builder: (context, state) => const MembershipWidget()),
+      builder: (context, state) => const ShowSubscriptionDialog()),
+  GoRoute(
+      path: '/managePayment',
+      builder: (context, state) => const ManagePaymentPage()),
   GoRoute(path: '/services', builder: (context, state) => const Services()),
   GoRoute(path: '/offers', builder: (context, state) => const OffersList()),
   GoRoute(path: '/orders', builder: (context, state) => const OrdersList()),

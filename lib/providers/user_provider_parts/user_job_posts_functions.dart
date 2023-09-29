@@ -31,7 +31,7 @@ extension UserJobPostsFunctions on UserProvider {
       if (!result) {
         showDialog(
             context: context,
-            builder: (context) => const showSubscriptionDialog());
+            builder: (context) => const ShowSubscriptionDialog());
       } else {
         bool? isEligible = appUser?.checkIfEligible();
 
@@ -42,7 +42,7 @@ extension UserJobPostsFunctions on UserProvider {
         } else {
           showDialog(
               context: context,
-              builder: (context) => const DisplayJobPostEligibilityDialog());
+              builder: (context) => const JobPostEligibilityDialog());
         }
       }
     }
