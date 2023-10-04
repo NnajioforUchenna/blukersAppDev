@@ -103,4 +103,11 @@ class UserProvider with ChangeNotifier {
     JobPostsDataProvider.updateJobPostAppliedWorkerIds(
         jobPost!.jobPostId!, appUser!.uid);
   }
+
+  String whichMembership() {
+    if (appUser == null || appUser?.activeSubscription == null) {
+      return "basic";
+    }
+    return appUser!.activeSubscription!.subscriptionId;
+  }
 }

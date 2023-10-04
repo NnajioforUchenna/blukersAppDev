@@ -23,20 +23,21 @@ import '../views/membership/mobile_view/manage_payment_page.dart';
 import '../views/membership/show_subscription_dialog.dart';
 import '../views/membership/subscription_components/payment_failed_widget.dart';
 import '../views/membership/subscription_components/payment_successful_widget.dart';
-import '../views/offers/offers_list.dart';
 import '../views/orders/orders_list.dart';
-import '../views/services/services.dart';
+import '../views/products/products.dart';
+import '../views/services/services_list.dart';
 import '../views/worker/create_worker_profile_component/create_worker_profile.dart';
 import '../views/worker/jobs.dart';
 import '../views/worker/my_jobs.dart';
 import '../views/worker/worker_profile.dart';
-import 'authentication_wrapper.dart';
 
 final goRouter = GoRouter(routes: routes, initialLocation: '/');
 
 final routes = [
   GoRoute(
-      path: '/', builder: (context, state) => const AuthenticationWrapper()),
+      path: '/',
+      builder: (context, state) =>
+          const ServicesList()), //AuthenticationWrapper())
   GoRoute(path: '/landing', builder: (context, state) => LandingPage()),
   GoRoute(path: '/workers', builder: (context, state) => const Workers()),
   GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
@@ -112,8 +113,8 @@ final routes = [
   GoRoute(
       path: '/managePayment',
       builder: (context, state) => const ManagePaymentPage()),
-  GoRoute(path: '/services', builder: (context, state) => const Services()),
-  GoRoute(path: '/offers', builder: (context, state) => const OffersList()),
+  GoRoute(path: '/services', builder: (context, state) => const Products()),
+  GoRoute(path: '/offers', builder: (context, state) => const ServicesList()),
   GoRoute(path: '/orders', builder: (context, state) => const OrdersList()),
   GoRoute(
       path: '/createCompanyProfile',

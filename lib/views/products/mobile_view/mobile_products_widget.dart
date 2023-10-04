@@ -6,10 +6,10 @@ import 'package:provider/provider.dart';
 import '../../../providers/payments_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import '../../membership/mobile_view/my_evelated_button.dart';
-import 'services_carousel_cards.dart';
+import 'products_carousel_cards.dart';
 
-class MobileServicesWidget extends StatelessWidget {
-  const MobileServicesWidget({super.key});
+class MobileProductsWidget extends StatelessWidget {
+  const MobileProductsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class MobileServicesWidget extends StatelessWidget {
               SizedBox(
                 height: 18.sp,
               ),
-              ServicesCarouselCards(),
+              ProductsCarouselCards(),
               SizedBox(
                 height: 18.sp,
               ),

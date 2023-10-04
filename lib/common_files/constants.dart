@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:blukers/views/services/service_coming_soon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/address.dart';
 import '../models/job_post.dart';
+import '../views/membership/membership_widget.dart';
+import '../views/products/products.dart';
 
 final List<String> routesWorker = [
   '/jobs',
@@ -94,7 +97,7 @@ Widget displayParagraph(String text) {
 
   return Text(
     formattedText,
-    style: TextStyle(
+    style: const TextStyle(
       fontSize: 13.0, // Adjust the font size as needed
       color: Colors.black,
       height: 1.5, // Adjust line height for better readability
@@ -103,37 +106,123 @@ Widget displayParagraph(String text) {
   );
 }
 
-final List<Map<String, String>> listOffers = [
+final List<Map<String, dynamic>> listProducts = [
+  {
+    "color": Color(0xffF16523),
+    "title": "FOIA",
+    "subtitle": "",
+    "amount": "299.99",
+    "productId": "foia",
+    "details": [
+      "Create your Resume",
+      "Upload your Resume",
+      "Upload your Certifications",
+      "Apply to 10 Jobs Daily",
+      "Show your profile on the top in employers searchers section"
+    ],
+  },
+  {
+    "color": Color(0xff1a75bb),
+    "title": "Employment",
+    "subtitle": "Verification",
+    "amount": "99.99",
+    "productId": "employmentVerification",
+    "details": [
+      "Create your Resume",
+      "Upload your Resume",
+      "Upload your Certifications",
+      "Apply to 10 Jobs Daily",
+      "Show your profile on the top in employers searchers section"
+    ],
+  },
+];
+
+final List<Map<String, dynamic>> listSubscriptions = [
+  {
+    "color": Color(0xffF29500),
+    "title": "Basic",
+    "subtitle": "",
+    "amount": "0",
+    "subscriptionId": "basic",
+    "details": [
+      "Create your Resume",
+      "Upload your Resume",
+      "Upload your Certifications",
+      "Apply to 10 Jobs Daily",
+      "Show your profile on the top in employers searchers section"
+    ],
+  },
+  {
+    "color": Color(0xff1a75bb),
+    "title": "Premium",
+    "subtitle": "",
+    "amount": "4.99",
+    "subscriptionId": "blukers_workers_premium",
+    "details": [
+      "Create your Resume",
+      "Upload your Resume",
+      "Upload your Certifications",
+      "Apply to 10 Jobs Daily",
+      "Show your profile on the top in employers searchers section"
+    ],
+  },
+  {
+    "color": Color(0xffF16523),
+    "title": "Premium",
+    "subtitle": "Plus",
+    "amount": "9.99",
+    "subscriptionId": "blukers_workers_premium_plus",
+    "details": [
+      "Create your Resume",
+      "Upload your Resume",
+      "Upload your Certifications",
+      "Apply to 10 Jobs Daily",
+      "Show your profile on the top in employers searchers section"
+    ],
+  },
+];
+
+final List<Map<String, dynamic>> listServices = [
   {
     'title': 'Subscriptions',
     'description':
         'Stay updated with the latest job opportunities in the USA tailored for international talents.',
-    'route': '/membership'
+    'route': '/membership',
+    'service': const MembershipWidget(),
+    'color': const Color(0xffF16523)
   },
   {
     'title': 'Products',
     'description':
         'Our comprehensive suite of services ensures that international workers transition smoothly into their new roles in the USA.',
-    'route': '/products'
+    'route': '/products',
+    'service': const Products(),
+    'color': const Color(0xff1a75bb)
   },
-  // {
-  //   'title': 'Exams',
-  //   'description':
-  //       'Prepare for relevant certifications and evaluations required for specific job roles in the USA.',
-  //   'route': '/exams'
-  // },
-  // {
-  //   'title': 'Courses',
-  //   'description':
-  //       'Skill-enhancement courses designed to make you more marketable to employers in the USA.',
-  //   'route': '/courses'
-  // },
-  // {
-  //   'title': 'Certifications',
-  //   'description':
-  //       'Real-world practical experiences to familiarize international talents with the US work environment.',
-  //   'route': '/practicals'
-  // },
+  {
+    'title': 'Exams',
+    'description':
+        'Prepare for relevant certifications and evaluations required for specific job roles in the USA.',
+    'route': '/exams',
+    'service': const ServiceComingSoonWidget(),
+    'color': const Color(0xffF16523)
+  },
+  {
+    'title': 'Courses',
+    'description':
+        'Skill-enhancement courses designed to make you more marketable to employers in the USA.',
+    'route': '/courses',
+    'service': const ServiceComingSoonWidget(),
+    'color': const Color(0xff1a75bb)
+  },
+  {
+    'title': 'Certifications',
+    'description':
+        'Real-world practical experiences to familiarize international talents with the US work environment.',
+    'route': '/practicals',
+    'service': const ServiceComingSoonWidget(),
+    'color': const Color(0xffF16523)
+  },
 ];
 
 List<List<Widget>> combineLists(List<Widget> list1, List<Widget> list2) {

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import '../../membership/mobile_view/mobile_membership_card.dart';
 
-const List<MobileMembershipCard> servicesCards = [
+const List<MobileMembershipCard> productsCards = [
   MobileMembershipCard(
     headerTitle: 'FOIA',
     headerSubtitle: '',

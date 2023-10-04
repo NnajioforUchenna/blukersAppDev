@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 import '../../../common_files/constants.dart';
 import '../../membership/mobile_view/flip_card.dart';
-import 'list_mobile_service_cards.dart';
+import 'list_mobile_product_cards.dart';
 
-class ServicesCarouselCards extends StatefulWidget {
-  const ServicesCarouselCards({super.key});
+class ProductsCarouselCards extends StatefulWidget {
+  const ProductsCarouselCards({super.key});
 
   @override
-  State<ServicesCarouselCards> createState() => _ServicesCarouselCardsState();
+  State<ProductsCarouselCards> createState() => _ProductsCarouselCardsState();
 }
 
-class _ServicesCarouselCardsState extends State<ServicesCarouselCards> {
+class _ProductsCarouselCardsState extends State<ProductsCarouselCards> {
   int _currentIndex = 0;
 
   @override
@@ -20,7 +20,7 @@ class _ServicesCarouselCardsState extends State<ServicesCarouselCards> {
     // List of cards
 
     List<List<Widget>> combinedList =
-        combineLists(servicesCards, backServicesCards);
+        combineLists(productsCards, backServicesCards);
 
     return Center(
         child: CarouselSlider(

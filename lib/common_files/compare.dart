@@ -1,77 +1,84 @@
-import 'package:blukers/providers/user_provider.dart';
-import 'package:blukers/utils/styles/index.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
-
-class MyButtomNavigationBar extends StatefulWidget {
-  const MyButtomNavigationBar({super.key});
-
-  @override
-  State<MyButtomNavigationBar> createState() => _MyButtomNavigationBarState();
-}
-
-class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
-  int currentPageIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    UserProvider up = Provider.of<UserProvider>(context);
-    currentPageIndex = up.currentPageIndex;
-    return NavigationBar(
-      animationDuration: const Duration(milliseconds: 1000),
-      destinations: <Widget>[
-        NavigationDestination(
-          icon: const Icon(UniconsLine.estate,
-              color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.estate,
-              color: ThemeColors.primaryThemeColor),
-          label: AppLocalizations.of(context)!.home,
-        ),
-        NavigationDestination(
-          icon: const Icon(UniconsLine.briefcase_alt,
-              color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.briefcase_alt,
-              color: ThemeColors.primaryThemeColor),
-          // label: up.userRole == 'company' ? 'Jobs' : 'Jobs',
-          label: AppLocalizations.of(context)!.jobs,
-        ),
-        NavigationDestination(
-          icon:
-              const Icon(UniconsLine.chat, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.chat,
-              color: ThemeColors.primaryThemeColor),
-          label: AppLocalizations.of(context)!.chat,
-        ),
-        NavigationDestination(
-          icon: const Icon(UniconsLine.plus_circle,
-              color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.plus_circle,
-              color: ThemeColors.primaryThemeColor),
-          label: AppLocalizations.of(context)!.members,
-        ),
-        NavigationDestination(
-          icon:
-              const Icon(UniconsLine.user, color: ThemeColors.grey1ThemeColor),
-          selectedIcon: const Icon(UniconsLine.user,
-              color: ThemeColors.primaryThemeColor),
-          // label: up.appUser == null ? "Login/Register" : 'Profile',
-          label: up.appUser == null
-              ? AppLocalizations.of(context)!.loginRegister
-              : AppLocalizations.of(context)!.profile,
-        ),
-      ],
-      onDestinationSelected: (int index) {
-        setState(() {
-          up.navigate(context, index);
-        });
-      },
-      selectedIndex: currentPageIndex,
-      backgroundColor: Colors.white,
-      elevation: 10,
-      // surfaceTintColor: Colors.blue,
-      indicatorColor: Colors.white,
-    );
-  }
-}
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+//
+// import 'active_indicator_widget.dart';
+// import 'diagonal_shape.dart';
+//
+// class NewMobileMembershipCard extends StatelessWidget {
+//   final Color color;
+//   final String title;
+//   final String subtitle;
+//   final double amount;
+//   const NewMobileMembershipCard(
+//       {super.key,
+//       required this.color,
+//       required this.title,
+//       required this.amount,
+//       required this.subtitle});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     double height = MediaQuery.of(context).size.height;
+//     double width = MediaQuery.of(context).size.width * 0.95;
+//
+//     return Card(
+//       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+//       elevation: 5.0,
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(15.0),
+//       ),
+//       color: color,
+//       child: Container(
+//         height: height * 0.14,
+//         width: width,
+//         decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(15.0),
+//         ),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             ActiveIndicatorWidget(isActive: false),
+//             Spacer(),
+//             Row(
+//               children: [
+//                 Expanded(
+//                     flex: 3,
+//                     child: DiagonalShape(
+//                       height: height * 0.09,
+//                     )),
+//                 Expanded(flex: 2, child: Container()),
+//                 Expanded(
+//                     flex: 4,
+//                     child: Transform.translate(
+//                       offset: Offset(0, -20.0),
+//                       child: Row(
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           Text(
+//                             title.toUpperCase(),
+//                             style: GoogleFonts.montserrat(
+//                               fontSize: 28.0,
+//                               color: Colors.white,
+//                               fontWeight: FontWeight.w700,
+//                             ),
+//                           ),
+//                           const Spacer(),
+//                           Container(
+//                             margin: const EdgeInsets.only(right: 20.0),
+//                             child: const Icon(
+//                               Icons.arrow_forward_ios,
+//                               color: Colors.white,
+//                             ),
+//                           )
+//                         ],
+//                       ),
+//                     )),
+//               ],
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

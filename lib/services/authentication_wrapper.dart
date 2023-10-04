@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:blukers/providers/payments_provider.dart';
+import 'package:blukers/views/common_views/splash_screen/splash_screen_main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,11 +10,8 @@ import '../providers/app_versions_provider.dart';
 import '../providers/job_posts_provider.dart';
 import '../providers/user_provider.dart';
 import '../views/company/workers.dart';
-import '../views/offers/offers_list.dart';
 import '../views/worker/jobs.dart';
 import '../views/worker/web_jobs_landing_page/web_search_landing_page.dart';
-import 'package:blukers/views/common_views/splash_screen/splash_screen_main.dart';
-import 'package:blukers/views/common_views/landing_page_components/landing_page.dart';
 
 class AuthenticationWrapper extends StatefulWidget {
   const AuthenticationWrapper({super.key});

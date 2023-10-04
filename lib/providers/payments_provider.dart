@@ -24,7 +24,7 @@ import '../views/membership/mobile_view/manageSubscriptionComponents/already_pre
 import '../views/membership/subscription_components/countdown_waiting_page_pulse.dart';
 import '../views/membership/subscription_components/payment_failed_widget.dart';
 import '../views/membership/subscription_components/payment_successful_widget.dart';
-import '../views/services/mobile_view/display_stripe_url_mobile.dart';
+import '../views/products/mobile_view/display_stripe_url_mobile.dart';
 
 part 'payment_providers/in_app_purchase_payment_provider.dart';
 part 'payment_providers/stripe_payment_provider.dart';
