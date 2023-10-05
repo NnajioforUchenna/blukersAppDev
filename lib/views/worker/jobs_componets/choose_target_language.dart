@@ -93,7 +93,6 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
         ),
         value: selectedLanguageCode,
         onChanged: (String? newValue) {
-          //
           // print('newValue');
           // print(newValue);
           if (newValue.toString() == "es") {
@@ -103,7 +102,6 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
           }
           // print("LanguageManager.getCurrentLocale()");
           // print(LanguageManager.getCurrentLocale());
-          //
           setState(() {
             selectedLanguageCode = newValue;
             up.updateTargetLanguage(newValue);
