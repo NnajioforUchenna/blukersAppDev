@@ -212,4 +212,20 @@ class PaymentsProvider with ChangeNotifier {
       pay4Subscription(context, 'premium_plus');
     }
   }
+
+  void determineAction(
+      BuildContext context, String buttonText, String subscriptionId) {
+    if (buttonText == "Active") {
+      showDialog(
+          context: context, builder: (context) => const AlreadyPremiumPlus());
+    } else if (buttonText == "Purchase") {
+      String subscriptionType = subscriptionId == 'blukers_workers_premium_plus'
+          ? 'premiumPlus'
+          : 'premium';
+      pay4Subscription(context, subscriptionType);
+    } else if (buttonText == "Change Plan") {
+    } else if (buttonText == "Upgrade") {
+      pay4Subscription(context, 'premiumPlus');
+    }
+  }
 }

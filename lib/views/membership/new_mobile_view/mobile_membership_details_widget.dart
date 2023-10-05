@@ -1,6 +1,7 @@
-import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'get_membership_button.dart';
 
 class MobileMembershipDetailsWidget extends StatelessWidget {
   final Color color;
@@ -21,6 +22,7 @@ class MobileMembershipDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -106,27 +108,9 @@ class MobileMembershipDetailsWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              height: height * 0.025,
-              margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  elevation: 5,
-                  backgroundColor: ThemeColors.secondaryThemeColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                ),
-                child: const Text(
-                  'Subscribe',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+            GetMembershipButton(
+              subscriptionId: subscriptionId,
+              color: color,
             ),
             SizedBox(height: height * 0.1)
           ],
