@@ -1,4 +1,4 @@
-import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/services/on_hover.dart';
 import 'package:blukers/services/responsive.dart';
 import 'package:blukers/utils/styles/index.dart';

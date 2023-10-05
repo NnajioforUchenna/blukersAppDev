@@ -8,11 +8,11 @@ import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../models/job.dart';
-import '../../../providers/user_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/on_hover.dart';
 import '../../../utils/localization/localized_jobs.dart';
 import '../../company/workers_components/display_workers.dart';
-import '../../worker/jobs_componets/display_jobs.dart';
+import '../../worker/jobs_and_componets/display_jobs.dart';
 import '../applicant_count.dart';
 
 class IndustryBodyPanel extends StatelessWidget {

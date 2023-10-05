@@ -1,4 +1,4 @@
-part of "../user_provider.dart";
+part of 'user_provider.dart';
 
 extension UserJobPostsFunctions on UserProvider {
   void updateTargetLanguage(String? newValue) {

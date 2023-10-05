@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:blukers/views/services/service_coming_soon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/address.dart';
 import '../models/job_post.dart';
-import '../views/membership/membership_widget.dart';
-import '../views/products/products.dart';
+import '../views/worker/membership/membership_widget.dart';
+import '../views/worker/products/products.dart';
+import '../views/worker/services/service_coming_soon_widget.dart';
 
 final List<String> routesWorker = [
   '/jobs',

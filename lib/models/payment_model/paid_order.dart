@@ -8,6 +8,8 @@ class PaidOrder {
   final String paymentPlatformName;
   final String orderNumber;
   final double orderTotalAmount;
+  String comment = "";
+  List<String> attachments = [];
 
   PaidOrder({
     required this.id,
@@ -23,7 +25,7 @@ class PaidOrder {
 
   // Optionally: A factory method to create an instance from a map (useful for deserialization)
   factory PaidOrder.fromMap(Map<String, dynamic> map) {
-    return PaidOrder(
+    PaidOrder newPaidOrder = PaidOrder(
       id: map['id'],
       createdAt: map['createdAt'],
       orderStatus: map['orderStatus'],
@@ -34,11 +36,20 @@ class PaidOrder {
       orderNumber: map['orderNumber'],
       orderTotalAmount: map['orderTotalAmount'].toDouble(),
     );
+    if (map['comment'] != null) {
+      newPaidOrder.comment = map['comment'];
+    }
+
+    if (map['attachments'] != null) {
+      newPaidOrder.attachments = map['attachments'].cast<String>();
+    }
+
+    return newPaidOrder;
   }
 
   // Optionally: A method to convert the instance to a map (useful for serialization)
   Map<String, dynamic> toMap() {
-    return {
+    Map<String, dynamic> newMap = {
       'id': id,
       'createdAt': createdAt,
       'orderStatus': orderStatus,
@@ -49,5 +60,15 @@ class PaidOrder {
       'orderNumber': orderNumber,
       'orderTotalAmount': orderTotalAmount,
     };
+
+    if (comment.isNotEmpty) {
+      newMap['comment'] = comment;
+    }
+
+    if (attachments.isNotEmpty) {
+      newMap['attachments'] = attachments;
+    }
+
+    return newMap;
   }
 }

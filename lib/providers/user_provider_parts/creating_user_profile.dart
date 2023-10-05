@@ -1,4 +1,4 @@
-part of "../user_provider.dart";
+part of 'user_provider.dart';
 
 extension CreatingUserProfile on UserProvider {
   void updateWorker(

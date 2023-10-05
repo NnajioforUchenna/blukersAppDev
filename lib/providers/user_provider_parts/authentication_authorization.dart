@@ -1,4 +1,4 @@
-part of "../user_provider.dart";
+part of 'user_provider.dart';
 
 extension Authentication_Authorization on UserProvider {
   Future<void> signOut() async {

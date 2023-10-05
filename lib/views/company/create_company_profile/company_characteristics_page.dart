@@ -1,4 +1,4 @@
-import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -28,6 +28,7 @@ class _CompanyCharacteristicsPageState
         industryController.text.isNotEmpty &&
         yearFoundedController.text.isNotEmpty;
   }
+
   ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
@@ -37,7 +38,7 @@ class _CompanyCharacteristicsPageState
       companySizeController.text = cp.previousParams['companySize'] ?? '';
       industryController.text = cp.previousParams['industry'] ?? '';
       yearFoundedController.text = cp.previousParams['yearFounded'] ?? '';
-       //added this listner to dismiss keyboard when scroll
+      //added this listner to dismiss keyboard when scroll
       scrollCtrl.addListener(() {
         print('scrolling');
       });

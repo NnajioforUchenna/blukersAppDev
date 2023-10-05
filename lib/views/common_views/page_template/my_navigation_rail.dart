@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 
 class MyNavigationRail extends StatefulWidget {
   const MyNavigationRail({super.key});

@@ -1,4 +1,4 @@
-part of '../payments_provider.dart';
+part of 'payments_provider.dart';
 
 extension InAppPurchasePaymentProvider on PaymentsProvider {
   /// Initializes the in-app purchase payment system.

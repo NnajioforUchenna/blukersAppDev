@@ -1,16 +1,13 @@
 import 'package:blukers/models/job_post.dart';
 import 'package:blukers/providers/company_provider.dart';
 import 'package:blukers/providers/job_posts_provider.dart';
-import 'package:blukers/views/worker/jobs_componets/complete_job_posts_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-
-import 'package:blukers/views/common_views/components/icon_text_404.dart';
-import 'package:unicons/unicons.dart';
-
 import 'package:blukers/views/common_views/components/animations/index.dart';
+import 'package:blukers/views/common_views/components/icon_text_404.dart';
+import 'package:blukers/views/worker/jobs_and_componets/complete_job_posts_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 class MyJobPostsTab extends StatelessWidget {
   const MyJobPostsTab({super.key});

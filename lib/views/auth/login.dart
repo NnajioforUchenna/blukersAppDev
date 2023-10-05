@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/user_provider.dart';
+import '../../providers/user_provider_parts/user_provider.dart';
 import '../../services/make_responsive_web.dart';
 import '../../services/responsive.dart';
 import '../../services/validation.dart';

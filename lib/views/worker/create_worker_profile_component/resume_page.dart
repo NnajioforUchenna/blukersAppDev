@@ -1,13 +1,12 @@
-import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/styles/theme_colors.dart';
 import '../../auth/common_widget/auth_input.dart';
 import 'your_resume.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResumePage extends StatelessWidget {
   const ResumePage({Key? key}) : super(key: key);

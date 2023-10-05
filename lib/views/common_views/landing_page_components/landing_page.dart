@@ -1,4 +1,5 @@
 import 'package:blukers/views/auth/common_widget/label_button.dart';
+import 'package:blukers/views/common_views/components/privacy_policy_terms_and_conditions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,11 +8,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
 import 'option_box.dart';
-
-import 'package:blukers/views/common_views/components/privacy_policy_terms_and_conditions.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/job_post.dart';
-import '../jobs_componets/complete_job_posts_widget.dart';
+import '../jobs_and_componets/complete_job_posts_widget.dart';
 
 class WebJobSearchResultPage extends StatelessWidget {
   final List<JobPost> toDisplay;
