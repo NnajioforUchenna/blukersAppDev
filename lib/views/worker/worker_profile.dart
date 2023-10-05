@@ -1,8 +1,7 @@
 // import 'dart:io';
 import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/providers/chat_provider.dart';
-import 'package:blukers/utils/styles/theme_colors.dart';
-import 'package:blukers/utils/styles/theme_text_styles.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';
 import 'package:blukers/views/common_views/components/confirmation_dialog.dart';
 import 'package:blukers/views/common_views/components/icon_text_404.dart';
@@ -26,6 +25,9 @@ import '../common_views/page_template/page_template.dart';
 import '../common_views/select_industry_components/industry_jobs_dropdown.dart';
 import '../orders/orders_list.dart';
 import '../orders/show_order_dialog.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/profile_menu_button.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/profile_image_and_edit_button.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/profile_logout_button.dart';
 
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
@@ -95,235 +97,117 @@ class _WorkerProfileState extends State<WorkerProfile> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  // const Text(
-                  //   "Profile",
-                  //   style: TextStyle(
-                  //     color: ThemeColors.primaryThemeColor,
-                  //     fontSize: 30,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
+                  const Text(
+                    "Profile",
+                    style: TextStyle(
+                      color: ThemeColors.primaryThemeColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 20),
-                  Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(1000),
-                        child: Container(
-                          // decoration: BoxDecoration(
-                          //   color: Colors.red,
-                          // ),
-                          width: 200,
-                          height: 200,
-                          child: up.appUser!.photoUrl != null &&
-                                  up.appUser!.photoUrl != ""
-                              ? FadeInImage.assetNetwork(
-                                  placeholder: "assets/images/loading.jpeg",
-                                  image: up.appUser!.photoUrl!,
-                                  //width: MediaQuery.of(context).size.width,
-                                  fit: BoxFit.fitWidth,
-                                )
-                              // : Image.asset("assets/images/userDefaultProfilePic.png"),
-                              : FittedBox(
-                                  child: Image.asset(
-                                      "assets/images/userDefaultProfilePic.png"),
-                                  fit: BoxFit.fill,
-                                ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet<void>(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              backgroundColor: Colors.transparent,
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Container(
-                                  //  height: 450,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(45),
-                                      topRight: Radius.circular(45),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        const SizedBox(height: 30),
-                                        Text(
-                                          AppLocalizations.of(context)!
-                                              .changeProfilePicture,
-                                          style: ThemeTextStyles
-                                              .headingThemeTextStyle,
-                                        ),
-                                        // const SizedBox(height: 20),
-                                        if (!kIsWeb)
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 18, vertical: 18),
-                                            child: Container(
-                                              //  height: 170,
-                                              width: 500,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color:
-                                                      const Color(0xffF3ECFF),
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                  Radius.circular(5),
-                                                ),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      String? imageUrl =
-                                                          await up.ontapCamera(
-                                                              "/profile_images/");
-                                                      if (imageUrl != "") {
-                                                        await up
-                                                            .updateUserProfilePic(
-                                                                imageUrl!);
-                                                      }
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Container(
-                                                      height: 70,
-                                                      width: 70,
-                                                      margin: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 100,
-                                                          vertical: 10),
-                                                      decoration: BoxDecoration(
-                                                        color: ThemeColors
-                                                            .blukersBlueThemeColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(80),
-                                                      ),
-                                                      child: const Icon(
-                                                        Icons.camera_alt,
-                                                        size: 40,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    AppLocalizations.of(
-                                                            context)!
-                                                        .takePhoto,
-                                                    style: ThemeTextStyles
-                                                        .headingThemeTextStyle,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 18),
-                                          child: Container(
-                                            //   height: 120,
-                                            width: 500,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: const Color(0xffF3ECFF),
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(5),
-                                              ),
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () async {
-                                                    String? imageUrl =
-                                                        await up.ontapGallery(
-                                                            "/profile_images/");
-                                                    if (imageUrl != "") {
-                                                      await up
-                                                          .updateUserProfilePic(
-                                                              imageUrl!);
-                                                    }
-                                                    Navigator.of(context).pop();
-                                                    print(imageUrl);
-                                                  },
-                                                  child: Container(
-                                                    height: 70,
-                                                    width: 70,
-                                                    margin: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 100,
-                                                        vertical: 10),
-                                                    decoration: BoxDecoration(
-                                                      color: ThemeColors
-                                                          .blukersBlueThemeColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              80),
-                                                    ),
-                                                    child: const Image(
-                                                      image: AssetImage(
-                                                          "assets/images/galleryImage.png"),
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  AppLocalizations.of(context)!
-                                                      .fromGallery,
-                                                  style: ThemeTextStyles
-                                                      .headingThemeTextStyle,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: const CircleAvatar(
-                            radius: 30,
-                            backgroundColor: ThemeColors.secondaryThemeColor,
-                            child: Icon(
-                              UniconsLine.pen,
-                              size: 30,
-                              color: Colors.white,
-                            ),
+                  ProfileImageAndEditButton(
+                    imageContent: up.appUser!.photoUrl != null &&
+                            up.appUser!.photoUrl != ""
+                        ? FadeInImage.assetNetwork(
+                            placeholder: "assets/images/loading.jpeg",
+                            image: up.appUser!.photoUrl!,
+                            fit: BoxFit.fitWidth,
+                          )
+                        : Image.asset(
+                            "assets/images/userDefaultProfilePic.png",
+                            fit: BoxFit.fill,
                           ),
-                        ),
-                      ),
-                    ],
+                    onTapCamera: () async {
+                      String? imageUrl =
+                          await up.ontapCamera("/profile_images/");
+                      if (imageUrl != "") {
+                        await up.updateUserProfilePic(imageUrl!);
+                      }
+                      Navigator.of(context).pop();
+                    },
+                    onTapGallery: () async {
+                      String? imageUrl =
+                          await up.ontapGallery("/profile_images/");
+                      if (imageUrl != "") {
+                        await up.updateUserProfilePic(imageUrl!);
+                      }
+                      Navigator.of(context).pop();
+                      print(imageUrl);
+                    },
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   Text(
                     up.appUser!.displayName ?? "Display Name",
                     style:
                         ThemeTextStyles.landingPageSubtitleThemeTextStyle.apply(
-                      color: ThemeColors.blukersBlueThemeColor,
+                      color: ThemeColors.blukersOrangeThemeColor,
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  const SizedBox(height: 30),
+                  ProfileMenuButton(
+                    text: AppLocalizations.of(context)!.userInformation,
+                    onPress: () {},
                   ),
+                  const SizedBox(height: 10),
+                  ProfileMenuButton(
+                    text: AppLocalizations.of(context)!.industriesSlashJobs,
+                    onPress: () {},
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileMenuButton(
+                    text: AppLocalizations.of(context)!.pdfResume,
+                    onPress: () {},
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileMenuButton(
+                    text: AppLocalizations.of(context)!.onlineResume,
+                    onPress: () {},
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileMenuButton(
+                    text: AppLocalizations.of(context)!.subscriptions,
+                    onPress: () {
+                      if (up.appUser!.worker != null) {
+                        // Navigator.pushNamed(context, "/payment");
+                        context.push('/payment');
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileMenuButton(
+                    text: AppLocalizations.of(context)!.orders,
+                    onPress: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => ShowOrderDialog(
+                                orders: OrdersList(),
+                              ));
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileMenuButton(
+                    text: AppLocalizations.of(context)!.deleteAccount,
+                    textColor: Colors.red,
+                    onPress: () {
+                      // print("Section clicked/ Edit Clicked");
+                      if (up.appUser != null) {
+                        // print("delete user");
+                        // chatProvider.clearGroups();
+                        // up.deleteUser(up.appUser!.uid);
+                        confirmationDialog(
+                          context: context,
+                          stringsTemplate: 'deleteAccount',
+                          onConfirm: () async {
+                            // Navigator.of(context).pushReplacementNamed('/');
+                            await up.deleteUser(up.appUser!.uid);
+                            Navigator.of(context).pushReplacementNamed('/');
+                          },
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 10),
                   ProfileSection(
                     heading: AppLocalizations.of(context)!.userInformation,
                     menuIcon: UniconsLine.user_circle,
@@ -521,79 +405,20 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     },
                   ),
                   const ProfileDivider(),
-                  ProfileSection(
-                    heading: AppLocalizations.of(context)!.deleteAccount,
-                    menuIcon: UniconsLine.user_times,
-                    icon: UniconsLine.trash_alt,
-                    showInfoInNewPage: true,
-                    onClickSection: () {
-                      // print("Section clicked/ Edit Clicked");
-                      if (up.appUser != null) {
-                        // print("delete user");
-                        // chatProvider.clearGroups();
-                        // up.deleteUser(up.appUser!.uid);
-                        confirmationDialog(
-                          context: context,
-                          stringsTemplate: 'deleteAccount',
-                          onConfirm: () async {
-                            // Navigator.of(context).pushReplacementNamed('/');
-                            await up.deleteUser(up.appUser!.uid);
-                            Navigator.of(context).pushReplacementNamed('/');
-                          },
-                        );
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (context) => ProfileDialog(
-                        //       child: Column(
-                        //     children: [
-                        //       Text(
-                        //         "Are you sure you want to delete your account?",
-                        //         style:
-                        //             ThemeTextStyles.headingThemeTextStyle.apply(
-                        //           color: ThemeColors.blukersOrangeThemeColor,
-                        //         ),
-                        //       ),
-                        //       const SizedBox(
-                        //         height: 25,
-                        //       ),
-                        //       const Text(
-                        //         "All your account information will be deleted, this action cannot be undone.",
-                        //         style: ThemeTextStyles.bodyThemeTextStyle,
-                        //       ),
-                        //       const SizedBox(
-                        //         height: 35,
-                        //       ),
-                        //       Row(
-                        //         mainAxisAlignment: MainAxisAlignment.end,
-                        //         children: [
-                        //           GestureDetector(
-                        //             onTap: () async {
-                        //               Navigator.of(context).pop();
-                        //               up.deleteUser(up.appUser!.uid);
-                        //             },
-                        //             child: Container(
-                        //               padding: EdgeInsets.all(16),
-                        //               decoration: BoxDecoration(
-                        //                   color: ThemeColors.primaryThemeColor,
-                        //                   borderRadius:
-                        //                       BorderRadius.circular(20)),
-                        //               child: Text(
-                        //                 "Delete",
-                        //                 style: ThemeTextStyles
-                        //                     .informationDisplayPlaceHolderThemeTextStyle
-                        //                     .apply(color: Colors.white),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ],
-                        //   )),
-                        // );
-                      }
-                    },
-                  ),
                   const SizedBox(height: 30),
+                  // ProfileLogoutButton(
+                  //   onTap: () async {
+                  //     confirmationDialog(
+                  //       context: context,
+                  //       stringsTemplate: 'logout',
+                  //       onConfirm: () async {
+                  //         chatProvider.clearGroups();
+                  //         await up.signOut();
+                  //         context.go('/');
+                  //       },
+                  //     );
+                  //   },
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -605,10 +430,6 @@ class _WorkerProfileState extends State<WorkerProfile> {
                             onConfirm: () async {
                               chatProvider.clearGroups();
                               await up.signOut();
-                              // Navigator.of(context).pushNamedAndRemoveUntil(
-                              //   "/",
-                              //   (route) => false,
-                              // );
                               context.go('/');
                             },
                           );
