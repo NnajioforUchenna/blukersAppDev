@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../common_files/constants.dart';
 import 'alternative_logo_widget.dart';
+import 'package:blukers/views/common_views/components/loading_animation.dart';
 
 class RoundedImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -44,7 +45,7 @@ class RoundedImageWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(child: LoadingAnimation());
                   },
                   errorBuilder: (context, error, stackTrace) {
                     return AlternativeLogoWidget(

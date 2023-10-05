@@ -8,6 +8,10 @@ import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:blukers/providers/payments_provider.dart';
 import 'package:blukers/providers/user_provider.dart';
 import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/providers/product_providers/product_provider.dart';
+import 'package:blukers/providers/product_providers/product_category_provider.dart';
+import 'package:blukers/providers/product_providers/product_subcategory_provider.dart';
+import 'package:blukers/providers/product_providers/product_status_provider.dart';
 import 'package:blukers/services/generate_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +47,18 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<ProductProvider>(
+          create: (context) => ProductProvider(),
+        ),
+        ChangeNotifierProvider<ProductCategoryProvider>(
+          create: (context) => ProductCategoryProvider(),
+        ),
+        ChangeNotifierProvider<ProductSubcategoryProvider>(
+          create: (context) => ProductSubcategoryProvider(),
+        ),
+        ChangeNotifierProvider<ProductStatusProvider>(
+          create: (context) => ProductStatusProvider(),
+        ),
         ChangeNotifierProvider(create: (context) => IndustriesProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),

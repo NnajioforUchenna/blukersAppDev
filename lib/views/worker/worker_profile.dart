@@ -605,10 +605,11 @@ class _WorkerProfileState extends State<WorkerProfile> {
                             onConfirm: () async {
                               chatProvider.clearGroups();
                               await up.signOut();
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                "/",
-                                (route) => false,
-                              );
+                              // Navigator.of(context).pushNamedAndRemoveUntil(
+                              //   "/",
+                              //   (route) => false,
+                              // );
+                              context.go('/');
                             },
                           );
                         },

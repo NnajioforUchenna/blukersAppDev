@@ -2,6 +2,7 @@ import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 
 import 'components/animations/index.dart';
+import 'package:blukers/views/common_views/components/loading_animation.dart';
 
 class LoadingPage extends StatelessWidget {
   @override
@@ -18,6 +19,7 @@ class LoadingPage extends StatelessWidget {
               child: MyAnimation(
                 name: 'blukersLoadingDots',
               ),
+              // child: LoadingAnimation(),
             ),
             const SizedBox(height: 25), // space between progress bar and text
             const Text(
