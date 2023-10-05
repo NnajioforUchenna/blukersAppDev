@@ -1,11 +1,10 @@
 import 'package:blukers/providers/payment_providers/payments_provider.dart';
+import 'package:blukers/services/authentication_wrapper.dart';
 import 'package:blukers/views/chat_message_screen.dart';
 import 'package:blukers/views/common_views/landing_page_components/landing_page.dart';
 import 'package:blukers/views/company/company_basic_info.dart';
 import 'package:blukers/views/company_chat.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/online_resume_additional_detail_screen.dart';
-import 'package:blukers/views/worker/online_resume_screen.dart';
-import 'package:blukers/views/worker/pdf_view_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/payment_model/url_info.dart';
@@ -19,6 +18,8 @@ import '../views/company/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
 import '../views/company/workers.dart';
 import '../views/worker/create_worker_profile_component/create_worker_profile.dart';
+import '../views/worker/create_worker_profile_component/online_resume_screen.dart';
+import '../views/worker/create_worker_profile_component/pdf_view_screen.dart';
 import '../views/worker/jobs_and_componets/jobs.dart';
 import '../views/worker/membership/membership_widget.dart';
 import '../views/worker/membership/mobile_view/manage_payment_page.dart';
@@ -28,10 +29,8 @@ import '../views/worker/membership/subscription_components/payment_successful_wi
 import '../views/worker/my_jobs_and_components/my_jobs.dart';
 import '../views/worker/orders/orders_list.dart';
 import '../views/worker/products/products.dart';
+import '../views/worker/profile/worker_profile.dart';
 import '../views/worker/services/services_list.dart';
-import '../views/worker/worker_profile.dart';
-import 'package:blukers/views/common_views/tests_screen/tests_screen.dart';
-import 'package:blukers/services/authentication_wrapper.dart';
 
 final goRouter = GoRouter(routes: routes, initialLocation: '/');
 

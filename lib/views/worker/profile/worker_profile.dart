@@ -12,6 +12,8 @@ import 'package:blukers/views/common_views/profile_dialog.dart';
 import 'package:blukers/views/common_views/profile_section.dart';
 import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
 import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/profile_image_and_edit_button.dart';
+import 'package:blukers/views/worker/create_worker_profile_component/profile_menu_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,20 +21,12 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../providers/user_provider_parts/user_provider.dart';
-import '../auth/common_widget/login_or_register.dart';
-import '../common_views/page_template/page_template.dart';
-import '../common_views/select_industry_components/industry_jobs_dropdown.dart';
-<<<<<<< HEAD
+import '../../../providers/user_provider_parts/user_provider.dart';
+import '../../auth/common_widget/login_or_register.dart';
+import '../../common_views/page_template/page_template.dart';
+import '../../common_views/select_industry_components/industry_jobs_dropdown.dart';
 import '../orders/orders_list.dart';
 import '../orders/show_order_dialog.dart';
-import 'package:blukers/views/worker/create_worker_profile_component/profile_menu_button.dart';
-import 'package:blukers/views/worker/create_worker_profile_component/profile_image_and_edit_button.dart';
-import 'package:blukers/views/worker/create_worker_profile_component/profile_logout_button.dart';
-=======
-import 'orders/orders_list.dart';
-import 'orders/show_order_dialog.dart';
->>>>>>> main
 
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
