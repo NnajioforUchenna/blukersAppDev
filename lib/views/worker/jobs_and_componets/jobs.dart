@@ -34,13 +34,16 @@ class Jobs extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Spacer(),
-                SizedBox(height: 50, width: 200, child: ChooseTargetLanguage()),
-                SizedBox(width: 30)
-              ],
+            // const Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     Spacer(),
+            //     SizedBox(height: 50, width: 200, child: ChooseTargetLanguage()),
+            //     SizedBox(width: 30)
+            //   ],
+            // ),
+            const Center(
+              child: ChooseTargetLanguage(),
             ),
             const SizedBox(
               height: 10,

@@ -31,15 +31,18 @@ import '../views/worker/products/products.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_profile.dart';
 import 'package:blukers/views/common_views/tests_screen/tests_screen.dart';
+import 'package:blukers/services/authentication_wrapper.dart';
 
 final goRouter = GoRouter(routes: routes, initialLocation: '/');
 
 final routes = [
-  // GoRoute(path: '/', builder: (context, state) => TestsScreen()),
+  // GoRoute(path: '/', builder: (context, state) => const TestsScreen()),
   GoRoute(
-      path: '/',
-      builder: (context, state) =>
-          const ServicesList()), //AuthenticationWrapper())
+      path: '/', builder: (context, state) => const AuthenticationWrapper()),
+  // GoRoute(
+  //     path: '/',
+  //     builder: (context, state) =>
+  //         const ServicesList()), //AuthenticationWrapper())
   GoRoute(path: '/landing', builder: (context, state) => LandingPage()),
   GoRoute(path: '/workers', builder: (context, state) => const Workers()),
   GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
