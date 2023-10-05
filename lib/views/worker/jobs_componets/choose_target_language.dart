@@ -7,6 +7,28 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class LanguageManager {
+  static Locale? _currentLocale;
+  static Function(Locale)? _onLanguageChange;
+
+  static void setLanguage(Locale newLocale) {
+    _currentLocale = newLocale;
+    if (_onLanguageChange != null) {
+      _onLanguageChange!(newLocale);
+    }
+  }
+
+  static Locale? getCurrentLocale() {
+    return _currentLocale;
+  }
+
+  static void setLanguageChangeListener(Function(Locale) listener) {
+    _onLanguageChange = listener;
+  }
+}
+
 class ChooseTargetLanguage extends StatefulWidget {
   const ChooseTargetLanguage({super.key});
 
@@ -16,6 +38,13 @@ class ChooseTargetLanguage extends StatefulWidget {
 
 class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
   String? selectedLanguageCode;
+
+//   String jsonString = '''
+// {
+//   "en": "English",
+//   "es": "Spanish"
+// }
+// ''';
 
   String jsonString = '''
 {
@@ -54,7 +83,7 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
       ),
       child: DropdownButton<String>(
         hint: Text(
-          'Language',
+          AppLocalizations.of(context)?.language ?? "",
           style: TextStyle(
             color: primaryColor,
             fontFamily: 'Montserrat',
@@ -64,6 +93,17 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
         ),
         value: selectedLanguageCode,
         onChanged: (String? newValue) {
+          //
+          // print('newValue');
+          // print(newValue);
+          if (newValue.toString() == "es") {
+            LanguageManager.setLanguage(const Locale("es"));
+          } else {
+            LanguageManager.setLanguage(const Locale("en"));
+          }
+          // print("LanguageManager.getCurrentLocale()");
+          // print(LanguageManager.getCurrentLocale());
+          //
           setState(() {
             selectedLanguageCode = newValue;
             up.updateTargetLanguage(newValue);
