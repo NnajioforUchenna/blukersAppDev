@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../services/validation.dart';
-import '../../../providers/user_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import '../common_widget/auth_input.dart';

@@ -1,12 +1,12 @@
 import 'package:blukers/models/reference.dart';
-import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/reference_form.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class WorkerReferenceProfile extends StatelessWidget {
   const WorkerReferenceProfile({super.key});

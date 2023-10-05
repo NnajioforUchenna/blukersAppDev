@@ -1,6 +1,6 @@
 import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/providers/chat_provider.dart';
-import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/auth/common_widget/login_or_register.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';

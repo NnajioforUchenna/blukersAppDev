@@ -2,11 +2,11 @@ import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:blukers/services/responsive.dart';
 import 'package:blukers/views/common_views/page_template/page_template.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../providers/user_provider.dart';
+import '../../providers/user_provider_parts/user_provider.dart';
 import '../../utils/styles/theme_colors.dart';
 import '../common_views/worker_timeline/display_worker_timeline_dialog.dart';
 import 'my_job_posts_components/interesting_workers_tab.dart';

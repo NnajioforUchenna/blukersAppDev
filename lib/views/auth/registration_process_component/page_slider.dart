@@ -2,7 +2,7 @@ import 'package:blukers/services/make_responsive_web.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/user_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 import 'basic_information.dart';
 import 'contact_information_page.dart';
 import 'login_information.dart';

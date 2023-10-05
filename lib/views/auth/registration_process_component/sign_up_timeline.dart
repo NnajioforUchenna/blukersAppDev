@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../../../providers/user_provider.dart';
 import '../../../../utils/styles/index.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
 
 const deliverySteps = [

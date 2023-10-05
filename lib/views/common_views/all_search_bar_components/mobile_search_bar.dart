@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'search_page.dart';
 

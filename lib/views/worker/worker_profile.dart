@@ -19,15 +19,20 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../providers/user_provider.dart';
+import '../../providers/user_provider_parts/user_provider.dart';
 import '../auth/common_widget/login_or_register.dart';
 import '../common_views/page_template/page_template.dart';
 import '../common_views/select_industry_components/industry_jobs_dropdown.dart';
+<<<<<<< HEAD
 import '../orders/orders_list.dart';
 import '../orders/show_order_dialog.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/profile_menu_button.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/profile_image_and_edit_button.dart';
 import 'package:blukers/views/worker/create_worker_profile_component/profile_logout_button.dart';
+=======
+import 'orders/orders_list.dart';
+import 'orders/show_order_dialog.dart';
+>>>>>>> main
 
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
@@ -93,7 +98,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
 
     return PageTemplate(
       child: up.appUser == null
-          ? LoginOrRegister()
+          ? const LoginOrRegister()
           : SingleChildScrollView(
               child: Column(
                 children: [
@@ -259,7 +264,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                   ),
                   if (showIndustries && up.appUser!.worker != null)
                     Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: InfoDisplayComponent(
                         placeHolder:
                             AppLocalizations.of(context)!.industriesSlashJobs,
@@ -399,7 +404,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     onClickSection: () {
                       showDialog(
                           context: context,
-                          builder: (context) => ShowOrderDialog(
+                          builder: (context) => const ShowOrderDialog(
                                 orders: OrdersList(),
                               ));
                     },

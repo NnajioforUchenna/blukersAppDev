@@ -1,10 +1,10 @@
 import 'package:blukers/views/common_views/address_form/address_form.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
 import '../common_widget/auth_input.dart';
 import '../common_widget/submit_button.dart';

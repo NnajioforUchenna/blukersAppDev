@@ -1,13 +1,12 @@
-import 'package:blukers/providers/user_provider.dart';
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'my_job_timeline.dart';
-
-import 'package:go_router/go_router.dart';
 
 class JobTimeline extends StatelessWidget {
   const JobTimeline({Key? key}) : super(key: key);

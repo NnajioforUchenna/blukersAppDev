@@ -1,4 +1,4 @@
-part of '../payments_provider.dart';
+part of 'payments_provider.dart';
 
 extension StripePaymentProvider on PaymentsProvider {
   Future<void> initializeStripe() async {
