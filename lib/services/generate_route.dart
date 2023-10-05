@@ -30,10 +30,12 @@ import '../views/worker/create_worker_profile_component/create_worker_profile.da
 import '../views/worker/jobs.dart';
 import '../views/worker/my_jobs.dart';
 import '../views/worker/worker_profile.dart';
+import 'package:blukers/views/common_views/tests_screen/tests_screen.dart';
 
 final goRouter = GoRouter(routes: routes, initialLocation: '/');
 
 final routes = [
+  // GoRoute(path: '/', builder: (context, state) => TestsScreen()),
   GoRoute(
       path: '/',
       builder: (context, state) =>
