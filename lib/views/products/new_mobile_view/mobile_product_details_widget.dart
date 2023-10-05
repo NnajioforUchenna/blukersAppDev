@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-import '../../../utils/styles/theme_colors.dart';
+import '../../../providers/payments_provider.dart';
 
 class MobileProductDetailsWidget extends StatelessWidget {
   final Color color;
@@ -22,6 +23,8 @@ class MobileProductDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -101,20 +104,27 @@ class MobileProductDetailsWidget extends StatelessWidget {
               ),
             ),
             Container(
-              height: height * 0.025,
+              height: height * 0.03,
+              width: width * 0.23,
               margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  pp.pay4Services(context, productId);
+                },
                 style: ElevatedButton.styleFrom(
                   elevation: 5,
-                  backgroundColor: ThemeColors.secondaryThemeColor,
+                  backgroundColor: Colors.green,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
+                    side: BorderSide(
+                      color: Colors.white,
+                      width: 5.0, // Adjust for desired thickness
+                    ),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Buy',
-                  style: TextStyle(
+                  style: GoogleFonts.montserrat(
                     color: Colors.white,
                     fontSize: 12.0,
                     fontWeight: FontWeight.bold,

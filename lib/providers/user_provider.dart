@@ -110,4 +110,35 @@ class UserProvider with ChangeNotifier {
     }
     return appUser!.activeSubscription!.subscriptionId;
   }
+
+  String getButton(String subscriptionId) {
+    return getButtonAction(whichMembership(), subscriptionId);
+  }
+
+  String getButtonAction(String state, String subscriptionId) {
+    Map<String, Map<String, String>> actions = {
+      'basic': {
+        'basic': 'Active',
+        'blukers_workers_premium': 'Purchase',
+        'blukers_workers_premium_plus': 'Purchase'
+      },
+      'blukers_workers_premium': {
+        'basic': 'Change Plan',
+        'blukers_workers_premium': 'Active',
+        'blukers_workers_premium_plus': 'Upgrade'
+      },
+      'blukers_workers_premium_plus': {
+        'basic': 'Change Plan',
+        'blukers_workers_premium': 'Change Plan',
+        'blukers_workers_premium_plus': 'Active'
+      }
+    };
+
+    if (actions.containsKey(state) &&
+        actions[state]!.containsKey(subscriptionId)) {
+      return actions[state]![subscriptionId]!;
+    } else {
+      return 'purchase';
+    }
+  }
 }

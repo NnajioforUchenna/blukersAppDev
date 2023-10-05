@@ -1,13 +1,12 @@
 // import 'dart:io';
-import 'package:blukers/views/company/workers_components/confirmation_dialog.dart';
-import 'package:flutter/foundation.dart';
-
-import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/providers/app_versions_provider.dart';
+import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:blukers/views/common_views/components/app_version_display.dart';
+import 'package:blukers/views/common_views/components/confirmation_dialog.dart';
 import 'package:blukers/views/common_views/components/icon_text_404.dart';
+import 'package:blukers/views/common_views/components/privacy_policy_terms_and_conditions.dart';
 import 'package:blukers/views/common_views/components/profile_divider.dart';
 import 'package:blukers/views/common_views/info_display_component.dart';
 import 'package:blukers/views/common_views/profile_dialog.dart';
@@ -17,17 +16,16 @@ import 'package:blukers/views/company/profile_components/user_basic_profile_deta
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:blukers/views/common_views/components/confirmation_dialog.dart';
 
 import '../../providers/user_provider.dart';
 import '../auth/common_widget/login_or_register.dart';
 import '../common_views/page_template/page_template.dart';
 import '../common_views/select_industry_components/industry_jobs_dropdown.dart';
-
-import 'package:go_router/go_router.dart';
-import 'package:blukers/views/common_views/components/privacy_policy_terms_and_conditions.dart';
+import '../orders/orders_list.dart';
+import '../orders/show_order_dialog.dart';
 
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
@@ -515,10 +513,11 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     icon: UniconsLine.angle_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
-                      if (up.appUser!.worker != null) {
-                        // Navigator.pushNamed(context, "/orders");
-                        context.push('/orders');
-                      }
+                      showDialog(
+                          context: context,
+                          builder: (context) => ShowOrderDialog(
+                                orders: OrdersList(),
+                              ));
                     },
                   ),
                   const ProfileDivider(),
