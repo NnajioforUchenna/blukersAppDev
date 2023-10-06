@@ -187,4 +187,16 @@ class AppUser {
     // Persist data to database
     UserDataProvider.updateNumOfJobsAppliedToday(jobApplicationTracker, uid);
   }
+
+  String get getDisplayName {
+    if (displayName != null && displayName!.isNotEmpty) {
+      return displayName!;
+    } else if (worker != null) {
+      return '${worker!.firstName} ${worker!.lastName}';
+    } else if (company != null) {
+      return company!.name;
+    } else {
+      return "Display Name";
+    }
+  }
 }

@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:unicons/unicons.dart';
 import 'package:blukers/utils/styles/index.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:unicons/unicons.dart';
 
 class ProfileMenuButton extends StatelessWidget {
   String text;
@@ -21,7 +22,7 @@ class ProfileMenuButton extends StatelessWidget {
       },
       child: Container(
         // margin: const EdgeInsets.all(14.0),
-        margin: const EdgeInsets.only(left: 16.0, right: 16.0),
+        margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           color: Colors.white, // Background color of the container
           borderRadius: BorderRadius.circular(10.0), // Rounded corners
@@ -35,16 +36,16 @@ class ProfileMenuButton extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
                 text,
-                style: TextStyle(
+                style: GoogleFonts.montserrat(
                   color: textColor,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const Icon(
