@@ -1,5 +1,8 @@
+import 'package:blukers/config/dev/dev_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:blukers/views/common_views/tests_screen/crud/crud.dart';
+
+import 'package:blukers/config/index.dart';
 
 class TestsScreen extends StatefulWidget {
   const TestsScreen({super.key});
@@ -11,7 +14,14 @@ class TestsScreen extends StatefulWidget {
 class _TestsScreenState extends State<TestsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const CRUD();
+    return Column(
+      children: [
+        SizedBox(height: 60),
+        Text('Hey'),
+        // Text(Config().stripeWorkerPremium),
+      ],
+    );
+    // return const CRUD();
   }
 }
 
