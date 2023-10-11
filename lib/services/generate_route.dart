@@ -32,6 +32,8 @@ import '../views/worker/products/products.dart';
 import '../views/worker/profile/worker_profile.dart';
 import '../views/worker/services/services_list.dart';
 
+import 'package:blukers/views/common_views/tests_screen/tests_screen.dart';
+
 final goRouter = GoRouter(routes: routes, initialLocation: '/');
 
 final routes = [
