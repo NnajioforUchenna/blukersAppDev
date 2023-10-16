@@ -22,7 +22,7 @@ final List<String> routesCompany = [
   '/myJobPosts',
   '/companyChat',
   '/offers',
-  'companyProfile',
+  '/companyProfile',
   '/login'
 ];
 
