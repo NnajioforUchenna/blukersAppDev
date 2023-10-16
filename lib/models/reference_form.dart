@@ -1,10 +1,10 @@
-class Reference {
+class ReferenceForm {
   final String name;
   final String phoneNumber;
   final String email;
   final String relationship;
 
-  Reference({
+  ReferenceForm({
     required this.name,
     required this.phoneNumber,
     required this.email,
@@ -20,8 +20,8 @@ class Reference {
     };
   }
 
-  static Reference fromMap(Map<String, dynamic> map) {
-    return Reference(
+  static ReferenceForm fromMap(Map<String, dynamic> map) {
+    return ReferenceForm(
       name: map['name'],
       phoneNumber: map['phoneNumber'],
       email: map['email'],

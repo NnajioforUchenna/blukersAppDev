@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:blukers/views/common_views/components/index.dart';
 
 import '../../../providers/worker_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'reference_form.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReferencePage extends StatefulWidget {
   ReferencePage({Key? key}) : super(key: key);
@@ -16,7 +14,7 @@ class ReferencePage extends StatefulWidget {
 }
 
 class _ReferencePageState extends State<ReferencePage> {
-  List<ReferenceForm> referenceForms = [];
+  List<ReferenceFormWidget> referenceForms = [];
   ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
@@ -42,7 +40,7 @@ class _ReferencePageState extends State<ReferencePage> {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     if (referenceForms.isEmpty) {
       for (int i = 0; i < wp.references.length; i++) {
-        referenceForms.add(ReferenceForm(index: i));
+        referenceForms.add(ReferenceFormWidget(index: i));
       }
     }
     return Container(

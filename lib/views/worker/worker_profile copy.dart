@@ -258,7 +258,6 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                                               imageUrl!);
                                                     }
                                                     Navigator.of(context).pop();
-                                                    print(imageUrl);
                                                   },
                                                   child: Container(
                                                     height: 70,
@@ -330,13 +329,11 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     icon: UniconsLine.pen,
                     showBasicInfo: showBasicInfo,
                     onClickSection: () {
-                      print("Section clicked");
                       setState(() {
                         showBasicInfo = !showBasicInfo;
                       });
                     },
                     onClickEdit: () {
-                      print("Edit clicked");
                       showDialog(
                         context: context,
                         builder: (context) => ProfileDialog(
@@ -367,7 +364,6 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     showBasicInfo: showIndustries,
                     showEditIcon: false,
                     onClickSection: () {
-                      print("Section clicked");
                       setState(() {
                         showIndustries = !showIndustries;
                       });
@@ -383,7 +379,6 @@ class _WorkerProfileState extends State<WorkerProfile> {
                             "${AppLocalizations.of(context)!.industries} ${up.appUser!.worker!.industryIds != null ? up.appUser!.worker!.industryIds!.join(", ") : ""}\n\n${AppLocalizations.of(context)!.jobs}: ${up.appUser!.worker!.jobIds != null ? up.appUser!.worker!.jobIds!.join(", ") : ""}",
                         icon: GestureDetector(
                           onTap: () {
-                            print("Edit clicked");
                             showDialog(
                               context: context,
                               builder: (context) => ProfileDialog(
@@ -393,7 +388,6 @@ class _WorkerProfileState extends State<WorkerProfile> {
                                 initialJobs: up.appUser!.worker!.jobIds ?? [],
                                 onPressUpdate:
                                     (selectedIndustries, selectedJobs) async {
-                                  print(selectedIndustries);
                                   if (up.appUser!.worker != null) {
                                     up.appUser!.worker!.industryIds =
                                         selectedIndustries;
@@ -499,7 +493,6 @@ class _WorkerProfileState extends State<WorkerProfile> {
                     icon: UniconsLine.angle_right,
                     showInfoInNewPage: true,
                     onClickSection: () {
-                      print("Section clicked/ Edit Clicked");
                       if (up.appUser!.worker != null) {
                         // Navigator.pushNamed(context, "/payment");
                         context.push('/payment');

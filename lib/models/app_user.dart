@@ -45,6 +45,10 @@ class AppUser {
   // Tracking Applied Jobs
   JobApplicationTracker? jobApplicationTracker;
 
+  // Deleting Account Parameters
+  String deleteAccountReason = '';
+  String whereYouReside = '';
+
   AppUser({
     required this.uid,
     required this.email,
@@ -118,6 +122,9 @@ class AppUser {
       data['jobApplicationTracker'] = jobApplicationTracker?.toMap();
     }
 
+    data['deleteAccountReason'] = deleteAccountReason;
+    data['whereYouReside'] = whereYouReside;
+
     return data;
   }
 
@@ -165,6 +172,9 @@ class AppUser {
       user.jobApplicationTracker =
           JobApplicationTracker.fromMap(map['jobApplicationTracker']);
     }
+
+    user.deleteAccountReason = map['deleteAccountReason'] ?? '';
+    user.whereYouReside = map['whereYouReside'] ?? '';
 
     user.createdAt = map['createdAt'] ?? 0;
     user.modifiedAt = map['modifiedAt'] ?? 0;

@@ -87,7 +87,6 @@ class DesktopCards extends StatelessWidget {
                     },
                   );
                 }
-                print("data set");
               },
             ),
           if (subscriptionStatus.subIsActive == false ||
@@ -105,7 +104,7 @@ class DesktopCards extends StatelessWidget {
                 'Display your immigration verified status so you can work internationally',
                 'Get Employment Verfied',
               ],
-              color: Color(0xffF16523),
+              color: const Color(0xffF16523),
               isSubscribed: subscriptionStatus.subIsActive,
               onPress: () async {
                 print("premium plus");

@@ -1,6 +1,6 @@
 import '../common_files/get_time_ago.dart';
 import 'address.dart';
-import 'reference.dart';
+import 'reference_form.dart';
 import 'work_experience.dart';
 
 enum WorkStatus { activelyLooking, hired }
@@ -24,7 +24,7 @@ class Worker {
   int birthdate;
   int dateCreated;
   List<WorkExperience> workExperiences;
-  List<Reference> references;
+  List<ReferenceForm> references;
   List<String> savedJobPostIds;
   List<String> appliedJobPostIds;
   List<String> workerBadgeIds;
@@ -158,7 +158,7 @@ class Worker {
                 .toList() ??
             [],
         references: (map['references'] as List?)
-                ?.map((item) => Reference.fromMap(item))
+                ?.map((item) => ReferenceForm.fromMap(item))
                 .toList() ??
             [],
         savedJobPostIds:

@@ -47,18 +47,21 @@ class ProfileRowTwo extends StatelessWidget {
                 width: 150,
                 height: 150,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(1000),
-                  child: imageContent.isNotEmpty
-                      ? FadeInImage.assetNetwork(
-                          placeholder: "assets/images/loading.jpeg",
-                          image: imageContent,
-                          fit: BoxFit.fitWidth,
-                        )
-                      : Image.asset(
-                          "assets/images/userDefaultProfilePic.png",
-                          fit: BoxFit.fill,
-                        ),
-                ),
+                    borderRadius: BorderRadius.circular(1000),
+                    child: imageContent.isNotEmpty
+                        ? FadeInImage.assetNetwork(
+                            placeholder: "assets/images/loading.jpeg",
+                            image: imageContent,
+                            fit: BoxFit.fitWidth,
+                          )
+                        : SizedBox(
+                            width: 150,
+                            height: 150,
+                            child: Image.asset(
+                              'assets/images/userDefaultProfilePic.png',
+                              fit: BoxFit.contain,
+                            ),
+                          )),
               ),
             ),
           ),

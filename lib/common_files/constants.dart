@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../models/address.dart';
 import '../models/job_post.dart';
-import '../views/worker/membership/membership_widget.dart';
+import '../views/worker/membership/new_mobile_view/mobile_new_membership_widget.dart';
 import '../views/worker/products/products.dart';
 import '../views/worker/services/service_coming_soon_widget.dart';
 
@@ -188,7 +188,7 @@ final List<Map<String, dynamic>> listServices = [
     'description':
         'Stay updated with the latest job opportunities in the USA tailored for international talents.',
     'route': '/membership',
-    'service': const MembershipWidget(),
+    'service': const MobileNewMembershipWidget(),
     'color': const Color(0xffF16523)
   },
   {

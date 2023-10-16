@@ -115,6 +115,9 @@ final routes = [
       path: '/membership',
       builder: (context, state) => const ShowSubscriptionDialog()),
   GoRoute(
+      path: '/selectMembership',
+      builder: (context, state) => const MembershipWidget()),
+  GoRoute(
       path: '/managePayment',
       builder: (context, state) => const ManagePaymentPage()),
   GoRoute(path: '/services', builder: (context, state) => const Products()),

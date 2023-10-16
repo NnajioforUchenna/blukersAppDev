@@ -2,6 +2,8 @@ import 'package:blukers/models/address.dart';
 import 'package:blukers/models/app_user.dart';
 import 'package:blukers/models/company.dart';
 import 'package:blukers/models/job_application_tracker.dart';
+import 'package:blukers/models/reference_form.dart';
+import 'package:blukers/models/work_experience.dart';
 import 'package:blukers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -498,6 +500,69 @@ class UserDataProvider {
         firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
       'jobApplicationTracker': jobApplicationTracker?.toMap(),
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static void updateUserInformation({
+    required String firstName,
+    required String middleName,
+    required String lastName,
+    required String description,
+    required String uid,
+  }) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+
+    appUserCollection.doc(uid).update({
+      'worker.firstName': firstName,
+      'worker.middleName': middleName,
+      'worker.lastName': lastName,
+      'worker.workerBriefDescription': description,
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static void updateWorkerIndustriesAndJobs(AppUser? appUser) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+
+    appUserCollection.doc(appUser!.uid).update({
+      'worker.industryIds': appUser.worker!.industryIds,
+      'worker.jobIds': appUser.worker!.jobIds,
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static void updateResumeUrl(String uid, String url) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+
+    appUserCollection.doc(uid).update({
+      'worker.pdfResumeUrl': url,
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static updateWorkerReferences(List<ReferenceForm> list, String uid) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    appUserCollection.doc(uid).update({
+      'worker.references': list.map((e) => e.toMap()).toList(),
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static updateWorkerWorkExperiences(List<WorkExperience> list, String uid) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    appUserCollection.doc(uid).update({
+      'worker.workExperiences': list.map((e) => e.toMap()).toList(),
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });

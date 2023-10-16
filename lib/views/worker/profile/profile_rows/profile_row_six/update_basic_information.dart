@@ -1,19 +1,17 @@
-import 'package:blukers/providers/user_provider_parts/user_provider.dart';
-import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../common_views/small_pop_button_widget.dart';
 
-class BasicUserInformation extends StatefulWidget {
-  const BasicUserInformation({super.key});
-
+class UpdateBasicInformation extends StatefulWidget {
   @override
-  State<BasicUserInformation> createState() => _BasicUserInformationState();
+  State<UpdateBasicInformation> createState() => _UpdateBasicInformationState();
 }
 
-class _BasicUserInformationState extends State<BasicUserInformation> {
+class _UpdateBasicInformationState extends State<UpdateBasicInformation> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();
@@ -21,16 +19,18 @@ class _BasicUserInformationState extends State<BasicUserInformation> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      UserProvider up = Provider.of<UserProvider>(context, listen: false);
-      if (up.appUser != null && up.appUser?.worker != null) {
-        firstNameController.text = up.appUser?.worker?.firstName ?? '';
-        lastNameController.text = up.appUser?.worker?.lastName ?? '';
-        middleNameController.text = up.appUser?.worker?.middleName ?? '';
-        descriptionController.text =
-            up.appUser?.worker?.workerBriefDescription ?? '';
-      }
-    });
+    if (mounted) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        UserProvider up = Provider.of<UserProvider>(context, listen: false);
+        if (up.appUser != null && up.appUser?.worker != null) {
+          firstNameController.text = up.appUser?.worker?.firstName ?? '';
+          lastNameController.text = up.appUser?.worker?.lastName ?? '';
+          middleNameController.text = up.appUser?.worker?.middleName ?? '';
+          descriptionController.text =
+              up.appUser?.worker?.workerBriefDescription ?? '';
+        }
+      });
+    }
 
     super.initState();
   }

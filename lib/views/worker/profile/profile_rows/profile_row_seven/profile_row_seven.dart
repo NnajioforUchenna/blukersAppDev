@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../membership/membership_widget.dart';
+import '../../../membership/new_mobile_view/mobile_new_membership_widget.dart';
 import '../../../services/show_service_dialog.dart';
 import '../../profile_menu_button.dart';
 
@@ -19,7 +19,7 @@ class ProfileRowSeven extends StatelessWidget {
         showDialog(
             context: context,
             builder: (context) => const ShowServiceDialog(
-                  service: MembershipWidget(),
+                  service: MobileNewMembershipWidget(),
                 ));
       },
     );

@@ -13,7 +13,7 @@ class JobPostEligibilityDialog extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
     String subscriptionType =
-        up.appUser?.activeSubscription?.subscriptionId ?? '';
+        up.appUser?.activeSubscription?.subscriptionId ?? 'basic';
     String numberOfJobsAppliedToday = up
             .appUser?.jobApplicationTracker?.numberOfAppliedJobsToday
             .toString() ??
@@ -73,7 +73,7 @@ class JobPostEligibilityDialog extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Logic for button press
-                context.go('/managePayment');
+                context.go('/selectMembership');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,

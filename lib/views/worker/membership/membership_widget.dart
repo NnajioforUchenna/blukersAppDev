@@ -1,3 +1,4 @@
+import 'package:blukers/views/common_views/page_template/page_template.dart';
 import 'package:flutter/material.dart';
 
 import '../../../services/responsive.dart';
@@ -9,8 +10,10 @@ class MembershipWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive.isMobile(context)
-        ? const MobileNewMembershipWidget()
-        : const DesktopMembershipWidget();
+    return PageTemplate(
+      child: Responsive.isMobile(context)
+          ? const MobileNewMembershipWidget()
+          : const DesktopMembershipWidget(),
+    );
   }
 }

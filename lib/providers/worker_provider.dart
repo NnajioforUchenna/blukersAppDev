@@ -11,7 +11,7 @@ import '../data_providers/company_data_provider.dart';
 import '../data_providers/worker_data_provider.dart';
 import '../models/app_user.dart';
 import '../models/job_post.dart';
-import '../models/reference.dart';
+import '../models/reference_form.dart';
 import '../models/work_experience.dart';
 import '../models/worker.dart';
 // Assuming the file containing the Worker class is named 'worker.dart'.
@@ -294,7 +294,7 @@ class WorkerProvider with ChangeNotifier {
   void setReference() {
     for (var element in references) {
       newWorker!.references = [];
-      newWorker!.references.add(Reference.fromMap(element));
+      newWorker!.references.add(ReferenceForm.fromMap(element));
     }
     workerProfileNextPage();
   }
@@ -310,6 +310,7 @@ class WorkerProvider with ChangeNotifier {
     newWorker?.createdAt = DateTime.now().millisecondsSinceEpoch;
     newWorker?.modifiedAt = DateTime.now().millisecondsSinceEpoch;
     WorkerDataProvider.createWorkerProfile(newWorker!);
+
     UserDataProvider.updateUserWorkerProfile(appUser!.uid, newWorker!);
     previousParams.clear();
   }

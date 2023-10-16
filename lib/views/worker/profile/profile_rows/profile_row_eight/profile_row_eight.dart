@@ -15,7 +15,7 @@ class ProfileRowEight extends StatelessWidget {
       onPress: () {
         showDialog(
             context: context,
-            builder: (context) => ShowOrderDialog(
+            builder: (context) => const ShowOrderDialog(
                   orders: OrdersList(),
                 ));
       },

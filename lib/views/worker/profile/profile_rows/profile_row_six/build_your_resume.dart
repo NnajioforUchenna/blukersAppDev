@@ -5,11 +5,12 @@ import '../../../../common_views/small_pop_button_widget.dart';
 import '../../profile_menu_button.dart';
 import '../profile_row_three/profile_row_three.dart';
 import '../profile_row_two/profile_row_two.dart';
-import 'build_your_resume.dart';
-import 'upload_your_resume.dart';
+import 'update_basic_information.dart';
+import 'update_references.dart';
+import 'update_work_experiences.dart';
 
-class UpdateResume extends StatelessWidget {
-  const UpdateResume({super.key});
+class BuildYourResume extends StatelessWidget {
+  const BuildYourResume({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class UpdateResume extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(bottom: height * 0.02),
                   child: Text(
-                    'Resume',
+                    'Online Resume',
                     style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.bold, fontSize: 24),
                   ),
@@ -40,20 +41,29 @@ class UpdateResume extends StatelessWidget {
                 const ProfileRowTwo(),
                 const ProfileRowThree(),
                 ProfileMenuButton(
-                  text: "Upload your Resume",
+                  text: "Basic Information",
                   onPress: () {
                     showDialog(
                         context: context,
-                        builder: (context) => const UploadYourResume());
+                        builder: (context) => UpdateBasicInformation());
                   },
                 ),
                 SizedBox(height: height * 0.02),
                 ProfileMenuButton(
-                  text: "Build your Resume",
+                  text: "References",
                   onPress: () {
                     showDialog(
                         context: context,
-                        builder: (context) => const BuildYourResume());
+                        builder: (context) => UpdateReferences());
+                  },
+                ),
+                SizedBox(height: height * 0.02),
+                ProfileMenuButton(
+                  text: "Work Experiences",
+                  onPress: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => const UpdateWorkExperiences());
                   },
                 )
               ],

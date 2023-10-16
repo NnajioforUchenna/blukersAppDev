@@ -1,16 +1,15 @@
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../auth/common_widget/auth_input.dart';
 import 'work_experience_date.dart';
 import 'work_experience_location_form.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 class WorkExperienceForm extends StatefulWidget {
   final int index;
-  WorkExperienceForm({Key? key, required this.index}) : super(key: key);
+  const WorkExperienceForm({Key? key, required this.index}) : super(key: key);
 
   @override
   State<WorkExperienceForm> createState() => _WorkExperienceFormState();

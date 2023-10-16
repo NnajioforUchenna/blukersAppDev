@@ -1,4 +1,4 @@
-import 'package:blukers/views/worker/profile/profile_rows/profile_row_four/basic_user_information.dart';
+import 'package:blukers/views/worker/profile/profile_rows/profile_row_four/update_user_information.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,7 +14,7 @@ class ProfileRowFour extends StatelessWidget {
       onPress: () {
         showDialog(
             context: context,
-            builder: (context) => const BasicUserInformation());
+            builder: (context) => const UpdateUserInformation());
       },
     );
   }

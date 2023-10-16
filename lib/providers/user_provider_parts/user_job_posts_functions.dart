@@ -27,23 +27,14 @@ extension UserJobPostsFunctions on UserProvider {
           context: context,
           builder: (context) => const DisplayJobTimelineDialog());
     } else {
-      bool result = await checkIfSubscribed();
-      if (!result) {
+      bool? isEligible = appUser?.checkIfEligible();
+      if (isEligible ?? false) {
+        appUser?.updateNumOfJobsAppliedToday();
+        applyForJobPost(jobPost);
+      } else {
         showDialog(
             context: context,
-            builder: (context) => const ShowSubscriptionDialog());
-      } else {
-        bool? isEligible = appUser?.checkIfEligible();
-
-        if (isEligible ?? false) {
-          appUser?.updateNumOfJobsAppliedToday();
-          print("${appUser?.jobApplicationTracker?.toMap()}");
-          applyForJobPost(jobPost);
-        } else {
-          showDialog(
-              context: context,
-              builder: (context) => const JobPostEligibilityDialog());
-        }
+            builder: (context) => const JobPostEligibilityDialog());
       }
     }
   }

@@ -1,4 +1,4 @@
-import 'package:blukers/models/reference.dart';
+import 'package:blukers/models/reference_form.dart';
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/utils/styles/theme_colors.dart';
@@ -19,7 +19,7 @@ class WorkerReferenceProfile extends StatelessWidget {
       child: Column(
         children: [
           ...wp.references
-              .map((e) => ReferenceForm(index: wp.references.indexOf(e)))
+              .map((e) => ReferenceFormWidget(index: wp.references.indexOf(e)))
               .toList(),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -47,9 +47,9 @@ class WorkerReferenceProfile extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () async {
-              List<Reference> ref = [];
+              List<ReferenceForm> ref = [];
               for (int i = 0; i < wp.references.length; ++i) {
-                ref.add(Reference(
+                ref.add(ReferenceForm(
                     name: wp.references[i]["name"],
                     phoneNumber: wp.references[i]["phoneNumber"],
                     email: wp.references[i]["email"],

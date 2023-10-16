@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../common_views/small_pop_button_widget.dart';
-import 'membership_widget.dart';
+import 'new_mobile_view/mobile_new_membership_widget.dart';
 
 class ShowSubscriptionDialog extends StatelessWidget {
   const ShowSubscriptionDialog({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class ShowSubscriptionDialog extends StatelessWidget {
         child: const Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
-            MembershipWidget(),
+            MobileNewMembershipWidget(),
             Positioned(
               top: 10, // Adjust as needed
               left: 10, // Adjust as needed

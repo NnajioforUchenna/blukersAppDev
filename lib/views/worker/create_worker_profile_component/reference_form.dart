@@ -1,24 +1,23 @@
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../auth/common_widget/auth_input.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-class ReferenceForm extends StatefulWidget {
+class ReferenceFormWidget extends StatefulWidget {
   final int index;
 
-  ReferenceForm({
+  ReferenceFormWidget({
     Key? key,
     required this.index,
   }) : super(key: key);
 
   @override
-  State<ReferenceForm> createState() => _ReferenceFormState();
+  State<ReferenceFormWidget> createState() => _ReferenceFormWidgetState();
 }
 
-class _ReferenceFormState extends State<ReferenceForm> {
+class _ReferenceFormWidgetState extends State<ReferenceFormWidget> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
