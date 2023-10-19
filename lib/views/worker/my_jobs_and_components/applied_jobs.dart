@@ -9,6 +9,8 @@ import 'package:unicons/unicons.dart';
 import '../../../models/job_post.dart';
 import 'list_job_posts_widget.dart';
 
+import 'package:blukers/views/common_views/components/loading_animation.dart';
+
 class AppliedJobs extends StatefulWidget {
   const AppliedJobs({Key? key}) : super(key: key); // Corrected here
 
@@ -38,7 +40,7 @@ class _AppliedJobsState extends State<AppliedJobs> {
       future: jobPosts,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return LoadingAnimation();
         } else if (snapshot.hasError) {
           return IconText404(
               text: AppLocalizations.of(context)!.youHaveNotAppliedToAnyJobPost,
