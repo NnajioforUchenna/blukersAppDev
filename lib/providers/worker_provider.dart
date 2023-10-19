@@ -291,12 +291,25 @@ class WorkerProvider with ChangeNotifier {
     workerProfileNextPage();
   }
 
+  // void setReference() {
+  //   for (var element in references) {
+  //     newWorker!.references = [];
+  //     newWorker!.references.add(ReferenceForm.fromMap(element));
+  //   }
+  //   workerProfileNextPage();
+  // }
   void setReference() {
-    for (var element in references) {
-      newWorker!.references = [];
-      newWorker!.references.add(ReferenceForm.fromMap(element));
+    if (references.isEmpty) {
+      EasyLoading.showError('Add at least 1 reference');
+    } else {
+      for (var element in references) {
+        newWorker!.references = [];
+        if (element.isNotEmpty) {
+          newWorker!.references.add(ReferenceForm.fromMap(element));
+        }
+      }
+      workerProfileNextPage();
     }
-    workerProfileNextPage();
   }
 
   void setResumeUrl(String pdfUrl) {
