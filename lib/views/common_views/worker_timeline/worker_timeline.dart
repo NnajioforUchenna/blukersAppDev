@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'my_worker_timeline.dart';
+
+import 'package:blukers/utils/styles/index.dart';
+import 'package:unicons/unicons.dart';
 
 class WorkerTimeline extends StatelessWidget {
   WorkerTimeline({Key? key}) : super(key: key);
@@ -20,6 +24,14 @@ class WorkerTimeline extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 60),
+          const Center(
+            child: Icon(
+              UniconsLine.hard_hat,
+              size: 60,
+              color: ThemeColors.blukersBlueThemeColor,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Center(
@@ -28,7 +40,8 @@ class WorkerTimeline extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: ThemeColors.primaryThemeColor,
+                  color: ThemeColors.blukersBlueThemeColor,
+                  fontFamily: "Montserrat",
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -51,16 +64,16 @@ class WorkerTimeline extends StatelessWidget {
                 description =
                     AppLocalizations.of(context)!.companyJourneyStep2Text;
               }
-              if (index == 2) {
-                title = AppLocalizations.of(context)!.companyJourneyStep3Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep3Text;
-              }
-              if (index == 3) {
-                title = AppLocalizations.of(context)!.companyJourneyStep4Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep4Text;
-              }
+              // if (index == 2) {
+              //   title = AppLocalizations.of(context)!.companyJourneyStep3Title;
+              //   description =
+              //       AppLocalizations.of(context)!.companyJourneyStep3Text;
+              // }
+              // if (index == 3) {
+              //   title = AppLocalizations.of(context)!.companyJourneyStep4Title;
+              //   description =
+              //       AppLocalizations.of(context)!.companyJourneyStep4Text;
+              // }
               final record = workerRecords[index];
               return MyWorkerTimeLine(
                 // You might need to create or adapt MyJobTimeLine for worker flow
@@ -81,13 +94,19 @@ class WorkerTimeline extends StatelessWidget {
               currentStep,
               AppLocalizations.of(context)!.register,
               context,
+              () {
+                context.go('/register');
+              },
             ),
           if (currentStep == 1)
             BuildButton(
               width,
               currentStep,
-              AppLocalizations.of(context)!.createCompanyProfile,
+              AppLocalizations.of(context)!.createProfile,
               context,
+              () {
+                context.go('/createCompanyProfile');
+              },
             ),
           const SizedBox(height: 20),
         ],
@@ -105,20 +124,21 @@ class WorkerTimeline extends StatelessWidget {
       'description':
           'Your company profile is your brand\'s showcase on our platform.',
     },
-    {
-      'title': 'View and Chats with Workers',
-      'description':
-          'Explore the profiles of professionals aligned with your requirements.',
-    },
-    {
-      'title': 'Hire',
-      'description':
-          'Once you\'ve found the right candidates, extend your offers directly through our platform.',
-    },
+    // {
+    //   'title': 'View and Chats with Workers',
+    //   'description':
+    //       'Explore the profiles of professionals aligned with your requirements.',
+    // },
+    // {
+    //   'title': 'Hire',
+    //   'description':
+    //       'Once you\'ve found the right candidates, extend your offers directly through our platform.',
+    // },
   ];
 }
 
-Widget BuildButton(double width, int currentStep, String text, context) {
+Widget BuildButton(
+    double width, int currentStep, String text, context, onClick) {
   return Center(
     child: Container(
       width: width < 600 ? 250 : 400, // 300 on mobile, 500 on web or tablet
@@ -131,26 +151,15 @@ Widget BuildButton(double width, int currentStep, String text, context) {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        onPressed: () {
-          // Add the functionality here
-          // if (text == "Register") {
-          //   context.go( '/register');
-          // } else if (text == "Create Company Profile") {
-          //   context.go( '/createCompanyProfile');
-          // }
-          if (currentStep == 0) {
-            context.go('/register');
-          } else if (currentStep == 1) {
-            context.go('/createCompanyProfile');
-          }
-        }, // Add the functionality here
+        onPressed: () => onClick(),
         child: Center(
           // Center the text inside the button
           child: Text(
             text.toUpperCase(),
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20 * Responsive.textScaleFactor(context)),
+                fontSize: 24 * Responsive.textScaleFactor(context)),
           ),
         ),
       ),

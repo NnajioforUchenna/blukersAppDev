@@ -38,6 +38,7 @@
     "createYourAccount": "Crea tu cuenta",
     "createYourProfile": "Crea tu perfil",
     "createCompanyProfile": "Crear perfil de compańía",
+    "createProfile": "Crear Perfil",
 
     "selectYourIndustriesAndJobs": "Selecciona tus industrias y trabajos",
 
@@ -119,8 +120,8 @@
     "selectAJobPosition": "Selecciona un trabajo",
     "salary": "Salario",
 
-    "workerSearchBarInput1Placeholder": "Industria, trabajo...",
-    "workerSearchBarInput2Placeholder": "Ubicación",
+    "workerSearchBarInput1Placeholder": "Busca un trabajo o industria",
+    "workerSearchBarInput2Placeholder": "Ciudad, Estado o Código Postal",
     "companySearchBarInput1Placeholder": "Industria, trabajo...",
     "companySearchBarInput2Placeholder": "Ubicación",
     "searchJobs": "Buscar",
@@ -160,6 +161,8 @@
     "month": "Mes",
     "year": "Año",
 
+    "monthly": "Mensual",
+
     "contactInformation": "Información de Contacto",
     "phone": "Teléfono",
     "address": "Dirección",
@@ -178,6 +181,7 @@
     "congratulations": "Felicidades!",
     "youHaveSuccessfullySignedUp": "Te has registrado exitosamente",
     "workerOnlineProfileCongratulationsDescription": "Has creado exitosamente tu perfil en línea",
+    "youHaveSuccessfullyCreatedYourCompanyProfile": "Has creado exitosamente el perfil de tu compañía",
 
     "resetPassword": "Reestablecer Contraseña",
     "resetPasswordDescription": "Introduce la dirección de correo electrónico asociada a tu cuenta. Recibirás un enlace para restablecer tu contraseña a la dirección de correo electrónico ingresada.",
@@ -192,17 +196,17 @@
 
     "joinNow": "Únete ya!",
     
-    "companyJourneyTitle": "Únete ya!",
+    "companyJourneyTitle": "Únete ya y encuentra trabajadores calificados!",
     "companyJourneyStep1Title": "Regístrate",
     "companyJourneyStep1Text": "Únete hoy y descubre nuevas oportunidades",
     "companyJourneyStep2Title": "Crea el Perfil de tu Compañía",
-    "companyJourneyStep2Text": "Haz crecer tu marca en nuestra plataforma",
+    "companyJourneyStep2Text": "Haz que cientos de trabajadores de cuello azul encuentren tu compañía",
     "companyJourneyStep3Title": "Conecta con Trabajadores",
     "companyJourneyStep3Text": "Ve y chatea con cientos de profesionales",
     "companyJourneyStep4Title": "Contrata",
     "companyJourneyStep4Text": "Envía ofertas a los candidatos correctos",
 
-    "workerJourneyTitle": "El Trabajo Soñado!",
+    "workerJourneyTitle": "El trabajo de tus sueños lo encontrarás en Blukers!",
     "workerJourneyStep1Title": "Regístrate",
     "workerJourneyStep1Text": "Obtén acceso a cientos de oportunidades de trabajo",
     "workerJourneyStep2Title": "Crea Tu Perfil",
@@ -233,6 +237,7 @@
     "toContinueOrAccessThisContent": "Para continuar o para accesar este contenido",
 
     "changeProfilePicture": "Cambiar foto de perfil",
+    "chooseFromLibrary": "Elegir de la Biblioteca",
     "fromGallery": "Elegir de Galería",
     "takePhoto": "Tomar Foto",
 
@@ -302,7 +307,7 @@
     "view": "Ver",
     "selectSkills": "Seleccionar Habilidades",
     "workExperience": "Experiencia Laboral",
-    "jobTitle": "Nombre del Puesto de Trabajo",
+    "jobTitle": "Título del Trabajo",
     "jobDescription": "Descripción del Trabajo",
     "selectStartDate": "Seleccionar Fecha de Inicio",
     "selectEndDate": "Seleccionar Fecha de Finalización",
@@ -320,6 +325,13 @@
     "relationship": "Relación",
     "uploadYourResume": "Sube tu Currículum",
     "addMoreCertifications": "Agregar mas certificaciones",
+    "addMore": "Agregar Mas",
+    "addOne": "Agregar Uno",
+    "removeLast": "Remover Último",
+    "addAnotherSocialNetwork": "Agregar Otra",
+    "removeLastSocialNetwork": "Remover Última",
+    "aboutYourCompany": "Acerca de tu Compañía",
+    "companySize": "Tamaño de la Compañía",
 
     "areYouSureYouWantToLogOut": "¿Estas seguro de que quieres cerrar sesión?",
     "areYouSureYouWantToDeleteYourAccount": "¿Estas seguro de que quieres eliminar tu cuenta? Tu cuenta se eliminará de manera permanente.",
@@ -332,7 +344,92 @@
     "termsAndConditions": "Términos y Condiciones",
     "termsOfService": "Términos de Servicio",
     "read": "Leer",
+
+    "services": "Servicios",
+    "products": "Productos",
+
+    "basic": "Basica",
+    "active": "Activa",
+
+    "alreadySubscribedTitle": "Ya estás suscrito a la versión premium plus.",
+    "alreadySubscribedDescription": "Gracias por ser un cliente valioso. \n\n Realmente apreciamos tu apoyo.",
+
+    "paymentSuccessful": "Pago Exitoso",
+    "paymentSuccessfulDescription": "Gracias por tu pago. La transacción se ha completado con éxito.",
+    "paymentCancelledOrFailed": "Pago Cancelado o Fallido",
+    "paymentCancelledOrFailedDescription": "Hubo un problema al procesar tu pago. Inténtalo de nuevo mas tarde o comunícate con el soporte.",
     
+    "createYourResume": "Crea tu Currículum",
+    "uploadYourResume": "Sube tu Currículum",
+    "uploadYourCertifications": "Sube tus Certificaciones",
+    "applyTo2JobsDaily": "Aplica a 2 Trabajos Diarios",
+    "applyTo10JobsDaily": "Aplica a 10 Trabajos Diarios",
+    "applyToUnlimitedJobsDaily": "Aplica a Trabajos Ilimitados",
+    "showYourProfileOnTopInEmployersSearchersSection": "Muestra tu perfil primero en los resultados de busqueda de los empleadores",
+    "displayYourImmigrationAndEmploymentVerificationStatus": "Muestra tu estado verificado de inmigración y empleo",
+
+    "employmentVerification": "Verificación de Empleo",
+    "employmentVerification1": "Verificación",
+    "employmentVerification2": "de Empleo",
+
+    "buy": "Comprar",
+    "purchase": "Comprar",
+
+    "generalInformation": "Información General",
+    "companySlogan": "Slogan de la Compañía",
+    "shortDescription": "Descripción breve",
+    "companyShortDescription": "Descripción breve sobre la compañía",
+    "uploadCompanyLogo": "Subir Logo de la Compañía",
+    "contactDetails": "Detalles de Contacto",
+    "customerServicePhoneNumber": "Número de Teléfono de Servicio al Cliente",
+    "headOfficeAddress": "Dirección de la Oficina Central",
+    "socialMediaInformation": "Información de Redes Sociales",
+    "companyWebsite": "Sitio Web de la Compañía",
+    "websiteAddress": "Dirección del Sitio Web",
+    "socialNetworks": "Redes Sociales",
+    "socialNetworkPlatformName": "Nombre de la Red Social",
+    "socialNetworkPlatformLink": "Enlace a tu perfil",
+
+    "privacyAndTerms": "Términos y Privacidad",
+
+    "createJobPost": "Crear Trabajo",
+    "selectAnIndustryAndAJobPosition": "Selecciona una Industria y una Posición de Trabajo",
+    "jobDetails": "Detalles del Trabajo",
+    "numberOfPositionsAvailable": "Número de Posiciones Disponibles",
+    "jobUrgencyLevel": "Nivel de Urgencia del Trabajo",
+    "lowF": "Baja",
+    "mediumF": "Media",
+    "highF": "Alta",
+    "requirementsAndSkills": "Requisitos & Habilidades",
+    "compensationAndContract": "Compensación y Contrato",
+    "selectAJobType": "Selecciona un Tipo de Trabajo",
+    "jobLocation": "Ubicación del Trabajo",
+
+    "fullTime": "Tiempo Completo",
+    "partTime": "Medio Tiempo",
+    "contract": "Contrato",
+    "specifiedTime": "Tiempo Específico",
+    "fullTimePermanent": "Tiempo Completo Permanente",
+    "fullTimeTemporary": "Tiempo Completo Temporal",
+    "internship": "Interno",
+
+    "hourly": "Hora",
+    "daily": "Diario",
+    "monthly": "Mensual",
+    "yearly": "Anual",
+
+    "salaryAmount": "Monto del Salario",
+    "salaryPeriod": "Periodo del Salario",
+    "selectSalaryPeriod": "Seleccione Periodo del Salario",
+
+    "comingSoon": "Muy Pronto",
+
+    "creatingYourAccount": "Creando tu cuenta",
+    "deletingYourAccount": "Eliminando tu cuenta",
+    "signingIn": "Iniciando sesión",
+    "signingOut": "Cerrando sesión",
+    "sendingPasswordResetLink": "Enviando link para reestablecer tu contraseña",
+
     "whatAreYouLookingFor": "¿Que estas buscando?",
     "aJob": "Un Trabajo",
     "workers": "Trabajadores",

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/styles/theme_colors.dart';
 
+import 'package:blukers/utils/styles/index.dart';
+
 class ExplanationCard extends StatelessWidget {
   final String title;
   final String briefDescription;
@@ -34,7 +36,7 @@ class ExplanationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title,
+              title.toUpperCase(),
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -43,9 +45,7 @@ class ExplanationCard extends StatelessWidget {
                     : ThemeColors.secondaryThemeColor.withOpacity(0.3),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text(
               briefDescription,
               style: const TextStyle(

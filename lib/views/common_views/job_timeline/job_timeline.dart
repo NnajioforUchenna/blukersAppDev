@@ -8,6 +8,9 @@ import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'my_job_timeline.dart';
 
+import 'package:blukers/utils/styles/index.dart';
+import 'package:unicons/unicons.dart';
+
 class JobTimeline extends StatelessWidget {
   const JobTimeline({Key? key}) : super(key: key);
 
@@ -20,15 +23,24 @@ class JobTimeline extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 60),
+          const Center(
+            child: Icon(
+              UniconsLine.bag_alt,
+              size: 60,
+              color: ThemeColors.blukersBlueThemeColor,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
                 AppLocalizations.of(context)!.workerJourneyTitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  color: ThemeColors.blukersBlueThemeColor,
+                  fontFamily: "Montserrat",
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -51,16 +63,16 @@ class JobTimeline extends StatelessWidget {
                 description =
                     AppLocalizations.of(context)!.workerJourneyStep2Text;
               }
-              if (index == 2) {
-                title = AppLocalizations.of(context)!.workerJourneyStep3Title;
-                description =
-                    AppLocalizations.of(context)!.workerJourneyStep3Text;
-              }
-              if (index == 3) {
-                title = AppLocalizations.of(context)!.workerJourneyStep4Title;
-                description =
-                    AppLocalizations.of(context)!.workerJourneyStep4Text;
-              }
+              // if (index == 2) {
+              //   title = AppLocalizations.of(context)!.workerJourneyStep3Title;
+              //   description =
+              //       AppLocalizations.of(context)!.workerJourneyStep3Text;
+              // }
+              // if (index == 3) {
+              //   title = AppLocalizations.of(context)!.workerJourneyStep4Title;
+              //   description =
+              //       AppLocalizations.of(context)!.workerJourneyStep4Text;
+              // }
               final record = jobRecords[index];
               return MyJobTimeLine(
                 isFirst: index == 0,
@@ -88,7 +100,7 @@ class JobTimeline extends StatelessWidget {
             buildButton(
               width,
               currentStep,
-              AppLocalizations.of(context)!.createYourProfile,
+              AppLocalizations.of(context)!.createProfile,
               context,
               () {
                 context.go('/createWorkerProfile');
@@ -113,16 +125,16 @@ final jobRecords = [
     'description':
         'Your profile is your professional showcase. Fill in your educational background, work experience, skills, and more. The more complete your profile, the easier it will be for employers to understand your expertise and reach out with relevant job offers. A well-crafted profile can make you stand out in the competitive job market.',
   },
-  {
-    'title': 'Apply for Jobs or Save to Apply Later',
-    'description':
-        'Browse through our extensive list of job postings. Find the ones that resonate with your career goals and apply directly through our platform. Not ready to apply just yet? No problem! You can save any job posting and return to it later when you\'re ready. Your dream job is just a click away.',
-  },
-  {
-    'title': 'Companies Interested in Your Skill Set Will Reach Out to You',
-    'description':
-        'Your skills and experience are valuable, and companies are looking for talents like you. By having a complete and detailed profile, you may catch the eye of recruiters actively seeking your expertise. When a match is found, companies will reach out to you directly through our platform. Stay active, keep your profile up-to-date, and let the opportunities come to you.',
-  },
+  // {
+  //   'title': 'Apply for Jobs or Save to Apply Later',
+  //   'description':
+  //       'Browse through our extensive list of job postings. Find the ones that resonate with your career goals and apply directly through our platform. Not ready to apply just yet? No problem! You can save any job posting and return to it later when you\'re ready. Your dream job is just a click away.',
+  // },
+  // {
+  //   'title': 'Companies Interested in Your Skill Set Will Reach Out to You',
+  //   'description':
+  //       'Your skills and experience are valuable, and companies are looking for talents like you. By having a complete and detailed profile, you may catch the eye of recruiters actively seeking your expertise. When a match is found, companies will reach out to you directly through our platform. Stay active, keep your profile up-to-date, and let the opportunities come to you.',
+  // },
 ];
 
 Widget buildButton(
@@ -133,33 +145,23 @@ Widget buildButton(
       height: width < 600 ? 50 : 80, // 70 on mobile, 100 on web or tablet
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: ThemeColors.secondaryThemeColor,
+          // backgroundColor: ThemeColors.secondaryThemeColor,
+          backgroundColor: ThemeColors.blukersOrangeThemeColor,
           elevation: 8,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        onPressed: () {
-          // Add the functionality here
-          // if (text == "Register") {
-          //   context.go( '/register');
-          // } else if (text == "Create Your Profile") {
-          //   context.go( '/createWorkerProfile');
-          // }
-          onClick();
-          // if (currentStep == 0) {
-          //   context.go('/register');
-          // } else if (currentStep == 1) {
-          //   context.go('/createWorkerProfile');
-          // }
-        }, // Add the functionality here
+        onPressed: () => onClick(),
         child: Center(
           // Center the text inside the button
           child: Text(
             text.toUpperCase(),
+            textAlign: TextAlign.center,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20 * Responsive.textScaleFactor(context)),
+              fontWeight: FontWeight.bold,
+              fontSize: 24 * Responsive.textScaleFactor(context),
+            ),
           ),
         ),
       ),
