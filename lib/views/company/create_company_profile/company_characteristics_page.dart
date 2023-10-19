@@ -8,6 +8,10 @@ import '../../../providers/company_provider.dart';
 import '../../../services/responsive.dart';
 import '../../auth/common_widget/auth_input.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class CompanyCharacteristicsPage extends StatefulWidget {
   CompanyCharacteristicsPage({Key? key}) : super(key: key);
 
@@ -67,6 +71,7 @@ class _CompanyCharacteristicsPageState
       child: Stack(
         children: <Widget>[
           Container(
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               controller: scrollCtrl,
@@ -77,16 +82,16 @@ class _CompanyCharacteristicsPageState
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
-                      "Company Characteristics",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.deepOrangeAccent,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25,
-                      ),
-                    ),
+                    // Text(
+                    //   AppLocalizations.of(context)!.aboutYourCompany,
+                    //   textAlign: TextAlign.center,
+                    //   style: const TextStyle(
+                    //     color: Colors.deepOrangeAccent,
+                    //     fontSize: 25,
+                    //     fontWeight: FontWeight.w600,
+                    //     height: 1.25,
+                    //   ),
+                    // ),
                     const SizedBox(height: 20),
                     AuthInput(
                       child: TextFormField(
@@ -96,10 +101,11 @@ class _CompanyCharacteristicsPageState
                         },
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) =>
-                            value!.isEmpty ? "Required" : null,
+                        validator: (value) => value!.isEmpty
+                            ? AppLocalizations.of(context)!.required
+                            : null,
                         decoration: InputDecoration(
-                          hintText: "Company Size",
+                          hintText: AppLocalizations.of(context)!.companySize,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -112,7 +118,7 @@ class _CompanyCharacteristicsPageState
                         ),
                       ),
                     ),
-                    SizedBox(height: height * 0.05),
+                    SizedBox(height: height * 0.015),
                     AuthInput(
                       child: TextFormField(
                         controller: industryController,
@@ -121,10 +127,11 @@ class _CompanyCharacteristicsPageState
                         },
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) =>
-                            value!.isEmpty ? "Required" : null,
+                        validator: (value) => value!.isEmpty
+                            ? AppLocalizations.of(context)!.required
+                            : null,
                         decoration: InputDecoration(
-                          hintText: "Industry",
+                          hintText: AppLocalizations.of(context)!.industry,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -137,7 +144,7 @@ class _CompanyCharacteristicsPageState
                         ),
                       ),
                     ),
-                    SizedBox(height: height * 0.05),
+                    SizedBox(height: height * 0.015),
                     AuthInput(
                       child: TextFormField(
                         controller: yearFoundedController,
@@ -149,7 +156,7 @@ class _CompanyCharacteristicsPageState
                         onEditingComplete: () => node.nextFocus(),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Required";
+                            return AppLocalizations.of(context)!.required;
                           }
                           final int currentYear = DateTime.now().year;
                           final int? year = int.tryParse(value);
@@ -159,7 +166,7 @@ class _CompanyCharacteristicsPageState
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: "Year Founded",
+                          hintText: AppLocalizations.of(context)!.yearFounded,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -176,18 +183,14 @@ class _CompanyCharacteristicsPageState
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            cp.companyProfileBackPage();
-                          },
-                          child: Text("Previous"),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () => cp.companyProfileBackPage(),
+                          navDirection: "back",
                         ),
-                        ElevatedButton(
-                          onPressed: () async {
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () async {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
                               bool result = await cp.addCompanyCharacteristics(
@@ -204,12 +207,41 @@ class _CompanyCharacteristicsPageState
                                   "Please fill all the fields");
                             }
                           },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
-                          child: const Text("Submit"),
                         ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     cp.companyProfileBackPage();
+                        //   },
+                        //   child: Text(AppLocalizations.of(context)!.previous),
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () async {
+                        //     if (_formKey.currentState!.validate() &&
+                        //         isFormComplete()) {
+                        //       bool result = await cp.addCompanyCharacteristics(
+                        //         companySizeController.text,
+                        //         industryController.text,
+                        //         yearFoundedController.text,
+                        //       );
+                        //       if (result) {
+                        //         up.companyTimelineStep = 2;
+                        //       }
+                        //       print("Company Characteristics Added");
+                        //     } else {
+                        //       EasyLoading.showError(
+                        //           "Please fill all the fields");
+                        //     }
+                        //   },
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        //   child: Text(AppLocalizations.of(context)!.finish),
+                        // ),
                       ],
                     ),
                     SizedBox(height: height * .05),

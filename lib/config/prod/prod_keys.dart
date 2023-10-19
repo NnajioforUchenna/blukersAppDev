@@ -3,4 +3,6 @@ class ProdKeys {
       "https://top-design-395510.ue.r.appspot.com";
 
   static const String revenueCatAppApiKey = "appl_MBmzgeHBODyABdfpBsqeVOHRrVV";
+
+  static const String stripeDataCollectionDocID = "Zh9frPRhBEPlSnlxdJyI";
 }

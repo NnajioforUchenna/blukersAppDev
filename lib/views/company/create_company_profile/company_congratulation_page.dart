@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class CompanyCongratulationPage extends StatefulWidget {
   const CompanyCongratulationPage({super.key});
 
@@ -54,11 +56,12 @@ class _CompanyCongratulationPageState extends State<CompanyCongratulationPage> {
           children: <Widget>[
             const Icon(Icons.check_circle, color: Colors.green, size: 100),
             const SizedBox(height: 20),
-            const Text(
-              'Congratulations!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Text(
+              AppLocalizations.of(context)!.congratulations,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const Text('You have successfully created your company profile.'),
+            Text(AppLocalizations.of(context)!
+                .youHaveSuccessfullyCreatedYourCompanyProfile),
             const SizedBox(height: 20),
             Text.rich(
               TextSpan(

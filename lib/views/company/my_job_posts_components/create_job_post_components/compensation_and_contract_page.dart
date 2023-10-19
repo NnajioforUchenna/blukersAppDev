@@ -8,6 +8,12 @@ import '../../../../providers/job_posts_provider.dart';
 import '../../../../utils/styles/theme_colors.dart';
 import 'show_search_button.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:blukers/utils/localization/localized_job_types.dart';
+import 'package:blukers/utils/localization/localized_salary_periods.dart';
+
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 enum SalaryPeriod { hourly, daily, monthly, yearly }
 
 class CompensationAndContractPage extends StatefulWidget {
@@ -70,26 +76,32 @@ class _CompensationAndContractPageState
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                "Compensation & Contract",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.deepOrangeAccent,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                  height: 1.25,
-                ),
-              ),
+              // Text(
+              //   AppLocalizations.of(context)!.compensationAndContract,
+              //   textAlign: TextAlign.center,
+              //   style: const TextStyle(
+              //     color: Colors.deepOrangeAccent,
+              //     fontSize: 25,
+              //     fontWeight: FontWeight.w600,
+              //     height: 1.25,
+              //   ),
+              // ),
               const SizedBox(height: 20),
               DropdownButtonFormField<JobType>(
                 value: _selectedJobType,
                 items: JobType.values.map((JobType type) {
                   return DropdownMenuItem<JobType>(
                     value: type,
-                    child: Text(type.toString().split('.').last),
+                    child: Text(
+                      // type.toString().split('.').last,
+                      LocalizedJobTypes.get(
+                        context,
+                        type.toString().split('.').last,
+                      ),
+                    ),
                   );
                 }).toList(),
-                hint: const Text("Select a Job Type"),
+                hint: Text(AppLocalizations.of(context)!.selectAJobType),
                 onChanged: (JobType? newValue) {
                   setState(() {
                     _selectedJobType = newValue;
@@ -133,66 +145,103 @@ class _CompensationAndContractPageState
                 ),
               ],
               const SizedBox(height: 20),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      controller: _salaryController,
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(
-                            r'^\d+\.?\d*')), // This allows only numbers and a single decimal point
-                      ],
-                      decoration: InputDecoration(
-                        labelText: "Salary Amount",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: DropdownButtonFormField<SalaryPeriod>(
-                      value: _selectedSalaryPeriod,
-                      items: SalaryPeriod.values.map((SalaryPeriod period) {
-                        return DropdownMenuItem<SalaryPeriod>(
-                          value: period,
-                          child: Text(period.toString().split('.').last),
-                        );
-                      }).toList(),
-                      hint: const Text("Select Salary Period"),
-                      onChanged: (SalaryPeriod? newValue) {
-                        setState(() {
-                          _selectedSalaryPeriod = newValue;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                    ),
-                  ),
+              // Row(
+              //   children: <Widget>[
+              //     Expanded(
+              //       child: TextField(
+              //         controller: _salaryController,
+              //         keyboardType:
+              //             TextInputType.numberWithOptions(decimal: true),
+              //         inputFormatters: [
+              //           FilteringTextInputFormatter.allow(RegExp(
+              //               r'^\d+\.?\d*')), // This allows only numbers and a single decimal point
+              //         ],
+              //         decoration: InputDecoration(
+              //           labelText: "Salary Amount",
+              //           border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(10.0),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(width: 10),
+              //     Expanded(
+              //       child: DropdownButtonFormField<SalaryPeriod>(
+              //         value: _selectedSalaryPeriod,
+              //         items: SalaryPeriod.values.map((SalaryPeriod period) {
+              //           return DropdownMenuItem<SalaryPeriod>(
+              //             value: period,
+              //             child: Text(period.toString().split('.').last),
+              //           );
+              //         }).toList(),
+              //         hint: const Text("Select Salary Period"),
+              //         onChanged: (SalaryPeriod? newValue) {
+              //           setState(() {
+              //             _selectedSalaryPeriod = newValue;
+              //           });
+              //         },
+              //         decoration: InputDecoration(
+              //           border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(10.0),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              TextField(
+                controller: _salaryController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(
+                      r'^\d+\.?\d*')), // This allows only numbers and a single decimal point
                 ],
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.salaryAmount,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              DropdownButtonFormField<SalaryPeriod>(
+                value: _selectedSalaryPeriod,
+                items: SalaryPeriod.values.map((SalaryPeriod period) {
+                  return DropdownMenuItem<SalaryPeriod>(
+                    value: period,
+                    child: Text(
+                      // period.toString().split('.').last,
+                      LocalizedSalaryPeriods.get(
+                        context,
+                        period.toString().split('.').last,
+                      ),
+                    ),
+                  );
+                }).toList(),
+                hint: Text(AppLocalizations.of(context)!.selectSalaryPeriod),
+                onChanged: (SalaryPeriod? newValue) {
+                  setState(() {
+                    _selectedSalaryPeriod = newValue;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
               ),
               SizedBox(height: height * 0.1),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      jp.setJobPostPagePrevious();
-                    },
-                    child: const Text("Previous"),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          ThemeColors.secondaryThemeColor),
-                    ),
+                  TimelineNavigationButton(
+                    isSelected: true,
+                    onPress: () => jp.setJobPostPagePrevious(),
+                    navDirection: "back",
                   ),
-                  ElevatedButton(
-                    onPressed: () {
+                  TimelineNavigationButton(
+                    isSelected: true,
+                    onPress: () {
                       jp.addCompensationAndContract(
                         jobType: _selectedJobType,
                         salaryAmount: _salaryController.text,
@@ -202,12 +251,34 @@ class _CompensationAndContractPageState
                         endDate: _endDate,
                       );
                     },
-                    child: const Text("Next"),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          ThemeColors.secondaryThemeColor),
-                    ),
                   ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     jp.setJobPostPagePrevious();
+                  //   },
+                  //   child: const Text("Previous"),
+                  //   style: ButtonStyle(
+                  //     backgroundColor: MaterialStateProperty.all<Color>(
+                  //         ThemeColors.secondaryThemeColor),
+                  //   ),
+                  // ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     jp.addCompensationAndContract(
+                  //       jobType: _selectedJobType,
+                  //       salaryAmount: _salaryController.text,
+                  //       salaryPeriod: _selectedSalaryPeriod,
+                  //       durationInMonth: _durationInMonth,
+                  //       startDate: _startDate,
+                  //       endDate: _endDate,
+                  //     );
+                  //   },
+                  //   child: const Text("Next"),
+                  //   style: ButtonStyle(
+                  //     backgroundColor: MaterialStateProperty.all<Color>(
+                  //         ThemeColors.secondaryThemeColor),
+                  //   ),
+                  // ),
                 ],
               ),
               SizedBox(height: height * .05),

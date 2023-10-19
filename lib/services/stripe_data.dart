@@ -9,15 +9,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:blukers/config/index.dart';
 
 Future<StripeData> fetchStripeData() async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  // dev: 1t9JfNnPqitkZFHkTL8x
-  // prod: Zh9frPRhBEPlSnlxdJyI
   var ds = await firestore
       .collection('stripe_data')
-      .doc('1t9JfNnPqitkZFHkTL8x')
+      .doc(Config().stripeDataCollectionDocID)
       .get();
 
   return StripeData(

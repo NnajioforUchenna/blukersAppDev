@@ -8,33 +8,50 @@ class CreateCompanyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.white,
+    //     elevation: 0,
+    //   ),
+    //   body: Center(
+    //     child: SizedBox(
+    //       height: MediaQuery.of(context).size.height,
+    //       child: CustomScrollView(
+    //         slivers: [
+    //           SliverList(
+    //               delegate: SliverChildListDelegate([
+    //             CompanyTimeLine(),
+    //             const SizedBox(height: 30.0),
+    //             CompanyPageSlider()
+    //           ]))
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        // title: const Center(
-        //   child: Text(
-        //     'Creating My Work Profile',
-        //     style: ThemeTextStyles.appBarThemeTextStyle,
-        //   ),
-        // ),
       ),
-      body: Center(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: CustomScrollView(
-            slivers: [
-              SliverList(
-                  delegate: SliverChildListDelegate([
-                CompanyTimeLine(),
-                const SizedBox(
-                  height: 30.0,
+      body: Column(
+        children: [
+          CompanyTimeLine(),
+          Expanded(
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      const CompanyPageSlider(),
+                    ],
+                  ),
                 ),
-                CompanyPageSlider()
-              ]))
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

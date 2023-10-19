@@ -1,3 +1,5 @@
+import 'package:blukers/config/index.dart';
+
 const String appUserCollections = "AppUsers";
 const String workersCollections = "workers";
 const String industriesCollections = "Industries";
@@ -20,5 +22,4 @@ const String leadContactSessionStatusesCollection =
 const String leadContactsCollection = "LeadContacts";
 const String leadContactStatusesCollection = "LeadContactStatuses";
 const String leadContactMethodsCollection = "LeadContactMethods";
-const String baseUrlAppEngineFunctions =
-    "https://development-dot-top-design-395510.ue.r.appspot.com"; // deployment baseURl = https://top-design-395510.ue.r.appspot.com
+String baseUrlAppEngineFunctions = Config().appEngineFunctionsURL;

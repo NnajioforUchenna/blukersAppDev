@@ -10,6 +10,8 @@ import '../../common_views/page_template/page_template.dart';
 import '../my_jobs_and_components/applied_jobs.dart';
 import '../my_jobs_and_components/saved_jobs.dart';
 
+import 'package:blukers/views/auth/common_widget/login_or_register.dart';
+
 class MyJobs extends StatelessWidget {
   const MyJobs({super.key});
 
@@ -18,40 +20,42 @@ class MyJobs extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     JobPostsProvider jpp = Provider.of<JobPostsProvider>(context);
     return PageTemplate(
-      child: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            centerTitle: true,
-            title: Text(
-              AppLocalizations.of(context)!.jobs,
-              style: const TextStyle(
-                  color: ThemeColors.primaryThemeColor,
-                  fontWeight: FontWeight.bold),
+      child: up.appUser == null
+          ? const LoginOrRegister()
+          : DefaultTabController(
+              length: 2,
+              child: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.white,
+                  centerTitle: true,
+                  title: Text(
+                    AppLocalizations.of(context)!.jobs,
+                    style: const TextStyle(
+                        color: ThemeColors.primaryThemeColor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  bottom: TabBar(
+                    indicatorColor: ThemeColors.primaryThemeColor,
+                    labelColor: ThemeColors.primaryThemeColor,
+                    unselectedLabelColor: ThemeColors.grey1ThemeColor,
+                    tabs: [
+                      Tab(
+                          text: AppLocalizations.of(context)!.applied,
+                          icon: const Icon(UniconsLine.file_edit_alt)),
+                      Tab(
+                          text: AppLocalizations.of(context)!.saved,
+                          icon: const Icon(UniconsLine.file_bookmark_alt)),
+                    ],
+                  ),
+                ),
+                body: const TabBarView(
+                  children: [
+                    AppliedJobs(),
+                    SavedJobs(),
+                  ],
+                ),
+              ),
             ),
-            bottom: TabBar(
-              indicatorColor: ThemeColors.primaryThemeColor,
-              labelColor: ThemeColors.primaryThemeColor,
-              unselectedLabelColor: ThemeColors.grey1ThemeColor,
-              tabs: [
-                Tab(
-                    text: AppLocalizations.of(context)!.applied,
-                    icon: const Icon(UniconsLine.file_edit_alt)),
-                Tab(
-                    text: AppLocalizations.of(context)!.saved,
-                    icon: const Icon(UniconsLine.file_bookmark_alt)),
-              ],
-            ),
-          ),
-          body: const TabBarView(
-            children: [
-              AppliedJobs(),
-              SavedJobs(),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import '../../../../services/responsive.dart';
 import 'job_post_page_slider.dart';
 import 'job_post_time_line.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:blukers/views/common_views/components/index.dart';
 
 class CreateJobPost extends StatelessWidget {
@@ -11,38 +12,66 @@ class CreateJobPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Scaffold(
+    //   // appBar: AppBar(
+    //   //   backgroundColor: Colors.white,
+    //   //   title: const Center(
+    //   //     child: Text(
+    //   //       'Creating Job Post',
+    //   //       style: ThemeTextStyles.headerThemeTextStyle,
+    //   //     ),
+    //   //   ),
+    //   // ),
+    //   appBar: MyAppBar(
+    //     title: "Create Job Post",
+    //   ),
+    //   body: Center(
+    //     child: SizedBox(
+    //       height: MediaQuery.of(context).size.height,
+    //       width: Responsive.isDesktop(context)
+    //           ? MediaQuery.of(context).size.width * 0.3
+    //           : MediaQuery.of(context).size.width,
+    //       child: CustomScrollView(
+    //         slivers: [
+    //           SliverList(
+    //               delegate: SliverChildListDelegate([
+    //             JobPostTimeline(),
+    //             const SizedBox(
+    //               height: 30.0,
+    //             ),
+    //             const JobPostPageSlider()
+    //           ]))
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
+
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.white,
-      //   title: const Center(
-      //     child: Text(
-      //       'Creating Job Post',
-      //       style: ThemeTextStyles.headerThemeTextStyle,
-      //     ),
-      //   ),
+      //   elevation: 0,
       // ),
       appBar: MyAppBar(
-        title: "Create Job Post",
+        title: AppLocalizations.of(context)!.createJobPost,
       ),
-      body: Center(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width * 0.3
-              : MediaQuery.of(context).size.width,
-          child: CustomScrollView(
-            slivers: [
-              SliverList(
-                  delegate: SliverChildListDelegate([
-                JobPostTimeline(),
-                const SizedBox(
-                  height: 30.0,
+      body: Column(
+        children: [
+          JobPostTimeline(),
+          Expanded(
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      const JobPostPageSlider(),
+                    ],
+                  ),
                 ),
-                const JobPostPageSlider()
-              ]))
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -7,6 +7,10 @@ import 'package:provider/provider.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../auth/common_widget/auth_input.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class AdditionalInformationPage extends StatefulWidget {
   const AdditionalInformationPage({super.key});
 
@@ -51,6 +55,7 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
             child: Container(),
           ),
           Container(
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Form(
@@ -60,16 +65,16 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Additional Information Page",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.deepOrangeAccent,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25,
-                      ),
-                    ),
+                    // Text(
+                    //   AppLocalizations.of(context)!.jobLocation,
+                    //   textAlign: TextAlign.center,
+                    //   style: const TextStyle(
+                    //     color: Colors.deepOrangeAccent,
+                    //     fontSize: 20,
+                    //     fontWeight: FontWeight.w600,
+                    //     height: 1.25,
+                    //   ),
+                    // ),
                     const SizedBox(height: 20),
                     AddressForm(
                         streetController: _streetController,
@@ -77,24 +82,20 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                         stateController: _stateController,
                         postalCodeController: _postalCodeController,
                         countryController: _countryController,
-                        label: "Address",
+                        label: AppLocalizations.of(context)!.address,
                         validate: isFormComplete),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            jp.setJobPostPagePrevious();
-                          },
-                          child: const Text("Previous"),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () => jp.setJobPostPagePrevious(),
+                          navDirection: "back",
                         ),
-                        ElevatedButton(
-                          onPressed: () {
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () {
                             if (isFormComplete() &&
                                 _formKey.currentState!.validate()) {
                               jp.updateUserAddress(
@@ -108,12 +109,38 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                                   'Please fill all the fields');
                             }
                           },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
-                          child: const Text("Submit"),
                         ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     jp.setJobPostPagePrevious();
+                        //   },
+                        //   child: const Text("Previous"),
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     if (isFormComplete() &&
+                        //         _formKey.currentState!.validate()) {
+                        //       jp.updateUserAddress(
+                        //           _streetController.text,
+                        //           _cityController.text,
+                        //           _stateController.text,
+                        //           _postalCodeController.text,
+                        //           _countryController.text);
+                        //     } else {
+                        //       EasyLoading.showError(
+                        //           'Please fill all the fields');
+                        //     }
+                        //   },
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        //   child: const Text("Submit"),
+                        // ),
                       ],
                     ),
                     SizedBox(height: height * .05),

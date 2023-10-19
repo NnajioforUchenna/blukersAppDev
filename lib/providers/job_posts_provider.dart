@@ -99,7 +99,7 @@ class JobPostsProvider with ChangeNotifier {
       newJobPostData['companyId'] = appUser.uid;
       newJobPostData['companyName'] = appUser.company?.name;
       newJobPostData['companyLogo'] = appUser.company?.logoUrl;
-      context.go('/createJobPost');
+      context.push('/createJobPost');
     }
   }
 

@@ -84,7 +84,7 @@ class PaymentsDataProvider {
 
   Future<Map<String, dynamic>> verifyStripePayment(
       String checkoutSessionId) async {
-    const String apiUrl =
+    String apiUrl =
         baseUrlAppEngineFunctions + '/payments/verify-stripe-payment';
 
     final response = await http.post(

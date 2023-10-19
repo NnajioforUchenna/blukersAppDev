@@ -16,10 +16,16 @@ class SkillsForm extends StatefulWidget {
 }
 
 class _SkillsFormState extends State<SkillsForm> {
-  List<String> skills =
-      DeviceLocale.get() == 'es' ? SkillsSpanish : SkillsEnglish;
+  getDeviceLanguage() async {
+    String lang = await DeviceLocale.get();
+    return lang;
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<String> skills =
+        getDeviceLanguage() == "es" ? SkillsSpanish : SkillsEnglish;
+
     return Column(
       children: [
         Text(AppLocalizations.of(context)!.selectSkills,

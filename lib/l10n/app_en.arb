@@ -38,6 +38,7 @@
     "createYourAccount": "Create your account",
     "createYourProfile": "Create your profile",
     "createCompanyProfile": "Create company profile",
+    "createProfile": "Create Profile",
 
     "selectYourIndustriesAndJobs": "Select your industries and jobs",
 
@@ -119,8 +120,8 @@
     "selectAJobPosition": "Select a job position",
     "salary": "Salary",
 
-    "workerSearchBarInput1Placeholder": "Industry, job title...",
-    "workerSearchBarInput2Placeholder": "Location",
+    "workerSearchBarInput1Placeholder": "Job title, Industry or Keywords",
+    "workerSearchBarInput2Placeholder": "City, State or Zip Code",
     "companySearchBarInput1Placeholder": "Industry, job title...",
     "companySearchBarInput2Placeholder": "Location",
     "searchJobs": "Search",
@@ -160,6 +161,8 @@
     "month": "Month",
     "year": "Year",
 
+    "monthly": "Monthly",
+
     "contactInformation": "Contact Information",
     "phone": "Phone",
     "address": "Address",
@@ -178,6 +181,7 @@
     "congratulations": "Congratulations!",
     "youHaveSuccessfullySignedUp": "You have successfully signed up",
     "workerOnlineProfileCongratulationsDescription": "You have successfully created your online profile",
+    "youHaveSuccessfullyCreatedYourCompanyProfile": "You have successfully created your company profile",
 
     "resetPassword": "Reset Password",
     "resetPasswordDescription": "Enter the email address associated with your account. A link to reset your password will be sent to your email address.",
@@ -192,17 +196,17 @@
 
     "joinNow": "Join Now!",
     
-    "companyJourneyTitle": "Join Now!",
+    "companyJourneyTitle": "Join now and find hundreds of qualified workers!",
     "companyJourneyStep1Title": "Register",
     "companyJourneyStep1Text": "Join today and find new opportunities",
     "companyJourneyStep2Title": "Create Company Profile",
-    "companyJourneyStep2Text": "Is your brand's showcase on our platform",
+    "companyJourneyStep2Text": "Let hundreds of blue collar workers find your company",
     "companyJourneyStep3Title": "Connect with Workers",
     "companyJourneyStep3Text": "View and chat with hundreds of professionals",
     "companyJourneyStep4Title": "Hire",
     "companyJourneyStep4Text": "Extend your offers to the right candidates",
 
-    "workerJourneyTitle": "Your Dream Job!",
+    "workerJourneyTitle": "Find your dream job in Blukers!",
     "workerJourneyStep1Title": "Register",
     "workerJourneyStep1Text": "Gain access to countless job opportunities",
     "workerJourneyStep2Title": "Create Your Profile",
@@ -233,6 +237,7 @@
     "toContinueOrAccessThisContent": "to continue or to access this content",
 
     "changeProfilePicture": "Change profile picture",
+    "chooseFromLibrary": "Choose From Library",
     "fromGallery": "From Gallery",
     "takePhoto": "Take Photo",
 
@@ -320,6 +325,13 @@
     "relationship": "Relationship",
     "uploadYourResume": "Upload Your Resume",
     "addMoreCertifications": "Add more certifications",
+    "addMore": "Add More",
+    "addOne": "Add One",
+    "removeLast": "Remove Last",
+    "addAnotherSocialNetwork": "Add Another",
+    "removeLastSocialNetwork": "Remove Last",
+    "aboutYourCompany": "About Your Company",
+    "companySize": "Company Size",
 
     "areYouSureYouWantToLogOut": "Are you sure you want to logout?",
     "areYouSureYouWantToDeleteYourAccount": "Are you sure you want to delete your account? Your account will be deleted permanently.",
@@ -332,6 +344,91 @@
     "termsAndConditions": "Terms and Conditions",
     "termsOfService": "Terms of Service",
     "read": "Read",
+
+    "services": "Services",
+    "products": "Products",
+
+    "basic": "Basic",
+    "active": "Active",
+
+    "alreadySubscribedTitle": "You are already subscribed to the premium plus version.",
+    "alreadySubscribedDescription": "Thank you for being a valued customer. \n\n We truly appreciate your support.",
+
+    "paymentSuccessful": "Payment Successful",
+    "paymentSuccessfulDescription": "Thank you for your payment. Your transaction has been completed successfully.",
+    "paymentCancelledOrFailed": "Payment Cancelled or Failed",
+    "paymentCancelledOrFailedDescription": "There was an issue processing your payment. Please try again later or contact support.",
+
+    "createYourResume": "Create your Resume",
+    "uploadYourResume": "Upload your Resume",
+    "uploadYourCertifications": "Upload your Certifications",
+    "applyTo2JobsDaily": "Apply to 2 Jobs Daily",
+    "applyTo10JobsDaily": "Apply to 10 Jobs Daily",
+    "applyToUnlimitedJobsDaily": "Apply to unlimited Jobs",
+    "showYourProfileOnTopInEmployersSearchersSection": "Show your profile on top in employers searchers section",
+    "displayYourImmigrationAndEmploymentVerificationStatus": "Display your immigration and employment verification status",
+
+    "employmentVerification": "Employment Verification",
+    "employmentVerification1": "Employment",
+    "employmentVerification2": "Verification",
+
+    "buy": "Buy",
+    "purchase": "Purchase",
+
+    "generalInformation": "General Information",
+    "companySlogan": "Company Slogan",
+    "shortDescription": "Short description",
+    "companyShortDescription": "Short description about the company",
+    "uploadCompanyLogo": "Upload Company Logo",
+    "contactDetails": "Contact Details",
+    "customerServicePhoneNumber": "Customer Service Phone Number",
+    "headOfficeAddress": "Head Office Address",
+    "socialMediaInformation": "Social Media Information",
+    "companyWebsite": "Company Website",
+    "websiteAddress": "Website Address",
+    "socialNetworks": "Social Networks",
+    "socialNetworkPlatformName": "Social Network Name",
+    "socialNetworkPlatformLink": "Link to your profile",
+
+    "privacyAndTerms": "Privacy and Terms",
+
+    "createJobPost": "Create Job Post",
+    "selectAnIndustryAndAJobPosition": "Select an Industry and a Job Position",
+    "jobDetails": "Job Details",
+    "numberOfPositionsAvailable": "Number of Positions Available",
+    "jobUrgencyLevel": "Job Urgency Level",
+    "lowF": "Low",
+    "mediumF": "Medium",
+    "highF": "High",
+    "requirementsAndSkills": "Requirements & Skills",
+    "compensationAndContract": "Compensation and Contract",
+    "selectAJobType": "Select a Job Type",
+    "jobLocation": "Job Location",
+
+    "fullTime": "Full Time",
+    "partTime": "Part Time",
+    "contract": "Contract",
+    "specifiedTime": "Specified Time",
+    "fullTimePermanent": "Full Time Permanent",
+    "fullTimeTemporary": "Full Time Temporary",
+    "internship": "Internship",
+
+    "hourly": "Hourly",
+    "daily": "Daily",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+
+    "salaryAmount": "Salary Amount",
+    "salaryPeriod": "Salary Period",
+    "selectSalaryPeriod": "Select Salary Period",
+
+    "comingSoon": "Coming Soon",
+
+    "creatingYourAccount": "Creating your account",
+    "deletingYourAccount": "Deleting your account",
+    "signingIn": "Signing in",
+    "signingOut": "Signing out",
+    "sendingPasswordResetLink": "Sending password reset link",
 
     "whatAreYouLookingFor": "What are you looking for?",
     "aJob": "A Job",

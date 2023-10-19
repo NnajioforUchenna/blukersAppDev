@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:go_router/go_router.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 
 class JobPostCongratulationPage extends StatefulWidget {
@@ -42,9 +43,11 @@ class _JobPostCongratulationPageState extends State<JobPostCongratulationPage> {
     Future.delayed(Duration(seconds: countdownValue), () {
       _timer.cancel(); // Cancel the timer if it's still active
       if (up.userRole == "company") {
-        Navigator.pushReplacementNamed(context, '/myJobPosts');
+        // Navigator.pushReplacementNamed(context, '/myJobPosts');
+        context.go('/myJobPosts');
       } else {
-        Navigator.pushReplacementNamed(context, '/myJobs');
+        // Navigator.pushReplacementNamed(context, '/myJobs');
+        context.go('/myJobs');
       }
     });
   }

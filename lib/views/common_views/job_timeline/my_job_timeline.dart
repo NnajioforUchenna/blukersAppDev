@@ -4,6 +4,9 @@ import 'package:timeline_tile/timeline_tile.dart';
 
 import 'explanation_card.dart';
 
+import 'package:blukers/utils/styles/index.dart';
+import 'package:unicons/unicons.dart';
+
 class MyJobTimeLine extends StatelessWidget {
   final bool isFirst;
   final bool isLast;
@@ -22,26 +25,27 @@ class MyJobTimeLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.2,
+      // height: MediaQuery.of(context).size.height * 0.2,
       child: TimelineTile(
         isFirst: isFirst,
         isLast: isLast,
         beforeLineStyle: LineStyle(
           color: isPast
-              ? ThemeColors.primaryThemeColor
-              : ThemeColors.primaryThemeColor.withOpacity(0.3),
+              ? ThemeColors.blukersBlueThemeColor
+              : ThemeColors.blukersBlueThemeColor.withOpacity(0.3),
           thickness: 2,
         ),
         indicatorStyle: IndicatorStyle(
           width: 40,
           color: isPast
-              ? ThemeColors.primaryThemeColor
-              : ThemeColors.primaryThemeColor.withOpacity(0.3),
+              ? ThemeColors.blukersBlueThemeColor
+              : ThemeColors.blukersBlueThemeColor.withOpacity(0.3),
           iconStyle: IconStyle(
             color: isPast
                 ? Colors.white
-                : ThemeColors.primaryThemeColor.withOpacity(0.3),
-            iconData: Icons.check,
+                : ThemeColors.blukersBlueThemeColor.withOpacity(0.3),
+            // iconData: Icons.circle_rounded,
+            iconData: Icons.arrow_right_alt_sharp,
           ),
           padding: EdgeInsets.all(8),
         ),

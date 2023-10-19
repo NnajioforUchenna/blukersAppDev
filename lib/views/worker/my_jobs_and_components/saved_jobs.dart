@@ -9,6 +9,8 @@ import '../../../providers/job_posts_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import 'list_job_posts_widget.dart';
 
+import 'package:blukers/views/common_views/components/loading_animation.dart';
+
 class SavedJobs extends StatefulWidget {
   const SavedJobs({super.key});
 
@@ -37,7 +39,7 @@ class _SavedJobsState extends State<SavedJobs> {
       future: jobPosts,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return LoadingAnimation();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {

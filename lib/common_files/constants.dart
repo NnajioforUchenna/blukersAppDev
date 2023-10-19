@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blukers/views/worker/membership/new_mobile_view/new_mobile_membership_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -114,11 +115,8 @@ final List<Map<String, dynamic>> listProducts = [
     "amount": "299.99",
     "productId": "foia",
     "details": [
-      "Create your Resume",
-      "Upload your Resume",
-      "Upload your Certifications",
-      "Apply to 10 Jobs Daily",
-      "Show your profile on the top in employers searchers section"
+      ""
+      // "Our team will verify your immigration status and will send you the results."
     ],
   },
   {
@@ -128,11 +126,8 @@ final List<Map<String, dynamic>> listProducts = [
     "amount": "99.99",
     "productId": "employmentVerification",
     "details": [
-      "Create your Resume",
-      "Upload your Resume",
-      "Upload your Certifications",
-      "Apply to 10 Jobs Daily",
-      "Show your profile on the top in employers searchers section"
+      ""
+      // "Our team will verify your work experience and will send you a certification of employment verified."
     ],
   },
 ];
@@ -146,10 +141,10 @@ final List<Map<String, dynamic>> listSubscriptions = [
     "subscriptionId": "basic",
     "details": [
       "Create your Resume",
-      "Upload your Resume",
-      "Upload your Certifications",
-      "Apply to 10 Jobs Daily",
-      "Show your profile on the top in employers searchers section"
+      // "Upload your Resume",
+      // "Upload your Certifications",
+      "Apply to 2 Jobs Daily",
+      // "Show your profile on top in employers searchers section"
     ],
   },
   {
@@ -163,7 +158,7 @@ final List<Map<String, dynamic>> listSubscriptions = [
       "Upload your Resume",
       "Upload your Certifications",
       "Apply to 10 Jobs Daily",
-      "Show your profile on the top in employers searchers section"
+      "Show your profile on top in employers searchers section"
     ],
   },
   {
@@ -176,8 +171,9 @@ final List<Map<String, dynamic>> listSubscriptions = [
       "Create your Resume",
       "Upload your Resume",
       "Upload your Certifications",
-      "Apply to 10 Jobs Daily",
-      "Show your profile on the top in employers searchers section"
+      "Apply to unlimited Jobs",
+      "Show your profile on top in employers searchers section",
+      "Display your immigration and employment verification status"
     ],
   },
 ];
@@ -199,30 +195,30 @@ final List<Map<String, dynamic>> listServices = [
     'service': const Products(),
     'color': const Color(0xff1a75bb)
   },
-  {
-    'title': 'Exams',
-    'description':
-        'Prepare for relevant certifications and evaluations required for specific job roles in the USA.',
-    'route': '/exams',
-    'service': const ServiceComingSoonWidget(),
-    'color': const Color(0xffF16523)
-  },
-  {
-    'title': 'Courses',
-    'description':
-        'Skill-enhancement courses designed to make you more marketable to employers in the USA.',
-    'route': '/courses',
-    'service': const ServiceComingSoonWidget(),
-    'color': const Color(0xff1a75bb)
-  },
-  {
-    'title': 'Certifications',
-    'description':
-        'Real-world practical experiences to familiarize international talents with the US work environment.',
-    'route': '/practicals',
-    'service': const ServiceComingSoonWidget(),
-    'color': const Color(0xffF16523)
-  },
+  // {
+  //   'title': 'Exams',
+  //   'description':
+  //       'Prepare for relevant certifications and evaluations required for specific job roles in the USA.',
+  //   'route': '/exams',
+  //   'service': const ServiceComingSoonWidget(),
+  //   'color': const Color(0xffF16523)
+  // },
+  // {
+  //   'title': 'Courses',
+  //   'description':
+  //       'Skill-enhancement courses designed to make you more marketable to employers in the USA.',
+  //   'route': '/courses',
+  //   'service': const ServiceComingSoonWidget(),
+  //   'color': const Color(0xff1a75bb)
+  // },
+  // {
+  //   'title': 'Certifications',
+  //   'description':
+  //       'Real-world practical experiences to familiarize international talents with the US work environment.',
+  //   'route': '/practicals',
+  //   'service': const ServiceComingSoonWidget(),
+  //   'color': const Color(0xffF16523)
+  // },
 ];
 
 List<List<Widget>> combineLists(List<Widget> list1, List<Widget> list2) {

@@ -61,7 +61,8 @@ class _AddressFormState extends State<AddressForm> {
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        border: Border.all(color: ThemeColors.secondaryThemeColor),
+        // border: Border.all(color: Colors.black12),
+        color: const Color.fromARGB(255, 250, 250, 250),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(

@@ -9,6 +9,8 @@ import '../../auth/common_widget/auth_input.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class PersonalInformationPage extends StatefulWidget {
   PersonalInformationPage({Key? key}) : super(key: key);
 
@@ -74,6 +76,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
       child: Stack(
         children: <Widget>[
           Container(
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               controller: scrollCtrl,
@@ -84,16 +87,16 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      AppLocalizations.of(context)!.personalInformation,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.deepOrangeAccent,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25,
-                      ),
-                    ),
+                    // Text(
+                    //   AppLocalizations.of(context)!.personalInformation,
+                    //   textAlign: TextAlign.center,
+                    //   style: const TextStyle(
+                    //     color: Colors.deepOrangeAccent,
+                    //     fontSize: 25,
+                    //     fontWeight: FontWeight.w600,
+                    //     height: 1.25,
+                    //   ),
+                    // ),
                     const SizedBox(height: 20),
                     AuthInput(
                       child: TextFormField(
@@ -117,15 +120,15 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: height * 0.05),
+                    SizedBox(height: height * 0.015),
                     AuthInput(
                       child: TextFormField(
                         controller: middleNameController,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) => value!.isEmpty
-                            ? AppLocalizations.of(context)!.required
-                            : null,
+                        // validator: (value) => value!.isEmpty
+                        //     ? AppLocalizations.of(context)!.required
+                        //     : null,
                         decoration: InputDecoration(
                           hintText: AppLocalizations.of(context)!.middleName,
                           border: OutlineInputBorder(
@@ -140,7 +143,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: height * 0.05),
+                    SizedBox(height: height * 0.015),
                     AuthInput(
                       child: TextFormField(
                         controller: lastNameController,
@@ -170,12 +173,13 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                       AppLocalizations.of(context)!.birthdate,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Colors.blueGrey,
-                        fontSize: 25,
+                        color: ThemeColors.blukersOrangeThemeColor,
+                        fontSize: 22,
                         fontWeight: FontWeight.w600,
                         height: 1.25,
                       ),
                     ),
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Expanded(
@@ -210,7 +214,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 4),
                         Expanded(
                           child: AuthInput(
                             child: TextFormField(
@@ -243,7 +247,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 4),
                         Expanded(
                           child: AuthInput(
                             child: TextFormField(
@@ -287,18 +291,16 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () {
                             wp.workerProfileBackPage();
                           },
-                          child: Text(AppLocalizations.of(context)!.previous),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
+                          navDirection: "back",
                         ),
-                        ElevatedButton(
-                          onPressed: () {
+                        TimelineNavigationButton(
+                          isSelected: isFormComplete(),
+                          onPress: () {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
                               wp.addPersonalInformtion(
@@ -315,12 +317,55 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                                   "Please fill all the fields");
                             }
                           },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
-                          child: Text(AppLocalizations.of(context)!.next),
                         ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     wp.workerProfileBackPage();
+                        //   },
+                        //   child: Text(
+                        //     AppLocalizations.of(context)!.previous,
+                        //     style: TextStyle(
+                        //       fontFamily: "Montserrat",
+                        //       fontSize: 20,
+                        //       fontWeight: FontWeight.bold,
+                        //     ),
+                        //   ),
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     if (_formKey.currentState!.validate() &&
+                        //         isFormComplete()) {
+                        //       wp.addPersonalInformtion(
+                        //         firstNameController.text,
+                        //         middleNameController.text,
+                        //         lastNameController.text,
+                        //         birthDayController.text,
+                        //         birthMonthController.text,
+                        //         birthYearController.text,
+                        //       );
+                        //       print("Personal Information Added");
+                        //     } else {
+                        //       EasyLoading.showError(
+                        //           "Please fill all the fields");
+                        //     }
+                        //   },
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        //   child: Text(
+                        //     AppLocalizations.of(context)!.next,
+                        //     style: TextStyle(
+                        //       fontFamily: "Montserrat",
+                        //       fontSize: 20,
+                        //       fontWeight: FontWeight.bold,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                     SizedBox(height: height * .05),

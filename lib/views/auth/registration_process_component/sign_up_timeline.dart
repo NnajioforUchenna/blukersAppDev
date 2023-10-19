@@ -7,6 +7,10 @@ import '../../../../utils/styles/index.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+const Color highlightColor = ThemeColors.blukersOrangeThemeColor;
+
 const deliverySteps = [
   'Login Information',
   'Basic Information',
@@ -16,17 +20,17 @@ const deliverySteps = [
 const List<Icon> icons = [
   Icon(
     UniconsLine.key_skeleton_alt,
-    color: ThemeColors.secondaryThemeColor,
+    color: highlightColor,
     size: 30,
   ),
   Icon(
     UniconsLine.info_circle,
-    color: ThemeColors.secondaryThemeColor,
+    color: highlightColor,
     size: 30,
   ),
   Icon(
     UniconsLine.postcard,
-    color: ThemeColors.secondaryThemeColor,
+    color: highlightColor,
     size: 30,
   ),
 ];
@@ -46,67 +50,162 @@ class SignUpTimeline extends StatelessWidget {
       _scrollController.jumpTo(currentStep * 120.0);
     });
 
+    // return Center(
+    //   child: Container(
+    //     color: Colors.white,
+    //     // margin: const EdgeInsets.all(8),
+    //     constraints: BoxConstraints(
+    //         maxHeight: 140, maxWidth: MediaQuery.of(context).size.width * 1),
+    //     child: ListView.builder(
+    //       scrollDirection: Axis.horizontal,
+    //       controller: _scrollController,
+    //       itemCount: deliverySteps.length,
+    //       itemBuilder: (BuildContext context, int index) {
+    //         final step = deliverySteps[index];
+    //         var indicatorSize = 30.0;
+    //         var beforeLineStyle = const LineStyle(
+    //           // color: Colors.white.withOpacity(0.8),
+    //           color: highlightColor,
+    //         );
+    //         LineStyle afterLineStyle =
+    //             const LineStyle(color: ThemeColors.grey1ThemeColor);
+
+    //         _DeliveryStatus status;
+
+    //         if (index < currentStep) {
+    //           status = _DeliveryStatus.done;
+    //           afterLineStyle =
+    //               const LineStyle(color: highlightColor);
+    //         } else if (index > currentStep) {
+    //           status = _DeliveryStatus.todo;
+    //           indicatorSize = 20;
+    //           beforeLineStyle =
+    //               const LineStyle(color: ThemeColors.grey1ThemeColor);
+    //         } else {
+    //           // afterLineStyle = const LineStyle(color: Colors.white);
+    //           status = _DeliveryStatus.doing;
+    //         }
+
+    //         return SizedBox(
+    //           width: Responsive.isDesktop(context)
+    //               ? MediaQuery.of(context).size.width / 4
+    //               : null,
+    //           child: TimelineTile(
+    //             axis: TimelineAxis.horizontal,
+    //             alignment: TimelineAlign.manual,
+    //             lineXY: 0.6,
+    //             isFirst: index == 0,
+    //             isLast: index == deliverySteps.length - 1,
+    //             beforeLineStyle: beforeLineStyle,
+    //             afterLineStyle: afterLineStyle,
+    //             indicatorStyle: IndicatorStyle(
+    //               width: indicatorSize,
+    //               height: indicatorSize,
+    //               indicator: _IndicatorDelivery(status: status),
+    //             ),
+    //             startChild: _StartChildDelivery(index: index),
+    //             endChild: _EndChildDelivery(
+    //               text: step,
+    //               current: index == currentStep,
+    //             ),
+    //           ),
+    //         );
+    //       },
+    //     ),
+    //   ),
+    // );
+
+    List<String> stepsLocalized = [
+      AppLocalizations.of(context)!.createYourAccount,
+      AppLocalizations.of(context)!.basicInformation,
+      AppLocalizations.of(context)!.contactInformation,
+    ];
+
     return Center(
-      child: Container(
-        margin: const EdgeInsets.all(8),
-        constraints: BoxConstraints(
-            maxHeight: 140, maxWidth: MediaQuery.of(context).size.width * 0.8),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          controller: _scrollController,
-          itemCount: deliverySteps.length,
-          itemBuilder: (BuildContext context, int index) {
-            final step = deliverySteps[index];
-            var indicatorSize = 30.0;
-            var beforeLineStyle = const LineStyle(
-              // color: Colors.white.withOpacity(0.8),
-              color: ThemeColors.secondaryThemeColor,
-            );
-            LineStyle afterLineStyle =
-                const LineStyle(color: ThemeColors.grey1ThemeColor);
+      child: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            // margin: const EdgeInsets.all(8),
+            constraints: BoxConstraints(
+                maxHeight: 140,
+                maxWidth: MediaQuery.of(context).size.width * 1),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              controller: _scrollController,
+              itemCount: deliverySteps.length,
+              itemBuilder: (BuildContext context, int index) {
+                final step = deliverySteps[index];
+                var indicatorSize = 30.0;
+                var beforeLineStyle = const LineStyle(
+                  // color: Colors.white.withOpacity(0.8),
+                  color: highlightColor,
+                );
+                LineStyle afterLineStyle =
+                    const LineStyle(color: ThemeColors.grey1ThemeColor);
 
-            _DeliveryStatus status;
+                _DeliveryStatus status;
 
-            if (index < currentStep) {
-              status = _DeliveryStatus.done;
-              afterLineStyle =
-                  const LineStyle(color: ThemeColors.secondaryThemeColor);
-            } else if (index > currentStep) {
-              status = _DeliveryStatus.todo;
-              indicatorSize = 20;
-              beforeLineStyle =
-                  const LineStyle(color: ThemeColors.grey1ThemeColor);
-            } else {
-              // afterLineStyle = const LineStyle(color: Colors.white);
-              status = _DeliveryStatus.doing;
-            }
+                if (index < currentStep) {
+                  status = _DeliveryStatus.done;
+                  afterLineStyle = const LineStyle(color: highlightColor);
+                } else if (index > currentStep) {
+                  status = _DeliveryStatus.todo;
+                  indicatorSize = 20;
+                  beforeLineStyle =
+                      const LineStyle(color: ThemeColors.grey1ThemeColor);
+                } else {
+                  // afterLineStyle = const LineStyle(color: Colors.white);
+                  status = _DeliveryStatus.doing;
+                }
 
-            return SizedBox(
-              width: Responsive.isDesktop(context)
-                  ? MediaQuery.of(context).size.width / 4
-                  : null,
-              child: TimelineTile(
-                axis: TimelineAxis.horizontal,
-                alignment: TimelineAlign.manual,
-                lineXY: 0.6,
-                isFirst: index == 0,
-                isLast: index == deliverySteps.length - 1,
-                beforeLineStyle: beforeLineStyle,
-                afterLineStyle: afterLineStyle,
-                indicatorStyle: IndicatorStyle(
-                  width: indicatorSize,
-                  height: indicatorSize,
-                  indicator: _IndicatorDelivery(status: status),
-                ),
-                startChild: _StartChildDelivery(index: index),
-                endChild: _EndChildDelivery(
-                  text: step,
-                  current: index == currentStep,
+                return SizedBox(
+                  width: Responsive.isDesktop(context)
+                      ? MediaQuery.of(context).size.width / 4
+                      : null,
+                  child: TimelineTile(
+                    axis: TimelineAxis.horizontal,
+                    alignment: TimelineAlign.manual,
+                    lineXY: 0.6,
+                    isFirst: index == 0,
+                    isLast: index == deliverySteps.length - 1,
+                    beforeLineStyle: beforeLineStyle,
+                    afterLineStyle: afterLineStyle,
+                    indicatorStyle: IndicatorStyle(
+                      width: indicatorSize,
+                      height: indicatorSize,
+                      indicator: _IndicatorDelivery(status: status),
+                    ),
+                    startChild: _StartChildDelivery(index: index),
+                    endChild: _EndChildDelivery(
+                      text: step,
+                      current: index == currentStep,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          if (currentStep < stepsLocalized.length)
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              padding: const EdgeInsets.only(bottom: 15),
+              constraints: BoxConstraints(
+                  maxHeight: 140,
+                  maxWidth: MediaQuery.of(context).size.width * 1),
+              child: Text(
+                textAlign: TextAlign.center,
+                stepsLocalized[currentStep],
+                style: const TextStyle(
+                  // color: ThemeColors.grey1ThemeColor,
+                  color: ThemeColors.blukersBlueThemeColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            );
-          },
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -137,7 +236,7 @@ class _EndChildDelivery extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 100),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Flexible(
@@ -147,7 +246,7 @@ class _EndChildDelivery extends StatelessWidget {
               //     style: GoogleFonts.sniglet(
               //       fontSize: 16,
               //       color: current
-              //           ? ThemeColors.secondaryThemeColor
+              //           ? highlightColor
               //           : ThemeColors.grey1ThemeColor,
               //     ),
               //   ),
@@ -172,7 +271,7 @@ class _IndicatorDelivery extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: ThemeColors.secondaryThemeColor,
+            color: highlightColor,
           ),
           child: const Center(
             child: Icon(Icons.check, color: Colors.white),
@@ -182,18 +281,18 @@ class _IndicatorDelivery extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: ThemeColors.secondaryThemeColor,
+            color: highlightColor,
           ),
-          child: const Center(
-            child: SizedBox(
-              height: 15,
-              width: 15,
-              child: CircularProgressIndicator(
-                strokeWidth: 3,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            ),
-          ),
+          // child: const Center(
+          //   child: SizedBox(
+          //     height: 15,
+          //     width: 15,
+          //     child: CircularProgressIndicator(
+          //       strokeWidth: 3,
+          //       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          //     ),
+          //   ),
+          // ),
         );
       case _DeliveryStatus.todo:
         return Container(
@@ -201,16 +300,16 @@ class _IndicatorDelivery extends StatelessWidget {
             shape: BoxShape.circle,
             color: ThemeColors.grey1ThemeColor,
           ),
-          child: Center(
-            child: Container(
-              width: 10,
-              height: 10,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0xFF5D6173),
-              ),
-            ),
-          ),
+          // child: Center(
+          //   child: Container(
+          //     width: 10,
+          //     height: 10,
+          //     decoration: const BoxDecoration(
+          //       shape: BoxShape.circle,
+          //       color: Color(0xFF5D6173),
+          //     ),
+          //   ),
+          // ),
         );
     }
     return Container();

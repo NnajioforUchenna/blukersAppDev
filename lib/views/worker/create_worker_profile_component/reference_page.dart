@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:blukers/views/common_views/components/index.dart';
 
 import '../../../providers/worker_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'reference_form.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
 
 class ReferencePage extends StatefulWidget {
   ReferencePage({Key? key}) : super(key: key);
@@ -44,11 +48,13 @@ class _ReferencePageState extends State<ReferencePage> {
       }
     }
     return Container(
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SingleChildScrollView(
         controller: scrollCtrl,
         child: Column(
           children: [
+            const SizedBox(height: 20),
             ...referenceForms,
             Tooltip(
               message: AppLocalizations.of(context)!.addMorePersonalReferences,
@@ -79,30 +85,53 @@ class _ReferencePageState extends State<ReferencePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      wp.workerProfileBackPage();
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          ThemeColors.secondaryThemeColor),
-                    ),
-                    child: Text(AppLocalizations.of(context)!.previous),
+                  TimelineNavigationButton(
+                    isSelected: true,
+                    onPress: () => wp.workerProfileBackPage(),
+                    navDirection: "back",
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      wp.setReference();
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          ThemeColors.secondaryThemeColor),
-                    ),
-                    child: Text(AppLocalizations.of(context)!.next),
+                  TimelineNavigationButton(
+                    isSelected: true,
+                    onPress: () => wp.setReference(),
                   ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     wp.workerProfileBackPage();
+                  //   },
+                  //   style: ButtonStyle(
+                  //     backgroundColor: MaterialStateProperty.all<Color>(
+                  //         ThemeColors.secondaryThemeColor),
+                  //   ),
+                  //   child: Text(
+                  //     AppLocalizations.of(context)!.previous,
+                  //     style: TextStyle(
+                  //       fontFamily: "Montserrat",
+                  //       fontSize: 20,
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //   ),
+                  // ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     wp.setReference();
+                  //   },
+                  //   style: ButtonStyle(
+                  //     backgroundColor: MaterialStateProperty.all<Color>(
+                  //         ThemeColors.secondaryThemeColor),
+                  //   ),
+                  //   child: Text(
+                  //     AppLocalizations.of(context)!.next,
+                  //     style: TextStyle(
+                  //       fontFamily: "Montserrat",
+                  //       fontSize: 20,
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
-            const SizedBox(height: 50)
+            const SizedBox(height: 150)
           ],
         ),
       ),

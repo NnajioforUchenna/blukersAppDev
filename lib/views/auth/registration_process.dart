@@ -10,23 +10,49 @@ class RegistrationProcess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    return SizedBox(
-      height: height,
-      width: Responsive.isDesktop(context)
-          ? MediaQuery.of(context).size.width * 0.5
-          : MediaQuery.of(context).size.width,
-      child: CustomScrollView(
-        slivers: [
-          SliverList(
-              delegate: SliverChildListDelegate([
-            const SizedBox(
-              height: 50,
+
+    // return SizedBox(
+    //   height: height,
+    //   width: Responsive.isDesktop(context)
+    //       ? MediaQuery.of(context).size.width * 0.5
+    //       : MediaQuery.of(context).size.width,
+    //   child: CustomScrollView(
+    //     slivers: [
+    //       SliverList(
+    //           delegate: SliverChildListDelegate([
+    //         const SizedBox(
+    //           height: 50,
+    //         ),
+    //         SignUpTimeline(),
+    //         // const CompanyLogo(),
+    //         const SizedBox(height: 20),
+    //         const PageSlider()
+    //       ]))
+    //     ],
+    //   ),
+    // );
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Column(
+        children: [
+          SignUpTimeline(),
+          Expanded(
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      const PageSlider(),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            SignUpTimeline(),
-            // const CompanyLogo(),
-            const SizedBox(height: 20),
-            const PageSlider()
-          ]))
+          ),
         ],
       ),
     );

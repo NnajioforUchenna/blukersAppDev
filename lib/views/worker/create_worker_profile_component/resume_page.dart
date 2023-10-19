@@ -8,6 +8,8 @@ import '../../../utils/styles/theme_colors.dart';
 import '../../auth/common_widget/auth_input.dart';
 import 'your_resume.dart';
 
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class ResumePage extends StatelessWidget {
   const ResumePage({Key? key}) : super(key: key);
 
@@ -19,77 +21,107 @@ class ResumePage extends StatelessWidget {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Text(
-              AppLocalizations.of(context)!.uploadYourResume,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.deepOrangeAccent,
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-                height: 1.25,
-              ),
-            ),
-            const SizedBox(height: 20),
-            YourResume(),
-            const SizedBox(height: 20),
-            AuthInput(
-              child: TextFormField(
-                controller: linkedInUrlController,
-                textInputAction: TextInputAction.done,
-                validator: (value) => value!.isEmpty
-                    ? AppLocalizations.of(context)!.required
-                    : null,
-                decoration: InputDecoration(
-                  hintText: "LinkedIn URL",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
+      body: Container(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              // Text(
+              //   AppLocalizations.of(context)!.uploadYourResume,
+              //   textAlign: TextAlign.center,
+              //   style: const TextStyle(
+              //     color: Colors.deepOrangeAccent,
+              //     fontSize: 25,
+              //     fontWeight: FontWeight.w600,
+              //     height: 1.25,
+              //   ),
+              // ),
+              const SizedBox(height: 20),
+              YourResume(),
+              const SizedBox(height: 20),
+              AuthInput(
+                child: TextFormField(
+                  controller: linkedInUrlController,
+                  textInputAction: TextInputAction.done,
+                  validator: (value) => value!.isEmpty
+                      ? AppLocalizations.of(context)!.required
+                      : null,
+                  decoration: InputDecoration(
+                    hintText: "LinkedIn URL",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
-                  fillColor: Colors.white,
-                  filled: true,
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      wp.workerProfileBackPage();
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          ThemeColors.secondaryThemeColor),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TimelineNavigationButton(
+                      isSelected: true,
+                      onPress: () => wp.workerProfileBackPage(),
+                      navDirection: "back",
                     ),
-                    child: Text(AppLocalizations.of(context)!.previous),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle "submit" or "next" logic here
-                      up.setJobTimelineStep(2);
-                      wp.setResume(linkedInUrlController.text);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          ThemeColors.secondaryThemeColor),
+                    TimelineNavigationButton(
+                      isSelected: true,
+                      onPress: () {
+                        // Handle "submit" or "next" logic here
+                        up.setJobTimelineStep(2);
+                        wp.setResume(linkedInUrlController.text);
+                      },
                     ),
-                    child: Text(AppLocalizations.of(context)!.next),
-                  ),
-                ],
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     wp.workerProfileBackPage();
+                    //   },
+                    //   style: ButtonStyle(
+                    //     backgroundColor: MaterialStateProperty.all<Color>(
+                    //         ThemeColors.secondaryThemeColor),
+                    //   ),
+                    //   child: Text(
+                    //     AppLocalizations.of(context)!.previous,
+                    //     style: TextStyle(
+                    //       fontFamily: "Montserrat",
+                    //       fontSize: 20,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    // ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     // Handle "submit" or "next" logic here
+                    //     up.setJobTimelineStep(2);
+                    //     wp.setResume(linkedInUrlController.text);
+                    //   },
+                    //   style: ButtonStyle(
+                    //     backgroundColor: MaterialStateProperty.all<Color>(
+                    //         ThemeColors.secondaryThemeColor),
+                    //   ),
+                    //   child: Text(
+                    //     AppLocalizations.of(context)!.next,
+                    //     style: TextStyle(
+                    //       fontFamily: "Montserrat",
+                    //       fontSize: 20,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 50)
-          ],
+              const SizedBox(height: 50)
+            ],
+          ),
         ),
       ),
     );

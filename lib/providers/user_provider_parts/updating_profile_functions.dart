@@ -60,7 +60,7 @@ extension UpdatingProfileFunctions on UserProvider {
       if (resultUrl != 'error') {
         appUser?.worker?.certificationsIds?.add(resultUrl);
         EasyLoading.dismiss();
-        EasyLoading.showError('Uploaded your credential successfully.',
+        EasyLoading.showSuccess('Uploaded your credential successfully.',
             duration: Duration(seconds: 3));
         notifyListeners();
         result = resultUrl;
@@ -102,7 +102,7 @@ extension UpdatingProfileFunctions on UserProvider {
         appUser?.worker?.certificationsIds?.add(resultUrl);
 
         EasyLoading.dismiss();
-        EasyLoading.showError('Uploaded your credential successfully.',
+        EasyLoading.showSuccess('Uploaded your credential successfully.',
             duration: Duration(seconds: 3));
         notifyListeners();
         returnFile['url'] = resultUrl;

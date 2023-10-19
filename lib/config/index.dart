@@ -17,7 +17,7 @@ bool isDevelopmentMode = true;
 class Config {
   // APP VERSION
 
-  String appVersion = "1.0.5";
+  String appVersion = "1.0.6";
 
   // SUBSCRIPTIONS - iOS - WORKER
 
@@ -118,4 +118,10 @@ class Config {
   var appEngineFunctionsURL = isDevelopmentMode
       ? DevKeys.appEngineFunctionsURL
       : ProdKeys.appEngineFunctionsURL;
+
+  // STRIPE
+
+  var stripeDataCollectionDocID = isDevelopmentMode
+      ? DevKeys.stripeDataCollectionDocID
+      : ProdKeys.stripeDataCollectionDocID;
 }

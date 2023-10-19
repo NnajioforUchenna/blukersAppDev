@@ -111,7 +111,7 @@ class CompanyProvider with ChangeNotifier {
       if (result != 'error') {
         appUser?.photoUrl = result;
         EasyLoading.dismiss();
-        EasyLoading.showError('Uploaded your profile image successfully.');
+        EasyLoading.showSuccess('Uploaded your profile image successfully.');
         notifyListeners();
         createCompanyProfileData['logoUrl'] = result;
       } else {

@@ -21,6 +21,8 @@ class DisplayJobTimelineDialog extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FloatingActionButton(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.red,
                   child: const Icon(Icons.close),
                   onPressed: () => Navigator.of(context).pop(),
                 ),

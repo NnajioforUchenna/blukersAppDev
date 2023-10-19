@@ -16,7 +16,7 @@ class YourProfilePhoto extends StatelessWidget {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     String? logoUrl = wp.appUser?.photoUrl;
     return Card(
-      elevation: 8.0,
+      elevation: 2.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -35,15 +35,18 @@ class YourProfilePhoto extends StatelessWidget {
                   height: 150,
                   width: 150,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(1000),
                     child: logoUrl == null || logoUrl.isEmpty
                         ? Center(
                             child: Text(
+                              textAlign: TextAlign.center,
                               AppLocalizations.of(context)!
                                   .tapToSelectAndUploadAFile,
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: "Montserrat",
                               ),
                             ),
                           )

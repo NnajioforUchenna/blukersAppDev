@@ -8,6 +8,10 @@ import '../../../utils/styles/theme_colors.dart';
 import '../../auth/common_widget/auth_input.dart';
 import '../../common_views/address_form/address_form.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class ContactDetailsPage extends StatefulWidget {
   const ContactDetailsPage({super.key});
 
@@ -38,6 +42,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
         _stateController.text.isNotEmpty &&
         _countryController.text.isNotEmpty;
   }
+
   ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
@@ -52,7 +57,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
       _stateController.text = cp.previousParams['state'] ?? '';
       _postalCodeController.text = cp.previousParams['postalCode'] ?? '';
       _countryController.text = cp.previousParams['country'] ?? '';
-       //added this listner to dismiss keyboard when scroll
+      //added this listner to dismiss keyboard when scroll
       scrollCtrl.addListener(() {
         print('scrolling');
       });
@@ -81,6 +86,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
             child: Container(),
           ),
           Container(
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               controller: scrollCtrl,
@@ -91,16 +97,16 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Contact Details Page",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.deepOrangeAccent,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25,
-                      ),
-                    ),
+                    // Text(
+                    //   AppLocalizations.of(context)!.contactDetails,
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //     color: Colors.deepOrangeAccent,
+                    //     fontSize: 20,
+                    //     fontWeight: FontWeight.w600,
+                    //     height: 1.25,
+                    //   ),
+                    // ),
                     const SizedBox(height: 20),
                     Row(
                       children: [
@@ -131,16 +137,18 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                               textInputAction: TextInputAction.next,
                               validator: (value) {
                                 if (value!.length < 10) {
-                                  return "Ten Digits Required";
+                                  return AppLocalizations.of(context)!
+                                      .tenDigitsRequired;
                                 }
                                 if (value.length > 10) {
-                                  return "Ten Digits Required";
+                                  return AppLocalizations.of(context)!
+                                      .tenDigitsRequired;
                                 }
                                 return null;
                               },
                               controller: _customerServicePhoneController,
                               decoration: InputDecoration(
-                                  hintText: "Customer Service Phone Number",
+                                  hintText: AppLocalizations.of(context)!.phone,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                     borderSide: const BorderSide(
@@ -162,25 +170,21 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                       stateController: _stateController,
                       postalCodeController: _postalCodeController,
                       countryController: _countryController,
-                      label: 'Head Office Address',
+                      label: AppLocalizations.of(context)!.headOfficeAddress,
                       validate: isFormComplete,
                     ),
                     const SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            cp.companyProfileBackPage();
-                          },
-                          child: Text("Previous"),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () => cp.companyProfileBackPage(),
+                          navDirection: "back",
                         ),
-                        ElevatedButton(
-                          onPressed: () {
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
                               cp.addContactDetails(
@@ -197,15 +201,45 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                                   "Please fill all the fields");
                             }
                           },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
-                          child: const Text("Next"),
                         ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     cp.companyProfileBackPage();
+                        //   },
+                        //   child: Text("Previous"),
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     if (_formKey.currentState!.validate() &&
+                        //         isFormComplete()) {
+                        //       cp.addContactDetails(
+                        //         ext,
+                        //         _customerServicePhoneController.text,
+                        //         _streetController.text,
+                        //         _cityController.text,
+                        //         _stateController.text,
+                        //         _postalCodeController.text,
+                        //         _countryController.text,
+                        //       );
+                        //     } else {
+                        //       EasyLoading.showError(
+                        //           "Please fill all the fields");
+                        //     }
+                        //   },
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        //   child: const Text("Next"),
+                        // ),
                       ],
                     ),
-                    SizedBox(height: height * .05),
+                    // SizedBox(height: height * .05),
+                    const SizedBox(height: 150),
                   ],
                 ),
               ),

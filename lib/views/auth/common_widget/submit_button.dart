@@ -20,7 +20,7 @@ class SubmitButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: isDisabled ? Colors.grey : Colors.deepOrangeAccent,
-          borderRadius: const BorderRadius.all(Radius.circular(50)),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
           boxShadow: <BoxShadow>[
             BoxShadow(
               color: Colors.grey.shade200,

@@ -1,4 +1,5 @@
 import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -76,6 +77,11 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      ThemeColors.blukersBlueThemeColor,
+                    ),
+                  ),
                   onPressed: () {
                     _selectDate(context);
                   },
@@ -91,6 +97,11 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      ThemeColors.blukersBlueThemeColor,
+                    ),
+                  ),
                   onPressed: _isCurrentlyWorking
                       ? null
                       : () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentFailedWidget extends StatelessWidget {
   @override
@@ -29,10 +30,10 @@ class PaymentFailedWidget extends StatelessWidget {
               color: Colors.red,
             ),
             const SizedBox(height: 16.0),
-            const Text(
-              'Payment Cancelled or Failed',
+            Text(
+              AppLocalizations.of(context)!.paymentCancelledOrFailed,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.red,
@@ -40,7 +41,7 @@ class PaymentFailedWidget extends StatelessWidget {
             ),
             const SizedBox(height: 8.0),
             Text(
-              'There was an issue processing your payment. Please try again or contact support.',
+              AppLocalizations.of(context)!.paymentCancelledOrFailedDescription,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16.0,
@@ -59,9 +60,9 @@ class PaymentFailedWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: const Text(
-                'Continue',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.continueStr,
+                style: const TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

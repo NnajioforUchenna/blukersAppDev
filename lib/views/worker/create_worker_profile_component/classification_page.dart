@@ -9,6 +9,8 @@ import '../../../services/responsive.dart';
 import '../../../utils/localization/localized_industries.dart';
 import '../../../utils/localization/localized_jobs.dart';
 
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class ClassificationPage extends StatefulWidget {
   ClassificationPage({Key? key}) : super(key: key);
 
@@ -62,6 +64,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
     industries = ip.industries.values.toList();
     wp = Provider.of<WorkerProvider>(context);
     return Container(
+      color: Colors.white,
       width: Responsive.isDesktop(context)
           ? MediaQuery.of(context).size.width * 0.3
           : MediaQuery.of(context).size.width * 0.9,
@@ -72,85 +75,92 @@ class _ClassificationPageState extends State<ClassificationPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              AppLocalizations.of(context)!.selectYourIndustriesAndJobs,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.deepOrangeAccent,
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-                height: 1.25,
-              ),
-            ),
+            // Text(
+            //   AppLocalizations.of(context)!.selectYourIndustriesAndJobs,
+            //   textAlign: TextAlign.center,
+            //   style: const TextStyle(
+            //     color: Colors.deepOrangeAccent,
+            //     fontSize: 25,
+            //     fontWeight: FontWeight.w600,
+            //     height: 1.25,
+            //   ),
+            // ),
             const SizedBox(height: 20),
             if (industries.isEmpty)
               const Center(child: CircularProgressIndicator()),
             ...industries.map((industry) {
-              return Column(
-                children: [
-                  CheckboxListTile(
-                    title: Text(
-                      LocalizedIndustries.get(context, industry.industryId),
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25,
-                      ),
-                    ),
-                    value: selectedIndustries.contains(industry.industryId),
-                    onChanged: (bool? value) {
-                      if (value != null && value) {
-                        setState(() {
-                          selectedIndustries.add(industry.industryId);
-                        });
-                      } else {
-                        setState(() {
-                          selectedIndustries.remove(industry.industryId);
-                          selectedJobs.remove(industry.industryId);
-                        });
-                      }
-                    },
-                  ),
-                  if (selectedIndustries.contains(industry.industryId))
-                    ...industry.jobs.map((job) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: CheckboxListTile(
-                          title: Text(
-                            LocalizedJobs.get(context, job.jobId),
-                            style: TextStyle(
-                              color: Colors.blueGrey[700],
-                              fontSize: 20,
-                              fontWeight: FontWeight.w200,
-                              height: 1.25,
-                            ),
-                          ),
-                          value: selectedJobs[industry.industryId]
-                                  ?.contains(job.jobId) ??
-                              false,
-                          onChanged: (bool? value) {
-                            if (value != null && value) {
-                              if (!selectedJobs
-                                  .containsKey(industry.industryId)) {
-                                selectedJobs[industry.industryId] = [];
-                              }
-                              setState(() {
-                                selectedJobs[industry.industryId]!
-                                    .add(job.jobId);
-                              });
-                            } else {
-                              setState(() {
-                                selectedJobs[industry.industryId]!
-                                    .remove(job.jobId);
-                              });
-                            }
-                            isSelect();
-                          },
+              return Container(
+                decoration: BoxDecoration(
+                  // color: const Color.fromARGB(255, 250, 250, 250),
+                  color: Color.fromARGB(255, 243, 243, 243),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    CheckboxListTile(
+                      title: Text(
+                        LocalizedIndustries.get(context, industry.industryId),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          height: 1.25,
                         ),
-                      );
-                    }).toList()
-                ],
+                      ),
+                      value: selectedIndustries.contains(industry.industryId),
+                      onChanged: (bool? value) {
+                        if (value != null && value) {
+                          setState(() {
+                            selectedIndustries.add(industry.industryId);
+                          });
+                        } else {
+                          setState(() {
+                            selectedIndustries.remove(industry.industryId);
+                            selectedJobs.remove(industry.industryId);
+                          });
+                        }
+                      },
+                    ),
+                    if (selectedIndustries.contains(industry.industryId))
+                      ...industry.jobs.map((job) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: CheckboxListTile(
+                            title: Text(
+                              LocalizedJobs.get(context, job.jobId),
+                              style: TextStyle(
+                                color: Colors.blueGrey[700],
+                                fontSize: 20,
+                                fontWeight: FontWeight.w200,
+                                height: 1.25,
+                              ),
+                            ),
+                            value: selectedJobs[industry.industryId]
+                                    ?.contains(job.jobId) ??
+                                false,
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                if (!selectedJobs
+                                    .containsKey(industry.industryId)) {
+                                  selectedJobs[industry.industryId] = [];
+                                }
+                                setState(() {
+                                  selectedJobs[industry.industryId]!
+                                      .add(job.jobId);
+                                });
+                              } else {
+                                setState(() {
+                                  selectedJobs[industry.industryId]!
+                                      .remove(job.jobId);
+                                });
+                              }
+                              isSelect();
+                            },
+                          ),
+                        );
+                      }).toList()
+                  ],
+                ),
               );
             }).toList(),
             const SizedBox(height: 40),
@@ -158,22 +168,41 @@ class _ClassificationPageState extends State<ClassificationPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Spacer(),
-                ElevatedButton(
-                  onPressed: !isSelected
-                      ? null
+                TimelineNavigationButton(
+                  isSelected: isSelected,
+                  onPress: !isSelected
+                      ? () => print('nothin to do')
                       : () {
                           wp.createWorkerProfile(
-                              context, selectedIndustries, selectedJobs);
+                            context,
+                            selectedIndustries,
+                            selectedJobs,
+                          );
                         },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        isSelected ? Colors.deepOrangeAccent : Colors.grey),
-                  ),
-                  child: Text(AppLocalizations.of(context)!.next),
                 ),
+                // ElevatedButton(
+                //   onPressed: !isSelected
+                //       ? null
+                //       : () {
+                //           wp.createWorkerProfile(
+                //               context, selectedIndustries, selectedJobs);
+                //         },
+                //   style: ButtonStyle(
+                //     backgroundColor: MaterialStateProperty.all<Color>(
+                //         isSelected ? Colors.deepOrangeAccent : Colors.grey),
+                //   ),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.next,
+                //     style: TextStyle(
+                //       fontFamily: "Montserrat",
+                //       fontSize: 20,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 150),
           ],
         ),
       ),

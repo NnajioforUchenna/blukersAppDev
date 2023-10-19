@@ -5,6 +5,10 @@ import 'package:provider/provider.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../common_views/skills_form/skills_form.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class QualificationAndSkillsPage extends StatefulWidget {
   QualificationAndSkillsPage({Key? key}) : super(key: key);
 
@@ -33,16 +37,18 @@ class _QualificationAndSkillsPageState
 
     return Scaffold(
       body: Container(
+        color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                "Qualification & Skills",
+              const SizedBox(height: 20),
+              Text(
+                AppLocalizations.of(context)!.requirements,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.deepOrangeAccent,
                   fontSize: 25,
                   fontWeight: FontWeight.w600,
@@ -54,7 +60,7 @@ class _QualificationAndSkillsPageState
                 controller: _requirementsController,
                 maxLines: 5,
                 decoration: InputDecoration(
-                  labelText: "Requirements",
+                  labelText: AppLocalizations.of(context)!.requirements,
                   alignLabelWithHint: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -69,32 +75,47 @@ class _QualificationAndSkillsPageState
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      jp.setJobPostPagePrevious();
-                    },
-                    child: const Text("Previous"),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          ThemeColors.secondaryThemeColor),
-                    ),
+                  TimelineNavigationButton(
+                    isSelected: true,
+                    onPress: () => jp.setJobPostPagePrevious(),
+                    navDirection: "back",
                   ),
-                  ElevatedButton(
-                    onPressed: () {
+                  TimelineNavigationButton(
+                    isSelected: true,
+                    onPress: () {
                       jp.addQualificationAndSkills(
                         _requirementsController.text,
                         selectedSkills,
                       );
                     },
-                    child: const Text("Next"),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          ThemeColors.secondaryThemeColor),
-                    ),
                   ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     jp.setJobPostPagePrevious();
+                  //   },
+                  //   child: const Text("Previous"),
+                  //   style: ButtonStyle(
+                  //     backgroundColor: MaterialStateProperty.all<Color>(
+                  //         ThemeColors.secondaryThemeColor),
+                  //   ),
+                  // ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     jp.addQualificationAndSkills(
+                  //       _requirementsController.text,
+                  //       selectedSkills,
+                  //     );
+                  //   },
+                  //   child: const Text("Next"),
+                  //   style: ButtonStyle(
+                  //     backgroundColor: MaterialStateProperty.all<Color>(
+                  //         ThemeColors.secondaryThemeColor),
+                  //   ),
+                  // ),
                 ],
               ),
-              SizedBox(height: height * .05),
+              // SizedBox(height: height * .05),
+              SizedBox(height: 150),
             ],
           ),
         ),

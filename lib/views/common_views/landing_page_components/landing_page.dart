@@ -22,25 +22,33 @@ class LandingPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 0.15.sh),
             SizedBox(
-              height: 0.4.sh, // Responsive height
-              width: 0.8.sw, // Responsive width
+              // height: 0.4.sh, // Responsive height
+              width: 0.6.sw,
               child: Image.asset(
-                'assets/images/looking_for_you.png',
+                'assets/images/blukers_logo.png',
                 fit: BoxFit.contain,
               ),
             ),
-            SizedBox(height: 0.03.sh), // Responsive height
-            Transform.translate(
-              offset: Offset(0, -60.w), // Responsive width
-              child: Text(
-                AppLocalizations.of(context)!.dreamBuildConnect,
-                textAlign: TextAlign.center,
-                style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
-                    .copyWith(fontSize: 18.sp), // Responsive font size
-              ),
+            SizedBox(height: 0.015.sh), // Responsive height
+            Text(
+              AppLocalizations.of(context)!.dreamBuildConnect,
+              textAlign: TextAlign.center,
+              style: ThemeTextStyles.landingPageSubtitleThemeTextStyle.copyWith(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold), // Responsive font size
             ),
-            const SizedBox(height: 25),
+            // Transform.translate(
+            //   offset: Offset(0, -60.w), // Responsive width
+            //   child: Text(
+            //     AppLocalizations.of(context)!.dreamBuildConnect,
+            //     textAlign: TextAlign.center,
+            //     style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
+            //         .copyWith(fontSize: 18.sp), // Responsive font size
+            //   ),
+            // ),
+            const SizedBox(height: 120),
             Padding(
               padding: EdgeInsets.all(16.w), // Responsive width
               child: Text(
@@ -87,17 +95,57 @@ class LandingPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 0.01.sh), // Responsive height
+            SizedBox(height: 0.02.sh), // Responsive height
             if (up.appUser == null)
-              LabelButton(
-                onTap: () {
-                  context.go("/login");
-                },
-                title: AppLocalizations.of(context)!.alreadyHaveAnAccount,
-                subTitle: AppLocalizations.of(context)!.signIn,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  buildAuthButton(
+                    context,
+                    () => context.go('/login'),
+                    AppLocalizations.of(context)!.signIn,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.or,
+                    style: const TextStyle(
+                      color: ThemeColors.grey2ThemeColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  buildAuthButton(
+                    context,
+                    () => context.go('/register'),
+                    AppLocalizations.of(context)!.register,
+                  ),
+                ],
               ),
-            if (!kIsWeb && up.appUser != null) SizedBox(height: 0.03.sh),
+            if (!kIsWeb && up.appUser != null) SizedBox(height: 0.05.sh),
             if (!kIsWeb) PrivacyPolicyTermsAndConditions(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildAuthButton(BuildContext context, onTap, text) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.all(15),
+        alignment: Alignment.bottomCenter,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              text,
+              style: const TextStyle(
+                color: ThemeColors.blukersBlueThemeColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
