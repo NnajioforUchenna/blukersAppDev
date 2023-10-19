@@ -118,4 +118,10 @@ class Config {
   var appEngineFunctionsURL = isDevelopmentMode
       ? DevKeys.appEngineFunctionsURL
       : ProdKeys.appEngineFunctionsURL;
+
+  // STRIPE
+
+  var stripeDataCollectionDocID = isDevelopmentMode
+      ? DevKeys.stripeDataCollectionDocID
+      : ProdKeys.stripeDataCollectionDocID;
 }
