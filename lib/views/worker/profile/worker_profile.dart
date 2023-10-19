@@ -1,6 +1,7 @@
 // import 'dart:io';
 import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:blukers/providers/chat_provider.dart';
+import 'package:blukers/views/common_views/components/app_version_display.dart';
 import 'package:blukers/views/worker/profile/profile_rows/profile_row_one/profile_row_one.dart';
 import 'package:blukers/views/worker/profile/profile_rows/profile_row_two/profile_row_two.dart';
 import 'package:flutter/foundation.dart';
@@ -45,24 +46,27 @@ class _WorkerProfileState extends State<WorkerProfile> {
     return PageTemplate(
       child: up.appUser == null
           ? const LoginOrRegister()
-          : const SingleChildScrollView(
+          : SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ProfileRowOne(),
-                  ProfileRowTwo(),
-                  ProfileRowThree(),
-                  ProfileRowFour(),
-                  SizedBox(height: 10),
-                  ProfileRowFive(),
-                  SizedBox(height: 10),
-                  ProfileRowSix(),
-                  SizedBox(height: 10),
-                  ProfileRowSeven(),
-                  SizedBox(height: 10),
-                  ProfileRowEight(),
-                  SizedBox(height: 10),
-                  ProfileRowNine(),
+                  const ProfileRowOne(),
+                  const ProfileRowTwo(),
+                  const ProfileRowThree(),
+                  const ProfileRowFour(),
+                  const SizedBox(height: 10),
+                  const ProfileRowFive(),
+                  const SizedBox(height: 10),
+                  const ProfileRowSix(),
+                  const SizedBox(height: 10),
+                  const ProfileRowSeven(),
+                  const SizedBox(height: 10),
+                  const ProfileRowEight(),
+                  const SizedBox(height: 10),
+                  const ProfileRowNine(),
+                  const SizedBox(height: 20),
+                  AppVersionDisplay(),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
