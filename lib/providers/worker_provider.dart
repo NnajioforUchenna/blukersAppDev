@@ -167,7 +167,7 @@ class WorkerProvider with ChangeNotifier {
       if (result != 'error') {
         appUser?.photoUrl = result;
         EasyLoading.dismiss();
-        EasyLoading.showError('Uploaded your profile image successfully.');
+        EasyLoading.showSuccess('Uploaded your profile image successfully.');
         notifyListeners();
       } else {
         EasyLoading.dismiss();
@@ -201,7 +201,7 @@ class WorkerProvider with ChangeNotifier {
       if (resultUrl != 'error') {
         appUser?.worker?.certificationsIds?.add(resultUrl);
         EasyLoading.dismiss();
-        EasyLoading.showError('Uploaded your credential successfully.',
+        EasyLoading.showSuccess('Uploaded your credential successfully.',
             duration: Duration(seconds: 3));
         notifyListeners();
         result = resultUrl;
@@ -243,7 +243,7 @@ class WorkerProvider with ChangeNotifier {
         appUser?.worker?.certificationsIds?.add(resultUrl);
 
         EasyLoading.dismiss();
-        EasyLoading.showError('Uploaded your credential successfully.',
+        EasyLoading.showSuccess('Uploaded your credential successfully.',
             duration: Duration(seconds: 3));
         notifyListeners();
         returnFile['url'] = resultUrl;
