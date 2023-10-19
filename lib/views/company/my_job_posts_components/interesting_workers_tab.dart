@@ -10,7 +10,7 @@ import '../workers_components/complete_worker_widget.dart';
 import 'package:blukers/views/common_views/components/icon_text_404.dart';
 import 'package:unicons/unicons.dart';
 
-import 'package:blukers/views/common_views/components/animations/index.dart';
+import 'package:blukers/views/common_views/components/loading_animation.dart';
 
 class InterestingWorkersTab extends StatelessWidget {
   const InterestingWorkersTab({super.key});
@@ -23,8 +23,7 @@ class InterestingWorkersTab extends StatelessWidget {
       stream: cp.getInterestingWorkersStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // return const LoadingInterestingWorkers();
-          return MyAnimation(name: 'circlePulseBlue2');
+          return LoadingAnimation();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {

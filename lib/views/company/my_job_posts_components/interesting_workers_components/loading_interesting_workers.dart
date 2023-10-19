@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:blukers/views/common_views/components/loading_animation.dart';
 
 class LoadingInterestingWorkers extends StatelessWidget {
   const LoadingInterestingWorkers({super.key});
@@ -33,9 +34,10 @@ class LoadingInterestingWorkers extends StatelessWidget {
             mainAxisSize:
                 MainAxisSize.min, // So it doesn't take the full height
             children: <Widget>[
-              const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
+              // const CircularProgressIndicator(
+              //   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              // ),
+              LoadingAnimation(),
               const SizedBox(height: 16.0),
               Text(
                 AppLocalizations.of(context)!.loadingSavedWorkers,
