@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentSuccessfulWidget extends StatelessWidget {
   @override
@@ -29,9 +30,9 @@ class PaymentSuccessfulWidget extends StatelessWidget {
               color: Colors.green,
             ),
             const SizedBox(height: 16.0),
-            const Text(
-              'Payment Successful',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.paymentSuccessful,
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.green,
@@ -39,7 +40,7 @@ class PaymentSuccessfulWidget extends StatelessWidget {
             ),
             const SizedBox(height: 8.0),
             Text(
-              'Thank you for your payment. Your transaction has been completed successfully.',
+              AppLocalizations.of(context)!.paymentSuccessfulDescription,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16.0,
@@ -58,9 +59,9 @@ class PaymentSuccessfulWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: const Text(
-                'Continue',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.continueStr,
+                style: const TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
