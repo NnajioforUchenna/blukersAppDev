@@ -6,6 +6,10 @@ import 'package:provider/provider.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../auth/common_widget/auth_input.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class BasicInformationPage extends StatefulWidget {
   BasicInformationPage({Key? key}) : super(key: key);
 
@@ -46,6 +50,7 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
       child: Stack(
         children: <Widget>[
           Container(
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Form(
@@ -54,26 +59,27 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      "Job Details",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.deepOrangeAccent,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25,
-                      ),
-                    ),
+                    // Text(
+                    //   AppLocalizations.of(context)!.jobDetails,
+                    //   textAlign: TextAlign.center,
+                    //   style: const TextStyle(
+                    //     color: Colors.deepOrangeAccent,
+                    //     fontSize: 25,
+                    //     fontWeight: FontWeight.w600,
+                    //     height: 1.25,
+                    //   ),
+                    // ),
                     const SizedBox(height: 20),
                     AuthInput(
                       child: TextFormField(
                         controller: jobTitleController,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) =>
-                            value!.isEmpty ? "Required" : null,
+                        validator: (value) => value!.isEmpty
+                            ? AppLocalizations.of(context)!.required
+                            : null,
                         decoration: InputDecoration(
-                          hintText: "Job Title",
+                          hintText: AppLocalizations.of(context)!.jobTitle,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -93,10 +99,12 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                         controller: jobDescriptionController,
                         textInputAction: TextInputAction.newline,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) =>
-                            value!.isEmpty ? "Required" : null,
+                        validator: (value) => value!.isEmpty
+                            ? AppLocalizations.of(context)!.required
+                            : null,
                         decoration: InputDecoration(
-                          hintText: "Job Description",
+                          hintText:
+                              AppLocalizations.of(context)!.jobDescription,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -119,10 +127,12 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                         ],
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus(),
-                        validator: (value) =>
-                            value!.isEmpty ? "Required" : null,
+                        validator: (value) => value!.isEmpty
+                            ? AppLocalizations.of(context)!.required
+                            : null,
                         decoration: InputDecoration(
-                          hintText: "Number of Positions Available",
+                          hintText: AppLocalizations.of(context)!
+                              .numberOfPositionsAvailable,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(
@@ -137,9 +147,9 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                     ),
                     SizedBox(height: height * 0.05),
                     Text(
-                      "Job Urgency Level",
+                      AppLocalizations.of(context)!.jobUrgencyLevel,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -157,10 +167,10 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                       max: 2,
                       divisions: 2,
                       label: urgencyValue == 0
-                          ? "Low"
+                          ? AppLocalizations.of(context)!.lowF
                           : urgencyValue == 1
-                              ? "Medium"
-                              : "High",
+                              ? AppLocalizations.of(context)!.mediumF
+                              : AppLocalizations.of(context)!.highF,
                       activeColor: urgencyValue == 0
                           ? Colors.green
                           : urgencyValue == 1
@@ -172,18 +182,14 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            jp.setJobPostPagePrevious();
-                          },
-                          child: Text("Previous"),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () => jp.setJobPostPagePrevious(),
+                          navDirection: "back",
                         ),
-                        ElevatedButton(
-                          onPressed: () {
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () {
                             if (isFormComplete()) {
                               jp.addBasicInformation(
                                 jobTitleController.text,
@@ -193,12 +199,34 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                               );
                             }
                           },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ThemeColors.secondaryThemeColor),
-                          ),
-                          child: Text("Next"),
                         ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     jp.setJobPostPagePrevious();
+                        //   },
+                        //   child: Text(AppLocalizations.of(context)!.previous),
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     if (isFormComplete()) {
+                        //       jp.addBasicInformation(
+                        //         jobTitleController.text,
+                        //         jobDescriptionController.text,
+                        //         positionsAvailableController.text,
+                        //         urgencyValue.round(),
+                        //       );
+                        //     }
+                        //   },
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all<Color>(
+                        //         ThemeColors.secondaryThemeColor),
+                        //   ),
+                        //   child: Text(AppLocalizations.of(context)!.next),
+                        // ),
                       ],
                     ),
                     SizedBox(height: height * .05),

@@ -6,6 +6,10 @@ import '../../../../providers/industry_provider.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../auth/common_widget/submit_button.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import "package:blukers/utils/localization/localized_industries.dart";
+import "package:blukers/utils/localization/localized_jobs.dart";
+
 class ClassificationPage extends StatefulWidget {
   ClassificationPage({Key? key}) : super(key: key);
 
@@ -36,16 +40,18 @@ class _ClassificationPageState extends State<ClassificationPage> {
       child: Stack(
         children: <Widget>[
           Container(
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
-                    "Select Industry",
+                  const SizedBox(height: 20),
+                  Text(
+                    AppLocalizations.of(context)!.selectAnIndustry,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.deepOrangeAccent,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -56,8 +62,13 @@ class _ClassificationPageState extends State<ClassificationPage> {
                   DropdownButtonFormField<String>(
                     items: industries.map((industry) {
                       return DropdownMenuItem(
-                        child: Text(industry.name),
                         value: industry.industryId,
+                        child: Text(
+                          LocalizedIndustries.get(
+                            context,
+                            industry.industryId,
+                          ),
+                        ),
                       );
                     }).toList(),
                     onChanged: (industryId) {
@@ -68,7 +79,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                     },
                     value: selectedIndustryId,
                     decoration: InputDecoration(
-                      labelText: "Industry",
+                      labelText: AppLocalizations.of(context)!.industry,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -76,10 +87,10 @@ class _ClassificationPageState extends State<ClassificationPage> {
                   ),
                   const SizedBox(height: 20),
                   if (selectedIndustryId != null) ...[
-                    const Text(
-                      "Select Job",
+                    Text(
+                      AppLocalizations.of(context)!.selectAJobPosition,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.deepOrangeAccent,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
@@ -93,8 +104,13 @@ class _ClassificationPageState extends State<ClassificationPage> {
                           .jobs
                           .map((job) {
                         return DropdownMenuItem(
-                          child: Text(job.title),
                           value: job.jobId,
+                          child: Text(
+                            LocalizedJobs.get(
+                              context,
+                              job.jobId,
+                            ),
+                          ),
                         );
                       }).toList(),
                       onChanged: (jobId) {
@@ -104,7 +120,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                       },
                       value: selectedJobId,
                       decoration: InputDecoration(
-                        labelText: "Job",
+                        labelText: AppLocalizations.of(context)!.jobPosition,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -120,7 +136,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                         // Handle the next action or save the selection.
                       }
                     },
-                    text: "Next",
+                    text: AppLocalizations.of(context)!.next,
                     isDisabled:
                         selectedIndustryId == null || selectedJobId == null,
                   ),
