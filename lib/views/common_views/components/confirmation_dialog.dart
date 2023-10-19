@@ -35,7 +35,7 @@ void confirmationDialog({
     builder: (BuildContext context) {
       return AlertDialog(
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
         actionsAlignment: MainAxisAlignment.center,
         title: Text(
@@ -84,7 +84,7 @@ void confirmationDialog({
                     fontFamily: 'Montserrat',
                   ),
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
                   ),
                 ),
                 child: Text(confirmText.toUpperCase()),
@@ -105,7 +105,7 @@ void confirmationDialog({
                     fontFamily: 'Montserrat',
                   ),
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
                   ),
                 ),
                 child: Text(cancelText.toUpperCase()),
