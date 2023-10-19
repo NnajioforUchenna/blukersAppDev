@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'get_membership_button.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class MobileMembershipDetailsWidget extends StatelessWidget {
   final Color color;
   final String title;
@@ -23,6 +25,39 @@ class MobileMembershipDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
+    String getSubscriptionDetails(details) {
+      if (details == "Create your Resume") {
+        return AppLocalizations.of(context)!.createYourResume;
+      }
+      if (details == "Upload your Resume") {
+        return AppLocalizations.of(context)!.uploadYourResume;
+      }
+      if (details == "Upload your Certifications") {
+        return AppLocalizations.of(context)!.uploadYourCertifications;
+      }
+      if (details == "Apply to 2 Jobs Daily") {
+        return AppLocalizations.of(context)!.applyTo2JobsDaily;
+      }
+      if (details == "Apply to 10 Jobs Daily") {
+        return AppLocalizations.of(context)!.applyTo10JobsDaily;
+      }
+      if (details == "Apply to unlimited Jobs") {
+        return AppLocalizations.of(context)!.applyToUnlimitedJobsDaily;
+      }
+      if (details ==
+          "Show your profile on top in employers searchers section") {
+        return AppLocalizations.of(context)!
+            .showYourProfileOnTopInEmployersSearchersSection;
+      }
+      if (details ==
+          "Display your immigration and employment verification status") {
+        return AppLocalizations.of(context)!
+            .displayYourImmigrationAndEmploymentVerificationStatus;
+      }
+      return details;
+    }
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -74,7 +109,7 @@ class MobileMembershipDetailsWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'monthly',
+                      AppLocalizations.of(context)!.monthly,
                       style: GoogleFonts.montserrat(
                         color: color,
                         fontSize: 30.0,
@@ -92,7 +127,7 @@ class MobileMembershipDetailsWidget extends StatelessWidget {
                 children: List<Widget>.generate(
                   details.length,
                   (index) => Text(
-                    details[index],
+                    getSubscriptionDetails(details[index]),
                     textAlign: TextAlign.center,
                     style: index % 2 == 0
                         ? GoogleFonts.montserrat(

@@ -12,7 +12,7 @@ import 'prod/prod_subscriptions_company.dart';
 import 'prod/prod_subscription_features_worker.dart';
 import 'prod/prod_subscription_features_company.dart';
 
-bool isDevelopmentMode = true;
+bool isDevelopmentMode = false;
 
 class Config {
   // APP VERSION
