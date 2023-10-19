@@ -56,7 +56,7 @@ class CompanyChat extends StatelessWidget {
                                               .chatRooms[index].members[0]
                                       ? chatProvider.chatRooms[index].names[1]
                                       : chatProvider.chatRooms[index].names[0];
-                                  context.go('/chat-message');
+                                  context.push('/chat-message');
                                 },
                               );
                             }),

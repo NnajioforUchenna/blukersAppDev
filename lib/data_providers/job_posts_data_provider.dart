@@ -116,7 +116,7 @@ class JobPostsDataProvider {
       required String locationRelated,
       required int pageNumber,
       required String targetLanguage}) async {
-    const String url = baseUrlAppEngineFunctions +
+    String url = baseUrlAppEngineFunctions +
         '/search/get-job-posts'; // Replace with your actual endpoint
 
     final response = await http.post(

@@ -177,7 +177,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                                 const DisplayWorkerTimelineDialog());
                       } else {
                         chatProvider.startRoom(up.appUser, worker);
-                        context.go('/chat-message');
+                        context.push('/chat-message');
                       }
                     },
                   ),
