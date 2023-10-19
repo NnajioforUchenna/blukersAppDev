@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/company_provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class YourCompanyLogo extends StatelessWidget {
   const YourCompanyLogo({
     Key? key,
@@ -15,7 +17,7 @@ class YourCompanyLogo extends StatelessWidget {
     String? logoUrl = cp.appUser
         ?.photoUrl; // Change to the appropriate property for the company logo URL
     return Card(
-      elevation: 8.0,
+      elevation: 1.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -28,21 +30,24 @@ class YourCompanyLogo extends StatelessWidget {
               const SizedBox(height: 30),
               InkWell(
                 onTap: () {
-                  cp.selectCompanyLogo(
-                      context); // Change to the appropriate method for selecting the company logo
+                  cp.selectCompanyLogo(context);
                 },
                 child: SizedBox(
                   height: 150,
                   width: 150,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(1000),
                     child: logoUrl == null || logoUrl.isEmpty
-                        ? const Center(
+                        ? Center(
                             child: Text(
-                              'Tap to select a logo',
-                              style: TextStyle(
+                              textAlign: TextAlign.center,
+                              AppLocalizations.of(context)!
+                                  .tapToSelectAndUploadAFile,
+                              style: const TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: "Montserrat",
                               ),
                             ),
                           )
