@@ -9,6 +9,8 @@ import 'work_experience_form.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class WorkExperiencePage extends StatefulWidget {
   WorkExperiencePage({super.key});
 
@@ -48,6 +50,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
       }
     }
     return Container(
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       width: Responsive.isDesktop(context)
           ? MediaQuery.of(context).size.width * 0.3
@@ -84,26 +87,49 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    wp.workerProfileBackPage();
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        ThemeColors.secondaryThemeColor),
-                  ),
-                  child: Text(AppLocalizations.of(context)!.previous),
+                TimelineNavigationButton(
+                  isSelected: true,
+                  onPress: () => wp.workerProfileBackPage(),
+                  navDirection: "back",
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    wp.setWorkExperience();
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        ThemeColors.secondaryThemeColor),
-                  ),
-                  child: Text(AppLocalizations.of(context)!.next),
+                TimelineNavigationButton(
+                  isSelected: true,
+                  onPress: () => wp.setWorkExperience(),
                 ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     wp.workerProfileBackPage();
+                //   },
+                //   style: ButtonStyle(
+                //     backgroundColor: MaterialStateProperty.all<Color>(
+                //         ThemeColors.secondaryThemeColor),
+                //   ),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.previous,
+                //     style: TextStyle(
+                //       fontFamily: "Montserrat",
+                //       fontSize: 20,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     wp.setWorkExperience();
+                //   },
+                //   style: ButtonStyle(
+                //     backgroundColor: MaterialStateProperty.all<Color>(
+                //         ThemeColors.secondaryThemeColor),
+                //   ),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.next,
+                //     style: TextStyle(
+                //       fontFamily: "Montserrat",
+                //       fontSize: 20,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             const SizedBox(height: 50)

@@ -1,15 +1,16 @@
 import 'package:blukers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../auth/common_widget/auth_input.dart';
 import 'work_experience_date.dart';
 import 'work_experience_location_form.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class WorkExperienceForm extends StatefulWidget {
   final int index;
-  const WorkExperienceForm({Key? key, required this.index}) : super(key: key);
+  WorkExperienceForm({Key? key, required this.index}) : super(key: key);
 
   @override
   State<WorkExperienceForm> createState() => _WorkExperienceFormState();
@@ -50,7 +51,13 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
     final node = FocusScope.of(context);
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      margin: const EdgeInsets.only(top: 20, bottom: 10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black12),
+        // color: const Color.fromARGB(255, 250, 250, 250),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -159,6 +166,8 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
             const SizedBox(height: 10),
             const Divider(
               color: Colors.deepOrangeAccent,
+              height: 20,
+              thickness: 2,
             ),
           ],
         ),

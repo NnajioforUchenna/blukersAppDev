@@ -8,6 +8,8 @@ import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'credential_field.dart';
 
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+
 class ProfessionalCredentialsPage extends StatefulWidget {
   const ProfessionalCredentialsPage({super.key});
 
@@ -37,6 +39,7 @@ class _ProfessionalCredentialsPageState
       credentialForms.add(CredentialField(index: i));
     }
     return Container(
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       width: Responsive.isDesktop(context)
           ? MediaQuery.of(context).size.width * 0.3
@@ -46,16 +49,16 @@ class _ProfessionalCredentialsPageState
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              AppLocalizations.of(context)!.certifications,
-              textAlign: TextAlign.start,
-              style: const TextStyle(
-                color: Colors.deepOrangeAccent,
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-                height: 1.25,
-              ),
-            ),
+            // Text(
+            //   AppLocalizations.of(context)!.certifications,
+            //   textAlign: TextAlign.start,
+            //   style: const TextStyle(
+            //     color: Colors.deepOrangeAccent,
+            //     fontSize: 25,
+            //     fontWeight: FontWeight.w600,
+            //     height: 1.25,
+            //   ),
+            // ),
             const SizedBox(height: 30),
 
             // Qualification and Certification Label
@@ -92,32 +95,60 @@ class _ProfessionalCredentialsPageState
             const SizedBox(height: 20),
             SkillsForm(selectedSkills: selectedSkills),
             const SizedBox(height: 40),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  onPressed: () {
+                TimelineNavigationButton(
+                  isSelected: true,
+                  onPress: () {
                     wp.workerProfileBackPage();
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        ThemeColors.secondaryThemeColor),
-                  ),
-                  child: Text(AppLocalizations.of(context)!.previous),
+                  navDirection: "back",
                 ),
-                ElevatedButton(
-                  onPressed: () {
+
+                TimelineNavigationButton(
+                  isSelected: true,
+                  onPress: () {
                     wp.setSkills(selectedSkills);
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        ThemeColors.secondaryThemeColor),
-                  ),
-                  child: Text(AppLocalizations.of(context)!.next),
                 ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     wp.workerProfileBackPage();
+                //   },
+                //   style: ButtonStyle(
+                //     backgroundColor: MaterialStateProperty.all<Color>(
+                //         ThemeColors.secondaryThemeColor),
+                //   ),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.previous,
+                //     style: TextStyle(
+                //       fontFamily: "Montserrat",
+                //       fontSize: 20,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     wp.setSkills(selectedSkills);
+                //   },
+                //   style: ButtonStyle(
+                //     backgroundColor: MaterialStateProperty.all<Color>(
+                //         ThemeColors.secondaryThemeColor),
+                //   ),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.next,
+                //     style: TextStyle(
+                //       fontFamily: "Montserrat",
+                //       fontSize: 20,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
+            const SizedBox(height: 150),
           ],
         ),
       ),
