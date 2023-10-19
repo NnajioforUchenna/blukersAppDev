@@ -73,7 +73,7 @@ class _OptionBoxState extends State<OptionBox> {
                       Text(
                         widget.title,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.5),
+                          color: Colors.white.withOpacity(0.9),
                           fontSize: 14.sp,
                         ),
                       ),
@@ -92,6 +92,7 @@ class _OptionBoxState extends State<OptionBox> {
                   alignment: Alignment.bottomCenter,
                   child: Text(
                     widget.thirdLine,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.7),
                       fontSize: 10.sp,
