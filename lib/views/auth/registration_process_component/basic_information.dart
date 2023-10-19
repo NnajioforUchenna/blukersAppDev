@@ -66,6 +66,7 @@ class _BasicInformationState extends State<BasicInformation> {
     userRole = up.userRole!;
 
     return Container(
+      color: Colors.white,
       width: Responsive.isDesktop(context)
           ? MediaQuery.of(context).size.width * 0.3
           : MediaQuery.of(context).size.width,
@@ -76,23 +77,23 @@ class _BasicInformationState extends State<BasicInformation> {
           controller: scrollCtrl,
           child: ConstrainedBox(
             constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height * 0.7),
+                minHeight: MediaQuery.of(context).size.height * 0.6),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    AppLocalizations.of(context)!.basicInformation,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.deepOrangeAccent,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600,
-                      height: 1.25,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
+                  // Text(
+                  //   AppLocalizations.of(context)!.basicInformation,
+                  //   textAlign: TextAlign.center,
+                  //   style: const TextStyle(
+                  //     color: Colors.deepOrangeAccent,
+                  //     fontSize: 25,
+                  //     fontWeight: FontWeight.w600,
+                  //     height: 1.25,
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 20),
                   if (userRole == "worker") ...[
                     AuthInput(
                       child: TextFormField(

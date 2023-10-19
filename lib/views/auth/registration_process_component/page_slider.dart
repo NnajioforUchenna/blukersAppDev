@@ -36,8 +36,7 @@ class _PageSliderState extends State<PageSlider> {
     if (_currentPageIndex < 3) {
       _pageController.animateToPage(
         _currentPageIndex + 1,
-        duration: const Duration(
-            seconds: 1), // Set the animation duration to 5 seconds
+        duration: const Duration(seconds: 1),
         curve: Curves.easeInOut,
       );
     }
@@ -47,7 +46,6 @@ class _PageSliderState extends State<PageSlider> {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     if (_currentPageIndex != up.registerCurrentPageIndex) {
-      // Add this line) {
       animateToNextPage();
       _currentPageIndex = up.registerCurrentPageIndex;
     }
@@ -61,14 +59,17 @@ class _PageSliderState extends State<PageSlider> {
           physics: const NeverScrollableScrollPhysics(),
           children: [
             const MakeResponsiveWeb(
-                image: AssetImage('assets/images/createAccount.png'),
-                child: LoginInformation()),
+              image: AssetImage('assets/images/createAccount.png'),
+              child: LoginInformation(),
+            ),
             MakeResponsiveWeb(
-                image: const AssetImage('assets/images/basicInfo.png'),
-                child: BasicInformation()),
+              image: const AssetImage('assets/images/basicInfo.png'),
+              child: BasicInformation(),
+            ),
             const MakeResponsiveWeb(
-                image: AssetImage('assets/images/contactInfo.png'),
-                child: ContantInformationPage()),
+              image: AssetImage('assets/images/contactInfo.png'),
+              child: ContantInformationPage(),
+            ),
             const RegistrationCongratulationPage(),
           ],
         ),

@@ -68,6 +68,7 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
     UserProvider up = Provider.of<UserProvider>(context);
     String initialSelection = up.userRole == 'company' ? '+1' : '+52';
     return Container(
+      color: Colors.white,
       width: Responsive.isDesktop(context)
           ? MediaQuery.of(context).size.width * 0.3
           : MediaQuery.of(context).size.width,
@@ -85,17 +86,17 @@ class _ContantInformationPageState extends State<ContantInformationPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    AppLocalizations.of(context)!.contactInformation,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.deepOrangeAccent,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      height: 1.25,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
+                  // Text(
+                  //   AppLocalizations.of(context)!.contactInformation,
+                  //   textAlign: TextAlign.center,
+                  //   style: const TextStyle(
+                  //     color: Colors.deepOrangeAccent,
+                  //     fontSize: 20,
+                  //     fontWeight: FontWeight.w600,
+                  //     height: 1.25,
+                  //   ),
+                  // ),
+                  const SizedBox(height: 30),
                   Row(
                     children: [
                       Expanded(
