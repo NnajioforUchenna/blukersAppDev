@@ -110,6 +110,7 @@ void confirmationDialog({
                 ),
                 child: Text(cancelText.toUpperCase()),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ],
