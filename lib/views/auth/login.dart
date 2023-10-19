@@ -74,7 +74,8 @@ class _LoginState extends State<Login> {
                                   },
                                   validator: ((value) {
                                     if (value == null) {
-                                      return "Required";
+                                      return AppLocalizations.of(context)!
+                                          .required;
                                     }
                                     return Validation().validateEmail(value);
                                   }),
@@ -107,7 +108,8 @@ class _LoginState extends State<Login> {
                                   textInputAction: TextInputAction.done,
                                   validator: ((value) {
                                     if (value == null) {
-                                      return "required";
+                                      return AppLocalizations.of(context)!
+                                          .required;
                                     }
                                   }),
                                   onChanged: (value) {
@@ -151,7 +153,7 @@ class _LoginState extends State<Login> {
                         InkWell(
                           key: const Key('forgotPasswordButton'),
                           onTap: () {
-                            context.go('/forgot-password');
+                            context.push('/forgot-password');
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 10),
