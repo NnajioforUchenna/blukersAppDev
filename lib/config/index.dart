@@ -12,12 +12,12 @@ import 'prod/prod_subscriptions_company.dart';
 import 'prod/prod_subscription_features_worker.dart';
 import 'prod/prod_subscription_features_company.dart';
 
-bool isDevelopmentMode = false;
+bool isDevelopmentMode = true;
 
 class Config {
   // APP VERSION
 
-  String appVersion = "1.0.5";
+  String appVersion = "1.0.6";
 
   // SUBSCRIPTIONS - iOS - WORKER
 
