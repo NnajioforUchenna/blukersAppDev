@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:blukers/views/worker/membership/new_mobile_view/new_mobile_membership_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -8,7 +7,6 @@ import '../models/address.dart';
 import '../models/job_post.dart';
 import '../views/worker/membership/new_mobile_view/mobile_new_membership_widget.dart';
 import '../views/worker/products/products.dart';
-import '../views/worker/services/service_coming_soon_widget.dart';
 
 final List<String> routesWorker = [
   '/jobs',
@@ -281,4 +279,21 @@ String getFirstChar(String input) {
 
 bool isWellFormedUrl(String url) {
   return Uri.tryParse(url)?.hasAbsolutePath ?? false;
+}
+
+String removeFirstWord(String sentence) {
+  List<String> words = sentence.split(' '); // Split the sentence into words
+  if (words.isNotEmpty) {
+    // Check if there are any words to remove
+    words.removeAt(0); // Remove the first word
+    return words.join(' '); // Join the remaining words back into a sentence
+  }
+  return ''; // Return an empty string if there were no words
+}
+
+String getFirstWord(String sentence) {
+  List<String> words = sentence.split(' '); // Split the sentence into words
+  return words.isNotEmpty
+      ? words.first
+      : ''; // Return the first word or an empty string if none
 }

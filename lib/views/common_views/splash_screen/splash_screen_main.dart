@@ -1,12 +1,13 @@
 import 'dart:async';
 
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../landing_page_components/landing_page.dart';
-import 'splash_screen_page.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'splash_2/splash_screen_page2.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -29,12 +30,38 @@ class _SplashScreenState extends State<SplashScreen> {
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (_currentPage < 2) {
         _pageController.nextPage(
-            duration: const Duration(milliseconds: 300), curve: Curves.ease);
+            duration: const Duration(milliseconds: 500), curve: Curves.ease);
       } else {
         context.go('/landing');
         _timer?.cancel();
+
+        // _currentPage = 0;
+        //
+        // _pageController.animateToPage(
+        //   _currentPage,
+        //   duration: const Duration(milliseconds: 500),
+        //   curve: Curves.ease,
+        // );
       }
     });
+  }
+
+  void _nextPage() {
+    if (_currentPage < 2) {
+      // Assuming there are 3 pages in the PageView
+      setState(() {
+        _currentPage++;
+      });
+      _pageController.animateToPage(
+        _currentPage,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.ease,
+      );
+    } else {
+      // If it's the last page, navigate to '/landing' or perform another action
+      context.go('/landing');
+      _timer?.cancel();
+    }
   }
 
   @override
@@ -46,73 +73,105 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Stack(
-        children: [
-          PageView(
-            controller: _pageController,
-            onPageChanged: (page) {
-              setState(() {
-                _currentPage = page;
-              });
-              _startTimer();
-            },
-            // children: const [
-            //   SplashScreenPage(
-            //     workerTitle: 'Search',
-            //     workerSubtitle:
-            //         'Explore Opportunities and find the perfect job that matches your skills and ambitions.',
-            //     companyTitle: 'Post',
-            //     companySubtitle:
-            //         'Post your job and connect with qualified candidates today.',
-            //   ),
-            //   SplashScreenPage(
-            //     workerTitle: 'Apply',
-            //     workerSubtitle:
-            //         'Submit Your Application to Take the first leap towards your career.',
-            //     companyTitle: 'Review',
-            //     companySubtitle:
-            //         'Review Candidates easily and make informed decisions.',
-            //   ),
-            //   SplashScreenPage(
-            //     workerTitle: 'Get Hired',
-            //     workerSubtitle: 'Ace The Interview and Showcase your Skills.',
-            //     companyTitle: 'Hire',
-            //     companySubtitle:
-            //         'Make the right hire with confidence and choose the perfect Candidate.',
-            //   ),
-            children: [
-              SplashScreenPage(
-                workerTitle: AppLocalizations.of(context)!.s1WTitle,
-                workerSubtitle: AppLocalizations.of(context)!.s1WSubtitle,
-                companyTitle: AppLocalizations.of(context)!.s1CTitle,
-                companySubtitle: AppLocalizations.of(context)!.s1CSubtitle,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.85,
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: (page) {
+                  setState(() {
+                    _currentPage = page;
+                  });
+                  _startTimer();
+                },
+                children: const [
+                  SplashScreenPage2(
+                    topLeftText:
+                        'Explore Opportunities and find the perfect job that marches your skills and ambitions.',
+                    topRightText: 'Worker Search',
+                    bottomLeftText: 'Company Post',
+                    bottomRightText:
+                        'Post Your Job and connect with qualified candidates today.',
+                    leftImage: 'assets/splash/companyCharacter.png',
+                    rightImage: 'assets/splash/workerCharacter1.png',
+                  ),
+                  SplashScreenPage2(
+                    topLeftText:
+                        'Submit Your Application to Take The First Leap Towards Your Career.',
+                    topRightText: 'Worker Apply',
+                    bottomLeftText: 'Company Review',
+                    bottomRightText:
+                        'Review Candidates easily and make informed decisions.',
+                    leftImage: 'assets/splash/companyCharacter.png',
+                    rightImage: 'assets/splash/workerCharacter2.png',
+                  ),
+                  SplashScreenPage2(
+                    topLeftText: 'Ace The Interview And Showcase your skills',
+                    topRightText: 'Worker Get Hired',
+                    bottomLeftText: 'Company Hire',
+                    bottomRightText:
+                        'Make the right hire with confidence and choose the perfect candidate',
+                    leftImage: 'assets/splash/companyCharacter.png',
+                    rightImage: 'assets/splash/workerCharacter3.png',
+                  ),
+                ],
               ),
-              SplashScreenPage(
-                workerTitle: AppLocalizations.of(context)!.s2WTitle,
-                workerSubtitle: AppLocalizations.of(context)!.s2WSubtitle,
-                companyTitle: AppLocalizations.of(context)!.s2CTitle,
-                companySubtitle: AppLocalizations.of(context)!.s2CSubtitle,
+            ),
+            Container(
+              height: height * 0.025,
+              width: width * 0.25,
+              margin: const EdgeInsets.only(top: 20),
+              child: ElevatedButton(
+                onPressed: _nextPage,
+                style: ElevatedButton.styleFrom(
+                  elevation: 5,
+                  backgroundColor: ThemeColors.primaryThemeColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+                child: Text(
+                  'Next',
+                  style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              SplashScreenPage(
-                workerTitle: AppLocalizations.of(context)!.s3WTitle,
-                workerSubtitle: AppLocalizations.of(context)!.s3WSubtitle,
-                companyTitle: AppLocalizations.of(context)!.s3CTitle,
-                companySubtitle: AppLocalizations.of(context)!.s3CSubtitle,
+            ),
+            TextButton(
+              onPressed: () {
+                context.go('/landing');
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  AppLocalizations.of(context)!.skip,
+                  style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
               ),
-            ],
-          ),
-          Positioned(
-            bottom: 20,
-            left: 0,
-            right: 0,
-            child: Row(
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children:
                   List.generate(3, (index) => _buildDot(index == _currentPage)),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 50,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -123,7 +182,7 @@ class _SplashScreenState extends State<SplashScreen> {
       width: isActive ? 12 : 8,
       height: isActive ? 12 : 8,
       decoration: BoxDecoration(
-        color: isActive ? Color(0xFFf06523) : Colors.grey,
+        color: isActive ? const Color(0xFFf06523) : Colors.grey,
         borderRadius: BorderRadius.circular(6),
       ),
     );

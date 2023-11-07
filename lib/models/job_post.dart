@@ -150,6 +150,7 @@ class JobPost {
     } catch (e, stackTrace) {
       print("Error creating JobPost: $e");
       print("Stack trace: $stackTrace");
+      print("Map: $map");
       return null;
     }
   }

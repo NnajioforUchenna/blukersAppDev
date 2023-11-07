@@ -61,7 +61,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
           ? const Workers() //Workers()
           : const Jobs(); //Jobs(); //Jobs();
     } else {
-      return SplashScreen(); // SplashScreen(); // SplashScreen(); //LandingPage() SplashScreen()
+      return SplashScreen(); // SplashScreen(); //LandingPage()
     }
   }
 }

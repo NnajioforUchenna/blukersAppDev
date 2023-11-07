@@ -26,14 +26,23 @@ class Address {
   }
 
   static Address fromMap(Map<String, dynamic> map) {
-    return Address(
-      street: map['street'] ?? '', // cast as String but keep it nullable
-      city: map['city'] ?? '', // cast as String but keep it nullable
-      state: map['state'] ?? '', // cast as String but keep it nullable
-      postalCode:
-          map['postalCode'] ?? '', // cast as String but keep it nullable
-      country: map['country'] ?? '', // cast as String but keep it nullable
-    );
+    try {
+      return Address(
+        street: map['street'] as String?, // cast as String but keep it nullable
+        city: map['city'] as String?, // cast as String but keep it nullable
+        state: map['state'] as String?, // cast as String but keep it nullable
+        postalCode:
+            map['postalCode'] as String?, // cast as String but keep it nullable
+        country:
+            map['country'] as String?, // cast as String but keep it nullable
+      );
+    } catch (e) {
+      // Handle the exception, e.g., logging or returning a default value
+      print('An error occurred while creating Address from Map: $e');
+      // Returning a default Address object or null, depending on your class design.
+      return Address(
+          street: '', city: '', state: '', postalCode: '', country: '');
+    }
   }
 
   String displayAddress() {

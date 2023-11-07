@@ -1,5 +1,4 @@
 import 'package:blukers/providers/payment_providers/payments_provider.dart';
-import 'package:blukers/services/authentication_wrapper.dart';
 import 'package:blukers/views/chat_message_screen.dart';
 import 'package:blukers/views/common_views/landing_page_components/landing_page.dart';
 import 'package:blukers/views/company/company_basic_info.dart';
@@ -31,16 +30,16 @@ import '../views/worker/orders/orders_list.dart';
 import '../views/worker/products/products.dart';
 import '../views/worker/profile/worker_profile.dart';
 import '../views/worker/services/services_list.dart';
-
-import 'package:blukers/views/common_views/tests_screen/tests_screen.dart';
+import 'authentication_wrapper.dart';
 
 final goRouter = GoRouter(routes: routes, initialLocation: '/');
 
 final routes = [
   // GoRoute(path: '/', builder: (context, state) => const TestsScreen()),
   GoRoute(
-      path: '/', builder: (context, state) => const AuthenticationWrapper()),
-  // GoRoute(
+      path: '/',
+      builder: (context, state) =>
+          const AuthenticationWrapper()), // const AuthenticationWrapper() //  SplashScreen()// GoRoute(
   //     path: '/',
   //     builder: (context, state) =>
   //         const ServicesList()), //AuthenticationWrapper())
