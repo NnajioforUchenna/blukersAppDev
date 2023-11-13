@@ -1,63 +1,67 @@
-// @override
-// Widget build(BuildContext context) {
-//   double width = MediaQuery.of(context).size.width;
-//   double height = MediaQuery.of(context).size.height;
-//   return Dialog(
-//     shape: const RoundedRectangleBorder(
-//       borderRadius: BorderRadius.all(Radius.circular(5)),
-//     ),
-//     insetPadding:
-//     const EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 80),
-//     child: Stack(
-//       alignment: Alignment.topCenter,
-//       children: <Widget>[
-//         Container(
-//           width: double.infinity,
-//           margin: EdgeInsets.only(top: height * 0.05, bottom: height * 0.05),
-//           child: Column(
-//             children: [
-//               Container(
-//                 margin: EdgeInsets.only(
-//                     top: height * 0.05, bottom: height * 0.06),
-//                 child: Text(
-//                   'References',
-//                   style: GoogleFonts.montserrat(
-//                       fontWeight: FontWeight.bold, fontSize: 24),
-//                 ),
-//               ),
-//               Spacer(),
-//               Container(
-//                 height: height * 0.03,
-//                 width: width * 0.23,
-//                 margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
-//                 child: ElevatedButton(
-//                   onPressed: () {},
-//                   style: ElevatedButton.styleFrom(
-//                     elevation: 5,
-//                     backgroundColor: ThemeColors.secondaryThemeColor,
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(15.0),
-//                     ),
-//                   ),
-//                   child: Text(
-//                     'Update',
-//                     style: GoogleFonts.montserrat(
-//                       color: Colors.white,
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.bold,
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
+// import 'package:blukers/providers/app_versions_provider.dart';
+// import 'package:flutter/foundation.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+//
+// import '../../../providers/industry_provider.dart';
+// import '../../../providers/job_posts_provider.dart';
+// import '../../common_views/all_search_bar_components/all_search_bar.dart';
+// import '../../common_views/loading_page.dart';
+// import '../../common_views/page_template/page_template.dart';
+// import '../../common_views/select_industry_components/display_industries.dart';
+// import '../jobs_and_componets/choose_target_language.dart';
+// import '../jobs_and_componets/job_search_result_page.dart';
+//
+// class Jobs extends StatelessWidget {
+//   const Jobs({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
+//     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+//     AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+//
+//     if (!kIsWeb) {
+//       avp.checkForUpdate(context);
+//     }
+//
+//     return PageTemplate(
+//       child: SingleChildScrollView(
+//         child: Column(
+//           children: [
+//             const AllSearchBar(),
+//             // if (Responsive.isDesktop(context))
+//             const SizedBox(
+//               height: 10,
+//             ),
+//             // const Row(
+//             //   mainAxisAlignment: MainAxisAlignment.end,
+//             //   children: [
+//             //     Spacer(),
+//             //     SizedBox(height: 50, width: 200, child: ChooseTargetLanguage()),
+//             //     SizedBox(width: 30)
+//             //   ],
+//             // ),
+//             const Center(
+//               child: ChooseTargetLanguage(),
+//             ),
+//             const SizedBox(
+//               height: 10,
+//             ),
+//             const Divider(),
+//             AnimatedCrossFade(
+//               firstChild: ip.industries.isEmpty
+//                   ? LoadingPage()
+//                   : const DisplayIndustries(),
+//               secondChild: const JobSearchResultPage(),
+//               crossFadeState: jp.isSearching
+//                   ? CrossFadeState.showSecond
+//                   : CrossFadeState.showFirst,
+//               duration: const Duration(milliseconds: 500),
+//             ),
+//           ],
 //         ),
-//         const Positioned(
-//           top: 10, // Adjust as needed
-//           left: 10, // Adjust as needed
-//           child: SmallPopButtonWidget(),
-//         ),
-//       ],
-//     ),
-//   );
+//       ),
+//     );
+//   }
 // }

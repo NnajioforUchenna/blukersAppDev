@@ -117,7 +117,7 @@
     "packer": "Packer",
     "warehousemanager": "Warehouse Manager",
 
-    "selectAJobPosition": "Select a job position",
+    "selectAJobPosition": "Select Job Position",
     "salary": "Salary",
 
     "workerSearchBarInput1Placeholder": "Job title, Industry or Keywords",

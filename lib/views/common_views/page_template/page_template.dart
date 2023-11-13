@@ -1,12 +1,11 @@
 import 'package:blukers/providers/industry_provider.dart';
 import 'package:blukers/services/responsive.dart';
+import 'package:blukers/views/common_views/components/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'my_buttom_navigation_bar.dart';
 import 'my_navigation_rail.dart';
-
-import 'package:blukers/views/common_views/components/my_app_bar.dart';
 
 class PageTemplate extends StatelessWidget {
   final Widget child;
@@ -37,10 +36,6 @@ class PageTemplate extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // // To Switch Roles Easily
-            // Row(
-            //   children: [Spacer(), SwitchRole()],
-            // ),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

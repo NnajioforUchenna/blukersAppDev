@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LanguageManager {
   static Locale? _currentLocale;
@@ -38,13 +37,6 @@ class ChooseTargetLanguage extends StatefulWidget {
 
 class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
   String? selectedLanguageCode;
-
-//   String jsonString = '''
-// {
-//   "en": "English",
-//   "es": "Spanish"
-// }
-// ''';
 
   String jsonString = '''
 {

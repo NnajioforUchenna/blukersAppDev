@@ -7,8 +7,8 @@ class NumberFormatHelper {
     return formatted;
   }
 
-  doubleToStrSimpleCurrency(value) {
-    var formatted = NumberFormat.simpleCurrency().format(value);
-    return formatted.toString();
+  String doubleToStrSimpleCurrency(double? value) {
+    NumberFormat customFormat = NumberFormat("#,##0.##", "en_US");
+    return '\$${customFormat.format(value)}';
   }
 }
