@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "blukers-development",
-    "prod": "blukers-app"
+    "prod": "blukers-app",
+    "production": "blukers-app"
   },
   "targets": {},
   "etags": {}

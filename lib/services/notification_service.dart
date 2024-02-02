@@ -56,11 +56,11 @@ class NotificationService {
   static void configLocalNotification() {
     var initializationSettingsAndroid =
         const AndroidInitializationSettings('app_icon');
-    var initializationSettingsIOS = const IOSInitializationSettings();
-    var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    // var initializationSettingsIOS = const IOSInitializationSettings();
+    // var initializationSettings = InitializationSettings(
+    //     android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    //
+    // flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
   static void showNotification(
@@ -76,11 +76,11 @@ class NotificationService {
       importance: Importance.max,
       priority: Priority.high,
     );
-    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin
-        .show(0, from, message, platformChannelSpecifics, payload: message);
+    // var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+    // var platformChannelSpecifics = NotificationDetails(
+    //     android: androidPlatformChannelSpecifics,
+    //     iOS: iOSPlatformChannelSpecifics);
+    // await flutterLocalNotificationsPlugin
+    //     .show(0, from, message, platformChannelSpecifics, payload: message);
   }
 }
