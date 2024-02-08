@@ -1,0 +1,17 @@
+Introducing the new Blukers phone app! 
+
+Are you a skilled worker looking for job opportunities in the United States? 
+Look no further! Blukers is a comprehensive job search and recruitment application designed exclusively to connect manual workers with employers from various industries. Blukers is an ideal platform to find and apply for jobs in the United States. It has a user-friendly interface and powerful features. Furthermore, it is specifically designed to meet the needs of manual workers.
+
+Key Features:
+
+- Extensive Job Database: Blukers has a wide database of job offers for labor workers. Regardless of your occupation, whether you're an expert welder in structures/piping, a structures/piping assembler, an electrician's assistant, a construction worker, a maintenance worker, a gardener, a chef, a kitchen assistant, a truck driver, or an industrial tractor operator, you'll discover a wide variety of job opportunities that match your experience.
+
+- Job Matching: Our advanced matching algorithm ensures that you receive personalized job recommendations based on your skills, location, and preferences. Say goodbye to searching through irrelevant job listings: Blukers brings you the most suitable opportunities directly to your fingertips.
+
+- Profile Creation: Create a compelling professional profile to showcase your skills, qualifications, and experience. You can upload your resume, highlight certifications, and provide references to increase your chances of being noticed by potential employers. Present yourself in the best possible way to stand out among the competition.
+
+- Easy Application Process: Applying for jobs has never been easier. With Blukers, you can apply for multiple positions with just a few clicks. Save time by storing your application documents, such as cover letters and certificates, within the app for quick access when needed. Keep track of the status of your applications and receive notifications about new opportunities.
+Download Blukers today and take the next step in your career. Connect with employers who value your skills and join a growing community of skilled workers finding meaningful employment throughout the United States. Your dream job awaits!
+
+[Minimum supported app version: 1.0.1]
