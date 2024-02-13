@@ -1,41 +1,121 @@
 {
   "project_info": {
-    "project_number": "1059320284686",
-    "firebase_url": "https://blukers-app-default-rtdb.firebaseio.com",
-    "project_id": "blukers-app",
-    "storage_bucket": "blukers-app.appspot.com"
+    "project_number": "25989559034",
+    "firebase_url": "https://blukers-development-default-rtdb.firebaseio.com",
+    "project_id": "blukers-development",
+    "storage_bucket": "blukers-development.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1059320284686:android:ac943ae54f2834f5eb5e5f",
+        "mobilesdk_app_id": "1:25989559034:android:ee8a9ab16f2dafc764cf43",
         "android_client_info": {
-          "package_name": "com.terralabor.blukers"
+          "package_name": "com.blukers.client_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1059320284686-d2ubm5vj7ucbmbiorcco5pv1je527luq.apps.googleusercontent.com",
+          "client_id": "25989559034-b9mmbu1eoap949r2dmkgh4m8ocm4dhrj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blukers.client_app",
+            "certificate_hash": "79ab174f11856692e957dfd4e44ead2efce494fd"
+          }
+        },
+        {
+          "client_id": "25989559034-jit1skch7hpli0in2r8lcn2tdvjhjeks.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCaH8vVOJ8nk77DqJotPBq56AIZoxvHhU"
+          "current_key": "AIzaSyDZnBA1yI928GjU892Q0_z3IrisrPB00CM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1059320284686-d2ubm5vj7ucbmbiorcco5pv1je527luq.apps.googleusercontent.com",
+              "client_id": "25989559034-jit1skch7hpli0in2r8lcn2tdvjhjeks.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "1059320284686-0al08semh0kftu25b685vtjts6l0kgen.apps.googleusercontent.com",
+              "client_id": "25989559034-04q0n9so1pot5u4s25i3naj3qldptv40.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.blukers"
+                "bundle_id": "com.example.blukers.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25989559034:android:9aecae48d1e0513364cf43",
+        "android_client_info": {
+          "package_name": "com.example.blukers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25989559034-jit1skch7hpli0in2r8lcn2tdvjhjeks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZnBA1yI928GjU892Q0_z3IrisrPB00CM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25989559034-jit1skch7hpli0in2r8lcn2tdvjhjeks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "25989559034-04q0n9so1pot5u4s25i3naj3qldptv40.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blukers.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25989559034:android:9d0ff9f7910a037664cf43",
+        "android_client_info": {
+          "package_name": "com.terralabor.blukers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25989559034-jit1skch7hpli0in2r8lcn2tdvjhjeks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZnBA1yI928GjU892Q0_z3IrisrPB00CM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25989559034-jit1skch7hpli0in2r8lcn2tdvjhjeks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "25989559034-04q0n9so1pot5u4s25i3naj3qldptv40.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blukers.RunnerTests"
               }
             }
           ]

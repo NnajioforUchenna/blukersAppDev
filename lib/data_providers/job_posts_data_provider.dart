@@ -119,17 +119,21 @@ class JobPostsDataProvider {
     String url = baseUrlAppEngineFunctions +
         '/search/get-job-posts'; // Replace with your actual endpoint
 
+    Map<String, dynamic> jsonBody = {
+      "query_name": nameRelated.toLowerCase(),
+      "query_location": locationRelated,
+      "page_number": pageNumber,
+      "target_language": targetLanguage,
+    };
+
+    // print(jsonBody);
+
     final response = await http.post(
       Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
       },
-      body: jsonEncode({
-        "query_name": nameRelated,
-        "query_location": locationRelated,
-        "page_number": pageNumber,
-        "target_language": targetLanguage,
-      }),
+      body: jsonEncode(jsonBody),
     );
 
     if (response.statusCode == 200) {

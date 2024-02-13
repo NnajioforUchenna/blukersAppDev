@@ -98,7 +98,7 @@ class NewMobileMembershipCard extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(right: 20.0),
                         child: const Icon(
-                          Icons.arrow_forward_ios,
+                          Icons.info_outline,
                           color: Colors.white,
                         ),
                       )

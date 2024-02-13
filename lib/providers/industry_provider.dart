@@ -1,8 +1,8 @@
-import 'package:blukers/data_providers/industries_data_provider.dart';
 import 'package:blukers/models/industry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart';
 
+import '../common_files/Industries.dart';
 import '../models/job.dart';
 import '../views/common_views/address_form/validate_address.dart';
 
@@ -17,11 +17,9 @@ class IndustriesProvider with ChangeNotifier {
   }
 
   void getData() {
-    IndustriesDataProvider.getAllIndustries().then((data) {
-      _industries = data;
-      notifyListeners();
-      fillJobs();
-    });
+    _industries = convertIndustries();
+    fillJobs();
+    notifyListeners();
   }
 
   // Implement Address Autocomplete
@@ -81,5 +79,14 @@ class IndustriesProvider with ChangeNotifier {
         jobs[job.jobId] = job;
       });
     });
+  }
+
+  Map<String, Industry> convertIndustries() {
+    Map<String, Industry> industries = {};
+    for (var industryData in IndustriesData) {
+      Industry industry = Industry.fromMap(industryData);
+      industries[industry.industryId] = industry;
+    }
+    return industries;
   }
 }
