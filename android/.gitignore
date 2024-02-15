@@ -12,3 +12,5 @@ key.properties
 **/*.keystore
 **/*.jks
 fastlaneServiceKey.json
+
+/app/google-services.json
