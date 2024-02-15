@@ -32,4 +32,12 @@ class IndustriesDataProvider {
 
     return industriesDict;
   }
+
+  static Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
+      getNumberOfJobPosts() async {
+    final collection =
+        FirebaseFirestore.instance.collection('NumberOfJobPosts');
+    final snapshot = await collection.get();
+    return snapshot.docs;
+  }
 }

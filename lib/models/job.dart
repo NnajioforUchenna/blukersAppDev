@@ -6,7 +6,7 @@ class Job {
   final double? highRange;
   final double? lowRange;
   final int numberOfApplicants;
-  final int numberOfJobPosts; // New parameter
+  int numberOfJobPosts; // New parameter
 
   Job({
     required this.jobId,

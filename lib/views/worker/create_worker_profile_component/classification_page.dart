@@ -1,6 +1,6 @@
 import 'package:blukers/providers/worker_provider.dart';
+import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/industry.dart';
@@ -8,8 +8,6 @@ import '../../../providers/industry_provider.dart';
 import '../../../services/responsive.dart';
 import '../../../utils/localization/localized_industries.dart';
 import '../../../utils/localization/localized_jobs.dart';
-
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
 
 class ClassificationPage extends StatefulWidget {
   ClassificationPage({Key? key}) : super(key: key);
@@ -122,12 +120,15 @@ class _ClassificationPageState extends State<ClassificationPage> {
                       },
                     ),
                     if (selectedIndustries.contains(industry.industryId))
-                      ...industry.jobs.map((job) {
+                      ...industry.jobs.entries.map((entry) {
+                        final jobId = entry.key;
+                        final job = entry.value;
                         return Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: CheckboxListTile(
                             title: Text(
-                              LocalizedJobs.get(context, job.jobId),
+                              LocalizedJobs.get(context,
+                                  jobId), // Assuming this method is correctly implemented to handle job IDs
                               style: TextStyle(
                                 color: Colors.blueGrey[700],
                                 fontSize: 20,
@@ -136,29 +137,26 @@ class _ClassificationPageState extends State<ClassificationPage> {
                               ),
                             ),
                             value: selectedJobs[industry.industryId]
-                                    ?.contains(job.jobId) ??
+                                    ?.contains(jobId) ??
                                 false,
                             onChanged: (bool? value) {
-                              if (value != null && value) {
-                                if (!selectedJobs
-                                    .containsKey(industry.industryId)) {
-                                  selectedJobs[industry.industryId] = [];
-                                }
-                                setState(() {
-                                  selectedJobs[industry.industryId]!
-                                      .add(job.jobId);
-                                });
-                              } else {
-                                setState(() {
-                                  selectedJobs[industry.industryId]!
-                                      .remove(job.jobId);
-                                });
+                              if (!selectedJobs
+                                  .containsKey(industry.industryId)) {
+                                selectedJobs[industry.industryId] = [];
                               }
-                              isSelect();
+                              setState(() {
+                                if (value == true) {
+                                  selectedJobs[industry.industryId]!.add(jobId);
+                                } else {
+                                  selectedJobs[industry.industryId]!
+                                      .remove(jobId);
+                                }
+                              });
+                              // Call to isSelect() here; ensure it's correctly defined to react to selection changes
                             },
                           ),
                         );
-                      }).toList()
+                      }).toList(),
                   ],
                 ),
               );

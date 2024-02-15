@@ -30,31 +30,31 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
 
   @override
   void initState() {
+    super
+        .initState(); // It's recommended to call super.initState() at the beginning
+
     UserProvider up = Provider.of<UserProvider>(context, listen: false);
     IndustriesProvider ip =
         Provider.of<IndustriesProvider>(context, listen: false);
     industries = ip.industries.values.toList();
 
     if (up.appUser != null && up.appUser?.worker != null) {
-      print('This is the industry ids Straight from the database');
-      print(up.appUser?.worker?.industryIds);
       selectedIndustries = up.appUser?.worker?.industryIds ?? [];
       if (up.appUser?.worker?.jobIds != null && industries.isNotEmpty) {
         selectedJobs = {};
         for (String jobId in up.appUser!.worker!.jobIds!) {
           for (Industry industry in industries) {
-            if (industry.jobs.any((job) => job.jobId == jobId)) {
-              if (!selectedJobs.containsKey(industry.industryId)) {
-                selectedJobs[industry.industryId] = [];
-              }
-              selectedJobs[industry.industryId]!.add(jobId);
+            // Since jobs is a Map, use .containsKey to check if jobId exists
+            if (industry.jobs.containsKey(jobId)) {
+              // Add jobId to the selectedJobs map under the correct industryId
+              selectedJobs
+                  .putIfAbsent(industry.industryId, () => [])
+                  .add(jobId);
             }
           }
         }
       }
     }
-
-    super.initState();
   }
 
   @override
@@ -130,7 +130,9 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
                   ),
                 ),
                 if (selectedIndustries.contains(industry.industryId))
-                  ...industry.jobs.map((job) {
+                  ...industry.jobs.entries.map((entry) {
+                    final jobId = entry.key;
+                    final job = entry.value;
                     return InkWell(
                       onTap: () {
                         if (!selectedJobs.containsKey(industry.industryId)) {
@@ -138,20 +140,19 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
                         }
 
                         if (selectedJobs[industry.industryId]
-                                ?.contains(job.jobId) ??
+                                ?.contains(jobId) ??
                             false) {
                           setState(() {
-                            selectedJobs[industry.industryId]!
-                                .remove(job.jobId);
+                            selectedJobs[industry.industryId]!.remove(jobId);
                           });
                         } else {
                           setState(() {
-                            selectedJobs[industry.industryId]!.add(job.jobId);
+                            selectedJobs[industry.industryId]!.add(jobId);
                           });
                         }
                         up.updateAppUserCategory(
                             selectedIndustries, selectedJobs);
-                        // isSelect();
+                        // isSelect(); // Ensure the isSelect method is defined or remove this comment
                       },
                       child: Container(
                         height: 20,
@@ -162,7 +163,8 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
                           children: [
                             Expanded(
                               child: Text(
-                                LocalizedJobs.get(context, job.jobId),
+                                LocalizedJobs.get(context,
+                                    jobId), // Assuming LocalizedJobs.get can handle jobId
                                 style: TextStyle(
                                   color: Colors.blueGrey[700],
                                   fontSize: 10,
@@ -174,27 +176,27 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
                               scale: 0.6,
                               child: Checkbox(
                                 value: selectedJobs[industry.industryId]
-                                        ?.contains(job.jobId) ??
+                                        ?.contains(jobId) ??
                                     false,
                                 onChanged: (bool? value) {
-                                  if (value != null && value) {
-                                    if (!selectedJobs
-                                        .containsKey(industry.industryId)) {
-                                      selectedJobs[industry.industryId] = [];
-                                    }
+                                  if (!selectedJobs
+                                      .containsKey(industry.industryId)) {
+                                    selectedJobs[industry.industryId] = [];
+                                  }
+                                  if (value == true) {
                                     setState(() {
                                       selectedJobs[industry.industryId]!
-                                          .add(job.jobId);
+                                          .add(jobId);
                                     });
                                   } else {
                                     setState(() {
                                       selectedJobs[industry.industryId]!
-                                          .remove(job.jobId);
+                                          .remove(jobId);
                                     });
                                   }
                                   up.updateAppUserCategory(
                                       selectedIndustries, selectedJobs);
-                                  isSelect();
+                                  // isSelect(); // Ensure the isSelect method is defined or remove this comment
                                 },
                               ),
                             ),

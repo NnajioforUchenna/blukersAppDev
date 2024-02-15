@@ -6,6 +6,8 @@ import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
+import '../../../models/job.dart';
 import '../../../utils/localization/localized_industries.dart';
 import '../../../utils/localization/localized_jobs.dart';
 
@@ -102,12 +104,14 @@ class _IndustryJobsDropdownComponentState
                 },
               ),
               if (selectedIndustries.contains(industry.industryId))
-                ...industry.jobs.map((job) {
+                ...industry.jobs.entries.map((entry) {
+                  final String jobId = entry.key;
+                  final Job job = entry.value;
                   return Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: CheckboxListTile(
                       title: Text(
-                        LocalizedJobs.get(context, job.jobId),
+                        LocalizedJobs.get(context, jobId),
                         style: TextStyle(
                           color: Colors.blueGrey[700],
                           fontSize: 20,
@@ -115,25 +119,20 @@ class _IndustryJobsDropdownComponentState
                           height: 1.25,
                         ),
                       ),
-                      value: selectedJobs.contains(job.jobId),
+                      value: selectedJobs.contains(jobId),
                       onChanged: (bool? value) {
-                        if (value != null && value) {
-                          // if (!selectedJobs.containsKey(industry.industryId)) {
-                          //   selectedJobs[industry.industryId] = [];
-                          // }
-                          setState(() {
-                            selectedJobs.add(job.jobId);
-                          });
-                        } else {
-                          setState(() {
-                            selectedJobs.remove(job.jobId);
-                          });
-                        }
-                        isSelect();
+                        setState(() {
+                          if (value == true) {
+                            selectedJobs.add(jobId);
+                          } else {
+                            selectedJobs.remove(jobId);
+                          }
+                        });
+                        isSelect(); // Ensure this method is correctly implemented to reflect any selection changes
                       },
                     ),
                   );
-                }).toList()
+                }).toList(),
             ],
           );
         }).toList(),

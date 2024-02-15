@@ -88,7 +88,8 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
               )
             : Container(),
         isExpanded
-            ? MobileIndustryBodyPanel(jobs: widget.industry.jobs)
+            ? MobileIndustryBodyPanel(
+                jobs: widget.industry.jobs.values.toList())
             : Container(),
       ],
     );

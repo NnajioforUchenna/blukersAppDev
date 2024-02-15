@@ -29,7 +29,7 @@ class DisplayIndustry extends StatelessWidget {
             ),
           ),
         ),
-        IndustryBodyPanel(jobs: industry.jobs),
+        IndustryBodyPanel(jobs: industry.jobs.values.toList()),
       ],
     );
   }

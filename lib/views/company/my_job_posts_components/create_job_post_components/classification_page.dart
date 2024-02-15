@@ -1,14 +1,13 @@
+import "package:blukers/utils/localization/localized_industries.dart";
+import "package:blukers/utils/localization/localized_jobs.dart";
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/industry.dart';
 import '../../../../providers/industry_provider.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../auth/common_widget/submit_button.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import "package:blukers/utils/localization/localized_industries.dart";
-import "package:blukers/utils/localization/localized_jobs.dart";
 
 class ClassificationPage extends StatefulWidget {
   ClassificationPage({Key? key}) : super(key: key);
@@ -100,15 +99,18 @@ class _ClassificationPageState extends State<ClassificationPage> {
                     const SizedBox(height: 20),
                     DropdownButtonFormField<String>(
                       items: industries
-                          .firstWhere((i) => i.industryId == selectedIndustryId)
+                          .firstWhere((industry) =>
+                              industry.industryId == selectedIndustryId)
                           .jobs
-                          .map((job) {
-                        return DropdownMenuItem(
-                          value: job.jobId,
+                          .entries
+                          .map((entry) {
+                        return DropdownMenuItem<String>(
+                          value: entry.key, // The job ID is the key in the map
                           child: Text(
                             LocalizedJobs.get(
                               context,
-                              job.jobId,
+                              entry
+                                  .key, // Use the job ID to get the localized job name
                             ),
                           ),
                         );

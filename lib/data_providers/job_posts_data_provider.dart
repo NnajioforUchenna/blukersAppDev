@@ -17,6 +17,7 @@ class JobPostsDataProvider {
         locationRelated: '',
         pageNumber: 0,
         targetLanguage: targetLanguage);
+
     return jobPosts.map((jobPost) => jobPost.toMap()).toList();
   }
 
@@ -80,75 +81,76 @@ class JobPostsDataProvider {
     return jobPosts;
   }
 
-  // static searchJobPosts(String nameRelated, String locationRelated) async {
-  //   CollectionReference jobPosts = db.collection(jobPostsCollections);
-  //
-  //   var queries = [
-  //     jobPosts.where('companyName', isEqualTo: nameRelated),
-  //     jobPosts.where('skills', arrayContains: nameRelated),
-  //     jobPosts.where('jobTitle', isEqualTo: nameRelated),
-  //     jobPosts.where('jobIds', isEqualTo: nameRelated),
-  //     jobPosts.where('addresses.street', isEqualTo: locationRelated),
-  //     jobPosts.where('addresses.city', isEqualTo: locationRelated),
-  //     jobPosts.where('addresses.state', isEqualTo: locationRelated),
-  //     jobPosts.where('addresses.country', isEqualTo: locationRelated),
-  //   ];
-  //
-  //   var allJobPosts = <JobPost>[];
-  //   for (var query in queries) {
-  //     final snapshot = await query.get();
-  //     final jobPosts = snapshot.docs.map((doc) {
-  //       return JobPost.fromMap(doc.data() as Map<String, dynamic>);
-  //     }).toList();
-  //     allJobPosts.addAll(jobPosts);
-  //   }
-  //
-  //   // Optionally, remove duplicates
-  //   var uniqueJobPosts = <JobPost>{};
-  //   uniqueJobPosts.addAll(allJobPosts);
-  //   allJobPosts = uniqueJobPosts.toList();
-  //
-  //   return allJobPosts;
-  // }
-
   static Future<List<JobPost>> searchJobPosts(
       {required String nameRelated,
       required String locationRelated,
       required int pageNumber,
       required String targetLanguage}) async {
-    String url = baseUrlAppEngineFunctions +
-        '/search/get-job-posts'; // Replace with your actual endpoint
+    nameRelated = nameRelated.trim();
+    locationRelated = locationRelated.trim();
+    String keyword =
+        ('${nameRelated}_${locationRelated}_${pageNumber}_$targetLanguage')
+            .trim()
+            .toLowerCase()
+            .replaceAll(' ', '%20');
 
-    Map<String, dynamic> jsonBody = {
-      "query_name": nameRelated.toLowerCase(),
-      "query_location": locationRelated,
-      "page_number": pageNumber,
-      "target_language": targetLanguage,
-    };
+    final docRef = FirebaseFirestore.instance.collection('cache2').doc(keyword);
+    final docSnapshot = await docRef.get();
+    if (docSnapshot.exists) {
+      print('Getting Record from Cache in Firebase');
 
-    // print(jsonBody);
-
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(jsonBody),
-    );
-
-    if (response.statusCode == 200) {
-      final sanitizedResponseBody = sanitizeJson(response.body);
-      final List<dynamic> jobPostData = jsonDecode(sanitizedResponseBody);
+      // The return Container
       final List<JobPost> jobPosts = [];
+
+      // Getting the Data from the firestore docSnapshot
+      final List<dynamic> jobPostData =
+          docSnapshot.get('jobPosts') as List<dynamic>;
+
+      // Converting the data to JobPost and adding to the container for return
       jobPostData.forEach((data) {
         JobPost? jobPost = JobPost.fromMap(data);
         if (jobPost != null) {
           jobPosts.add(jobPost);
         }
       });
+
       return jobPosts;
     } else {
-      throw Exception('Failed to fetch job posts from the API');
+      print('Getting Record from API');
+      String url = baseUrlAppEngineFunctions +
+          '/search/get-job-posts'; // Replace with your actual endpoint
+
+      Map<String, dynamic> jsonBody = {
+        "query_name": nameRelated.toLowerCase(),
+        "query_location": locationRelated,
+        "page_number": pageNumber,
+        "target_language": targetLanguage,
+      };
+
+      // print(jsonBody);
+
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(jsonBody),
+      );
+
+      if (response.statusCode == 200) {
+        final sanitizedResponseBody = sanitizeJson(response.body);
+        final List<dynamic> jobPostData = jsonDecode(sanitizedResponseBody);
+        final List<JobPost> jobPosts = [];
+        jobPostData.forEach((data) {
+          JobPost? jobPost = JobPost.fromMap(data);
+          if (jobPost != null) {
+            jobPosts.add(jobPost);
+          }
+        });
+        return jobPosts;
+      } else {
+        throw Exception('Failed to fetch job posts from the API');
+      }
     }
   }
 

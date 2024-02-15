@@ -253,6 +253,7 @@ class JobPostsProvider with ChangeNotifier {
         locationRelated: locationRelated,
         pageNumber: 0,
         targetLanguage: language);
+
     hasMore = listJobPosts.isNotEmpty;
 
     if (listJobPosts.isEmpty) {

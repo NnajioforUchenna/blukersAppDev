@@ -1,11 +1,11 @@
-import 'job.dart';
+import 'job.dart'; // Assuming Job class is defined in job.dart with a fromMap method
 
 class Industry {
   final String industryId;
   final String name;
   final String? description;
   final String? imageUrl;
-  final List<Job> jobs;
+  final Map<String, Job> jobs;
 
   Industry({
     required this.industryId,
@@ -21,22 +21,27 @@ class Industry {
       'name': name,
       'description': description,
       'imageUrl': imageUrl,
-      'jobs': jobs.map((job) => job.toMap()).toList(),
+      // Convert each Job object in the map to a map
+      'jobs': jobs.map((jobId, job) => MapEntry(jobId, job.toMap())),
     };
   }
 
   static Industry fromMap(Map<String, dynamic> map) {
-    List<dynamic> jobsData = map['jobs'];
-    List<Job> jobsList = jobsData
-        .map((jobMap) => Job.fromMap(jobMap as Map<String, dynamic>))
-        .toList();
+    Map<String, Job> jobsMap = {};
+
+    List<Map<String, dynamic>> jobsData = map['jobs'] ?? {};
+
+    for (var jobMap in jobsData) {
+      String jobId = jobMap["jobId"];
+      jobsMap[jobId] = Job.fromMap(jobMap);
+    }
 
     return Industry(
       industryId: map['industryId'],
       name: map['name'],
       description: map['description'],
       imageUrl: map['imageUrl'],
-      jobs: jobsList,
+      jobs: jobsMap,
     );
   }
 
@@ -47,17 +52,17 @@ class Industry {
 
   int getApplicantCount() {
     int count = 0;
-    for (Job job in jobs) {
+    jobs.forEach((jobId, job) {
       count += job.numberOfApplicants;
-    }
+    });
     return count;
   }
 
-  getNumberOfJobPosts() {
+  int getNumberOfJobPosts() {
     int count = 0;
-    for (Job job in jobs) {
+    jobs.forEach((jobId, job) {
       count += job.numberOfJobPosts;
-    }
+    });
     return count;
   }
 }
