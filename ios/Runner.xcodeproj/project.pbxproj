@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		1D8C910A2B7E776700BAD4A0 /* blukersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8C91092B7E776700BAD4A0 /* blukersUITests.swift */; };
+		1D8C910C2B7E776700BAD4A0 /* blukersUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8C910B2B7E776700BAD4A0 /* blukersUITestsLaunchTests.swift */; };
 		1DA87C0F2B64C132003A2AC3 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA87C0E2B64C132003A2AC3 /* NotificationService.m */; };
 		1DA87C132B64C132003A2AC3 /* ImageNotification2.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1DA87C0B2B64C132003A2AC3 /* ImageNotification2.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		307C4D2EE0FA61F66E8E37B7 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C062590BC9D7BF98712BF50 /* Pods_Runner.framework */; };
@@ -24,6 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1D8C910D2B7E776700BAD4A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 97C146ED1CF9000F007C117D;
+			remoteInfo = Runner;
+		};
 		1DA87C112B64C132003A2AC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
@@ -67,6 +76,9 @@
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		1D8C91072B7E776700BAD4A0 /* blukersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = blukersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D8C91092B7E776700BAD4A0 /* blukersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blukersUITests.swift; sourceTree = "<group>"; };
+		1D8C910B2B7E776700BAD4A0 /* blukersUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blukersUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1DA87BF52B64B7C9003A2AC3 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		1DA87BFC2B64C09C003A2AC3 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		1DA87BFE2B64C09C003A2AC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,6 +116,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1D8C91042B7E776700BAD4A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1DA87C082B64C132003A2AC3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,6 +151,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D8C91082B7E776700BAD4A0 /* blukersUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1D8C91092B7E776700BAD4A0 /* blukersUITests.swift */,
+				1D8C910B2B7E776700BAD4A0 /* blukersUITestsLaunchTests.swift */,
+			);
+			path = blukersUITests;
+			sourceTree = "<group>";
+		};
 		1DA87BFB2B64C09C003A2AC3 /* ImageNotification */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +205,7 @@
 				97C146F01CF9000F007C117D /* Runner */,
 				1DA87BFB2B64C09C003A2AC3 /* ImageNotification */,
 				1DA87C0C2B64C132003A2AC3 /* ImageNotification2 */,
+				1D8C91082B7E776700BAD4A0 /* blukersUITests */,
 				97C146EF1CF9000F007C117D /* Products */,
 				331C8082294A63A400263BE5 /* RunnerTests */,
 				F7033ACBA6A307BF82C18954 /* Pods */,
@@ -191,6 +220,7 @@
 				97C146EE1CF9000F007C117D /* Runner.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
 				1DA87C0B2B64C132003A2AC3 /* ImageNotification2.appex */,
+				1D8C91072B7E776700BAD4A0 /* blukersUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,6 +271,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1D8C91062B7E776700BAD4A0 /* blukersUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D8C91122B7E776700BAD4A0 /* Build configuration list for PBXNativeTarget "blukersUITests" */;
+			buildPhases = (
+				1D8C91032B7E776700BAD4A0 /* Sources */,
+				1D8C91042B7E776700BAD4A0 /* Frameworks */,
+				1D8C91052B7E776700BAD4A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D8C910E2B7E776700BAD4A0 /* PBXTargetDependency */,
+			);
+			name = blukersUITests;
+			productName = blukersUITests;
+			productReference = 1D8C91072B7E776700BAD4A0 /* blukersUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		1DA87C0A2B64C132003A2AC3 /* ImageNotification2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DA87C142B64C132003A2AC3 /* Build configuration list for PBXNativeTarget "ImageNotification2" */;
@@ -313,6 +361,10 @@
 				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
+					1D8C91062B7E776700BAD4A0 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 97C146ED1CF9000F007C117D;
+					};
 					1DA87C0A2B64C132003A2AC3 = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -342,11 +394,19 @@
 				97C146ED1CF9000F007C117D /* Runner */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
 				1DA87C0A2B64C132003A2AC3 /* ImageNotification2 */,
+				1D8C91062B7E776700BAD4A0 /* blukersUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1D8C91052B7E776700BAD4A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1DA87C092B64C132003A2AC3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -510,6 +570,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1D8C91032B7E776700BAD4A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D8C910A2B7E776700BAD4A0 /* blukersUITests.swift in Sources */,
+				1D8C910C2B7E776700BAD4A0 /* blukersUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1DA87C072B64C132003A2AC3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -538,6 +607,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1D8C910E2B7E776700BAD4A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 97C146ED1CF9000F007C117D /* Runner */;
+			targetProxy = 1D8C910D2B7E776700BAD4A0 /* PBXContainerItemProxy */;
+		};
 		1DA87C122B64C132003A2AC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1DA87C0A2B64C132003A2AC3 /* ImageNotification2 */;
@@ -570,6 +644,96 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1D8C910F2B7E776700BAD4A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A8AXM65865;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = talk2victormarius.blukersUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Runner;
+			};
+			name = Debug;
+		};
+		1D8C91102B7E776700BAD4A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A8AXM65865;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = talk2victormarius.blukersUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Runner;
+			};
+			name = Release;
+		};
+		1D8C91112B7E776700BAD4A0 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A8AXM65865;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = talk2victormarius.blukersUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Runner;
+			};
+			name = Profile;
+		};
 		1DA87C152B64C132003A2AC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 67C65690935D3A75667FA24A /* Pods-ImageNotification2.debug.xcconfig */;
@@ -996,6 +1160,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1D8C91122B7E776700BAD4A0 /* Build configuration list for PBXNativeTarget "blukersUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D8C910F2B7E776700BAD4A0 /* Debug */,
+				1D8C91102B7E776700BAD4A0 /* Release */,
+				1D8C91112B7E776700BAD4A0 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1DA87C142B64C132003A2AC3 /* Build configuration list for PBXNativeTarget "ImageNotification2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
