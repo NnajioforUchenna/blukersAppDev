@@ -114,7 +114,7 @@ class _SearchPageState extends State<SearchPage> {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: ThemeColors.blukersOrangeThemeColor,
+                      backgroundColor: ThemeColors.blukersOrangeThemeColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),

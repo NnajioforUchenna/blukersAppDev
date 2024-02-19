@@ -16,8 +16,7 @@ class SubmitButton extends StatelessWidget {
       onPressed: () => onPress,
       style: ElevatedButton.styleFrom(
         // minimumSize: const Size.fromHeight(50), // NEW
-        primary: Colors.green,
-        onPrimary: Colors.white,
+        foregroundColor: Colors.white, backgroundColor: Colors.green,
         shadowColor: Colors.black,
         elevation: 3,
         shape: RoundedRectangleBorder(

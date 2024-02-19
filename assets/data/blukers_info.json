@@ -1,0 +1,42 @@
+{
+  "welcomeTitle": "Welcome to Blukers - Your Gateway to Blue-Collar Jobs!",
+  "welcomeMessage": "At Blukers, we're dedicated to connecting blue-collar workers with meaningful employment opportunities across a wide range of industries. Our mission is to simplify your job search and enhance your visibility to potential employers, making it easier than ever to secure your next job. With Blukers, you're not just searching for a job; you're stepping into a community committed to supporting your career growth.",
+  "whyRegisterTitle": "Why Register with Blukers?",
+  "whyRegisterPoints": [
+    "Access to Hundreds of Jobs: Dive into an extensive database of job listings tailored for blue-collar workers.",
+    "Simplify Your Job Search: Our user-friendly platform makes finding and applying for jobs straightforward and effective.",
+    "Boost Your Career: With features designed to enhance your job application, Blukers gives you the edge you need in a competitive job market."
+  ],
+  "subscriptionPlans": [
+    {
+      "name": "Basic",
+      "price": "Free",
+      "features": [
+        "Create Your Resume",
+        "Apply to 2 Jobs Daily"
+      ]
+    },
+    {
+      "name": "Premium",
+      "price": "$5 monthly",
+      "features": [
+        "Upload Your Resume",
+        "Upload Your Certification",
+        "Apply to 10 Jobs Daily",
+        "Show your profile on top in employers searchers section"
+      ]
+    },
+    {
+      "name": "Premium Plus",
+      "price": "$10 monthly",
+      "features": [
+        "Create Your Resume",
+        "Upload Your Resume",
+        "Upload Your Certification",
+        "Apply to unlimited Jobs Daily",
+        "Show your profile on top in employers searchers section",
+        "Display your immigration and employment verification status"
+      ]
+    }
+  ]
+}

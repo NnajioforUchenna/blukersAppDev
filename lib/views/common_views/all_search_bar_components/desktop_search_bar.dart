@@ -157,7 +157,7 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
           });
         },
         style: ElevatedButton.styleFrom(
-          primary: const Color.fromARGB(255, 243, 85, 7), // Red color
+          backgroundColor: const Color.fromARGB(255, 243, 85, 7), // Red color
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),

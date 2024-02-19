@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:blukers/views/common_views/components/loading_animation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CountDown extends StatefulWidget {
   final String platform;
@@ -25,15 +25,17 @@ class _CountDownState extends State<CountDown> {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (waitTime > 0) {
         if (mounted) {
-          // Check if the widget is still in the tree
           setState(() {
             waitTime--;
           });
         }
       } else {
         timer.cancel();
-        // Navigator.pushReplacement(
-        //    context, MaterialPageRoute(builder: (context) => const Screens()));
+        // Replace this with the action to "pop off"
+        Navigator.pop(context); // Example action to pop the current widget
+        // You can replace Navigator.pop(context) with the specific action you want to perform after 60 seconds
+        EasyLoading.showError('Failed to Connect Payment Store',
+            duration: const Duration(seconds: 3));
       }
     });
   }
@@ -47,56 +49,26 @@ class _CountDownState extends State<CountDown> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: LoadingAnimation(
-        // text: widget.platform,
-        text: AppLocalizations.of(context)!.connecting + '...',
-      ),
-    );
-
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'Please give us 30 seconds',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.merriweather(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 27,
-                    color: Colors.black),
-              ),
-            ),
-            SizedBox(
-              height: 18.sp,
-            ),
-            DisplayTimer(),
-            SizedBox(
-              height: 18.sp,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'We are Connecting ${widget.platform} for Payment...',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.merriweather(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.black),
-              ),
-            ),
-            SizedBox(
-              height: 18.sp,
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          LoadingAnimation(
+            // text: widget.platform,
+            text: '${AppLocalizations.of(context)!.connecting}...',
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          DisplayTimer()
+        ],
       ),
     );
   }
 
   SizedBox DisplayTimer() {
-    double square = 400;
+    double square = 200;
     return SizedBox(
       width: square,
       height: square,

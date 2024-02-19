@@ -42,7 +42,7 @@ extension InAppPurchasePaymentProvider on PaymentsProvider {
     currentContext = context;
 
     // Determine subscription type
-    int indexSubType = subscriptionType == 'premium' ? 0 : 1;
+    int indexSubType = subscriptionType == 'premium' ? 1 : 0;
     if (_listSubscriptionDetails.length > 1) {
       PurchaseParam purchaseParam = PurchaseParam(
         productDetails: _listSubscriptionDetails[indexSubType],

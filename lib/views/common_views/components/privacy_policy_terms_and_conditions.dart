@@ -1,10 +1,7 @@
+import 'package:blukers/utils/styles/index.dart';
+import 'package:blukers/views/common_views/web_views/tap_to_web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:blukers/views/common_views/components/my_app_bar.dart';
-import 'package:blukers/views/common_views/components/loading_animation.dart';
-import 'package:blukers/views/common_views/web_views/tap_to_web_view.dart';
-import 'package:blukers/utils/styles/index.dart';
 
 class PrivacyPolicyTermsAndConditions extends StatelessWidget {
   final Color textColor;
@@ -24,7 +21,7 @@ class PrivacyPolicyTermsAndConditions extends StatelessWidget {
         _showPrivacyDialog(context);
       },
       style: ElevatedButton.styleFrom(
-        primary: ThemeColors.grey2ThemeColor,
+        backgroundColor: ThemeColors.grey2ThemeColor,
       ),
       child: Text(
         AppLocalizations.of(context)!.privacyAndTerms,

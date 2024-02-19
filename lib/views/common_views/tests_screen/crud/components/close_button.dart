@@ -16,8 +16,7 @@ class CloseButton extends StatelessWidget {
       onPressed: () => onPress,
       style: ElevatedButton.styleFrom(
         // minimumSize: const Size.fromHeight(50), // NEW
-        primary: Colors.red,
-        onPrimary: Colors.white,
+        foregroundColor: Colors.white, backgroundColor: Colors.red,
         shadowColor: Colors.black,
         elevation: 3,
         shape: RoundedRectangleBorder(

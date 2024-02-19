@@ -33,7 +33,7 @@ class AlreadyPremiumPlus extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     vertical: 10.0, horizontal: 30.0),
                 child: Text(
-                  'You are already subscribed to the premium plus version.',
+                  'You have already subscribed. Thanks',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                     color: Colors.black,

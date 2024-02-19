@@ -1,13 +1,10 @@
+import 'package:blukers/views/worker/membership/new_mobile_view/subscription_info_page.dart';
 import 'package:flutter/material.dart';
 
-import 'color_small_info_button_widget.dart';
 import 'color_small_pop_button_widget.dart';
 
-class ShowMembershipDetailsDialog extends StatelessWidget {
-  final Widget membership;
-  final Color color;
-  const ShowMembershipDetailsDialog(
-      {super.key, required this.membership, required this.color});
+class ShowMembershipInfoDialog extends StatelessWidget {
+  const ShowMembershipInfoDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +19,15 @@ class ShowMembershipDetailsDialog extends StatelessWidget {
       child: SizedBox(
         width: width * 0.95,
         height: height * 0.95,
-        child: Stack(
+        child: const Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
-            membership,
+            SubscriptionInfoPage(),
             Positioned(
               top: 10, // Adjust as needed
               left: 10, // Adjust as needed
               child: ColorSmallPopButtonWidget(
-                color: color,
-              ),
-            ),
-            Positioned(
-              top: 10, // Adjust as needed
-              right: 10, // Adjust as needed
-              child: ColorSmallInfoButtonWidget(
-                color: color,
+                color: Colors.black,
               ),
             ),
           ],

@@ -25,11 +25,9 @@ import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   setPathUrlStrategy();
   runApp(MyApp());
 }
@@ -41,10 +39,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final appcastURL =
-    //     'https://raw.githubusercontent.com/larryaasen/upgrader/master/test/testappcast.xml';
-    // final cfg = AppcastConfiguration(url: appcastURL, supportedOS: ['android']);
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ProductProvider>(
@@ -83,13 +77,6 @@ class MyApp extends StatelessWidget {
                 previous!..update(user.appUser)),
       ],
       child: UpgradeAlert(
-        upgrader: Upgrader(
-          // durationUntilAlertAgain: Duration(seconds: 2),
-          // debugDisplayAlways: true,
-          // debugLogging: true,
-          showIgnore: false,
-          showLater: false,
-        ),
         child: ScreenUtilInit(
           designSize: const Size(360, 690),
           minTextAdapt: true,

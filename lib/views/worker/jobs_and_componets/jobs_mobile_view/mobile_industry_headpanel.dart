@@ -49,18 +49,19 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
                       ),
                     ),
                     SizedBox(width: Responsive.isDesktop(context) ? 25 : 10),
-                    RichText(
-                      text: TextSpan(
-                        text: LocalizedIndustries.get(
-                            context, widget.industry.industryId),
-                        style: TextStyle(
-                          fontSize: Responsive.isDesktop(context) ? 30 : 20,
-                          fontWeight: FontWeight.w500,
-                          color: ThemeColors.grey1ThemeColor,
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          text: LocalizedIndustries.get(
+                              context, widget.industry.industryId),
+                          style: TextStyle(
+                            fontSize: Responsive.isDesktop(context) ? 30 : 20,
+                            fontWeight: FontWeight.w500,
+                            color: ThemeColors.grey1ThemeColor,
+                          ),
                         ),
                       ),
                     ),
-                    const Spacer(),
                     Container(
                         margin: const EdgeInsets.only(right: 10),
                         child: const Icon(

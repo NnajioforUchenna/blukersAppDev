@@ -87,7 +87,7 @@ class _JobSearchBarState extends State<JobSearchBar> {
                     // Action for the button
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:
+                    backgroundColor:
                         ThemeColors.searchBarSecondaryThemeColor, // Red color
                   ),
                   child: Padding(

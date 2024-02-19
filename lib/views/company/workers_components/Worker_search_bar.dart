@@ -90,7 +90,7 @@ class _WorkerSearchBarState extends State<WorkerSearchBar> {
                     // Action for the button
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:
+                    backgroundColor:
                         ThemeColors.searchBarSecondaryThemeColor, // Red color
                   ),
                   child: Padding(

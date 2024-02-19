@@ -224,6 +224,9 @@ class PaymentsProvider with ChangeNotifier {
           : 'premium';
       pay4Subscription(context, subscriptionType);
     } else if (buttonText == "Change Plan") {
+      // Write Code to Change Plan Here
+      // TODO
+      // Display Cancel Subscription
     } else if (buttonText == "Upgrade") {
       pay4Subscription(context, 'premiumPlus');
     }
