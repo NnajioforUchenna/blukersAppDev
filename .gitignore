@@ -35,6 +35,8 @@ migrate_working_dir/
 # Symbolication related
 app.*.symbols
 
+# Flutter Version Manager
+
 # Obfuscation related
 app.*.map.json
 
@@ -51,3 +53,6 @@ ios/Runner/GoogleService-Info.plist
 /android/app/google-services.json
 /ios/firebase_app_id_file.json
 /ios/Runner/GoogleService-Info.plist
+
+# FVM Version Cache
+.fvm/
