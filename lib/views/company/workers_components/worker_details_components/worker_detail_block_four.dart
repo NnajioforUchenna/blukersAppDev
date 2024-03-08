@@ -7,8 +7,7 @@ import '../../../../services/responsive.dart';
 class WorkerDetailBlockFour extends StatelessWidget {
   final List<WorkExperience> workExperiences;
 
-  const WorkerDetailBlockFour({Key? key, required this.workExperiences})
-      : super(key: key);
+  const WorkerDetailBlockFour({super.key, required this.workExperiences});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +60,7 @@ class WorkerDetailBlockFour extends StatelessWidget {
                       const SizedBox(height: 15),
                     ],
                   ))
-              .toList(),
+              ,
           const Divider(),
         ],
       ),

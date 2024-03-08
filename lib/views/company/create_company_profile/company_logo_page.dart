@@ -1,17 +1,13 @@
-import 'package:blukers/providers/company_provider.dart';
-import 'package:blukers/utils/styles/theme_colors.dart';
+import '../../../providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
+import '../../old_common_views/components/timelines/timeline_navigation_button.dart';
 import 'your_company_logo.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
-
 class CompanyLogoPage extends StatefulWidget {
-  CompanyLogoPage({Key? key}) : super(key: key);
+  const CompanyLogoPage({super.key});
 
   @override
   _CompanyLogoPageState createState() => _CompanyLogoPageState();
@@ -66,7 +62,6 @@ class _CompanyLogoPageState extends State<CompanyLogoPage> {
                             // Update the condition to check for company logo
                             cp.companyProfileNextPage();
                           }
-                          ;
                         },
                       ),
                       // ElevatedButton(

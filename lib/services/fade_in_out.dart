@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FadeInOutWidget extends StatefulWidget {
   final Widget child;
 
-  FadeInOutWidget({required this.child});
+  const FadeInOutWidget({super.key, required this.child});
 
   @override
   _FadeInOutWidgetState createState() => _FadeInOutWidgetState();
@@ -21,7 +21,7 @@ class _FadeInOutWidgetState extends State<FadeInOutWidget>
     // Initialize the animation controller
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2), // Adjust the duration as needed
+      duration: const Duration(seconds: 2), // Adjust the duration as needed
     );
 
     // Create a curved animation

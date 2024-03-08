@@ -3,7 +3,6 @@
 // session-active
 // session-closed
 
-import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LeadContactSessionStatusModel {

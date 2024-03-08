@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:blukers/data_providers/user_data_provider.dart';
+import '../data_providers/user_data_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +101,7 @@ class WorkerProvider with ChangeNotifier {
 
       newWorker = Worker.fromMap({
         'workerId': appUser!.uid,
-        'emails': [appUser!.email!],
+        'emails': [appUser!.email],
       });
 
       // Add the selected industries to the newWorker.
@@ -199,10 +199,10 @@ class WorkerProvider with ChangeNotifier {
           await WorkerDataProvider.uploadCredentialToFirebaseStorageWeb(
               appUser!.uid, filePlatformFile.bytes!, filePlatformFile.name);
       if (resultUrl != 'error') {
-        appUser?.worker?.certificationsIds?.add(resultUrl);
+        appUser?.worker?.certificationsIds.add(resultUrl);
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your credential successfully.',
-            duration: Duration(seconds: 3));
+            duration: const Duration(seconds: 3));
         notifyListeners();
         result = resultUrl;
       } else {
@@ -240,11 +240,11 @@ class WorkerProvider with ChangeNotifier {
               appUser!.uid, file, result.files.single.name);
 
       if (resultUrl != 'error') {
-        appUser?.worker?.certificationsIds?.add(resultUrl);
+        appUser?.worker?.certificationsIds.add(resultUrl);
 
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your credential successfully.',
-            duration: Duration(seconds: 3));
+            duration: const Duration(seconds: 3));
         notifyListeners();
         returnFile['url'] = resultUrl;
       } else {
@@ -283,11 +283,11 @@ class WorkerProvider with ChangeNotifier {
   }
 
   void setWorkExperience() {
-    workExperience.forEach((element) {
+    for (var element in workExperience) {
       print(element);
       newWorker!.workExperiences = [];
       newWorker!.workExperiences.add(WorkExperience.fromMap(element));
-    });
+    }
     workerProfileNextPage();
   }
 

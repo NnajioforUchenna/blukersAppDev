@@ -1,4 +1,4 @@
-import 'package:blukers/config/index.dart';
+import '../config/index.dart';
 
 const String appUserCollections = "AppUsers";
 const String workersCollections = "workers";

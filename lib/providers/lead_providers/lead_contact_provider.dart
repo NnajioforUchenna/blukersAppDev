@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:blukers/models/lead_models/lead_contact_model.dart';
-import 'package:blukers/data_providers/lead_data_providers/lead_contact_data_provider.dart';
+import '../../models/lead_models/lead_contact_model.dart';
+import '../../data_providers/lead_data_providers/lead_contact_data_provider.dart';
 
 class LeadContactProvider with ChangeNotifier {
   final LeadContactDataProvider _dataProvider = LeadContactDataProvider();

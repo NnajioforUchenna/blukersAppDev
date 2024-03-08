@@ -1,18 +1,17 @@
-import 'package:blukers/providers/app_versions_provider.dart';
-import 'package:blukers/providers/user_provider_parts/user_provider.dart';
+import '../../../providers/app_versions_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common_files/constants.dart';
-import '../../common_views/page_template/page_template.dart';
-import 'service_card.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../common_vieiws/page_template/page_template.dart';
+import 'services_components/service_card.dart';
 
 class ServicesList extends StatelessWidget {
-  const ServicesList({Key? key}) : super(key: key);
+  const ServicesList({super.key});
 
   @override
   Widget build(BuildContext context) {

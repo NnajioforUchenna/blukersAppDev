@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:blukers/models/lead_models/lead_contact_session_model.dart';
+import '../../models/lead_models/lead_contact_session_model.dart';
 import '../data_constants.dart';
 
 class LeadContactSessionDataProvider {

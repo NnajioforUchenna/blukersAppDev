@@ -58,10 +58,10 @@ extension UpdatingProfileFunctions on UserProvider {
           await WorkerDataProvider.uploadCredentialToFirebaseStorageWeb(
               appUser!.uid, filePlatformFile.bytes!, filePlatformFile.name);
       if (resultUrl != 'error') {
-        appUser?.worker?.certificationsIds?.add(resultUrl);
+        appUser?.worker?.certificationsIds.add(resultUrl);
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your credential successfully.',
-            duration: Duration(seconds: 3));
+            duration: const Duration(seconds: 3));
         notifyListeners();
         result = resultUrl;
       } else {
@@ -99,11 +99,11 @@ extension UpdatingProfileFunctions on UserProvider {
               appUser!.uid, file, result.files.single.name);
 
       if (resultUrl != 'error') {
-        appUser?.worker?.certificationsIds?.add(resultUrl);
+        appUser?.worker?.certificationsIds.add(resultUrl);
 
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your credential successfully.',
-            duration: Duration(seconds: 3));
+            duration: const Duration(seconds: 3));
         notifyListeners();
         returnFile['url'] = resultUrl;
       } else {

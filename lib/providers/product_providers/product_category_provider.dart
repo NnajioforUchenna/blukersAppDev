@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:blukers/models/product_models/product_category_model.dart';
-import 'package:blukers/data_providers/product_data_providers/product_category_data_provider.dart';
+import '../../models/product_models/product_category_model.dart';
+import '../../data_providers/product_data_providers/product_category_data_provider.dart';
 
 class ProductCategoryProvider with ChangeNotifier {
   final ProductCategoryDataProvider _dataProvider =

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:blukers/models/worker.dart';
+import '../models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
@@ -229,7 +229,7 @@ class WorkerDataProvider {
   static Future<List<Worker>> getWorkers(
       String nameRelated, String locationRelated) async {
     final response = await http.post(
-      Uri.parse(baseUrlAppEngineFunctions + '/searchWorkers'),
+      Uri.parse('$baseUrlAppEngineFunctions/searchWorkers'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

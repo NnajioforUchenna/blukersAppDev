@@ -56,6 +56,7 @@ class FirebaseDataProvider<T> {
     } else {
       null;
     }
+    return null;
   }
 
   Future<List<T>> readAllDocuments() async {

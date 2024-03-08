@@ -1,5 +1,5 @@
-import 'package:blukers/models/job_post.dart';
-import 'package:blukers/providers/worker_provider.dart';
+import '../../../../../models/job_post.dart';
+import '../../../../../providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class ListOfAppliedWorkers extends StatelessWidget {
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     return wp.appliedWorkers.isEmpty
-        ? LoadingInterestingWorkers()
+        ? const LoadingInterestingWorkers()
         : ListView.separated(
             itemCount: wp.appliedWorkers.length,
             itemBuilder: (BuildContext context, int index) {

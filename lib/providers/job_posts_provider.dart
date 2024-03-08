@@ -1,5 +1,5 @@
-import 'package:blukers/models/app_user.dart';
-import 'package:blukers/views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
+import '../models/app_user.dart';
+import '../views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
 import '../models/job_post.dart';
-import '../views/common_views/please_login_dialog.dart';
+import '../views/auth/please_login_dialog.dart';
 
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;
@@ -240,6 +240,7 @@ class JobPostsProvider with ChangeNotifier {
 
   // Searching Parameters for Job Posts
   bool isSearching = false;
+
   Future<void> searchJobPosts(
       String nameRelated, String locationRelated) async {
     nameSearch = nameRelated;
@@ -293,9 +294,9 @@ class JobPostsProvider with ChangeNotifier {
     if (searchJobPosts.isEmpty) {
       EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
     } else {
-      searchJobPosts.forEach((element) {
+      for (var element in searchJobPosts) {
         searchJobs[element.jobPostId] = element;
-      });
+      }
       isWebSearching = true;
       notifyListeners();
     }
@@ -401,7 +402,7 @@ class JobPostsProvider with ChangeNotifier {
   }
 
 // Future<List<JobPost>> getSavedJobPostIds(String uid) {
-  //   return JobPostsDataProvider.getSavedJobPostIds(uid)
-  //       .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
-  // }
+//   return JobPostsDataProvider.getSavedJobPostIds(uid)
+//       .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
+// }
 }

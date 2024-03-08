@@ -14,7 +14,7 @@ extension CreatingUserProfile on UserProvider {
       'workerId': appUser!.uid,
       'lastName': lastName,
       'firstName': name,
-      'emails': [appUser!.email!],
+      'emails': [appUser!.email],
       'workerBriefDescription': description,
       'isBasicProfileCompleted': true,
     });
@@ -38,7 +38,7 @@ extension CreatingUserProfile on UserProvider {
       companyId: appUser!.uid,
       companyDescription: description,
       name: companyName,
-      emails: [appUser!.email!],
+      emails: [appUser!.email],
     );
     UserDataProvider.updateBasicInformation(company);
     _appUser!.company = company;
@@ -47,31 +47,32 @@ extension CreatingUserProfile on UserProvider {
     setRegisterPageIndex();
   }
 
-  void addingContactInformation(String ext, String phoneNumber, String street,
-      String city, String state, String postalCode, String country) {
+  void addingContactInformation(String ext, String phoneNumber) {
+    // String street,
+    //       String city, String state, String postalCode, String country
     EasyLoading.show(
       status: 'Adding Contact Information...',
       maskType: EasyLoadingMaskType.black,
     );
 
-    Address address = Address(
-        street: street,
-        city: city,
-        state: state,
-        postalCode: postalCode,
-        country: country);
+    // Address address = Address(
+    //     street: street,
+    //     city: city,
+    //     state: state,
+    //     postalCode: postalCode,
+    //     country: country);
 
     String completePhoneNumber = "$ext-$phoneNumber";
 
     UserDataProvider.updateContactInformation(
-        completePhoneNumber, address, appUser!.uid);
+        completePhoneNumber, appUser!.uid);
 
-    _appUser!.address = address;
+    // _appUser!.address = address;
     _appUser!.phoneNumber = completePhoneNumber;
     _appUser!.isContactInformation = true;
 
     EasyLoading.dismiss();
-    setRegisterPageIndex();
+    // setRegisterPageIndex();
   }
 
   Future<void> updateUserBasicInfo(
@@ -239,7 +240,7 @@ extension CreatingUserProfile on UserProvider {
 
     // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
     //fbImageUrl.value = imageUrl ?? "";
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     EasyLoading.dismiss();
     return imageUrl;

@@ -1,16 +1,16 @@
-import 'package:blukers/models/worker.dart';
-import 'package:blukers/providers/chat_provider.dart';
-import 'package:blukers/providers/worker_provider.dart';
-import 'package:blukers/services/rounded_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../common_files/constants.dart';
+import '../../../../models/worker.dart';
+import '../../../../providers/chat_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../providers/worker_provider.dart';
 import '../../../../services/responsive.dart';
+import '../../../../services/rounded_image.dart';
 import '../../../../utils/styles/theme_colors.dart';
-import '../../../common_views/worker_timeline/display_worker_timeline_dialog.dart';
+import '../../../old_common_views/worker_timeline/display_worker_timeline_dialog.dart';
 
 class WorkerDetailBlockOne extends StatelessWidget {
   final Worker worker;
@@ -77,7 +77,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  worker?.middleName ?? '',
+                  worker.middleName ?? '',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -85,7 +85,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  worker?.lastName ?? '',
+                  worker.lastName ?? '',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -98,7 +98,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  worker?.workStatus == WorkStatus.activelyLooking
+                  worker.workStatus == WorkStatus.activelyLooking
                       ? 'Actively Looking'
                       : 'Hired',
                   style: const TextStyle(
@@ -117,7 +117,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        worker?.skillIds?.join(', ') ??
+                        worker.skillIds.join(', ') ??
                             '', // TODO: Change this to worker?.jobIds?.join(', ') ?? '',
                         style: const TextStyle(
                           fontSize: 24,
@@ -128,7 +128,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        worker?.location!,
+                        worker.location!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -144,7 +144,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
             const SizedBox(height: 25),
             Row(
               children: [
-                Container(
+                SizedBox(
                   width: width < Responsive.mobileBreakpoint ? 150 : 200,
                   height: width < Responsive.mobileBreakpoint ? 40 : 70,
                   child: ElevatedButton.icon(

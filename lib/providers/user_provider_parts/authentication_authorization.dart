@@ -71,7 +71,7 @@ extension Authentication_Authorization on UserProvider {
       // call a function after 30 seconds
 
       if (!kIsWeb) {
-        Future.delayed(Duration(seconds: 30), () async {
+        Future.delayed(const Duration(seconds: 30), () async {
           await NotificationService.registerNotification(
               _appUser!.uid, chatProvider);
           NotificationService.configLocalNotification();

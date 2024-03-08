@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 
 import '../models/address.dart';
 import '../models/job_post.dart';
-import '../views/worker/membership/new_mobile_view/mobile_new_membership_widget.dart';
-import '../views/worker/products/products.dart';
+import '../views/worker/services/services_components/products/products.dart';
+import '../views/worker/services/services_components/subscription/subscription_components/mobile_view/subscription_mobile_view_widget.dart';
 
 final List<String> routesWorker = [
   '/jobs',
@@ -107,7 +107,7 @@ Widget displayParagraph(String text) {
 
 final List<Map<String, dynamic>> listProducts = [
   {
-    "color": Color(0xffF16523),
+    "color": const Color(0xffF16523),
     "title": "FOIA",
     "subtitle": "",
     "amount": "299.99",
@@ -118,7 +118,7 @@ final List<Map<String, dynamic>> listProducts = [
     ],
   },
   {
-    "color": Color(0xff1a75bb),
+    "color": const Color(0xff1a75bb),
     "title": "Employment",
     "subtitle": "Verification",
     "amount": "99.99",
@@ -132,7 +132,7 @@ final List<Map<String, dynamic>> listProducts = [
 
 final List<Map<String, dynamic>> listSubscriptions = [
   {
-    "color": Color(0xffF29500),
+    "color": const Color(0xffF29500),
     "title": "Basic",
     "subtitle": "",
     "amount": "0",
@@ -146,7 +146,7 @@ final List<Map<String, dynamic>> listSubscriptions = [
     ],
   },
   {
-    "color": Color(0xff1a75bb),
+    "color": const Color(0xff1a75bb),
     "title": "Premium",
     "subtitle": "",
     "amount": "4.99",
@@ -160,7 +160,7 @@ final List<Map<String, dynamic>> listSubscriptions = [
     ],
   },
   {
-    "color": Color(0xffF16523),
+    "color": const Color(0xffF16523),
     "title": "Premium",
     "subtitle": "Plus",
     "amount": "9.99",
@@ -182,7 +182,7 @@ final List<Map<String, dynamic>> listServices = [
     'description':
         'Stay updated with the latest job opportunities in the USA tailored for international talents.',
     'route': '/membership',
-    'service': const MobileNewMembershipWidget(),
+    'service': const MobileSubscriptionWidget(),
     'color': const Color(0xffF16523)
   },
   {
@@ -268,6 +268,11 @@ const ProductPrices = {
 String formatDate(int timestamp) {
   DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   return DateFormat('MMM d, y').format(date);
+}
+
+String formatDateTime(int timestamp) {
+  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return DateFormat('MMMM dd, yyyy').format(date);
 }
 
 String getFirstChar(String input) {

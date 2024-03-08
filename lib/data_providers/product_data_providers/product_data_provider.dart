@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:blukers/models/product_models/product_model.dart';
+
+import '../../models/product_models/product_model.dart';
 import '../data_constants.dart';
 
 class ProductDataProvider {

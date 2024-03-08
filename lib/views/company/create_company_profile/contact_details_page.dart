@@ -1,16 +1,15 @@
-import 'package:blukers/providers/company_provider.dart';
+import '../../../providers/company_provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utils/styles/theme_colors.dart';
 import '../../auth/common_widget/auth_input.dart';
-import '../../common_views/address_form/address_form.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+import '../../common_vieiws/address_form/address_form.dart';
+import '../../old_common_views/components/timelines/timeline_navigation_button.dart';
 
 class ContactDetailsPage extends StatefulWidget {
   const ContactDetailsPage({super.key});
@@ -47,7 +46,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       CompanyProvider cp = Provider.of<CompanyProvider>(context, listen: false);
       ext = cp.previousParams['ext'] ?? '+1';
       _customerServicePhoneController.text =
@@ -112,7 +111,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                       children: [
                         Expanded(
                           flex: 2,
-                          child: Container(
+                          child: SizedBox(
                             height: 50,
                             child: AuthInput(
                               child: Center(

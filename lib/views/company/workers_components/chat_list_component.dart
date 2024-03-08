@@ -1,8 +1,9 @@
-import 'package:blukers/models/chat_room.dart';
-import 'package:blukers/providers/user_provider_parts/user_provider.dart';
-import 'package:blukers/utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../models/chat_room.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
+import '../../../utils/styles/theme_text_styles.dart';
 
 class ChatListComponent extends StatelessWidget {
   const ChatListComponent(

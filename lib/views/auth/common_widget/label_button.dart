@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class LabelButton extends StatelessWidget {
   const LabelButton(
-      {Key? key, required this.onTap, required this.title, this.subTitle = ''})
-      : super(key: key);
+      {super.key, required this.onTap, required this.title, this.subTitle = ''});
   final VoidCallback onTap;
   final String title;
   final String subTitle;

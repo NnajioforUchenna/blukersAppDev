@@ -219,4 +219,25 @@ extension StripePaymentProvider on PaymentsProvider {
       }
     }
   }
+
+  // Example function to call your backend to upgrade the subscription on Stripe
+  Future<void> upgradeSubscriptionStripe() async {
+    // Example endpoint and request body
+    final String endpoint =
+        '$baseUrlAppEngineFunctions/payments/upgradeSubscription';
+    final response = await http.post(
+      Uri.parse(endpoint),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'userId': appUser!.uid,
+        'newPlan': 'blukers_workers_premium_plus',
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // Handle successful upgrade
+    } else {
+      // Handle error
+    }
+  }
 }

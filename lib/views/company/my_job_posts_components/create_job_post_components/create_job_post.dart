@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../services/responsive.dart';
+import '../../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import 'job_post_page_slider.dart';
 import 'job_post_time_line.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:blukers/views/common_views/components/index.dart';
 
 class CreateJobPost extends StatelessWidget {
   const CreateJobPost({super.key});

@@ -1,5 +1,3 @@
-import 'package:blukers/utils/styles/index.dart';
-import 'package:blukers/views/common_views/address_form/address_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +7,8 @@ import '../../../auth/common_widget/auth_input.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+import '../../../common_vieiws/address_form/address_form.dart';
+import '../../../old_common_views/components/timelines/timeline_navigation_button.dart';
 
 class AdditionalInformationPage extends StatefulWidget {
   const AdditionalInformationPage({super.key});

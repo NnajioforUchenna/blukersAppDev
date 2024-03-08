@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:blukers/data_providers/user_data_provider.dart';
 import 'package:blukers/models/job_post.dart';
+import 'package:blukers/models/jobs_perference.dart';
 import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/services/notification_service.dart';
 import 'package:blukers/services/stripe_data.dart';
@@ -20,14 +21,13 @@ import '../../common_files/constants.dart';
 import '../../data_providers/app_user_stream_service.dart';
 import '../../data_providers/job_posts_data_provider.dart';
 import '../../data_providers/worker_data_provider.dart';
-import '../../models/address.dart';
 import '../../models/app_user.dart';
 import '../../models/company.dart';
 import '../../models/reference_form.dart';
 import '../../models/work_experience.dart';
 import '../../models/worker.dart';
-import '../../views/common_views/display_job_post_eligibility_dialog.dart';
-import '../../views/common_views/job_timeline/display_job_timeline_dialog.dart';
+import '../../views/old_common_views/display_job_post_eligibility_dialog.dart';
+import '../../views/old_common_views/job_timeline/display_job_timeline_dialog.dart';
 
 part 'authentication_authorization.dart';
 part 'creating_user_profile.dart';
@@ -39,14 +39,17 @@ class UserProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   User? _user;
+
   User? get user => _user;
 
   AppUser? _appUser;
+
   AppUser? get appUser => _appUser;
   late StreamService streamService;
 
   // Language Variables
   String language = "en";
+
   String get userLanguage {
     if (_appUser != null && _appUser!.language != null) {
       return _appUser!.language ?? language;
@@ -65,13 +68,12 @@ class UserProvider with ChangeNotifier {
 
   // Variable holder for reference form
   List<Map<String, dynamic>> references = [{}, {}];
+
   List<Map<String, dynamic>> getReferences() {
-    if (appUser == null ||
-        appUser!.worker == null ||
-        appUser!.worker!.references == null) {
+    if (appUser == null || appUser!.worker == null) {
       return [{}, {}];
     }
-    references = appUser!.worker!.references!.map((e) => e.toMap()).toList();
+    references = appUser!.worker!.references.map((e) => e.toMap()).toList();
     return references;
   }
 
@@ -85,15 +87,15 @@ class UserProvider with ChangeNotifier {
 
   // Variable holder for WorkExperience Form
   List<Map<String, dynamic>> workExperiences = [{}, {}];
+
   List<Map<String, dynamic>> getWorkExperiences() {
     if (appUser == null ||
         appUser!.worker == null ||
-        appUser!.worker!.workExperiences == null ||
-        appUser!.worker!.workExperiences!.isEmpty) {
+        appUser!.worker!.workExperiences.isEmpty) {
       return [{}, {}];
     }
     workExperiences =
-        appUser!.worker!.workExperiences!.map((e) => e.toMap()).toList();
+        appUser!.worker!.workExperiences.map((e) => e.toMap()).toList();
     return workExperiences;
   }
 
@@ -139,14 +141,14 @@ class UserProvider with ChangeNotifier {
   void applyForJobPost(JobPost jobPost) {
     // print(jobPost.toString());
     // Update UI interFace
-    appUser?.worker?.appliedJobPostIds?.add(jobPost!.jobPostId!);
+    appUser?.worker?.appliedJobPostIds.add(jobPost.jobPostId);
     notifyListeners();
     // Persist data to database
     UserDataProvider.updateWorkerAppliedJobPostIds(
-        appUser!.worker!.appliedJobPostIds!, appUser!.uid);
+        appUser!.worker!.appliedJobPostIds, appUser!.uid);
     // update JobPost Records
     JobPostsDataProvider.updateJobPostAppliedWorkerIds(
-        jobPost!.jobPostId!, appUser!.uid);
+        jobPost.jobPostId, appUser!.uid);
   }
 
   String whichMembership() {
@@ -205,7 +207,7 @@ class UserProvider with ChangeNotifier {
     setReferences(references);
     updatingInformation(() async {
       await UserDataProvider.updateWorkerReferences(
-          appUser!.worker!.references!, appUser!.uid);
+          appUser!.worker!.references, appUser!.uid);
     });
   }
 
@@ -223,7 +225,7 @@ class UserProvider with ChangeNotifier {
     setWorkExperiences(workExperiences);
     updatingInformation(() async {
       await UserDataProvider.updateWorkerWorkExperiences(
-          appUser!.worker!.workExperiences!, appUser!.uid);
+          appUser!.worker!.workExperiences, appUser!.uid);
     });
   }
 
@@ -255,5 +257,22 @@ class UserProvider with ChangeNotifier {
     }
     appUser!.deleteAccountReason = selected;
     notifyListeners();
+  }
+
+  void updateJobsPreference(
+      List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
+    if (appUser != null) {
+      JobsPreference jobsPreference = JobsPreference(
+        industryIds: selectedIndustries,
+        jobIds: selectedJobs,
+      );
+      appUser?.jobsPreference = jobsPreference;
+    }
+  }
+
+  void updateSelection() {
+    if (appUser != null) {
+      UserDataProvider.updateJobsPreference(appUser!);
+    }
   }
 }

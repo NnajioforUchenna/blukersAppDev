@@ -1,4 +1,3 @@
-import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,10 +7,10 @@ import '../../../auth/common_widget/auth_input.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+import '../../../old_common_views/components/timelines/timeline_navigation_button.dart';
 
 class BasicInformationPage extends StatefulWidget {
-  BasicInformationPage({Key? key}) : super(key: key);
+  const BasicInformationPage({super.key});
 
   @override
   _BasicInformationPageState createState() => _BasicInformationPageState();

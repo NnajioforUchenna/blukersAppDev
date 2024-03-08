@@ -7,9 +7,9 @@ class WorkerDetailBlockThree extends StatelessWidget {
   final Worker worker;
 
   const WorkerDetailBlockThree({
-    Key? key,
+    super.key,
     required this.worker,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

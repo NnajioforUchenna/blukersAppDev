@@ -1,16 +1,15 @@
-import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/job_posts_provider.dart';
-import '../../../common_views/skills_form/skills_form.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+import '../../../old_common_views/components/timelines/timeline_navigation_button.dart';
+import '../../../old_common_views/skills_form/skills_form.dart';
 
 class QualificationAndSkillsPage extends StatefulWidget {
-  QualificationAndSkillsPage({Key? key}) : super(key: key);
+  const QualificationAndSkillsPage({super.key});
 
   @override
   _QualificationAndSkillsPageState createState() =>
@@ -89,33 +88,10 @@ class _QualificationAndSkillsPageState
                       );
                     },
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     jp.setJobPostPagePrevious();
-                  //   },
-                  //   child: const Text("Previous"),
-                  //   style: ButtonStyle(
-                  //     backgroundColor: MaterialStateProperty.all<Color>(
-                  //         ThemeColors.secondaryThemeColor),
-                  //   ),
-                  // ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     jp.addQualificationAndSkills(
-                  //       _requirementsController.text,
-                  //       selectedSkills,
-                  //     );
-                  //   },
-                  //   child: const Text("Next"),
-                  //   style: ButtonStyle(
-                  //     backgroundColor: MaterialStateProperty.all<Color>(
-                  //         ThemeColors.secondaryThemeColor),
-                  //   ),
-                  // ),
                 ],
               ),
               // SizedBox(height: height * .05),
-              SizedBox(height: 150),
+              const SizedBox(height: 150),
             ],
           ),
         ),

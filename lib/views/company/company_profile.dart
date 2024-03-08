@@ -1,26 +1,21 @@
-import 'package:blukers/providers/app_versions_provider.dart';
-import 'package:blukers/providers/chat_provider.dart';
-import 'package:blukers/providers/user_provider_parts/user_provider.dart';
-import 'package:blukers/utils/styles/index.dart';
-import 'package:blukers/views/auth/common_widget/login_or_register.dart';
-import 'package:blukers/views/common_views/components/app_version_display.dart';
-import 'package:blukers/views/common_views/profile_dialog.dart';
-import 'package:blukers/views/common_views/profile_section.dart';
-import 'package:blukers/views/company/profile_components/edit_basic_profile.dart';
-import 'package:blukers/views/company/profile_components/user_basic_profile_details.dart';
+import '../../providers/app_versions_provider.dart';
+import '../../providers/chat_provider.dart';
+import '../../providers/user_provider_parts/user_provider.dart';
+import '../../utils/styles/index.dart';
+import '../auth/common_widget/login_or_register.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../common_views/page_template/page_template.dart';
-
-import 'package:blukers/views/common_views/components/confirmation_dialog.dart';
-import 'package:blukers/views/common_views/components/profile/profile_menu_button.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+
+import '../common_vieiws/page_template/page_template.dart';
+import '../old_common_views/components/app_version_display.dart';
+import '../old_common_views/components/confirmation_dialog.dart';
+import '../old_common_views/components/profile/profile_menu_button.dart';
 
 class CompanyProfile extends StatefulWidget {
   const CompanyProfile({super.key});
@@ -43,7 +38,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
 
     return PageTemplate(
       child: up.appUser == null
-          ? LoginOrRegister()
+          ? const LoginOrRegister()
           : SingleChildScrollView(
               child: Column(
                 children: [
@@ -104,7 +99,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     text: AppLocalizations.of(context)!.basicInformation,
                     onPress: () {},
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   // ProfileSection(
                   //   heading: AppLocalizations.of(context)!.companyInformation,
                   //   icon: UniconsLine.arrow_right,
@@ -120,7 +115,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     text: AppLocalizations.of(context)!.companyInformation,
                     onPress: () {},
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   buildDeleteAccountSection(context, up),
                   // ProfileSection(
                   //   heading: AppLocalizations.of(context)!.deleteAccount,
@@ -471,9 +466,9 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   )
                 // : Image.asset("assets/images/userDefaultProfilePic.png"),
                 : FittedBox(
+                    fit: BoxFit.fill,
                     child:
                         Image.asset("assets/images/userDefaultProfilePic.png"),
-                    fit: BoxFit.fill,
                   ),
           ),
         ),

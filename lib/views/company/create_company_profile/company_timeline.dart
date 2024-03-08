@@ -142,7 +142,7 @@ class CompanyTimeLine extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final step = companySteps[index];
               var indicatorSize = 30.0;
-              var beforeLineStyle = LineStyle(
+              var beforeLineStyle = const LineStyle(
                 // color: Colors.white.withOpacity(0.8),
                 color: ThemeColors.secondaryThemeColor,
               );
@@ -240,7 +240,7 @@ class _EndChildCompany extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 100),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Flexible(

@@ -1,18 +1,3 @@
-import 'package:blukers/firebase_options.dart';
-import 'package:blukers/l10n/l10n.dart';
-import 'package:blukers/providers/app_versions_provider.dart';
-import 'package:blukers/providers/chat_provider.dart';
-import 'package:blukers/providers/company_provider.dart';
-import 'package:blukers/providers/industry_provider.dart';
-import 'package:blukers/providers/job_posts_provider.dart';
-import 'package:blukers/providers/payment_providers/payments_provider.dart';
-import 'package:blukers/providers/product_providers/product_category_provider.dart';
-import 'package:blukers/providers/product_providers/product_provider.dart';
-import 'package:blukers/providers/product_providers/product_status_provider.dart';
-import 'package:blukers/providers/product_providers/product_subcategory_provider.dart';
-import 'package:blukers/providers/user_provider_parts/user_provider.dart';
-import 'package:blukers/providers/worker_provider.dart';
-import 'package:blukers/services/generate_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -22,6 +7,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:url_strategy/url_strategy.dart';
+
+import 'firebase_options.dart';
+import 'l10n/l10n.dart';
+import 'providers/app_versions_provider.dart';
+import 'providers/chat_provider.dart';
+import 'providers/company_provider.dart';
+import 'providers/industry_provider.dart';
+import 'providers/job_posts_provider.dart';
+import 'providers/payment_providers/payments_provider.dart';
+import 'providers/product_providers/product_category_provider.dart';
+import 'providers/product_providers/product_provider.dart';
+import 'providers/product_providers/product_status_provider.dart';
+import 'providers/product_providers/product_subcategory_provider.dart';
+import 'providers/user_provider_parts/user_provider.dart';
+import 'providers/worker_provider.dart';
+import 'services/generate_route.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,13 +35,13 @@ Future<void> main() async {
   }
 
   setPathUrlStrategy();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

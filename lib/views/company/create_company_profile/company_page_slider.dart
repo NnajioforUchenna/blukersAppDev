@@ -1,5 +1,5 @@
-import 'package:blukers/providers/company_provider.dart';
-import 'package:blukers/services/make_responsive_web.dart';
+import '../../../providers/company_provider.dart';
+import '../../../services/make_responsive_web.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ import 'general_information_page.dart';
 import 'social_media_page.dart';
 
 class CompanyPageSlider extends StatefulWidget {
-  const CompanyPageSlider({Key? key}) : super(key: key);
+  const CompanyPageSlider({super.key});
 
   @override
   _CompanyPageSliderState createState() => _CompanyPageSliderState();
@@ -59,25 +59,24 @@ class _CompanyPageSliderState extends State<CompanyPageSlider> {
         child: PageView(
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(),
-          children: [
+          children: const [
             MakeResponsiveWeb(
-                image: const AssetImage(
-                    'assets/images/generalInformationPage.png'),
+                image: AssetImage('assets/images/generalInformationPage.png'),
                 child: GeneralInformationPage()),
             MakeResponsiveWeb(
-                image: const AssetImage('assets/images/companyLogoPage.png'),
+                image: AssetImage('assets/images/companyLogoPage.png'),
                 child: CompanyLogoPage()),
-            const MakeResponsiveWeb(
+            MakeResponsiveWeb(
                 image: AssetImage('assets/images/contactDetailsPage.png'),
                 child: ContactDetailsPage()),
             MakeResponsiveWeb(
-                image: const AssetImage('assets/images/socialMediaPage.png'),
+                image: AssetImage('assets/images/socialMediaPage.png'),
                 child: SocialMediaPage()),
             MakeResponsiveWeb(
-                image: const AssetImage(
-                    'assets/images/companyCharacteristicsPage.png'),
+                image:
+                    AssetImage('assets/images/companyCharacteristicsPage.png'),
                 child: CompanyCharacteristicsPage()),
-            const MakeResponsiveWeb(
+            MakeResponsiveWeb(
                 image: AssetImage('assets/images/workerCongratulationPage.png'),
                 child: CompanyCongratulationPage()),
           ],

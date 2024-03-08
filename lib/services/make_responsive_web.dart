@@ -5,10 +5,10 @@ class MakeResponsiveWeb extends StatelessWidget {
   final Widget child;
 
   const MakeResponsiveWeb({
-    Key? key,
+    super.key,
     required this.image,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class MakeResponsiveWeb extends StatelessWidget {
 class DisplayImage extends StatelessWidget {
   final ImageProvider image;
 
-  const DisplayImage({Key? key, required this.image}) : super(key: key);
+  const DisplayImage({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {

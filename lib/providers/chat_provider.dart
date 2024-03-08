@@ -1,8 +1,8 @@
-import 'package:blukers/data_providers/chat_data_provider.dart';
-import 'package:blukers/models/app_user.dart';
-import 'package:blukers/models/chat_message.dart';
-import 'package:blukers/models/chat_room.dart';
-import 'package:blukers/models/worker.dart';
+import '../data_providers/chat_data_provider.dart';
+import '../models/app_user.dart';
+import '../models/chat_message.dart';
+import '../models/chat_room.dart';
+import '../models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -30,7 +30,7 @@ class ChatProvider with ChangeNotifier {
     ChatRoom chatRoom;
     //if chat room does not exist then create chat room
     //else move user to already created chatroom
-    print("chat" + chat.toString());
+    print("chat$chat");
     if (chat == -1) {
       chatRoom = await ChatDataProvider.createChatRoom(
           myUid: myUid,
@@ -106,10 +106,10 @@ class ChatProvider with ChangeNotifier {
     String? roomId = await createChatRoom(
         myUid: appUser!.uid,
         recipientUid: worker.workerId,
-        myName: appUser!.displayName ?? "Company",
+        myName: appUser.displayName ?? "Company",
         recipientName: worker.firstName + worker.lastName,
         message: "",
-        myLogo: appUser!.photoUrl ?? "",
+        myLogo: appUser.photoUrl ?? "",
         recipientLogo: worker.profilePhotoUrl ?? "");
 
     chatDetails["roomId"] = roomId ?? "";

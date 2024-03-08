@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:blukers/data_providers/user_data_provider.dart';
-import 'package:blukers/models/app_user.dart';
-import 'package:blukers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../models/app_user.dart';
 import '../models/job_post.dart';
+import '../models/worker.dart';
 import 'data_constants.dart';
+import 'user_data_provider.dart';
 
 final FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -17,7 +17,7 @@ class CompanyDataProvider {
     CollectionReference companiesCollection =
         firestore.collection(companyCollections);
     if (appUser == null) return;
-    companiesCollection.doc(appUser!.uid).set(
+    companiesCollection.doc(appUser.uid).set(
       {
         'interestingWorkers': FieldValue.arrayUnion([worker.workerId]),
       },
@@ -64,7 +64,7 @@ class CompanyDataProvider {
 
   static StreamController<List<Worker>> fetchInterestingWorkers(
       String companyId) {
-    StreamController<List<Worker>> _streamController =
+    StreamController<List<Worker>> streamController =
         StreamController<List<Worker>>();
     db.collection(companyCollections).doc(companyId).get().then((doc) {
       if (doc.exists) {
@@ -83,13 +83,13 @@ class CompanyDataProvider {
             }
           }
         }).then((_) {
-          _streamController.add(returnWorkerList);
+          streamController.add(returnWorkerList);
         });
       } else {
-        _streamController.add([]);
+        streamController.add([]);
       }
     });
-    return _streamController;
+    return streamController;
   }
 
   static void streamDispose() {

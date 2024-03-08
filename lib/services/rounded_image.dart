@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../common_files/constants.dart';
+import '../views/common_vieiws/policy_terms/policy_terms_components/loading_animation.dart';
 import 'alternative_logo_widget.dart';
-import 'package:blukers/views/common_views/components/loading_animation.dart';
 
 class RoundedImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -10,11 +10,11 @@ class RoundedImageWidget extends StatelessWidget {
   final String firstChar;
 
   const RoundedImageWidget({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.firstChar,
     this.size = 50.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class RoundedImageWidget extends StatelessWidget {
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 10,
-              offset: Offset(0, 5),
+              offset: const Offset(0, 5),
             ),
           ],
           borderRadius: BorderRadius.circular(10.0),
@@ -45,7 +45,7 @@ class RoundedImageWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return Center(child: LoadingAnimation());
+                    return const Center(child: LoadingAnimation());
                   },
                   errorBuilder: (context, error, stackTrace) {
                     return AlternativeLogoWidget(

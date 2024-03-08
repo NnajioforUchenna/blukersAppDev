@@ -14,7 +14,7 @@ class ChatMessage {
     data["message"] = message;
     data["sentAt"] = sentAt;
     data["sentBy"] = sentBy;
-  data["roomId"] = roomId;
+    data["roomId"] = roomId;
     return data;
   }
 
@@ -22,6 +22,7 @@ class ChatMessage {
     return ChatMessage(
         message: map["message"],
         sentAt: (map["sentAt"]).toDate(),
-        sentBy: map["sentBy"],roomId: map["roomId"]);
+        sentBy: map["sentBy"],
+        roomId: map["roomId"]);
   }
 }

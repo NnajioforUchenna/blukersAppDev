@@ -1,17 +1,17 @@
 import 'dart:core';
 
-import 'package:blukers/providers/payment_providers/payments_provider.dart';
-import 'package:blukers/views/common_views/splash_screen/splash_screen_main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/app_versions_provider.dart';
 import '../providers/job_posts_provider.dart';
+import '../providers/payment_providers/payments_provider.dart';
 import '../providers/user_provider_parts/user_provider.dart';
+import '../views/common_vieiws/splash_screen/splash_screen_main.dart';
 import '../views/company/workers.dart';
-import '../views/worker/jobs_and_componets/jobs.dart';
-import '../views/worker/web_jobs_landing_page/web_search_landing_page.dart';
+import '../views/worker/worker_home/jobs.dart';
+import '../views/worker/worker_home/jobs_components/jobs_desktop_view/web_search_landing_page.dart';
 
 class AuthenticationWrapper extends StatefulWidget {
   const AuthenticationWrapper({super.key});
@@ -61,7 +61,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
           ? const Workers() //Workers()
           : const Jobs(); //Jobs(); //Jobs();
     } else {
-      return SplashScreen(); // SplashScreen(); //LandingPage()
+      return const SplashScreen(); // SplashScreen(); //LandingPage()
     }
   }
 }

@@ -5,8 +5,7 @@ import '../../../../services/responsive.dart';
 class WorkerDetailBlockFive extends StatelessWidget {
   final List<String> skills;
 
-  const WorkerDetailBlockFive({Key? key, required this.skills})
-      : super(key: key);
+  const WorkerDetailBlockFive({super.key, required this.skills});
 
   @override
   Widget build(BuildContext context) {

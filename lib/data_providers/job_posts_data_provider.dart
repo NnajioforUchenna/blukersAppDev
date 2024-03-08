@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:blukers/models/job_post.dart';
+import '../models/job_post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
@@ -71,12 +71,12 @@ class JobPostsDataProvider {
           .collection(jobPostsCollections)
           .where('jobPostId', isEqualTo: id)
           .get();
-      query.docs.forEach((doc) {
+      for (var doc in query.docs) {
         JobPost? jobPost = JobPost.fromMap(doc.data() as Map<String, dynamic>);
         if (jobPost != null) {
           jobPosts.add(jobPost);
         }
-      });
+      }
     }
     return jobPosts;
   }
@@ -107,18 +107,18 @@ class JobPostsDataProvider {
           docSnapshot.get('jobPosts') as List<dynamic>;
 
       // Converting the data to JobPost and adding to the container for return
-      jobPostData.forEach((data) {
+      for (var data in jobPostData) {
         JobPost? jobPost = JobPost.fromMap(data);
         if (jobPost != null) {
           jobPosts.add(jobPost);
         }
-      });
+      }
 
       return jobPosts;
     } else {
       print('Getting Record from API');
-      String url = baseUrlAppEngineFunctions +
-          '/search/get-job-posts'; // Replace with your actual endpoint
+      String url =
+          '$baseUrlAppEngineFunctions/search/get-job-posts'; // Replace with your actual endpoint
 
       Map<String, dynamic> jsonBody = {
         "query_name": nameRelated.toLowerCase(),
@@ -141,12 +141,12 @@ class JobPostsDataProvider {
         final sanitizedResponseBody = sanitizeJson(response.body);
         final List<dynamic> jobPostData = jsonDecode(sanitizedResponseBody);
         final List<JobPost> jobPosts = [];
-        jobPostData.forEach((data) {
+        for (var data in jobPostData) {
           JobPost? jobPost = JobPost.fromMap(data);
           if (jobPost != null) {
             jobPosts.add(jobPost);
           }
-        });
+        }
         return jobPosts;
       } else {
         throw Exception('Failed to fetch job posts from the API');
@@ -161,7 +161,7 @@ class JobPostsDataProvider {
     if (selectedJobPostId.isNotEmpty) {
       final response = await http.post(
         Uri.parse(
-            baseUrlAppEngineFunctions + '/getJobPostsByIdAndTargetLanguage'),
+            '$baseUrlAppEngineFunctions/getJobPostsByIdAndTargetLanguage'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'jobId': selectedJobPostId,
@@ -172,12 +172,12 @@ class JobPostsDataProvider {
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
         if (jsonResponse is List) {
-          jsonResponse.forEach((data) {
+          for (var data in jsonResponse) {
             JobPost? jobPost = JobPost.fromMap(data as Map<String, dynamic>);
             if (jobPost != null) {
               translatedJobPosts.add(jobPost);
             }
-          });
+          }
         }
       } else {
         print('Failed to load job posts. Error: ${response.body}');
@@ -220,7 +220,7 @@ class JobPostsDataProvider {
 
     // Make the HTTP request
     var response = await http.post(
-        Uri.parse(baseUrlAppEngineFunctions + '/search/get-job-posts'),
+        Uri.parse('$baseUrlAppEngineFunctions/search/get-job-posts'),
         headers: {"Content-Type": "application/json"},
         body: body);
 

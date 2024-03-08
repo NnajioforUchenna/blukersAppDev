@@ -1,11 +1,12 @@
 import 'dart:io';
 
-import 'package:blukers/utils/helpers/app_version.dart';
-import 'package:blukers/views/common_views/components/update_app_dialog.dart';
+import '../data_providers/app_versions_data_provider.dart';
+import '../utils/helpers/app_version.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:blukers/data_providers/app_versions_data_provider.dart';
 import 'package:pub_semver/pub_semver.dart';
+
+import '../views/old_common_views/components/update_app_dialog.dart';
 
 class AppVersionsProvider with ChangeNotifier {
   String? _latestVersion;
@@ -14,8 +15,11 @@ class AppVersionsProvider with ChangeNotifier {
   bool? _shouldUpdate;
 
   String? get latestVersion => _latestVersion;
+
   String? get androidUrl => _androidUrl;
+
   String? get iOSUrl => _iOSUrl;
+
   bool? get shouldUpdate => _shouldUpdate;
 
   Future<bool?> _shouldUpdateApp() async {
@@ -52,7 +56,7 @@ class AppVersionsProvider with ChangeNotifier {
       //_latestversion ==null means the update never checked before since the app is open
       // if (_latestVersion == null) {
       _shouldUpdateApp().then((value) {
-        print("update: " + value!.toString());
+        print("update: ${value!}");
         if (value) {
           showDialog(
             context: context,

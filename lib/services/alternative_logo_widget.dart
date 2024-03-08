@@ -8,8 +8,7 @@ class AlternativeLogoWidget extends StatelessWidget {
   final double size;
 
   const AlternativeLogoWidget(
-      {Key? key, required this.char, required this.size})
-      : super(key: key);
+      {super.key, required this.char, required this.size});
 
   @override
   Widget build(BuildContext context) {

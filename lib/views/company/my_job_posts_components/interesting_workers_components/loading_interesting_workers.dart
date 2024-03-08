@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:blukers/views/common_views/components/loading_animation.dart';
+
+import '../../../common_vieiws/policy_terms/policy_terms_components/loading_animation.dart';
+
 
 class LoadingInterestingWorkers extends StatelessWidget {
   const LoadingInterestingWorkers({super.key});

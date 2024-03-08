@@ -1,5 +1,4 @@
-import 'package:blukers/providers/company_provider.dart';
-import 'package:blukers/utils/styles/theme_colors.dart';
+import '../../../providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
@@ -9,10 +8,10 @@ import '../../auth/common_widget/auth_input.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+import '../../old_common_views/components/timelines/timeline_navigation_button.dart';
 
 class GeneralInformationPage extends StatefulWidget {
-  GeneralInformationPage({Key? key}) : super(key: key);
+  const GeneralInformationPage({super.key});
 
   @override
   _GeneralInformationPageState createState() => _GeneralInformationPageState();
@@ -39,7 +38,7 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
     companySloganController.text = cp.previousParams["companySlogan"] ?? "";
     shortDescriptionController.text =
         cp.previousParams["shortDescription"] ?? "";
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       //added this listner to dismiss keyboard when scroll
       scrollCtrl.addListener(() {
         print('scrolling');
@@ -161,7 +160,7 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         TimelineNavigationButton(
                           isSelected: true,
                           onPress: () {

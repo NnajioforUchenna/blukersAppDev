@@ -11,7 +11,7 @@ Widget showSearchButton({
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
         padding: MaterialStateProperty.all<EdgeInsets>(
-            EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0)),
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),
@@ -24,9 +24,9 @@ Widget showSearchButton({
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
-          Icon(Icons.calendar_today_outlined, color: Colors.white),
+          const Icon(Icons.calendar_today_outlined, color: Colors.white),
         ],
       ),
     ),

@@ -1,4 +1,4 @@
-import 'package:blukers/views/company/workers_components/complete_worker_widget.dart';
+import 'complete_worker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

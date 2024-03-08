@@ -1,4 +1,4 @@
-import 'package:blukers/utils/styles/index.dart';
+import '../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -55,7 +55,7 @@ class ChatComponent extends StatelessWidget {
           ],
         ),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.symmetric(horizontal: 12),
           // alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
           child: Text(
             DateFormat.jm().format(time),

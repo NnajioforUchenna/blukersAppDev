@@ -53,7 +53,7 @@ dependencies:
   flutter_pdfview: ^1.0.1
   permission_handler:
   http: ^1.1.0
-  flutter_google_places_sdk: ^0.3.7
+  #  flutter_google_places_sdk: ^0.3.6
   lottie: ^3.0.0
   flutter_screenutil: ^5.9.0 # latest version 5.9.0 has some issues
   carousel_slider: ^4.2.1
@@ -61,7 +61,7 @@ dependencies:
   webview_flutter: ^4.2.2
   webview_flutter_web: ^0.2.2+1
   cloud_functions: ^4.4.0
-  url_launcher: ^6.1.12
+  url_launcher: ^6.2.5
   upgrader: ^9.0.0
   package_info_plus: ^5.0.1
   pub_semver: ^2.1.4

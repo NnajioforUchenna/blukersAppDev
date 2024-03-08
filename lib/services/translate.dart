@@ -11,7 +11,7 @@ Future<String> translateText({
 }) async {
   const String apiKey = 'AIzaSyASLTknnqA92wvWjp7UHQplgFaP_9v8NJw';
   const url =
-      'https://translation.googleapis.com/language/translate/v2?&key=' + apiKey;
+      'https://translation.googleapis.com/language/translate/v2?&key=$apiKey';
   final Map<String, dynamic> body = {
     'q': text,
     'target': targetLanguage,

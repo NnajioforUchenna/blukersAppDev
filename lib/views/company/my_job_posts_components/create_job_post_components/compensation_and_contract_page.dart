@@ -5,19 +5,17 @@ import 'package:provider/provider.dart';
 
 import '../../../../models/job_post.dart';
 import '../../../../providers/job_posts_provider.dart';
-import '../../../../utils/styles/theme_colors.dart';
+import '../../../old_common_views/components/timelines/timeline_navigation_button.dart';
 import 'show_search_button.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:blukers/utils/localization/localized_job_types.dart';
-import 'package:blukers/utils/localization/localized_salary_periods.dart';
-
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+import '../../../../utils/localization/localized_job_types.dart';
+import '../../../../utils/localization/localized_salary_periods.dart';
 
 enum SalaryPeriod { hourly, daily, monthly, yearly }
 
 class CompensationAndContractPage extends StatefulWidget {
-  CompensationAndContractPage({Key? key}) : super(key: key);
+  const CompensationAndContractPage({super.key});
 
   @override
   _CompensationAndContractPageState createState() =>
@@ -31,7 +29,7 @@ class _CompensationAndContractPageState
   int? _durationInMonth;
   DateTime? _startDate;
   DateTime? _endDate;
-  TextEditingController _salaryController = TextEditingController();
+  final TextEditingController _salaryController = TextEditingController();
 
   Future<void> _selectDate(BuildContext context,
       {bool isStartDate = true}) async {
@@ -191,7 +189,8 @@ class _CompensationAndContractPageState
               // ),
               TextField(
                 controller: _salaryController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(
                       r'^\d+\.?\d*')), // This allows only numbers and a single decimal point

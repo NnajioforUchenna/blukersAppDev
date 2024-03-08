@@ -1,9 +1,10 @@
-import 'package:blukers/views/company/workers_components/worker_details_components/worker_detail_block_four.dart';
+import '../../common_vieiws/loading_page.dart';
+import 'worker_details_components/worker_detail_block_four.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/worker.dart';
 import '../../../utils/styles/theme_colors.dart';
-import '../../common_views/loading_page.dart';
+
 import 'worker_details_components/worker_detail_block_five.dart';
 import 'worker_details_components/worker_detail_block_one.dart';
 import 'worker_details_components/worker_detail_block_three.dart';
@@ -59,7 +60,8 @@ class _WorkerDisplayDetailsWidgetState extends State<WorkerDisplayDetailsWidget>
     double width = MediaQuery.of(context).size.width;
     Worker? worker = widget.worker;
     return worker == null
-        ? Center(child: SizedBox(height: 100, width: 100, child: LoadingPage()))
+        ? const Center(
+            child: SizedBox(height: 100, width: 100, child: LoadingPage()))
         : Container(
             margin: EdgeInsets.symmetric(horizontal: width * 0.04),
             child: Card(

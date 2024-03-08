@@ -1,6 +1,6 @@
-import 'package:blukers/providers/job_posts_provider.dart';
-import 'package:blukers/services/responsive.dart';
-import 'package:blukers/views/common_views/page_template/page_template.dart';
+import '../../providers/job_posts_provider.dart';
+import '../../services/responsive.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -8,11 +8,13 @@ import 'package:unicons/unicons.dart';
 
 import '../../providers/user_provider_parts/user_provider.dart';
 import '../../utils/styles/theme_colors.dart';
-import '../common_views/worker_timeline/display_worker_timeline_dialog.dart';
+
+import '../common_vieiws/page_template/page_template.dart';
+import '../old_common_views/worker_timeline/display_worker_timeline_dialog.dart';
 import 'my_job_posts_components/interesting_workers_tab.dart';
 import 'my_job_posts_components/my_job_posts_tab.dart';
 
-import 'package:blukers/views/auth/common_widget/login_or_register.dart';
+import '../auth/common_widget/login_or_register.dart';
 
 class MyJobPosts extends StatelessWidget {
   const MyJobPosts({super.key});

@@ -1,4 +1,4 @@
-import 'package:blukers/models/my_form_input_model.dart';
+import 'my_form_input_model.dart';
 
 class MyFormModel {
   final String? titleText;

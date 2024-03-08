@@ -1,18 +1,17 @@
-import 'package:blukers/providers/company_provider.dart';
+import '../../../providers/company_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
-import '../../../utils/styles/theme_colors.dart';
 import '../../auth/common_widget/auth_input.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:blukers/views/common_views/components/timelines/timeline_navigation_button.dart';
+import '../../old_common_views/components/timelines/timeline_navigation_button.dart';
 
 class SocialMediaPage extends StatefulWidget {
-  SocialMediaPage({Key? key}) : super(key: key);
+  const SocialMediaPage({super.key});
 
   @override
   _SocialMediaPageState createState() => _SocialMediaPageState();

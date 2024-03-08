@@ -1,5 +1,5 @@
-import 'package:blukers/models/chat_message.dart';
-import 'package:blukers/models/chat_room.dart';
+import '../models/chat_message.dart';
+import '../models/chat_room.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
@@ -63,7 +63,7 @@ class ChatDataProvider {
           "sentByName": sentByName,
           "message": chatMessage.message
         });
-    print("res:: " + res.toString());
+    print("res:: $res");
   }
 
   static updateLastMEssage(String chatMessage, String roomId) async {

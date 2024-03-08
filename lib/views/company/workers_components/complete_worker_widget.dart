@@ -32,7 +32,7 @@ buildWebContentWorkers(List<Worker> workers, context) {
       // 1st column
       Expanded(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: ListViewWorkers(
             workers: workers,
           ),

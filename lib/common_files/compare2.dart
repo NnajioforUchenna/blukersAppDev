@@ -9,7 +9,7 @@ class SplashScreenCustomShape extends StatelessWidget {
   final String companyTitle;
   final String companySubtitle;
 
-  SplashScreenCustomShape({
+  const SplashScreenCustomShape({super.key, 
     this.width = 400,
     this.height = 700,
     required this.workerTitle,
@@ -24,7 +24,7 @@ class SplashScreenCustomShape extends StatelessWidget {
       child: CustomPaint(
         painter: MyCustomPainter(width, height, workerTitle, workerSubtitle,
             companyTitle, companySubtitle),
-        child: Container(
+        child: SizedBox(
           width: width,
           height: height,
         ),
@@ -47,7 +47,7 @@ class MyCustomPainter extends CustomPainter {
   Path createRoundedRectPath(double x, double y) {
     final double rectWidth = width * 0.5;
     final double rectHeight = height * 0.0625;
-    final double borderRadius =
+    const double borderRadius =
         20; // you can adjust this value relative to width and height
 
     return Path()
@@ -67,8 +67,8 @@ class MyCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint bluePaint = Paint()..color = const Color(0xFF1c75bb);
-    final Paint orangePaint = Paint()..color = Color(0xFFf06523);
-    final double borderRadius =
+    final Paint orangePaint = Paint()..color = const Color(0xFFf06523);
+    const double borderRadius =
         40; // you can adjust this value relative to width and height
 
     // Draw the blue upper part
@@ -112,7 +112,7 @@ class MyCustomPainter extends CustomPainter {
             fontSize: 30,
             shadows: <Shadow>[
               Shadow(
-                offset: Offset(1.0, 1.0),
+                offset: const Offset(1.0, 1.0),
                 blurRadius: 10.0,
                 color: Colors.black.withOpacity(0.7),
               ),
@@ -137,7 +137,7 @@ class MyCustomPainter extends CustomPainter {
             fontSize: 30,
             shadows: <Shadow>[
               Shadow(
-                offset: Offset(1.0, 1.0),
+                offset: const Offset(1.0, 1.0),
                 blurRadius: 8.0,
                 color: Colors.black.withOpacity(0.5),
               ),
@@ -175,7 +175,7 @@ class MyCustomPainter extends CustomPainter {
           fontWeight: FontWeight.w700,
           shadows: <Shadow>[
             Shadow(
-              offset: Offset(1.0, 1.0),
+              offset: const Offset(1.0, 1.0),
               blurRadius: 8.0,
               color: Colors.black.withOpacity(0.5),
             ),
@@ -198,7 +198,7 @@ class MyCustomPainter extends CustomPainter {
           fontSize: 21,
           shadows: <Shadow>[
             Shadow(
-              offset: Offset(1.0, 1.0),
+              offset: const Offset(1.0, 1.0),
               blurRadius: 8.0,
               color: Colors.black.withOpacity(0.5),
             ),

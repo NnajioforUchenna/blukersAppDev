@@ -1,4 +1,4 @@
-import 'package:blukers/providers/worker_provider.dart';
+import '../../../providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,10 +11,10 @@ class DisplayWorkerCard extends StatefulWidget {
   final VoidCallback? onTap;
 
   const DisplayWorkerCard({
-    Key? key,
+    super.key,
     this.worker,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   _DisplayWorkerCardState createState() => _DisplayWorkerCardState();
@@ -60,7 +60,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(widget.worker?.timeAgo ?? ''),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Text(
@@ -70,7 +70,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                           fontSize: 18,
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         widget.worker?.lastName ?? '',
                         style: const TextStyle(
@@ -80,7 +80,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                       )
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -95,7 +95,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -104,7 +104,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.worker?.skillIds?.join(', ') ??
+                              widget.worker?.skillIds.join(', ') ??
                                   '', // TODO: Change this to worker?.jobIds?.join(', ') ?? '',
                               style: const TextStyle(
                                 fontSize: 18,
@@ -126,10 +126,10 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                   ),
                   Row(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       if (widget.worker?.profilePhotoUrl != null)
                         RoundedImageWidget(
-                          imageUrl: widget.worker!.profilePhotoUrl!,
+                          imageUrl: widget.worker!.profilePhotoUrl,
                           firstChar:
                               getFirstChar(widget.worker?.lastName ?? ''),
                         ),

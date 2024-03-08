@@ -1,4 +1,4 @@
-import 'package:blukers/services/blur_out.dart';
+import '../../../../services/blur_out.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common_files/constants.dart';
@@ -8,8 +8,7 @@ import '../../../../services/responsive.dart';
 class WorkerDetailBlockTwo extends StatelessWidget {
   final Worker worker;
 
-  const WorkerDetailBlockTwo({Key? key, required this.worker})
-      : super(key: key);
+  const WorkerDetailBlockTwo({super.key, required this.worker});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +84,7 @@ class WorkerDetailBlockTwo extends StatelessWidget {
           const Divider(),
           Row(
             children: [
-              Spacer(),
+              const Spacer(),
               if (isBlur) // If the member is not active, show the "Activate Your Membership" button
                 ElevatedButton(
                   onPressed: () {

@@ -1,4 +1,4 @@
-import 'package:blukers/utils/styles/index.dart';
+import '../../../utils/styles/index.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
 
 class LoginOrRegister extends StatelessWidget {
-  const LoginOrRegister({Key? key}) : super(key: key);
+  const LoginOrRegister({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class LoginOrRegister extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   // const TextSpan(text: 'Please '),
-                  TextSpan(text: AppLocalizations.of(context)!.please + ' '),
+                  TextSpan(text: '${AppLocalizations.of(context)!.please} '),
                   TextSpan(
                       text: AppLocalizations.of(context)!.login2,
                       style:
@@ -48,7 +48,7 @@ class LoginOrRegister extends StatelessWidget {
                           // Navigate to login page or perform login action here
                           context.go('/login');
                         }),
-                  TextSpan(text: ' ' + AppLocalizations.of(context)!.or + ' '),
+                  TextSpan(text: ' ${AppLocalizations.of(context)!.or} '),
                   TextSpan(
                       text: AppLocalizations.of(context)!.register,
                       style:

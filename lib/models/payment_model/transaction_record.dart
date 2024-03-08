@@ -1,7 +1,7 @@
 import 'dart:async'; // Import for Future
 import 'dart:math';
 
-import 'package:blukers/data_providers/payments_data_provider.dart';
+import '../../data_providers/payments_data_provider.dart';
 
 class TransactionRecord {
   String transactionId;

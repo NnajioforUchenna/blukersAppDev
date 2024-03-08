@@ -1,15 +1,14 @@
-import 'package:blukers/models/address.dart';
-import 'package:blukers/models/app_user.dart';
-import 'package:blukers/models/company.dart';
-import 'package:blukers/models/job_application_tracker.dart';
-import 'package:blukers/models/reference_form.dart';
-import 'package:blukers/models/work_experience.dart';
-import 'package:blukers/models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 
+import '../models/app_user.dart';
+import '../models/company.dart';
+import '../models/job_application_tracker.dart';
+import '../models/reference_form.dart';
+import '../models/work_experience.dart';
+import '../models/worker.dart';
 import 'data_constants.dart';
 
 final firestore = FirebaseFirestore.instance;
@@ -113,13 +112,12 @@ class UserDataProvider {
     });
   }
 
-  static void updateContactInformation(
-      String completePhoneNumber, Address address, String uid) {
+  static void updateContactInformation(String completePhoneNumber, String uid) {
     CollectionReference appUserCollection =
         firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
       'phoneNumber': completePhoneNumber,
-      'address': address.toMap(),
+      // 'address': address.toMap(),
       'isContactInformation': true
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
@@ -564,6 +562,27 @@ class UserDataProvider {
     appUserCollection.doc(uid).update({
       'worker.workExperiences': list.map((e) => e.toMap()).toList(),
     }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static void updateJobsPreference(AppUser? appUser) {
+    if (appUser == null || appUser.uid.isEmpty) {
+      print("Error: appUser is null or UID is empty");
+      return;
+    }
+
+    // Assuming 'firestore' is a correctly initialized FirebaseFirestore instance
+    // and 'appUserCollections' holds the correct name of the collection
+    CollectionReference appUserCollection = firestore.collection(
+        'appUserCollections'); // Use the actual name of your collection
+
+    appUserCollection.doc(appUser.uid).set({
+      'jobsPreference': {
+        'industryIds': appUser.jobsPreference?.industryIds ?? [],
+        'jobIds': appUser.jobsPreference?.jobIds ?? {},
+      }
+    }, SetOptions(merge: true)).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
   }

@@ -1,11 +1,11 @@
-import 'package:blukers/models/payment_model/active_subscription.dart';
-import 'package:blukers/models/payment_model/paid_order.dart';
-import 'package:blukers/models/worker.dart';
-
 import '../data_providers/user_data_provider.dart';
 import 'address.dart';
 import 'company.dart';
 import 'job_application_tracker.dart';
+import 'jobs_perference.dart';
+import 'payment_model/paid_order.dart';
+import 'payment_model/subscription_model.dart';
+import 'worker.dart';
 
 class AppUser {
   String uid;
@@ -39,7 +39,8 @@ class AppUser {
 
   // Varibles for Tracking Payments
   bool isSubscriptionActive = false;
-  ActiveSubscription? activeSubscription;
+  SubscriptionPlan? activeSubscription;
+  SubscriptionPlan? deferredSubscription;
   Map<String, PaidOrder> listActiveOrders = {};
 
   // Tracking Applied Jobs
@@ -48,6 +49,9 @@ class AppUser {
   // Deleting Account Parameters
   String deleteAccountReason = '';
   String whereYouReside = '';
+
+  // Set Jobs Perferences
+  JobsPreference? jobsPreference;
 
   AppUser({
     required this.uid,
@@ -70,6 +74,8 @@ class AppUser {
     this.workerTimelineStep,
     this.companyTimelineStep,
     this.activeSubscription,
+    this.deferredSubscription,
+    this.jobsPreference,
     this.isSubscriptionActive = false,
     this.listActiveOrders = const {},
   })  : createdAt = DateTime.now().millisecondsSinceEpoch,
@@ -79,7 +85,7 @@ class AppUser {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
     data['uid'] = uid; // Assuming uid will always be non-null
-    if (email != null) data['email'] = email;
+    data['email'] = email;
     if (language != null) data['language'] = language;
     if (displayName != null) data['displayName'] = displayName;
     if (phoneNumber != null) data['phoneNumber'] = phoneNumber;
@@ -103,14 +109,19 @@ class AppUser {
     if (address != null) data['address'] = address!.toMap();
     if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
     if (userRole != null) data['userRole'] = userRole;
-    if (workerTimelineStep != null)
+    if (workerTimelineStep != null) {
       data['workerTimelineStep'] = workerTimelineStep;
-    if (companyTimelineStep != null)
+    }
+    if (companyTimelineStep != null) {
       data['companyTimelineStep'] = companyTimelineStep;
+    }
     if (createdAt != 0) data['createdAt'] = createdAt;
     if (modifiedAt != 0) data['modifiedAt'] = modifiedAt;
     if (activeSubscription != null) {
       data['activeSubscription'] = activeSubscription?.toMap();
+    }
+    if (deferredSubscription != null) {
+      data['deferredSubscription'] = deferredSubscription?.toMap();
     }
     data['isSubscriptionActive'] = isSubscriptionActive;
     if (listActiveOrders.isNotEmpty) {
@@ -120,6 +131,10 @@ class AppUser {
 
     if (jobApplicationTracker != null) {
       data['jobApplicationTracker'] = jobApplicationTracker?.toMap();
+    }
+
+    if (jobsPreference != null) {
+      data['jobsPreference'] = jobsPreference?.toMap();
     }
 
     data['deleteAccountReason'] = deleteAccountReason;
@@ -147,19 +162,25 @@ class AppUser {
       companyTimelineStep: map['companyTimelineStep'] as int?,
       worker: (map['worker'] != null && map['worker'] is Map<String, dynamic>)
           ? Worker.fromMap(map['worker'])
-          : null, // Convert Map to Worker object
+          : null,
+      // Convert Map to Worker object
       company:
           (map['company'] != null && map['company'] is Map<String, dynamic>)
               ? Company.fromMap(map['company'])
-              : null, // Convert Map to Company object
+              : null,
+      // Convert Map to Company object
       address:
           (map['address'] != null && map['address'] is Map<String, dynamic>)
               ? Address.fromMap(map['address'])
               : null,
       isSubscriptionActive: map['isSubscriptionActive'] ?? false,
       activeSubscription: map['activeSubscription'] != null
-          ? ActiveSubscription.fromMap(map['activeSubscription'])
+          ? SubscriptionPlan.fromMap(map['activeSubscription'])
           : null,
+      deferredSubscription: map['deferredSubscription'] != null
+          ? SubscriptionPlan.fromMap(map['deferredSubscription'])
+          : null,
+      deviceTokenU: map['deviceTokenU'] as String?,
     );
 
     if (map['listActiveOrders'] != null) {
@@ -171,6 +192,10 @@ class AppUser {
     if (map['jobApplicationTracker'] != null) {
       user.jobApplicationTracker =
           JobApplicationTracker.fromMap(map['jobApplicationTracker']);
+    }
+
+    if (map['jobsPreference'] != null) {
+      user.jobsPreference = JobsPreference.fromMap(map['jobsPreference']);
     }
 
     user.deleteAccountReason = map['deleteAccountReason'] ?? '';

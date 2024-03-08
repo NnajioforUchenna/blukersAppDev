@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:blukers/models/lead_models/lead_status_model.dart';
-import 'package:blukers/data_providers/lead_data_providers/lead_status_data_provider.dart';
+import '../../models/lead_models/lead_status_model.dart';
+import '../../data_providers/lead_data_providers/lead_status_data_provider.dart';
 
 class LeadStatusProvider with ChangeNotifier {
   final LeadStatusDataProvider _dataProvider = LeadStatusDataProvider();

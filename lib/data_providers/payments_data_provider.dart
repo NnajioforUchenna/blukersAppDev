@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:blukers/models/payment_model/transaction_record.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -10,7 +9,9 @@ import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 import '../common_files/constants.dart';
-import '../models/payment_model/active_subscription.dart';
+import '../models/app_user.dart';
+import '../models/payment_model/subscription_model.dart';
+import '../models/payment_model/transaction_record.dart';
 import '../services/platform_check.dart';
 import 'data_constants.dart';
 
@@ -45,7 +46,7 @@ class PaymentsDataProvider {
 
     if (purchaseDetails is GooglePlayPurchaseDetails) {
       PurchaseWrapper billingClientPurchase =
-          (purchaseDetails as GooglePlayPurchaseDetails).billingClientPurchase;
+          (purchaseDetails).billingClientPurchase;
       purchaseWrapper = {
         'developerPayload': billingClientPurchase.developerPayload,
         'isAcknowledged': billingClientPurchase.isAcknowledged,
@@ -61,7 +62,7 @@ class PaymentsDataProvider {
       };
     } else if (purchaseDetails is AppStorePurchaseDetails) {
       SKPaymentTransactionWrapper skProduct =
-          (purchaseDetails as AppStorePurchaseDetails).skPaymentTransaction;
+          (purchaseDetails).skPaymentTransaction;
       purchaseWrapper = {
         'transactionState': skProduct.transactionState,
         'transactionTimeStamp': skProduct.transactionTimeStamp,
@@ -84,8 +85,7 @@ class PaymentsDataProvider {
 
   Future<Map<String, dynamic>> verifyStripePayment(
       String checkoutSessionId) async {
-    String apiUrl =
-        baseUrlAppEngineFunctions + '/payments/verify-stripe-payment';
+    String apiUrl = '$baseUrlAppEngineFunctions/payments/verify-stripe-payment';
 
     final response = await http.post(
       Uri.parse(apiUrl),
@@ -110,7 +110,7 @@ class PaymentsDataProvider {
     // Create ActiveSubscription object from purchase details
     print('purchase.productID: ${purchase.productID}');
 
-    ActiveSubscription activeSubscription = ActiveSubscription(
+    SubscriptionPlan activeSubscription = SubscriptionPlan(
       subscribeDate: DateTime.now().millisecondsSinceEpoch,
       // add 30 days to the current date
       renewDate: DateTime.now().millisecondsSinceEpoch + 2592000000,
@@ -140,7 +140,7 @@ class PaymentsDataProvider {
       String? productId = metadata['product_id'];
       String productName = ProductNames[productId] ?? '';
 
-      ActiveSubscription activeSubscription = ActiveSubscription(
+      SubscriptionPlan activeSubscription = SubscriptionPlan(
         subscribeDate: DateTime.now().millisecondsSinceEpoch,
         // add 30 days to the current date
         renewDate: DateTime.now().millisecondsSinceEpoch + 2592000000,
@@ -181,5 +181,35 @@ class PaymentsDataProvider {
       print("Error fetching subscription: $error");
       return null;
     }
+  }
+
+  void cancelSubscription(AppUser appUser, String paymentPlatform) {
+    //   1. Cancel Users Subscription
+    int subscriptionRenewDate = appUser.activeSubscription!.renewDate;
+    SubscriptionPlan defferedSubscription = SubscriptionPlan(
+      subscribeDate: subscriptionRenewDate,
+      renewDate: subscriptionRenewDate + 2592000000,
+      subscriptionId: 'basic',
+      subscriptionName: 'Basic',
+      amountPaid: 0.0,
+      paymentPlatform: paymentPlatform,
+    );
+
+    db.collection('AppUsers').doc(appUser.uid).set({
+      'deferredSubscription': defferedSubscription.toMap(),
+    }, SetOptions(merge: true));
+
+    //   2. Record Deffered Payments in a collection called DefferedPayments
+    db.collection('DefferedPayments').doc(appUser.uid).set({
+      'deferredSubscription': defferedSubscription.toMap(),
+    }, SetOptions(merge: true));
+  }
+
+  void removeDefferedPayment(AppUser appUser) {
+    db.collection('AppUsers').doc(appUser.uid).set({
+      'deferredSubscription': null,
+    }, SetOptions(merge: true));
+
+    db.collection('DefferedPayments').doc(appUser.uid).delete();
   }
 }

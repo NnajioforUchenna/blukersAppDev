@@ -1,7 +1,7 @@
-import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../providers/job_posts_provider.dart';
 import 'additional_information_page.dart';
 import 'basic_information_page.dart';
 // import the required pages here
@@ -12,8 +12,8 @@ import 'qualification_and_skills_page.dart';
 
 class JobPostPageSlider extends StatefulWidget {
   const JobPostPageSlider({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _JobPostPageSliderState createState() => _JobPostPageSliderState();
@@ -39,7 +39,7 @@ class _JobPostPageSliderState extends State<JobPostPageSlider> {
       // modified to fit the 5 steps in JobPost
       _pageController.animateToPage(
         index,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         curve: Curves.easeInOut,
       );
     }
@@ -58,13 +58,13 @@ class _JobPostPageSliderState extends State<JobPostPageSlider> {
       child: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: [
+        children: const [
           ClassificationPage(),
           BasicInformationPage(),
           QualificationAndSkillsPage(),
           CompensationAndContractPage(),
-          const AdditionalInformationPage(),
-          const JobPostCongratulationPage(),
+          AdditionalInformationPage(),
+          JobPostCongratulationPage(),
         ],
       ),
     );

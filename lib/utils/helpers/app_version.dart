@@ -1,5 +1,6 @@
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:blukers/config/index.dart';
+
+import '../../config/index.dart';
 
 class AppVersionHelper {
   // String hardCodedVersion = "1.0.2";

@@ -10,7 +10,7 @@ class StreamService {
 
   Stream<AppUser?> get appUser {
     if (documentId == null) {
-      return Stream<AppUser?>.empty();
+      return const Stream<AppUser?>.empty();
     }
     return FirebaseFirestore.instance
         .collection(appUserCollections)
