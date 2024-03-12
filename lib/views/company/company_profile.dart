@@ -1,17 +1,15 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
+
 import '../../providers/app_versions_provider.dart';
 import '../../providers/chat_provider.dart';
 import '../../providers/user_provider_parts/user_provider.dart';
 import '../../utils/styles/index.dart';
 import '../auth/common_widget/login_or_register.dart';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
-
-import 'package:google_fonts/google_fonts.dart';
-
 import '../common_vieiws/page_template/page_template.dart';
 import '../old_common_views/components/app_version_display.dart';
 import '../old_common_views/components/confirmation_dialog.dart';
@@ -26,11 +24,12 @@ class CompanyProfile extends StatefulWidget {
 
 class _CompanyProfileState extends State<CompanyProfile> {
   bool showBasicInfo = false;
+
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
-    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+    AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
 
     if (!kIsWeb) {
       avp.checkForUpdate(context);

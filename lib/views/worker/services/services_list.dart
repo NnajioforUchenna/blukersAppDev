@@ -15,7 +15,7 @@ class ServicesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+    AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     String userRole = up.userRole!;
 

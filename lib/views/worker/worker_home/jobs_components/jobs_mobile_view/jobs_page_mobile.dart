@@ -1,8 +1,10 @@
-import '../../../../../providers/industry_provider.dart';
-import '../../../../../providers/job_posts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:showcaseview/showcaseview.dart';
 
+import '../../../../../providers/app_versions_provider.dart';
+import '../../../../../providers/industry_provider.dart';
+import '../../../../../providers/job_posts_provider.dart';
 import '../../../../common_vieiws/loading_page.dart';
 import '../../../saved/job_search_result_page.dart';
 import 'jobs_mobile_view_compnents/mobile_display_industries.dart';
@@ -16,6 +18,15 @@ class JobsPageMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+    AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => ShowCaseWidget.of(context).startShowCase([
+              asp.signInButton,
+              asp.bottomNavigation,
+              asp.searchBar,
+              asp.selection,
+              asp.translation
+            ]));
     return Column(
       children: [
         const SignInRow(),
@@ -24,7 +35,10 @@ class JobsPageMobile extends StatelessWidget {
           child: AnimatedCrossFade(
             firstChild: ip.industries.isEmpty
                 ? const LoadingPage()
-                : const MobileDisplayIndustries(),
+                : Showcase(
+                    key: asp.selection,
+                    description: 'Use this section to Select Jobs by industry',
+                    child: const MobileDisplayIndustries()),
             secondChild: const JobSearchResultPage(),
             crossFadeState: jp.isSearching
                 ? CrossFadeState.showSecond

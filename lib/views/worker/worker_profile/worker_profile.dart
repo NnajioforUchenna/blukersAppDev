@@ -37,7 +37,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
     final width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
-    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+    AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
 
     if (!kIsWeb) {
       avp.checkForUpdate(context);

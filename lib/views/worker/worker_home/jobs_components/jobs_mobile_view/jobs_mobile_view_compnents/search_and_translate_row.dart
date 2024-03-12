@@ -1,4 +1,8 @@
+import 'package:blukers/providers/app_versions_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:showcaseview/showcaseview.dart';
+
 import '../../../../../../utils/styles/theme_colors.dart';
 import 'job_mobile_choose_target_language.dart';
 import 'job_mobile_search_bar.dart';
@@ -8,6 +12,7 @@ class SearchAndTranslateRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
     return Container(
       height: 70,
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -18,10 +23,17 @@ class SearchAndTranslateRow extends StatelessWidget {
           bottomRight: Radius.circular(20),
         ),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          JobMobileSearchBar(),
-          JobsMobileChooseTargetLanguage(),
+          Showcase(
+              key: asp.searchBar,
+              description: 'Use this search bar to search for jobs',
+              child: JobMobileSearchBar()),
+          Showcase(
+              key: asp.translation,
+              description:
+                  'For selecting the target language of the job description',
+              child: JobsMobileChooseTargetLanguage()),
         ],
       ),
     );

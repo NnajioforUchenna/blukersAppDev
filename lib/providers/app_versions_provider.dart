@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import '../data_providers/app_versions_data_provider.dart';
-import '../utils/helpers/app_version.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pub_semver/pub_semver.dart';
 
+import '../data_providers/app_versions_data_provider.dart';
+import '../utils/helpers/app_version.dart';
 import '../views/old_common_views/components/update_app_dialog.dart';
 
-class AppVersionsProvider with ChangeNotifier {
+class AppSettingsProvider with ChangeNotifier {
   String? _latestVersion;
   String? _androidUrl;
   String? _iOSUrl;
@@ -21,6 +21,13 @@ class AppVersionsProvider with ChangeNotifier {
   String? get iOSUrl => _iOSUrl;
 
   bool? get shouldUpdate => _shouldUpdate;
+
+  // Global Keys for ShowCaseView
+  GlobalKey searchBar = GlobalKey();
+  GlobalKey translation = GlobalKey();
+  GlobalKey selection = GlobalKey();
+  GlobalKey signInButton = GlobalKey();
+  GlobalKey bottomNavigation = GlobalKey();
 
   Future<bool?> _shouldUpdateApp() async {
     // bool shouldShowUpdateDialog = false;

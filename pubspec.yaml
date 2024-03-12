@@ -73,6 +73,7 @@ dependencies:
   form_builder_validators: ^9.1.0
   form_builder_extra_fields: ^10.1.0
   form_builder_file_picker: ^4.1.0
+  showcaseview: ^2.0.3
 
 
 

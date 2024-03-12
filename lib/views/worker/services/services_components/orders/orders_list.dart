@@ -1,6 +1,3 @@
-import '../../../../../models/payment_model/paid_order.dart';
-import '../../../../../providers/app_versions_provider.dart';
-import '../../../../../providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,6 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
+import '../../../../../models/payment_model/paid_order.dart';
+import '../../../../../providers/app_versions_provider.dart';
+import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../common_vieiws/icon_text_404.dart';
 import 'order_card.dart';
 
@@ -16,7 +16,7 @@ class OrdersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppVersionsProvider avp = Provider.of<AppVersionsProvider>(context);
+    AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     double height = MediaQuery.of(context).size.height;
 

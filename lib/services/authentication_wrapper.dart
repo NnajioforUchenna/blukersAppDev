@@ -22,7 +22,7 @@ class AuthenticationWrapper extends StatefulWidget {
 
 class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
   late UserProvider up;
-  late AppVersionsProvider avp;
+  late AppSettingsProvider avp;
   late PaymentsProvider pp;
 
   // Get the current URL
@@ -32,7 +32,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
   @override
   void initState() {
     up = Provider.of<UserProvider>(context, listen: false);
-    avp = Provider.of<AppVersionsProvider>(context, listen: false);
+    avp = Provider.of<AppSettingsProvider>(context, listen: false);
     pp = Provider.of<PaymentsProvider>(context, listen: false);
     uri = Uri.parse(urlEx);
 
