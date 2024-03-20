@@ -44,10 +44,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => IndustriesProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
-        ChangeNotifierProvider(create: (context) => ChatProvider()),
         ChangeNotifierProvider(create: (context) => AppSettingsProvider()),
+        ChangeNotifierProvider(create: (context) => IndustriesProvider()),
+        ChangeNotifierProvider(create: (context) => ChatProvider()),
         ChangeNotifierProxyProvider<UserProvider, JobPostsProvider>(
             create: (context) => JobPostsProvider(),
             update: (_, user, JobPostsProvider? previous) =>

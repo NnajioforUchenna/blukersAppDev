@@ -115,7 +115,9 @@ class UserProvider with ChangeNotifier {
       }
       notifyListeners();
     });
+
   }
+
 
   void initializeAppUser(String uid) {
     streamService = StreamService(uid);

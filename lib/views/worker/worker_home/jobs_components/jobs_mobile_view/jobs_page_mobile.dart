@@ -11,22 +11,35 @@ import 'jobs_mobile_view_compnents/mobile_display_industries.dart';
 import 'jobs_mobile_view_compnents/search_and_translate_row.dart';
 import 'jobs_mobile_view_compnents/sign_in_row.dart';
 
-class JobsPageMobile extends StatelessWidget {
+class JobsPageMobile extends StatefulWidget {
   const JobsPageMobile({super.key});
+
+  @override
+  State<JobsPageMobile> createState() => _JobsPageMobileState();
+}
+
+class _JobsPageMobileState extends State<JobsPageMobile> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final asp = Provider.of<AppSettingsProvider>(context, listen: false);
+      ShowCaseWidget.of(context).startShowCase([
+        asp.signInButton,
+        asp.bottomNavigation,
+        asp.searchBar,
+        asp.selection,
+        asp.translation
+      ]);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => ShowCaseWidget.of(context).startShowCase([
-              asp.signInButton,
-              asp.bottomNavigation,
-              asp.searchBar,
-              asp.selection,
-              asp.translation
-            ]));
+
     return Column(
       children: [
         const SignInRow(),
@@ -38,6 +51,7 @@ class JobsPageMobile extends StatelessWidget {
                 : Showcase(
                     key: asp.selection,
                     description: 'Use this section to Select Jobs by industry',
+                    targetShapeBorder: const CircleBorder(),
                     child: const MobileDisplayIndustries()),
             secondChild: const JobSearchResultPage(),
             crossFadeState: jp.isSearching
