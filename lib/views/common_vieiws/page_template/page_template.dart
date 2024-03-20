@@ -8,6 +8,7 @@ import '../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart
 import 'page_template_components/my_buttom_navigation_bar.dart';
 import 'page_template_components/my_navigation_rail.dart';
 
+// ignore: must_be_immutable
 class PageTemplate extends StatelessWidget {
   final Widget child;
 
@@ -38,6 +39,13 @@ class PageTemplate extends StatelessWidget {
           : Showcase(
               key: asp.bottomNavigation,
               description: 'This is the bottom navigation bar',
+                overlayOpacity: 0.6,
+                  targetShapeBorder: const CircleBorder(),
+                  tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+                  descTextStyle: const TextStyle( 
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
               child: const MyButtomNavigationBar()),
       body: SafeArea(
         child: Column(

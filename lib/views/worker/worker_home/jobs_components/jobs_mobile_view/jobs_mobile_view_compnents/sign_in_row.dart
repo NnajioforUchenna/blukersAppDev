@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:showcaseview/showcaseview.dart';
+import 'package:showcaseview/showcaseview.dart' show Showcase;
 
 import '../../../../../../utils/styles/index.dart';
 
@@ -26,6 +26,15 @@ class SignInRow extends StatelessWidget {
         Showcase(
           key: asp.signInButton,
           description: 'Use this button to sign in to your account',
+          
+            overlayOpacity: 0.6,
+            targetShapeBorder: const CircleBorder(),
+            tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+         
+            descTextStyle: const TextStyle( 
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
             height: 20,

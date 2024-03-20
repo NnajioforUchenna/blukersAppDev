@@ -52,6 +52,12 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
                     key: asp.selection,
                     description: 'Use this section to Select Jobs by industry',
                     targetShapeBorder: const CircleBorder(),
+                    overlayOpacity: 0.6,
+                    tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+                    descTextStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                     child: const MobileDisplayIndustries()),
             secondChild: const JobSearchResultPage(),
             crossFadeState: jp.isSearching
