@@ -38,6 +38,14 @@ class JobsPageMobile extends StatelessWidget {
                 : Showcase(
                     key: asp.selection,
                     description: 'Use this section to Select Jobs by industry',
+                    overlayOpacity: 0.6,
+                      targetShapeBorder: const CircleBorder(),
+                      tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+                  
+                      descTextStyle: const TextStyle( 
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     child: const MobileDisplayIndustries()),
             secondChild: const JobSearchResultPage(),
             crossFadeState: jp.isSearching
