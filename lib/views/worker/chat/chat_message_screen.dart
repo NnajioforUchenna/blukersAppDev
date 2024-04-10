@@ -1,13 +1,13 @@
-import '../../../models/chat_message.dart';
-import '../../../providers/chat_provider.dart';
-import '../../../utils/styles/index.dart';
-import '../../company/workers_components/chat_component.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/chat_message.dart';
+import '../../../providers/chat_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
+import '../../../utils/styles/index.dart';
 import '../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
+import '../../company/workers_components/chat_component.dart';
 
 class ChatMessageScreen extends StatefulWidget {
   const ChatMessageScreen({super.key});
@@ -37,6 +37,8 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
       await chatProvider.sendMessage(
           textMessage, up.appUser!.uid, roomId, sentToId, roomName);
     }
+
+    print('I was called to Run');
 
     return WillPopScope(
       onWillPop: () async {

@@ -1,7 +1,9 @@
-import '../models/chat_message.dart';
-import '../models/chat_room.dart';
+import 'package:blukers/models/chat_recipient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+
+import '../models/chat_message.dart';
+import '../models/chat_room.dart';
 
 final firestore = FirebaseFirestore.instance;
 
@@ -85,5 +87,28 @@ class ChatDataProvider {
     //   res.add(snapshot.docs[i].data());
     // }
     // return res;
+  }
+
+  // Async function to get chat recipients
+  static Future<List<ChatRecipient>> getChatRecipients(String uid) async {
+    try {
+      // Access the specific document and subcollection
+      QuerySnapshot snapshot = await firestore
+          .collection('Chats')
+          .doc(uid)
+          .collection('ChatRecipients')
+          .get();
+
+      // Map each document to a ChatRecipient object
+      List<ChatRecipient> recipients = snapshot.docs.map((doc) {
+        return ChatRecipient.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
+
+      return recipients;
+    } catch (e) {
+      print(e.toString());
+      // Handle exceptions or return an empty list
+      return [];
+    }
   }
 }

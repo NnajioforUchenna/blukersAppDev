@@ -1,86 +1,116 @@
-import 'dart:convert';
-import 'dart:io';
-
-import '../main.dart';
-import '../providers/chat_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:blukers/data_providers/user_data_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-final firebaseMessaging = FirebaseMessaging.instance;
-final firestore = FirebaseFirestore.instance;
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-ChatProvider? chatProvider;
-//final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+import '../models/app_user.dart';
 
-class NotificationService {
-  static Future<void> registerNotification(
-      String uid, ChatProvider chatProv) async {
-    chatProvider = chatProv;
-    firebaseMessaging.requestPermission();
-    //firebaseMessaging.requestPermission();
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      final res = json.decode(message.data["body"]);
-      if (res["roomId"] != chatProvider?.activeRoomId) {
-        showNotification(from: res["sendByNamy"], message: res["message"]);
-      } else {
-        print("no notification");
-      }
-      int index = chatProvider!.chatRooms
-          .indexWhere((element) => element.id == res["roomId"]);
-      chatProvider!.chatRooms[index].lastMessage = res["message"];
-      chatProvider!.notifyListners();
-      print('onMessage:: $res');
-      //message.data;
-    });
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
-      final res = json.decode(message.data["body"]);
-      int index = chatProvider!.chatRooms
-          .indexWhere((element) => element.id == res["roomId"]);
-      chatProvider!.chatRooms[index].lastMessage = res["message"];
-      chatProvider!.notifyListners();
-      navigatorKey.currentState!.pushNamed('/chat-message', arguments: {
-        "roomId": res["roomId"].toString(),
-        "roomName": res["sendByNamy"].toString(),
-      });
-      // context.go( '/message',
-      //     arguments: MessageArguments(message, true));
-    });
+FirebaseMessaging messaging = FirebaseMessaging.instance;
+Future<void> requestForNotificationPermission(AppUser? appUser) async {
+  NotificationSettings settings = await messaging.getNotificationSettings();
 
-    String? token = await firebaseMessaging.getToken();
-    firestore.collection('AppUsers').doc(uid).update({'pushToken': token});
-  }
+  // Delay for 30 Seconds
+  await Future.delayed(const Duration(seconds: 10));
 
-  static void configLocalNotification() {
-    var initializationSettingsAndroid =
-        const AndroidInitializationSettings('app_icon');
-    // var initializationSettingsIOS = const IOSInitializationSettings();
-    // var initializationSettings = InitializationSettings(
-    //     android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    //
-    // flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  }
-
-  static void showNotification(
-      {required String from, required String message}) async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      Platform.isAndroid
-          ? 'com.dfa.flutterchatdemo'
-          : 'com.duytq.flutterchatdemo',
-      'Flutter chat demo',
-      // 'your channel description',
-      playSound: true,
-      enableVibration: true,
-      importance: Importance.max,
-      priority: Priority.high,
+  if (settings.authorizationStatus == AuthorizationStatus.authorized ||
+      settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('We have permission');
+    // Set up the token in the database
+    setupToken(appUser!.uid);
+  } else {
+    print('We dont have accepted permission');
+    settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
     );
-    // var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
-    // var platformChannelSpecifics = NotificationDetails(
-    //     android: androidPlatformChannelSpecifics,
-    //     iOS: iOSPlatformChannelSpecifics);
-    // await flutterLocalNotificationsPlugin
-    //     .show(0, from, message, platformChannelSpecifics, payload: message);
+
+    print('User granted permission: ${settings.authorizationStatus}');
+    if (settings.authorizationStatus == AuthorizationStatus.authorized ||
+        settings.authorizationStatus == AuthorizationStatus.provisional) {
+      print('We now have permission');
+      // Set up the token in the database
+      setupToken(appUser!.uid);
+    }
   }
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    String? title = message.notification?.title;
+    String? body = message.notification?.body;
+
+    EasyLoading.showToast(
+      title ?? 'No Title',
+      duration: const Duration(seconds: 10),
+      dismissOnTap: true,
+      toastPosition: EasyLoadingToastPosition.top,
+      maskType: EasyLoadingMaskType.none,
+    );
+
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+    print('Message Title: ${title}');
+    print('Message Body: ${body}');
+
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+}
+
+Future<void> getToken(FirebaseMessaging messaging) async {
+  String? token;
+  if (kIsWeb) {
+    String validKey =
+        'BKTUvKrXq-WYWeW2uIFaBsHe4GFG6dh1SHwY5tn7UJ9IYLLBdLyWh94zOjdbZUTvS9lLE0z2PpaJ_XyZTBIVxdE';
+
+    token = await messaging.getToken(
+      vapidKey: validKey,
+    );
+  } else {
+    token = await messaging.getToken();
+  }
+}
+
+Future<void> saveTokenToDatabase(String token, String uid) async {
+  await UserDataProvider.saveTokenToDatabase(token, uid);
+}
+
+Future<void> setupToken(String uid) async {
+  String? token;
+  if (kIsWeb) {
+    String validKey =
+        'BKTUvKrXq-WYWeW2uIFaBsHe4GFG6dh1SHwY5tn7UJ9IYLLBdLyWh94zOjdbZUTvS9lLE0z2PpaJ_XyZTBIVxdE';
+
+    token = await messaging.getToken(
+      vapidKey: validKey,
+    );
+
+    await saveTokenToDatabase(token!, uid);
+    FirebaseMessaging.instance.onTokenRefresh.listen((token) {
+      // Now, you can pass both the token and the uid to the save function.
+      saveTokenToDatabase(token, uid);
+    });
+  } else {
+    token = await messaging.getToken();
+    await saveTokenToDatabase(token!, uid);
+    FirebaseMessaging.instance.onTokenRefresh.listen((token) {
+      // Now, you can pass both the token and the uid to the save function.
+      saveTokenToDatabase(token, uid);
+    });
+  }
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
 }

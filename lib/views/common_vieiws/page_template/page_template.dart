@@ -38,14 +38,14 @@ class PageTemplate extends StatelessWidget {
           ? null
           : Showcase(
               key: asp.bottomNavigation,
-              description: 'This is the bottom navigation bar',
-                overlayOpacity: 0.6,
-                  targetShapeBorder: const CircleBorder(),
-                  tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
-                  descTextStyle: const TextStyle( 
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+              description: 'This is App Navigation Bar',
+              overlayOpacity: 0.6,
+              targetShapeBorder: const CircleBorder(),
+              tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+              descTextStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
               child: const MyButtomNavigationBar()),
       body: SafeArea(
         child: Column(

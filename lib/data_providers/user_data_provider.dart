@@ -586,4 +586,26 @@ class UserDataProvider {
       print("Error adding user to Firestore: $error");
     });
   }
+
+  static void updateNotificationStatus(String uid, String notificationStatus) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+
+    appUserCollection.doc(uid).update({
+      'notificationStatus': notificationStatus,
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static saveTokenToDatabase(String token, String uid) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+
+    appUserCollection.doc(uid).update({
+      'tokens': FieldValue.arrayUnion([token]),
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
 }

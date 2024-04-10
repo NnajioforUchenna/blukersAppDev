@@ -26,6 +26,10 @@ class AppUser {
   Worker? worker; // Added Worker parameter
   Company? company; // Added Company parameter
   Address? address;
+
+  // Device Token for Push Notification
+  List<String>? tokens = [];
+
   String? deviceTokenU;
 
   // navigation Controls
@@ -70,6 +74,7 @@ class AppUser {
     this.company, // Added Company parameter
     this.address,
     this.deviceTokenU,
+    this.tokens,
     this.userRole,
     this.workerTimelineStep,
     this.companyTimelineStep,
@@ -108,6 +113,8 @@ class AppUser {
     if (company != null) data['company'] = company!.toMap();
     if (address != null) data['address'] = address!.toMap();
     if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
+    if (tokens != null) data['tokens'] = tokens;
+
     if (userRole != null) data['userRole'] = userRole;
     if (workerTimelineStep != null) {
       data['workerTimelineStep'] = workerTimelineStep;
@@ -181,6 +188,9 @@ class AppUser {
           ? SubscriptionPlan.fromMap(map['deferredSubscription'])
           : null,
       deviceTokenU: map['deviceTokenU'] as String?,
+      tokens: map['tokens'] != null
+          ? List<String>.from(map['tokens'].map((x) => x))
+          : [],
     );
 
     if (map['listActiveOrders'] != null) {

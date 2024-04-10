@@ -44,10 +44,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => AppSettingsProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => IndustriesProvider()),
-        ChangeNotifierProvider(create: (context) => ChatProvider()),
+        ChangeNotifierProxyProvider<UserProvider, ChatProvider>(
+            create: (context) => ChatProvider(),
+            update: (_, user, ChatProvider? previous) =>
+                previous!..update(user.appUser)),
         ChangeNotifierProxyProvider<UserProvider, JobPostsProvider>(
             create: (context) => JobPostsProvider(),
             update: (_, user, JobPostsProvider? previous) =>
@@ -98,10 +101,6 @@ class MyApp extends StatelessWidget {
                     primarySwatch: Colors.blue,
                     fontFamily: 'Montserrat',
                   ),
-                  // home: AuthenticationWrapper(),
-                  // onGenerateRoute: generateRoute,
-                  // initialRoute: "/",
-                  // navigatorKey: navigatorKey,
                 );
               }),
             );

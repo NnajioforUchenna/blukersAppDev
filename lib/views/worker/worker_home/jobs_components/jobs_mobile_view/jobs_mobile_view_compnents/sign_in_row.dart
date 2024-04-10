@@ -26,15 +26,13 @@ class SignInRow extends StatelessWidget {
         Showcase(
           key: asp.signInButton,
           description: 'Use this button to sign in to your account',
-          
-            overlayOpacity: 0.6,
-            targetShapeBorder: const CircleBorder(),
-            tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
-         
-            descTextStyle: const TextStyle( 
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+          overlayOpacity: 0.6,
+          targetShapeBorder: const CircleBorder(),
+          tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+          descTextStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
             height: 20,

@@ -6,7 +6,6 @@ import 'package:blukers/data_providers/user_data_provider.dart';
 import 'package:blukers/models/job_post.dart';
 import 'package:blukers/models/jobs_perference.dart';
 import 'package:blukers/providers/chat_provider.dart';
-import 'package:blukers/services/notification_service.dart';
 import 'package:blukers/services/stripe_data.dart';
 import 'package:blukers/services/user_shared_preferences_services.dart';
 import 'package:file_picker/file_picker.dart';
@@ -26,6 +25,7 @@ import '../../models/company.dart';
 import '../../models/reference_form.dart';
 import '../../models/work_experience.dart';
 import '../../models/worker.dart';
+import '../../services/notification_service.dart';
 import '../../views/old_common_views/display_job_post_eligibility_dialog.dart';
 import '../../views/old_common_views/job_timeline/display_job_timeline_dialog.dart';
 
@@ -115,9 +115,7 @@ class UserProvider with ChangeNotifier {
       }
       notifyListeners();
     });
-
   }
-
 
   void initializeAppUser(String uid) {
     streamService = StreamService(uid);

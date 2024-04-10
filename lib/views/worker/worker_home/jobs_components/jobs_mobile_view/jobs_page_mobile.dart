@@ -19,18 +19,20 @@ class JobsPageMobile extends StatefulWidget {
 }
 
 class _JobsPageMobileState extends State<JobsPageMobile> {
+  late AppSettingsProvider asp;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final asp = Provider.of<AppSettingsProvider>(context, listen: false);
-      ShowCaseWidget.of(context).startShowCase([
-        asp.signInButton,
-        asp.bottomNavigation,
-        asp.searchBar,
-        asp.selection,
-        asp.translation
-      ]);
+      asp = Provider.of<AppSettingsProvider>(context, listen: false);
+      // ShowCaseWidget.of(context).startShowCase([
+      //   asp.signInButton,
+      //   asp.bottomNavigation,
+      //   asp.searchBar,
+      //   asp.selection,
+      //   asp.translation
+      // ]);
     });
   }
 
@@ -38,7 +40,7 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
+    asp = Provider.of<AppSettingsProvider>(context);
 
     return Column(
       children: [

@@ -1,14 +1,40 @@
+import 'package:blukers/models/chat_recipient.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import '../data_providers/chat_data_provider.dart';
 import '../models/app_user.dart';
 import '../models/chat_message.dart';
 import '../models/chat_room.dart';
 import '../models/worker.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ChatProvider with ChangeNotifier {
+  AppUser? appUser;
+
+  List<ChatRecipient> chatRecipients = [];
+
+  update(AppUser? user) {
+    appUser = user;
+    getChatRecipients(appUser!.uid);
+    notifyListeners();
+  }
+
+  ChatProvider() {
+    if (appUser != null) {
+      getChatRecipients(appUser!.uid);
+    }
+  }
+
+  Future<void> getChatRecipients(String uid) async {
+    chatRecipients = await ChatDataProvider.getChatRecipients(uid);
+    notifyListeners();
+  }
+
+  // _______________________________________________________
+
   final List<ChatRoom> _chatRooms = [];
+
   String activeRoomId = "";
 
   List<ChatRoom> get chatRooms => _chatRooms;
@@ -54,11 +80,14 @@ class ChatProvider with ChangeNotifier {
       status: '',
       maskType: EasyLoadingMaskType.black,
     );
+
     final List<Map<String, dynamic>> res =
         await ChatDataProvider.fetchGroupsByUserId(uid);
+
     for (int i = 0; i < res.length; ++i) {
       _chatRooms.add(ChatRoom.fromMap(res[i]));
     }
+
     EasyLoading.dismiss();
     // notifyListeners();// This is create an endless loop
   }

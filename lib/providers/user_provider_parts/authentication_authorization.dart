@@ -68,15 +68,9 @@ extension Authentication_Authorization on UserProvider {
       UserDataProvider.registerUserToDatabase(appUser);
       //
 
-      // call a function after 30 seconds
+      // Request permission for notifications
+      requestForNotificationPermission(_appUser);
 
-      if (!kIsWeb) {
-        Future.delayed(const Duration(seconds: 30), () async {
-          await NotificationService.registerNotification(
-              _appUser!.uid, chatProvider);
-          NotificationService.configLocalNotification();
-        });
-      }
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
 
@@ -119,13 +113,8 @@ extension Authentication_Authorization on UserProvider {
         UserSharedPreferencesServices.create(appUser4DB);
       }
 
-      if (!kIsWeb) {
-        Future.delayed(const Duration(seconds: 30), () async {
-          await NotificationService.registerNotification(
-              _appUser!.uid, chatProvider);
-          NotificationService.configLocalNotification();
-        });
-      }
+      // Request permission for notifications
+      requestForNotificationPermission(_appUser);
 
       notifyListeners();
 
