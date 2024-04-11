@@ -32,7 +32,7 @@ import '../views/worker/worker_profile/create_worker_profile/create_worker_profi
 import '../views/worker/worker_profile/worker_profile.dart';
 import 'authentication_wrapper.dart';
 
-final goRouter = GoRouter(routes: routes, initialLocation: '/messageScreen');
+final goRouter = GoRouter(routes: routes, initialLocation: '/');
 
 final routes = [
   // GoRoute(path: '/', builder: (context, state) => const TestsScreen()),
@@ -70,7 +70,8 @@ final routes = [
   GoRoute(
       path: '/companyChat', builder: (context, state) => const CompanyChat()),
   GoRoute(
-      path: '/messageScreen', builder: (context, state) => const MessageScreen()),
+      path: '/messageScreen',
+      builder: (context, state) => const MessageScreen()),
   GoRoute(path: '/payment', builder: (context, state) => const Subscription()),
   GoRoute(
       path: '/paymentFailed',
