@@ -44,9 +44,9 @@ class _MessageScreenState extends State<MessageScreen> {
     if (messageText.isNotEmpty) {
       String? currentUserId = Provider.of<UserProvider>(context, listen: false).appUser?.uid;
       _firestore
-          .collection('single_messages')
-          .doc()
-          .collection('messages')
+          .collection('chat')
+          .doc(currentUserId)
+          .collection('chat-receipts')
           .add({
         'text': messageText,
         'type': 'text',
