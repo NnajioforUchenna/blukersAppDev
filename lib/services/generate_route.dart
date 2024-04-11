@@ -15,6 +15,7 @@ import '../views/company/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
 import '../views/company/workers.dart';
 import '../views/worker/chat/chat_message_screen.dart';
+import '../views/worker/chat/message.dart';
 import '../views/worker/services/services_components/orders/orders_list.dart';
 import '../views/worker/services/services_components/products/products.dart';
 import '../views/worker/services/services_components/subscription/subscription.dart';
@@ -31,7 +32,7 @@ import '../views/worker/worker_profile/create_worker_profile/create_worker_profi
 import '../views/worker/worker_profile/worker_profile.dart';
 import 'authentication_wrapper.dart';
 
-final goRouter = GoRouter(routes: routes, initialLocation: '/');
+final goRouter = GoRouter(routes: routes, initialLocation: '/messageScreen');
 
 final routes = [
   // GoRoute(path: '/', builder: (context, state) => const TestsScreen()),
@@ -68,6 +69,8 @@ final routes = [
       builder: (context, state) => const WorkerProfile()),
   GoRoute(
       path: '/companyChat', builder: (context, state) => const CompanyChat()),
+  GoRoute(
+      path: '/messageScreen', builder: (context, state) => const MessageScreen()),
   GoRoute(path: '/payment', builder: (context, state) => const Subscription()),
   GoRoute(
       path: '/paymentFailed',
