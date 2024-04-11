@@ -23,8 +23,8 @@ class CompanyChat extends StatelessWidget {
             ? const LoginOrRegister()
             : LayoutBuilder(
                 builder: ((context, constraints) {
-                  return Container(
-                    child: cp.chatRecipients.isEmpty
+                  return
+                    cp.chatRecipients.isEmpty
                         ? IconText404(
                             text: AppLocalizations.of(context)!.youHaveNoChats,
                             icon: UniconsLine.chat)
@@ -34,8 +34,18 @@ class CompanyChat extends StatelessWidget {
                               return ChatRecipientWidget(
                                 chatRecipient: cp.chatRecipients[index],
                               );
-                            }),
-                  );
+                            });
+
+                   //
+                   // ListView.builder(
+                   //            // itemCount: cp.chatRecipients.length,
+                   //            itemCount: 10,
+                   //            itemBuilder: (BuildContext context, int index) {
+                   //              return ChatRecipientWidget(
+                   //                // chatRecipient: cp.chatRecipients[index],
+                   //              );
+                   //            });
+
                 }),
               ));
   }
