@@ -2,6 +2,7 @@ import 'package:blukers/models/chat_recipient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/app_user.dart';
 import '../models/chat_message.dart';
 import '../models/chat_room.dart';
 
@@ -82,11 +83,6 @@ class ChatDataProvider {
         .collection('messages')
         .orderBy('sentAt')
         .snapshots();
-    // for (int i = 0; i < snapshot.docs.length; i++) {
-    //   //print(snapshot.docs[i].data());
-    //   res.add(snapshot.docs[i].data());
-    // }
-    // return res;
   }
 
   // Async function to get chat recipients
@@ -94,9 +90,9 @@ class ChatDataProvider {
     try {
       // Access the specific document and subcollection
       QuerySnapshot snapshot = await firestore
-          .collection('Chats')
+          .collection('chat')
           .doc(uid)
-          .collection('ChatRecipients')
+          .collection('chat-recipients')
           .get();
 
       // Map each document to a ChatRecipient object
@@ -110,5 +106,57 @@ class ChatDataProvider {
       // Handle exceptions or return an empty list
       return [];
     }
+  }
+
+  static void sendChat(String message, AppUser currentUser,
+      ChatRecipient selectedChatRecipient) {
+    // 2 Step for Sending Message and 2 Steps for Receiver to Receive Message
+    // Step 1: List the Recipient in the senders chat Recipients
+    firestore
+        .collection('chat')
+        .doc(currentUser.uid)
+        .collection('chat-recipients')
+        .doc(selectedChatRecipient.uid)
+        .set(selectedChatRecipient.toMap());
+    // Step 2: add message to the senders chat messages
+    firestore
+        .collection('chat')
+        .doc(currentUser.uid)
+        .collection('messages')
+        .doc(selectedChatRecipient.uid)
+        .collection('messages')
+        .add({
+      'message': message,
+      'senderId': currentUser.uid,
+      'recipientId': selectedChatRecipient.uid,
+      'timestamp': FieldValue.serverTimestamp()
+    });
+
+    // Step 3: List the Sender in the Recipients chat Recipients
+    firestore
+        .collection('chat')
+        .doc(selectedChatRecipient.uid)
+        .collection('chat-recipients')
+        .doc(currentUser.uid)
+        .set({
+      "clientType": currentUser.userRole,
+      "displayName": currentUser.displayName,
+      "email": currentUser.email,
+      "photoUrl": currentUser.photoUrl,
+      "uid": currentUser.uid
+    });
+    // Step 4: add message to the Recipients chat messages
+    firestore
+        .collection('chat')
+        .doc(selectedChatRecipient.uid)
+        .collection('messages')
+        .doc(currentUser.uid)
+        .collection('messages')
+        .add({
+      'message': message,
+      'senderId': currentUser.uid,
+      'recipientId': selectedChatRecipient.uid,
+      'timestamp': FieldValue.serverTimestamp()
+    });
   }
 }

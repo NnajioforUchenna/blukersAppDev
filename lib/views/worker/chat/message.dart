@@ -1,24 +1,14 @@
-// ignore_for_file: library_private_types_in_public_api
-
+import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/views/common_vieiws/index.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
 import 'components/message_stream.dart';
 
-final _firestore = FirebaseFirestore.instance;
-
 class MessageScreen extends StatefulWidget {
-  static const String id = 'message_screen';
-  // final String generateChatId;
-
   const MessageScreen({
     super.key,
-    // required this.generateChatId,
   });
 
   @override
@@ -27,42 +17,16 @@ class MessageScreen extends StatefulWidget {
 
 class _MessageScreenState extends State<MessageScreen> {
   final messageTextController = TextEditingController();
-  final _auth = FirebaseAuth.instance;
-  late String messageText;
-  // late String generateChatId;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   generateChatId = widget.generateChatId;
-  // }
-
-
-
-  void sendMessage() {
-    String messageText = messageTextController.text.trim();
-    if (messageText.isNotEmpty) {
-      String? currentUserId = Provider.of<UserProvider>(context, listen: false).appUser?.uid;
-      _firestore
-          .collection('chat')
-          .doc(currentUserId)
-          .collection('chat-receipts')
-          .add({
-        'text': messageText,
-        'type': 'text',
-        'senderId': currentUserId,
-        'receiverId': '',
-        'createdAt': FieldValue.serverTimestamp(),
-      });
-      messageTextController.clear();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    String? currentUserId = Provider.of<UserProvider>(context, listen: false).appUser?.uid;
+    String? currentUserId =
+        Provider.of<UserProvider>(context, listen: false).appUser?.uid;
+    ChatProvider cp = Provider.of<ChatProvider>(context);
     return Scaffold(
-      appBar: const MyAppBar(title: 'Username',),
+      appBar: MyAppBar(
+        title: cp.selectedChatRecipient?.displayName ?? 'Not Given',
+      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () {
@@ -82,7 +46,7 @@ class _MessageScreenState extends State<MessageScreen> {
               Container(
                 decoration: const BoxDecoration(
                   border: Border(
-                    top: BorderSide(color: Colors.blue,width: 2),
+                    top: BorderSide(color: Colors.blue, width: 2),
                   ),
                 ),
                 child: Row(
@@ -91,11 +55,9 @@ class _MessageScreenState extends State<MessageScreen> {
                     Expanded(
                       child: TextField(
                         controller: messageTextController,
-                        onChanged: (value) {
-                          messageText = value;
-                        },
                         decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
                           hintText: 'Message...',
                           hintStyle: TextStyle(fontSize: 14),
                           border: InputBorder.none,
@@ -103,7 +65,12 @@ class _MessageScreenState extends State<MessageScreen> {
                       ),
                     ),
                     IconButton(
-                      onPressed: sendMessage,
+                      onPressed: () {
+                        if (messageTextController.text.trim().isNotEmpty) {
+                          cp.sendChat(messageTextController.text.trim());
+                          messageTextController.clear();
+                        }
+                      },
                       icon: const Icon(
                         Icons.send,
                         color: Colors.blue,
@@ -120,7 +87,3 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 }
-
-
-
-

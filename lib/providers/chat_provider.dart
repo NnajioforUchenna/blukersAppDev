@@ -13,11 +13,14 @@ class ChatProvider with ChangeNotifier {
   AppUser? appUser;
 
   List<ChatRecipient> chatRecipients = [];
+  ChatRecipient? selectedChatRecipient;
 
   update(AppUser? user) {
     appUser = user;
-    getChatRecipients(appUser!.uid);
-    notifyListeners();
+    if (appUser != null) {
+      getChatRecipients(appUser!.uid);
+      notifyListeners();
+    }
   }
 
   ChatProvider() {
@@ -29,6 +32,15 @@ class ChatProvider with ChangeNotifier {
   Future<void> getChatRecipients(String uid) async {
     chatRecipients = await ChatDataProvider.getChatRecipients(uid);
     notifyListeners();
+  }
+
+  void setChatRecipient(ChatRecipient? chatRecipient) {
+    selectedChatRecipient = chatRecipient;
+    notifyListeners();
+  }
+
+  void sendChat(String message) {
+    ChatDataProvider.sendChat(message, appUser!, selectedChatRecipient!);
   }
 
   // _______________________________________________________

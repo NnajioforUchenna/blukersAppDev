@@ -1,35 +1,36 @@
-
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../providers/chat_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import 'message_bubble.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
 class MessagesStream extends StatelessWidget {
-
- // final String generateChatId;
+  // final String generateChatId;
 
   const MessagesStream({
     super.key,
-
-   String? currentUserId, required receiverUserName,
+    String? currentUserId,
+    required receiverUserName,
   });
 
   @override
   Widget build(BuildContext context) {
-    String? currentUserId = Provider.of<UserProvider>(context, listen: false).appUser?.uid;
+    String? currentUserId =
+        Provider.of<UserProvider>(context, listen: false).appUser?.uid;
+    ChatProvider cp = Provider.of<ChatProvider>(context);
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
-          .collection('single_messages')
-          .doc()
+          .collection('chat')
+          .doc(currentUserId)
           .collection('messages')
-          .orderBy('createdAt')
+          .doc(cp.selectedChatRecipient?.uid)
+          .collection('messages')
+          .orderBy('timestamp')
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -48,7 +49,7 @@ class MessagesStream extends StatelessWidget {
 
         for (var message in messages) {
           final data = message.data() as Map<String, dynamic>;
-          final messageText = data['text'] as String? ?? '';
+          final messageText = data['message'] as String? ?? '';
           final isMe = currentUserId == data['senderId'];
 
           final messageWidget = MessageBubble(
