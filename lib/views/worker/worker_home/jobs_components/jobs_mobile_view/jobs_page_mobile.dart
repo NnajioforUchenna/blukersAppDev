@@ -26,13 +26,13 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       asp = Provider.of<AppSettingsProvider>(context, listen: false);
-      // ShowCaseWidget.of(context).startShowCase([
-      //   asp.signInButton,
-      //   asp.bottomNavigation,
-      //   asp.searchBar,
-      //   asp.selection,
-      //   asp.translation
-      // ]);
+      ShowCaseWidget.of(context).startShowCase([
+        asp.signInButton,
+        asp.bottomNavigation,
+        asp.searchBar,
+        asp.selection,
+        asp.translation
+      ]);
     });
   }
 
