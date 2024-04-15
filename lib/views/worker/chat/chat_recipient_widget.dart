@@ -2,12 +2,11 @@ import 'package:blukers/models/chat_recipient.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 import '../../../providers/chat_provider.dart';
 
 class ChatRecipientWidget extends StatelessWidget {
   final ChatRecipient? chatRecipient;
-  const ChatRecipientWidget({super.key, this.chatRecipient});
+  const ChatRecipientWidget({Key? key, this.chatRecipient}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +23,28 @@ class ChatRecipientWidget extends StatelessWidget {
           elevation: 3,
           child: ListTile(
             leading: const CircleAvatar(
-                backgroundImage:
-                    AssetImage('assets/images/companyLogoPage.png')),
+              backgroundImage: AssetImage('assets/images/companyLogoPage.png'),
+            ),
             title: Text(chatRecipient?.displayName ?? 'Not Given'),
             subtitle: Text(chatRecipient?.clientType ?? 'Not Given'),
+            trailing: Container(
+              width: 23,
+              height: 23,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.blueAccent,
+              ),
+              child: Center(
+                child: Text(
+                  '${chatRecipient?.unreadMessageCount ?? 0}', // Use unreadMessageCount dynamically
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ),

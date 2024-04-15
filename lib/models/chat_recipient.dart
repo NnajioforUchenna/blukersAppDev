@@ -1,9 +1,10 @@
 class ChatRecipient {
-  String uid;
-  String displayName;
-  String email;
-  String photoUrl;
-  String clientType;
+  final String uid;
+  final String displayName;
+  final String email;
+  final String photoUrl;
+  final String clientType;
+  int unreadMessageCount; // Added property for unread message count
 
   // Constructor
   ChatRecipient({
@@ -12,6 +13,7 @@ class ChatRecipient {
     required this.email,
     required this.photoUrl,
     required this.clientType,
+    this.unreadMessageCount = 0, // Default unread message count to 0
   });
 
   // Factory constructor for creating an instance from a map
@@ -22,6 +24,7 @@ class ChatRecipient {
       email: map['email'] ?? '',
       photoUrl: map['photoUrl'] ?? '',
       clientType: map['clientType'] ?? '',
+      unreadMessageCount: map['unreadMessageCount'] ?? 0, // Assign unread message count if available, else default to 0
     );
   }
 
@@ -33,6 +36,7 @@ class ChatRecipient {
       'email': email,
       'photoUrl': photoUrl,
       'clientType': clientType,
+      'unreadMessageCount': unreadMessageCount, // Include unread message count in the map
     };
   }
 }
