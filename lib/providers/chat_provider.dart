@@ -23,14 +23,9 @@ class ChatProvider with ChangeNotifier {
     }
   }
 
-  ChatProvider() {
-    if (appUser != null) {
-      getChatRecipients(appUser!.uid);
-    }
-  }
-
   Future<void> getChatRecipients(String uid) async {
     chatRecipients = await ChatDataProvider.getChatRecipients(uid);
+
     notifyListeners();
   }
 
@@ -41,6 +36,8 @@ class ChatProvider with ChangeNotifier {
 
   void sendChat(String message) {
     ChatDataProvider.sendChat(message, appUser!, selectedChatRecipient!);
+    // Increment unread message count for the recipient
+    selectedChatRecipient!.unreadMessageCount++;
   }
 
   // _______________________________________________________

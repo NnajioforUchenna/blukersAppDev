@@ -108,18 +108,34 @@ class ChatDataProvider {
     }
   }
 
+  // ----------------------------------------------------------
+
+
+  static Future<int> getUnreadMessageCount(String currentUserUid, String recipientUid) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('chat')
+        .doc(currentUserUid)
+        .collection('messages')
+        .doc(recipientUid)
+        .collection('messages')
+        .where('recipientId', isEqualTo: currentUserUid)
+        .where('isRead', isEqualTo: false)
+        .get();
+
+    return querySnapshot.docs.length;
+  }
   static void sendChat(String message, AppUser currentUser,
-      ChatRecipient selectedChatRecipient) {
-    // 2 Step for Sending Message and 2 Steps for Receiver to Receive Message
-    // Step 1: List the Recipient in the senders chat Recipients
-    firestore
+      ChatRecipient selectedChatRecipient) async {
+    // Step 1: List the Recipient in the sender's chat Recipients
+    await firestore
         .collection('chat')
         .doc(currentUser.uid)
         .collection('chat-recipients')
         .doc(selectedChatRecipient.uid)
         .set(selectedChatRecipient.toMap());
-    // Step 2: add message to the senders chat messages
-    firestore
+
+    // Step 2: add message to the sender's chat messages
+    await firestore
         .collection('chat')
         .doc(currentUser.uid)
         .collection('messages')
@@ -132,8 +148,8 @@ class ChatDataProvider {
       'timestamp': FieldValue.serverTimestamp()
     });
 
-    // Step 3: List the Sender in the Recipients chat Recipients
-    firestore
+    // Step 3: List the Sender in the Recipient's chat Recipients
+    await firestore
         .collection('chat')
         .doc(selectedChatRecipient.uid)
         .collection('chat-recipients')
@@ -143,10 +159,12 @@ class ChatDataProvider {
       "displayName": currentUser.displayName,
       "email": currentUser.email,
       "photoUrl": currentUser.photoUrl,
-      "uid": currentUser.uid
+      "uid": currentUser.uid,
+    //  "unreadMessageCount": selectedChatRecipient.uid,
     });
-    // Step 4: add message to the Recipients chat messages
-    firestore
+
+    // Step 4: add message to the Recipient's chat messages
+    await firestore
         .collection('chat')
         .doc(selectedChatRecipient.uid)
         .collection('messages')
@@ -156,7 +174,9 @@ class ChatDataProvider {
       'message': message,
       'senderId': currentUser.uid,
       'recipientId': selectedChatRecipient.uid,
-      'timestamp': FieldValue.serverTimestamp()
+      'timestamp': FieldValue.serverTimestamp(),
     });
   }
+
 }
+

@@ -20,8 +20,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String? currentUserId =
-        Provider.of<UserProvider>(context, listen: false).appUser?.uid;
+    String? currentUserId = Provider.of<UserProvider>(context, listen: false).appUser?.uid;
     ChatProvider cp = Provider.of<ChatProvider>(context);
     return Scaffold(
       appBar: MyAppBar(
