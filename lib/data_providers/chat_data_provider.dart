@@ -25,7 +25,7 @@ class ChatDataProvider {
         chatLogo: [myLogo, recipientLogo],
         members: [myUid, recipientUid]);
     await chatRoomDocRef.set(chatRoom.toMap()).catchError((error) {
-      print("Error adding chat room to Firestore: $error");
+      print("Error adding worker_chat room to Firestore: $error");
     });
     return chatRoom;
   }
@@ -85,33 +85,20 @@ class ChatDataProvider {
         .snapshots();
   }
 
-  // Async function to get chat recipients
-  static Future<List<ChatRecipient>> getChatRecipients(String uid) async {
-    try {
-      // Access the specific document and subcollection
-      QuerySnapshot snapshot = await firestore
-          .collection('chat')
-          .doc(uid)
-          .collection('chat-recipients')
-          .get();
-
-      // Map each document to a ChatRecipient object
-      List<ChatRecipient> recipients = snapshot.docs.map((doc) {
-        return ChatRecipient.fromMap(doc.data() as Map<String, dynamic>);
-      }).toList();
-
-      return recipients;
-    } catch (e) {
-      print(e.toString());
-      // Handle exceptions or return an empty list
-      return [];
-    }
+  static Stream<List<ChatRecipient>> getChatRecipientsStream(String uid) {
+    return firestore
+        .collection('chat')
+        .doc(uid)
+        .collection('chat-recipients')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) =>
+                ChatRecipient.fromMap(doc.data() as Map<String, dynamic>))
+            .toList());
   }
 
-  // ----------------------------------------------------------
-
-
-  static Future<int> getUnreadMessageCount(String currentUserUid, String recipientUid) async {
+  static Future<int> getUnreadMessageCount(
+      String currentUserUid, String recipientUid) async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('chat')
         .doc(currentUserUid)
@@ -124,9 +111,10 @@ class ChatDataProvider {
 
     return querySnapshot.docs.length;
   }
+
   static void sendChat(String message, AppUser currentUser,
       ChatRecipient selectedChatRecipient) async {
-    // Step 1: List the Recipient in the sender's chat Recipients
+    // Step 1: List the Recipient in the sender's worker_chat Recipients
     await firestore
         .collection('chat')
         .doc(currentUser.uid)
@@ -134,7 +122,7 @@ class ChatDataProvider {
         .doc(selectedChatRecipient.uid)
         .set(selectedChatRecipient.toMap());
 
-    // Step 2: add message to the sender's chat messages
+    // Step 2: add message to the sender's worker_chat messages
     await firestore
         .collection('chat')
         .doc(currentUser.uid)
@@ -148,22 +136,22 @@ class ChatDataProvider {
       'timestamp': FieldValue.serverTimestamp()
     });
 
-    // Step 3: List the Sender in the Recipient's chat Recipients
+    // Step 3: List the Sender in the Recipient's worker_chat Recipients
     await firestore
         .collection('chat')
         .doc(selectedChatRecipient.uid)
         .collection('chat-recipients')
         .doc(currentUser.uid)
-        .set({
+        .update({
       "clientType": currentUser.userRole,
       "displayName": currentUser.displayName,
       "email": currentUser.email,
       "photoUrl": currentUser.photoUrl,
       "uid": currentUser.uid,
-    //  "unreadMessageCount": selectedChatRecipient.uid,
+      "unreadMessageCount": FieldValue.increment(1),
     });
 
-    // Step 4: add message to the Recipient's chat messages
+    // Step 4: add message to the Recipient's worker_chat messages
     await firestore
         .collection('chat')
         .doc(selectedChatRecipient.uid)
@@ -178,5 +166,12 @@ class ChatDataProvider {
     });
   }
 
+  static void updateUnreadMessageCount(String uid, String uid2, int i) {
+    firestore
+        .collection('chat')
+        .doc(uid)
+        .collection('chat-recipients')
+        .doc(uid2)
+        .update({'unreadMessageCount': i});
+  }
 }
-

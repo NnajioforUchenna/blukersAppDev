@@ -6,21 +6,22 @@ import 'package:provider/provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import 'components/message_stream.dart';
 
-class MessageScreen extends StatefulWidget {
-  const MessageScreen({
+class WorkerChatRoom extends StatefulWidget {
+  const WorkerChatRoom({
     super.key,
   });
 
   @override
-  _MessageScreenState createState() => _MessageScreenState();
+  _WorkerChatRoomState createState() => _WorkerChatRoomState();
 }
 
-class _MessageScreenState extends State<MessageScreen> {
+class _WorkerChatRoomState extends State<WorkerChatRoom> {
   final messageTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    String? currentUserId = Provider.of<UserProvider>(context, listen: false).appUser?.uid;
+    String? currentUserId =
+        Provider.of<UserProvider>(context, listen: false).appUser?.uid;
     ChatProvider cp = Provider.of<ChatProvider>(context);
     return Scaffold(
       appBar: MyAppBar(

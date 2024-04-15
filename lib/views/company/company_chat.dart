@@ -8,7 +8,7 @@ import '../../providers/user_provider_parts/user_provider.dart';
 import '../auth/common_widget/login_or_register.dart';
 import '../common_vieiws/icon_text_404.dart';
 import '../common_vieiws/page_template/page_template.dart';
-import '../worker/chat/chat_recipient_widget.dart';
+import '../worker/worker_chat/components/chat_recipient_widget.dart';
 
 class CompanyChat extends StatelessWidget {
   const CompanyChat({super.key});

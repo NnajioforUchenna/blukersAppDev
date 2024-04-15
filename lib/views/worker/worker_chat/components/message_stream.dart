@@ -10,13 +10,11 @@ import 'message_bubble.dart';
 final _firestore = FirebaseFirestore.instance;
 
 class MessagesStream extends StatelessWidget {
-
   const MessagesStream({
     super.key,
     String? currentUserId,
     required receiverUserName,
   });
-
 
   @override
   Widget build(BuildContext context) {

@@ -24,7 +24,8 @@ class ChatRecipient {
       email: map['email'] ?? '',
       photoUrl: map['photoUrl'] ?? '',
       clientType: map['clientType'] ?? '',
-      unreadMessageCount: map['unreadMessageCount'] ?? 0, // Assign unread message count if available, else default to 0
+      unreadMessageCount: map['unreadMessageCount'] ??
+          0, // Assign unread message count if available, else default to 0
     );
   }
 
@@ -36,7 +37,8 @@ class ChatRecipient {
       'email': email,
       'photoUrl': photoUrl,
       'clientType': clientType,
-      'unreadMessageCount': unreadMessageCount, // Include unread message count in the map
+      'unreadMessageCount':
+          unreadMessageCount, // Include unread message count in the map
     };
   }
 }

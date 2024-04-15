@@ -14,8 +14,6 @@ import '../views/company/my_job_posts.dart';
 import '../views/company/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
 import '../views/company/workers.dart';
-import '../views/worker/chat/chat_message_screen.dart';
-import '../views/worker/chat/message.dart';
 import '../views/worker/services/services_components/orders/orders_list.dart';
 import '../views/worker/services/services_components/products/products.dart';
 import '../views/worker/services/services_components/subscription/subscription.dart';
@@ -23,6 +21,9 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/manage_subscription/payment_successful_widget.dart';
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
+import '../views/worker/worker_chat/chat_message_screen.dart';
+import '../views/worker/worker_chat/workerChatRoom.dart';
+import '../views/worker/worker_chat/worker_chat.dart';
 import '../views/worker/worker_home/jobs.dart';
 import '../views/worker/worker_home/my_jobs_and_components/my_jobs.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile.dart';
@@ -69,9 +70,10 @@ final routes = [
       builder: (context, state) => const WorkerProfile()),
   GoRoute(
       path: '/companyChat', builder: (context, state) => const CompanyChat()),
+  GoRoute(path: '/workerChat', builder: (context, state) => const WorkerChat()),
   GoRoute(
-      path: '/messageScreen',
-      builder: (context, state) => const MessageScreen()),
+      path: '/workerChatRoom',
+      builder: (context, state) => const WorkerChatRoom()),
 
   GoRoute(path: '/payment', builder: (context, state) => const Subscription()),
   GoRoute(
@@ -127,9 +129,10 @@ final routes = [
       path: '/createCompanyProfile',
       builder: (context, state) => const CreateCompanyProfile()),
   GoRoute(
-      path: '/company-chat', builder: (context, state) => const CompanyChat()),
+      path: '/company-worker_chat',
+      builder: (context, state) => const CompanyChat()),
   GoRoute(
-      path: '/chat-message',
+      path: '/worker_chat-message',
       builder: (context, state) => const ChatMessageScreen())
 ];
 

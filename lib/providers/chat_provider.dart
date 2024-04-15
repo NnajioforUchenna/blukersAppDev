@@ -18,26 +18,25 @@ class ChatProvider with ChangeNotifier {
   update(AppUser? user) {
     appUser = user;
     if (appUser != null) {
-      getChatRecipients(appUser!.uid);
       notifyListeners();
     }
   }
 
-  Future<void> getChatRecipients(String uid) async {
-    chatRecipients = await ChatDataProvider.getChatRecipients(uid);
-
-    notifyListeners();
+  Stream<List<ChatRecipient>> getChatRecipientsStream() {
+    if (appUser == null) return const Stream.empty();
+    return ChatDataProvider.getChatRecipientsStream(appUser!.uid);
   }
 
-  void setChatRecipient(ChatRecipient? chatRecipient) {
+  void setChatRecipient(ChatRecipient chatRecipient) {
     selectedChatRecipient = chatRecipient;
+    selectedChatRecipient!.unreadMessageCount = 0;
+    ChatDataProvider.updateUnreadMessageCount(
+        appUser!.uid, selectedChatRecipient!.uid, 0);
     notifyListeners();
   }
 
   void sendChat(String message) {
     ChatDataProvider.sendChat(message, appUser!, selectedChatRecipient!);
-    // Increment unread message count for the recipient
-    selectedChatRecipient!.unreadMessageCount++;
   }
 
   // _______________________________________________________
@@ -63,9 +62,9 @@ class ChatProvider with ChangeNotifier {
     int chat = _chatRooms.indexWhere((element) =>
         element.members[0] == myUid && element.members[1] == recipientUid);
     ChatRoom chatRoom;
-    //if chat room does not exist then create chat room
+    //if worker_chat room does not exist then create worker_chat room
     //else move user to already created chatroom
-    print("chat$chat");
+    print("worker_chat$chat");
     if (chat == -1) {
       chatRoom = await ChatDataProvider.createChatRoom(
           myUid: myUid,
