@@ -37,13 +37,9 @@ part 'user_navigation_functions.dart';
 
 class UserProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
   User? _user;
-
   User? get user => _user;
-
   AppUser? _appUser;
-
   AppUser? get appUser => _appUser;
   late StreamService streamService;
 
