@@ -1,6 +1,6 @@
+import 'package:blukers/views/auth/registration/registration_component/page_slider.dart';
 import 'package:flutter/material.dart';
 
-import 'registration_component/page_slider.dart';
 import 'registration_component/sign_up_timeline.dart';
 
 class Registration extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 
 import '../models/payment_model/url_info.dart';
 import '../providers/payment_providers/payments_provider.dart';
-import '../views/auth/login.dart';
+import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
 import '../views/common_vieiws/landing_page/landing_page.dart';
@@ -38,12 +38,13 @@ final goRouter = GoRouter(routes: routes, initialLocation: '/');
 final routes = [
   // GoRoute(path: '/', builder: (context, state) => const TestsScreen()),
   GoRoute(
-      path: '/', builder: (context, state) => const AuthenticationWrapper()), //
+      path: '/auth',
+      builder: (context, state) => const AuthenticationWrapper()), //
   // const AuthenticationWrapper() //  SplashScreen()// GoRoute(
   //     path: '/',
   //     builder: (context, state) =>
   //         const ServicesList()), //AuthenticationWrapper())
-  GoRoute(path: '/landing', builder: (context, state) => const LandingPage()),
+  GoRoute(path: '/', builder: (context, state) => const LandingPage()),
   GoRoute(path: '/workers', builder: (context, state) => const Workers()),
   GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
   GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),

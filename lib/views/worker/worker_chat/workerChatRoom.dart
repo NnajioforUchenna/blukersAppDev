@@ -40,7 +40,6 @@ class _WorkerChatRoomState extends State<WorkerChatRoom> {
                 child: MessagesStream(
                   currentUserId: currentUserId,
                   receiverUserName: '',
-                  // generateChatId: generateChatId,
                 ),
               ),
               Container(

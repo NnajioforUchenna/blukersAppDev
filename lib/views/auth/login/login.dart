@@ -1,18 +1,19 @@
-import '../../providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/user_provider_parts/user_provider.dart';
-import '../../services/make_responsive_web.dart';
-import '../../services/responsive.dart';
-import '../../services/validation.dart';
-import 'common_widget/auth_input.dart';
-import 'common_widget/company_logo.dart';
-import 'common_widget/label_button.dart';
-import 'common_widget/submit_button.dart';
+import '../../../providers/chat_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
+import '../../../services/make_responsive_web.dart';
+import '../../../services/responsive.dart';
+import '../../../services/validation.dart';
+import '../common_widget/auth_input.dart';
+import '../common_widget/company_logo.dart';
+import '../common_widget/label_button.dart';
+import '../common_widget/submit_button.dart';
+import 'components/sign_in_options.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -187,7 +188,10 @@ class _LoginState extends State<Login> {
                           },
                           text: AppLocalizations.of(context)!.signIn,
                         ),
+                        const SizedBox(height: 20),
+                        const Text('Or Sign In using'),
                         const SizedBox(height: 10),
+                        const SignInOptions(),
                         LabelButton(
                           onTap: () {
                             context.go('/register');
