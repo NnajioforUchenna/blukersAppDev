@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../utils/styles/index.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:unicons/unicons.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../utils/styles/index.dart';
 
 class UpdateAppDialog extends StatelessWidget {
-  const UpdateAppDialog({super.key, required this.url});
+  const UpdateAppDialog({
+    super.key,
+    required this.url,
+  });
   final String url;
 
   @override

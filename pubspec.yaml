@@ -75,6 +75,7 @@ dependencies:
   showcaseview: ^2.0.3
   dart_format: ^0.0.4
   font_awesome_flutter: ^10.7.0
+  device_info_plus: ^9.1.2
 
 
 

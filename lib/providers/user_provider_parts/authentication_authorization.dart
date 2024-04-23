@@ -1,6 +1,6 @@
 part of 'user_provider.dart';
 
-extension Authentication_Authorization on UserProvider {
+extension AuthenticationAuthorization on UserProvider {
   Future<void> signOut() async {
     await _auth.signOut();
     _appUser = null;

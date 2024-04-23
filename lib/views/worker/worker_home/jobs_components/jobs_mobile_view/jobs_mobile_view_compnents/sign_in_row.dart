@@ -1,4 +1,4 @@
-import 'package:blukers/providers/app_versions_provider.dart';
+import 'package:blukers/providers/app_settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';

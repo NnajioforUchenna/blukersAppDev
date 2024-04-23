@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../providers/app_versions_provider.dart';
+import '../../providers/app_settings_provider.dart';
 import '../../providers/chat_provider.dart';
 import '../../providers/user_provider_parts/user_provider.dart';
 import '../../utils/styles/index.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/app_versions_provider.dart';
+import '../providers/app_settings_provider.dart';
 import '../providers/job_posts_provider.dart';
 import '../providers/payment_providers/payments_provider.dart';
 import '../providers/user_provider_parts/user_provider.dart';

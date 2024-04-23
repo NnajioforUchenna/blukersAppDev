@@ -1,4 +1,4 @@
-import 'package:blukers/providers/app_versions_provider.dart';
+import 'package:blukers/providers/app_settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';

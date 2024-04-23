@@ -1,18 +1,34 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pub_semver/pub_semver.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 import '../data_providers/app_versions_data_provider.dart';
 import '../utils/helpers/app_version.dart';
 import '../views/old_common_views/components/update_app_dialog.dart';
+
+part 'user_journey.dart';
 
 class AppSettingsProvider with ChangeNotifier {
   String? _latestVersion;
   String? _androidUrl;
   String? _iOSUrl;
   bool? _shouldUpdate;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? _user;
+
+  AppSettingsProvider() {
+    _auth.authStateChanges().listen((User? user) {
+      _user = user;
+      notifyListeners();
+    });
+    getDeviceId();
+  }
 
   String? get latestVersion => _latestVersion;
 

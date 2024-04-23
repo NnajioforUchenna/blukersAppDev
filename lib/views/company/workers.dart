@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/app_versions_provider.dart';
+import '../../providers/app_settings_provider.dart';
 import '../../providers/industry_provider.dart';
 import '../../providers/worker_provider.dart';
 import '../common_vieiws/all_search_bar_components/all_search_bar.dart';

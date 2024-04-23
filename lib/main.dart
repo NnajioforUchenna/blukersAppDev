@@ -11,7 +11,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'firebase_options.dart';
 import 'l10n/l10n.dart';
-import 'providers/app_versions_provider.dart';
+import 'providers/app_settings_provider.dart';
 import 'providers/chat_provider.dart';
 import 'providers/company_provider.dart';
 import 'providers/industry_provider.dart';

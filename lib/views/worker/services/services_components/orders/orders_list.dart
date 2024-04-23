@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../../../models/payment_model/paid_order.dart';
-import '../../../../../providers/app_versions_provider.dart';
+import '../../../../../providers/app_settings_provider.dart';
 import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../common_vieiws/icon_text_404.dart';
 import 'order_card.dart';
