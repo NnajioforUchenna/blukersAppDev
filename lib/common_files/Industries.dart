@@ -2,671 +2,971 @@ final List<Map<String, dynamic>> IndustriesData = [
   {
     "jobs": [
       {
-        "description":
-            "A farmer is responsible for cultivating crops, raising livestock, and managing farm operations.",
-        "requirements":
-            "knowledge of crop cultivation and animal husbandry, physical stamina, problem-solving skills, basic mechanical and technical skills, time management",
-        "lowRange": 22000,
+        "description": "Operate commercial vehicles to transport goods or passengers over short distances.",
+        "requirements": "Valid commercial driver's license (CDL), Clean driving record, Ability to operate and maintain commercial vehicles",
+        "lowRange": 30000,
         "numberOfApplicants": 0,
-        "title": "Farmer",
-        "jobId": "farmer",
-        "highRange": 70000
-      },
-      {
-        "description":
-            "An Agricultural Technician is responsible for conducting tests and experiments, collecting data, and providing support to agricultural scientists and farmers.",
-        "requirements":
-            "Knowledge of agricultural techniques, Ability to operate and maintain equipment, Strong analytical and problem-solving skills, Good communication and interpersonal skills, Attention to detail",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Agricultural Technician",
-        "jobId": "agriculturaltechnician",
-        "highRange": 45000
-      },
-      {
-        "description":
-            "A farm laborer performs various manual tasks on a farm, such as planting, cultivating, and harvesting crops, as well as caring for livestock and maintaining farm equipment.",
-        "requirements":
-            "Physical stamina, Ability to work outdoors in various weather conditions, Attention to detail, Basic knowledge of farm equipment operation, Ability to follow instructions",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Farm Laborer",
-        "jobId": "farmlaborer",
-        "highRange": 40000
-      },
-      {
-        "description":
-            "Provide expert advice and assistance to farmers on crop management, including soil health, irrigation, pest control, and crop rotation.",
-        "requirements":
-            "Agricultural knowledge, Analytical skills, Strong communication, Problem-solving abilities",
-        "lowRange": 35000,
-        "numberOfApplicants": 0,
-        "title": "Crop Consultant",
-        "jobId": "cropconsultant",
-        "highRange": 70000
-      }
-    ],
-    "industryId": "agriculture",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2Fagriculture-300.png?alt=media&token=506c395d-f5ed-49ea-b176-fa342537578d",
-    "description":
-        "The agriculture industry encompasses the cultivation, processing, and distribution of crops, livestock, and other agricultural products. It plays a crucial role in providing food, employment, and economic growth worldwide.",
-    "name": "Agriculture"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A fisherman catches fish and other marine creatures for commercial purposes such as selling or processing.",
-        "requirements":
-            "Strong physical stamina, Knowledge of fishing techniques, Ability to operate fishing equipment, Basic navigation skills, Ability to work in adverse weather conditions",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Fisherman",
-        "jobId": "fisherman",
+        "title": "Commercial Driver",
+        "jobId": "commercial driver",
         "highRange": 60000
       },
       {
-        "description":
-            "A deckhand in the commercial fishing industry assists in various tasks aboard a fishing vessel, including maintaining equipment, cleaning the deck, and assisting with fishing operations.",
-        "requirements":
-            "Physical stamina, Ability to work long hours in challenging conditions, Knowledge of fishing techniques and equipment, Basic first aid skills, Communication skills",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Deckhand",
-        "jobId": "deckhand",
-        "highRange": 50000
-      },
-      {
-        "description":
-            "A fish processing worker is responsible for cleaning, sorting, and packaging fish and seafood products in a commercial fishing setting.",
-        "requirements":
-            "knowledge of seafood processing methods, ability to handle and clean fish, attention to detail, physical stamina",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Fish Processing Worker",
-        "jobId": "fishprocessingworker",
-        "highRange": 40000
-      },
-      {
-        "description":
-            "A Fishing Vessel Captain is responsible for overseeing the operation of fishing vessels, ensuring the safety of the crew, and managing the fishing operations.",
-        "requirements":
-            "Strong navigation and seamanship skills, Knowledge of commercial fishing techniques, Leadership and decision-making abilities, Excellent communication and problem-solving skills",
-        "lowRange": 30000,
-        "numberOfApplicants": 0,
-        "title": "Fishing Vessel Captain",
-        "jobId": "fishingvesselcaptain",
-        "highRange": 80000
-      }
-    ],
-    "industryId": "commercialfishing",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2FcommercialFishing-300.png?alt=media&token=16c5501d-afaf-478b-b84f-bd6c6f036293",
-    "description":
-        "Commercial fishing is a global industry that involves capturing fish and other marine organisms for profit. It encompasses a range of methods, including trawling, longlining, and netting. Large-scale fishing vessels and smaller operations contribute to the industry, which supplies seafood for consumption and trade worldwide.",
-    "name": "Commercial Fishing"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A painter in the construction industry is responsible for applying paint, varnish, and other finishes to buildings, structures, and surfaces.",
-        "requirements":
-            "Painting techniques, Color matching, Surface preparation, Knowledge of different paint types, Attention to detail",
+        "description": "Operate industrial trucks and tractors to move materials within warehouses, storage yards, factories, construction sites, or similar locations.",
+        "requirements": "Experience operating industrial trucks, Forklift certification (preferred), Ability to follow safety protocols",
         "lowRange": 25000,
         "numberOfApplicants": 0,
-        "title": "Painter",
-        "jobId": "painter",
-        "highRange": 50000
-      },
-      {
-        "description":
-            "A mason is responsible for constructing, repairing, and maintaining structures using materials such as bricks, stones, and concrete.",
-        "requirements":
-            "Knowledge of basic construction principles, Ability to read blueprints and follow instructions, Proficiency in using masonry tools and equipment, Physical stamina and strength",
-        "lowRange": 35000,
-        "numberOfApplicants": 0,
-        "title": "Mason",
-        "jobId": "mason",
-        "highRange": 70000
-      },
-      {
-        "description":
-            "A carpenter is responsible for constructing and repairing structures made of wood or other materials. They may work on building frames, floors, walls, roofs, or other structural components.",
-        "requirements":
-            "Knowledge of carpentry techniques and tools, Ability to read blueprints and sketches, Strong mathematical skills for measuring and calculating, Physical strength and stamina, Attention to detail and precision in work",
-        "lowRange": 30000,
-        "numberOfApplicants": 0,
-        "title": "Carpenter",
-        "jobId": "carpenter",
-        "highRange": 60000
-      },
-      {
-        "description":
-            "Electricians are responsible for installing, maintaining, and repairing electrical systems in various construction projects.",
-        "requirements":
-            "Knowledge of electrical systems, Ability to read blueprints, Proficient in handling electrical tools and equipment, Attention to safety protocols, Strong troubleshooting and problem-solving skills",
-        "lowRange": 35000,
-        "numberOfApplicants": 0,
-        "title": "Electrician",
-        "jobId": "electrician",
-        "highRange": 80000
-      },
-      {
-        "description":
-            "A plumber in the Construction industry installs, repairs, and maintains plumbing systems in residential and commercial buildings.",
-        "requirements":
-            "Knowledge of plumbing systems and codes, Good problem-solving and troubleshooting skills, Strong physical stamina and dexterity, Ability to read blueprints and technical drawings, Excellent communication and customer service skills",
-        "lowRange": 35000,
-        "numberOfApplicants": 0,
-        "title": "Plumber",
-        "jobId": "plumber",
-        "highRange": 75000
-      }
-    ],
-    "industryId": "construction",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2Fconstruction-300.png?alt=media&token=b6399fb7-5632-4890-ae5c-4aff6ec6b80f",
-    "description":
-        "The construction industry involves building, repairing, and renovating infrastructure and buildings. It includes various professions and trades, such as architects, engineers, contractors, and laborers. It plays a crucial role in shaping cities, providing employment opportunities, and driving economic growth.",
-    "name": "Construction"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A janitor is responsible for cleaning and maintaining the cleanliness of buildings and premises.",
-        "requirements":
-            "Knowledge of cleaning techniques and supplies, Physical stamina, Attention to detail, Time management skills",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Janitor",
-        "jobId": "janitor",
-        "highRange": 50000
-      },
-      {
-        "description":
-            "A Cleaner is responsible for maintaining cleanliness and hygiene in various facilities, including offices, schools, and hospitals.",
-        "requirements":
-            "Attention to detail, Physical stamina, Ability to follow instructions, Time management, Knowledge of cleaning equipment and materials",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Cleaner",
-        "jobId": "cleaner",
-        "highRange": 50000
-      },
-      {
-        "description":
-            "The Housekeeping Supervisor oversees the cleanliness and maintenance of a facility, managing a team of custodial staff and ensuring high standards of cleanliness and organization.",
-        "requirements":
-            "Customer service skills, Organizational skills, Communication skills, Leadership skills, Knowledge of cleaning techniques and products",
-        "lowRange": 28000,
-        "numberOfApplicants": 0,
-        "title": "Housekeeping Supervisor",
-        "jobId": "housekeepingsupervisor",
-        "highRange": 46000
-      },
-      {
-        "description":
-            "A floor technician is responsible for maintaining the cleanliness of various types of flooring in commercial or residential buildings.",
-        "requirements":
-            "Knowledge of floor cleaning techniques, Ability to operate floor cleaning equipment, Attention to detail, Physical stamina",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Floor Technician",
-        "jobId": "floortechnician",
-        "highRange": 40000
-      }
-    ],
-    "industryId": "custodialwork",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2FcustodialWork-300.png?alt=media&token=1bac3e1f-462c-4d59-aeaf-9baea0e46f5b",
-    "description":
-        "The custodial work industry involves cleaning and maintenance services for various facilities, such as offices, schools, hospitals, and hotels. Custodial workers are responsible for tasks like dusting, mopping, vacuuming, and sanitizing to ensure cleanliness and hygiene in these environments.",
-    "name": "Custodial Work"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "As a cook, you will prepare and cook food in a commercial kitchen. You will be responsible for ensuring all meals are prepared to the highest quality and presentation standards.",
-        "requirements":
-            "Knowledge of various cooking techniques and recipes, Ability to work in a fast-paced environment, Attention to detail and ability to follow recipes accurately, Good communication and teamwork skills, Food safety and sanitation knowledge, Physical stamina and ability to stand for long periods, Flexibility to work evenings, weekends, and holidays",
-        "lowRange": 22000,
-        "numberOfApplicants": 0,
-        "title": "Cook",
-        "jobId": "cook",
+        "title": "Industrial Truck and Tractor Operator",
+        "jobId": "industrial operator",
         "highRange": 45000
       },
       {
-        "description":
-            "Assisting cooks in preparing and cooking food, maintaining cleanliness of the kitchen, and ensuring food is prepared and presented according to standards.",
-        "requirements":
-            "Basic cooking skills, Food safety knowledge, Ability to follow instructions, Physical stamina, Attention to detail",
-        "lowRange": 20000,
+        "description": "Drive light trucks or delivery vehicles to transport goods to customers or businesses.",
+        "requirements": "Valid driver's license, Clean driving record, Ability to lift and carry packages",
+        "lowRange": 22000,
         "numberOfApplicants": 0,
-        "title": "Cook Helper",
-        "jobId": "cookhelper",
+        "title": "Light Truck Driver",
+        "jobId": "lighttruck driver",
         "highRange": 35000
-      },
-      {
-        "description":
-            "A Dish Washer is responsible for cleaning dishes, utensils, and kitchen equipment in a restaurant or food service establishment.",
-        "requirements":
-            "Attention to detail, Ability to work in a fast-paced environment, Physical stamina, Teamwork skills",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Dish Washer",
-        "jobId": "dishwasher",
-        "highRange": 30000
-      },
-      {
-        "description":
-            "A host in the food and beverages industry is responsible for greeting and seating customers, managing reservations, and ensuring a positive dining experience.",
-        "requirements":
-            "Excellent communication skills, Customer service orientation, Ability to handle stressful situations, Organizational skills, Ability to multitask, Knowledge of reservation systems",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Host",
-        "jobId": "host",
-        "highRange": 40000
-      },
-      {
-        "description":
-            "A cashier in the food and beverages industry is responsible for processing customer payments, providing excellent customer service, and maintaining an accurate cash drawer.",
-        "requirements":
-            "Basic math skills, Customer service, Attention to detail, Ability to handle cash transactions",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Cashier",
-        "jobId": "cashier",
-        "highRange": 35000
-      },
-      {
-        "description":
-            "A bartender is responsible for preparing and serving alcoholic and non-alcoholic beverages to customers. They also interact with customers, take orders, and handle cash transactions.",
-        "requirements":
-            "Knowledge of drink recipes and mixology, Good customer service and communication skills, Ability to multitask and work efficiently in a fast-paced environment, Cash handling and basic math skills, Understanding of health and safety regulations, Physical stamina and ability to stand for long periods",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Bartender",
-        "jobId": "bartender",
-        "highRange": 50000
       }
     ],
-    "industryId": "foodandbeverages",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2FfoodAndBeverages-300.png?alt=media&token=36db6501-8db8-46ac-ac95-3d36714a9a07",
-    "description":
-        "The food and beverages industry is a vast and diverse sector encompassing the production, processing, distribution, and sale of food and drinks to meet the consumption needs of individuals. It involves various businesses ranging from restaurants, cafes, and food trucks to food manufacturers, wholesalers, and retailers. This sector is driven by the ever-evolving consumer demand for tasty, nutritious, and convenient food options.",
-    "name": "Food and Beverages"
+    "industryId": "Driver",
+    "imageUrl": "industryimage/driver.png",
+    "description": "The driver industry involves operating various types of vehicles for transporting goods or passengers.",
+    "name": "Driver"
   },
+
+
+
+
   {
     "jobs": [
       {
-        "description":
-            "A food technologist develops and improves food products, ensuring they are safe, nutritious, and meet quality standards.",
-        "requirements":
-            "knowledge of food science and technology, ability to research and analyze data, knowledge of food regulations and safety standards, excellent problem-solving and communication skills",
+        "description": "A fitter is responsible for assembling, installing, and repairing mechanical components and systems according to specifications.",
+        "requirements": "Knowledge of mechanical systems, Ability to use hand and power tools, Attention to detail, Physical stamina",
+        "lowRange": 25000,
+        "numberOfApplicants": 0,
+        "title": "Fitter",
+        "jobId": "fitter",
+        "highRange": 60000
+      },
+      {
+        "description": "A helper assists fitters in assembling and installing mechanical components, and may perform other supportive tasks.",
+        "requirements": "Willingness to learn, Ability to follow instructions, Physical fitness",
+        "lowRange": 20000,
+        "numberOfApplicants": 0,
+        "title": "Helper",
+        "jobId": "helper",
+        "highRange": 50000
+      },
+      {
+        "description": "A Fitter I (Structural) is responsible for structural assembly and installation tasks within a mechanical setting.",
+        "requirements": "Experience in structural assembly, Ability to interpret technical drawings, Attention to safety procedures",
+        "lowRange": 20000,
+        "numberOfApplicants": 0,
+        "title": "Fitter I (Structural)",
+        "jobId": "fitter1",
+        "highRange": 40000
+      },
+      {
+        "description": "A Fitter II performs advanced mechanical assembly and troubleshooting tasks, requiring specialized skills and knowledge.",
+        "requirements": "Advanced mechanical skills, Experience with complex assembly processes, Problem-solving abilities",
+        "lowRange": 30000,
+        "numberOfApplicants": 0,
+        "title": "Fitter II",
+        "jobId": "fitter2",
+        "highRange": 80000
+      },
+      {
+        "description": "A Fitter Supervisor oversees and coordinates the work of fitters, ensuring projects are completed efficiently and safely.",
+        "requirements": "Leadership skills, Experience in supervisory roles, Knowledge of mechanical systems and processes",
         "lowRange": 40000,
         "numberOfApplicants": 0,
-        "title": "Food Technologist",
-        "jobId": "foodtechnologist",
+        "title": "Fitter Supervisor",
+        "jobId": "fitterSupervisor",
+        "highRange": 100000
+      }
+    ],
+    "industryId": "fitter",
+    "imageUrl": "industryimage/fitter.png",
+    "description": "The Fitter involves assembling, installing, and maintaining mechanical components and systems.",
+    "name": "Fitter"
+  },
+
+
+
+  {
+    "jobs": [
+      {
+        "description": "A Pipe Welder I - 1st Class (6GR) is skilled in welding pipe joints using various welding techniques, including the 6GR position. They are responsible for interpreting blueprints, setting up welding equipment, and ensuring welds meet quality standards.",
+        "requirements": "Certification in pipe welding, Proficiency in welding techniques (e.g., TIG, MIG), Ability to read and interpret blueprints, Attention to detail, Physical stamina",
+        "lowRange": 35000,
+        "numberOfApplicants": 0,
+        "title": "Pipe Welder I - 1st Class (6GR)",
+        "jobId": "pipeWelder1",
+        "highRange": 70000
+      },
+      {
+        "description": "A Pipe Welder Supervisor oversees and coordinates the work of pipe welders, ensuring projects are completed safely and efficiently. They provide technical guidance, inspect welds, and manage workflow.",
+        "requirements": "Extensive experience in pipe welding, Leadership and management skills, Knowledge of welding codes and standards, Excellent communication and problem-solving abilities",
+        "lowRange": 50000,
+        "numberOfApplicants": 0,
+        "title": "Pipe Welder Supervisor",
+        "jobId": "pipeWelder Supervisor",
+        "highRange": 90000
+      }
+    ],
+    "industryId": "pipeWelder",
+    "imageUrl": "industryimage/pipeWelder.png",
+    "description": "Pipe welding involves joining metal pipes using specialized welding techniques. It is essential in industries such as construction, manufacturing, and oil and gas.",
+    "name": "pipeWelder"
+  },
+
+
+  {
+    "jobs": [
+      {
+        "description": "A Machinist Helper assists machinists in setting up and operating machine tools, and may perform basic machining tasks under supervision.",
+        "requirements": "Willingness to learn, Basic mechanical aptitude, Ability to follow instructions",
+        "lowRange": 25000,
+        "numberOfApplicants": 0,
+        "title": "Machinist Helper",
+        "jobId": "machinist Helper",
+        "highRange": 50000
+      },
+      {
+        "description": "A Machinist Supervisor oversees machinists and machining operations, ensuring production goals are met and quality standards are maintained.",
+        "requirements": "Leadership and management skills, Extensive experience in machining, Knowledge of machine tool operation and maintenance",
+        "lowRange": 50000,
+        "numberOfApplicants": 0,
+        "title": "Machinist Supervisor",
+        "jobId": "machinist Supervisor",
+        "highRange": 90000
+      }
+    ],
+    "industryId": "Machinist",
+    "imageUrl": "industryimage/Machinist.png",
+    "description": "A Machinist operates and maintains machine tools to produce precision parts and components according to engineering drawings and specifications.",
+    "name": "Machinist"
+  },
+
+
+
+  {
+    "jobs": [
+      {
+        "description": "A Welder II - Structural specializes in welding structural components and assemblies using various welding techniques. They interpret blueprints, set up welding equipment, and perform quality inspections.",
+        "requirements": "Certification in structural welding, Proficiency in welding techniques (e.g., MIG, TIG), Ability to read and interpret blueprints, Attention to detail, Physical stamina",
+        "lowRange": 30000,
+        "numberOfApplicants": 0,
+        "title": "Welder II - Structural",
+        "jobId": "welder2 Structural",
+        "highRange": 60000
+      },
+      {
+        "description": "A Welder III - Structural is an experienced welder responsible for advanced welding tasks on structural components. They may oversee welding projects, train junior welders, and ensure compliance with safety standards.",
+        "requirements": "Extensive experience in structural welding, Advanced proficiency in welding techniques, Leadership skills, Knowledge of welding codes and standards",
+        "lowRange": 40000,
+        "numberOfApplicants": 0,
+        "title": "Welder III - Structural",
+        "jobId": "welder3 Structural",
+        "highRange": 80000
+      },
+      {
+        "description": "A Welder II – Supervisor oversees and coordinates the work of welders, ensuring projects are completed safely and efficiently. They provide technical guidance, inspect welds, and manage workflow.",
+        "requirements": "Leadership and management skills, Extensive experience in welding, Knowledge of welding processes and safety protocols",
+        "lowRange": 50000,
+        "numberOfApplicants": 0,
+        "title": "Welder II – Supervisor",
+        "jobId": "welder Supervisor",
         "highRange": 90000
       },
       {
-        "description":
-            "A production supervisor oversees the daily operations and staff in a food processing facility to ensure efficient and safe production of food products.",
-        "requirements":
-            "Knowledge of food processing regulations and standards, Strong leadership and communication skills, Ability to manage and motivate a team, Attention to detail and problem-solving abilities",
+        "description": "A Welder, Cutter, Solderer, and Brazer performs various welding, cutting, soldering, and brazing tasks based on project requirements.",
+        "requirements": "Experience in welding, cutting, soldering, and brazing techniques, Ability to work with different materials (metal, plastic, etc.), Attention to safety protocols",
         "lowRange": 35000,
         "numberOfApplicants": 0,
-        "title": "Production Supervisor",
-        "jobId": "productionsupervisor",
-        "highRange": 65000
-      },
-      {
-        "description":
-            "A Packaging Operator in the Food Processing industry is responsible for operating and maintaining packaging equipment to ensure the efficient production and packaging of food products.",
-        "requirements":
-            "Attention to detail, Strong manual dexterity, Ability to work in a fast-paced environment, Knowledge of food safety regulations, Basic math skills",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Packaging Operator",
-        "jobId": "packagingoperator",
-        "highRange": 40000
-      },
-      {
-        "description":
-            "Quality Assurance Inspectors in the Food Processing industry are responsible for ensuring that products meet quality standards and comply with regulations.",
-        "requirements":
-            "Attention to detail, Knowledge of food safety and quality regulations, Analytical skills, Good communication",
-        "lowRange": 30000,
-        "numberOfApplicants": 0,
-        "title": "Quality Assurance Inspector",
-        "jobId": "qualityassuranceinspector",
-        "highRange": 60000
+        "title": "Welder, Cutter, Solderer, and Brazer",
+        "jobId": "welderCutter SoldererBrazer",
+        "highRange": 70000
       }
     ],
-    "industryId": "foodprocessing",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2FfoodProcessing-300.png?alt=media&token=c2a960ce-d01f-491c-acaa-fc58cb03f274",
-    "description":
-        "The food processing industry involves transforming raw ingredients into packaged or processed food products. It includes activities such as cleaning, sorting, cooking, and packaging food items. This industry plays a crucial role in providing a wide variety of safe and convenient food options to consumers worldwide.",
-    "name": "Food Processing"
+    "industryId": "welding",
+    "imageUrl": "industryimage/Welder.png",
+    "description": "Welding involves joining metals and materials using heat and pressure. It is essential in construction, manufacturing, and fabrication industries.",
+    "name": "Welder"
   },
+
+
   {
     "jobs": [
+
       {
-        "description":
-            "A forester is responsible for managing and maintaining forests, including tree growth, harvesting, and conservation. They also conduct surveys and monitor wildlife populations.",
-        "requirements":
-            "Knowledge of forestry principles, Strong analytical and problem-solving skills, Ability to use GIS and other software tools, Excellent communication skills, Physical stamina and outdoor work capability",
-        "lowRange": 38000,
-        "numberOfApplicants": 0,
-        "title": "Forester",
-        "jobId": "forester",
-        "highRange": 77000
-      },
-      {
-        "description":
-            "A Timber Cruiser in the Forestry industry is responsible for assessing and evaluating timber resources in a given area, including species identification, measuring timber volume, and analyzing forest health.",
-        "requirements":
-            "Knowledge of forestry practices, Ability to use mapping and GPS tools, Strong data collection and analysis skills, Understanding of tree and plant identification, Physical fitness for outdoor work",
+        "description": "An Electrical Helper assists industrial electricians in installing and maintaining electrical systems and equipment.",
+        "requirements": "Basic electrical knowledge, Ability to use hand tools, Willingness to learn",
         "lowRange": 30000,
         "numberOfApplicants": 0,
-        "title": "Timber Cruiser",
-        "jobId": "timbercruiser",
-        "highRange": 60000
+        "title": "Electrical Helper",
+        "jobId": "Electrical Helper",
+        "highRange": 50000
       },
       {
-        "description":
-            "A tree planter is responsible for planting and maintaining trees in forestry areas. They help restore forests and promote sustainable land management.",
-        "requirements":
-            "Physical stamina, Knowledge of tree species, Attention to detail, Ability to work in outdoor environments",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Tree Planter",
-        "jobId": "treeplanter",
-        "highRange": 40000
-      },
-      {
-        "description":
-            "A logging equipment operator is responsible for operating heavy machinery to harvest trees in the forestry industry.",
-        "requirements":
-            "Proficient operation of logging machinery, Safety awareness and adherence, Physical stamina, Mechanical aptitude, Knowledge of forestry practices",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Logging Equipment Operator",
-        "jobId": "loggingequipmentoperator",
-        "highRange": 60000
-      }
-    ],
-    "industryId": "forestry",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2Fforestry-300.png?alt=media&token=0a5fd80f-7f7a-4d31-8d6f-0258f1c06b0d",
-    "description":
-        "The forestry industry involves the sustainable management of forests to harvest timber, maintain wildlife habitats, and promote ecological balance. It contributes to the production of lumber, paper, and other wood-based products while focusing on conservation and environmental protection.",
-    "name": "Forestry"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A structural welder in the industrial construction industry is responsible for welding and fabricating metal structures used in construction projects.",
-        "requirements":
-            "Proficient in various welding techniques (MIG, TIG, Stick), Ability to read blueprints and interpret welding symbols, Experience working with structural steel and other metals, Knowledge of welding safety procedures and practices, Physical stamina and dexterity to work in various positions and environments",
-        "lowRange": 30000,
-        "numberOfApplicants": 0,
-        "title": "Structural Welder",
-        "jobId": "structuralwelder",
-        "highRange": 60000
-      },
-      {
-        "description":
-            "A pipe fitter in the industrial construction industry is responsible for installing, repairing, and maintaining pipes used in various industrial systems.",
-        "requirements":
-            "Knowledge of pipefitting techniques, Ability to read blueprints and technical drawings, Strong mathematical skills for measuring and sizing pipes, Excellent problem-solving and troubleshooting abilities, Physical stamina and strength for working in various environments",
+        "description": "An Electrician I installs, maintains, and repairs electrical wiring, fixtures, and equipment in industrial settings.",
+        "requirements": "Electrical certification, Knowledge of industrial electrical systems, Ability to read blueprints",
         "lowRange": 40000,
         "numberOfApplicants": 0,
-        "title": "Pipe Fitter",
-        "jobId": "pipefitter",
-        "highRange": 70000
-      },
-      {
-        "description":
-            "A sandblaster in industrial construction is responsible for cleaning and preparing surfaces by using sandblasting equipment to remove dirt, debris, and old paint.",
-        "requirements":
-            "Knowledge of sandblasting equipment, Strong attention to detail, Physical stamina, Ability to follow safety guidelines",
-        "lowRange": 26000,
-        "numberOfApplicants": 0,
-        "title": "Sandblaster",
-        "jobId": "sandblaster",
-        "highRange": 45000
-      }
-    ],
-    "industryId": "industrialconstruction",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2FindustrialConstruction-300.png?alt=media&token=78be2b59-1209-471e-ac17-5788a9eb0e1e",
-    "description":
-        "The industrial construction industry encompasses the planning, design, and construction of large-scale facilities such as factories, warehouses, power plants, and refineries. It involves a range of specialized services, including project management, engineering, and installation of complex systems and equipment. The industry plays a crucial role in supporting economic growth and infrastructure development.",
-    "name": "Industrial Construction"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A landscape designer creates and modifies outdoor spaces by combining elements of nature, architecture, and design.",
-        "requirements":
-            "Creativity, Knowledge of plants and horticulture, Attention to detail, Strong communication skills, Ability to use design software, Project management skills",
-        "lowRange": 35000,
-        "numberOfApplicants": 0,
-        "title": "Landscape Designer",
-        "jobId": "landscapedesigner",
-        "highRange": 70000
-      },
-      {
-        "description":
-            "A gardener in the landscaping industry is responsible for maintaining and caring for outdoor spaces, including planting, pruning, weeding, and general landscape maintenance.",
-        "requirements":
-            "Knowledge of plants and horticulture, Ability to use gardening tools and equipment, Physical stamina, Attention to detail, Good communication skills",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Gardener",
-        "jobId": "gardener",
-        "highRange": 40000
-      },
-      {
-        "description":
-            "An Irrigation Specialist in the Landscaping industry is responsible for designing and maintaining irrigation systems to ensure proper watering and efficient water usage.",
-        "requirements":
-            "Knowledge of irrigation system design, Proficiency in using irrigation equipment, Strong problem-solving skills, Knowledge of water conservation practices, Ability to read blueprints and understand irrigation plans",
-        "lowRange": 30000,
-        "numberOfApplicants": 0,
-        "title": "Irrigation Specialist",
-        "jobId": "irrigationspecialist",
+        "title": "Electrician I",
+        "jobId": "Electrician I",
         "highRange": 60000
       },
+
       {
-        "description":
-            "A tree surgeon is responsible for maintaining and caring for trees, including pruning, trimming, and removing branches or trees. They may also diagnose and treat diseases or pests that affect trees.",
-        "requirements":
-            "Knowledge of tree care techniques, Physical fitness and stamina, Climbing and tree rigging skills, Knowledge of safety procedures, Attention to detail",
-        "lowRange": 30000,
+        "description": "An Electrician II performs advanced electrical installations, troubleshooting, and repairs in industrial environments.",
+        "requirements": "Experience as an Electrician I, Advanced electrical skills, Ability to work independently",
+        "lowRange": 50000,
         "numberOfApplicants": 0,
-        "title": "Tree Surgeon",
-        "jobId": "treesurgeon",
-        "highRange": 60000
-      }
-    ],
-    "industryId": "landscaping",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2Flandscaping-300.png?alt=media&token=dd56d525-e3a7-419e-96c6-f12b350e1606",
-    "description":
-        "The landscaping industry involves the design, installation, and maintenance of outdoor spaces. It includes services such as lawn care, tree trimming, irrigation systems, and hardscaping. The industry is competitive and offers opportunities for landscape designers, contractors, and maintenance crews to enhance and beautify residential and commercial properties.",
-    "name": "Landscaping"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A machine operator is responsible for operating and maintaining machinery in the manufacturing industry.",
-        "requirements":
-            "Mechanical aptitude, Attention to detail, Ability to read and interpret blueprints, Basic math skills, Physical stamina",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Machine Operator",
-        "jobId": "machineoperator",
-        "highRange": 45000
-      },
-      {
-        "description":
-            "A Quality Control Inspector in the Manufacturing industry is responsible for inspecting and testing products at various stages of the production process to ensure they meet quality standards.",
-        "requirements":
-            "Attention to detail, Knowledge of quality control standards, Ability to use measuring tools and equipment, Strong analytical and problem-solving skills, Good communication and documentation skills",
-        "lowRange": 30000,
-        "numberOfApplicants": 0,
-        "title": "Quality Control Inspector",
-        "jobId": "qualitycontrolinspector",
-        "highRange": 55000
-      },
-      {
-        "description":
-            "An assembly line worker is responsible for repetitive tasks related to assembling products in a manufacturing setting.",
-        "requirements":
-            "Attention to detail, Manual dexterity, Ability to follow instructions, Physical stamina",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Assembly Line Worker",
-        "jobId": "assemblylineworker",
-        "highRange": 50000
-      }
-    ],
-    "industryId": "manufacturing",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2Fmanufacturing-300.png?alt=media&token=3d71c85a-1117-4ba1-9feb-7361189fbd7f",
-    "description":
-        "The manufacturing industry involves transforming raw materials into finished goods through various processes, such as production, assembly, and packaging. It plays a vital role in the global economy, creating jobs and contributing to technological advancements.",
-    "name": "Manufacturing"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A truck driver is responsible for transporting goods and materials from one location to another using a large commercial truck.",
-        "requirements":
-            "valid commercial driver's license (CDL), good driving record, excellent physical stamina, ability to operate and maintain a large commercial truck, knowledge of transportation regulations and safety standards, ability to plan and organize routes, good communication and customer service skills",
-        "lowRange": 30000,
-        "numberOfApplicants": 0,
-        "title": "Truck Driver",
-        "jobId": "truckdriver",
-        "highRange": 60000
-      },
-      {
-        "description":
-            "Delivery drivers transport goods or packages from one location to another, often driving a vehicle such as a van or truck.",
-        "requirements":
-            "Valid driver's license, good driving record, knowledge of local roads and traffic regulations, ability to lift heavy objects, excellent time management skills",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Delivery Driver",
-        "jobId": "deliverydriver",
-        "highRange": 50000
-      },
-      {
-        "description":
-            "A dispatcher in the transportation industry is responsible for coordinating and scheduling the movement of vehicles or goods.",
-        "requirements":
-            "strong organizational skills, excellent communication skills, ability to work under pressure and meet deadlines, knowledge of transportation logistics and regulations, basic computer skills, problem-solving abilities",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Dispatcher",
-        "jobId": "dispatcher",
-        "highRange": 55000
-      },
-      {
-        "description":
-            "A courier is responsible for delivering packages, documents, and other goods to various locations. They may use a car, motorcycle, bicycle, or on-foot depending on the company and location.",
-        "requirements":
-            "Valid driver's license, Good driving record, Time management skills, Basic math skills, Physical stamina, Customer service",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Courier",
-        "jobId": "courier",
-        "highRange": 40000
-      },
-      {
-        "description":
-            "A taxi driver is responsible for safely transporting passengers from one location to another using a taxi or rideshare vehicle.",
-        "requirements":
-            "valid driver's license, knowledge of local roads and traffic patterns, customer service skills, good communication skills, ability to work flexible hours, good driving record, ability to handle money and process payments",
-        "lowRange": 20000,
-        "numberOfApplicants": 0,
-        "title": "Taxi driver",
-        "jobId": "taxidriver",
-        "highRange": 50000
-      }
-    ],
-    "industryId": "transportation",
-    "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2Ftransportation-300.png?alt=media&token=55b04733-5256-4aa1-86ee-c0677c78e065",
-    "description":
-        "The transportation industry involves the movement of people, goods, and vehicles through various modes like air, land, and water. It is vital for global trade and connectivity, enabling economic growth and facilitating travel and commerce worldwide.",
-    "name": "Transportation"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A Warehouse Manager oversees the daily operations of a warehouse, including inventory management, order fulfillment, and team supervision.",
-        "requirements":
-            "Inventory Management, Team Leadership, Organizational Skills, Analytical Thinking, Communication Skills",
-        "lowRange": 40000,
-        "numberOfApplicants": 0,
-        "title": "Warehouse Manager",
-        "jobId": "warehousemanager",
+        "title": "Electrician II",
+        "jobId": "Electrician II",
         "highRange": 80000
       },
+
       {
-        "description":
-            "A forklift operator is responsible for safely operating a forklift to move and transport materials within a warehouse or distribution center.",
-        "requirements":
-            "Valid forklift operator certification, Ability to operate a forklift in a safe and efficient manner, Knowledge of warehouse layout and inventory, Attention to detail and accuracy in performing tasks, Physical stamina and ability to lift heavy objects",
-        "lowRange": 25000,
+        "description": "An Electrical Power Line technician installs and maintains electrical power lines and related equipment.",
+        "requirements": "Specialized training in power line work, Ability to work at heights, Knowledge of safety regulations",
+        "lowRange": 60000,
         "numberOfApplicants": 0,
-        "title": "Forklift Operator",
-        "jobId": "forkliftoperator",
-        "highRange": 40000
+        "title": "Electrical Power Line Technician",
+        "jobId": "Electrical Power Line",
+        "highRange": 100000
       },
+
       {
-        "description":
-            "A Packer in the Warehousing industry is responsible for packaging products, preparing them for shipment, and organizing the inventory.",
-        "requirements":
-            "Attention to detail, Ability to lift heavy objects, Basic math and counting skills, Ability to work in a fast-paced environment",
-        "lowRange": 20000,
+        "description": "An Electrical and Electronics Repairer specializes in repairing and maintaining electrical and electronic equipment in commercial and industrial settings.",
+        "requirements": "Experience in electronics repair, Familiarity with industrial equipment, Troubleshooting skills",
+        "lowRange": 50000,
         "numberOfApplicants": 0,
-        "title": "Packer",
-        "jobId": "packer",
-        "highRange": 35000
+        "title": "Electrical and Electronics Repairer",
+        "jobId": "Electrical and Electronics Repairer, Commercial and Industrial",
+        "highRange": 90000
       },
+
+
       {
-        "description":
-            "The Inventory Clerk is responsible for accurately counting, recording, and maintaining inventory levels in a warehouse setting.",
-        "requirements":
-            "Attention to detail, Strong organizational skills, Familiarity with inventory management systems, Ability to perform physical tasks such as lifting and carrying",
-        "lowRange": 25000,
+        "description": "A Journeyman Electrician holds a state-issued journeyman electrician license and is skilled in industrial electrical work.",
+        "requirements": "Valid journeyman electrician license, Extensive experience in industrial electrical installations",
+        "lowRange": 60000,
         "numberOfApplicants": 0,
-        "title": "Inventory Clerk",
-        "jobId": "inventoryclerk",
-        "highRange": 40000
+        "title": "Journeyman Electrician",
+        "jobId": "Journeyman Electrician",
+        "highRange": 90000
       }
     ],
-    "industryId": "warehousing",
+    "industryId": "electrician",
+    "imageUrl": "industryimage/electrician.png",
+    "description": "The industrial electrician industry involves electrical work in industrial settings, including installation, maintenance, and repair of electrical systems and equipment used in factories, plants, and manufacturing facilities.",
+    "name": "Electrician Industrial",
+  },
+
+
+
+
+
+  {
+    "jobs": [
+      {
+        "description": "An Electrical and Electronic Assembler is responsible for assembling electrical or electronic components and products according to blueprints or specifications.",
+        "requirements": "Basic knowledge of electronics, Ability to use hand tools, Attention to detail",
+        "lowRange": 30000,
+        "numberOfApplicants": 0,
+        "title": "Electrical and Electronic Assemblers",
+        "jobId": "Electrical and Electronic Assemblers",
+        "highRange": 50000
+      },
+
+      {
+        "description": "A Supervisor in equipment operations oversees and coordinates the work of equipment assemblers, ensuring productivity and quality standards are met.",
+        "requirements": "Leadership and management skills, Experience in equipment assembly, Knowledge of safety protocols",
+        "lowRange": 50000,
+        "numberOfApplicants": 0,
+        "title": "Supervisor",
+        "jobId": "Supervisor (Equipment)",
+        "highRange": 80000
+      }
+
+
+    ],
+    "industryId": "equipment",
+    "imageUrl": "industryimage/equipment.png",
+    "description": "The equipment industry encompasses the manufacturing, assembly, and maintenance of various tools, machinery, and devices used across multiple sectors. Professionals in this industry are responsible for producing equipment components, assembling them into finished products, and ensuring their functionality and reliability in operational environments.",
+    "name": "Equipment Industry"
+  },
+
+
+  {
+    "jobs": [
+      {
+        "description": "A Painter/Sand Blaster Supervisor oversees and coordinates painting and sandblasting operations at industrial or construction sites. They manage a team of painters and sand blasters, schedule tasks, ensure quality control, and enforce safety regulations.",
+        "requirements": "Previous experience as a painter or sand blaster, Leadership and supervisory skills, Knowledge of surface preparation techniques and coatings application, Ability to manage and motivate a team",
+        "lowRange": 50000,
+        "numberOfApplicants": 0,
+        "title": "Painter/Sand Blaster Supervisor",
+        "jobId": "Painter/Sand Blaster Supervisor",
+        "highRange": 80000
+      }
+
+    ],
+    "industryId": "Painter/Sand Blaster",
+    "imageUrl": "industryimage/PainterSand Blaste.png",
+    "description": "The Painter/Sand Blaster industry involves surface preparation and coating application in industrial and construction environments. Professionals in this field use abrasive blasting techniques to remove old paint, rust, or contaminants from surfaces, and apply protective coatings using various methods such as brush, roller, or spray gun. Painter/Sand Blasters play a critical role in maintaining and protecting structural components and equipment.",
+    "name": "Painter/Sand Blaster"
+  },
+
+
+
+  {
+    "jobs": [
+      {
+        "title": "Scaffolder Supervisor",
+        "jobId": "scaffolder Supervisor",
+        "description": "A Scaffolder Supervisor oversees and coordinates scaffolding operations in construction and industrial settings. They lead teams of scaffolders, ensuring that scaffold erection and dismantling are performed efficiently and safely. Scaffolder Supervisors are responsible for planning work schedules, conducting safety inspections, and providing training and guidance to team members.",
+        "requirements": "Extensive experience as a Scaffolder, Leadership and supervisory skills, Strong knowledge of scaffolding techniques and safety practices, Ability to manage projects and communicate effectively",
+        "lowRange": 50000,
+        "highRange": 80000,
+        "numberOfApplicants": 0
+      },
+    ],
+    "industryId": "Scaffolder",
+    "imageUrl": "industryimage/Scaffolder.png",
+    "description": "A Scaffolder specializes in erecting and dismantling scaffolding structures used in construction and industrial projects. They assemble temporary platforms and support structures to provide safe working platforms for workers at heights during building, maintenance, or repair tasks. Scaffolders are trained to follow safety protocols and perform regular inspections to ensure structural stability and worker safety.",
+    "name": "Scaffolder"
+  },
+
+
+  {
+    "jobs": [
+      {
+        "title": "Baristas",
+        "jobId": "baristas",
+        "description": "Baristas are skilled in preparing and serving specialty coffee and beverages. They operate espresso machines, brew coffee, and create signature drinks based on customer preferences. Baristas also provide excellent customer service by engaging with patrons and maintaining a clean and organized coffee shop environment.",
+        "requirements": "Knowledge of coffee preparation techniques, Customer service skills, Ability to work efficiently under pressure, Attention to detail",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Bartenders",
+        "jobId": "bartenders",
+        "description": "Bartenders mix and serve alcoholic and non-alcoholic beverages at bars, restaurants, or events. They interact with customers, take drink orders, prepare cocktails, and ensure a pleasant experience for patrons. Bartenders also monitor alcohol consumption and comply with legal regulations.",
+        "requirements": "Knowledge of drink recipes and mixology techniques, Customer service and interpersonal skills, Ability to multitask and work efficiently in a fast-paced environment",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Chefs and Head Cooks",
+        "jobId": "chefs And HeadCooks",
+        "description": "Chefs and Head Cooks oversee kitchen operations and food preparation in restaurants or culinary establishments. They plan menus, supervise kitchen staff, ensure food quality and presentation, and manage inventory. Chefs and Head Cooks may specialize in specific cuisines or culinary techniques.",
+        "requirements": "Culinary training or experience, Leadership and management skills, Creativity in menu planning, Attention to food safety and hygiene",
+        "lowRange": 35000,
+        "highRange": 70000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Cooks, Restaurants",
+        "jobId": "cooks, Restaurants",
+        "description": "Restaurant Cooks prepare and cook food items according to restaurant recipes and standards. They work as part of a kitchen team, following instructions from chefs or supervisors to ensure timely food production and quality. Restaurant Cooks maintain cleanliness and food safety in the kitchen.",
+        "requirements": "Experience in food preparation, Ability to work in a fast-paced environment, Teamwork and communication skills",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      }
+
+    ],
+    "industryId": "food Preparation",
+    "imageUrl": "industryimage/food Preparation.png",
+    "description": "The food preparation and serving industry involves the creation, cooking, and serving of food and beverages in various settings such as restaurants, cafes, and food establishments. It encompasses a range of roles from chefs and cooks to servers and bartenders, contributing to culinary experiences and hospitality services.",
+    "name": "Food Preparation and Serving",
+  },
+
+
+
+  {
+    "industryId": "farming",
+    "imageUrl": "industryimage/farming.png",
+    "description": "The farming industry involves agricultural activities such as cultivating crops, raising livestock, and managing farm operations. It plays a crucial role in food production, contributing to global food supply and economic development.",
+    "name": "Farming",
+    "jobs": [
+      {
+        "title": "Agricultural Equipment Operators",
+        "jobId": "agricultural Equipment Operators",
+        "description": "Agricultural Equipment Operators operate and maintain machinery used in farming activities such as plowing, planting, and harvesting. They ensure equipment functions properly and perform routine maintenance to maximize productivity.",
+        "requirements": "Experience in operating agricultural machinery, Mechanical aptitude, Attention to detail, Physical stamina",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Agricultural Inspectors",
+        "jobId": "agricultural Inspectors",
+        "description": "Agricultural Inspectors assess crops, livestock, and agricultural products to ensure compliance with regulations and quality standards. They conduct inspections, take samples, and report findings to regulatory agencies.",
+        "requirements": "Knowledge of agricultural practices and regulations, Attention to detail, Analytical skills, Strong communication skills",
+        "lowRange": 30000,
+        "highRange": 55000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Agricultural Workers",
+        "jobId": "agricultural Workers",
+        "description": "Agricultural Workers perform various tasks on farms, including planting, harvesting, and caring for crops and livestock. They operate machinery, maintain equipment, and assist in farm operations.",
+        "requirements": "Physical stamina, Ability to work outdoors in all weather conditions, Basic farm equipment operation skills, Willingness to learn and follow instructions",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Animal Breeders",
+        "jobId": "animal Breeders",
+        "description": "Animal Breeders select and breed animals to improve desirable traits such as size, productivity, and temperament. They monitor animal health, manage breeding programs, and maintain records of genetic data.",
+        "requirements": "Knowledge of animal genetics and breeding techniques, Attention to detail, Patience and observation skills",
+        "lowRange": 30000,
+        "highRange": 60000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Falles",
+        "jobId": "falles",
+        "description": "Falles perform specific tasks related to farm operations, such as specialized crop management, pest control, or livestock care. They may have distinct roles within the farming environment.",
+        "requirements": "Varies based on specific tasks assigned",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Farmworkers and Laborers",
+        "jobId": "farmworkers and Laborers",
+        "description": "Farmworkers and Laborers perform manual tasks on farms, including planting, harvesting, and maintaining crops and livestock. They operate farm equipment, assist with irrigation, and perform general farm maintenance.",
+        "requirements": "Physical strength and stamina, Ability to work in various weather conditions, Basic knowledge of farm operations, Willingness to perform repetitive tasks",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Farmworkers, Farm, Ranch",
+        "jobId": "farmworkers, Farm, Ranch",
+        "description": "Farmworkers on farms and ranches perform a variety of agricultural tasks, including feeding animals, cleaning barns, repairing fences, and operating machinery. They assist with crop planting, irrigation, and harvesting.",
+        "requirements": "Physical fitness, Ability to perform manual labor, Basic farm equipment operation skills, Willingness to work outdoors",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+
+
+  {
+    "industryId": "fishing",
+    "imageUrl": "industryimage/fishing.png",
+    "description": "The farming industry involves agricultural activities such as cultivating crops, raising livestock, and managing farm operations. It plays a crucial role in food production, contributing to global food supply and economic development.",
+    "name": "Fishing",
+    "jobs": [
+      {
+        "title": "Fishing and Hunting",
+        "jobId": "fishing and Hunting",
+        "description": "Workers in fishing and hunting engage in activities related to capturing marine and aquatic organisms for commercial purposes. They operate fishing vessels, manage fishing gear, and process caught seafood.",
+        "requirements": "Experience in fishing or related activities, Knowledge of fishing techniques, Physical stamina, Ability to work in challenging marine environments",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+
+  {
+    "industryId": "maintenance",
+    "imageUrl": "industryimage/maintenance.png",
+    "description": "The maintenance industry involves activities focused on the upkeep and preservation of buildings, facilities, and outdoor spaces. It encompasses cleaning, repair, and management of property to ensure functionality and safety.",
+    "name": "Maintenance",
+    "jobs": [
+      {
+        "title": "Building Cleaning",
+        "jobId": "building Cleaning",
+        "description": "Building Cleaners perform cleaning tasks in various facilities, including offices, residential buildings, and commercial spaces. They sanitize surfaces, empty trash, and maintain cleanliness standards.",
+        "requirements": "Attention to detail, Physical stamina, Knowledge of cleaning techniques and products",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Supervisor of Housekeeping and Janitorial",
+        "jobId": "supervisor of Housekeeping and Janitorial",
+        "description": "Supervisors of Housekeeping and Janitorial oversee cleaning operations in facilities, managing staff and ensuring cleanliness standards are met. They schedule tasks, train workers, and monitor inventory of cleaning supplies.",
+        "requirements": "Leadership skills, Experience in janitorial or housekeeping roles, Organizational skills",
+        "lowRange": 30000,
+        "highRange": 50000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Grounds Maintenance",
+        "jobId": "grounds Maintenance",
+        "description": "Grounds Maintenance workers care for outdoor areas, including parks, gardens, and landscapes. They mow lawns, trim trees and bushes, and apply pesticides or fertilizers to maintain aesthetics and health.",
+        "requirements": "Knowledge of landscaping tools and techniques, Physical fitness, Attention to detail",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Maids and Housekeeping Cleaners",
+        "jobId": "maids and Housekeeping Cleaners",
+        "description": "Maids and Housekeeping Cleaners perform cleaning duties in residences or hotels, including making beds, vacuuming, and tidying rooms. They ensure guest satisfaction and maintain cleanliness standards.",
+        "requirements": "Attention to detail, Physical stamina, Ability to work efficiently",
+        "lowRange": 20000,
+        "highRange": 35000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Pest Control",
+        "jobId": "pest Control",
+        "description": "Pest Control workers identify and eliminate pests such as insects, rodents, and vermin in residential or commercial settings. They apply pesticides, set traps, and provide recommendations for pest prevention.",
+        "requirements": "Knowledge of pest control methods, Attention to safety protocols, Problem-solving skills",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Helper Installation, Maintenance and Repair",
+        "jobId": "helper Installation, Maintenance and Repair",
+        "description": "Helpers in Installation, Maintenance, and Repair assist skilled workers in performing maintenance and repair tasks in various settings. They provide support, carry tools, and learn on-the-job skills.",
+        "requirements": "Willingness to learn, Physical stamina, Ability to follow instructions",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+
+  {
+    "industryId": "landscaping",
+    "imageUrl": "industryimage/landscaping.png",
+    "description": "The landscaping industry involves modifying and beautifying outdoor spaces by incorporating elements of nature, architecture, and design. It includes activities such as gardening, lawn care, and landscape design, enhancing aesthetics and functionality.",
+    "name": "Landscaping",
+    "jobs": [
+      {
+        "title": "Landscape and Groundskeeping",
+        "jobId": "landscape and Groundskeeping",
+        "description": "Landscape and Groundskeeping workers maintain outdoor areas, including gardens, parks, and green spaces. They mow lawns, plant flowers, trim bushes, and perform general landscape maintenance.",
+        "requirements": "Knowledge of plants and horticulture, Physical stamina, Attention to detail",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Tree Trimmers and Pruners",
+        "jobId": "tree Trimmers and Pruners",
+        "description": "Tree Trimmers and Pruners specialize in trimming and pruning trees and shrubs to maintain their health and appearance. They use specialized tools and equipment to remove branches, shape trees, and ensure safety.",
+        "requirements": "Knowledge of tree species and pruning techniques, Climbing and rigging skills (for tree climbing), Physical fitness",
+        "lowRange": 30000,
+        "highRange": 55000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+  {
+    "industryId": "construction and Extraction",
+    "imageUrl": "industryimage/construction and Extraction.png",
+    "description": "The construction industry involves the planning, design, and execution of building projects, including residential, commercial, and infrastructure developments. It encompasses various skilled trades and labor-intensive activities to create structures and facilities.",
+    "name": "Construction",
+    "jobs": [
+      {
+        "title": "Boilermakers",
+        "jobId": "Boilermakers",
+        "description": "Boilermakers fabricate, assemble, and repair boilers, vats, and other large metal structures. They work with heavy machinery and use specialized tools to construct and maintain industrial equipment.",
+        "requirements": "Technical skills, Blueprint reading, Welding and metalworking expertise, Physical strength",
+        "lowRange": 40000,
+        "highRange": 80000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Brickmasons and Blockmasons",
+        "jobId": "Brickmasons and Blockmasons",
+        "description": "Brickmasons and Blockmasons lay bricks, concrete blocks, and other materials to construct or repair walls, partitions, and other structures. They use mortar, trowels, and levels to ensure precise alignment and adherence to building codes.",
+        "requirements": "Knowledge of masonry techniques, Physical stamina, Attention to detail",
+        "lowRange": 35000,
+        "highRange": 60000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+  {
+    "industryId": "carpentry",
+    "imageUrl": "industryimage/carpentry.png",
+    "description": "The carpentry industry involves the construction and installation of wooden structures and fixtures. Carpenters work with various tools and materials to build, repair, and install frameworks, furniture, and other wood-based products.",
+    "name": "Carpentry",
+    "jobs": [
+      {
+        "title": "Carpenters",
+        "jobId": "Carpenters",
+        "description": "Carpenters construct and repair wooden structures and fixtures, including frameworks, stairways, doorframes, and furniture. They use hand and power tools to cut, shape, and assemble wood components.",
+        "requirements": "Knowledge of carpentry techniques, Blueprint reading, Skill in using carpentry tools, Physical stamina",
+        "lowRange": 35000,
+        "highRange": 60000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Helper Carpenters",
+        "jobId": "Helper Carpenters",
+        "description": "Helper Carpenters assist skilled carpenters in tasks such as carrying materials, holding tools, and performing basic carpentry duties. They learn on-the-job skills and support carpentry projects.",
+        "requirements": "Willingness to learn, Physical fitness, Ability to follow instructions",
+        "lowRange": 25000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+  {
+    "industryId": "construction_building",
+    "imageUrl": "industryimage/construction_building.png",
+    "description": "The construction and building industry involves the planning, design, and construction of various structures and facilities. It includes a wide range of skilled trades and labor-intensive activities to create buildings, roads, bridges, and infrastructure.",
+    "name": "Construction and Building",
+    "jobs": [
+      {
+        "title": "Construction Laborers",
+        "jobId": "Construction Laborers",
+        "description": "Construction Laborers perform various tasks to assist skilled workers on construction sites. They operate equipment, load and unload materials, and clean and prepare construction areas.",
+        "requirements": "Physical fitness, Willingness to learn, Ability to follow instructions",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Derrick Operators, Oil and Gas",
+        "jobId": "Derrick Operators, Oil and Gas",
+        "description": "Derrick Operators in the Oil and Gas industry control and operate equipment to extract oil or gas from wells. They set up and maintain derrick equipment and ensure safety protocols are followed.",
+        "requirements": "Technical knowledge of oil and gas extraction, Experience with derrick equipment, Attention to safety procedures",
+        "lowRange": 50000,
+        "highRange": 90000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Drywall and Ceiling Tile Installers",
+        "jobId": "Drywall and Ceiling Tile Installers",
+        "description": "Drywall and Ceiling Tile Installers apply and fasten drywall and ceiling panels to interior walls and ceilings. They measure, cut, and install panels, ensuring a smooth and even finish.",
+        "requirements": "Knowledge of drywall installation techniques, Attention to detail, Ability to work efficiently",
+        "lowRange": 30000,
+        "highRange": 55000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+  {
+    "industryId": "roofing",
+    "imageUrl": "industryimage/roofing.png",
+    "description": "The roofing industry involves the installation, repair, and maintenance of roofs on buildings and structures. Roofers work with various materials such as shingles, tiles, and metal to protect buildings from weather elements.",
+    "name": "Roofing",
+    "jobs": [
+      {
+        "title": "Roofer",
+        "jobId": "Roofer",
+        "description": "Roofers install, repair, and replace roofs on buildings. They work with a variety of roofing materials and use specialized tools to ensure roofs are watertight and durable.",
+        "requirements": "Knowledge of roofing techniques, Physical stamina, Ability to work at heights",
+        "lowRange": 35000,
+        "highRange": 60000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Helper Roofer",
+        "jobId": "Helper Roofer",
+        "description": "Helper Roofers assist skilled roofers in tasks such as carrying materials, setting up equipment, and cleaning work areas. They learn on-the-job skills and support roofing projects.",
+        "requirements": "Willingness to learn, Physical fitness, Ability to follow instructions",
+        "lowRange": 25000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+  {
+    "industryId": "production",
+    "imageUrl": "industryimage/production.png",
+    "description": "The production industry involves the manufacturing of goods through various processes such as assembly, packaging, and quality control. Production workers play a vital role in producing consumer products and industrial goods.",
+    "name": "Production",
+    "jobs": [
+      {
+        "title": "Helper Production",
+        "jobId": "Helper Production",
+        "description": "Helper Production workers assist in manufacturing processes by performing tasks such as loading materials, operating machinery, and cleaning work areas. They support production operations and learn on-the-job skills.",
+        "requirements": "Willingness to learn, Physical fitness, Ability to follow instructions",
+        "lowRange": 25000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Packers and Packagers",
+        "jobId": "Packers and Packagers",
+        "description": "Packers and Packagers prepare finished products for shipment by packaging items according to specifications. They inspect products for quality, label packages, and ensure proper documentation.",
+        "requirements": "Attention to detail, Ability to work efficiently, Basic computer skills",
+        "lowRange": 22000,
+        "highRange": 35000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+
+  {
+    "industryId": "woodworking",
+    "imageUrl": "industryimage/woodworking.png",
+    "description": "The woodworking industry involves crafting wood into various products such as furniture, cabinets, and decorative items. Woodworkers use specialized tools and techniques to create high-quality wooden goods.",
+    "name": "Woodworking",
+    "jobs": [
+      {
+        "title": "Woodworker",
+        "jobId": "Woodworker",
+        "description": "Woodworkers create and build wooden products using hand tools and woodworking machinery. They design, cut, shape, and assemble wood components to craft furniture, cabinets, and other wood-based items.",
+        "requirements": "Skill in woodworking techniques, Ability to read blueprints, Attention to detail, Physical stamina",
+        "lowRange": 30000,
+        "highRange": 60000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Woodworking Machine Setters",
+        "jobId": "Woodworking Machine Setters",
+        "description": "Woodworking Machine Setters operate and maintain woodworking machinery to cut, shape, and finish wooden parts. They adjust machine settings, inspect finished products, and ensure safety procedures.",
+        "requirements": "Knowledge of woodworking machinery, Mechanical aptitude, Attention to detail",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Safety Representative",
+    "imageUrl": "industryimage/Safety Representative.png",
+    "description": "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
+    "name": "Safety Representative",
+    "jobs": [
+      {
+        "title": "Safety Representative",
+        "jobId": "safety_representative",
+        "description": "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
+        "requirements": "Knowledge of safety regulations, Communication skills, Attention to detail",
+        "lowRange": 40000,
+        "highRange": 70000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+  {
+    "industryId": ""
+        "Record Clerk",
+    "imageUrl": "industryimage/Record Clerk.png",
+    "description": "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
+    "name": "Record Clerk",
+    "jobs": [
+      {
+        "title": "Record Clerk",
+        "jobId": "record_clerk",
+        "description": "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
+        "requirements": "Organizational skills, Attention to detail, Computer literacy",
+        "lowRange": 30000,
+        "highRange": 50000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Project Manager",
+    "imageUrl": "industryimage/Project Manager.png",
+    "description": "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
+    "name": "Project Manager",
+    "jobs": [
+      {
+        "title": "Project Manager",
+        "jobId": "project_manager",
+        "description": "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
+        "requirements": "Project management skills, Leadership abilities, Construction knowledge",
+        "lowRange": 60000,
+        "highRange": 100000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Carpet Installers",
+    "imageUrl": "industryimage/Carpet Installers.png",
+    "description": "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
+    "name": "Carpet Installers",
+    "jobs": [
+      {
+        "title": "Carpet Installer",
+        "jobId": "carpet_installer",
+        "description": "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
+        "requirements": "Knowledge of flooring materials, Installation skills, Attention to detail",
+        "lowRange": 30000,
+        "highRange": 50000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Cement Masons and Concrete Finishers",
+    "imageUrl": "industryimage/Cement Masons and Concrete Finishers.png",
+    "description": "Cement Masons and Concrete Finishers work with concrete to pour, smooth, and finish surfaces such as sidewalks, driveways, and foundations.",
+    "name": "Cement Masons and Concrete Finishers",
+    "jobs": [
+      {
+        "title": "Cement Mason",
+        "jobId": "cement_mason",
+        "description": "Cement Masons and Concrete Finishers work with concrete to pour, smooth, and finish surfaces such as sidewalks, driveways, and foundations.",
+        "requirements": "Concrete working skills, Physical strength, Attention to detail",
+        "lowRange": 35000,
+        "highRange": 55000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Elevator and Escalator Installers and Repairers",
+    "imageUrl": "industryimage/Elevator and Escalator Installers and Repairers.png",
+    "description": "Elevator and Escalator Installers and Repairers install, maintain, and repair elevators, escalators, and related equipment.",
+    "name": "Elevator and Escalator Installers and Repairers",
+    "jobs": [
+      {
+        "title": "Elevator Installer",
+        "jobId": "elevator_installer",
+        "description": "Elevator and Escalator Installers and Repairers install, maintain, and repair elevators, escalators, and related equipment.",
+        "requirements": "Mechanical skills, Electrical knowledge, Troubleshooting abilities",
+        "lowRange": 40000,
+        "highRange": 70000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Excavating and Loading Machine and Dragline Operators",
     "imageUrl":
-        "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2Fwarehousing-300.png?alt=media&token=b434bac0-8aa7-4b71-b4e5-7269d9de8e28",
-    "description":
-        "The warehousing industry involves the storage, handling, and distribution of goods on a large scale. It plays a crucial role in supply chains by providing secure storage facilities and efficient logistics services to businesses, ensuring timely delivery of products to customers.",
-    "name": "Warehousing"
-  }
+    "https://firebasestorage.googleapis.com/v0/b/blukers-development.appspot.com/o/industries%2Ficons%2Fwarehousing-300.png?alt=media&token=b434bac0-8aa7-4b71-b4e5-7269d9de8e28",
+    "description": "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
+    "name": "Excavating and Loading Machine and Dragline Operators",
+    "jobs": [
+      {
+        "title": "Machine Operator",
+        "jobId": "machine_operator_excavating",
+        "description": "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
+        "requirements": "Heavy equipment operation skills, Safety awareness, Physical stamina",
+        "lowRange": 35000,
+        "highRange": 60000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Floor Senders and Finishers",
+    "imageUrl": "industryimage/Floor Senders and Finishers.png",
+    "description": "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
+    "name": "Floor Senders and Finishers",
+    "jobs": [
+      {
+        "title": "Floor Sander",
+        "jobId": "floor_sander",
+        "description": "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
+        "requirements": "Flooring skills, Attention to detail, Hand tool proficiency",
+        "lowRange": 30000,
+        "highRange": 50000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Glaziers",
+    "imageUrl": "industryimage/Glaziers.png",
+    "description": "Glaziers install glass in windows, skylights, and other structures.",
+    "name": "Glaziers",
+    "jobs": [
+      {
+        "title": "Glazier",
+        "jobId": "glazier",
+        "description": "Glaziers install glass in windows, skylights, and other structures.",
+        "requirements": "Glass installation skills, Attention to safety, Physical fitness",
+        "lowRange": 35000,
+        "highRange": 55000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Hazardous Material Removal",
+    "imageUrl": "industryimage/Hazardous Material Removal.png",
+    "description": "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
+    "name": "Hazardous Material Removal",
+    "jobs": [
+      {
+        "title": "Hazardous Material Remover",
+        "jobId": "hazardous_material_remover",
+        "description": "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
+        "requirements": "Knowledge of hazardous materials, Safety training, Certification",
+        "lowRange": 40000,
+        "highRange": 65000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "General Laborer",
+    "imageUrl": "industryimage/carpentry.png",
+    "description": "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
+    "name": "General Laborer",
+    "jobs": [
+      {
+        "title": "General Laborer",
+        "jobId": "general_laborer",
+        "description": "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
+        "requirements": "Physical stamina, Willingness to perform manual tasks, Ability to follow instructions",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ];
