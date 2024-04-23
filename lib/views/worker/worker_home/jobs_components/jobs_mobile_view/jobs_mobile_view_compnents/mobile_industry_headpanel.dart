@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../../models/industry.dart';
 import '../../../../../../services/on_hover.dart';
 import '../../../../../../services/responsive.dart';
-import '../../../../../../utils/localization/localized_industries.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import 'mobile_industry_bodypanel.dart';
 
@@ -44,25 +44,29 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Image.network(
-                        widget.industry.imageUrl!,
+                      child: Container(
                         width: Responsive.isDesktop(context) ? 70 : 50,
-                      ),
-                    ),
-                    SizedBox(width: Responsive.isDesktop(context) ? 25 : 10),
-                    Expanded(
-                      child: RichText(
-                        text: TextSpan(
-                          text: LocalizedIndustries.get(
-                              context, widget.industry.industryId),
-                          style: TextStyle(
-                            fontSize: Responsive.isDesktop(context) ? 30 : 20,
-                            fontWeight: FontWeight.w500,
-                            color: ThemeColors.grey1ThemeColor,
+                        height: Responsive.isDesktop(context) ? 70 : 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit
+                                .cover, // This ensures the image covers the circular area
+                            image: AssetImage(widget.industry.imageUrl!),
                           ),
                         ),
                       ),
                     ),
+                    SizedBox(width: Responsive.isDesktop(context) ? 25 : 10),
+                    Expanded(
+                        child: Text(
+                      widget.industry.industryId,
+                      style: TextStyle(
+                        fontSize: Responsive.isDesktop(context) ? 30 : 20,
+                        fontWeight: FontWeight.w700,
+                        color: ThemeColors.grey1ThemeColor,
+                      ),
+                    )),
                     Container(
                         margin: const EdgeInsets.only(right: 10),
                         child: const Icon(
