@@ -66,7 +66,9 @@ extension AuthenticationAuthorization on UserProvider {
 
       // Store the user data in the database.
       UserDataProvider.registerUserToDatabase(appUser);
-      //
+
+      // Update the User Journey
+      UserJourneyDataProvider.updateNewcomer(appUser.uid);
 
       // Request permission for notifications
       requestForNotificationPermission(_appUser);

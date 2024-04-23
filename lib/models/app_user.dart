@@ -1,3 +1,5 @@
+import 'package:blukers/models/userJourney.dart';
+
 import '../data_providers/user_data_provider.dart';
 import 'address.dart';
 import 'company.dart';
@@ -57,6 +59,9 @@ class AppUser {
   // Set Jobs Perferences
   JobsPreference? jobsPreference;
 
+  // Tracking User Journey in the App
+  UserJourney? userJourney;
+
   AppUser({
     required this.uid,
     required this.email,
@@ -81,6 +86,7 @@ class AppUser {
     this.activeSubscription,
     this.deferredSubscription,
     this.jobsPreference,
+    this.userJourney,
     this.isSubscriptionActive = false,
     this.listActiveOrders = const {},
   })  : createdAt = DateTime.now().millisecondsSinceEpoch,
@@ -142,6 +148,10 @@ class AppUser {
 
     if (jobsPreference != null) {
       data['jobsPreference'] = jobsPreference?.toMap();
+    }
+
+    if (userJourney != null) {
+      data['userJourney'] = userJourney?.toMap();
     }
 
     data['deleteAccountReason'] = deleteAccountReason;
@@ -206,6 +216,10 @@ class AppUser {
 
     if (map['jobsPreference'] != null) {
       user.jobsPreference = JobsPreference.fromMap(map['jobsPreference']);
+    }
+
+    if (map['userJourney'] != null) {
+      user.userJourney = UserJourney.fromMap(map['userJourney']);
     }
 
     user.deleteAccountReason = map['deleteAccountReason'] ?? '';

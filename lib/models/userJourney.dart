@@ -12,6 +12,8 @@ final List<String> subscriptionStatuses = [
 class UserJourney {
   Map<String, int> statusHistory = {};
 
+  UserJourney({required this.statusHistory});
+
   void updateStatus(String status) {
     // Clear any conflicting engagement statuses if setting a new one
     if (engagementStatuses.contains(status)) {
@@ -45,6 +47,20 @@ class UserJourney {
       DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
       print("$status was set on $date");
     });
+  }
+
+  // Convert the UserJourney object to a Map
+  Map<String, dynamic> toMap() {
+    return {
+      'statusHistory': statusHistory,
+    };
+  }
+
+  // Create a UserJourney object from a Map
+  factory UserJourney.fromMap(Map<String, dynamic> map) {
+    return UserJourney(
+      statusHistory: map['statusHistory'] as Map<String, int>,
+    );
   }
 }
 

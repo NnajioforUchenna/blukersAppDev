@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../data_providers/app_versions_data_provider.dart';
+import '../data_providers/user_journey_data_provider.dart';
 import '../utils/helpers/app_version.dart';
 import '../views/old_common_views/components/update_app_dialog.dart';
 
