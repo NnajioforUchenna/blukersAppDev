@@ -9,7 +9,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 30000,
         "numberOfApplicants": 0,
         "title": "Commercial Driver",
-        "jobId": "commercial driver",
+        "jobId": "Commercial Driver",
         "highRange": 60000
       },
       {
@@ -20,7 +20,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 25000,
         "numberOfApplicants": 0,
         "title": "Industrial Truck and Tractor Operator",
-        "jobId": "industrial operator",
+        "jobId": "Industrial Operator",
         "highRange": 45000
       },
       {
@@ -31,7 +31,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 22000,
         "numberOfApplicants": 0,
         "title": "Light Truck Driver",
-        "jobId": "lighttruck driver",
+        "jobId": "Lighttruck Driver",
         "highRange": 35000
       }
     ],
@@ -45,15 +45,126 @@ final List<Map<String, dynamic>> IndustriesData = [
     "jobs": [
       {
         "description":
-            "A fitter is responsible for assembling, installing, and repairing mechanical components and systems according to specifications.",
+            "Operate commercial vehicles to transport goods or passengers over short distances.",
         "requirements":
-            "Knowledge of mechanical systems, Ability to use hand and power tools, Attention to detail, Physical stamina",
-        "lowRange": 25000,
+            "Valid commercial driver's license (CDL), Clean driving record, Ability to operate and maintain commercial vehicles",
+        "lowRange": 30000,
         "numberOfApplicants": 0,
-        "title": "Fitter",
-        "jobId": "fitter",
+        "title": "Commercial Driver",
+        "jobId": "Commercial Driver",
         "highRange": 60000
       },
+      {
+        "description":
+            "Operate industrial trucks and tractors to move materials within warehouses, storage yards, factories, construction sites, or similar locations.",
+        "requirements":
+            "Experience operating industrial trucks, Forklift certification (preferred), Ability to follow safety protocols",
+        "lowRange": 25000,
+        "numberOfApplicants": 0,
+        "title": "Industrial Truck and Tractor Operator",
+        "jobId": "Industrial Operator",
+        "highRange": 45000
+      },
+      {
+        "description":
+            "Drive light trucks or delivery vehicles to transport goods to customers or businesses.",
+        "requirements":
+            "Valid driver's license, Clean driving record, Ability to lift and carry packages",
+        "lowRange": 22000,
+        "numberOfApplicants": 0,
+        "title": "Light Truck Driver",
+        "jobId": "Lighttruck Driver",
+        "highRange": 35000
+      }
+    ],
+    "industryId": "Driver",
+    "imageUrl": "assets/industryImages/driver.png",
+    "description":
+        "The driver industry involves operating various types of vehicles for transporting goods or passengers.",
+    "name": "Driver"
+  },
+  {
+    "industryId": "Safety Representative",
+    "imageUrl": "assets/industryImages/Safety Representative.png",
+    "description":
+        "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
+    "name": "Safety Representative",
+    "jobs": [
+      {
+        "title": "Safety Representative",
+        "jobId": "safety representative",
+        "description":
+            "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
+        "requirements":
+            "Knowledge of safety regulations, Communication skills, Attention to detail",
+        "lowRange": 40000,
+        "highRange": 70000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "industryId": "Record Clerk",
+    "imageUrl": "assets/industryImages/Record Clerk.png",
+    "description":
+        "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
+    "name": "Record Clerk",
+    "jobs": [
+      {
+        "title": "Record Clerk",
+        "jobId": "record clerk",
+        "description":
+            "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
+        "requirements":
+            "Organizational skills, Attention to detail, Computer literacy",
+        "lowRange": 30000,
+        "highRange": 50000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "industryId": "Project Manager",
+    "imageUrl": "assets/industryImages/Project Manager.png",
+    "description":
+        "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
+    "name": "Project Manager",
+    "jobs": [
+      {
+        "title": "Project Manager",
+        "jobId": "Project Manager",
+        "description":
+            "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
+        "requirements":
+            "Project management skills, Leadership abilities, Construction knowledge",
+        "lowRange": 60000,
+        "highRange": 100000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "industryId": "General Laborer",
+    "imageUrl": "assets/industryImages/carpentry.png",
+    "description":
+        "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
+    "name": "General Laborer",
+    "jobs": [
+      {
+        "title": "General Laborer",
+        "jobId": "general laborer",
+        "description":
+            "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
+        "requirements":
+            "Physical stamina, Willingness to perform manual tasks, Ability to follow instructions",
+        "lowRange": 25000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "jobs": [
       {
         "description":
             "A helper assists fitters in assembling and installing mechanical components, and may perform other supportive tasks.",
@@ -99,7 +210,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 100000
       }
     ],
-    "industryId": "fitter",
+    "industryId": "Fitter",
     "imageUrl": "assets/industryImages/fitter.png",
     "description":
         "The Fitter involves assembling, installing, and maintaining mechanical components and systems.",
@@ -130,42 +241,11 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 90000
       }
     ],
-    "industryId": "pipeWelder",
+    "industryId": "PipeWelder",
     "imageUrl": "assets/industryImages/pipeWelder.png",
     "description":
         "Pipe welding involves joining metal pipes using specialized welding techniques. It is essential in industries such as construction, manufacturing, and oil and gas.",
-    "name": "pipeWelder"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A Machinist Helper assists machinists in setting up and operating machine tools, and may perform basic machining tasks under supervision.",
-        "requirements":
-            "Willingness to learn, Basic mechanical aptitude, Ability to follow instructions",
-        "lowRange": 25000,
-        "numberOfApplicants": 0,
-        "title": "Machinist Helper",
-        "jobId": "machinist Helper",
-        "highRange": 50000
-      },
-      {
-        "description":
-            "A Machinist Supervisor oversees machinists and machining operations, ensuring production goals are met and quality standards are maintained.",
-        "requirements":
-            "Leadership and management skills, Extensive experience in machining, Knowledge of machine tool operation and maintenance",
-        "lowRange": 50000,
-        "numberOfApplicants": 0,
-        "title": "Machinist Supervisor",
-        "jobId": "machinist Supervisor",
-        "highRange": 90000
-      }
-    ],
-    "industryId": "Machinist",
-    "imageUrl": "assets/industryImages/Machinist.png",
-    "description":
-        "A Machinist operates and maintains machine tools to produce precision parts and components according to engineering drawings and specifications.",
-    "name": "Machinist"
+    "name": "PipeWelder"
   },
   {
     "jobs": [
@@ -219,6 +299,37 @@ final List<Map<String, dynamic>> IndustriesData = [
     "description":
         "Welding involves joining metals and materials using heat and pressure. It is essential in construction, manufacturing, and fabrication industries.",
     "name": "Welder"
+  },
+  {
+    "jobs": [
+      {
+        "description":
+            "A Machinist Helper assists machinists in setting up and operating machine tools, and may perform basic machining tasks under supervision.",
+        "requirements":
+            "Willingness to learn, Basic mechanical aptitude, Ability to follow instructions",
+        "lowRange": 25000,
+        "numberOfApplicants": 0,
+        "title": "Machinist Helper",
+        "jobId": "machinist Helper",
+        "highRange": 50000
+      },
+      {
+        "description":
+            "A Machinist Supervisor oversees machinists and machining operations, ensuring production goals are met and quality standards are maintained.",
+        "requirements":
+            "Leadership and management skills, Extensive experience in machining, Knowledge of machine tool operation and maintenance",
+        "lowRange": 50000,
+        "numberOfApplicants": 0,
+        "title": "Machinist Supervisor",
+        "jobId": "machinist Supervisor",
+        "highRange": 90000
+      }
+    ],
+    "industryId": "Machinist",
+    "imageUrl": "assets/industryImages/Machinist.png",
+    "description":
+        "A Machinist operates and maintains machine tools to produce precision parts and components according to engineering drawings and specifications.",
+    "name": "Machinist"
   },
   {
     "jobs": [
@@ -290,7 +401,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 90000
       }
     ],
-    "industryId": "electrician",
+    "industryId": "Electrician Industrial",
     "imageUrl": "assets/industryImages/electrician.png",
     "description":
         "The industrial electrician industry involves electrical work in industrial settings, including installation, maintenance, and repair of electrical systems and equipment used in factories, plants, and manufacturing facilities.",
@@ -321,7 +432,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 80000
       }
     ],
-    "industryId": "equipment",
+    "industryId": "Equipment",
     "imageUrl": "assets/industryImages/equipment.png",
     "description":
         "The equipment industry encompasses the manufacturing, assembly, and maintenance of various tools, machinery, and devices used across multiple sectors. Professionals in this industry are responsible for producing equipment components, assembling them into finished products, and ensuring their functionality and reliability in operational environments.",
@@ -336,8 +447,8 @@ final List<Map<String, dynamic>> IndustriesData = [
             "Previous experience as a painter or sand blaster, Leadership and supervisory skills, Knowledge of surface preparation techniques and coatings application, Ability to manage and motivate a team",
         "lowRange": 50000,
         "numberOfApplicants": 0,
-        "title": "Painter/Sand Blaster Supervisor",
-        "jobId": "Painter/Sand Blaster Supervisor",
+        "title": "Painter And Sand Blaster Supervisor",
+        "jobId": "Painter And Sand Blaster Supervisor",
         "highRange": 80000
       }
     ],
@@ -371,7 +482,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     "jobs": [
       {
         "title": "Baristas",
-        "jobId": "baristas",
+        "jobId": "Baristas",
         "description":
             "Baristas are skilled in preparing and serving specialty coffee and beverages. They operate espresso machines, brew coffee, and create signature drinks based on customer preferences. Baristas also provide excellent customer service by engaging with patrons and maintaining a clean and organized coffee shop environment.",
         "requirements":
@@ -382,7 +493,7 @@ final List<Map<String, dynamic>> IndustriesData = [
       },
       {
         "title": "Bartenders",
-        "jobId": "bartenders",
+        "jobId": "Bartenders",
         "description":
             "Bartenders mix and serve alcoholic and non-alcoholic beverages at bars, restaurants, or events. They interact with customers, take drink orders, prepare cocktails, and ensure a pleasant experience for patrons. Bartenders also monitor alcohol consumption and comply with legal regulations.",
         "requirements":
@@ -414,14 +525,14 @@ final List<Map<String, dynamic>> IndustriesData = [
         "numberOfApplicants": 0
       }
     ],
-    "industryId": "food Preparation",
+    "industryId": "Food Preparation",
     "imageUrl": "assets/industryImages/food Preparation.png",
     "description":
         "The food preparation and serving industry involves the creation, cooking, and serving of food and beverages in various settings such as restaurants, cafes, and food establishments. It encompasses a range of roles from chefs and cooks to servers and bartenders, contributing to culinary experiences and hospitality services.",
     "name": "Food Preparation and Serving",
   },
   {
-    "industryId": "farming",
+    "industryId": "Farming",
     "imageUrl": "assets/industryImages/farming.png",
     "description":
         "The farming industry involves agricultural activities such as cultivating crops, raising livestock, and managing farm operations. It plays a crucial role in food production, contributing to global food supply and economic development.",
@@ -506,7 +617,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ]
   },
   {
-    "industryId": "fishing",
+    "industryId": "Fishing",
     "imageUrl": "assets/industryImages/fishing.png",
     "description":
         "The farming industry involves agricultural activities such as cultivating crops, raising livestock, and managing farm operations. It plays a crucial role in food production, contributing to global food supply and economic development.",
@@ -526,7 +637,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ]
   },
   {
-    "industryId": "maintenance",
+    "industryId": "Maintenance",
     "imageUrl": "assets/industryImages/maintenance.png",
     "description":
         "The maintenance industry involves activities focused on the upkeep and preservation of buildings, facilities, and outdoor spaces. It encompasses cleaning, repair, and management of property to ensure functionality and safety.",
@@ -601,7 +712,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ]
   },
   {
-    "industryId": "landscaping",
+    "industryId": "LandScaping",
     "imageUrl": "assets/industryImages/landscaping.png",
     "description":
         "The landscaping industry involves modifying and beautifying outdoor spaces by incorporating elements of nature, architecture, and design. It includes activities such as gardening, lawn care, and landscape design, enhancing aesthetics and functionality.",
@@ -632,7 +743,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ]
   },
   {
-    "industryId": "construction and Extraction",
+    "industryId": "Construction and Extraction",
     "imageUrl": "assets/industryImages/construction and Extraction.png",
     "description":
         "The construction industry involves the planning, design, and execution of building projects, including residential, commercial, and infrastructure developments. It encompasses various skilled trades and labor-intensive activities to create structures and facilities.",
@@ -663,38 +774,48 @@ final List<Map<String, dynamic>> IndustriesData = [
     ]
   },
   {
-    "industryId": "carpentry",
-    "imageUrl": "assets/industryImages/carpentry.png",
+    "industryId": "Carpet Installers",
+    "imageUrl": "assets/industryImages/Carpet Installers.png",
     "description":
-        "The carpentry industry involves the construction and installation of wooden structures and fixtures. Carpenters work with various tools and materials to build, repair, and install frameworks, furniture, and other wood-based products.",
-    "name": "Carpentry",
+        "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
+    "name": "Carpet Installers",
     "jobs": [
       {
-        "title": "Carpenters",
-        "jobId": "Carpenters",
+        "title": "Carpet Installer",
+        "jobId": "carpet Installer",
         "description":
-            "Carpenters construct and repair wooden structures and fixtures, including frameworks, stairways, doorframes, and furniture. They use hand and power tools to cut, shape, and assemble wood components.",
+            "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
         "requirements":
-            "Knowledge of carpentry techniques, Blueprint reading, Skill in using carpentry tools, Physical stamina",
-        "lowRange": 35000,
-        "highRange": 60000,
-        "numberOfApplicants": 0
-      },
-      {
-        "title": "Helper Carpenters",
-        "jobId": "Helper Carpenters",
-        "description":
-            "Helper Carpenters assist skilled carpenters in tasks such as carrying materials, holding tools, and performing basic carpentry duties. They learn on-the-job skills and support carpentry projects.",
-        "requirements":
-            "Willingness to learn, Physical fitness, Ability to follow instructions",
-        "lowRange": 25000,
-        "highRange": 40000,
+            "Knowledge of flooring materials, Installation skills, Attention to detail",
+        "lowRange": 30000,
+        "highRange": 50000,
         "numberOfApplicants": 0
       }
     ]
   },
   {
-    "industryId": "construction_building",
+    "industryId": "Cement Masons",
+    "imageUrl":
+        "assets/industryImages/Cement Masons and Concrete Finishers.png",
+    "description":
+        "Cement Masons and Concrete Finishers work with concrete to pour, smooth, and finish surfaces such as sidewalks, driveways, and foundations.",
+    "name": "Cement Masons and Concrete Finishers",
+    "jobs": [
+      {
+        "title": "Cement Mason",
+        "jobId": "cement mason",
+        "description":
+            "Cement Masons and Concrete Finishers work with concrete to pour, smooth, and finish surfaces such as sidewalks, driveways, and foundations.",
+        "requirements":
+            "Concrete working skills, Physical strength, Attention to detail",
+        "lowRange": 35000,
+        "highRange": 55000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "industryId": "Construction Building",
     "imageUrl": "assets/industryImages/construction_building.png",
     "description":
         "The construction and building industry involves the planning, design, and construction of various structures and facilities. It includes a wide range of skilled trades and labor-intensive activities to create buildings, roads, bridges, and infrastructure.",
@@ -736,23 +857,206 @@ final List<Map<String, dynamic>> IndustriesData = [
     ]
   },
   {
-    "industryId": "roofing",
-    "imageUrl": "assets/industryImages/roofing.png",
+    "industryId": "Elevator and Escalator Installers",
+    "imageUrl":
+        "assets/industryImages/Elevator and Escalator Installers and Repairers.png",
     "description":
-        "The roofing industry involves the installation, repair, and maintenance of roofs on buildings and structures. Roofers work with various materials such as shingles, tiles, and metal to protect buildings from weather elements.",
-    "name": "Roofing",
+        "Elevator and Escalator Installers and Repairers install, maintain, and repair elevators, escalators, and related equipment.",
+    "name": "Elevator and Escalator Installers and Repairers",
     "jobs": [
       {
-        "title": "Roofer",
-        "jobId": "Roofer",
+        "title": "Elevator Installer",
+        "jobId": "Elevator Installer",
         "description":
-            "Roofers install, repair, and replace roofs on buildings. They work with a variety of roofing materials and use specialized tools to ensure roofs are watertight and durable.",
+            "Elevator and Escalator Installers and Repairers install, maintain, and repair elevators, escalators, and related equipment.",
         "requirements":
-            "Knowledge of roofing techniques, Physical stamina, Ability to work at heights",
+            "Mechanical skills, Electrical knowledge, Troubleshooting abilities",
+        "lowRange": 40000,
+        "highRange": 70000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "industryId": "Excavating and Loading Machine and Dragline Operators",
+    "imageUrl": "assets/industryImages/warehousing-300.png",
+    "description":
+        "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
+    "name": "Excavating and Loading Machine and Dragline Operators",
+    "jobs": [
+      {
+        "title": "Machine Operator",
+        "jobId": "machine operator excavating",
+        "description":
+            "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
+        "requirements":
+            "Heavy equipment operation skills, Safety awareness, Physical stamina",
+        "lowRange": 35000,
+        "highRange": 60000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "industryId": "Floor Senders and Finishers",
+    "imageUrl": "assets/industryImages/Floor Senders and Finishers.png",
+    "description":
+        "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
+    "name": "Floor Senders and Finishers",
+    "jobs": [
+      {
+        "title": "Floor Sander",
+        "jobId": "floor sander",
+        "description":
+            "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
+        "requirements":
+            "Flooring skills, Attention to detail, Hand tool proficiency",
+        "lowRange": 30000,
+        "highRange": 50000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "industryId": "Glaziers",
+    "imageUrl": "assets/industryImages/Glaziers.png",
+    "description":
+        "Glaziers install glass in windows, skylights, and other structures.",
+    "name": "Glaziers",
+    "jobs": [
+      {
+        "title": "Glazier",
+        "jobId": "Glazier",
+        "description":
+            "Glaziers install glass in windows, skylights, and other structures.",
+        "requirements":
+            "Glass installation skills, Attention to safety, Physical fitness",
+        "lowRange": 35000,
+        "highRange": 55000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+  {
+    "industryId": "Hazardous Material Removal",
+    "imageUrl": "assets/industryImages/Hazardous Material Removal.png",
+    "description":
+        "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
+    "name": "Hazardous Material Removal",
+    "jobs": [
+      {
+        "title": "Hazardous Material Remover",
+        "jobId": "hazardous material remover",
+        "description":
+            "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
+        "requirements":
+            "Knowledge of hazardous materials, Safety training, Certification",
+        "lowRange": 40000,
+        "highRange": 65000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+ {
+    "industryId": "Carpentry",
+    "imageUrl": "assets/industryImages/carpentry.png",
+    "description":
+        "The carpentry industry involves the construction and installation of wooden structures and fixtures. Carpenters work with various tools and materials to build, repair, and install frameworks, furniture, and other wood-based products.",
+    "name": "Carpentry",
+    "jobs": [
+      {
+        "title": "Carpenters",
+        "jobId": "Carpenters",
+        "description":
+            "Carpenters construct and repair wooden structures and fixtures, including frameworks, stairways, doorframes, and furniture. They use hand and power tools to cut, shape, and assemble wood components.",
+        "requirements":
+            "Knowledge of carpentry techniques, Blueprint reading, Skill in using carpentry tools, Physical stamina",
         "lowRange": 35000,
         "highRange": 60000,
         "numberOfApplicants": 0
       },
+      {
+        "title": "Helper Carpenters",
+        "jobId": "Helper Carpenters",
+        "description":
+            "Helper Carpenters assist skilled carpenters in tasks such as carrying materials, holding tools, and performing basic carpentry duties. They learn on-the-job skills and support carpentry projects.",
+        "requirements":
+            "Willingness to learn, Physical fitness, Ability to follow instructions",
+        "lowRange": 25000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+ {
+    "industryId": "Construction",
+    "imageUrl": "assets/industryImages/construction and Extraction.png",
+    "description":
+        "The construction industry involves building, repairing, and maintaining structures such as buildings, roads, bridges, and utilities.",
+    "name": "Construction",
+    "jobs": [
+      {
+        "title": "Helper Construction",
+        "jobId": "helper construction",
+        "description":
+            "Helpers in construction assist skilled workers with various tasks on construction sites.",
+        "requirements": "Willingness to learn, Physical fitness",
+        "lowRange": 25000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Helper Brickmasons, Blockmasons, Stonemasons",
+        "jobId": "helper brickmasons blockmasons stonemasons",
+        "description":
+            "Helpers in brickmasonry, blockmasonry, and stonemasonry assist with preparing materials and supporting masons in construction tasks.",
+        "requirements": "Ability to follow instructions, Physical stamina",
+        "lowRange": 24000,
+        "highRange": 38000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Helper Painter, Paperhangers, Plasters",
+        "jobId": "helper painter paperhangers plasters",
+        "description":
+            "Helpers in painting, paperhanging, and plastering assist painters and decorators with surface preparation and finishing tasks.",
+        "requirements": "Attention to detail, Manual dexterity",
+        "lowRange": 23000,
+        "highRange": 36000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Painting, Coating and Decorating",
+        "jobId": "painting coating decorating",
+        "description":
+            "Workers in painting, coating, and decorating apply paints, coatings, and finishes to surfaces.",
+        "requirements":
+            "Experience in painting, Knowledge of coating techniques",
+        "lowRange": 28000,
+        "highRange": 45000,
+        "numberOfApplicants": 0
+      },
+      {
+        "title": "Pipelayers, Plumbers",
+        "jobId": "pipelayers plumbers",
+        "description":
+            "Pipelayers and plumbers install and repair plumbing systems and pipelines.",
+        "requirements": "Plumbing skills, Knowledge of pipefitting",
+        "lowRange": 30000,
+        "highRange": 55000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Roofer",
+    "imageUrl": "assets/industryImages/roofing.png",
+    "description":
+        "The roofing industry involves the installation, repair, and maintenance of roofs on buildings and structures. Roofers work with various materials such as shingles, tiles, and metal to protect buildings from weather elements.",
+    "name": "Roofer",
+    "jobs": [
       {
         "title": "Helper Roofer",
         "jobId": "Helper Roofer",
@@ -766,8 +1070,53 @@ final List<Map<String, dynamic>> IndustriesData = [
       }
     ]
   },
+
+
   {
-    "industryId": "production",
+    "industryId": "Structural Iron And Steel",
+    "imageUrl": "assets/industryImages/Machinist.png",
+    "description":
+        "The structural iron and steel industry involves the construction and installation of structural steel components used in buildings, bridges, and other large structures.",
+    "name": "Structural Iron and Steel",
+    "jobs": [
+      {
+        "title": "StructuralIronSteel",
+        "jobId": "Structural Iron Steel",
+        "description":
+            "Structural Steel Fabricators are responsible for cutting, shaping, and assembling steel components according to construction blueprints and specifications. They operate machinery such as shears, presses, and welding equipment.",
+        "requirements":
+            "Experience in steel fabrication, Ability to read blueprints, Proficiency in operating fabrication tools and equipment",
+        "lowRange": 25000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+  {
+    "industryId": "Aircraft Mechanic",
+    "imageUrl": "assets/industryImages/electrician.png",
+    "description":
+        "Aircraft mechanics, also known as aviation maintenance technicians, are responsible for inspecting, repairing, and maintaining aircraft to ensure safety and performance standards are met.",
+    "name": "Aircraft Mechanic",
+    "jobs": [
+      {
+        "title": "Aviation Maintenance Technician",
+        "jobId": "Aviation Maintenance Technician",
+        "description":
+            "Aviation Maintenance Technicians inspect, troubleshoot, and repair aircraft systems and components including engines, landing gear, hydraulic systems, and avionics. They perform scheduled maintenance and ensure compliance with aviation regulations.",
+        "requirements":
+            "FAA Airframe and Powerplant (A&P) certification, Strong mechanical aptitude, Attention to detail, Ability to work in a team",
+         "lowRange": 25000,
+        "highRange": 40000,
+        "numberOfApplicants": 0
+      }
+    ]
+  },
+
+
+   {
+    "industryId": "Production",
     "imageUrl": "assets/industryImages/production.png",
     "description":
         "The production industry involves the manufacturing of goods through various processes such as assembly, packaging, and quality control. Production workers play a vital role in producing consumer products and industrial goods.",
@@ -797,8 +1146,9 @@ final List<Map<String, dynamic>> IndustriesData = [
       }
     ]
   },
+
   {
-    "industryId": "woodworking",
+    "industryId": "WoodWorker",
     "imageUrl": "assets/industryImages/woodworking.png",
     "description":
         "The woodworking industry involves crafting wood into various products such as furniture, cabinets, and decorative items. Woodworkers use specialized tools and techniques to create high-quality wooden goods.",
@@ -828,227 +1178,7 @@ final List<Map<String, dynamic>> IndustriesData = [
       }
     ]
   },
-  {
-    "industryId": "Safety Representative",
-    "imageUrl": "assets/industryImages/Safety Representative.png",
-    "description":
-        "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
-    "name": "Safety Representative",
-    "jobs": [
-      {
-        "title": "Safety Representative",
-        "jobId": "safety_representative",
-        "description":
-            "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
-        "requirements":
-            "Knowledge of safety regulations, Communication skills, Attention to detail",
-        "lowRange": 40000,
-        "highRange": 70000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": ""
-        "Record Clerk",
-    "imageUrl": "assets/industryImages/Record Clerk.png",
-    "description":
-        "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
-    "name": "Record Clerk",
-    "jobs": [
-      {
-        "title": "Record Clerk",
-        "jobId": "record_clerk",
-        "description":
-            "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
-        "requirements":
-            "Organizational skills, Attention to detail, Computer literacy",
-        "lowRange": 30000,
-        "highRange": 50000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "Project Manager",
-    "imageUrl": "assets/industryImages/Project Manager.png",
-    "description":
-        "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
-    "name": "Project Manager",
-    "jobs": [
-      {
-        "title": "Project Manager",
-        "jobId": "project_manager",
-        "description":
-            "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
-        "requirements":
-            "Project management skills, Leadership abilities, Construction knowledge",
-        "lowRange": 60000,
-        "highRange": 100000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "Carpet Installers",
-    "imageUrl": "assets/industryImages/Carpet Installers.png",
-    "description":
-        "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
-    "name": "Carpet Installers",
-    "jobs": [
-      {
-        "title": "Carpet Installer",
-        "jobId": "carpet_installer",
-        "description":
-            "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
-        "requirements":
-            "Knowledge of flooring materials, Installation skills, Attention to detail",
-        "lowRange": 30000,
-        "highRange": 50000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "Cement Masons and Concrete Finishers",
-    "imageUrl":
-        "assets/industryImages/Cement Masons and Concrete Finishers.png",
-    "description":
-        "Cement Masons and Concrete Finishers work with concrete to pour, smooth, and finish surfaces such as sidewalks, driveways, and foundations.",
-    "name": "Cement Masons and Concrete Finishers",
-    "jobs": [
-      {
-        "title": "Cement Mason",
-        "jobId": "cement_mason",
-        "description":
-            "Cement Masons and Concrete Finishers work with concrete to pour, smooth, and finish surfaces such as sidewalks, driveways, and foundations.",
-        "requirements":
-            "Concrete working skills, Physical strength, Attention to detail",
-        "lowRange": 35000,
-        "highRange": 55000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "Elevator and Escalator Installers and Repairers",
-    "imageUrl":
-        "assets/industryImages/Elevator and Escalator Installers and Repairers.png",
-    "description":
-        "Elevator and Escalator Installers and Repairers install, maintain, and repair elevators, escalators, and related equipment.",
-    "name": "Elevator and Escalator Installers and Repairers",
-    "jobs": [
-      {
-        "title": "Elevator Installer",
-        "jobId": "elevator_installer",
-        "description":
-            "Elevator and Escalator Installers and Repairers install, maintain, and repair elevators, escalators, and related equipment.",
-        "requirements":
-            "Mechanical skills, Electrical knowledge, Troubleshooting abilities",
-        "lowRange": 40000,
-        "highRange": 70000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "Excavating and Loading Machine and Dragline Operators",
-    "imageUrl": "assets/industryImages/warehousing-300.png",
-    "description":
-        "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
-    "name": "Excavating and Loading Machine and Dragline Operators",
-    "jobs": [
-      {
-        "title": "Machine Operator",
-        "jobId": "machine_operator_excavating",
-        "description":
-            "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
-        "requirements":
-            "Heavy equipment operation skills, Safety awareness, Physical stamina",
-        "lowRange": 35000,
-        "highRange": 60000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "Floor Senders and Finishers",
-    "imageUrl": "assets/industryImages/Floor Senders and Finishers.png",
-    "description":
-        "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
-    "name": "Floor Senders and Finishers",
-    "jobs": [
-      {
-        "title": "Floor Sander",
-        "jobId": "floor_sander",
-        "description":
-            "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
-        "requirements":
-            "Flooring skills, Attention to detail, Hand tool proficiency",
-        "lowRange": 30000,
-        "highRange": 50000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "Glaziers",
-    "imageUrl": "assets/industryImages/Glaziers.png",
-    "description":
-        "Glaziers install glass in windows, skylights, and other structures.",
-    "name": "Glaziers",
-    "jobs": [
-      {
-        "title": "Glazier",
-        "jobId": "glazier",
-        "description":
-            "Glaziers install glass in windows, skylights, and other structures.",
-        "requirements":
-            "Glass installation skills, Attention to safety, Physical fitness",
-        "lowRange": 35000,
-        "highRange": 55000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "Hazardous Material Removal",
-    "imageUrl": "assets/industryImages/Hazardous Material Removal.png",
-    "description":
-        "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
-    "name": "Hazardous Material Removal",
-    "jobs": [
-      {
-        "title": "Hazardous Material Remover",
-        "jobId": "hazardous_material_remover",
-        "description":
-            "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
-        "requirements":
-            "Knowledge of hazardous materials, Safety training, Certification",
-        "lowRange": 40000,
-        "highRange": 65000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
-  {
-    "industryId": "General Laborer",
-    "imageUrl": "assets/industryImages/carpentry.png",
-    "description":
-        "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
-    "name": "General Laborer",
-    "jobs": [
-      {
-        "title": "General Laborer",
-        "jobId": "general_laborer",
-        "description":
-            "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
-        "requirements":
-            "Physical stamina, Willingness to perform manual tasks, Ability to follow instructions",
-        "lowRange": 25000,
-        "highRange": 45000,
-        "numberOfApplicants": 0
-      }
-    ]
-  },
+
+
+
 ];
