@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../providers/app_settings_provider.dart';
@@ -22,19 +23,27 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
   late AppSettingsProvider asp;
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+void initState() {
+  super.initState();
+
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    if (!prefs.containsKey('showcaseShown')) {
       asp = Provider.of<AppSettingsProvider>(context, listen: false);
       ShowCaseWidget.of(context).startShowCase([
         asp.signInButton,
         asp.bottomNavigation,
         asp.searchBar,
         asp.selection,
-        asp.translation
+        asp.translation,
       ]);
-    });
-  }
+
+      prefs.setBool('showcaseShown', true);
+    }
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {
