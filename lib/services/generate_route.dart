@@ -1,3 +1,4 @@
+import 'package:blukers/views/common_vieiws/all_search_bar_components/search_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/payment_model/url_info.dart';
@@ -63,6 +64,7 @@ final routes = [
           isReference: extra['isReference']);
     },
   ),
+  GoRoute( path: '/search', builder: (context, state) => const SearchPage()),
   GoRoute(
       path: '/pdfViewScreen',
       builder: (context, state) => const ResumeScreen()),

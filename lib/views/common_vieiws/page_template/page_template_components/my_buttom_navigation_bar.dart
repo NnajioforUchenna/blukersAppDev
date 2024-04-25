@@ -51,15 +51,15 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
         NavigationDestination(
           icon: buildCustomIcon(
             context,
-            'assets/icons/navicon-03.png',
+            'assets/icons/search-icon.png',
             ThemeColors.grey1ThemeColor,
           ),
           selectedIcon: buildCustomIcon(
             context,
-            'assets/icons/navicon-03-selected.png',
+            'assets/icons/search-icon-selected.png',
             ThemeColors.primaryThemeColor,
           ),
-          label: AppLocalizations.of(context)!.chat,
+          label: "Search",
         ),
         NavigationDestination(
           icon: SvgPicture.asset(
@@ -90,6 +90,7 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
           up.navigate(context, index);
         });
       },
+      
       selectedIndex: currentPageIndex,
       backgroundColor: Colors.white,
       elevation: 10,
