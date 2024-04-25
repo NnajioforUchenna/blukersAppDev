@@ -11,7 +11,7 @@ import '../views/worker/services/services_components/subscription/subscription_c
 final List<String> routesWorker = [
   '/jobs',
   '/myJobs',
-  '/workerChat',
+  '/search',
   '/offers',
   '/workerProfile',
   '/login'
@@ -19,7 +19,7 @@ final List<String> routesWorker = [
 final List<String> routesCompany = [
   '/workers',
   '/myJobPosts',
-  '/companyChat',
+  '/search',
   '/offers',
   '/companyProfile',
   '/login'
