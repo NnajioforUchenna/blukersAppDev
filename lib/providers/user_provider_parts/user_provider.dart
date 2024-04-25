@@ -32,6 +32,7 @@ import '../../views/old_common_views/job_timeline/display_job_timeline_dialog.da
 
 part 'authentication_authorization.dart';
 part 'creating_user_profile.dart';
+part 'other_siginin_options.dart';
 part 'updating_profile_functions.dart';
 part 'user_job_posts_functions.dart';
 part 'user_navigation_functions.dart';

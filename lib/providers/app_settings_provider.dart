@@ -14,19 +14,35 @@ import '../views/old_common_views/components/update_app_dialog.dart';
 
 part 'user_journey.dart';
 
+Map<String, Locale> supportedLocales = {
+  'en': const Locale('en', 'US'), // English
+  'es': const Locale('es', 'ES'), // Spanish
+  'ar': const Locale('ar', 'AE'), // Arabic
+  'bn': const Locale('bn', 'BD'), // Bengali
+  'zh': const Locale('zh', 'CN'), // Chinese (Simplified)
+  'fr': const Locale('fr', 'FR'), // French
+  'de': const Locale('de', 'DE'), // German
+  'hi': const Locale('hi', 'IN'), // Hindi
+  'ig': const Locale('ig', 'NG'), // Igbo
+  'it': const Locale('it', 'IT'), // Italian
+  'ja': const Locale('ja', 'JP'), // Japanese
+  'jv': const Locale('jv', 'ID'), // Javanese
+  'ko': const Locale('ko', 'KR'), // Korean
+  'pt': const Locale('pt', 'BR'), // Portuguese
+  'ru': const Locale('ru', 'RU'), // Russian
+  'tr': const Locale('tr', 'TR'), // Turkish
+};
+
 class AppSettingsProvider with ChangeNotifier {
   String? _latestVersion;
   String? _androidUrl;
   String? _iOSUrl;
   bool? _shouldUpdate;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _user;
+
+
+  Locale myLocale = WidgetsBinding.instance.window.locale;
 
   AppSettingsProvider() {
-    _auth.authStateChanges().listen((User? user) {
-      _user = user;
-      notifyListeners();
-    });
     getDeviceId();
   }
 
@@ -76,8 +92,7 @@ class AppSettingsProvider with ChangeNotifier {
 
   void checkForUpdate(BuildContext context) {
     if (!kIsWeb) {
-      //_latestversion ==null means the update never checked before since the app is open
-      // if (_latestVersion == null) {
+
       _shouldUpdateApp().then((value) {
         print("update: ${value!}");
         if (value) {
@@ -97,7 +112,10 @@ class AppSettingsProvider with ChangeNotifier {
     }
   }
 
-  void notifyListners() {
+
+
+  void setLocale(String? selectedLanguageCode) {
+    myLocale = supportedLocales[selectedLanguageCode ?? 'en']!;
     notifyListeners();
   }
 }

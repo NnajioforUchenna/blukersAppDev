@@ -1,16 +1,1 @@
-{
-  "storage": {
-    "rules": "storage.rules"
-  },
-  "hosting": {
-    "source": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "frameworksBackend": {
-      "region": "us-central1"
-    }
-  }
-}
+{"storage":{"rules":"storage.rules"},"hosting":{"source":".","ignore":["firebase.json","**/.*","**/node_modules/**"],"frameworksBackend":{"region":"us-central1"}},"flutter":{"platforms":{"android":{"default":{"projectId":"blukers-development","appId":"1:25989559034:android:9d0ff9f7910a037664cf43","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"blukers-development","appId":"1:25989559034:ios:d028a7a2865bae0964cf43","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"blukers-development","appId":"1:25989559034:ios:64a2b3282bec97b564cf43","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"blukers-development","configurations":{"android":"1:25989559034:android:9d0ff9f7910a037664cf43","ios":"1:25989559034:ios:d028a7a2865bae0964cf43","macos":"1:25989559034:ios:64a2b3282bec97b564cf43","web":"1:25989559034:web:00bcd96fde3b747f64cf43","windows":"1:25989559034:web:21e3c0c831ed20ee64cf43"}}}}}}

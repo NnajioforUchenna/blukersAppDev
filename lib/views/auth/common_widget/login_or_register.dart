@@ -1,9 +1,10 @@
-import '../../../utils/styles/index.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
+
+import '../../../utils/styles/index.dart';
 
 class LoginOrRegister extends StatelessWidget {
   const LoginOrRegister({super.key});
@@ -16,17 +17,12 @@ class LoginOrRegister extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Company Logo
-            // const CompanyLogo(),
-            // const SizedBox(height: 15.0),
-
             Icon(
               UniconsLine.user,
               color: Colors.grey.shade400,
               size: 100,
             ),
             const SizedBox(height: 10.0),
-
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(

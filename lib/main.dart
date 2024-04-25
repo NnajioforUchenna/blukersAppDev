@@ -78,16 +78,13 @@ class MyApp extends StatelessWidget {
           builder: (context, child) {
             return ShowCaseWidget(
               builder: Builder(builder: (context) {
+                AppSettingsProvider ap =
+                    Provider.of<AppSettingsProvider>(context);
                 return MaterialApp.router(
                   title: "Blukers",
                   routerConfig: goRouter,
                   debugShowCheckedModeBanner: false,
-                  // LOCALIZATION
-                  // - Manually set a locale:
-                  // locale: const Locale('en'),
-                  // - supportedLocales, if they match the phone's locale,
-                  // flutter automatically use the langage for the given delegates.
-                  // If they don't match the phone's locale, default locale will be 'en'.
+                  locale: ap.myLocale,
                   supportedLocales: L10n.all,
                   localizationsDelegates: const [
                     AppLocalizations.delegate,
