@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pub_semver/pub_semver.dart';
@@ -38,7 +37,6 @@ class AppSettingsProvider with ChangeNotifier {
   String? _androidUrl;
   String? _iOSUrl;
   bool? _shouldUpdate;
-
 
   Locale myLocale = WidgetsBinding.instance.window.locale;
 
@@ -92,7 +90,6 @@ class AppSettingsProvider with ChangeNotifier {
 
   void checkForUpdate(BuildContext context) {
     if (!kIsWeb) {
-
       _shouldUpdateApp().then((value) {
         print("update: ${value!}");
         if (value) {
@@ -111,8 +108,6 @@ class AppSettingsProvider with ChangeNotifier {
       // }
     }
   }
-
-
 
   void setLocale(String? selectedLanguageCode) {
     myLocale = supportedLocales[selectedLanguageCode ?? 'en']!;

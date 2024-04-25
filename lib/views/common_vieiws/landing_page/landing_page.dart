@@ -38,15 +38,6 @@ class LandingPage extends StatelessWidget {
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold), // Responsive font size
             ),
-            // Transform.translate(
-            //   offset: Offset(0, -60.w), // Responsive width
-            //   child: Text(
-            //     AppLocalizations.of(context)!.dreamBuildConnect,
-            //     textAlign: TextAlign.center,
-            //     style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
-            //         .copyWith(fontSize: 18.sp), // Responsive font size
-            //   ),
-            // ),
             const SizedBox(height: 120),
             Padding(
               padding: EdgeInsets.all(16.w), // Responsive width

@@ -10,6 +10,7 @@ class MobileListIndustries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
+    print(ip.industries.length);
     return Column(
       children: ip.industries.values.map((industry) {
         return Container(

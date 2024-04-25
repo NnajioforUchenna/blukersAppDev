@@ -53,6 +53,7 @@ class IndustriesProvider with ChangeNotifier {
     Map<String, Industry> industries = {};
 
     for (var industryData in IndustriesData) {
+      print(industryData['industryId']);
       Industry industry = Industry.fromMap(industryData);
       industries[industry.industryId] = industry;
     }
