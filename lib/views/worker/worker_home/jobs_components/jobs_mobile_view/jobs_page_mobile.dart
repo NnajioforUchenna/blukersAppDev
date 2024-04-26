@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,47 +21,29 @@ class JobsPageMobile extends StatefulWidget {
 
 class _JobsPageMobileState extends State<JobsPageMobile> {
   late AppSettingsProvider asp;
-  SharedPreferences? prefs;
-  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  String? deviceId;
+
   @override
   void initState() {
     super.initState();
-    _initSharedPreferences();
-    _getDeviceId();
-  }
 
-  Future<void> _initSharedPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-  }
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final prefs = await SharedPreferences.getInstance();
+      final hasShowcased =
+          prefs.getBool('showcaseShown') ?? false; // Default to false
 
-  Future<void> _getDeviceId() async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-
-    if (Platform.isAndroid) {
-      final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      deviceId = androidInfo.id; // Replace with appropriate identifier
-    } else if (Platform.isIOS) {
-      final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-      deviceId =
-          iosInfo.identifierForVendor; // Replace with appropriate identifier
-    }
-
-    Future<void> showShowcaseIfNeeded() async {
-      if (prefs == null || deviceId == null) {
-        // New user, show showcase
+      if (!hasShowcased) {
         final asp = Provider.of<AppSettingsProvider>(context, listen: false);
-        ShowCaseWidget.of(context).startShowCase([
+        final showcase = ShowCaseWidget.of(context);
+        showcase.startShowCase([
           asp.signInButton,
           asp.bottomNavigation,
           asp.searchBar,
           asp.selection,
           asp.translation,
         ]);
-        await prefs!.setString(deviceId!, 'showcaseShown');
+        await prefs.setBool('showcaseShown', true);
       }
-    }
+    });
   }
 
   @override
