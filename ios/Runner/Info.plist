@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+
+<key>FacebookAppID</key>
+<string>326245573545115</string>
+<key>FacebookClientToken</key>
+<string>538fa6e74c8214a35cb97c97551118ae</string>
+<key>FacebookDisplayName</key>
+<string>blukers app</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -70,6 +77,7 @@
     			<!-- TODO Replace this value: -->
     			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
     			<string>com.googleusercontent.apps.25989559034-32qt09e8cg860hqv86805fomh6n5cfq1</string>
+    			<string>fb326245573545115</string>
     		</array>
     	</dict>
     </array>

@@ -27,7 +27,7 @@ class SignInOptions extends StatelessWidget {
         SignInOptionsWidget(
           icon: FontAwesomeIcons.facebook,
           onPressed: () {
-            up.signInWithApple();
+            up.signInWithFacebook();
           },
           color: Colors.blue,
         ),

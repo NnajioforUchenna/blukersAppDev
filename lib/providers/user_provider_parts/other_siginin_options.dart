@@ -10,4 +10,9 @@ extension OtherSignInOptions on UserProvider {
     // Attempt to sign in with Apple.
     var result = await UserDataProvider.signInWithApple();
   }
+
+  Future<void> signInWithFacebook() async {
+    // Attempt to sign in with Facebook.
+    var result = await UserDataProvider.signInWithFacebook();
+  }
 }

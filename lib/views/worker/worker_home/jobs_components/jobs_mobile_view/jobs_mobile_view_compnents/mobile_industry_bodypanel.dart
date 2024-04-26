@@ -1,14 +1,14 @@
-import '../../../../../../providers/job_posts_provider.dart';
-import '../../../../../../providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/job.dart';
+import '../../../../../../providers/job_posts_provider.dart';
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../utils/helpers/number_format.dart';
-import '../../../../../../utils/localization/localized_jobs.dart';
+import '../../../../../../utils/localization/localized_job_ids.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../company/workers_components/display_workers.dart';
 import '../../../../saved/display_jobs.dart';
@@ -71,7 +71,7 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                           children: [
                             RichText(
                               text: TextSpan(
-                                text: LocalizedJobs.get(context, job.jobId),
+                                text: LocalizedJobIds.get(context, job.jobId),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
