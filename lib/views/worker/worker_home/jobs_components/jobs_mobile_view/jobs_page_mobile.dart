@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +12,7 @@ import '../../../saved/job_search_result_page.dart';
 import 'jobs_mobile_view_compnents/mobile_display_industries.dart';
 import 'jobs_mobile_view_compnents/search_and_translate_row.dart';
 import 'jobs_mobile_view_compnents/sign_in_row.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class JobsPageMobile extends StatefulWidget {
   const JobsPageMobile({super.key});
@@ -21,29 +23,49 @@ class JobsPageMobile extends StatefulWidget {
 
 class _JobsPageMobileState extends State<JobsPageMobile> {
   late AppSettingsProvider asp;
-
+  SharedPreferences? prefs;
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  String? deviceId;
   @override
-void initState() {
-  super.initState();
+  void initState() {
+    super.initState();
+    _initSharedPreferences();
+    _getDeviceId();
+    
+  }
 
-  WidgetsBinding.instance.addPostFrameCallback((_) async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<void> _initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+  }
 
-    if (!prefs.containsKey('showcaseShown')) {
-      asp = Provider.of<AppSettingsProvider>(context, listen: false);
-      ShowCaseWidget.of(context).startShowCase([
-        asp.signInButton,
-        asp.bottomNavigation,
-        asp.searchBar,
-        asp.selection,
-        asp.translation,
-      ]);
-
-      prefs.setBool('showcaseShown', true);
+  Future<void> _getDeviceId() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+   
+    if (Platform.isAndroid) {
+      final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      deviceId = androidInfo.id; // Replace with appropriate identifier
+    } else if (Platform.isIOS) {
+      final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      deviceId =
+          iosInfo.identifierForVendor; // Replace with appropriate identifier
     }
-  });
-}
 
+    Future<void> _showShowcaseIfNeeded() async {
+      if (prefs == null || deviceId == null) {
+        // New user, show showcase
+        final asp = Provider.of<AppSettingsProvider>(context, listen: false);
+        ShowCaseWidget.of(context).startShowCase([
+          asp.signInButton,
+          asp.bottomNavigation,
+          asp.searchBar,
+          asp.selection,
+          asp.translation,
+        ]);
+        await prefs!.setString(deviceId!, 'showcaseShown');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
