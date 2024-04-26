@@ -5,4 +5,9 @@ extension OtherSignInOptions on UserProvider {
     // Attempt to sign in with Google.
     var result = await UserDataProvider.signInWithGoogle();
   }
+
+  Future<void> signInWithApple() async {
+    // Attempt to sign in with Apple.
+    var result = await UserDataProvider.signInWithApple();
+  }
 }

@@ -639,4 +639,14 @@ class UserDataProvider {
       };
     }
   }
+
+  static signInWithApple() async {
+    // Implement the Apple Sign-In functionality here
+    final appleProvider = AppleAuthProvider();
+    final userCredential =
+        await FirebaseAuth.instance.signInWithProvider(appleProvider);
+    if (userCredential.user != null) {
+      print('Successfully signed in with Apple');
+    }
+  }
 }

@@ -26,13 +26,17 @@ class SignInOptions extends StatelessWidget {
         const SizedBox(width: 10),
         SignInOptionsWidget(
           icon: FontAwesomeIcons.facebook,
-          onPressed: () {},
+          onPressed: () {
+            up.signInWithApple();
+          },
           color: Colors.blue,
         ),
         const SizedBox(width: 10),
         SignInOptionsWidget(
           icon: FontAwesomeIcons.apple,
-          onPressed: () {},
+          onPressed: () {
+            up.signInWithApple();
+          },
           color: Colors.grey.shade800,
         ),
       ],
