@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../models/app_user.dart';
 import '../models/company.dart';
@@ -607,5 +608,35 @@ class UserDataProvider {
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
+  }
+
+  static signInWithGoogle() async {
+    // Implement the Google Sign-In functionality here
+
+    final googleAccount = await GoogleSignIn().signIn();
+    final googleAuth = await googleAccount?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    if (userCredential.user != null) {
+      print('Successfully signed in with Google');
+      print(userCredential.user!.displayName);
+      print(userCredential.user!.email);
+      return {
+        'success': true,
+        'userCredential': userCredential,
+      };
+    } else {
+      print('Failed to sign in with Google');
+      return {
+        'success': false,
+        'error': 'Failed to sign in with Google',
+      };
+    }
   }
 }

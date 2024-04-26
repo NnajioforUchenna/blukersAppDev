@@ -188,9 +188,7 @@ class _LoginState extends State<Login> {
                           },
                           text: AppLocalizations.of(context)!.signIn,
                         ),
-                        const SizedBox(height: 20),
-                        const Text('Or Sign In using'),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 30),
                         const SignInOptions(),
                         LabelButton(
                           onTap: () {

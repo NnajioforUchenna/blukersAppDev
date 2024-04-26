@@ -18,7 +18,7 @@ class SignInOptionsWidget extends StatelessWidget {
       onPressed: onPressed,
       icon: Icon(
         icon,
-        size: 24,
+        size: 50,
         color: color,
       ),
     );

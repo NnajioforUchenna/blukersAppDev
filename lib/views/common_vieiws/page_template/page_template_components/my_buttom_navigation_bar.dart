@@ -59,7 +59,7 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
             'assets/icons/search-icon-selected.png',
             ThemeColors.primaryThemeColor,
           ),
-          label: "Search",
+          label: AppLocalizations.of(context)!.searchJobs,
         ),
         NavigationDestination(
           icon: SvgPicture.asset(

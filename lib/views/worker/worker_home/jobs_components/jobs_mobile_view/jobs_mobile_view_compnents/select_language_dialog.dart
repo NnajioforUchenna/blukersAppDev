@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blukers/providers/app_settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,15 +42,10 @@ class _SelectLanguageDialogState extends State<SelectLanguageDialog> {
   "en": "English",
   "es": "Spanish",
   "ar": "Arabic",
-  "bn": "Bengali",
   "zh": "Chinese (Simplified)",
   "fr": "French",
   "de": "German",
-  "hi": "Hindi",
-  "ig": "Igbo",
   "it": "Italian",
-  "ja": "Japanese",
-  "jv": "Javanese",
   "ko": "Korean",
   "pt": "Portuguese",
   "ru": "Russian",
@@ -62,6 +58,7 @@ class _SelectLanguageDialogState extends State<SelectLanguageDialog> {
     var languageMap = jsonDecode(jsonString);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
+    AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
 
     return SimpleDialog(
       title: const Text('Select Language'),
@@ -73,6 +70,7 @@ class _SelectLanguageDialogState extends State<SelectLanguageDialog> {
               selectedLanguageCode = key;
               up.updateTargetLanguage(selectedLanguageCode);
               jp.translateJobPosts(selectedLanguageCode);
+              asp.setLocale(selectedLanguageCode);
             });
             Navigator.of(context).pop();
           },

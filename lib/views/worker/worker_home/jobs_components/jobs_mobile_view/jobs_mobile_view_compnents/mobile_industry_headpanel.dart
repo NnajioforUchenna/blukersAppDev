@@ -1,9 +1,12 @@
+import 'package:blukers/providers/app_settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../../models/industry.dart';
 import '../../../../../../services/on_hover.dart';
 import '../../../../../../services/responsive.dart';
+import '../../../../../../utils/localization/localized_industries.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import 'mobile_industry_bodypanel.dart';
 
@@ -22,6 +25,7 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
 
   @override
   Widget build(BuildContext context) {
+    AppSettingsProvider ap = Provider.of<AppSettingsProvider>(context);
     return Column(
       children: [
         InkWell(
@@ -60,7 +64,8 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
                     SizedBox(width: Responsive.isDesktop(context) ? 25 : 10),
                     Expanded(
                         child: Text(
-                      widget.industry.industryId,
+                      LocalizedIndustries.get(
+                          context, widget.industry.industryId),
                       style: TextStyle(
                         fontSize: Responsive.isDesktop(context) ? 30 : 20,
                         fontWeight: FontWeight.w700,
