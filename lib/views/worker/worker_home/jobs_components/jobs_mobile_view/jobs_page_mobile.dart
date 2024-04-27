@@ -23,27 +23,28 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
   late AppSettingsProvider asp;
 
   @override
-void initState() {
-  super.initState();
+  void initState() {
+    super.initState();
 
-  WidgetsBinding.instance.addPostFrameCallback((_) async {
-    final prefs = await SharedPreferences.getInstance();
-    final hasShowcased = prefs.getBool('showcaseShown') ?? false; // Default to false
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final prefs = await SharedPreferences.getInstance();
+      final hasShowcased =
+          prefs.getBool('showcaseShown') ?? false; // Default to false
 
-    if (!hasShowcased) {
-      final asp = Provider.of<AppSettingsProvider>(context, listen: false);
-      final showcase = ShowCaseWidget.of(context);
-       showcase.startShowCase([
-        asp.signInButton,
-        asp.bottomNavigation,
-        asp.searchBar,
-        asp.selection,
-        asp.translation,
-      ]);
-      await prefs.setBool('showcaseShown', true);
-    }
-  });
-}
+      if (!hasShowcased) {
+        final asp = Provider.of<AppSettingsProvider>(context, listen: false);
+        final showcase = ShowCaseWidget.of(context);
+        showcase.startShowCase([
+          asp.signInButton,
+          asp.bottomNavigation,
+          asp.searchBar,
+          asp.selection,
+          asp.translation,
+        ]);
+        await prefs.setBool('showcaseShown', true);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

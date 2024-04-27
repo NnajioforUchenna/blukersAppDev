@@ -76,6 +76,8 @@ dependencies:
   dart_format: ^0.0.4
   font_awesome_flutter: ^10.7.0
   device_info_plus: ^9.1.2
+  sign_in_with_apple: ^6.1.0
+  flutter_facebook_auth: ^6.2.0
 
 
 

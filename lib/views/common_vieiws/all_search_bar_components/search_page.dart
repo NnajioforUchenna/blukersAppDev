@@ -1,7 +1,8 @@
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../utils/styles/index.dart';
 import '../../old_common_views/small_pop_button_widget.dart';
@@ -16,13 +17,24 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController locationController = TextEditingController();
-
+  String buttonLabel = 'Search Jobs';
+  String searchName = 'Position, work area or company';
   @override
   Widget build(BuildContext context) {
     // Determine screen size for responsive design
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
+    if (up.userRole == 'Company') {
+      buttonLabel = AppLocalizations.of(context)!.searchWorkers;
+      searchName =
+          AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
+    } else {
+      buttonLabel = AppLocalizations.of(context)!.searchJobs;
+      searchName =
+          AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
+    }
 
     nameController.text = jp.nameSearch;
     locationController.text = jp.locationSearch;
@@ -54,7 +66,7 @@ class _SearchPageState extends State<SearchPage> {
                       decoration: InputDecoration(
                         contentPadding:
                             const EdgeInsets.symmetric(vertical: 10),
-                        hintText: 'Job title, Industry or Keywords',
+                        hintText: searchName,
                         hintStyle: GoogleFonts.montserrat(
                           color: Colors.grey,
                           fontSize: 13.0,
@@ -85,7 +97,7 @@ class _SearchPageState extends State<SearchPage> {
                       decoration: InputDecoration(
                         contentPadding:
                             const EdgeInsets.symmetric(vertical: 10),
-                        hintText: 'City, State or Zip Code',
+                        hintText:  AppLocalizations.of(context)!.cityandzipcode,
                         hintStyle: GoogleFonts.montserrat(
                           color: Colors.grey,
                           fontSize: 13.0,
@@ -120,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                     ),
-                    child: Text('Search',
+                    child: Text(buttonLabel,
                         style: GoogleFonts.montserrat(
                           color: Colors.white,
                           fontSize: 14,

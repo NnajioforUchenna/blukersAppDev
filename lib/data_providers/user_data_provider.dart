@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../models/app_user.dart';
@@ -637,6 +638,32 @@ class UserDataProvider {
         'success': false,
         'error': 'Failed to sign in with Google',
       };
+    }
+  }
+
+  static signInWithApple() async {
+    // Implement the Apple Sign-In functionality here
+    final appleProvider = AppleAuthProvider();
+    final userCredential =
+        await FirebaseAuth.instance.signInWithProvider(appleProvider);
+    if (userCredential.user != null) {
+      print('Successfully signed in with Apple');
+    }
+  }
+
+  static signInWithFacebook() async {
+    // Implement the Facebook Sign-In functionality here
+    final LoginResult result = await FacebookAuth.instance.login();
+    if (result.status == LoginStatus.success) {
+      // Create a credential from the access token
+      final OAuthCredential credential =
+          FacebookAuthProvider.credential(result.accessToken!.token);
+      // Once signed in, return the UserCredential
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      if (userCredential.user != null) {
+        print('Successfully signed in with Facebook');
+      }
     }
   }
 }
