@@ -10,7 +10,8 @@
     }
   },
   "dreamBuildConnect": "Dream. Build. Connect.",
-  "whatDoYouIdentifyAs": "Choose your user type?",
+  "whatDoYouIdentifyAs": "What do you identify as?",
+  "cityandzipcode": "City, State or Zip Code",
   "home": "Home",
   "jobs": "Jobs",
   "chat": "Chat",
