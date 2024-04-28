@@ -6,11 +6,9 @@ import 'mobile_industry_headpanel.dart';
 
 class MobileListIndustries extends StatelessWidget {
   const MobileListIndustries({super.key});
-
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
-    print(ip.industries.length);
     return Column(
       children: ip.industries.values.map((industry) {
         return Container(

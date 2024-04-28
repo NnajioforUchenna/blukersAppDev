@@ -92,38 +92,36 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                       )),
                   Expanded(
                       flex: 3,
-                      child: Container(
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.groups,
-                              color: ThemeColors.primaryThemeColor,
-                            ),
-                            Container(
-                                height: 30,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: ThemeColors.primaryThemeColor,
-                                ),
-                                margin: const EdgeInsets.only(
-                                    left: 5, right: 5, top: 10, bottom: 10),
-                                child: Center(
-                                  child: Text(
-                                    up.userRole == 'company'
-                                        ? job.numberOfApplicants.toString()
-                                        : job.numberOfJobPosts.toString(),
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.groups,
+                            color: ThemeColors.primaryThemeColor,
+                          ),
+                          Container(
+                              height: 30,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: ThemeColors.primaryThemeColor,
+                              ),
+                              margin: const EdgeInsets.only(
+                                  left: 5, right: 5, top: 10, bottom: 10),
+                              child: Center(
+                                child: Text(
+                                  up.userRole == 'company'
+                                      ? job.numberOfApplicants.toString()
+                                      : job.numberOfJobPosts.toString(),
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
-                                )),
-                            const Icon(Icons.arrow_forward_ios,
-                                color: Colors.grey)
-                          ],
-                        ),
+                                ),
+                              )),
+                          const Icon(Icons.arrow_forward_ios,
+                              color: Colors.grey)
+                        ],
                       )),
                 ],
               )),

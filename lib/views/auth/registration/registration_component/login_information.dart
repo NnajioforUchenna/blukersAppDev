@@ -1,10 +1,10 @@
-import '../../../../providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../services/validation.dart';
+import '../../../../providers/chat_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../services/responsive.dart';
 import '../../../../utils/styles/theme_colors.dart';
@@ -748,10 +748,9 @@ class _LoginInformationState extends State<LoginInformation> {
                     onTap: () {
                       if (isFormComplete()) {
                         up.registerUser(
+                          context: context,
                           email: emailController.text,
                           password: passwordController.text,
-                          userType: groupValue,
-                          chatProvider: chatProvider,
                         );
                       }
                     },

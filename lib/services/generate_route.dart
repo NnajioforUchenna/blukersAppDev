@@ -25,8 +25,8 @@ import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
 import '../views/worker/worker_chat/workerChatRoom.dart';
 import '../views/worker/worker_chat/worker_chat.dart';
-import '../views/worker/worker_home/jobs.dart';
 import '../views/worker/worker_home/my_jobs_and_components/my_jobs.dart';
+import '../views/worker/worker_home/worker_home.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
@@ -64,7 +64,7 @@ final routes = [
           isReference: extra['isReference']);
     },
   ),
-  GoRoute( path: '/search', builder: (context, state) => const SearchPage()),
+  GoRoute(path: '/search', builder: (context, state) => const SearchPage()),
   GoRoute(
       path: '/pdfViewScreen',
       builder: (context, state) => const ResumeScreen()),

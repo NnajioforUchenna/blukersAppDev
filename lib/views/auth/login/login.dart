@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/chat_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/make_responsive_web.dart';
 import '../../../services/responsive.dart';
@@ -37,7 +36,6 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
-    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
       body: MakeResponsiveWeb(
         image: const AssetImage('assets/images/login.png'),
@@ -177,12 +175,10 @@ class _LoginState extends State<Login> {
                           onTap: () async {
                             if (isFormComplete()) {
                               // You can submit your form data here.
-                              print('Form is valid');
                               await up.loginAppUser(
                                   context: context,
                                   email: emailController.text,
-                                  password: passwordController.text,
-                                  chatProvider: chatProvider);
+                                  password: passwordController.text);
                               //   await chatProvider.getGroups(up.appUser?.uid ?? "");
                             }
                           },

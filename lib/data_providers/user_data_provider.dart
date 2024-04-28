@@ -626,8 +626,6 @@ class UserDataProvider {
 
     if (userCredential.user != null) {
       print('Successfully signed in with Google');
-      print(userCredential.user!.displayName);
-      print(userCredential.user!.email);
       return {
         'success': true,
         'userCredential': userCredential,
@@ -648,11 +646,31 @@ class UserDataProvider {
         await FirebaseAuth.instance.signInWithProvider(appleProvider);
     if (userCredential.user != null) {
       print('Successfully signed in with Apple');
+      return {
+        'success': true,
+        'userCredential': userCredential,
+      };
+    } else {
+      print('Failed to sign in with Apple');
+      return {
+        'success': false,
+        'error': 'Failed to sign in with Apple',
+      };
     }
   }
 
   static signInWithFacebook() async {
     // Implement the Facebook Sign-In functionality here
+
+    if (kIsWeb) {
+      await FacebookAuth.i.webAndDesktopInitialize(
+        appId: "326245573545115",
+        cookie: true,
+        xfbml: true,
+        version: "v15.0",
+      );
+    }
+
     final LoginResult result = await FacebookAuth.instance.login();
     if (result.status == LoginStatus.success) {
       // Create a credential from the access token
@@ -663,7 +681,25 @@ class UserDataProvider {
           await FirebaseAuth.instance.signInWithCredential(credential);
       if (userCredential.user != null) {
         print('Successfully signed in with Facebook');
+        return {
+          'success': true,
+          'userCredential': userCredential,
+        };
+      } else {
+        print('Failed to sign in with Facebook');
+        return {
+          'success': false,
+          'error': 'Failed to sign in with Facebook',
+        };
       }
     }
+  }
+
+  static Future<bool> isUserRegistered(String uid) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    return appUserCollection.doc(uid).get().then((doc) {
+      return doc.exists;
+    });
   }
 }

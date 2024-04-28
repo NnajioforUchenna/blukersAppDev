@@ -52,17 +52,11 @@ class IndustriesProvider with ChangeNotifier {
   Map<String, Industry> fillIndustries() {
     Map<String, Industry> industries = {};
 
-    List<String> JobIds = [];
-
     for (var industryData in IndustriesData) {
       Industry industry = Industry.fromMap(industryData);
-
-      for (var job in industry.jobs.values) {
-        JobIds.add(job.jobId);
-      }
       industries[industry.industryId] = industry;
     }
-    print(JobIds);
+
     return industries;
   }
 }

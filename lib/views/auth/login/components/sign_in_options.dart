@@ -5,11 +5,16 @@ import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider_parts/user_provider.dart';
 
-class SignInOptions extends StatelessWidget {
+class SignInOptions extends StatefulWidget {
   const SignInOptions({
     super.key,
   });
 
+  @override
+  State<SignInOptions> createState() => _SignInOptionsState();
+}
+
+class _SignInOptionsState extends State<SignInOptions> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
@@ -19,7 +24,7 @@ class SignInOptions extends StatelessWidget {
         SignInOptionsWidget(
           icon: FontAwesomeIcons.google,
           onPressed: () {
-            up.signInWithGoogle();
+            up.signInWithGoogle(context);
           },
           color: Colors.red,
         ),
@@ -27,7 +32,7 @@ class SignInOptions extends StatelessWidget {
         SignInOptionsWidget(
           icon: FontAwesomeIcons.facebook,
           onPressed: () {
-            up.signInWithFacebook();
+            up.signInWithFacebook(context);
           },
           color: Colors.blue,
         ),
@@ -35,7 +40,7 @@ class SignInOptions extends StatelessWidget {
         SignInOptionsWidget(
           icon: FontAwesomeIcons.apple,
           onPressed: () {
-            up.signInWithApple();
+            up.signInWithApple(context);
           },
           color: Colors.grey.shade800,
         ),

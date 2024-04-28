@@ -59,7 +59,7 @@ class UserJourney {
   // Create a UserJourney object from a Map
   factory UserJourney.fromMap(Map<String, dynamic> map) {
     return UserJourney(
-      statusHistory: map['statusHistory'] as Map<String, int>,
+      statusHistory: map['statusHistory'] as Map<String, int>? ?? {},
     );
   }
 }
