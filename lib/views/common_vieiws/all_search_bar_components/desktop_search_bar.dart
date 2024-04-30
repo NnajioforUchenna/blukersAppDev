@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
@@ -184,8 +185,8 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
   Widget _buildSmallCircleButton() {
     return wp.isSearching || jp.isSearching
         ? SizedBox(
-            width: 50, // Fixed width
-            height: 50, // Fixed height
+            width: 25.w, // Fixed width
+            height: 25.h, // Fixed height
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -201,6 +202,7 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
                 shape: const CircleBorder(), // Makes the button circular
               ),
               child: const Icon(Icons.close,
+                  size: 15,
                   color: Colors
                       .white), // Example icon, you can replace with your content
             ),

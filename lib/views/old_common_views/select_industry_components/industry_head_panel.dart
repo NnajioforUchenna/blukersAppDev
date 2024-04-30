@@ -16,10 +16,18 @@ class IndustryHeadPanel extends StatelessWidget {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.network(
-              industry.imageUrl!,
-              width: Responsive.isDesktop(context) ? 70 : 55,
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              width: Responsive.isDesktop(context) ? 70 : 50,
+              height: Responsive.isDesktop(context) ? 70 : 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit
+                      .cover, // This ensures the image covers the circular area
+                  image: AssetImage(industry.imageUrl!),
+                ),
+              ),
             ),
           ),
           SizedBox(width: Responsive.isDesktop(context) ? 25 : 10),
