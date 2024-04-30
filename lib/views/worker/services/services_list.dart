@@ -17,7 +17,7 @@ class ServicesList extends StatelessWidget {
   Widget build(BuildContext context) {
     AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
-    String userRole = up.userRole!;
+    String? userRole = up.userRole;
 
     if (!kIsWeb) {
       avp.checkForUpdate(context);

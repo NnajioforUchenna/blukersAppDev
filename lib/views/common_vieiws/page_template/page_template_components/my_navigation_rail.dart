@@ -1,10 +1,10 @@
-import '../../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../utils/styles/index.dart';
 
 class MyNavigationRail extends StatefulWidget {
   const MyNavigationRail({super.key});
@@ -66,11 +66,11 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
           label: Text(AppLocalizations.of(context)!.jobs),
         ),
         NavigationRailDestination(
-          icon: SvgPicture.asset('assets/icons/chatIcon.svg',
+          icon: SvgPicture.asset('assets/icons/search.svg',
               color: ThemeColors.grey1ThemeColor),
-          selectedIcon: SvgPicture.asset('assets/icons/chatIcon.svg',
+          selectedIcon: SvgPicture.asset('assets/icons/search.svg',
               color: ThemeColors.primaryThemeColor),
-          label: Text(AppLocalizations.of(context)!.chat),
+          label: Text(AppLocalizations.of(context)!.searchJobs),
         ),
         NavigationRailDestination(
           icon: SvgPicture.asset('assets/icons/servicesIcon.svg',
