@@ -31,7 +31,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 22000,
         "numberOfApplicants": 0,
         "title": "Light Truck Driver",
-        "jobId": "Lighttruck Driver",
+        "jobId": "Light truck Driver",
         "highRange": 35000
       }
     ],
@@ -41,6 +41,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "The driver industry involves operating various types of vehicles for transporting goods or passengers.",
     "name": "Driver"
   },
+
   {
     "jobs": [
       {
@@ -814,6 +815,8 @@ final List<Map<String, dynamic>> IndustriesData = [
       }
     ]
   },
+
+  
   {
     "industryId": "Construction Building",
     "imageUrl": "assets/industryImages/construction_building.png",

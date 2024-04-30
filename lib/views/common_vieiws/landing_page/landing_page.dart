@@ -42,7 +42,7 @@ class LandingPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(16.w), // Responsive width
               child: Text(
-                AppLocalizations.of(context)!.whatDoYouIdentifyAs,
+                AppLocalizations.of(context)!.choose_your_user_type,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserrat(
                   color: const Color(0xFFf06523),

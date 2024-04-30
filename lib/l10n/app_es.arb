@@ -1,4 +1,6 @@
 {
+
+
     "hello": "Hola {userName}",
     "@hello": {
         "description": "Un mensaje con un solo par\u00e1metro",
@@ -41,6 +43,7 @@
     "construction": "Construcci\u00f3n",
     "custodialwork": "Trabajo de Custodia",
     "foodandbeverages": "Alimentos y Bebidas",
+    "cityandzipcode": "Ciudad, Estado o Código Postal",
     "foodprocessing": "Procesamiento de Alimentos",
     "forestry": "Silvicultura",
     "industrialconstruction": "Construcci\u00f3n Industrial",
