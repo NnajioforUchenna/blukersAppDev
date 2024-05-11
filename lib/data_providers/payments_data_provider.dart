@@ -73,7 +73,6 @@ class PaymentsDataProvider {
       };
     }
 
-    print(purchaseWrapper);
     if (purchaseWrapper.isNotEmpty) {
       platformCol
           .doc(purchaseDetails.purchaseID)

@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../../../../../../models/industry.dart';
 import '../../../../../../services/on_hover.dart';
 import '../../../../../../services/responsive.dart';
-import '../../../../../../utils/localization/localized_industries.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import 'mobile_industry_bodypanel.dart';
 
@@ -64,8 +63,7 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
                     SizedBox(width: Responsive.isDesktop(context) ? 25 : 10),
                     Expanded(
                         child: Text(
-                      LocalizedIndustries.get(
-                          context, widget.industry.industryId),
+                      widget.industry.name,
                       style: TextStyle(
                         fontSize: Responsive.isDesktop(context) ? 30 : 20,
                         fontWeight: FontWeight.w700,

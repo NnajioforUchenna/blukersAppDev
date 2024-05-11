@@ -1,15 +1,18 @@
-import '../../../../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-import 'mobile_list_industries.dart';
+import '../../../../../../providers/industry_provider.dart';
+import '../../../../../../utils/styles/index.dart';
+import 'mobile_industry_headpanel.dart';
 
 class MobileDisplayIndustries extends StatelessWidget {
   const MobileDisplayIndustries({super.key});
 
   @override
   Widget build(BuildContext context) {
+    IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -23,7 +26,15 @@ class MobileDisplayIndustries extends StatelessWidget {
                   color: ThemeColors.secondaryThemeColor,
                 )),
           ),
-          const MobileListIndustries(),
+          Column(
+            children: ip.industries.values.map((industry) {
+              return Container(
+                margin:
+                    const EdgeInsets.only(bottom: 10.0, left: 30, right: 30),
+                child: MobileIndustryHeadPanel(industry: industry),
+              );
+            }).toList(),
+          ),
           const SizedBox(height: 60),
         ],
       ),

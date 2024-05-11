@@ -37,11 +37,12 @@ class AppSettingsProvider with ChangeNotifier {
   String? _androidUrl;
   String? _iOSUrl;
   bool? _shouldUpdate;
-
+  SharedPreferences? prefs;
   Locale myLocale = WidgetsBinding.instance.window.locale;
+  bool hasShowcased = false;
 
   AppSettingsProvider() {
-    getDeviceId();
+    initializeBlukersApp();
   }
 
   String? get latestVersion => _latestVersion;
@@ -75,10 +76,6 @@ class AppSettingsProvider with ChangeNotifier {
     if (shouldUpdateApp.containsKey('version') &&
         _latestVersion != "" &&
         Version.parse(_latestVersion!) > Version.parse(currentAppVersion)) {
-      // print('versions are not the same');
-      // print('current version: $currentAppVersion');
-      // print('latest version: ' + shouldUpdateApp["version"]);
-
       _shouldUpdate = true;
       _iOSUrl = shouldUpdateApp['iOSUrl'];
       _androidUrl = shouldUpdateApp['androidUrl'];
@@ -111,6 +108,12 @@ class AppSettingsProvider with ChangeNotifier {
 
   void setLocale(String? selectedLanguageCode) {
     myLocale = supportedLocales[selectedLanguageCode ?? 'en']!;
+    notifyListeners();
+  }
+
+  setHasShowcased(bool bool) {
+    hasShowcased = bool;
+    prefs?.setBool('showcaseShown', bool);
     notifyListeners();
   }
 }

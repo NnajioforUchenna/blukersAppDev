@@ -3,21 +3,32 @@ part of 'user_provider.dart';
 extension OtherSignInOptions on UserProvider {
   Future<void> signInWithGoogle(BuildContext context) async {
     // Attempt to sign in with Google.
-    var result = await UserDataProvider.signInWithGoogle();
-    updateUserRecords(result, context);
+    AuthResult authResult = await UserDataProvider.signInWithGoogle();
+    checkIfRegisteredOrLogin(authResult, context);
   }
 
   Future<void> signInWithApple(BuildContext context) async {
     // Attempt to sign in with Apple.
-    var result = await UserDataProvider.signInWithApple();
+    AuthResult authResult = await UserDataProvider.signInWithApple();
     // Check if the registration was successful.
-    updateUserRecords(result, context);
+    checkIfRegisteredOrLogin(authResult, context);
   }
 
   Future<void> signInWithFacebook(BuildContext context) async {
     // Attempt to sign in with Facebook.
-    var result = await UserDataProvider.signInWithFacebook();
+    AuthResult authResult = await UserDataProvider.signInWithFacebook();
     // Check if the registration was successful.
-    updateUserRecords(result, context);
+    checkIfRegisteredOrLogin(authResult, context);
+  }
+
+  checkIfRegisteredOrLogin(AuthResult authResult, BuildContext context) {
+    if (authResult.isSuccess) {
+      // Check if the user is already registered.
+      if (authResult.userCredential!.additionalUserInfo!.isNewUser) {
+        followRegistrationFlow(authResult, context);
+      } else {
+        followLoginFlow(authResult, context);
+      }
+    }
   }
 }

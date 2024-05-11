@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../providers/app_settings_provider.dart';
@@ -27,12 +26,8 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final prefs = await SharedPreferences.getInstance();
-      final hasShowcased =
-          prefs.getBool('showcaseShown') ?? false; // Default to false
-
-      if (!hasShowcased) {
-        final asp = Provider.of<AppSettingsProvider>(context, listen: false);
+      final asp = Provider.of<AppSettingsProvider>(context, listen: false);
+      if (!asp.hasShowcased) {
         final showcase = ShowCaseWidget.of(context);
         showcase.startShowCase([
           asp.signInButton,
@@ -41,7 +36,7 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
           asp.selection,
           asp.translation,
         ]);
-        await prefs.setBool('showcaseShown', true);
+        asp.setHasShowcased(true);
       }
     });
   }

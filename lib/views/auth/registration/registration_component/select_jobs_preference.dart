@@ -51,6 +51,9 @@ class _SelectJobsPreferenceState extends State<SelectJobsPreference> {
                           text: AppLocalizations.of(context)!.saveProfile,
                           isDisabled: !isValidate,
                         ),
+                        const SizedBox(
+                          height: 60,
+                        ),
                       ],
                     ))))));
   }

@@ -4,9 +4,9 @@ import 'dart:io';
 
 import 'package:blukers/data_providers/user_data_provider.dart';
 import 'package:blukers/data_providers/user_journey_data_provider.dart';
+import 'package:blukers/models/authResult.dart';
 import 'package:blukers/models/job_post.dart';
 import 'package:blukers/models/jobs_perference.dart';
-import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/services/stripe_data.dart';
 import 'package:blukers/services/user_shared_preferences_services.dart';
 import 'package:file_picker/file_picker.dart';

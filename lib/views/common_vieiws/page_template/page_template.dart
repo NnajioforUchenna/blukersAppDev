@@ -1,7 +1,6 @@
 import 'package:blukers/providers/app_settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 import '../../../services/responsive.dart';
 import '../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
@@ -34,19 +33,8 @@ class PageTemplate extends StatelessWidget {
               showLeading: showAppBarBackButton,
             )
           : null,
-      bottomNavigationBar: Responsive.isDesktop(context)
-          ? null
-          : Showcase(
-              key: asp.bottomNavigation,
-              description: 'This is App Navigation Bar',
-              overlayOpacity: 0.6,
-              targetShapeBorder: const CircleBorder(),
-              tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
-              descTextStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              child: const MyButtomNavigationBar()),
+      bottomNavigationBar:
+          Responsive.isDesktop(context) ? null : const MyButtomNavigationBar(),
       body: SafeArea(
         child: Column(
           children: [

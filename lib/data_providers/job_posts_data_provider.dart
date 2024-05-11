@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import '../models/job_post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
 import '../common_files/constants.dart';
+import '../models/job_post.dart';
 import 'data_constants.dart';
 
 final db = FirebaseFirestore.instance;

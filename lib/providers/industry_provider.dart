@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../common_files/Industries.dart';
-import '../data_providers/industries_data_provider.dart';
 import '../models/industry.dart';
 
 class IndustriesProvider with ChangeNotifier {
@@ -17,29 +16,27 @@ class IndustriesProvider with ChangeNotifier {
   // Fills the industries
   void getData() {
     _industries = fillIndustries();
-    notifyListeners();
-    fillNumberOfJobPosts();
   }
 
-  Future<void> fillNumberOfJobPosts() async {
-    final data = await IndustriesDataProvider.getNumberOfJobPosts();
-
-    for (var doc in data) {
-      final data = doc.data();
-
-      final jobId = data['jobId'] as String;
-      final industryId = data['industryId'] as String;
-      final totalJobs = data['totalJobs'] as int;
-
-      if (_industries.containsKey(industryId)) {
-        if (_industries[industryId]!.jobs.containsKey(jobId)) {
-          _industries[industryId]!.jobs[jobId]!.numberOfJobPosts = totalJobs;
-        }
-      }
-    }
-
-    notifyListeners(); // Notify listeners after updating the industries map
-  }
+  // Future<void> fillNumberOfJobPosts() async {
+  //   final data = await IndustriesDataProvider.getNumberOfJobPosts();
+  //
+  //   for (var doc in data) {
+  //     final data = doc.data();
+  //
+  //     final jobId = data['jobId'] as String;
+  //     final industryId = data['industryId'] as String;
+  //     final totalJobs = data['totalJobs'] as int;
+  //
+  //     if (_industries.containsKey(industryId)) {
+  //       if (_industries[industryId]!.jobs.containsKey(jobId)) {
+  //         _industries[industryId]!.jobs[jobId]!.numberOfJobPosts = totalJobs;
+  //       }
+  //     }
+  //   }
+  //
+  //   notifyListeners(); // Notify listeners after updating the industries map
+  // }
 
   var selectedAddress = {};
   bool isSelectedAddress = false;

@@ -1,13 +1,13 @@
-import '../models/app_user.dart';
-import '../views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
+import '../models/app_user.dart';
 import '../models/job_post.dart';
 import '../views/auth/please_login_dialog.dart';
+import '../views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
 
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;
@@ -39,16 +39,9 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  JobPostsProvider() {
-    // get50LastestJobPosts();
-    // getRealJobPosts();
-  }
-
   bool searchComplete = false;
 
   void getJobPostsByJobID(String jobId, String targetLanguage) {
-    print('getJobPostsByJobID: $jobId');
-    print('targetLanguage: $targetLanguage');
     searchComplete = false;
     selectedJobPostId = jobId;
     nameSearch = jobId;
@@ -58,6 +51,7 @@ class JobPostsProvider with ChangeNotifier {
     JobPostsDataProvider.getJobPostsByJobID(jobId, targetLanguage)
         .then((jobPosts) {
       List<JobPost> listJobPosts = [];
+
       listJobPosts = jobPosts
           .map((jobPost) {
             return JobPost.fromMap(jobPost);
@@ -202,8 +196,6 @@ class JobPostsProvider with ChangeNotifier {
   }
 
   Future<void> createJobPost() async {
-    print('newJobPostData: $newJobPostData');
-
     // make sure that the jobPost accepts JobPost Model
     JobPost? jobPost = JobPost.fromMap(newJobPostData);
     if (jobPost != null) {
@@ -364,10 +356,10 @@ class JobPostsProvider with ChangeNotifier {
     required int pageNumber,
     required String targetLanguage,
   }) async {
-    print('queryName: $queryName');
-    print('queryLocation: $queryLocation');
-    print('pageNumber: $pageNumber');
-    print('targetLanguage: $targetLanguage');
+    // print('queryName: $queryName');
+    // print('queryLocation: $queryLocation');
+    // print('pageNumber: $pageNumber');
+    // print('targetLanguage: $targetLanguage');
 
     // Get the 50 most recent job posts.
     Map<String, JobPost> newJobs = {};

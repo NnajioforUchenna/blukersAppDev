@@ -34,4 +34,6 @@ class UserJourneyDataProvider {
       },
     });
   }
+
+  // Update Crm that a new User have been registered
 }

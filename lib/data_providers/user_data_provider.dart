@@ -1,3 +1,4 @@
+import 'package:blukers/models/authResult.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -31,29 +32,22 @@ class UserDataProvider {
     }
   }
 
-  static Future<Map<String, dynamic>> registerUser(
-      String email, String password) async {
+  static Future<AuthResult> registerUser(String email, String password) async {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return {
-        'success': true,
-        'userCredential': userCredential,
-      };
+      AuthResult authResult = AuthResult.isSuccess(userCredential);
+      return authResult;
     } on FirebaseAuthException catch (e) {
       String errorMessage = extractFirebaseError(e.message!);
-      return {
-        'success': false,
-        'error': errorMessage,
-      };
+      AuthResult authResult = AuthResult.failure(errorMessage);
+      return authResult;
     } catch (e) {
-      return {
-        'success': false,
-        'error': e.toString(),
-      };
+      AuthResult authResult = AuthResult.failure(e.toString());
+      return authResult;
     }
   }
 
@@ -177,33 +171,24 @@ class UserDataProvider {
     });
   }
 
-  static Future<Map<String, dynamic>> loginUser(
-      String email, String password) async {
+  static Future<AuthResult> loginUser(String email, String password) async {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return {
-        'success': true,
-        'userCredential': userCredential,
-      };
+      AuthResult authResult = AuthResult.isSuccess(userCredential);
+      return authResult;
     } on FirebaseAuthException catch (e) {
       String errorMessage = extractFirebaseError(e.message!);
-      return {
-        'success': false,
-        'error': errorMessage,
-      };
+      return AuthResult.failure(errorMessage);
     } catch (e) {
-      return {
-        'success': false,
-        'error': e.toString(),
-      };
+      return AuthResult.failure(e.toString());
     }
   }
 
-  static Future<AppUser?> getAppUser(String uid) async {
+  static Future<AppUser?> getAppUser(String? uid) async {
     CollectionReference appUserCollection =
         firestore.collection(appUserCollections);
     DocumentSnapshot documentSnapshot = await appUserCollection.doc(uid).get();
@@ -611,7 +596,7 @@ class UserDataProvider {
     });
   }
 
-  static signInWithGoogle() async {
+  static Future<AuthResult> signInWithGoogle() async {
     // Implement the Google Sign-In functionality here
 
     final googleAccount = await GoogleSignIn().signIn();
@@ -626,40 +611,28 @@ class UserDataProvider {
 
     if (userCredential.user != null) {
       print('Successfully signed in with Google');
-      return {
-        'success': true,
-        'userCredential': userCredential,
-      };
+      return AuthResult.isSuccess(userCredential);
     } else {
       print('Failed to sign in with Google');
-      return {
-        'success': false,
-        'error': 'Failed to sign in with Google',
-      };
+      return AuthResult.failure('Failed to sign in with Google');
     }
   }
 
-  static signInWithApple() async {
+  static Future<AuthResult> signInWithApple() async {
     // Implement the Apple Sign-In functionality here
     final appleProvider = AppleAuthProvider();
     final userCredential =
         await FirebaseAuth.instance.signInWithProvider(appleProvider);
     if (userCredential.user != null) {
       print('Successfully signed in with Apple');
-      return {
-        'success': true,
-        'userCredential': userCredential,
-      };
+      return AuthResult.isSuccess(userCredential);
     } else {
       print('Failed to sign in with Apple');
-      return {
-        'success': false,
-        'error': 'Failed to sign in with Apple',
-      };
+      return AuthResult.failure('Failed to sign in with Apple');
     }
   }
 
-  static signInWithFacebook() async {
+  static Future<AuthResult> signInWithFacebook() async {
     // Implement the Facebook Sign-In functionality here
 
     if (kIsWeb) {
@@ -681,17 +654,13 @@ class UserDataProvider {
           await FirebaseAuth.instance.signInWithCredential(credential);
       if (userCredential.user != null) {
         print('Successfully signed in with Facebook');
-        return {
-          'success': true,
-          'userCredential': userCredential,
-        };
+        return AuthResult.isSuccess(userCredential);
       } else {
         print('Failed to sign in with Facebook');
-        return {
-          'success': false,
-          'error': 'Failed to sign in with Facebook',
-        };
+        return AuthResult.failure('Failed to sign in with Facebook');
       }
+    } else {
+      return AuthResult.failure('Failed Trying to get Facebook Login Instance');
     }
   }
 

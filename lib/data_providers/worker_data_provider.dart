@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import '../models/worker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/worker.dart';
 import 'data_constants.dart';
 
 final FirebaseFirestore db = FirebaseFirestore.instance;
@@ -18,7 +18,6 @@ class WorkerDataProvider {
     CollectionReference workers = db.collection(workersCollections);
 
     // Query the collection: Fetch documents where jobId is in the jobPositionIds field
-    print(jobId);
     QuerySnapshot querySnapshot =
         await workers.where('jobIds', arrayContains: jobId).get();
 

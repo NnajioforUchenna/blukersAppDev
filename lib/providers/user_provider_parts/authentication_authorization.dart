@@ -38,10 +38,11 @@ extension AuthenticationAuthorization on UserProvider {
     );
 
     // Attempt to register the user.
-    var result = await UserDataProvider.registerUser(email, password);
+    AuthResult authResult =
+        await UserDataProvider.registerUser(email, password);
 
-    // Check if the registration was successful.
-    updateUserRecords(result, context);
+    // Follow the registration flow.
+    followRegistrationFlow(authResult, context);
   }
 
   Future<void> loginAppUser(
@@ -55,44 +56,10 @@ extension AuthenticationAuthorization on UserProvider {
     );
 
     // Attempt to log the user in.
-    var result = await UserDataProvider.loginUser(email, password);
+    AuthResult authResult = await UserDataProvider.loginUser(email, password);
 
-    // Check if the login was successful.
-    if (result['success']) {
-      // Fetch user details from the database or wherever necessary.
-      // This step assumes that you have a method to get user details after they log in.
-      AppUser? appUser4DB =
-          await UserDataProvider.getAppUser(result['userCredential'].user!.uid);
-
-      // Set the _appUser
-      _appUser = appUser4DB;
-
-      // Add to Shared Preferences
-      if (appUser4DB != null) {
-        UserSharedPreferencesServices.create(appUser4DB);
-      }
-
-      // Request permission for notifications
-      requestForNotificationPermission(_appUser);
-
-      notifyListeners();
-
-      // Dismiss the loading indicator.
-      EasyLoading.dismiss();
-
-      // Navigate to the home page.
-      if (userRole == "worker") {
-        context.go('/jobs');
-      } else {
-        context.go('/workers');
-      }
-    } else {
-      // Print and display any errors that occurred during login.
-
-      EasyLoading.dismiss();
-      EasyLoading.showError(result['error'],
-          duration: const Duration(seconds: 3));
-    }
+    // Follow the login flow.
+    followLoginFlow(authResult, context);
   }
 
   Future<void> resetAppUserPassword({
@@ -129,12 +96,11 @@ extension AuthenticationAuthorization on UserProvider {
     }
   }
 
-  Future<void> updateNewUserRecords(Map<String, dynamic> result) async {
-    print('I was called to update new user records');
-    if (result['success']) {
+  void followRegistrationFlow(AuthResult authResult, BuildContext context) {
+    if (authResult.isSuccess) {
       Map<String, dynamic> userData = {
-        'uid': result['userCredential'].user!.uid,
-        'email': result['userCredential'].user!.email,
+        'uid': authResult.userCredential?.user!.uid,
+        'email': authResult.userCredential?.user!.email,
         'isLoginInformation': true,
         'registeredAs': userRole,
         'userRole': userRole,
@@ -170,39 +136,16 @@ extension AuthenticationAuthorization on UserProvider {
     } else {
       // Print and display any errors that occurred during registration.
       EasyLoading.dismiss();
-      EasyLoading.showError(result['error'],
+      EasyLoading.showError(authResult.message!,
           duration: const Duration(seconds: 3));
     }
   }
 
-  Future<void> updateUserRecords(
-      Map<String, dynamic> result, BuildContext context) async {
-    if (result['success']) {
-      print('The User UID is: ${result['userCredential'].user!.uid}');
-      bool isUserRegistered = await UserDataProvider.isUserRegistered(
-          result['userCredential'].user!.uid);
-
-      print('This User have Registered: $isUserRegistered');
-
-      if (isUserRegistered) {
-        loginUserInApp(result, context);
-      } else {
-        updateNewUserRecords(result);
-      }
-    } else {
-      EasyLoading.dismiss();
-      EasyLoading.showError(result['error'],
-          duration: const Duration(seconds: 3));
-    }
-  }
-
-  Future<void> loginUserInApp(Map<String, dynamic> result, context) async {
-    print('I was called to login user in app');
-    if (result['success']) {
-      // Fetch user details from the database or wherever necessary.
-      // This step assumes that you have a method to get user details after they log in.
-      AppUser? appUser4DB =
-          await UserDataProvider.getAppUser(result['userCredential'].user!.uid);
+  Future<void> followLoginFlow(
+      AuthResult authResult, BuildContext context) async {
+    if (authResult.isSuccess) {
+      AppUser? appUser4DB = await UserDataProvider.getAppUser(
+          authResult.userCredential?.user!.uid);
 
       // Set the _appUser
       _appUser = appUser4DB;
@@ -222,19 +165,14 @@ extension AuthenticationAuthorization on UserProvider {
 
       // Navigate to the home page.
       if (userRole == "worker") {
-        print('I was called to navigate to jobs page');
-        // context.push('/jobs');
         GoRouter.of(context).go('/jobs');
       } else {
-        print('I was called to navigate to workers page');
         GoRouter.of(context).go('/workers');
-        context.push('/workers');
       }
     } else {
       // Print and display any errors that occurred during login.
-
       EasyLoading.dismiss();
-      EasyLoading.showError(result['error'],
+      EasyLoading.showError(authResult.message!,
           duration: const Duration(seconds: 3));
     }
   }

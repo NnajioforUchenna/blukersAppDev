@@ -320,7 +320,7 @@ class _BasicInformationState extends State<BasicInformation> {
                     text: AppLocalizations.of(context)!.saveProfile,
                     isDisabled: !isFormComplete(),
                   ),
-                  SizedBox(height: height * .05),
+                  SizedBox(height: height * .1),
                   // SizedBox(height: 10),
                 ],
               ),

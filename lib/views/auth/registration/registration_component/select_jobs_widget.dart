@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../../models/industry.dart';
 import '../../../../providers/industry_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../utils/localization/localized_industries.dart';
 import '../../../../utils/localization/localized_jobs.dart';
 
 class SelectJobsWidget extends StatefulWidget {
@@ -73,8 +72,7 @@ class _SelectJobsWidgetState extends State<SelectJobsWidget> {
                       children: [
                         Expanded(
                           child: Text(
-                            LocalizedIndustries.get(
-                                context, industry.industryId),
+                            industry.name,
                             style: GoogleFonts.montserrat(
                               color: Colors.black,
                               fontSize: 12,
@@ -100,8 +98,7 @@ class _SelectJobsWidgetState extends State<SelectJobsWidget> {
                 ),
                 if (selectedIndustries.contains(industry.industryId))
                   ...industry.jobs.entries.map((entry) {
-                    final jobId = entry.key;
-                    final job = entry.value;
+                    final jobId = entry.value.title;
                     return InkWell(
                       onTap: () {
                         if (!selectedJobs.containsKey(industry.industryId)) {

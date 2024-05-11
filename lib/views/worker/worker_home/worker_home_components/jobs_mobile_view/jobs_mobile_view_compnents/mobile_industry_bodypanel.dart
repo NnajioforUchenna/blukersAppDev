@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/job.dart';
@@ -8,7 +7,6 @@ import '../../../../../../providers/job_posts_provider.dart';
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../utils/helpers/number_format.dart';
-import '../../../../../../utils/localization/localized_job_ids.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../company/workers_components/display_workers.dart';
 import '../../../../saved/display_jobs.dart';
@@ -71,7 +69,7 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                           children: [
                             RichText(
                               text: TextSpan(
-                                text: LocalizedJobIds.get(context, job.jobId),
+                                text: job.title,
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -92,36 +90,39 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                       )),
                   Expanded(
                       flex: 3,
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.groups,
-                            color: ThemeColors.primaryThemeColor,
-                          ),
-                          Container(
-                              height: 30,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: ThemeColors.primaryThemeColor,
-                              ),
-                              margin: const EdgeInsets.only(
-                                  left: 5, right: 5, top: 10, bottom: 10),
-                              child: Center(
-                                child: Text(
-                                  up.userRole == 'company'
-                                      ? job.numberOfApplicants.toString()
-                                      : job.numberOfJobPosts.toString(),
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              )),
-                          const Icon(Icons.arrow_forward_ios,
-                              color: Colors.grey)
-                        ],
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.groups,
+                              color: ThemeColors.primaryThemeColor,
+                            ),
+                            // Container(
+                            //     height: 30,
+                            //     width: 40,
+                            //     decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(15),
+                            //       color: ThemeColors.primaryThemeColor,
+                            //     ),
+                            //     margin: const EdgeInsets.only(
+                            //         left: 5, right: 5, top: 10, bottom: 10),
+                            //     child: Center(
+                            //       child: Text(
+                            //         up.userRole == 'company'
+                            //             ? job.numberOfApplicants.toString()
+                            //             : job.numberOfJobPosts.toString(),
+                            //         style: GoogleFonts.montserrat(
+                            //           fontSize: 12,
+                            //           fontWeight: FontWeight.bold,
+                            //           color: Colors.white,
+                            //         ),
+                            //       ),
+                            //     )),
+                            Icon(Icons.arrow_forward_ios, color: Colors.grey)
+                          ],
+                        ),
                       )),
                 ],
               )),

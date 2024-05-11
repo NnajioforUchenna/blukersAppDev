@@ -29,7 +29,7 @@ class Industry {
   static Industry fromMap(Map<String, dynamic> map) {
     Map<String, Job> jobsMap = {};
 
-    List<Map<String, dynamic>> jobsData = map['jobs'] ?? {};
+    List<dynamic> jobsData = map['jobs'] ?? {};
 
     for (var jobMap in jobsData) {
       String jobId = jobMap["jobId"];
