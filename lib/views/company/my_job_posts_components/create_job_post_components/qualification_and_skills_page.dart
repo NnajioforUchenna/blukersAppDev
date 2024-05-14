@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/job_posts_provider.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../old_common_views/components/timelines/timeline_navigation_button.dart';
 import '../../../old_common_views/skills_form/skills_form.dart';
+import '../../../worker/worker_profile/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 
 class QualificationAndSkillsPage extends StatefulWidget {
   const QualificationAndSkillsPage({super.key});

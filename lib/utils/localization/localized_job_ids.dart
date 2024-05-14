@@ -157,7 +157,7 @@ class LocalizedJobIds {
   }
 
   static get(BuildContext context, String jobId) {
-    jobId = convert2Keyword(jobId);
-    return JobMap[jobId]?.call(context) ?? jobId;
+    String keyword = convert2Keyword(jobId);
+    return JobMap[keyword]?.call(context) ?? jobId;
   }
 }

@@ -1,10 +1,11 @@
-import '../../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../../../providers/worker_provider.dart';
-import '../../../../../old_common_views/components/timelines/timeline_navigation_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../../providers/worker_provider.dart';
 import '../../../../../auth/common_widget/auth_input.dart';
+import '../timeline_navigation_button.dart';
 import '../your_resume.dart';
 
 class ResumePage extends StatelessWidget {
@@ -24,16 +25,6 @@ class ResumePage extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              // Text(
-              //   AppLocalizations.of(context)!.uploadYourResume,
-              //   textAlign: TextAlign.center,
-              //   style: const TextStyle(
-              //     color: Colors.deepOrangeAccent,
-              //     fontSize: 25,
-              //     fontWeight: FontWeight.w600,
-              //     height: 1.25,
-              //   ),
-              // ),
               const SizedBox(height: 20),
               const YourResume(),
               const SizedBox(height: 20),
@@ -77,42 +68,6 @@ class ResumePage extends StatelessWidget {
                         wp.setResume(linkedInUrlController.text);
                       },
                     ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     wp.workerProfileBackPage();
-                    //   },
-                    //   style: ButtonStyle(
-                    //     backgroundColor: MaterialStateProperty.all<Color>(
-                    //         ThemeColors.secondaryThemeColor),
-                    //   ),
-                    //   child: Text(
-                    //     AppLocalizations.of(context)!.previous,
-                    //     style: TextStyle(
-                    //       fontFamily: "Montserrat",
-                    //       fontSize: 20,
-                    //       fontWeight: FontWeight.bold,
-                    //     ),
-                    //   ),
-                    // ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     // Handle "submit" or "next" logic here
-                    //     up.setJobTimelineStep(2);
-                    //     wp.setResume(linkedInUrlController.text);
-                    //   },
-                    //   style: ButtonStyle(
-                    //     backgroundColor: MaterialStateProperty.all<Color>(
-                    //         ThemeColors.secondaryThemeColor),
-                    //   ),
-                    //   child: Text(
-                    //     AppLocalizations.of(context)!.next,
-                    //     style: TextStyle(
-                    //       fontFamily: "Montserrat",
-                    //       fontSize: 20,
-                    //       fontWeight: FontWeight.bold,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

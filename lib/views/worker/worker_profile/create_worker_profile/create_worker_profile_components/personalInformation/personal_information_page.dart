@@ -1,13 +1,13 @@
-import '../../../../../../providers/worker_provider.dart';
-import '../../../../../../utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
+import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../auth/common_widget/auth_input.dart';
-import '../../../../../old_common_views/components/timelines/timeline_navigation_button.dart';
+import '../timeline_navigation_button.dart';
 
 class PersonalInformationPage extends StatefulWidget {
   const PersonalInformationPage({super.key});
@@ -47,18 +47,6 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
       birthDayController.text = wp.previousParams["birthDay"] ?? "";
       birthMonthController.text = wp.previousParams["birthMonth"] ?? "";
       birthYearController.text = wp.previousParams["birthYear"] ?? "";
-      //added this listner to dismiss keyboard when scroll
-      scrollCtrl.addListener(() {
-        print('scrolling');
-      });
-      scrollCtrl.position.isScrollingNotifier.addListener(() {
-        if (!scrollCtrl.position.isScrollingNotifier.value) {
-          print('scroll is stopped');
-          FocusManager.instance.primaryFocus?.unfocus();
-        } else {
-          print('scroll is started');
-        }
-      });
     });
   }
 
@@ -86,16 +74,6 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // Text(
-                    //   AppLocalizations.of(context)!.personalInformation,
-                    //   textAlign: TextAlign.center,
-                    //   style: const TextStyle(
-                    //     color: Colors.deepOrangeAccent,
-                    //     fontSize: 25,
-                    //     fontWeight: FontWeight.w600,
-                    //     height: 1.25,
-                    //   ),
-                    // ),
                     const SizedBox(height: 20),
                     AuthInput(
                       child: TextFormField(
@@ -317,54 +295,6 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                             }
                           },
                         ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     wp.workerProfileBackPage();
-                        //   },
-                        //   child: Text(
-                        //     AppLocalizations.of(context)!.previous,
-                        //     style: TextStyle(
-                        //       fontFamily: "Montserrat",
-                        //       fontSize: 20,
-                        //       fontWeight: FontWeight.bold,
-                        //     ),
-                        //   ),
-                        //   style: ButtonStyle(
-                        //     backgroundColor: MaterialStateProperty.all<Color>(
-                        //         ThemeColors.secondaryThemeColor),
-                        //   ),
-                        // ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     if (_formKey.currentState!.validate() &&
-                        //         isFormComplete()) {
-                        //       wp.addPersonalInformtion(
-                        //         firstNameController.text,
-                        //         middleNameController.text,
-                        //         lastNameController.text,
-                        //         birthDayController.text,
-                        //         birthMonthController.text,
-                        //         birthYearController.text,
-                        //       );
-                        //       print("Personal Information Added");
-                        //     } else {
-                        //       EasyLoading.showError(
-                        //           "Please fill all the fields");
-                        //     }
-                        //   },
-                        //   style: ButtonStyle(
-                        //     backgroundColor: MaterialStateProperty.all<Color>(
-                        //         ThemeColors.secondaryThemeColor),
-                        //   ),
-                        //   child: Text(
-                        //     AppLocalizations.of(context)!.next,
-                        //     style: TextStyle(
-                        //       fontFamily: "Montserrat",
-                        //       fontSize: 20,
-                        //       fontWeight: FontWeight.bold,
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                     SizedBox(height: height * .05),

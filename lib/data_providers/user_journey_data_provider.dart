@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'data_constants.dart';
+
 final firestore = FirebaseFirestore.instance;
 
 class UserJourneyDataProvider {
@@ -33,7 +35,124 @@ class UserJourneyDataProvider {
         'newcomer': DateTime.now().millisecondsSinceEpoch,
       },
     });
+
+    // Update Crm that a new User have been registered
+    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
+
+    await crmFireStore
+        .collection('Dashboard')
+        .doc('Admin')
+        .collection('NewUser')
+        .doc(uid)
+        .set({
+      'uid': uid,
+      'userJourney': {
+        'prospect': firstLoadTime,
+        'newcomer': DateTime.now().millisecondsSinceEpoch,
+      }
+    });
   }
 
-  // Update Crm that a new User have been registered
+  static Future<void> updateInitiate(String uid) async {
+    // Update initiating profile creation
+
+    // update the user journey
+// Update the user journey
+    await firestore.collection('AppUsers').doc(uid).set({
+      'userJourney': {
+        'initiateProfileCreation': DateTime.now().millisecondsSinceEpoch,
+      },
+    }, SetOptions(merge: true));
+
+    // Update Crm that a new User have initiated profile creation
+    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
+
+    await crmFireStore
+        .collection('Dashboard')
+        .doc('Admin')
+        .collection('InitiateProfileCreation')
+        .doc(uid)
+        .set({
+      'uid': uid,
+      'userJourney': {
+        'initiate': DateTime.now().millisecondsSinceEpoch,
+      }
+    });
+  }
+
+  static Future<void> updateMember(String uid) async {
+    // Update the user journey
+    await firestore.collection('AppUsers').doc(uid).set({
+      'userJourney': {
+        'member': DateTime.now().millisecondsSinceEpoch,
+      },
+    }, SetOptions(merge: true));
+
+    // Update Crm that a new User have been registered
+    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
+
+    await crmFireStore
+        .collection('Dashboard')
+        .doc('Admin')
+        .collection('Member')
+        .doc(uid)
+        .set({
+      'uid': uid,
+      'userJourney': {
+        'member': DateTime.now().millisecondsSinceEpoch,
+      }
+    });
+  }
+
+  static Future<void> updateSubscriber(String? uid) async {
+    if (uid == null) {
+      return;
+    }
+
+    // Update the user journey
+    await firestore.collection('AppUsers').doc(uid).set({
+      'userJourney': {
+        'subscriber': DateTime.now().millisecondsSinceEpoch,
+      },
+    }, SetOptions(merge: true));
+
+    // Update Crm that a new User have been registered
+    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
+
+    await crmFireStore
+        .collection('Dashboard')
+        .doc('Admin')
+        .collection('Subscriber')
+        .doc(uid)
+        .set({
+      'uid': uid,
+      'userJourney': {
+        'subscriber': DateTime.now().millisecondsSinceEpoch,
+      }
+    });
+  }
+
+  static Future<void> updateEliteClient(String uid) async {
+    // Update the user journey
+    await firestore.collection('AppUsers').doc(uid).set({
+      'userJourney': {
+        'eliteClient': DateTime.now().millisecondsSinceEpoch,
+      },
+    }, SetOptions(merge: true));
+
+    // Update Crm that a new User have been registered
+    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
+
+    await crmFireStore
+        .collection('Dashboard')
+        .doc('Admin')
+        .collection('EliteClient')
+        .doc(uid)
+        .set({
+      'uid': uid,
+      'userJourney': {
+        'eliteClient': DateTime.now().millisecondsSinceEpoch,
+      }
+    });
+  }
 }

@@ -562,7 +562,7 @@ class UserDataProvider {
     // Assuming 'firestore' is a correctly initialized FirebaseFirestore instance
     // and 'appUserCollections' holds the correct name of the collection
     CollectionReference appUserCollection = firestore.collection(
-        'appUserCollections'); // Use the actual name of your collection
+        appUserCollections); // Use the actual name of your collection
 
     appUserCollection.doc(appUser.uid).set({
       'jobsPreference': {

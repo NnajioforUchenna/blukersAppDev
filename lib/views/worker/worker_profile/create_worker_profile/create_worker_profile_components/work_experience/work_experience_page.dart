@@ -1,12 +1,11 @@
-import '../../../../../../providers/worker_provider.dart';
-import '../../../../../../services/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../old_common_views/components/timelines/timeline_navigation_button.dart';
+import '../../../../../../providers/worker_provider.dart';
+import '../../../../../../services/responsive.dart';
+import '../timeline_navigation_button.dart';
 import 'work_experience_form.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WorkExperiencePage extends StatefulWidget {
   const WorkExperiencePage({super.key});
@@ -93,40 +92,6 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
                   isSelected: true,
                   onPress: () => wp.setWorkExperience(),
                 ),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     wp.workerProfileBackPage();
-                //   },
-                //   style: ButtonStyle(
-                //     backgroundColor: MaterialStateProperty.all<Color>(
-                //         ThemeColors.secondaryThemeColor),
-                //   ),
-                //   child: Text(
-                //     AppLocalizations.of(context)!.previous,
-                //     style: TextStyle(
-                //       fontFamily: "Montserrat",
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // ),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     wp.setWorkExperience();
-                //   },
-                //   style: ButtonStyle(
-                //     backgroundColor: MaterialStateProperty.all<Color>(
-                //         ThemeColors.secondaryThemeColor),
-                //   ),
-                //   child: Text(
-                //     AppLocalizations.of(context)!.next,
-                //     style: TextStyle(
-                //       fontFamily: "Montserrat",
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
             const SizedBox(height: 50)

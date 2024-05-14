@@ -1,10 +1,9 @@
-import '../../../../../providers/worker_provider.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../providers/worker_provider.dart';
 import '../../../../../services/responsive.dart';
-import '../../../../old_common_views/components/timelines/timeline_navigation_button.dart';
+import 'timeline_navigation_button.dart';
 import 'yourProfilePhoto.dart';
 
 class ProfilePhotoPage extends StatefulWidget {
@@ -31,19 +30,8 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisAlignment: MainAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              // Text(
-              //   AppLocalizations.of(context)!.uploadProfilePhoto,
-              //   textAlign: TextAlign.center,
-              //   style: const TextStyle(
-              //     color: Colors.deepOrangeAccent,
-              //     fontSize: 25,
-              //     fontWeight: FontWeight.w600,
-              //     height: 1.25,
-              //   ),
-              // ),
               const SizedBox(height: 20),
               Column(
                 children: [
@@ -67,43 +55,6 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
                           }
                         },
                       ),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     wp.workerProfileBackPage();
-                      //   },
-                      //   child: Text(
-                      //     AppLocalizations.of(context)!.previous,
-                      //     style: TextStyle(
-                      //       fontFamily: "Montserrat",
-                      //       fontSize: 20,
-                      //       fontWeight: FontWeight.bold,
-                      //     ),
-                      //   ),
-                      //   style: ButtonStyle(
-                      //     backgroundColor: MaterialStateProperty.all<Color>(
-                      //         ThemeColors.secondaryThemeColor),
-                      //   ),
-                      // ),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     if (wp.appUser?.photoUrl != null) {
-                      //       wp.workerProfileNextPage();
-                      //     }
-                      //     ;
-                      //   },
-                      //   style: ButtonStyle(
-                      //     backgroundColor: MaterialStateProperty.all<Color>(
-                      //         ThemeColors.secondaryThemeColor),
-                      //   ),
-                      //   child: Text(
-                      //     AppLocalizations.of(context)!.next,
-                      //     style: TextStyle(
-                      //       fontFamily: "Montserrat",
-                      //       fontSize: 20,
-                      //       fontWeight: FontWeight.bold,
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ],

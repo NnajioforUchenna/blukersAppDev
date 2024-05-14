@@ -4,12 +4,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../../data_providers/user_journey_data_provider.dart';
+import '../../../../../../../providers/user_provider_parts/user_provider.dart';
+
 class PaymentSuccessfulWidget extends StatelessWidget {
   const PaymentSuccessfulWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     PaymentsProvider pp = Provider.of<PaymentsProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
+    UserJourneyDataProvider.updateSubscriber(up.appUser?.uid);
     return Center(
       child: Container(
         padding: const EdgeInsets.all(16.0),

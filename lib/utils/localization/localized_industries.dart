@@ -64,7 +64,7 @@ class LocalizedIndustries {
   }
 
   static get(BuildContext context, String industryId) {
-    industryId = convert2Keyword(industryId);
-    return industryMap[industryId]?.call(context) ?? industryId;
+    String keyWord = convert2Keyword(industryId);
+    return industryMap[keyWord]?.call(context) ?? industryId;
   }
 }

@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
-import 'package:upgrader/upgrader.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'firebase_options.dart';
@@ -70,39 +69,37 @@ class MyApp extends StatelessWidget {
             update: (_, user, WorkerProvider? previous) =>
                 previous!..update(user.appUser)),
       ],
-      child: UpgradeAlert(
-        child: ScreenUtilInit(
-          designSize: const Size(360, 690),
-          minTextAdapt: true,
-          splitScreenMode: true,
-          builder: (context, child) {
-            return ShowCaseWidget(
-              builder: Builder(builder: (context) {
-                AppSettingsProvider ap =
-                    Provider.of<AppSettingsProvider>(context);
-                return MaterialApp.router(
-                  title: "Blukers",
-                  routerConfig: goRouter,
-                  debugShowCheckedModeBanner: false,
-                  locale: ap.myLocale,
-                  supportedLocales: L10n.all,
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  //
-                  builder: EasyLoading.init(),
-                  theme: ThemeData(
-                    primarySwatch: Colors.blue,
-                    fontFamily: 'Montserrat',
-                  ),
-                );
-              }),
-            );
-          },
-        ),
+      child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return ShowCaseWidget(
+            builder: Builder(builder: (context) {
+              AppSettingsProvider ap =
+                  Provider.of<AppSettingsProvider>(context);
+              return MaterialApp.router(
+                title: "Blukers",
+                routerConfig: goRouter,
+                debugShowCheckedModeBanner: false,
+                locale: ap.myLocale,
+                supportedLocales: L10n.all,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                //
+                builder: EasyLoading.init(),
+                theme: ThemeData(
+                  primarySwatch: Colors.blue,
+                  fontFamily: 'Montserrat',
+                ),
+              );
+            }),
+          );
+        },
       ),
     );
   }

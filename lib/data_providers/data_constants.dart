@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import '../config/index.dart';
 
 const String appUserCollections = "AppUsers";
@@ -23,3 +26,25 @@ const String leadContactsCollection = "LeadContacts";
 const String leadContactStatusesCollection = "LeadContactStatuses";
 const String leadContactMethodsCollection = "LeadContactMethods";
 String baseUrlAppEngineFunctions = Config().appEngineFunctionsURL;
+
+getCRMFireStoreInstance() async {
+  FirebaseApp additionalApp = await Firebase.initializeApp(
+    name: 'SecondaryApp', // Give your app a custom name
+    options: const FirebaseOptions(
+        apiKey: "AIzaSyBefN8HB2FRN7ygJdJyAI_xOE4eKaB1D5k",
+        authDomain: "blukerscrm.firebaseapp.com",
+        projectId: "blukerscrm",
+        storageBucket: "blukerscrm.appspot.com",
+        messagingSenderId: "460836121292",
+        appId: "1:460836121292:web:f9f079425727ad08a5f069",
+        measurementId: "G-N6KVZ8TWS0"
+// Add other required options
+        ),
+  );
+
+  // Create a Firestore instance for the new app
+  FirebaseFirestore firestoreForAdditionalApp =
+      FirebaseFirestore.instanceFor(app: additionalApp);
+
+  return firestoreForAdditionalApp;
+}

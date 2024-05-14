@@ -1,13 +1,13 @@
-import '../../../../../../providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/industry.dart';
 import '../../../../../../providers/industry_provider.dart';
+import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
 import '../../../../../../utils/localization/localized_industries.dart';
 import '../../../../../../utils/localization/localized_jobs.dart';
-import '../../../../../old_common_views/components/timelines/timeline_navigation_button.dart';
+import '../timeline_navigation_button.dart';
 
 class ClassificationPage extends StatefulWidget {
   const ClassificationPage({super.key});
@@ -21,17 +21,6 @@ class _ClassificationPageState extends State<ClassificationPage> {
   late List<Industry> industries;
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
-  bool isSelected = false;
-
-  isSelect() {
-    setState(() {
-      if (selectedJobs.isNotEmpty) {
-        isSelected = true;
-      } else {
-        isSelected = false;
-      }
-    });
-  }
 
   ScrollController scrollCtrl = ScrollController();
 
@@ -41,21 +30,6 @@ class _ClassificationPageState extends State<ClassificationPage> {
     wp = Provider.of<WorkerProvider>(context, listen: false);
     selectedIndustries = wp.previousParams['industries'] ?? [];
     selectedJobs = wp.previousParams['jobs'] ?? {};
-    isSelect(); // Check if something is selected on initialization
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      //added this listner to dismiss keyboard when scroll
-      scrollCtrl.addListener(() {
-        print('scrolling');
-      });
-      scrollCtrl.position.isScrollingNotifier.addListener(() {
-        if (!scrollCtrl.position.isScrollingNotifier.value) {
-          print('scroll is stopped');
-          FocusManager.instance.primaryFocus?.unfocus();
-        } else {
-          print('scroll is started');
-        }
-      });
-    });
   }
 
   @override
@@ -63,6 +37,11 @@ class _ClassificationPageState extends State<ClassificationPage> {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     industries = ip.industries.values.toList();
     wp = Provider.of<WorkerProvider>(context);
+
+    bool areJobsSelected() {
+      return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
+    }
+
     return Container(
       color: Colors.white,
       width: Responsive.isDesktop(context)
@@ -75,23 +54,12 @@ class _ClassificationPageState extends State<ClassificationPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Text(
-            //   AppLocalizations.of(context)!.selectYourIndustriesAndJobs,
-            //   textAlign: TextAlign.center,
-            //   style: const TextStyle(
-            //     color: Colors.deepOrangeAccent,
-            //     fontSize: 25,
-            //     fontWeight: FontWeight.w600,
-            //     height: 1.25,
-            //   ),
-            // ),
             const SizedBox(height: 20),
             if (industries.isEmpty)
               const Center(child: CircularProgressIndicator()),
             ...industries.map((industry) {
               return Container(
                 decoration: BoxDecoration(
-                  // color: const Color.fromARGB(255, 250, 250, 250),
                   color: const Color.fromARGB(255, 243, 243, 243),
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -99,7 +67,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                   children: [
                     CheckboxListTile(
                       title: Text(
-                        LocalizedIndustries.get(context, industry.industryId),
+                        LocalizedIndustries.get(context, industry.name),
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -109,28 +77,24 @@ class _ClassificationPageState extends State<ClassificationPage> {
                       ),
                       value: selectedIndustries.contains(industry.industryId),
                       onChanged: (bool? value) {
-                        if (value != null && value) {
-                          setState(() {
+                        setState(() {
+                          if (value ?? false) {
                             selectedIndustries.add(industry.industryId);
-                          });
-                        } else {
-                          setState(() {
+                          } else {
                             selectedIndustries.remove(industry.industryId);
                             selectedJobs.remove(industry.industryId);
-                          });
-                        }
+                          }
+                        });
                       },
                     ),
                     if (selectedIndustries.contains(industry.industryId))
                       ...industry.jobs.entries.map((entry) {
-                        final jobId = entry.key;
-                        final job = entry.value;
+                        final jobId = entry.value.title;
                         return Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: CheckboxListTile(
                             title: Text(
                               LocalizedJobs.get(context, jobId),
-                              // Assuming this method is correctly implemented to handle job IDs
                               style: TextStyle(
                                 color: Colors.blueGrey[700],
                                 fontSize: 20,
@@ -154,7 +118,6 @@ class _ClassificationPageState extends State<ClassificationPage> {
                                       .remove(jobId);
                                 }
                               });
-                              // Call to isSelect() here; ensure it's correctly defined to react to selection changes
                             },
                           ),
                         );
@@ -169,16 +132,16 @@ class _ClassificationPageState extends State<ClassificationPage> {
               children: [
                 const Spacer(),
                 TimelineNavigationButton(
-                  isSelected: isSelected,
-                  onPress: !isSelected
-                      ? () => print('nothin to do')
-                      : () {
+                  isSelected: areJobsSelected(),
+                  onPress: areJobsSelected()
+                      ? () {
                           wp.createWorkerProfile(
                             context,
                             selectedIndustries,
                             selectedJobs,
                           );
-                        },
+                        }
+                      : () {}, // Disable the button if no jobs are selected
                 ),
               ],
             ),

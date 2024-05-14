@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import '../data_providers/user_data_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../data_providers/company_data_provider.dart';
+import '../data_providers/user_data_provider.dart';
+import '../data_providers/user_journey_data_provider.dart';
 import '../data_providers/worker_data_provider.dart';
 import '../models/app_user.dart';
 import '../models/job_post.dart';
@@ -108,6 +109,10 @@ class WorkerProvider with ChangeNotifier {
       newWorker!.industryIds = selectedIndustries;
       newWorker!.jobIds =
           selectedJobs.values.toList().expand((element) => element).toList();
+
+      // Update User Journey Initialising Worker Profile
+      UserJourneyDataProvider.updateInitiate(appUser!.uid);
+
       workerProfileNextPage();
     } else {
       // PLease sign in
@@ -325,6 +330,8 @@ class WorkerProvider with ChangeNotifier {
     WorkerDataProvider.createWorkerProfile(newWorker!);
 
     UserDataProvider.updateUserWorkerProfile(appUser!.uid, newWorker!);
+    // Update User Journey Worker Profile Created
+    UserJourneyDataProvider.updateMember(appUser!.uid);
     previousParams.clear();
   }
 

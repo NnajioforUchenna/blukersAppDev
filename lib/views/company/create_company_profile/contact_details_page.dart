@@ -1,15 +1,13 @@
-import '../../../providers/company_provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/company_provider.dart';
 import '../../auth/common_widget/auth_input.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../common_vieiws/address_form/address_form.dart';
-import '../../old_common_views/components/timelines/timeline_navigation_button.dart';
+import '../../worker/worker_profile/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 
 class ContactDetailsPage extends StatefulWidget {
   const ContactDetailsPage({super.key});

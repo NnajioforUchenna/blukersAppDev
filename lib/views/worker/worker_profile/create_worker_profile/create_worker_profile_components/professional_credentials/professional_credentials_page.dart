@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
-import '../../../../../old_common_views/components/timelines/timeline_navigation_button.dart';
 import '../../../../../old_common_views/skills_form/skills_form.dart';
 import '../credential_field.dart';
+import '../timeline_navigation_button.dart';
 
 class ProfessionalCredentialsPage extends StatefulWidget {
   const ProfessionalCredentialsPage({super.key});
@@ -47,16 +47,6 @@ class _ProfessionalCredentialsPageState
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Text(
-            //   AppLocalizations.of(context)!.certifications,
-            //   textAlign: TextAlign.start,
-            //   style: const TextStyle(
-            //     color: Colors.deepOrangeAccent,
-            //     fontSize: 25,
-            //     fontWeight: FontWeight.w600,
-            //     height: 1.25,
-            //   ),
-            // ),
             const SizedBox(height: 30),
 
             // Qualification and Certification Label
@@ -103,47 +93,12 @@ class _ProfessionalCredentialsPageState
                   },
                   navDirection: "back",
                 ),
-
                 TimelineNavigationButton(
                   isSelected: true,
                   onPress: () {
                     wp.setSkills(selectedSkills);
                   },
                 ),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     wp.workerProfileBackPage();
-                //   },
-                //   style: ButtonStyle(
-                //     backgroundColor: MaterialStateProperty.all<Color>(
-                //         ThemeColors.secondaryThemeColor),
-                //   ),
-                //   child: Text(
-                //     AppLocalizations.of(context)!.previous,
-                //     style: TextStyle(
-                //       fontFamily: "Montserrat",
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // ),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     wp.setSkills(selectedSkills);
-                //   },
-                //   style: ButtonStyle(
-                //     backgroundColor: MaterialStateProperty.all<Color>(
-                //         ThemeColors.secondaryThemeColor),
-                //   ),
-                //   child: Text(
-                //     AppLocalizations.of(context)!.next,
-                //     style: TextStyle(
-                //       fontFamily: "Montserrat",
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
             const SizedBox(height: 150),

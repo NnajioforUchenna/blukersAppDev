@@ -179,6 +179,9 @@ extension StripePaymentProvider on PaymentsProvider {
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       if (jsonResponse.containsKey('checkout_url')) {
+        // Update User Journey for CRM Use
+        UserJourneyDataProvider.updateEliteClient(appUser!.uid);
+
         return jsonResponse['checkout_url'];
       }
     }
