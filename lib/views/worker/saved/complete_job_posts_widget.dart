@@ -99,9 +99,11 @@ class _ListViewJobsState extends State<ListViewJobs> {
         queryName: jp.nameSearch,
         queryLocation: jp.locationSearch);
 
-    setState(() {
-      widget.jobPosts.addAll(newJobs.values.toList());
-    });
+    if (mounted) {
+      setState(() {
+        widget.jobPosts.addAll(newJobs.values.toList());
+      });
+    }
 
     isRefilling = false;
   }

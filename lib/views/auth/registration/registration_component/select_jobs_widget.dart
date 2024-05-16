@@ -62,10 +62,6 @@ class _SelectJobsWidgetState extends State<SelectJobsWidget> {
                           ? Colors.grey[200]
                           : Colors.transparent,
                     ),
-                    margin: EdgeInsets.only(
-                      right: width * 0.05,
-                      left: width * 0.05,
-                    ),
                     padding: EdgeInsets.symmetric(horizontal: width * 0.1),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -122,8 +118,6 @@ class _SelectJobsWidgetState extends State<SelectJobsWidget> {
                       },
                       child: Container(
                         height: 20,
-                        margin: EdgeInsets.symmetric(horizontal: width * 0.1),
-                        padding: EdgeInsets.symmetric(horizontal: width * 0.1),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

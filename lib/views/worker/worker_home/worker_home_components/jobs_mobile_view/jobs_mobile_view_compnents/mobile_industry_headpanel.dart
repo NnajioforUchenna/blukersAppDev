@@ -1,4 +1,5 @@
 import 'package:blukers/providers/app_settings_provider.dart';
+import 'package:blukers/utils/localization/localized_industries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,8 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
                     SizedBox(width: Responsive.isDesktop(context) ? 25 : 10),
                     Expanded(
                         child: Text(
-                      widget.industry.name,
+                      LocalizedIndustries.get(
+                          context, widget.industry.industryId),
                       style: TextStyle(
                         fontSize: Responsive.isDesktop(context) ? 30 : 20,
                         fontWeight: FontWeight.w700,

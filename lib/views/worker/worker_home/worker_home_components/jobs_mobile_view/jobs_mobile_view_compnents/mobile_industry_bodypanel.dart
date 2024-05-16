@@ -1,3 +1,4 @@
+import 'package:blukers/utils/localization/localized_job_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,7 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                           children: [
                             RichText(
                               text: TextSpan(
-                                text: job.title,
+                               text: LocalizedJobIds.get(context, job.jobId),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
