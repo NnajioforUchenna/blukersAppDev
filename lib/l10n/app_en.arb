@@ -478,5 +478,8 @@
   "woodworker": "Woodworker",
   "record_clerk": "record clerk",
   "brickmasons__blockmasons": "Brickmasons and Blockmasons",
-  "choose_your_user_type": "Choose Your User Type"
+  "choose_your_user_type": "Choose Your User Type",
+  "update": "Update",
+  "delete": "Delete",
+  "noworkersfound": "No workers found"
 }

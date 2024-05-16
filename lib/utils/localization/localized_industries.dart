@@ -53,6 +53,9 @@ class LocalizedIndustries {
     'excavating__loading_machine__dragline_operators': (context) =>
         AppLocalizations.of(context)!
             .excavating__loading_machine__dragline_operators,
+    'update': (context) => AppLocalizations.of(context)!.update,
+    'delete': (context) => AppLocalizations.of(context)!.delete,
+    'noworkersfound': (context) => AppLocalizations.of(context)!.noworkersfound,
   };
 
   static String convert2Keyword(String title) {

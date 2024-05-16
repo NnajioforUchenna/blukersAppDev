@@ -12,10 +12,7 @@ class ProfileRowTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    String imageContent =
-        up.appUser!.photoUrl != null && up.appUser!.photoUrl != ""
-            ? up.appUser!.photoUrl!
-            : "assets/images/userDefaultProfilePic.png";
+
     return InkWell(
       onTap: () {
         showDialog(

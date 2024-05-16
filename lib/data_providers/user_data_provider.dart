@@ -510,6 +510,23 @@ class UserDataProvider {
     });
   }
 
+  // for company
+  static void updateCompanyInformation({
+    required String name,
+    required String description,
+    required String uid,
+  }) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+
+    appUserCollection.doc(uid).update({
+      'company.name': name,
+      'company.companyBriefDescription': description,
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
   static void updateWorkerIndustriesAndJobs(AppUser? appUser) {
     CollectionReference appUserCollection =
         firestore.collection(appUserCollections);

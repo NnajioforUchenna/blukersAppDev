@@ -5,15 +5,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../providers/app_settings_provider.dart';
-import '../../providers/chat_provider.dart';
-import '../../providers/user_provider_parts/user_provider.dart';
-import '../../utils/styles/index.dart';
-import '../auth/common_widget/login_or_register.dart';
-import '../common_vieiws/page_template/page_template.dart';
-import '../old_common_views/components/app_version_display.dart';
-import '../old_common_views/components/confirmation_dialog.dart';
-import '../old_common_views/components/profile/profile_menu_button.dart';
+import '../../../providers/app_settings_provider.dart';
+import '../../../providers/chat_provider.dart';
+import '../../../providers/user_provider_parts/user_provider.dart';
+import '../../../utils/styles/index.dart';
+import '../../auth/common_widget/login_or_register.dart';
+import '../../common_vieiws/page_template/page_template.dart';
+import '../../old_common_views/components/app_version_display.dart';
+import '../../old_common_views/components/confirmation_dialog.dart';
+import '../../old_common_views/components/profile/profile_menu_button.dart';
+import '../../worker/worker_profile/profile_rows/profile_row_three/profile_row_three.dart';
+import 'components/update_company_information.dart';
 
 class CompanyProfile extends StatefulWidget {
   const CompanyProfile({super.key});
@@ -28,7 +30,6 @@ class _CompanyProfileState extends State<CompanyProfile> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
 
     if (!kIsWeb) {
@@ -54,11 +55,11 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   const SizedBox(height: 10),
                   buildProfilePicAndEdit(context, up),
                   const SizedBox(height: 10),
-                  Text(
-                    up.appUser!.displayName ?? "Display Name",
-                    style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
-                        .apply(color: Colors.black),
-                  ),
+                  // Text(
+                  //   up.appUser!.displayName ?? "Display Name",
+                  //   style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
+                  //       .apply(color: Colors.black),
+                  // ),
                   const SizedBox(height: 30),
                   // ProfileSection(
                   //   heading: AppLocalizations.of(context)!.basicInformation,
@@ -94,9 +95,15 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   //       language: up.appUser!.language ?? "Not Available",
                   //     ),
                   //   ),
+                  const ProfileRowThree(),
                   ProfileMenuButton(
                     text: AppLocalizations.of(context)!.basicInformation,
-                    onPress: () {},
+                    onPress: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) =>
+                              const UpdateCompanyInformation());
+                    },
                   ),
                   const SizedBox(height: 10),
                   // ProfileSection(
