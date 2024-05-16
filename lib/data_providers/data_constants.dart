@@ -6,7 +6,7 @@ import '../config/index.dart';
 const String appUserCollections = "AppUsers";
 const String workersCollections = "workers";
 const String industriesCollections = "Industries";
-const String jobPostsCollections = "ScrappedJobs"; //"""JobPosts";
+const String jobPostsCollections = "ScrappedJobs";
 const String companyCollections = "Companies";
 const String appVersionsCollection = "AppVersions";
 const String transactionsCollection = "Transactions";

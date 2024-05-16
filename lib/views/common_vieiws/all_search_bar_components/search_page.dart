@@ -1,8 +1,10 @@
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../providers/job_posts_provider.dart';
 import '../../../utils/styles/index.dart';
 import '../../old_common_views/small_pop_button_widget.dart';
@@ -97,7 +99,7 @@ class _SearchPageState extends State<SearchPage> {
                       decoration: InputDecoration(
                         contentPadding:
                             const EdgeInsets.symmetric(vertical: 10),
-                        hintText:  AppLocalizations.of(context)!.cityandzipcode,
+                        hintText: AppLocalizations.of(context)!.cityandzipcode,
                         hintStyle: GoogleFonts.montserrat(
                           color: Colors.grey,
                           fontSize: 13.0,
@@ -123,8 +125,7 @@ class _SearchPageState extends State<SearchPage> {
                       jp.setSearching(true);
                       jp.searchJobPosts(
                           nameController.text, locationController.text);
-                      Navigator.pop(context);
-                    
+                      GoRouter.of(context).pushReplacement('/jobs');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ThemeColors.blukersOrangeThemeColor,
