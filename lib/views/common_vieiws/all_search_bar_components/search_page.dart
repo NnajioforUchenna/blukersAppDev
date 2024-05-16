@@ -124,6 +124,7 @@ class _SearchPageState extends State<SearchPage> {
                       jp.searchJobPosts(
                           nameController.text, locationController.text);
                       Navigator.pop(context);
+                    
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ThemeColors.blukersOrangeThemeColor,

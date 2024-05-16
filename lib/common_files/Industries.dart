@@ -10,7 +10,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Commercial Driver",
-        "jobId": "commercialdriver"
+        "jobId": "Commercial Driver",
       },
       {
         "description":
@@ -21,7 +21,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Industrial Truck and Tractor Operator",
-        "jobId": "industrialtruckandtractoroperator"
+        "jobId": "Industrial Operator",
       },
       {
         "description":
@@ -32,10 +32,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 35000,
         "numberOfApplicants": 0,
         "title": "Light Truck Driver",
-        "jobId": "lighttruckdriver"
+        "jobId": "Lighttruck Driver",
       }
     ],
-    "industryId": "driver",
+    "industryId": "Driver",
     "imageUrl": "assets/industryImages/driver.png",
     "description":
         "The driver industry involves operating various types of vehicles for transporting goods or passengers.",
@@ -52,10 +52,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 70000,
         "numberOfApplicants": 0,
         "title": "Safety Representative",
-        "jobId": "safetyrepresentative"
+        "jobId": "safety representative",
       }
     ],
-    "industryId": "safetyrepresentative",
+    "industryId": "Safety Representative",
     "imageUrl": "assets/industryImages/Safety Representative.png",
     "description":
         "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
@@ -72,10 +72,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 50000,
         "numberOfApplicants": 0,
         "title": "Record Clerk",
-        "jobId": "recordclerk"
+        "jobId": "record clerk",
       }
     ],
-    "industryId": "recordclerk",
+    "industryId": "Record Clerk",
     "imageUrl": "assets/industryImages/Record Clerk.png",
     "description":
         "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
@@ -92,10 +92,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 100000,
         "numberOfApplicants": 0,
         "title": "Project Manager",
-        "jobId": "projectmanager"
+        "jobId": "Project Manager",
       }
     ],
-    "industryId": "projectmanager",
+    "industryId": "Project Manager",
     "imageUrl": "assets/industryImages/Project Manager.png",
     "description":
         "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
@@ -112,10 +112,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "General Laborer",
-        "jobId": "generallaborer"
+        "jobId": "general laborer",
       }
     ],
-    "industryId": "generallaborer",
+    "industryId": "General Laborer",
     "imageUrl": "assets/industryImages/carpenters.png",
     "description":
         "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
@@ -143,7 +143,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Fitter I (Structural)",
-        "jobId": "fitteri(structural)"
+        "jobId": "fitter1",
       },
       {
         "description":
@@ -154,7 +154,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 80000,
         "numberOfApplicants": 0,
         "title": "Fitter II",
-        "jobId": "fitterii"
+        "jobId": "fitter2",
       },
       {
         "description":
@@ -168,7 +168,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "jobId": "fittersupervisor"
       }
     ],
-    "industryId": "fitter",
+    "industryId": "Fitter",
     "imageUrl": "assets/industryImages/fitter.png",
     "description":
         "The Fitter involves assembling, installing, and maintaining mechanical components and systems.",
@@ -185,7 +185,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 70000,
         "numberOfApplicants": 0,
         "title": "Pipe Welder I - 1st Class (6GR)",
-        "jobId": "pipewelder1"
+        "jobId": "pipeWelder1",
       },
       {
         "description":
@@ -196,14 +196,14 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 90000,
         "numberOfApplicants": 0,
         "title": "Pipe Welder Supervisor",
-        "jobId": "pipeweldersupervisor"
+        "jobId": "pipeWelder Supervisor",
       }
     ],
-    "industryId": "pipewelder",
+    "industryId": "PipeWelder",
     "imageUrl": "assets/industryImages/pipeWelder.png",
     "description":
         "Pipe welding involves joining metal pipes using specialized welding techniques. It is essential in industries such as construction, manufacturing, and oil and gas.",
-    "name": "Pipe Welder"
+    "name": "PipeWelder"
   },
   {
     "jobs": [
@@ -216,7 +216,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Welder II - Structural",
-        "jobId": "welder2structural"
+        "jobId": "welder2 Structural",
       },
       {
         "description":
@@ -227,7 +227,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 80000,
         "numberOfApplicants": 0,
         "title": "Welder III - Structural",
-        "jobId": "welder3structural"
+        "jobId": "welder3 Structural",
       },
       {
         "description":
@@ -238,7 +238,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 90000,
         "numberOfApplicants": 0,
         "title": "Welder II – Supervisor",
-        "jobId": "weldersupervisor"
+        "jobId": "welder Supervisor",
       },
       {
         "description":
@@ -249,7 +249,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 70000,
         "numberOfApplicants": 0,
         "title": "Welder, Cutter, Solderer, and Brazer",
-        "jobId": "weldercuttersoldererbrazer"
+        "jobId": "welderCutter SoldererBrazer",
       },
       {
         "description":
@@ -291,7 +291,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 50000,
         "numberOfApplicants": 0,
         "title": "Machinist Helper",
-        "jobId": "machinisthelper"
+        "jobId": "machinist Helper",
       },
       {
         "description":
@@ -302,10 +302,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 90000,
         "numberOfApplicants": 0,
         "title": "Machinist Supervisor",
-        "jobId": "machinistsupervisor"
+        "jobId": "machinist Supervisor",
       }
     ],
-    "industryId": "machinist",
+    "industryId": "Machinist",
     "imageUrl": "assets/industryImages/Machinist.png",
     "description":
         "A Machinist operates and maintains machine tools to produce precision parts and components according to engineering drawings and specifications.",
@@ -322,7 +322,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 50000,
         "numberOfApplicants": 0,
         "title": "Electrical Helper",
-        "jobId": "electricalhelper"
+        "jobId": "Electrical Helper",
       },
       {
         "description":
@@ -333,7 +333,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Electrician I",
-        "jobId": "electriciani"
+        "jobId": "Electrician I",
       },
       {
         "description":
@@ -344,7 +344,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 80000,
         "numberOfApplicants": 0,
         "title": "Electrician II",
-        "jobId": "electricianii"
+        "jobId": "Electrician II",
       },
       {
         "description":
@@ -355,7 +355,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 100000,
         "numberOfApplicants": 0,
         "title": "Electrical Power Line Technician",
-        "jobId": "electricalpowerline"
+        "jobId": "Electrical Power Line",
       },
       {
         "description":
@@ -366,7 +366,8 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 90000,
         "numberOfApplicants": 0,
         "title": "Electrical and Electronics Repairer",
-        "jobId": "electricalandelectronicsrepairer,commercialandindustrial"
+        "jobId":
+            "Electrical and Electronics Repairer, Commercial and Industrial",
       },
       {
         "description":
@@ -377,44 +378,32 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 90000,
         "numberOfApplicants": 0,
         "title": "Journeyman Electrician",
-        "jobId": "journeymanelectrician"
+        "jobId": "Journeyman Electrician",
       },
       {
         "description":
-            "Perform repair or maintenance on commercial and industrial electrical and electronic equipment.",
+            "An Electrical and Electronic Assembler is responsible for assembling electrical or electronic components and products according to blueprints or specifications.",
         "requirements":
-            "Knowledge in electronics, electrical circuits, and industrial equipment, Ability to diagnose and repair electrical and electronic faults",
-        "lowRange": 40000,
-        "highRange": 80000,
-        "numberOfApplicants": 0,
-        "title":
-            "Electrical and Electronics Repairers, Commercial and Industrial Equipment",
-        "jobId": "eercie"
-      },
-      {
-        "description":
-            "Operate and maintain electrical and electronic equipment for commercial use.",
-        "requirements":
-            "Skills in electrical repairs and installations, Knowledge of safety procedures, Ability to operate and maintain electrical equipment",
+            "Basic knowledge of electronics, Ability to use hand tools, Attention to detail",
         "lowRange": 30000,
-        "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Electrical and Electronic Assemblers",
-        "jobId": "electronicassembler"
+        "jobId": "Electrical and Electronic Assemblers",
+        "highRange": 50000
       },
       {
         "description":
-            "Supervise and coordinate the activities of commercial drivers over short distances.",
+            "A Supervisor in equipment operations oversees and coordinates the work of equipment assemblers, ensuring productivity and quality standards are met.",
         "requirements":
-            "Experience in supervising, ability to manage and coordinate commercial drivers, understanding of vehicle maintenance",
-        "lowRange": 35000,
-        "highRange": 75000,
+            "Leadership and management skills, Experience in equipment assembly, Knowledge of safety protocols",
+        "lowRange": 50000,
         "numberOfApplicants": 0,
         "title": "Supervisor",
-        "jobId": "supervisor"
+        "jobId": "Supervisor (Equipment)",
+        "highRange": 80000
       }
     ],
-    "industryId": "electricianindustrial",
+    "industryId": "Electrician Industrial",
     "imageUrl": "assets/industryImages/electricians.png",
     "description":
         "The industrial electrician industry involves electrical work in industrial settings, including installation, maintenance, and repair of electrical systems and equipment used in factories, plants, and manufacturing facilities.",
@@ -431,14 +420,14 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 70000,
         "numberOfApplicants": 0,
         "title": "Painter And Sand Blaster Supervisor",
-        "jobId": "painter_sand_blaster_supervisor"
+        "jobId": "Painter And Sand Blaster Supervisor",
       }
     ],
-    "industryId": "painter_sand_blaster",
+    "industryId": "Painter/Sand Blaster",
     "imageUrl": "assets/industryImages/painter_sand_blaster.png",
     "description":
         "The Painter and Sand Blaster industry involves working on various surfaces to remove old paint or rust, clean, and apply new paint.",
-    "name": "Painter And Sand Blaster"
+    "name": "Painter/Sand Blaster"
   },
   {
     "jobs": [
@@ -451,10 +440,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 80000,
         "numberOfApplicants": 0,
         "title": "Scaffolder Supervisor",
-        "jobId": "scaffoldersupervisor"
+        "jobId": "scaffolder Supervisor",
       }
     ],
-    "industryId": "scaffolder",
+    "industryId": "Scaffolder",
     "imageUrl": "assets/industryImages/Scaffolder.png",
     "description":
         "A Scaffolder specializes in erecting and dismantling scaffolding structures used in construction and industrial projects. They assemble temporary platforms and support structures to provide safe working platforms for workers at heights during building, maintenance, or repair tasks. Scaffolders are trained to follow safety protocols and perform regular inspections to ensure structural stability and worker safety.",
@@ -471,7 +460,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Baristas",
-        "jobId": "baristas"
+        "jobId": "Baristas",
       },
       {
         "description":
@@ -482,7 +471,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Bartenders",
-        "jobId": "bartenders"
+        "jobId": "Bartenders",
       },
       {
         "description":
@@ -493,7 +482,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 70000,
         "numberOfApplicants": 0,
         "title": "Chefs and Head Cooks",
-        "jobId": "chefsandheadcooks"
+        "jobId": "chefs And HeadCooks",
       },
       {
         "description":
@@ -504,7 +493,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Cooks, Restaurants",
-        "jobId": "cooks,restaurants"
+        "jobId": "cooks, Restaurants",
       },
       {
         "description":
@@ -551,7 +540,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "jobId": "hosthostess"
       }
     ],
-    "industryId": "foodpreparation",
+    "industryId": "Food Preparation",
     "imageUrl": "assets/industryImages/food Preparation.png",
     "description":
         "The food preparation and serving industry involves the creation, cooking, and serving of food and beverages in various settings such as restaurants, cafes, and food establishments. It encompasses a range of roles from chefs and cooks to servers and bartenders, contributing to culinary experiences and hospitality services.",
@@ -568,7 +557,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Agricultural Equipment Operators",
-        "jobId": "agriculturalequipmentoperators"
+        "jobId": "agricultural Equipment Operators",
       },
       {
         "description":
@@ -579,7 +568,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 55000,
         "numberOfApplicants": 0,
         "title": "Agricultural Inspectors",
-        "jobId": "agriculturalinspectors"
+        "jobId": "agricultural Inspectors",
       },
       {
         "description":
@@ -590,7 +579,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Agricultural Workers",
-        "jobId": "agriculturalworkers"
+        "jobId": "agricultural Workers",
       },
       {
         "description":
@@ -601,7 +590,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Animal Breeders",
-        "jobId": "animalbreeders"
+        "jobId": "animal Breeders",
       },
       {
         "description":
@@ -611,7 +600,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Falles",
-        "jobId": "falles"
+        "jobId": "falles",
       },
       {
         "description":
@@ -622,7 +611,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Farmworkers and Laborers",
-        "jobId": "farmworkersandlaborers"
+        "jobId": "farmworkers and Laborers",
       },
       {
         "description":
@@ -632,11 +621,11 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 20000,
         "highRange": 40000,
         "numberOfApplicants": 0,
-        "title": "Farm Workers, Farm, Ranch",
-        "jobId": "farmworkers,farm,ranch"
+        "title": "Farmworkers, Farm, Ranch",
+        "jobId": "farmworkers, Farm, Ranch",
       }
     ],
-    "industryId": "farming",
+    "industryId": "Farming",
     "imageUrl": "assets/industryImages/farming.png",
     "description":
         "The farming industry involves agricultural activities such as cultivating crops, raising livestock, and managing farm operations. It plays a crucial role in food production, contributing to global food supply and economic development.",
@@ -656,7 +645,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "jobId": "fishingandhunting"
       }
     ],
-    "industryId": "fishing",
+    "industryId": "Fishing",
     "imageUrl": "assets/industryImages/fishing.png",
     "description":
         "The farming industry involves agricultural activities such as cultivating crops, raising livestock, and managing farm operations. It plays a crucial role in food production, contributing to global food supply and economic development.",
@@ -673,7 +662,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Building Cleaning",
-        "jobId": "buildingcleaning"
+        "jobId": "building Cleaning",
       },
       {
         "description":
@@ -684,7 +673,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 50000,
         "numberOfApplicants": 0,
         "title": "Supervisor of Housekeeping and Janitorial",
-        "jobId": "supervisorofhousekeepingandjanitorial"
+        "jobId": "supervisor of Housekeeping and Janitorial",
       },
       {
         "description":
@@ -695,7 +684,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Grounds Maintenance",
-        "jobId": "groundsmaintenance"
+        "jobId": "grounds Maintenance",
       },
       {
         "description":
@@ -706,7 +695,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 35000,
         "numberOfApplicants": 0,
         "title": "Maids and Housekeeping Cleaners",
-        "jobId": "maidsandhousekeepingcleaners"
+        "jobId": "maids and Housekeeping Cleaners",
       },
       {
         "description":
@@ -717,7 +706,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Pest Control",
-        "jobId": "pestcontrol"
+        "jobId": "pest Control",
       },
       {
         "description":
@@ -728,10 +717,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Helper Installation, Maintenance and Repair",
-        "jobId": "helperinstallation,maintenanceandrepair"
+        "jobId": "helper Installation, Maintenance and Repair",
       }
     ],
-    "industryId": "maintenance",
+    "industryId": "Maintenance",
     "imageUrl": "assets/industryImages/maintenance.png",
     "description":
         "The maintenance industry involves activities focused on the upkeep and preservation of buildings, facilities, and outdoor spaces. It encompasses cleaning, repair, and management of property to ensure functionality and safety.",
@@ -748,7 +737,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Landscape and Groundskeeping",
-        "jobId": "landscapeandgroundskeeping"
+        "jobId": "landscape and Groundskeeping",
       },
       {
         "description":
@@ -759,7 +748,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 55000,
         "numberOfApplicants": 0,
         "title": "Tree Trimmers and Pruners",
-        "jobId": "treetrimmersandpruners"
+        "jobId": "tree Trimmers and Pruners",
       },
       {
         "description":
@@ -773,7 +762,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "jobId": "landscapegroundskeeper"
       }
     ],
-    "industryId": "landscaping",
+    "industryId": "LandScaping",
     "imageUrl": "assets/industryImages/landscaping.png",
     "description":
         "The landscaping industry involves modifying and beautifying outdoor spaces by incorporating elements of nature, architecture, and design. It includes activities such as gardening, lawn care, and landscape design, enhancing aesthetics and functionality.",
@@ -790,7 +779,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Boilermakers",
-        "jobId": "boilermakers"
+        "jobId": "Boilermakers",
       },
       {
         "description":
@@ -801,10 +790,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Brickmasons and Blockmasons",
-        "jobId": "brickmasonsandblockmasons"
+        "jobId": "Brickmasons and Blockmasons",
       }
     ],
-    "industryId": "constructionandextraction",
+    "industryId": "Construction and Extraction",
     "imageUrl": "assets/industryImages/constructionandextraction.png",
     "description":
         "The construction and extraction industry includes jobs that involve building new structures, repairing existing ones, and extracting natural resources.",
@@ -821,10 +810,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Helper Carpenters",
-        "jobId": "helpercarpenters"
+        "jobId": "Helper Carpenters",
       }
     ],
-    "industryId": "carpenters",
+    "industryId": "Carpentry",
     "imageUrl": "assets/industryImages/carpenters.png",
     "description":
         "The carpentry industry involves creating and repairing building structures and furniture.",
@@ -840,11 +829,11 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 30000,
         "highRange": 50000,
         "numberOfApplicants": 0,
-        "title": "Carpet Installers",
-        "jobId": "carpetinstallers"
+        "title": "Carpet Installer",
+        "jobId": "carpet Installer",
       }
     ],
-    "industryId": "carpetinstallers",
+    "industryId": "Carpet Installers",
     "imageUrl": "assets/industryImages/Carpet Installers.png",
     "description":
         "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
@@ -864,7 +853,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "jobId": "cementmasonsandconcretefinishers"
       }
     ],
-    "industryId": "cementmasons",
+    "industryId": "Cement Masons",
     "imageUrl":
         "assets/industryImages/Cement Masons and Concrete Finishers.png",
     "description":
@@ -882,7 +871,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Construction Laborers",
-        "jobId": "constructionlaborers"
+        "jobId": "Construction Laborers",
       },
       {
         "description":
@@ -893,7 +882,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 90000,
         "numberOfApplicants": 0,
         "title": "Derrick Operators, Oil and Gas",
-        "jobId": "derrickoperators,oilandgas"
+        "jobId": "Derrick Operators, Oil and Gas",
       },
       {
         "description":
@@ -904,10 +893,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 55000,
         "numberOfApplicants": 0,
         "title": "Drywall and Ceiling Tile Installers",
-        "jobId": "drywallandceilingtileinstallers"
+        "jobId": "Drywall and Ceiling Tile Installers",
       }
     ],
-    "industryId": "constructionbuilding",
+    "industryId": "Construction Building",
     "imageUrl": "assets/industryImages/construction_building.png",
     "description":
         "The construction and building industry involves the planning, design, and construction of various structures and facilities. It includes a wide range of skilled trades and labor-intensive activities to create buildings, roads, bridges, and infrastructure.",
@@ -962,11 +951,11 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 40000,
         "highRange": 70000,
         "numberOfApplicants": 0,
-        "title": "Elevator and Escalator Installers and Repairers",
-        "jobId": "elevatorandescalatorinstallersandrepairers"
+        "title": "Elevator Installer",
+        "jobId": "Elevator Installer",
       }
     ],
-    "industryId": "elevatorandescalatorinstallers",
+    "industryId": "Elevator and Escalator Installers",
     "imageUrl":
         "assets/industryImages/Elevator and Escalator Installers and Repairers.png",
     "description":
@@ -984,10 +973,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Excavating and Loading Machine and Dragline Operators",
-        "jobId": "excavatingandloadingmachineanddraglineoperators"
+        "jobId": "Excavating and Loading Machine and Dragline Operators",
       }
     ],
-    "industryId": "excavatingandloadingmachineanddraglineoperators",
+    "industryId": "Excavating and Loading Machine and Dragline Operators",
     "imageUrl": "assets/industryImages/warehousing-300.png",
     "description":
         "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
@@ -1007,7 +996,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "jobId": "floorsendersandfinishers"
       }
     ],
-    "industryId": "floorsendersandfinishers",
+    "industryId": "Floor Senders and Finishers",
     "imageUrl": "assets/industryImages/Floor Senders and Finishers.png",
     "description":
         "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
@@ -1023,11 +1012,11 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 35000,
         "highRange": 55000,
         "numberOfApplicants": 0,
-        "title": "Glaziers",
-        "jobId": "glaziers"
+        "title": "Glazier",
+        "jobId": "Glazier",
       }
     ],
-    "industryId": "glaziers",
+    "industryId": "Glaziers",
     "imageUrl": "assets/industryImages/Glaziers.png",
     "description":
         "Glaziers install glass in windows, skylights, and other structures.",
@@ -1043,11 +1032,11 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 40000,
         "highRange": 65000,
         "numberOfApplicants": 0,
-        "title": "Hazardous Material Removal",
-        "jobId": "hazardousmaterialremoval"
+        "title": "Hazardous Material Remover",
+        "jobId": "hazardous material remover",
       }
     ],
-    "industryId": "hazardousmaterialremoval",
+    "industryId": "Hazardous Material Removal",
     "imageUrl": "assets/industryImages/Hazardous Material Removal.png",
     "description":
         "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
@@ -1062,8 +1051,8 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 25000,
         "highRange": 40000,
         "numberOfApplicants": 0,
-        "title": "Helper construction",
-        "jobId": "helperconstruction"
+        "title": "Helper Construction",
+        "jobId": "helper construction",
       },
       {
         "description":
@@ -1073,7 +1062,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 38000,
         "numberOfApplicants": 0,
         "title": "Helper Brickmasons, Blockmasons, Stonemasons",
-        "jobId": "helperbrickmasons,blockmasons,stonemasons"
+        "jobId": "helper brickmasons blockmasons stonemasons",
       },
       {
         "description":
@@ -1082,8 +1071,8 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 23000,
         "highRange": 36000,
         "numberOfApplicants": 0,
-        "title": "Helper Painter, Paperhangers, plasters",
-        "jobId": "helperpainter,paperhangers,plasters"
+        "title": "Helper Painter, Paperhangers, Plasters",
+        "jobId": "helper painter paperhangers plasters",
       },
       {
         "description":
@@ -1094,7 +1083,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Painting, Coating and Decorating",
-        "jobId": "painting,coatinganddecorating"
+        "jobId": "painting coating decorating",
       },
       {
         "description":
@@ -1104,10 +1093,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 55000,
         "numberOfApplicants": 0,
         "title": "Pipelayers, Plumbers",
-        "jobId": "pipelayers,plumbers"
+        "jobId": "pipelayers plumbers",
       }
     ],
-    "industryId": "construction",
+    "industryId": "Construction",
     "imageUrl": "assets/industryImages/constructionandextraction.png",
     "description":
         "The construction industry involves building, repairing, and maintaining structures such as buildings, roads, bridges, and utilities.",
@@ -1124,10 +1113,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Helper Roofer",
-        "jobId": "helperroofer"
+        "jobId": "Helper Roofer",
       }
     ],
-    "industryId": "roofer",
+    "industryId": "Roofer",
     "imageUrl": "assets/industryImages/roofing.png",
     "description":
         "The roofing industry involves the installation, repair, and maintenance of roofs on buildings and structures. Roofers work with various materials such as shingles, tiles, and metal to protect buildings from weather elements.",
@@ -1143,11 +1132,11 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 25000,
         "highRange": 40000,
         "numberOfApplicants": 0,
-        "title": "Structural Iron and Steel",
-        "jobId": "structuralironandsteel"
+        "title": "StructuralIronSteel",
+        "jobId": "Structural Iron Steel",
       }
     ],
-    "industryId": "structuralironandsteel",
+    "industryId": "Structural Iron And Steel",
     "imageUrl": "assets/industryImages/Machinist.png",
     "description":
         "The structural iron and steel industry involves the construction and installation of structural steel components used in buildings, bridges, and other large structures.",
@@ -1164,10 +1153,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Aircraft Mechanic",
-        "jobId": "aircraftmechanic"
+        "jobId": "Aircraft Mechanic",
       }
     ],
-    "industryId": "aircraftmechanic",
+    "industryId": "Aircraft Mechanic",
     "imageUrl": "assets/industryImages/electricians.png",
     "description":
         "Aircraft mechanics, also known as aviation maintenance technicians, are responsible for inspecting, repairing, and maintaining aircraft to ensure safety and performance standards are met.",
@@ -1184,7 +1173,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Helper Production",
-        "jobId": "helperproduction"
+        "jobId": "Helper Production",
       },
       {
         "description":
@@ -1195,21 +1184,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 35000,
         "numberOfApplicants": 0,
         "title": "Packers and Packagers",
-        "jobId": "packersandpackagers"
+        "jobId": "Packers and Packagers",
       },
-      {
-        "description":
-            "Operate commercial vehicles to transport goods or passengers over short distances.",
-        "requirements":
-            "Valid commercial driver's license (CDL), Clean driving record, Ability to operate and maintain commercial vehicles",
-        "lowRange": 30000,
-        "highRange": 60000,
-        "numberOfApplicants": 0,
-        "title": "Packerd and Packegers",
-        "jobId": "packerdandpackegers"
-      }
     ],
-    "industryId": "production",
+    "industryId": "Production",
     "imageUrl": "assets/industryImages/production.png",
     "description":
         "The production industry involves the manufacturing of goods through various processes such as assembly, packaging, and quality control. Production workers play a vital role in producing consumer products and industrial goods.",
@@ -1226,10 +1204,10 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 50000,
         "numberOfApplicants": 0,
         "title": "Woodworking Machine Setters",
-        "jobId": "woodworkingmachinesetters"
+        "jobId": "Woodworking Machine Setters",
       }
     ],
-    "industryId": "woodworker",
+    "industryId": "WoodWorker",
     "imageUrl": "assets/industryImages/woodworker.png",
     "description":
         "The woodworker industry involves setting up, operating, or tending woodworking machines.",
