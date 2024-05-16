@@ -8,7 +8,6 @@ import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
 import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
-import '../views/company/company_basic_info.dart';
 import '../views/company/company_chat.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
 import '../views/company/my_job_posts.dart';
@@ -50,9 +49,6 @@ final routes = [
   GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
   GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),
   GoRoute(path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
-  GoRoute(
-      path: '/companyBasicInfo',
-      builder: (context, state) => const CompanyBasicInfo()),
   GoRoute(
       path: '/onlineResumeScreen',
       builder: (context, state) => const OnlineResumeScreen()),

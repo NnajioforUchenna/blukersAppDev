@@ -26,15 +26,33 @@ extension UpdatingProfileFunctions on UserProvider {
     });
   }
 
-  // for company
-  void updateCompanyInformation({
+  // for company basic information
+  void updateCompanyBasicInformation({
     required String name,
+    required List<String> email,
+    required List<String> phoneNumber,
     required String description,
   }) {
     updatingInformation(() async {
-      UserDataProvider.updateCompanyInformation(
+      UserDataProvider.updateCompanyBasicInformation(
         name: name,
         description: description,
+        email: email,
+        phoneNumber: phoneNumber,
+        uid: appUser!.uid,
+      );
+    });
+  }
+
+  // for company information
+  void updateCompanyInformation({
+    required int yearFounded,
+    required int totalEmployees,
+  }) {
+    updatingInformation(() async {
+      UserDataProvider.updateCompanyInformation(
+        yearFounded: yearFounded,
+        totalEmployees: totalEmployees,
         uid: appUser!.uid,
       );
     });

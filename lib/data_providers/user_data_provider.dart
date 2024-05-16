@@ -510,10 +510,12 @@ class UserDataProvider {
     });
   }
 
-  // for company
-  static void updateCompanyInformation({
+  // for company basic information
+  static void updateCompanyBasicInformation({
     required String name,
     required String description,
+    required List<String> email,
+    required List<String> phoneNumber,
     required String uid,
   }) {
     CollectionReference appUserCollection =
@@ -521,7 +523,26 @@ class UserDataProvider {
 
     appUserCollection.doc(uid).update({
       'company.name': name,
-      'company.companyBriefDescription': description,
+      'company.companyDescription': description,
+      'company.emails': email,
+      'company.phoneNumbers': phoneNumber,
+    }).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
+  }
+
+  // for company information
+  static void updateCompanyInformation({
+    required int yearFounded,
+    required int totalEmployees,
+    required String uid,
+  }) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+
+    appUserCollection.doc(uid).update({
+      'company.yearFounded': yearFounded,
+      'company.totalEmployees': totalEmployees,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });

@@ -14,8 +14,8 @@ import '../../common_vieiws/page_template/page_template.dart';
 import '../../old_common_views/components/app_version_display.dart';
 import '../../old_common_views/components/confirmation_dialog.dart';
 import '../../old_common_views/components/profile/profile_menu_button.dart';
-import '../../worker/worker_profile/profile_rows/profile_row_three/profile_row_three.dart';
-import 'components/update_company_information.dart';
+import 'components/update_company_basic_information.dart';
+import 'components/updatecompanyinformation.dart';
 
 class CompanyProfile extends StatefulWidget {
   const CompanyProfile({super.key});
@@ -42,62 +42,25 @@ class _CompanyProfileState extends State<CompanyProfile> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  // const Text(
-                  //   "Profile",
-                  //   style: TextStyle(
-                  //     color: ThemeColors.primaryThemeColor,
-                  //     fontSize: 30,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
-                  // const SizedBox(height: 20),
                   buildSignoutButton(context),
                   const SizedBox(height: 10),
                   buildProfilePicAndEdit(context, up),
                   const SizedBox(height: 10),
-                  // Text(
-                  //   up.appUser!.displayName ?? "Display Name",
-                  //   style: ThemeTextStyles.landingPageSubtitleThemeTextStyle
-                  //       .apply(color: Colors.black),
-                  // ),
-                  const SizedBox(height: 30),
-                  // ProfileSection(
-                  //   heading: AppLocalizations.of(context)!.basicInformation,
-                  //   icon: UniconsLine.pen,
-                  //   showBasicInfo: showBasicInfo,
-                  //   onClickSection: () {
-                  //     print("Section clicked");
-                  //     setState(() {
-                  //       showBasicInfo = !showBasicInfo;
-                  //     });
-                  //   },
-                  //   onClickEdit: () {
-                  //     print("Edit clicked");
-                  //     showDialog(
-                  //       context: context,
-                  //       builder: (context) => ProfileDialog(
-                  //         child: EditBasicProfile(
-                  //           displayName: up.appUser!.displayName ?? "",
-                  //           phoneNo: up.appUser!.phoneNumber ?? "",
-                  //           language: up.appUser!.language ?? "",
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  // ),
-                  // if (showBasicInfo)
-                  //   Padding(
-                  //     padding: const EdgeInsets.all(16),
-                  //     child: UserBasicProfileDetail(
-                  //       displayName: up.appUser!.displayName ?? "Not Available",
-                  //       email: up.appUser!.email ?? "Not Available",
-                  //       phoneNo: up.appUser!.phoneNumber ?? "Not Available",
-                  //       language: up.appUser!.language ?? "Not Available",
-                  //     ),
-                  //   ),
-                  const ProfileRowThree(),
+                  Text(up.appUser!.company!.name,
+                      style: ThemeTextStyles.headingThemeTextStyle),
+                  const SizedBox(height: 10),
                   ProfileMenuButton(
                     text: AppLocalizations.of(context)!.basicInformation,
+                    onPress: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) =>
+                              const UpdateCompanyBasicInformation());
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileMenuButton(
+                    text: AppLocalizations.of(context)!.companyInformation,
                     onPress: () {
                       showDialog(
                           context: context,
@@ -106,133 +69,9 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  // ProfileSection(
-                  //   heading: AppLocalizations.of(context)!.companyInformation,
-                  //   icon: UniconsLine.arrow_right,
-                  //   showInfoInNewPage: true,
-                  //   onClickSection: () {
-                  //     print("Section clicked/ Edit Clicked");
-                  //     if (up.appUser!.company != null) {
-                  //       context.go("/companyBasicInfo");
-                  //     }
-                  //   },
-                  // ),
-                  ProfileMenuButton(
-                    text: AppLocalizations.of(context)!.companyInformation,
-                    onPress: () {},
-                  ),
-                  const SizedBox(height: 10),
                   buildDeleteAccountSection(context, up),
-                  // ProfileSection(
-                  //   heading: AppLocalizations.of(context)!.deleteAccount,
-                  //   icon: UniconsLine.trash_alt,
-                  //   showInfoInNewPage: true,
-                  //   onClickSection: () {
-                  //     print("Section clicked/ Edit Clicked");
-                  //     if (up.appUser != null) {
-                  //       print("delete user");
-
-                  //       chatProvider.clearGroups();
-                  //       up.deleteUser(up.appUser!.uid);
-
-                  //       showDialog(
-                  //         context: context,
-                  //         builder: (context) => ProfileDialog(
-                  //             child: Column(
-                  //           children: [
-                  //             Text(
-                  //               "Are you sure you want to delete your account?",
-                  //               style:
-                  //                   ThemeTextStyles.headingThemeTextStyle.apply(
-                  //                 color: ThemeColors.blukersOrangeThemeColor,
-                  //               ),
-                  //             ),
-                  //             const SizedBox(
-                  //               height: 25,
-                  //             ),
-                  //             const Text(
-                  //               "All your account information will be deleted, this action cannot be undone.",
-                  //               style: ThemeTextStyles.bodyThemeTextStyle,
-                  //             ),
-                  //             const SizedBox(
-                  //               height: 35,
-                  //             ),
-                  //             Row(
-                  //               mainAxisAlignment: MainAxisAlignment.end,
-                  //               children: [
-                  //                 GestureDetector(
-                  //                   onTap: () async {
-                  //                     Navigator.of(context).pop();
-                  //                     up.deleteUser(up.appUser!.uid);
-                  //                   },
-                  //                   child: Container(
-                  //                     padding: EdgeInsets.all(16),
-                  //                     decoration: BoxDecoration(
-                  //                         color: ThemeColors.primaryThemeColor,
-                  //                         borderRadius:
-                  //                             BorderRadius.circular(20)),
-                  //                     child: Text(
-                  //                       "Delete",
-                  //                       style: ThemeTextStyles
-                  //                           .informationDisplayPlaceHolderThemeTextStyle
-                  //                           .apply(color: Colors.white),
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ],
-                  //         )),
-                  //       );
-                  //     }
-                  //   },
-                  // ),
-                  // const SizedBox(height: 30),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     GestureDetector(
-                  //       onTap: () async {
-                  //         chatProvider.clearGroups();
-                  //         await up.signOut();
-                  //         Navigator.of(context)
-                  //             .pushNamedAndRemoveUntil("/", (route) => false);
-                  //       },
-                  //       child: Container(
-                  //         // color: Colors.amber,
-                  //         // margin: const EdgeInsets.all(12),
-                  //         padding: const EdgeInsets.symmetric(
-                  //           vertical: 8,
-                  //           horizontal: 24,
-                  //         ),
-                  //         decoration: BoxDecoration(
-                  //             color: Colors.red,
-                  //             borderRadius: BorderRadius.circular(1000)),
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //           children: [
-                  //             Text(
-                  //               AppLocalizations.of(context)!.logout,
-                  //               style: const TextStyle(
-                  //                 color: Colors.white,
-                  //                 fontSize: 16,
-                  //                 fontWeight: FontWeight.bold,
-                  //               ),
-                  //             ),
-                  //             const SizedBox(width: 10),
-                  //             const Icon(
-                  //               UniconsLine.sign_out_alt,
-                  //               size: 40,
-                  //               color: Colors.white,
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                   const SizedBox(height: 40),
-                  AppVersionDisplay(),
+                  const AppVersionDisplay(),
                   const SizedBox(height: 30),
                 ],
               ),
@@ -243,29 +82,6 @@ class _CompanyProfileState extends State<CompanyProfile> {
   Widget buildProfilePicAndEdit(context, up) {
     return Stack(
       children: [
-        // ClipRRect(
-        //   borderRadius: BorderRadius.circular(1000),
-        //   child: Container(
-        //     // decoration: BoxDecoration(
-        //     //   color: Colors.red,
-        //     // ),
-        //     width: 150,
-        //     height: 150,
-        //     child: up.appUser!.photoUrl != null && up.appUser!.photoUrl != ""
-        //         ? FadeInImage.assetNetwork(
-        //             placeholder: "assets/images/loading.jpeg",
-        //             image: up.appUser!.photoUrl!,
-        //             //width: MediaQuery.of(context).size.width,
-        //             fit: BoxFit.cover,
-        //           )
-        //         // : Image.asset("assets/images/userDefaultProfilePic.png"),
-        //         : FittedBox(
-        //             child:
-        //                 Image.asset("assets/images/userDefaultProfilePic.png"),
-        //             fit: BoxFit.fill,
-        //           ),
-        //   ),
-        // ),
         buildProfileImage(context, up),
         Positioned(
           bottom: 0,
@@ -453,16 +269,6 @@ class _CompanyProfileState extends State<CompanyProfile> {
           height: 150,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(1000),
-            // child: imageContent.isNotEmpty
-            //     ? FadeInImage.assetNetwork(
-            //         placeholder: "assets/images/loading.jpeg",
-            //         image: imageContent,
-            //         fit: BoxFit.fitWidth,
-            //       )
-            //     : Image.asset(
-            //         "assets/images/userDefaultProfilePic.png",
-            //         fit: BoxFit.fill,
-            //       ),
             child: up.appUser!.photoUrl != null && up.appUser!.photoUrl != ""
                 ? FadeInImage.assetNetwork(
                     placeholder: "assets/images/loading.jpeg",

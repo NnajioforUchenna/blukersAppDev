@@ -6,16 +6,19 @@ import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../utils/styles/index.dart';
 import '../../../old_common_views/small_pop_button_widget.dart';
 
-class UpdateCompanyInformation extends StatefulWidget {
-  const UpdateCompanyInformation({super.key});
+class UpdateCompanyBasicInformation extends StatefulWidget {
+  const UpdateCompanyBasicInformation({super.key});
 
   @override
-  State<UpdateCompanyInformation> createState() =>
-      _UpdateCompanyInformationState();
+  State<UpdateCompanyBasicInformation> createState() =>
+      _UpdateCompanyBasicInformationState();
 }
 
-class _UpdateCompanyInformationState extends State<UpdateCompanyInformation> {
+class _UpdateCompanyBasicInformationState
+    extends State<UpdateCompanyBasicInformation> {
   TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
   @override
@@ -24,6 +27,9 @@ class _UpdateCompanyInformationState extends State<UpdateCompanyInformation> {
       UserProvider up = Provider.of<UserProvider>(context, listen: false);
       if (up.appUser != null && up.appUser?.company != null) {
         nameController.text = up.appUser?.company?.name ?? '';
+        emailController.text = up.appUser?.company?.emails.first ?? '';
+        phoneNumberController.text =
+            up.appUser?.company?.phoneNumbers.first ?? '';
         descriptionController.text =
             up.appUser?.company?.companyDescription ?? '';
       }
@@ -69,6 +75,16 @@ class _UpdateCompanyInformationState extends State<UpdateCompanyInformation> {
                           maxlines: 1,
                           controller: nameController,
                         ),
+                        TextInputWigdet(
+                          label: 'Email',
+                          maxlines: 1,
+                          controller: emailController,
+                        ),
+                        TextInputWigdet(
+                          label: 'Phone Number',
+                          maxlines: 1,
+                          controller: phoneNumberController,
+                        ),
                         const SizedBox(height: 10),
                         TextInputWigdet(
                           label: 'Description',
@@ -86,9 +102,11 @@ class _UpdateCompanyInformationState extends State<UpdateCompanyInformation> {
                       onPressed: () {
                         UserProvider up =
                             Provider.of<UserProvider>(context, listen: false);
-                        up.updateCompanyInformation(
+                        up.updateCompanyBasicInformation(
                           name: nameController.text,
                           description: descriptionController.text,
+                          email: [emailController.text],
+                          phoneNumber: [phoneNumberController.text],
                         );
                         Navigator.pop(context);
                       },

@@ -138,7 +138,10 @@ class Company {
       companyDescription: map['companyDescription'] ?? '',
       companySlogan: map['companySlogan'] ?? '',
       companyIndustry: map['companyIndustry'] ?? '',
-      emails: map['emails'] != null ? List<String>.from(map['emails']) : [],
+
+      emails: (map['emails'] is String)
+          ? [map['emails']]
+          : List<String>.from(map['emails'] ?? []),
       phoneNumbers: map['phoneNumbers'] != null
           ? List<String>.from(map['phoneNumbers'])
           : [],

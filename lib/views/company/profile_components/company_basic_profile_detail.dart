@@ -1,15 +1,16 @@
-import '../../../models/company.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../models/company.dart';
 import '../../old_common_views/info_display_component.dart';
 import '../../old_common_views/info_display_list_component.dart';
 import '../../old_common_views/profile_dialog.dart';
 import 'edit_company_basic_info.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CompanyBasicProfileDetail extends StatelessWidget {
   const CompanyBasicProfileDetail(
       {super.key, required this.company, required this.onPressUpdate});
+
   final Company company;
   final Function(Company company) onPressUpdate;
 
@@ -17,14 +18,6 @@ class CompanyBasicProfileDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Text(
-        //   "Basic Information",
-        //   style:
-        //       ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
-        // ),
-        // const SizedBox(
-        //   height: 20,
-        // ),
         InfoDisplayComponent(
           placeHolder: AppLocalizations.of(context)!.displayName,
           value: company.name,
@@ -86,37 +79,37 @@ class CompanyBasicProfileDetail extends StatelessWidget {
             ),
           ),
         ),
-        InfoDisplayListComponent(
-          placeHolder: AppLocalizations.of(context)!.phoneNumber,
-          value: company.phoneNumbers,
-          icon: GestureDetector(
-            onTap: () {
-              print("Edit clicked");
-              showDialog(
-                context: context,
-                builder: (context) => ProfileDialog(
-                  child: EditCompanyBasicInfo(
-                    placeHolder: AppLocalizations.of(context)!.phoneNumber,
-                    textInputType: TextInputType.phone,
-                    //value: name,
-                    values: company.phoneNumbers,
-                    isPhoneNumber: true,
-                    onPressUpdate: (value, values) {
-                      print(values);
-                      company.phoneNumbers = values!;
-                      onPressUpdate(company);
-                    },
-                  ),
-                ),
-              );
-            },
-            child: Icon(
-              Icons.edit_outlined,
-              color: Colors.grey[700],
-              size: 30,
-            ),
-          ),
-        ),
+        // InfoDisplayListComponent(
+        //   placeHolder: AppLocalizations.of(context)!.phoneNumber,
+        //   value: company.phoneNumbers,
+        //   icon: GestureDetector(
+        //     onTap: () {
+        //       print("Edit clicked");
+        //       showDialog(
+        //         context: context,
+        //         builder: (context) => ProfileDialog(
+        //           child: EditCompanyBasicInfo(
+        //             placeHolder: AppLocalizations.of(context)!.phoneNumber,
+        //             textInputType: TextInputType.phone,
+        //             //value: name,
+        //             values: company.phoneNumbers,
+        //             isPhoneNumber: true,
+        //             onPressUpdate: (value, values) {
+        //               print(values);
+        //               company.phoneNumbers = values!;
+        //               onPressUpdate(company);
+        //             },
+        //           ),
+        //         ),
+        //       );
+        //     },
+        //     child: Icon(
+        //       Icons.edit_outlined,
+        //       color: Colors.grey[700],
+        //       size: 30,
+        //     ),
+        //   ),
+        // ),
         InfoDisplayComponent(
           placeHolder: AppLocalizations.of(context)!.description,
           value: company.companyDescription,

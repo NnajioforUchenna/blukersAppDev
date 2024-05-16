@@ -181,8 +181,10 @@ class _LoginState extends State<Login> {
                                   password: passwordController.text);
                               //   await chatProvider.getGroups(up.appUser?.uid ?? "");
                             }
+                            print(up.appUser?.uid ?? 'No user');
                           },
                           text: AppLocalizations.of(context)!.signIn,
+                          // print the uid
                         ),
                         const SizedBox(height: 30),
                         const SignInOptions(),
