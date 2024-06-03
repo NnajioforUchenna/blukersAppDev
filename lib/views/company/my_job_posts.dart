@@ -1,20 +1,17 @@
-import '../../providers/job_posts_provider.dart';
-import '../../services/responsive.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
+import '../../providers/job_posts_provider.dart';
 import '../../providers/user_provider_parts/user_provider.dart';
+import '../../services/responsive.dart';
 import '../../utils/styles/theme_colors.dart';
-
+import '../auth/common_widget/login_or_register.dart';
 import '../common_vieiws/page_template/page_template.dart';
 import '../old_common_views/worker_timeline/display_worker_timeline_dialog.dart';
 import 'my_job_posts_components/interesting_workers_tab.dart';
 import 'my_job_posts_components/my_job_posts_tab.dart';
-
-import '../auth/common_widget/login_or_register.dart';
 
 class MyJobPosts extends StatelessWidget {
   const MyJobPosts({super.key});
@@ -22,7 +19,7 @@ class MyJobPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    JobPostsProvider jpp = Provider.of<JobPostsProvider>(context);
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     return PageTemplate(
       child: up.appUser == null
           ? const LoginOrRegister()
@@ -62,7 +59,7 @@ class MyJobPosts extends StatelessWidget {
                                 builder: (context) =>
                                     const DisplayWorkerTimelineDialog());
                           } else {
-                            jpp.createNewJobPost(up.appUser, context);
+                            jp.createNewJobPost(up.appUser, context);
                           }
                         },
                         child: Row(
@@ -70,8 +67,8 @@ class MyJobPosts extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Icon(UniconsLine.file_plus_alt,
-                                color: ThemeColors
-                                    .secondaryThemeColor), // Use Icon instead of IconButton
+                                color: ThemeColors.secondaryThemeColor),
+                            // Use Icon instead of IconButton
                             if (Responsive.isDesktop(context))
                               const Padding(
                                 padding: EdgeInsets.only(left: 4.0),

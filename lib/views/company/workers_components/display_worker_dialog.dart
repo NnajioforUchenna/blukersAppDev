@@ -6,6 +6,7 @@ import 'animate_worker_details_page.dart';
 
 class DisplayWorkerDialog extends StatelessWidget {
   final Worker worker;
+
   const DisplayWorkerDialog({super.key, required this.worker});
 
   @override
@@ -23,19 +24,11 @@ class DisplayWorkerDialog extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(14.0.sp), // Add padding around the column
-            child: Column(
+            child: const Column(
               children: [
-                const Spacer(),
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth:
-                        width * 0.8, // Constrain the width to 80% of the screen
-                    maxHeight: height *
-                        0.85, // Constrain the height to 70% of the screen
-                  ),
-                  child: const AnimateWorkerDetails(),
-                ),
-                const Spacer(),
+                Spacer(),
+                AnimateWorkerDetails(),
+                Spacer(),
               ],
             ),
           ),

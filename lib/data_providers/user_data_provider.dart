@@ -709,4 +709,23 @@ class UserDataProvider {
       return doc.exists;
     });
   }
+
+  static Future<void> saveOtherCompanyJobPosts(
+      List<String> jobPostsIds, String companyId) async {
+    // Get a reference to the 'companies' collection
+    CollectionReference companies = firestore.collection('Companies');
+
+    // Update the companyId in each JobPost document in the database
+    for (String jobPostId in jobPostsIds) {
+      DocumentReference jobPostDoc =
+          firestore.collection('JobPosts').doc(jobPostId);
+      await jobPostDoc.update({'companyId': companyId});
+    }
+
+    // Get a reference to the specific company document
+    DocumentReference companyDoc = companies.doc(companyId);
+
+    // Add the new job post IDs to the 'jobPostIds' field in the company document
+    await companyDoc.update({'jobPostIds': FieldValue.arrayUnion(jobPostsIds)});
+  }
 }

@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import '../data_providers/company_data_provider.dart';
-import '../models/social_media_platform.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../data_providers/company_data_provider.dart';
 import '../models/address.dart';
 import '../models/app_user.dart';
 import '../models/company.dart';
 import '../models/job_post.dart';
+import '../models/social_media_platform.dart';
 import '../models/worker.dart';
 // Assuming the file containing the Company class is named 'company.dart'.
 
@@ -225,5 +225,27 @@ class CompanyProvider with ChangeNotifier {
   void updateCompanyTimelineStep() {
     CompanyDataProvider.updateCompanyTimelineStep(appUser!.uid, 2);
     notifyListeners();
+  }
+
+  void saveOtherCompanyJobPosts(JobPost jobPost) async {
+    String? companyId = _company?.companyId;
+    try {
+      // Change the companyId in the jobPost to your companyId
+      if (companyId != null) {
+        jobPost.companyId = companyId!;
+      }
+
+      // Add the job post to the list of job posts associated with the user's company ID
+      _company?.jobPostIds.add(jobPost.jobPostId);
+      print('Job post added to company job posts: ${jobPost.jobPostId}');
+
+      // Persist the changes to the database
+      if (companyId != null) {
+        CompanyDataProvider.saveOtherCompanyJobPosts(
+            [jobPost.jobPostId], companyId);
+      }
+    } catch (e) {
+      print('Failed to save job post: $e');
+    }
   }
 }

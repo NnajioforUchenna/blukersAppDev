@@ -33,7 +33,7 @@ class WorkerProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  setSelectedWorker(Worker worker) {
+  void setSelectedWorker(Worker worker) {
     selectedWorker = worker;
     notifyListeners();
   }
@@ -357,6 +357,7 @@ class WorkerProvider with ChangeNotifier {
 
   // Searching Parameters
   bool isSearching = false;
+
   Future<void> searchWorkers(String nameRelated, String locationRelated) async {
     selectedWorkers = [];
     selectedWorkers =
@@ -373,6 +374,7 @@ class WorkerProvider with ChangeNotifier {
 
   // initialize the Applicant list
   List<Worker> applicants = [];
+
   Future<bool> getApplicants(List<String> list) async {
     // Clearing existing applicants if any
     applicants.clear();

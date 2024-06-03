@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../models/job_post.dart';
 import '../../../services/fade_in_out.dart';
-
 import '../../old_common_views/small_pop_button_widget.dart';
 import 'mobile_job_post_details_components/apply_main_button_widget.dart';
 import 'mobile_job_post_details_components/mobile_detail_page_block_five.dart';
@@ -13,6 +12,7 @@ import 'mobile_job_post_details_components/mobile_detail_page_block_two.dart';
 
 class JobPostMobileDetails extends StatefulWidget {
   final JobPost jobPost;
+
   const JobPostMobileDetails({super.key, required this.jobPost});
 
   @override
@@ -20,23 +20,12 @@ class JobPostMobileDetails extends StatefulWidget {
 }
 
 class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
-  bool isButtonVisible = false;
-
   @override
   Widget build(BuildContext context) {
     double topPadding = MediaQuery.of(context).size.height * 0.1;
 
     // Create a ScrollController to track the scroll position
     ScrollController scrollController = ScrollController();
-
-    // Add a listener to the ScrollController to toggle button visibility
-    scrollController.addListener(() {
-      setState(() {
-        isButtonVisible = scrollController.position.pixels >=
-            scrollController.position.maxScrollExtent -
-                (MediaQuery.of(context).size.height * 0.1);
-      });
-    });
 
     return Stack(
       children: [
@@ -65,14 +54,6 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
           left: 10, // Adjust as needed
           child: SmallPopButtonWidget(),
         ),
-        if (!isButtonVisible)
-          Positioned(
-            left: 0.0,
-            right: 0.0,
-            bottom: 10.0, // Adjust as needed to create the desired spacing
-            child: FadeInOutWidget(
-                child: ApplyButtonWidget(jobPost: widget.jobPost)),
-          ),
       ],
     );
   }
