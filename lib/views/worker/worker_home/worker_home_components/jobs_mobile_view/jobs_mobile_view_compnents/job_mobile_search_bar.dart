@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
-import '../../../../../common_vieiws/all_search_bar_components/search_page.dart';
+import '../../../../../common_vieiws/all_search_bar_components/worker_search_page.dart';
 
 class JobMobileSearchBar extends StatefulWidget {
   const JobMobileSearchBar({super.key});

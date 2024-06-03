@@ -16,8 +16,27 @@ class LocalizedJobIds {
         AppLocalizations.of(context)!.helper_construction,
     'maintenance__repair': (context) =>
         AppLocalizations.of(context)!.maintenance__repair,
+    'welder2supervisor': (context) =>
+        AppLocalizations.of(context)!.welder2supervisor,
+    'weldercuttersoldererbrazer': (context) =>
+        AppLocalizations.of(context)!.weldercuttersoldererbrazer,
+    'cooksfastfood': (context) => AppLocalizations.of(context)!.cooksfastfood,
+    'dishwashers': (context) => AppLocalizations.of(context)!.dishwashers,
+    'firstlinesupervisorsfoodpreparation': (context) =>
+        AppLocalizations.of(context)!.firstlinesupervisorsfoodpreparation,
+    'hosthostess': (context) => AppLocalizations.of(context)!.hosthostess,
+    'helperelectrician': (context) =>
+        AppLocalizations.of(context)!.helperelectrician,
+    'buildingelectrician': (context) =>
+        AppLocalizations.of(context)!.buildingelectrician,
+    'landscapegroundskeeper': (context) =>
+        AppLocalizations.of(context)!.landscapegroundskeeper,
+    'cementmasonsandconcretefinishers': (context) =>
+        AppLocalizations.of(context)!.cementmasonsandconcretefinishers,
     'grounds_maintenance': (context) =>
         AppLocalizations.of(context)!.grounds_maintenance,
+    'floorsendersandfinishers': (context) =>
+        AppLocalizations.of(context)!.floorsendersandfinishers,
     'supervisor_of_housekeeping__janitorial': (context) =>
         AppLocalizations.of(context)!.supervisor_of_housekeeping__janitorial,
     'agricultural_equipment_operators': (context) =>

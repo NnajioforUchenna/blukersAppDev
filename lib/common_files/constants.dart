@@ -19,7 +19,7 @@ final List<String> routesWorker = [
 final List<String> routesCompany = [
   '/workers',
   '/myJobPosts',
-  '/search',
+  '/companysearch',
   '/offers',
   '/companyProfile',
   '/login'

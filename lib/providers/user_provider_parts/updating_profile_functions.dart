@@ -26,6 +26,20 @@ extension UpdatingProfileFunctions on UserProvider {
     });
   }
 
+  // for company
+  void updateCompanyInformation({
+    required String name,
+    required String description,
+  }) {
+    updatingInformation(() async {
+      UserDataProvider.updateCompanyInformation(
+        name: name,
+        description: description,
+        uid: appUser!.uid,
+      );
+    });
+  }
+
   void updateAppUserCategory(
       List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
     if (appUser != null && appUser?.worker != null) {

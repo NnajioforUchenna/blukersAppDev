@@ -100,7 +100,7 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
           ),
         ],
         onDestinationSelected: (int index) {
-          asp.bottomNavigation = GlobalKey();
+          asp.bottomNavigation;
           up.navigate(context, index);
         },
         selectedIndex: currentPageIndex,

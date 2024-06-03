@@ -1,3 +1,6 @@
+import 'package:blukers/services/responsive.dart';
+import 'package:blukers/views/company/company_desktop_view/company_desktop_view.dart';
+import 'package:blukers/views/company/company_mobile_view/company_mobile_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -5,11 +8,8 @@ import 'package:provider/provider.dart';
 import '../../providers/app_settings_provider.dart';
 import '../../providers/industry_provider.dart';
 import '../../providers/worker_provider.dart';
-import '../common_vieiws/all_search_bar_components/all_search_bar.dart';
-import '../common_vieiws/loading_page.dart';
 import '../common_vieiws/page_template/page_template.dart';
-import '../worker/worker_home/worker_home_components/jobs_mobile_view/jobs_mobile_view_compnents/mobile_industry_headpanel.dart';
-import 'workers_components/worker_search_result_page.dart';
+
 
 class Workers extends StatelessWidget {
   const Workers({super.key});
@@ -25,33 +25,37 @@ class Workers extends StatelessWidget {
     }
 
     return PageTemplate(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const AllSearchBar(),
-            const SizedBox(height: 10),
-            const Divider(),
-            AnimatedCrossFade(
-              firstChild: ip.industries.isEmpty
-                  ? LoadingPage()
-                  : Column(
-                      children: ip.industries.values.map((industry) {
-                        return Container(
-                          margin: const EdgeInsets.only(
-                              bottom: 10.0, left: 30, right: 30),
-                          child: MobileIndustryHeadPanel(industry: industry),
-                        );
-                      }).toList(),
-                    ),
-              secondChild: const WorkerSearchResultPage(),
-              crossFadeState: wp.isSearching
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              duration: const Duration(milliseconds: 500),
-            ),
-          ],
-        ),
-      ),
+     child: Responsive.isMobile(context)
+          ? const CompanyMobile()
+          : const CompanyDesktop(),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

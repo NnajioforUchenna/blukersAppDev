@@ -63,6 +63,7 @@ class WorkerProvider with ChangeNotifier {
     references.add({});
     notifyListeners();
   }
+  
 
   void addInterestingWorker(AppUser? appUser, Worker worker) {
     // Update Companies Data

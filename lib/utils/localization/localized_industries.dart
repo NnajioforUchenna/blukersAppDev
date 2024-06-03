@@ -37,6 +37,8 @@ class LocalizedIndustries {
         AppLocalizations.of(context)!.food_preparation,
     'carpet_installers': (context) =>
         AppLocalizations.of(context)!.carpet_installers,
+    'electrician': (context) => AppLocalizations.of(context)!.electrician,
+    'earthdrillers': (context) => AppLocalizations.of(context)!.earthdrillers,
     'driver': (context) => AppLocalizations.of(context)!.driver,
     'cement_masons': (context) => AppLocalizations.of(context)!.cement_masons,
     'hazardous_material_removal': (context) =>
@@ -53,6 +55,9 @@ class LocalizedIndustries {
     'excavating__loading_machine__dragline_operators': (context) =>
         AppLocalizations.of(context)!
             .excavating__loading_machine__dragline_operators,
+    'update': (context) => AppLocalizations.of(context)!.update,
+    'delete': (context) => AppLocalizations.of(context)!.delete,
+    'noworkersfound': (context) => AppLocalizations.of(context)!.noworkersfound,
   };
 
   static String convert2Keyword(String title) {

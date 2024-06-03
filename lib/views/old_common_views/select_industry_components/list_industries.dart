@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/industry_provider.dart';
-import 'display_industry.dart';
+
 
 class ListIndustries extends StatelessWidget {
   const ListIndustries({super.key});

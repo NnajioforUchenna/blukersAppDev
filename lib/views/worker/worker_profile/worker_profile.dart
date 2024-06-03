@@ -1,6 +1,5 @@
 // import 'dart:io';
 import 'package:blukers/providers/app_settings_provider.dart';
-import 'package:blukers/providers/chat_provider.dart';
 import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_one/profile_row_one.dart';
 import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_two/profile_row_two.dart';
 import 'package:flutter/foundation.dart';
@@ -33,10 +32,7 @@ class _WorkerProfileState extends State<WorkerProfile> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
-    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
 
     if (!kIsWeb) {

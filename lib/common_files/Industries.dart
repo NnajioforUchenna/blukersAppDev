@@ -504,7 +504,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Cooks, Fast Food",
-        "jobId": "cooksfastfood"
+        "jobId": "Cooksfastfood"
       },
       {
         "description":
@@ -515,7 +515,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Dishwashers",
-        "jobId": "dishwashers"
+        "jobId": "Dishwashers"
       },
       {
         "description":
@@ -526,7 +526,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "First line supervisors of food preparation",
-        "jobId": "firstlinesupervisorsfoodpreparation"
+        "jobId": "Firstlinesupervisorsfoodpreparation"
       },
       {
         "description":
@@ -537,7 +537,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Hostess and Hostesses",
-        "jobId": "hosthostess"
+        "jobId": "Hosthostess"
       }
     ],
     "industryId": "Food Preparation",
@@ -904,7 +904,7 @@ final List<Map<String, dynamic>> IndustriesData = [
   },
   {
     "jobs": [],
-    "industryId": "earthdrillers",
+    "industryId": "Earthdrillers",
     "imageUrl": "assets/industryImages/earthdrillers.png",
     "description":
         "The earth drillers industry involves operating various types of drilling machines for earth exploration and construction purposes.",
@@ -935,7 +935,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "jobId": "buildingelectrician"
       }
     ],
-    "industryId": "electrician",
+    "industryId": "Electrician",
     "imageUrl": "assets/industryImages/electricians.png",
     "description":
         "The Electrician industry encompasses the design, installation, maintenance and troubleshooting of electrical wiring systems. These systems can be located on stationary or mobile structures, in residential or commercial properties.",

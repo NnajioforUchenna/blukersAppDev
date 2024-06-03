@@ -10,14 +10,15 @@ import '../../../providers/worker_provider.dart';
 import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 
-class DesktopSearchBar extends StatefulWidget {
-  const DesktopSearchBar({super.key});
+class CompanyDesktopSearchBar extends StatefulWidget {
+  const CompanyDesktopSearchBar({super.key});
 
   @override
-  State<DesktopSearchBar> createState() => _DesktopSearchBarState();
+  State<CompanyDesktopSearchBar> createState() =>
+      _CompanyDesktopSearchBarState();
 }
 
-class _DesktopSearchBarState extends State<DesktopSearchBar> {
+class _CompanyDesktopSearchBarState extends State<CompanyDesktopSearchBar> {
   final TextEditingController _searchController1 = TextEditingController();
   final TextEditingController _searchController2 = TextEditingController();
   late WorkerProvider wp;
@@ -35,21 +36,14 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
     up = Provider.of<UserProvider>(context, listen: false);
   }
 
-  String buttonLabel = 'Search Jobs';
+  String buttonLabel = 'Search workers';
   String searchName = 'Position, work area or company';
 
   @override
   Widget build(BuildContext context) {
-    UserProvider up = Provider.of<UserProvider>(context);
-    if (up.userRole == 'Company') {
-      buttonLabel = AppLocalizations.of(context)!.searchWorkers;
-      searchName =
-          AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
-    } else {
-      buttonLabel = AppLocalizations.of(context)!.searchJobs;
-      searchName =
-          AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
-    }
+    buttonLabel = AppLocalizations.of(context)!.searchWorkers;
+    searchName =
+        AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
 
     return Container(
       color: ThemeColors.searchBarPrimaryThemeColor,
@@ -145,14 +139,7 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
 
           String nameRelated = _searchController1.text;
           String locationRelated = _searchController2.text;
-
-          // Determine which provider to use
-          if (up.userRole == 'company') {
-            await wp.searchWorkers(nameRelated, locationRelated);
-          } else {
-            await jp.searchJobPosts(nameRelated, locationRelated);
-          }
-
+          await wp.searchWorkers(nameRelated, locationRelated);
           setState(() {
             _isLoading = false; // End loading
           });

@@ -1,0 +1,50 @@
+{
+  "fr": [
+    "hello",
+    "dreamBuildConnect",
+    "whatDoYouIdentifyAs",
+    "home",
+    "jobs",
+    "chat",
+    "profile",
+    "loginRegister",
+    "login",
+    "login2"
+  ],
+
+  "it": [
+    "hello",
+    "dreamBuildConnect",
+    "whatDoYouIdentifyAs",
+    "home",
+    "jobs",
+    "chat",
+    "profile",
+    "loginRegister",
+    "login",
+    "login2"
+  ],
+
+  "ko": [
+    "next",
+    "continueStr",
+    "done",
+    "finish",
+    "joinNow",
+    "companyJourneyTitle",
+    "companyJourneyStep1Title",
+    "companyJourneyStep1Text",
+    "companyJourneyStep2Title",
+    "companyJourneyStep2Text",
+    "companyJourneyStep3Title",
+    "companyJourneyStep3Text",
+    "companyJourneyStep4Title",
+    "companyJourneyStep4Text",
+    "workerJourneyTitle",
+    "workerJourneyStep1Title",
+    "workerJourneyStep1Text",
+    "workerJourneyStep2Title",
+    "workerJourneyStep2Text",
+    "workerJourneyStep3Title"
+  ]
+}

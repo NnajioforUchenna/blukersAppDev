@@ -1,17 +1,18 @@
-import '../../../services/responsive.dart';
-import '../../../utils/styles/index.dart';
-
-import '../../common_vieiws/loading_page.dart';
-import 'Worker_search_bar.dart';
-import 'build_list_view_workers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/worker_provider.dart';
+import '../../../services/responsive.dart';
+import '../../../utils/styles/index.dart';
+import '../../common_vieiws/loading_page.dart';
+import 'Worker_search_bar.dart';
 import 'animate_worker_details_page.dart';
+import 'build_list_view_workers.dart';
 
 class DisplayWorkers extends StatefulWidget {
   final String title;
+
   const DisplayWorkers({super.key, required this.title});
 
   @override
@@ -36,11 +37,27 @@ class _DisplayWorkersState extends State<DisplayWorkers> {
               color: Colors.white,
             ),
           )),
-      body: wp.selectedWorkers.isEmpty
-          ? LoadingPage()
-          : Responsive.isDesktop(context)
-              ? buildWebContent()
-              : const BuildListViewWorkers(),
+      body: FutureBuilder(
+        future: Future.delayed(const Duration(seconds: 5)),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingPage();
+          } else {
+            return wp.selectedWorkers.isEmpty
+                ? Center(
+                    child: Text(
+                    AppLocalizations.of(context)!.noworkersfound,
+                    style: const TextStyle(
+                        color: ThemeColors.blukersOrangeThemeColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ))
+                : Responsive.isDesktop(context)
+                    ? buildWebContent()
+                    : const BuildListViewWorkers();
+          }
+        },
+      ),
     );
   }
 
@@ -74,5 +91,5 @@ class _DisplayWorkersState extends State<DisplayWorkers> {
       ],
     );
   }
-  //
+//
 }

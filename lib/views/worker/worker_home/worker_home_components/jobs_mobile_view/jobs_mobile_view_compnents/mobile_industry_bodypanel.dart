@@ -78,14 +78,6 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Text(
-                              '${AppLocalizations.of(context)!.salary}: ${NumberFormatHelper().doubleToStrSimpleCurrency(job.lowRange)} - ${NumberFormatHelper().doubleToStrSimpleCurrency(job.highRange)}',
-                              style: const TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                color: ThemeColors.grey1ThemeColor,
-                              ),
-                            ),
                           ],
                         ),
                       )),

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
-import 'search_page.dart';
+import 'worker_search_page.dart';
 
 class MobileSearchBar extends StatefulWidget {
   const MobileSearchBar({super.key});
@@ -17,7 +17,7 @@ class MobileSearchBar extends StatefulWidget {
 
 class _MobileSearchBarState extends State<MobileSearchBar> {
   final TextEditingController controller = TextEditingController();
-  String buttonLabel = 'Search Jobs';
+  String buttonLabel = '';
   String searchName = 'Position, work area or company';
 
   @override
@@ -25,15 +25,9 @@ class _MobileSearchBarState extends State<MobileSearchBar> {
     double screenHeight = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    if (up.userRole == 'Company') {
-      buttonLabel = AppLocalizations.of(context)!.searchWorkers;
-      searchName =
-          AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
-    } else {
-      buttonLabel = AppLocalizations.of(context)!.searchJobs;
-      searchName =
-          AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
-    }
+
+    buttonLabel = AppLocalizations.of(context)!.searchJobs;
+    searchName = AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
 
     controller.text = "${jp.nameSearch} ${jp.locationSearch}";
 
@@ -55,11 +49,11 @@ class _MobileSearchBarState extends State<MobileSearchBar> {
               margin: const EdgeInsets.only(bottom: 20),
               child: TextField(
                 controller: controller,
-                onChanged: (value) {
-                  showDialog(
-                      context: context,
-                      builder: (context) => const SearchPage());
-                },
+                // onChanged: (value) {
+                //   showDialog(
+                //       context: context,
+                //       builder: (context) => const SearchPage());
+                // },
                 decoration: InputDecoration(
                   isDense: true, // Added this
                   contentPadding: const EdgeInsets.symmetric(

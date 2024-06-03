@@ -1,4 +1,5 @@
-import 'package:blukers/views/common_vieiws/all_search_bar_components/search_page.dart';
+import 'package:blukers/views/common_vieiws/all_search_bar_components/company_search_page.dart';
+import 'package:blukers/views/common_vieiws/all_search_bar_components/worker_search_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/payment_model/url_info.dart';
@@ -7,9 +8,9 @@ import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
 import '../views/common_vieiws/landing_page/landing_page.dart';
+import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_basic_info.dart';
 import '../views/company/company_chat.dart';
-import '../views/company/company_profile.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
 import '../views/company/my_job_posts.dart';
 import '../views/company/my_job_posts_components/applicants/applicants.dart';
@@ -65,6 +66,7 @@ final routes = [
     },
   ),
   GoRoute(path: '/search', builder: (context, state) => const SearchPage()),
+  GoRoute(path: '/companysearch', builder: (context, state) => const CompanySearchPage()),
   GoRoute(
       path: '/pdfViewScreen',
       builder: (context, state) => const ResumeScreen()),
