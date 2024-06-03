@@ -397,4 +397,10 @@ class JobPostsProvider with ChangeNotifier {
 //   return JobPostsDataProvider.getSavedJobPostIds(uid)
 //       .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
 // }
+
+// delete jobs posted
+  Future<void> deleteJobPost(String jobPostId) async {
+    JobPostsDataProvider.deleteJobPost(jobPostId, appUser!.uid);
+    notifyListeners();
+  }
 }

@@ -39,6 +39,7 @@ class CompanyDataProvider {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         List<dynamic> jobPostIdList = data['jobPostIds'] ?? [];
         List<JobPost> returnJobPostList = [];
+        int index = 0;
 
         Future.forEach(jobPostIdList, (jobPostId) async {
           DocumentSnapshot jobPostDoc =
@@ -48,7 +49,10 @@ class CompanyDataProvider {
                 jobPostDoc.data() as Map<String, dynamic>;
             JobPost? jobPost = JobPost.fromMap(jobPostData);
             if (jobPost != null) {
+              print(
+                  'job post index: ${index} id as ${jobPostId} and company id as  ${jobPost.companyId}');
               returnJobPostList.add(jobPost);
+              index++;
             }
           }
         }).then((_) {
@@ -156,5 +160,24 @@ class CompanyDataProvider {
     db.collection(appUserCollections).doc(uid).set({
       'companyTimelineStep': i,
     }, SetOptions(merge: true));
+  }
+
+  static Future<void> saveOtherCompanyJobPosts(
+      List<String> jobPostsIds, String companyId) async {
+    // Get a reference to the 'companies' collection
+    CollectionReference companies = firestore.collection('Companies');
+
+    // Update the companyId in each JobPost document in the database
+    for (String jobPostId in jobPostsIds) {
+      DocumentReference jobPostDoc =
+          firestore.collection('JobPosts').doc(jobPostId);
+      await jobPostDoc.update({'companyId': companyId});
+    }
+
+    // Get a reference to the specific company document
+    DocumentReference companyDoc = companies.doc(companyId);
+
+    // Add the new job post IDs to the 'jobPostIds' field in the company document
+    await companyDoc.update({'jobPostIds': FieldValue.arrayUnion(jobPostsIds)});
   }
 }

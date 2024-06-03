@@ -6,7 +6,7 @@ class TimelineNavigationButton extends StatelessWidget {
     super.key,
     required this.isSelected,
     required this.onPress,
-    this.navDirection = "right", // "left", "right"
+    this.navDirection = "right",
   });
 
   bool isSelected;
@@ -22,14 +22,6 @@ class TimelineNavigationButton extends StatelessWidget {
           isSelected ? Colors.deepOrangeAccent : Colors.grey,
         ),
       ),
-      // child: Text(
-      //   AppLocalizations.of(context)!.next,
-      //   style: TextStyle(
-      //     fontFamily: "Montserrat",
-      //     fontSize: 20,
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      // ),
       child: Icon(
         navDirection.toString().toLowerCase() == "right"
             ? UniconsLine.arrow_right

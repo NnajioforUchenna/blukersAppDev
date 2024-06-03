@@ -232,4 +232,14 @@ class JobPostsDataProvider {
       throw Exception('Failed to load AI job posts');
     }
   }
+
+  // delete jobs posted
+  static Future<void> deleteJobPost(String jobPostId, String companyId) async {
+    await db.collection(jobPostsCollections).doc(jobPostId).delete();
+    DocumentReference companyDoc =
+        db.collection(companyCollections).doc(companyId);
+    await companyDoc.update({
+      'jobPostIds': FieldValue.arrayRemove([jobPostId])
+    });
+  }
 }

@@ -40,8 +40,10 @@ part 'user_navigation_functions.dart';
 class UserProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? _user;
+
   User? get user => _user;
   AppUser? _appUser;
+
   AppUser? get appUser => _appUser;
   late StreamService streamService;
 
@@ -271,6 +273,27 @@ class UserProvider with ChangeNotifier {
   void updateSelection() {
     if (appUser != null) {
       UserDataProvider.updateJobsPreference(appUser!);
+    }
+  }
+
+  void saveOtherCompanyJobPosts(JobPost jobPost) async {
+    try {
+      // Change the companyId in the jobPost to your companyId
+      if (appUser?.company?.companyId != null) {
+        jobPost.companyId = appUser!.company!.companyId!;
+      }
+
+      // Add the job post to the list of job posts associated with the user's company ID
+      appUser?.company?.jobPostIds.add(jobPost.jobPostId);
+      print('Job post added to company job posts: ${jobPost.jobPostId}');
+
+      // Persist the changes to the database
+      if (appUser?.company?.companyId != null) {
+        UserDataProvider.saveOtherCompanyJobPosts(
+            [jobPost.jobPostId], appUser!.company!.companyId!);
+      }
+    } catch (e) {
+      print('Failed to save job post: $e');
     }
   }
 }

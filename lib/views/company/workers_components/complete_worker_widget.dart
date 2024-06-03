@@ -10,6 +10,7 @@ import 'display_worker_dialog.dart';
 
 class CompleteWorkerWidget extends StatelessWidget {
   final List<Worker> workers;
+
   const CompleteWorkerWidget({super.key, required this.workers});
 
   @override
@@ -52,6 +53,7 @@ buildWebContentWorkers(List<Worker> workers, context) {
 
 class ListViewWorkers extends StatelessWidget {
   final List<Worker> workers;
+
   const ListViewWorkers({super.key, required this.workers});
 
   @override
@@ -75,6 +77,7 @@ class ListViewWorkers extends StatelessWidget {
                     builder: (context) => DisplayWorkerDialog(
                           worker: worker,
                         ));
+                print('worker: ${worker.firstName}');
               }
             });
       },
