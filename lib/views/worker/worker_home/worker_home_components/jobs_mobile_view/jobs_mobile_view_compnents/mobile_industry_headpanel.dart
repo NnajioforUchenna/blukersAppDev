@@ -1,8 +1,6 @@
-import 'package:blukers/providers/app_settings_provider.dart';
 import 'package:blukers/utils/localization/localized_industries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../../models/industry.dart';
 import '../../../../../../services/on_hover.dart';
@@ -25,7 +23,6 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
 
   @override
   Widget build(BuildContext context) {
-    AppSettingsProvider ap = Provider.of<AppSettingsProvider>(context);
     return Column(
       children: [
         InkWell(

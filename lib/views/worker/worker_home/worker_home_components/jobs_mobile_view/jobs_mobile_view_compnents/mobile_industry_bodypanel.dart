@@ -1,13 +1,11 @@
 import 'package:blukers/utils/localization/localized_job_ids.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/job.dart';
 import '../../../../../../providers/job_posts_provider.dart';
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../providers/worker_provider.dart';
-import '../../../../../../utils/helpers/number_format.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../company/workers_components/display_workers.dart';
 import '../../../../saved/display_jobs.dart';
@@ -70,7 +68,7 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                           children: [
                             RichText(
                               text: TextSpan(
-                               text: LocalizedJobIds.get(context, job.jobId),
+                                text: LocalizedJobIds.get(context, job.title),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -78,14 +76,14 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Text(
-                              '${AppLocalizations.of(context)!.salary}: ${NumberFormatHelper().doubleToStrSimpleCurrency(job.lowRange)} - ${NumberFormatHelper().doubleToStrSimpleCurrency(job.highRange)}',
-                              style: const TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                color: ThemeColors.grey1ThemeColor,
-                              ),
-                            ),
+                            // Text(
+                            //   '${AppLocalizations.of(context)!.salary}: ${NumberFormatHelper().doubleToStrSimpleCurrency(job.lowRange)} - ${NumberFormatHelper().doubleToStrSimpleCurrency(job.highRange)}',
+                            //   style: const TextStyle(
+                            //     fontSize: 11,
+                            //     fontWeight: FontWeight.bold,
+                            //     color: ThemeColors.grey1ThemeColor,
+                            //   ),
+                            // ),
                           ],
                         ),
                       )),

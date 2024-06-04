@@ -251,28 +251,6 @@ final List<Map<String, dynamic>> IndustriesData = [
         "title": "Welder, Cutter, Solderer, and Brazer",
         "jobId": "welderCutter SoldererBrazer",
       },
-      {
-        "description":
-            "Operate and supervise welding procedures to complete projects. This may include short distances transportation of necessary goods and materials.",
-        "requirements":
-            "Valid welding certification, ability to operate and maintain welding machines, Clean driving record, Valid commercial driver's license (CDL), ability to supervise and coordinate a team",
-        "lowRange": 30000,
-        "highRange": 60000,
-        "numberOfApplicants": 0,
-        "title": "Welder II -- Supervisor",
-        "jobId": "welder2supervisor"
-      },
-      {
-        "description":
-            "Operate welding, soldering, and brazing tools to join or cut metal parts.",
-        "requirements":
-            "Ability to handle welding and cutting tools, Ability to read blueprints, Professional certification (preferred)",
-        "lowRange": 30000,
-        "highRange": 60000,
-        "numberOfApplicants": 0,
-        "title": "Welder, Cutter, Solderer and Brazer",
-        "jobId": "weldercuttersoldererbrazer"
-      }
     ],
     "industryId": "welding",
     "imageUrl": "assets/industryImages/Welder.png",
@@ -557,7 +535,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Agricultural Equipment Operators",
-        "jobId": "agricultural Equipment Operators",
+        "jobId": "Agricultural Equipment Operators",
       },
       {
         "description":
@@ -673,7 +651,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 50000,
         "numberOfApplicants": 0,
         "title": "Supervisor of Housekeeping and Janitorial",
-        "jobId": "supervisor of Housekeeping and Janitorial",
+        "jobId": "Supervisor of Housekeeping and Janitorial",
       },
       {
         "description":
@@ -1132,7 +1110,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 25000,
         "highRange": 40000,
         "numberOfApplicants": 0,
-        "title": "StructuralIronSteel",
+        "title": "Structural Iron Steel",
         "jobId": "Structural Iron Steel",
       }
     ],
@@ -1203,8 +1181,8 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 25000,
         "highRange": 50000,
         "numberOfApplicants": 0,
-        "title": "Woodworking Machine Setters",
-        "jobId": "Woodworking Machine Setters",
+        "title": "Wood Working Machine Setters",
+        "jobId": "Wood Working Machine Setters",
       }
     ],
     "industryId": "WoodWorker",

@@ -15,9 +15,6 @@ class BuildListViewWorkers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
-    // UserProvider up = Provider.of<UserProvider>(context);
-    // ChatProvider chatProvider = Provider.of<ChatProvider>(context);
-    // CompanyProvider cp = Provider.of<CompanyProvider>(context);
     final List<Worker> workers = wp.selectedWorkers;
 
     return ListView.separated(
@@ -38,7 +35,6 @@ class BuildListViewWorkers extends StatelessWidget {
                     builder: (context) => DisplayWorkerDialog(
                           worker: worker,
                         ));
-                print('worker(s): ${wp.setSelectedWorker}');
               }
             });
       },
