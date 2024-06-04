@@ -288,7 +288,6 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                                 birthMonthController.text,
                                 birthYearController.text,
                               );
-                              print("Personal Information Added");
                             } else {
                               EasyLoading.showError(
                                   "Please fill all the fields");

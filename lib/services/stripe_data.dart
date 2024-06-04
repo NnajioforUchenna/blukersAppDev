@@ -5,11 +5,11 @@
 // AppUsers
 // But we also use this file to get our stripe product memberships data.
 
+import 'package:blukers/config/index.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:blukers/config/index.dart';
 
 Future<StripeData> fetchStripeData() async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -91,8 +91,6 @@ getCustomerPortalUrl() async {
       {'returnUrl': kIsWeb ? 'http://localhost:50246/' : "https://cancel.com"});
 
   EasyLoading.dismiss();
-
-  print(result.data);
   if (result.data != null) {
     var url = result.data["url"];
     return url;

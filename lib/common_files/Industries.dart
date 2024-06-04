@@ -736,7 +736,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "lowRange": 30000,
         "highRange": 60000,
         "numberOfApplicants": 0,
-        "title": "Landscaiping and Groundskeeping",
+        "title": "Land Scalping and Grounds Keeping",
         "jobId": "landscapegroundskeeper"
       }
     ],

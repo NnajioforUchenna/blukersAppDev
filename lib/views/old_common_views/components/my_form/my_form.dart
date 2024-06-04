@@ -50,7 +50,8 @@ class MyForm extends StatelessWidget {
   List<MyFormInputModel> inputElements;
   Function(Map<String, dynamic>) onSubmit;
 
-  MyForm({super.key, 
+  MyForm({
+    super.key,
     this.padding = const EdgeInsets.all(30.0),
     this.titleText = '',
     this.subtitleText = '',
@@ -60,11 +61,6 @@ class MyForm extends StatelessWidget {
     List<MyFormInputModel>? inputElements,
     required this.onSubmit,
   }) : inputElements = inputElements ?? inputElementsExample;
-
-  static void _defaultOnSubmit(Map<String, dynamic> values) {
-    // Default behavior: Print all values
-    print("Default onSubmit: $values");
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -45,7 +45,6 @@ class UserJourney {
   void printStatuses() {
     statusHistory.forEach((status, timestamp) {
       DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-      print("$status was set on $date");
     });
   }
 

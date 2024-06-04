@@ -1,9 +1,9 @@
-import '../../../../../../providers/job_posts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../providers/job_posts_provider.dart';
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../common_vieiws/all_search_bar_components/search_page.dart';
@@ -33,7 +33,6 @@ class _JobMobileSearchBarState extends State<JobMobileSearchBar> {
       searchName =
           AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
     }
-    print(searchName);
     if (jp.nameSearch.isNotEmpty || jp.locationSearch.isNotEmpty) {
       controller.text = "${jp.nameSearch} ${jp.locationSearch}";
     }

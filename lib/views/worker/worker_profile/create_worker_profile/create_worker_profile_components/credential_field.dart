@@ -1,11 +1,12 @@
-import '../../../../../providers/worker_provider.dart';
-import '../../../../../utils/styles/index.dart';
-import 'show_pdf_dialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../../providers/worker_provider.dart';
+import '../../../../../utils/styles/index.dart';
+import 'show_pdf_dialog.dart';
 
 class CredentialField extends StatefulWidget {
   final int index;
@@ -103,7 +104,6 @@ class _CredentialFieldState extends State<CredentialField> {
               child: ElevatedButton(
                 onPressed: isFileUploaded
                     ? () {
-                        print(filePlatformFile!.name);
                         showDialog(
                             context: context,
                             builder: (_) => ShowPdfDialog(

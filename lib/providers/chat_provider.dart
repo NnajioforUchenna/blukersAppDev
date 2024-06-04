@@ -64,7 +64,6 @@ class ChatProvider with ChangeNotifier {
     ChatRoom chatRoom;
     //if worker_chat room does not exist then create worker_chat room
     //else move user to already created chatroom
-    print("worker_chat$chat");
     if (chat == -1) {
       chatRoom = await ChatDataProvider.createChatRoom(
           myUid: myUid,

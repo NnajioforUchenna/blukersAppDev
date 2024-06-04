@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,7 +6,6 @@ import 'package:uuid/uuid.dart';
 import '../data_providers/app_versions_data_provider.dart';
 import '../data_providers/user_journey_data_provider.dart';
 import '../utils/helpers/app_version.dart';
-import '../views/old_common_views/components/update_app_dialog.dart';
 
 part 'user_journey.dart';
 
@@ -69,6 +65,7 @@ class AppSettingsProvider with ChangeNotifier {
     _shouldUpdate = false;
 
     Map shouldUpdateApp = await AppVersionsDataProvider().shouldUpdateApp();
+
     _latestVersion = shouldUpdateApp['version'] ?? "";
 
     String currentAppVersion = AppVersionHelper().get();
@@ -86,24 +83,23 @@ class AppSettingsProvider with ChangeNotifier {
   }
 
   void checkForUpdate(BuildContext context) {
-    if (!kIsWeb) {
-      _shouldUpdateApp().then((value) {
-        print("update: ${value!}");
-        if (value) {
-          showDialog(
-            context: context,
-            barrierDismissible:
-                false, // Dialog cannot be dismissed by tapping outside
-            builder: (BuildContext context) {
-              return UpdateAppDialog(
-                url: Platform.isAndroid ? _androidUrl ?? "" : _iOSUrl ?? "",
-              );
-            },
-          );
-        }
-      });
-      // }
-    }
+    // if (!kIsWeb) {
+    //   _shouldUpdateApp().then((value) {
+    //     if (value != null) {
+    //       showDialog(
+    //         context: context,
+    //         barrierDismissible:
+    //             false, // Dialog cannot be dismissed by tapping outside
+    //         builder: (BuildContext context) {
+    //           return UpdateAppDialog(
+    //             url: Platform.isAndroid ? _androidUrl ?? "" : _iOSUrl ?? "",
+    //           );
+    //         },
+    //       );
+    //     }
+    //   });
+    //   // }
+    // }
   }
 
   void setLocale(String? selectedLanguageCode) {
@@ -115,5 +111,13 @@ class AppSettingsProvider with ChangeNotifier {
     hasShowcased = bool;
     prefs?.setBool('showcaseShown', bool);
     notifyListeners();
+  }
+
+  void regenerateKeys() {
+    searchBar = GlobalKey();
+    translation = GlobalKey();
+    selection = GlobalKey();
+    signInButton = GlobalKey();
+    bottomNavigation = GlobalKey();
   }
 }

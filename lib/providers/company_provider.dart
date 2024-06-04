@@ -104,7 +104,7 @@ class CompanyProvider with ChangeNotifier {
             'Selected file is more than 10 MB. Please select a smaller file.');
         return;
       }
-      print(appUser!.uid);
+
       String result = await CompanyDataProvider.uploadImageToFirebaseStorage(
           appUser!.uid, await image.readAsBytes(), image.name.split('.').last);
       // If the result is not an error, then update the logoUrl of the Worker.
@@ -213,7 +213,7 @@ class CompanyProvider with ChangeNotifier {
     // Add the company to the database
     await CompanyDataProvider.createCompanyProfile(
         appUser!.uid, company.toMap());
-    print('Company Profile Created Successfully');
+
     appUser?.companyTimelineStep = 2;
 
     notifyListeners();
@@ -237,7 +237,6 @@ class CompanyProvider with ChangeNotifier {
 
       // Add the job post to the list of job posts associated with the user's company ID
       _company?.jobPostIds.add(jobPost.jobPostId);
-      print('Job post added to company job posts: ${jobPost.jobPostId}');
 
       // Persist the changes to the database
       if (companyId != null) {

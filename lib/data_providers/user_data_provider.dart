@@ -287,7 +287,6 @@ class UserDataProvider {
       final uploadTask = await imagesRef.putData(
         image!,
       );
-      print(uploadTask);
       imageUrl = await uploadTask.ref.getDownloadURL();
       // Set the logoUrl in the database
       // await updateOrAddUserPhoto(uid, imageUrl);

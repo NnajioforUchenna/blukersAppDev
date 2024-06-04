@@ -1,10 +1,10 @@
-import '../../providers/user_provider_parts/user_provider.dart';
-import '../../services/responsive.dart';
-import '../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/user_provider_parts/user_provider.dart';
+import '../../services/responsive.dart';
+import '../../utils/styles/index.dart';
 import '../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import 'common_widget/submit_button.dart';
 
@@ -51,7 +51,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               const SizedBox(height: 50),
               _buildEmailField(),
               const SizedBox(height: 50),
-              _buildResetButton(context, up),
+              SubmitButton(
+                  isDisabled: !isFormComplete(),
+                  onTap: () {
+                    if (isFormComplete()) {
+                      up.resetAppUserPassword(
+                          context: context, email: emailController.text);
+                    }
+                  },
+                  text: AppLocalizations.of(context)!.resetPassword)
             ],
           ),
         ),
@@ -85,16 +93,5 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       //   // Store the email value in a variable or state if needed
       // },
     );
-  }
-
-  Widget _buildResetButton(context, up) {
-    return SubmitButton(
-        isDisabled: !isFormComplete(),
-        onTap: () {
-          if (isFormComplete()) {
-            up.resetPassword(context, emailController.text);
-          }
-        },
-        text: AppLocalizations.of(context)!.resetPassword);
   }
 }

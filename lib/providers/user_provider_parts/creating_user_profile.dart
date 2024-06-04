@@ -177,10 +177,6 @@ extension CreatingUserProfile on UserProvider {
       return "";
     }
 
-    print(appUser!.uid);
-    //PlatformFile? filePlatformFile = gallery.files.first;
-    //  ;
-
     String? result = await UserDataProvider.uploadImage(
       image: await gallery.readAsBytes(),
       path: "$storagePath${appUser!.uid}",
@@ -258,7 +254,6 @@ extension CreatingUserProfile on UserProvider {
       maskType: EasyLoadingMaskType.black,
     );
 
-    print(appUser!.uid);
     PlatformFile? filePlatformFile = gallery.files.first;
     String? result = await UserDataProvider.uploadImage(
       image: filePlatformFile.bytes!,

@@ -53,12 +53,6 @@ class IndustriesProvider with ChangeNotifier {
       Industry industry = Industry.fromMap(industryData);
       industries[industry.industryId] = industry;
     }
-
-    // print the names of each industries
-    industries.forEach((key, value) {
-      print(value.name);
-    });
-
     return industries;
   }
 }

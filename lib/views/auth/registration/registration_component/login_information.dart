@@ -53,11 +53,6 @@ class _LoginInformationState extends State<LoginInformation> {
     });
   }
 
-  // hideKeyboard() {
-  //   FocusScope.of(context).requestFocus(FocusNode());
-  //   // FocusManager.instance.primaryFocus?.unfocus();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

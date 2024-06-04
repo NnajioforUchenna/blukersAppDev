@@ -1,10 +1,10 @@
-import '../../../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../../../../services/stripe_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../../../services/stripe_data.dart';
 import 'desktop_membership_card.dart';
 
 class DesktopCards extends StatelessWidget {
@@ -55,7 +55,6 @@ class DesktopCards extends StatelessWidget {
               color: const Color(0xff1a75bb),
               isSubscribed: subscriptionStatus.subIsActive,
               onPress: () async {
-                print("premium");
                 if (subscriptionStatus.subIsActive) {
                   var url = await getCustomerPortalUrl();
                   launchUrl(Uri.parse(url));
@@ -107,7 +106,6 @@ class DesktopCards extends StatelessWidget {
               color: const Color(0xffF16523),
               isSubscribed: subscriptionStatus.subIsActive,
               onPress: () async {
-                print("premium plus");
                 if (subscriptionStatus.subIsActive) {
                   var url = await getCustomerPortalUrl();
                   launchUrl(Uri.parse(url));
@@ -138,7 +136,6 @@ class DesktopCards extends StatelessWidget {
                     },
                   );
                 }
-                print("data set");
               },
             ),
         ],

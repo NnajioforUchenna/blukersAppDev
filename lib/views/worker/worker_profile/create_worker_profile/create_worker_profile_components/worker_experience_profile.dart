@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
 import '../../../../../models/work_experience.dart';
 import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../providers/worker_provider.dart';
 import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../../utils/styles/theme_text_styles.dart';
 import 'work_experience/work_experience_form.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
 class WorkerExperienceProfile extends StatelessWidget {
   const WorkerExperienceProfile({super.key});
@@ -63,7 +64,6 @@ class WorkerExperienceProfile extends StatelessWidget {
               up.appUser!.worker!.workExperiences = ref;
               await up.updateWorkerInfo(up.appUser!.worker!);
               Navigator.of(context).pop();
-              print(wp.workExperience);
             },
             child: Container(
               margin: const EdgeInsets.all(12),

@@ -39,7 +39,6 @@ class WorkerProvider with ChangeNotifier {
   }
 
   void getWorkersByJobID(String jobId) {
-    print(jobId);
     // Get all workers for the job with the given jobId.
     WorkerDataProvider.getWorkersByJobID(jobId).then((workers) {
       selectedWorkers = workers
@@ -289,7 +288,6 @@ class WorkerProvider with ChangeNotifier {
 
   void setWorkExperience() {
     for (var element in workExperience) {
-      print(element);
       newWorker!.workExperiences = [];
       newWorker!.workExperiences.add(WorkExperience.fromMap(element));
     }

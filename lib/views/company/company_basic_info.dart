@@ -6,7 +6,6 @@ import '../../models/company.dart';
 import '../../providers/user_provider_parts/user_provider.dart';
 import '../../utils/styles/theme_colors.dart';
 import '../../utils/styles/theme_text_styles.dart';
-
 import '../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import '../old_common_views/profile_section.dart';
 import 'profile_components/company_additional_profile_detail.dart';
@@ -238,7 +237,6 @@ class _CompanyBasicInfoState extends State<CompanyBasicInfo> {
               showBasicInfo: showBasicInfo,
               showEditIcon: false,
               onClickSection: () {
-                print(company);
                 setState(() {
                   showBasicInfo = !showBasicInfo;
                 });

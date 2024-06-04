@@ -38,11 +38,8 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
           textMessage, up.appUser!.uid, roomId, sentToId, roomName);
     }
 
-    print('I was called to Run');
-
     return WillPopScope(
       onWillPop: () async {
-        print("back");
         chatProvider.activeRoomId = "";
         return true;
       },

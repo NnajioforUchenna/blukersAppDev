@@ -1,18 +1,18 @@
-import '../../../../../../models/worker.dart';
-import '../../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../../../utils/styles/theme_colors.dart';
-import '../../../../../../utils/styles/theme_text_styles.dart';
-import '../worker_basic_profile_detail.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
+import '../../../../../../models/worker.dart';
+import '../../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../../utils/styles/theme_colors.dart';
+import '../../../../../../utils/styles/theme_text_styles.dart';
 import '../../../../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import '../../../../../old_common_views/profile_dialog.dart';
 import '../../../../../old_common_views/profile_section.dart';
 import '../edit_worker_basic_profile.dart';
+import '../worker_basic_profile_detail.dart';
 
 class OnlineResumeScreen extends StatefulWidget {
   const OnlineResumeScreen({super.key});
@@ -248,13 +248,11 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
               icon: Icons.edit_outlined,
               showBasicInfo: showBasicInfo,
               onClickSection: () {
-                print("Section clicked");
                 setState(() {
                   showBasicInfo = !showBasicInfo;
                 });
               },
               onClickEdit: () {
-                print("Edit clicked");
                 showDialog(
                   context: context,
                   builder: (context) => const ProfileDialog(
@@ -289,7 +287,6 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
               icon: UniconsLine.arrow_right,
               showInfoInNewPage: true,
               onClickSection: () {
-                print("Section clicked/ Edit Clicked");
                 if (up.appUser!.worker != null) {
                   context.go("/onlineResumeAdditionalDetailScreen",
                       extra: {"isReference": false});
