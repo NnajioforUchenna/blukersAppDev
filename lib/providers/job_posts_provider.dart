@@ -356,11 +356,6 @@ class JobPostsProvider with ChangeNotifier {
     required int pageNumber,
     required String targetLanguage,
   }) async {
-    // print('queryName: $queryName');
-    // print('queryLocation: $queryLocation');
-    // print('pageNumber: $pageNumber');
-    // print('targetLanguage: $targetLanguage');
-
     // Get the 50 most recent job posts.
     Map<String, JobPost> newJobs = {};
 

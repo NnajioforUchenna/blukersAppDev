@@ -7,7 +7,6 @@ import '../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart
 import 'page_template_components/my_buttom_navigation_bar.dart';
 import 'page_template_components/my_navigation_rail.dart';
 
-// ignore: must_be_immutable
 class PageTemplate extends StatelessWidget {
   final Widget child;
 

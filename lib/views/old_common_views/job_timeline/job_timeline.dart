@@ -1,15 +1,14 @@
-import '../../../providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
+import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
+import '../../../utils/styles/index.dart';
 import '../../../utils/styles/theme_colors.dart';
 import 'my_job_timeline.dart';
-
-import '../../../utils/styles/index.dart';
-import 'package:unicons/unicons.dart';
 
 class JobTimeline extends StatelessWidget {
   const JobTimeline({super.key});
@@ -63,23 +62,11 @@ class JobTimeline extends StatelessWidget {
                 description =
                     AppLocalizations.of(context)!.workerJourneyStep2Text;
               }
-              // if (index == 2) {
-              //   title = AppLocalizations.of(context)!.workerJourneyStep3Title;
-              //   description =
-              //       AppLocalizations.of(context)!.workerJourneyStep3Text;
-              // }
-              // if (index == 3) {
-              //   title = AppLocalizations.of(context)!.workerJourneyStep4Title;
-              //   description =
-              //       AppLocalizations.of(context)!.workerJourneyStep4Text;
-              // }
               final record = jobRecords[index];
               return MyJobTimeLine(
                 isFirst: index == 0,
                 isLast: index == jobRecords.length - 1,
                 isPast: index <= currentStep,
-                // title: record['title']!,
-                // briefDescription: record['description']!,
                 title: title,
                 briefDescription: description,
               );
