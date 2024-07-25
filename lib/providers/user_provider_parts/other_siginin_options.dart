@@ -4,6 +4,8 @@ extension OtherSignInOptions on UserProvider {
   Future<void> signInWithGoogle(BuildContext context) async {
     // Attempt to sign in with Google.
     AuthResult authResult = await UserDataProvider.signInWithGoogle();
+    print('Signing in is done');
+    print(authResult.toString());
     checkIfRegisteredOrLogin(authResult, context);
   }
 

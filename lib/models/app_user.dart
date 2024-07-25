@@ -1,15 +1,16 @@
+import 'package:blukers/models/registration_details.dart';
 import 'package:blukers/models/userJourney.dart';
 
 import '../data_providers/user_data_provider.dart';
 import 'address.dart';
 import 'company.dart';
 import 'job_application_tracker.dart';
-import 'jobs_perference.dart';
 import 'payment_model/paid_order.dart';
 import 'payment_model/subscription_model.dart';
 import 'worker.dart';
 
 class AppUser {
+  // User Information
   String uid;
   String email;
   String? language;
@@ -18,15 +19,13 @@ class AppUser {
   String? photoUrl;
   bool? isEmailVerified;
 
-  // for Tracking Registration Process
-  bool? isLoginInformation;
-  String? registeredAs;
-  bool? isBasicInformation;
-  bool? isContactInformation;
-  bool? isRegistrationComplete;
+  // Tracking Registration Form
+  RegistrationDetails? registrationDetails;
 
-  Worker? worker; // Added Worker parameter
-  Company? company; // Added Company parameter
+  // Tracking Worker Profile form
+  Worker? worker;
+
+  Company? company;
   Address? address;
 
   // Device Token for Push Notification
@@ -34,7 +33,7 @@ class AppUser {
 
   String? deviceTokenU;
 
-  // navigation Controls
+  // Navigation Controls
   String? userRole;
   int? workerTimelineStep = 0;
   int? companyTimelineStep = 0;
@@ -43,7 +42,7 @@ class AppUser {
   int createdAt = 0;
   int modifiedAt = 0;
 
-  // Varibles for Tracking Payments
+  // Variables for Tracking Payments
   bool isSubscriptionActive = false;
   SubscriptionPlan? activeSubscription;
   SubscriptionPlan? deferredSubscription;
@@ -56,9 +55,6 @@ class AppUser {
   String deleteAccountReason = '';
   String whereYouReside = '';
 
-  // Set Jobs Perferences
-  JobsPreference? jobsPreference;
-
   // Tracking User Journey in the App
   UserJourney? userJourney;
 
@@ -70,13 +66,9 @@ class AppUser {
     this.phoneNumber,
     this.photoUrl,
     this.isEmailVerified,
-    this.isLoginInformation,
-    this.registeredAs,
-    this.isBasicInformation,
-    this.isContactInformation,
-    this.isRegistrationComplete,
-    this.worker, // Added Worker parameter
-    this.company, // Added Company parameter
+    this.registrationDetails,
+    this.worker,
+    this.company,
     this.address,
     this.deviceTokenU,
     this.tokens,
@@ -85,7 +77,6 @@ class AppUser {
     this.companyTimelineStep,
     this.activeSubscription,
     this.deferredSubscription,
-    this.jobsPreference,
     this.userJourney,
     this.isSubscriptionActive = false,
     this.listActiveOrders = const {},
@@ -102,58 +93,32 @@ class AppUser {
     if (phoneNumber != null) data['phoneNumber'] = phoneNumber;
     if (photoUrl != null) data['photoUrl'] = photoUrl;
     if (isEmailVerified != null) data['isEmailVerified'] = isEmailVerified;
-    if (isLoginInformation != null) {
-      data['isLoginInformation'] = isLoginInformation;
-    }
-    if (registeredAs != null) data['registeredAs'] = registeredAs;
-    if (isBasicInformation != null) {
-      data['isBasicInformation'] = isBasicInformation;
-    }
-    if (isContactInformation != null) {
-      data['isContactInformation'] = isContactInformation;
-    }
-    if (isRegistrationComplete != null) {
-      data['isRegistrationComplete'] = isRegistrationComplete;
-    }
+    if (registrationDetails != null)
+      data['registrationDetails'] = registrationDetails!.toMap();
     if (worker != null) data['worker'] = worker!.toMap();
     if (company != null) data['company'] = company!.toMap();
     if (address != null) data['address'] = address!.toMap();
     if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
     if (tokens != null) data['tokens'] = tokens;
-
     if (userRole != null) data['userRole'] = userRole;
-    if (workerTimelineStep != null) {
+    if (workerTimelineStep != null)
       data['workerTimelineStep'] = workerTimelineStep;
-    }
-    if (companyTimelineStep != null) {
+    if (companyTimelineStep != null)
       data['companyTimelineStep'] = companyTimelineStep;
-    }
     if (createdAt != 0) data['createdAt'] = createdAt;
     if (modifiedAt != 0) data['modifiedAt'] = modifiedAt;
-    if (activeSubscription != null) {
+    if (activeSubscription != null)
       data['activeSubscription'] = activeSubscription?.toMap();
-    }
-    if (deferredSubscription != null) {
+    if (deferredSubscription != null)
       data['deferredSubscription'] = deferredSubscription?.toMap();
-    }
     data['isSubscriptionActive'] = isSubscriptionActive;
     if (listActiveOrders.isNotEmpty) {
       data['listActiveOrders'] =
           listActiveOrders.map((key, value) => MapEntry(key, value.toMap()));
     }
-
-    if (jobApplicationTracker != null) {
+    if (jobApplicationTracker != null)
       data['jobApplicationTracker'] = jobApplicationTracker?.toMap();
-    }
-
-    if (jobsPreference != null) {
-      data['jobsPreference'] = jobsPreference?.toMap();
-    }
-
-    if (userJourney != null) {
-      data['userJourney'] = userJourney?.toMap();
-    }
-
+    if (userJourney != null) data['userJourney'] = userJourney?.toMap();
     data['deleteAccountReason'] = deleteAccountReason;
     data['whereYouReside'] = whereYouReside;
 
@@ -169,23 +134,17 @@ class AppUser {
       phoneNumber: map['phoneNumber'] as String?,
       photoUrl: map['photoUrl'] as String?,
       isEmailVerified: map['isEmailVerified'] as bool?,
-      isLoginInformation: map['isLoginInformation'] as bool?,
-      registeredAs: map['registeredAs'] as String?,
-      isBasicInformation: map['isBasicInformation'] as bool?,
-      isContactInformation: map['isContactInformation'] as bool?,
-      isRegistrationComplete: map['isRegistrationComplete'] as bool?,
-      userRole: map['userRole'] as String?,
-      workerTimelineStep: map['workerTimelineStep'] as int?,
-      companyTimelineStep: map['companyTimelineStep'] as int?,
+      registrationDetails: (map['registrationDetails'] != null &&
+              map['registrationDetails'] is Map<String, dynamic>)
+          ? RegistrationDetails.fromMap(map['registrationDetails'])
+          : null,
       worker: (map['worker'] != null && map['worker'] is Map<String, dynamic>)
           ? Worker.fromMap(map['worker'])
           : null,
-      // Convert Map to Worker object
       company:
           (map['company'] != null && map['company'] is Map<String, dynamic>)
               ? Company.fromMap(map['company'])
               : null,
-      // Convert Map to Company object
       address:
           (map['address'] != null && map['address'] is Map<String, dynamic>)
               ? Address.fromMap(map['address'])
@@ -212,10 +171,6 @@ class AppUser {
     if (map['jobApplicationTracker'] != null) {
       user.jobApplicationTracker =
           JobApplicationTracker.fromMap(map['jobApplicationTracker']);
-    }
-
-    if (map['jobsPreference'] != null) {
-      user.jobsPreference = JobsPreference.fromMap(map['jobsPreference']);
     }
 
     if (map['userJourney'] != null) {

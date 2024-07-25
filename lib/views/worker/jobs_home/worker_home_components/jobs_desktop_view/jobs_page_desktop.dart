@@ -1,24 +1,26 @@
+import 'package:blukers/views/worker/jobs_home/worker_home_components/jobs_desktop_view/select_desktop_language_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../providers/app_settings_provider.dart';
 import '../../../../../providers/industry_provider.dart';
 import '../../../../../providers/job_posts_provider.dart';
+import '../../../../common_vieiws/all_search_bar_components/all_search_bar.dart';
 import '../../../../common_vieiws/loading_page.dart';
-import '../../../saved/job_search_result_page.dart';
-import 'jobs_mobile_view_compnents/mobile_display_industries.dart';
-import 'jobs_mobile_view_compnents/search_and_translate_row.dart';
-import 'jobs_mobile_view_compnents/sign_in_row.dart';
+import '../../../../old_common_views/select_industry_components/display_industries.dart';
+import '../../../search_jobs/jobs_search_result_page/job_search_result_page.dart';
 
-class JobsPageMobile extends StatefulWidget {
-  const JobsPageMobile({super.key});
+class JobsPageDesktop extends StatefulWidget {
+  const JobsPageDesktop({Key? key}) : super(key: key);
 
   @override
-  State<JobsPageMobile> createState() => _JobsPageMobileState();
+  State<JobsPageDesktop> createState() => _JobsPageDesktopState();
 }
 
-class _JobsPageMobileState extends State<JobsPageMobile> {
+class _JobsPageDesktopState extends State<JobsPageDesktop> {
+  @override
   late AppSettingsProvider asp;
 
   @override
@@ -26,8 +28,12 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final asp = Provider.of<AppSettingsProvider>(context, listen: false);
-      if (!asp.hasShowcased) {
+      final prefs = await SharedPreferences.getInstance();
+      final hasShowcased =
+          prefs.getBool('showcaseShown') ?? false; // Default to false
+
+      if (!hasShowcased) {
+        final asp = Provider.of<AppSettingsProvider>(context, listen: false);
         final showcase = ShowCaseWidget.of(context);
         showcase.startShowCase([
           asp.signInButton,
@@ -36,7 +42,7 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
           asp.selection,
           asp.translation,
         ]);
-        asp.setHasShowcased(true);
+        await prefs.setBool('showcaseShown', true);
       }
     });
   }
@@ -46,13 +52,21 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     asp = Provider.of<AppSettingsProvider>(context);
-
-    return Column(
-      children: [
-        const SignInRow(),
-        const SearchAndTranslateRow(),
-        Expanded(
-          child: AnimatedCrossFade(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const AllSearchBar(),
+          const SizedBox(
+            height: 10,
+          ),
+          const Center(
+            child: SelectDesktopLanguageDialog(),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Divider(),
+          AnimatedCrossFade(
             firstChild: ip.industries.isEmpty
                 ? const LoadingPage()
                 : Showcase(
@@ -60,21 +74,20 @@ class _JobsPageMobileState extends State<JobsPageMobile> {
                     description: 'Use this section to Select Jobs by industry',
                     targetShapeBorder: const CircleBorder(),
                     overlayOpacity: 0.6,
-                    tooltipBackgroundColor:
-                        const Color.fromRGBO(30, 117, 187, 1),
+                    tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
                     descTextStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
-                    child: const MobileDisplayIndustries()),
+                    child: const DisplayIndustries()),
             secondChild: const JobSearchResultPage(),
             crossFadeState: jp.isSearching
                 ? CrossFadeState.showSecond
                 : CrossFadeState.showFirst,
             duration: const Duration(milliseconds: 500),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -69,6 +69,16 @@ class UserProvider with ChangeNotifier {
   // Variable holder for reference form
   List<Map<String, dynamic>> references = [{}, {}];
 
+  bool isUserRegistered() {
+    if (_appUser != null &&
+        _appUser?.worker != null &&
+        _appUser?.worker?.jobsPreference != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   List<Map<String, dynamic>> getReferences() {
     if (appUser == null || appUser!.worker == null) {
       return [{}, {}];
@@ -259,14 +269,15 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // TODO: Re-evaluate the AppUser Worker Details
   void updateJobsPreference(
       List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
     if (appUser != null) {
-      JobsPreference jobsPreference = JobsPreference(
+      Preference jobsPreference = Preference(
         industryIds: selectedIndustries,
         jobIds: selectedJobs,
       );
-      appUser?.jobsPreference = jobsPreference;
+      appUser?.worker?.jobsPreference = jobsPreference;
     }
   }
 

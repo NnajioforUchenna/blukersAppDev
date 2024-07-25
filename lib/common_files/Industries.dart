@@ -45,66 +45,6 @@ final List<Map<String, dynamic>> IndustriesData = [
     "jobs": [
       {
         "description":
-            "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
-        "requirements":
-            "Knowledge of safety regulations, Communication skills, Attention to detail",
-        "lowRange": 40000,
-        "highRange": 70000,
-        "numberOfApplicants": 0,
-        "title": "Safety Representative",
-        "jobId": "safety representative",
-      }
-    ],
-    "industryId": "Safety Representative",
-    "imageUrl": "assets/industryImages/Safety Representative.png",
-    "description":
-        "Safety Representatives monitor and enforce safety protocols at construction sites to prevent accidents and ensure compliance with regulations.",
-    "name": "Safety Representative"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
-        "requirements":
-            "Organizational skills, Attention to detail, Computer literacy",
-        "lowRange": 30000,
-        "highRange": 50000,
-        "numberOfApplicants": 0,
-        "title": "Record Clerk",
-        "jobId": "record clerk",
-      }
-    ],
-    "industryId": "Record Clerk",
-    "imageUrl": "assets/industryImages/Record Clerk.png",
-    "description":
-        "Record Clerks maintain and organize construction project documents, including permits, plans, and reports.",
-    "name": "Record Clerk"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
-        "requirements":
-            "Project management skills, Leadership abilities, Construction knowledge",
-        "lowRange": 60000,
-        "highRange": 100000,
-        "numberOfApplicants": 0,
-        "title": "Project Manager",
-        "jobId": "Project Manager",
-      }
-    ],
-    "industryId": "Project Manager",
-    "imageUrl": "assets/industryImages/Project Manager.png",
-    "description":
-        "Project Managers oversee construction projects from start to finish, coordinating resources, schedules, and budgets.",
-    "name": "Project Manager"
-  },
-  {
-    "jobs": [
-      {
-        "description":
             "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
         "requirements":
             "Physical stamina, Willingness to perform manual tasks, Ability to follow instructions",
@@ -379,6 +319,28 @@ final List<Map<String, dynamic>> IndustriesData = [
         "title": "Supervisor",
         "jobId": "Supervisor (Equipment)",
         "highRange": 80000
+      },
+      {
+        "description":
+            "Assist electricians by performing tasks under the direct supervision of an electrician. Duties will include using, supplying or holding materials or tools, and cleaning work area and equipment.",
+        "requirements":
+            "High School Diploma or equivalent, Ability to follow directions and take initiative, Experience in the electrician field is a plus",
+        "lowRange": 20000,
+        "highRange": 40000,
+        "numberOfApplicants": 0,
+        "title": "Helper Electrician",
+        "jobId": "helperelectrician"
+      },
+      {
+        "description":
+            "Install, maintain, and repair electrical wiring, equipment, and fixtures. Ensure that work is in accordance with relevant codes. May install or service street lights, intercom systems, or electrical control systems.",
+        "requirements":
+            "Proven experience as an Electrician, Experience in industrial and/or commercial electrical systems, Demonstrate ability to use electrical and hand tools and electrical drawings and blueprints",
+        "lowRange": 30000,
+        "highRange": 60000,
+        "numberOfApplicants": 0,
+        "title": "Building Electrician",
+        "jobId": "buildingelectrician"
       }
     ],
     "industryId": "Electrician Industrial",
@@ -406,26 +368,6 @@ final List<Map<String, dynamic>> IndustriesData = [
     "description":
         "The Painter and Sand Blaster industry involves working on various surfaces to remove old paint or rust, clean, and apply new paint.",
     "name": "Painter/Sand Blaster"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "A Scaffolder Supervisor oversees and coordinates scaffolding operations in construction and industrial settings. They lead teams of scaffolders, ensuring that scaffold erection and dismantling are performed efficiently and safely. Scaffolder Supervisors are responsible for planning work schedules, conducting safety inspections, and providing training and guidance to team members.",
-        "requirements":
-            "Extensive experience as a Scaffolder, Leadership and supervisory skills, Strong knowledge of scaffolding techniques and safety practices, Ability to manage projects and communicate effectively",
-        "lowRange": 50000,
-        "highRange": 80000,
-        "numberOfApplicants": 0,
-        "title": "Scaffolder Supervisor",
-        "jobId": "scaffolder Supervisor",
-      }
-    ],
-    "industryId": "Scaffolder",
-    "imageUrl": "assets/industryImages/Scaffolder.png",
-    "description":
-        "A Scaffolder specializes in erecting and dismantling scaffolding structures used in construction and industrial projects. They assemble temporary platforms and support structures to provide safe working platforms for workers at heights during building, maintenance, or repair tasks. Scaffolders are trained to follow safety protocols and perform regular inspections to ensure structural stability and worker safety.",
-    "name": "Scaffolder"
   },
   {
     "jobs": [
@@ -546,7 +488,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 55000,
         "numberOfApplicants": 0,
         "title": "Agricultural Inspectors",
-        "jobId": "agricultural Inspectors",
+        "jobId": "Agricultural Inspectors",
       },
       {
         "description":
@@ -557,7 +499,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Agricultural Workers",
-        "jobId": "agricultural Workers",
+        "jobId": "Agricultural Workers",
       },
       {
         "description":
@@ -568,7 +510,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 60000,
         "numberOfApplicants": 0,
         "title": "Animal Breeders",
-        "jobId": "animal Breeders",
+        "jobId": "Animal Breeders",
       },
       {
         "description":
@@ -578,7 +520,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Falles",
-        "jobId": "falles",
+        "jobId": "Falles",
       },
       {
         "description":
@@ -589,19 +531,8 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 40000,
         "numberOfApplicants": 0,
         "title": "Farmworkers and Laborers",
-        "jobId": "farmworkers and Laborers",
+        "jobId": "Farmworkers and Laborers",
       },
-      {
-        "description":
-            "Farmworkers on farms and ranches perform a variety of agricultural tasks, including feeding animals, cleaning barns, repairing fences, and operating machinery. They assist with crop planting, irrigation, and harvesting.",
-        "requirements":
-            "Physical fitness, Ability to perform manual labor, Basic farm equipment operation skills, Willingness to work outdoors",
-        "lowRange": 20000,
-        "highRange": 40000,
-        "numberOfApplicants": 0,
-        "title": "Farmworkers, Farm, Ranch",
-        "jobId": "farmworkers, Farm, Ranch",
-      }
     ],
     "industryId": "Farming",
     "imageUrl": "assets/industryImages/farming.png",
@@ -715,7 +646,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 45000,
         "numberOfApplicants": 0,
         "title": "Landscape and Groundskeeping",
-        "jobId": "landscape and Groundskeeping",
+        "jobId": "Landscape and Groundskeeping",
       },
       {
         "description":
@@ -726,7 +657,7 @@ final List<Map<String, dynamic>> IndustriesData = [
         "highRange": 55000,
         "numberOfApplicants": 0,
         "title": "Tree Trimmers and Pruners",
-        "jobId": "tree Trimmers and Pruners",
+        "jobId": "Tree Trimmers and Pruners",
       },
       {
         "description":
@@ -769,6 +700,17 @@ final List<Map<String, dynamic>> IndustriesData = [
         "numberOfApplicants": 0,
         "title": "Brickmasons and Blockmasons",
         "jobId": "Brickmasons and Blockmasons",
+      },
+      {
+        "description":
+            "A Scaffolder Supervisor oversees and coordinates scaffolding operations in construction and industrial settings. They lead teams of scaffolders, ensuring that scaffold erection and dismantling are performed efficiently and safely. Scaffolder Supervisors are responsible for planning work schedules, conducting safety inspections, and providing training and guidance to team members.",
+        "requirements":
+            "Extensive experience as a Scaffolder, Leadership and supervisory skills, Strong knowledge of scaffolding techniques and safety practices, Ability to manage projects and communicate effectively",
+        "lowRange": 50000,
+        "highRange": 80000,
+        "numberOfApplicants": 0,
+        "title": "Scaffolder Supervisor",
+        "jobId": "scaffolder Supervisor",
       }
     ],
     "industryId": "Construction and Extraction",
@@ -801,58 +743,6 @@ final List<Map<String, dynamic>> IndustriesData = [
     "jobs": [
       {
         "description":
-            "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
-        "requirements":
-            "Knowledge of flooring materials, Installation skills, Attention to detail",
-        "lowRange": 30000,
-        "highRange": 50000,
-        "numberOfApplicants": 0,
-        "title": "Carpet Installer",
-        "jobId": "carpet Installer",
-      }
-    ],
-    "industryId": "Carpet Installers",
-    "imageUrl": "assets/industryImages/Carpet Installers.png",
-    "description":
-        "Carpet Installers specialize in laying and installing carpets and other types of flooring materials.",
-    "name": "Carpet Installers"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Cement Masons and Concrete Finishers work with concrete to pour, smooth, and finish surfaces such as sidewalks, driveways, and foundations.",
-        "requirements":
-            "Concrete working skills, Physical strength, Attention to detail",
-        "lowRange": 35000,
-        "highRange": 55000,
-        "numberOfApplicants": 0,
-        "title": "Cement Masons and Concrete Finishers",
-        "jobId": "cementmasonsandconcretefinishers"
-      }
-    ],
-    "industryId": "Cement Masons",
-    "imageUrl":
-        "assets/industryImages/Cement Masons and Concrete Finishers.png",
-    "description":
-        "Cement Masons and Concrete Finishers work with concrete to pour, smooth, and finish surfaces such as sidewalks, driveways, and foundations.",
-    "name": "Cement Masons and Concrete Finishers"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Construction Laborers perform various tasks to assist skilled workers on construction sites. They operate equipment, load and unload materials, and clean and prepare construction areas.",
-        "requirements":
-            "Physical fitness, Willingness to learn, Ability to follow instructions",
-        "lowRange": 25000,
-        "highRange": 45000,
-        "numberOfApplicants": 0,
-        "title": "Construction Laborers",
-        "jobId": "Construction Laborers",
-      },
-      {
-        "description":
             "Derrick Operators in the Oil and Gas industry control and operate equipment to extract oil or gas from wells. They set up and maintain derrick equipment and ensure safety protocols are followed.",
         "requirements":
             "Technical knowledge of oil and gas extraction, Experience with derrick equipment, Attention to safety procedures",
@@ -879,45 +769,6 @@ final List<Map<String, dynamic>> IndustriesData = [
     "description":
         "The construction and building industry involves the planning, design, and construction of various structures and facilities. It includes a wide range of skilled trades and labor-intensive activities to create buildings, roads, bridges, and infrastructure.",
     "name": "Construction and Building"
-  },
-  {
-    "jobs": [],
-    "industryId": "earthdrillers",
-    "imageUrl": "assets/industryImages/earthdrillers.png",
-    "description":
-        "The earth drillers industry involves operating various types of drilling machines for earth exploration and construction purposes.",
-    "name": "Earth Drillers"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Assist electricians by performing tasks under the direct supervision of an electrician. Duties will include using, supplying or holding materials or tools, and cleaning work area and equipment.",
-        "requirements":
-            "High School Diploma or equivalent, Ability to follow directions and take initiative, Experience in the electrician field is a plus",
-        "lowRange": 20000,
-        "highRange": 40000,
-        "numberOfApplicants": 0,
-        "title": "Helper Electrician",
-        "jobId": "helperelectrician"
-      },
-      {
-        "description":
-            "Install, maintain, and repair electrical wiring, equipment, and fixtures. Ensure that work is in accordance with relevant codes. May install or service street lights, intercom systems, or electrical control systems.",
-        "requirements":
-            "Proven experience as an Electrician, Experience in industrial and/or commercial electrical systems, Demonstrate ability to use electrical and hand tools and electrical drawings and blueprints",
-        "lowRange": 30000,
-        "highRange": 60000,
-        "numberOfApplicants": 0,
-        "title": "Building Electrician",
-        "jobId": "buildingelectrician"
-      }
-    ],
-    "industryId": "electrician",
-    "imageUrl": "assets/industryImages/electricians.png",
-    "description":
-        "The Electrician industry encompasses the design, installation, maintenance and troubleshooting of electrical wiring systems. These systems can be located on stationary or mobile structures, in residential or commercial properties.",
-    "name": "Electricians"
   },
   {
     "jobs": [
@@ -959,66 +810,6 @@ final List<Map<String, dynamic>> IndustriesData = [
     "description":
         "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
     "name": "Excavating and Loading Machine and Dragline Operators"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
-        "requirements":
-            "Flooring skills, Attention to detail, Hand tool proficiency",
-        "lowRange": 30000,
-        "highRange": 50000,
-        "numberOfApplicants": 0,
-        "title": "Floor Senders and Finishers",
-        "jobId": "floorsendersandfinishers"
-      }
-    ],
-    "industryId": "Floor Senders and Finishers",
-    "imageUrl": "assets/industryImages/Floor Senders and Finishers.png",
-    "description":
-        "Floor Senders and Finishers specialize in sanding, staining, and finishing wooden floors.",
-    "name": "Floor Senders and Finishers"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Glaziers install glass in windows, skylights, and other structures.",
-        "requirements":
-            "Glass installation skills, Attention to safety, Physical fitness",
-        "lowRange": 35000,
-        "highRange": 55000,
-        "numberOfApplicants": 0,
-        "title": "Glazier",
-        "jobId": "Glazier",
-      }
-    ],
-    "industryId": "Glaziers",
-    "imageUrl": "assets/industryImages/Glaziers.png",
-    "description":
-        "Glaziers install glass in windows, skylights, and other structures.",
-    "name": "Glaziers"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
-        "requirements":
-            "Knowledge of hazardous materials, Safety training, Certification",
-        "lowRange": 40000,
-        "highRange": 65000,
-        "numberOfApplicants": 0,
-        "title": "Hazardous Material Remover",
-        "jobId": "hazardous material remover",
-      }
-    ],
-    "industryId": "Hazardous Material Removal",
-    "imageUrl": "assets/industryImages/Hazardous Material Removal.png",
-    "description":
-        "Hazardous Material Removal workers safely handle and dispose of toxic or hazardous substances.",
-    "name": "Hazardous Material Removal"
   },
   {
     "jobs": [
@@ -1119,26 +910,6 @@ final List<Map<String, dynamic>> IndustriesData = [
     "description":
         "The structural iron and steel industry involves the construction and installation of structural steel components used in buildings, bridges, and other large structures.",
     "name": "Structural Iron and Steel"
-  },
-  {
-    "jobs": [
-      {
-        "description":
-            "Aviation Maintenance Technicians inspect, troubleshoot, and repair aircraft systems and components including engines, landing gear, hydraulic systems, and avionics. They perform scheduled maintenance and ensure compliance with aviation regulations.",
-        "requirements":
-            "FAA Airframe and Powerplant (A&P) certification, Strong mechanical aptitude, Attention to detail, Ability to work in a team",
-        "lowRange": 25000,
-        "highRange": 40000,
-        "numberOfApplicants": 0,
-        "title": "Aircraft Mechanic",
-        "jobId": "Aircraft Mechanic",
-      }
-    ],
-    "industryId": "Aircraft Mechanic",
-    "imageUrl": "assets/industryImages/electricians.png",
-    "description":
-        "Aircraft mechanics, also known as aviation maintenance technicians, are responsible for inspecting, repairing, and maintaining aircraft to ensure safety and performance standards are met.",
-    "name": "Aircraft Mechanic"
   },
   {
     "jobs": [

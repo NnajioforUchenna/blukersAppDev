@@ -1,15 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
+
 import '../../../models/worker.dart';
 import '../../../providers/company_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../providers/worker_provider.dart';
 import '../../common_vieiws/icon_text_404.dart';
 import '../../common_vieiws/policy_terms/policy_terms_components/loading_animation.dart';
 import '../workers_components/complete_worker_widget.dart';
-
-import 'package:unicons/unicons.dart';
 
 class InterestingWorkersTab extends StatelessWidget {
   const InterestingWorkersTab({super.key});

@@ -1,9 +1,9 @@
-import 'complete_worker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/worker.dart';
 import '../../../providers/worker_provider.dart';
+import 'complete_worker_widget.dart';
 
 class WorkerSearchResultPage extends StatelessWidget {
   const WorkerSearchResultPage({super.key});

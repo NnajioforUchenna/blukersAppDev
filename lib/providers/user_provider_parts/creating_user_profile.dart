@@ -23,7 +23,6 @@ extension CreatingUserProfile on UserProvider {
       UserDataProvider.updateWorkerBasicInformation(worker);
     }
     _appUser!.worker = worker;
-    _appUser!.isBasicInformation = true;
     EasyLoading.dismiss();
     setRegisterPageIndex();
   }
@@ -42,7 +41,6 @@ extension CreatingUserProfile on UserProvider {
     );
     UserDataProvider.updateBasicInformation(company);
     _appUser!.company = company;
-    _appUser!.isBasicInformation = true;
     EasyLoading.dismiss();
     setRegisterPageIndex();
   }
@@ -66,11 +64,8 @@ extension CreatingUserProfile on UserProvider {
 
     UserDataProvider.updateContactInformation(
         completePhoneNumber, appUser!.uid);
-
     // _appUser!.address = address;
     _appUser!.phoneNumber = completePhoneNumber;
-    _appUser!.isContactInformation = true;
-
     EasyLoading.dismiss();
     // setRegisterPageIndex();
   }

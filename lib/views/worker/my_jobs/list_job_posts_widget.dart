@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import '../../../../models/job_post.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../../services/responsive.dart';
-import '../../saved/animate_job_post_details.dart';
-import '../../saved/display_job_card.dart';
-import '../../saved/display_job_post_dialog.dart';
+import '../saved/animate_job_post_details.dart';
+import '../saved/display_job_card.dart';
+import '../saved/display_job_post_dialog.dart';
 
 class ListJobPostsWidget extends StatelessWidget {
   final List<JobPost> jobPosts;

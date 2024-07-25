@@ -603,8 +603,8 @@ class UserDataProvider {
 
     appUserCollection.doc(appUser.uid).set({
       'jobsPreference': {
-        'industryIds': appUser.jobsPreference?.industryIds ?? [],
-        'jobIds': appUser.jobsPreference?.jobIds ?? {},
+        'industryIds': appUser.worker?.jobsPreference?.industryIds ?? [],
+        'jobIds': appUser.worker?.jobsPreference?.jobIds ?? {},
       }
     }, SetOptions(merge: true)).catchError((error) {
       print("Error adding user to Firestore: $error");
@@ -636,7 +636,27 @@ class UserDataProvider {
   static Future<AuthResult> signInWithGoogle() async {
     // Implement the Google Sign-In functionality here
 
-    final googleAccount = await GoogleSignIn().signIn();
+    // final googleAccount = await GoogleSignIn().signIn();
+
+    GoogleSignInAccount? googleAccount;
+
+    if (kIsWeb) {
+      // googleAccount = await GoogleSignIn(
+      //   scopes: ['email', 'profile'],
+      // ).signInSilently();
+
+      GoogleAuthProvider googleProvider = GoogleAuthProvider();
+      googleProvider
+          .addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+      final userCredential =
+          await FirebaseAuth.instance.signInWithPopup(googleProvider);
+
+      return AuthResult.isSuccess(userCredential);
+    } else {
+      googleAccount = await GoogleSignIn().signIn();
+    }
+
     final googleAuth = await googleAccount?.authentication;
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,

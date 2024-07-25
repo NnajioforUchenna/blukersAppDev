@@ -70,12 +70,12 @@ class MyApp extends StatelessWidget {
                 previous!..update(user.appUser)),
       ],
       child: ScreenUtilInit(
-        designSize: const Size(360, 690),
+        designSize: const Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
           return ShowCaseWidget(
-            builder: Builder(builder: (context) {
+            builder: (context) {
               AppSettingsProvider ap =
                   Provider.of<AppSettingsProvider>(context);
               return MaterialApp.router(
@@ -90,14 +90,15 @@ class MyApp extends StatelessWidget {
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                //
-                builder: EasyLoading.init(),
+                builder: (context, widget) {
+                  return EasyLoading.init()(context, widget);
+                },
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                   fontFamily: 'Montserrat',
                 ),
               );
-            }),
+            },
           );
         },
       ),

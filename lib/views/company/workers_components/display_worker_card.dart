@@ -1,9 +1,9 @@
-import '../../../providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common_files/constants.dart';
 import '../../../models/worker.dart';
+import '../../../providers/worker_provider.dart';
 import '../../../services/rounded_image.dart';
 
 class DisplayWorkerCard extends StatefulWidget {

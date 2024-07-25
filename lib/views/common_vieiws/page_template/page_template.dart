@@ -1,4 +1,5 @@
 import 'package:blukers/providers/app_settings_provider.dart';
+import 'package:blukers/views/common_vieiws/page_template/page_template_components/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,8 @@ class PageTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
     return Scaffold(
+      key: asp.scaffoldKey,
+      endDrawer: const MyDrawer(),
       appBar: showAppBar
           ? MyAppBar(
               title: appBarTitle,

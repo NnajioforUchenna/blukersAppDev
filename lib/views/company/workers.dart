@@ -8,7 +8,7 @@ import '../../providers/worker_provider.dart';
 import '../common_vieiws/all_search_bar_components/all_search_bar.dart';
 import '../common_vieiws/loading_page.dart';
 import '../common_vieiws/page_template/page_template.dart';
-import '../worker/worker_home/worker_home_components/jobs_mobile_view/jobs_mobile_view_compnents/mobile_industry_headpanel.dart';
+import '../worker/jobs_home/worker_home_components/jobs_mobile_view/jobs_mobile_view_compnents/mobile_industry_headpanel.dart';
 import 'workers_components/worker_search_result_page.dart';
 
 class Workers extends StatelessWidget {

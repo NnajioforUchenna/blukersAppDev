@@ -6,19 +6,20 @@ import 'package:unicons/unicons.dart';
 import '../../../../models/job_post.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../common_vieiws/icon_text_404.dart';
-import '../../../common_vieiws/policy_terms/policy_terms_components/loading_animation.dart';
+import '../../common_vieiws/icon_text_404.dart';
+import '../../common_vieiws/policy_terms/policy_terms_components/loading_animation.dart';
 import 'list_job_posts_widget.dart';
 
-class SavedJobs extends StatefulWidget {
-  const SavedJobs({super.key});
+class AppliedJobs extends StatefulWidget {
+  const AppliedJobs({super.key}); // Corrected here
 
   @override
-  State<SavedJobs> createState() => _SavedJobsState();
+  State<AppliedJobs> createState() => _AppliedJobsState();
 }
 
-class _SavedJobsState extends State<SavedJobs> {
-  late Future<List<JobPost>> jobPosts;
+class _AppliedJobsState extends State<AppliedJobs> {
+  late Future<List<JobPost>>
+      jobPosts; // Changed to late as it is initialized in initState
 
   @override
   void initState() {
@@ -26,7 +27,7 @@ class _SavedJobsState extends State<SavedJobs> {
     final up = Provider.of<UserProvider>(context, listen: false);
     final jpp = Provider.of<JobPostsProvider>(context, listen: false);
     if (up.appUser != null) {
-      jobPosts = jpp.getSavedJobPostIds(up.appUser!.uid);
+      jobPosts = jpp.getAppliedJobPostIds(up.appUser!.uid);
     } else {
       jobPosts = Future.value([]); // It's better to initialize in this way
     }
@@ -40,20 +41,23 @@ class _SavedJobsState extends State<SavedJobs> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingAnimation();
         } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
+          return IconText404(
+              text: AppLocalizations.of(context)!.youHaveNotAppliedToAnyJobPost,
+              icon: UniconsLine.file_edit_alt);
         } else if (snapshot.hasData) {
           List<JobPost> jobPosts = snapshot.data!;
-          return jobPosts.isEmpty
-              ? IconText404(
-                  text: AppLocalizations.of(context)!.youHaveNotSavedAnyJobPost,
-                  icon: UniconsLine.file_bookmark_alt)
-              : ListJobPostsWidget(
-                  jobPosts: snapshot.data!,
-                );
+          return jobPosts.isNotEmpty
+              ? ListJobPostsWidget(
+                  jobPosts: jobPosts,
+                )
+              : IconText404(
+                  text: AppLocalizations.of(context)!
+                      .youHaveNotAppliedToAnyJobPost,
+                  icon: UniconsLine.file_edit_alt);
         }
         return IconText404(
-            text: AppLocalizations.of(context)!.youHaveNotSavedAnyJobPost,
-            icon: UniconsLine.file_bookmark_alt);
+            text: AppLocalizations.of(context)!.youHaveNotAppliedToAnyJobPost,
+            icon: UniconsLine.file_edit_alt);
       },
     );
   }

@@ -1,9 +1,8 @@
-import 'package:blukers/views/worker/worker_home/worker_home_components/jobs_mobile_view/jobs_mobile_view_compnents/mobile_industry_headpanel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/industry_provider.dart';
-import 'display_industry.dart';
+import '../../worker/jobs_home/worker_home_components/jobs_mobile_view/jobs_mobile_view_compnents/mobile_industry_headpanel.dart';
 
 class ListIndustries extends StatelessWidget {
   const ListIndustries({super.key});

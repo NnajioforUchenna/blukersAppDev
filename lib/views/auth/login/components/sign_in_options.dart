@@ -37,13 +37,13 @@ class _SignInOptionsState extends State<SignInOptions> {
           color: Colors.blue,
         ),
         const SizedBox(width: 10),
-        SignInOptionsWidget(
-          icon: FontAwesomeIcons.apple,
-          onPressed: () {
-            up.signInWithApple(context);
-          },
-          color: Colors.grey.shade800,
-        ),
+        // SignInOptionsWidget(
+        //   icon: FontAwesomeIcons.apple,
+        //   onPressed: () {
+        //     up.signInWithApple(context);
+        //   },
+        //   color: Colors.grey.shade800,
+        // ),
       ],
     );
   }

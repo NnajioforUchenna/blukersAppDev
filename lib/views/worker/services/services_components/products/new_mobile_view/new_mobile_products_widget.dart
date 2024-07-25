@@ -1,10 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../common_files/constants.dart';
 import 'product_card.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewMobileProductsWidget extends StatelessWidget {
   // final ProductProvider productProvider;
@@ -31,7 +31,7 @@ class NewMobileProductsWidget extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.only(top: height * 0.05, bottom: height * 0.1),
-          child: Text(
+          child: AutoSizeText(
             AppLocalizations.of(context)!.products,
             style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold, fontSize: 24),

@@ -1,6 +1,5 @@
 import 'dart:core';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,8 +9,8 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../providers/user_provider_parts/user_provider.dart';
 import '../views/common_vieiws/splash_screen/splash_screen_main.dart';
 import '../views/company/workers.dart';
-import '../views/worker/worker_home/worker_home.dart';
-import '../views/worker/worker_home/worker_home_components/jobs_desktop_view/web_search_landing_page.dart';
+import '../views/worker/jobs_home/jobs_home.dart';
+import '../views/worker/jobs_home/worker_home_components/jobs_desktop_view/web_search_landing_page.dart';
 
 class AuthenticationWrapper extends StatefulWidget {
   const AuthenticationWrapper({super.key});
@@ -41,10 +40,6 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    if (!kIsWeb) {
-      avp.checkForUpdate(context);
-    }
-
     // Check for the query parameters
     String? nameSearch = uri.queryParameters['nameSearch'];
     String? locationSearch = uri.queryParameters['locationSearch'];
@@ -57,7 +52,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
     }
 
     if (up.user != null) {
-      return up.appUser != null && up.appUser?.registeredAs == 'company'
+      return up.appUser != null
           ? const Workers() //Workers()
           : const Jobs(); //Jobs(); //Jobs();
     } else {

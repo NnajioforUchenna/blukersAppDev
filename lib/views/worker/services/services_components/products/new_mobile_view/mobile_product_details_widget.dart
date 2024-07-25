@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -53,26 +55,27 @@ class MobileProductDetailsWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    AutoSizeText(
                       title.toUpperCase(),
                       style: GoogleFonts.montserrat(
                           color: Colors.grey[800],
-                          fontSize: 42.0,
+                          fontSize: 40.0.sp,
                           fontWeight: FontWeight.w800),
+                      maxLines: 1,
                     ),
                     if (subtitle.isNotEmpty)
-                      Text(
+                      AutoSizeText(
                         subtitle.toUpperCase(),
                         style: GoogleFonts.montserrat(
                           color: Colors.grey[800],
-                          fontSize: 30.0,
+                          fontSize: 30.0.sp,
                         ),
                       ),
-                    Text(
+                    AutoSizeText(
                       "\$$amount",
                       style: GoogleFonts.montserrat(
                           color: color,
-                          fontSize: 70.0,
+                          fontSize: 70.0.sp,
                           fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -122,11 +125,11 @@ class MobileProductDetailsWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: Text(
+                child: AutoSizeText(
                   'Buy',
                   style: GoogleFonts.montserrat(
                     color: Colors.white,
-                    fontSize: 12.0,
+                    fontSize: 12.0.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

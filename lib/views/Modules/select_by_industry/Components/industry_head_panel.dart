@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../models/industry.dart';
-import '../../../services/on_hover.dart';
-import '../../../services/responsive.dart';
-import '../../../utils/localization/localized_industries.dart';
-import '../../../utils/styles/theme_colors.dart';
+import '../../../../models/industry.dart';
+import '../../../../services/on_hover.dart';
+import '../../../../services/responsive.dart';
+import '../../../../utils/localization/localized_industries.dart';
+import '../../../../utils/styles/theme_colors.dart';
 import 'industry_body_panel.dart';
 
 class IndustryHeadPanel extends StatefulWidget {

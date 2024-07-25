@@ -24,4 +24,9 @@ class AuthResult {
       message: message,
     );
   }
+
+  @override
+  String toString() {
+    return 'AuthResult{userCredential: $userCredential, isSuccess: $isSuccess, message: $message}';
+  }
 }

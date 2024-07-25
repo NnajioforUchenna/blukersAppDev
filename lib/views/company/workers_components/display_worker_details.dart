@@ -1,11 +1,10 @@
-import '../../common_vieiws/loading_page.dart';
-import 'worker_details_components/worker_detail_block_four.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/worker.dart';
 import '../../../utils/styles/theme_colors.dart';
-
+import '../../common_vieiws/loading_page.dart';
 import 'worker_details_components/worker_detail_block_five.dart';
+import 'worker_details_components/worker_detail_block_four.dart';
 import 'worker_details_components/worker_detail_block_one.dart';
 import 'worker_details_components/worker_detail_block_three.dart';
 import 'worker_details_components/worker_detail_block_two.dart';

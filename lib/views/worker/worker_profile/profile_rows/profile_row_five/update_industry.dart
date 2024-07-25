@@ -1,10 +1,11 @@
-import '../../../../../utils/styles/index.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
-
+import '../../../../../utils/styles/index.dart';
 import '../../../../old_common_views/small_pop_button_widget.dart';
 import 'select_industries_to_update.dart';
 
@@ -55,8 +56,8 @@ class _UpdateIndustryState extends State<UpdateIndustry> {
                 Expanded(
                   child: Center(
                     child: Container(
-                      height: height * 0.03,
-                      width: width * 0.23,
+                      height: height * 0.04,
+                      width: width * 0.25,
                       margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
                       child: ElevatedButton(
                         onPressed: () {
@@ -72,11 +73,11 @@ class _UpdateIndustryState extends State<UpdateIndustry> {
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
-                        child: Text(
+                        child: AutoSizeText(
                           'Update',
                           style: GoogleFonts.montserrat(
                             color: Colors.white,
-                            fontSize: 12.0,
+                            fontSize: 11.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

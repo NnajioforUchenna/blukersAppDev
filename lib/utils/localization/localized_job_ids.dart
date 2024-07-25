@@ -20,8 +20,6 @@ class LocalizedJobIds {
         AppLocalizations.of(context)!.grounds_maintenance,
     'supervisor_of_housekeeping__janitorial': (context) =>
         AppLocalizations.of(context)!.supervisor_of_housekeeping__janitorial,
-    'agricultural_equipment_operators': (context) =>
-        AppLocalizations.of(context)!.agricultural_equipment_operators,
     'baristas': (context) => AppLocalizations.of(context)!.baristas,
     'helper_roofer': (context) => AppLocalizations.of(context)!.helper_roofer,
     'animal_breeders': (context) =>

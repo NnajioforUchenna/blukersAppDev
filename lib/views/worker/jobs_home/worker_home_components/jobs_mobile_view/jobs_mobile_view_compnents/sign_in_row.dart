@@ -34,7 +34,7 @@ class SignInRow extends StatelessWidget {
             color: Colors.white,
           ),
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
             height: 20,
             width: 80,
             child: ElevatedButton(
@@ -57,6 +57,17 @@ class SignInRow extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        // Add Hamburger Icon
+        IconButton(
+          icon: const Icon(
+            Icons.menu,
+            color: ThemeColors.primaryThemeColor,
+          ),
+          onPressed: () {
+            // Open the end drawer
+            asp.scaffoldKey.currentState!.openEndDrawer();
+          },
         ),
       ],
     );

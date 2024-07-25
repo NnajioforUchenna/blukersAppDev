@@ -1,8 +1,8 @@
-class JobsPreference {
+class Preference {
   List<String> industryIds;
   Map<String, List<String>> jobIds;
 
-  JobsPreference({
+  Preference({
     required this.industryIds,
     required this.jobIds,
   });
@@ -16,12 +16,12 @@ class JobsPreference {
   }
 
   // Create JobsPreference from Map
-  factory JobsPreference.fromMap(Map<String, dynamic> map) {
+  factory Preference.fromMap(Map<String, dynamic> map) {
     // Ensure 'industryIds' and 'jobIds' are present and are lists
     final industryIds = List<String>.from(map['industryIds'] ?? []);
     final jobIds = Map<String, dynamic>.from(map['jobIds'] ?? {}).map(
       (key, value) => MapEntry(key, List<String>.from(value ?? [])),
     );
-    return JobsPreference(industryIds: industryIds, jobIds: jobIds);
+    return Preference(industryIds: industryIds, jobIds: jobIds);
   }
 }

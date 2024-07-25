@@ -27,6 +27,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               context); // This line pops the current route and goes back
         },
       ),
+
       actions: actions,
       //
       toolbarHeight: 100,

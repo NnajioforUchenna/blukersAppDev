@@ -1,8 +1,8 @@
-import '../../../../services/blur_out.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/worker.dart';
+import '../../../../services/blur_out.dart';
 import '../../../../services/responsive.dart';
 
 class WorkerDetailBlockTwo extends StatelessWidget {

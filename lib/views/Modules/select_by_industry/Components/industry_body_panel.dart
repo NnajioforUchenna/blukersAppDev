@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/job.dart';
-import '../../../utils/localization/localized_job_ids.dart';
-import '../../../utils/styles/theme_colors.dart';
+import '../../../../models/job.dart';
+import '../../../../utils/localization/localized_job_ids.dart';
+import '../../../../utils/styles/theme_colors.dart';
 
 class IndustryBodyPanel extends StatelessWidget {
   final List<Job> jobs;
