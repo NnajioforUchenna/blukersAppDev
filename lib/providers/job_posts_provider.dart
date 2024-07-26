@@ -238,14 +238,15 @@ class JobPostsProvider with ChangeNotifier {
     nameSearch = nameRelated;
     locationSearch = locationRelated;
 
-    List<JobPost> listJobPosts = [];
     displayedJobPosts.clear();
 
-    listJobPosts = await JobPostsDataProvider.searchJobPosts(
+    List<JobPost> listJobPosts = await JobPostsDataProvider.searchJobPosts(
         nameRelated: nameRelated,
         locationRelated: locationRelated,
         pageNumber: 0,
         targetLanguage: language);
+
+    print('listJobPosts: $listJobPosts');
 
     hasMore = listJobPosts.isNotEmpty;
 

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../models/job_post.dart';
 import '../../../../providers/job_posts_provider.dart';
-import '../../saved/complete_job_posts_widget.dart';
+import 'Components/complete_job_posts_widget.dart';
 
 class JobSearchResultPage extends StatelessWidget {
   const JobSearchResultPage({super.key});

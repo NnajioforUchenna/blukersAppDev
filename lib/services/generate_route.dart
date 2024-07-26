@@ -18,6 +18,8 @@ import '../views/company/my_job_posts_components/create_job_post_components/crea
 import '../views/company/workers.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
+import '../views/worker/search_jobs/jobs_search_result_page/job_search_result_page.dart';
+import '../views/worker/search_jobs/search_jobs_ui.dart';
 import '../views/worker/services/services_components/orders/orders_list.dart';
 import '../views/worker/services/services_components/products/products.dart';
 import '../views/worker/services/services_components/subscription/subscription.dart';
@@ -38,7 +40,7 @@ final goRouter = GoRouter(routes: routes, initialLocation: '/');
 final routes = [
   GoRoute(
       path: '/',
-      builder: (context, state) => const WorkerPath()), // const LandingPage()
+      builder: (context, state) => const SearchJobsUi()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),
@@ -53,6 +55,9 @@ final routes = [
     routes: [
       GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
       GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),
+      GoRoute(
+          path: '/jobSearchResults',
+          builder: (context, state) => const JobSearchResultPage()),
       GoRoute(
           path: '/workerProfile',
           builder: (context, state) => const WorkerProfile()),
