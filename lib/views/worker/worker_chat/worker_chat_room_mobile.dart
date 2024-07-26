@@ -6,16 +6,16 @@ import 'package:provider/provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import 'components/message_stream.dart';
 
-class WorkerChatRoom extends StatefulWidget {
-  const WorkerChatRoom({
+class WorkerChatRoomMobile extends StatefulWidget {
+  const WorkerChatRoomMobile({
     super.key,
   });
 
   @override
-  _WorkerChatRoomState createState() => _WorkerChatRoomState();
+  _WorkerChatRoomMobileState createState() => _WorkerChatRoomMobileState();
 }
 
-class _WorkerChatRoomState extends State<WorkerChatRoom> {
+class _WorkerChatRoomMobileState extends State<WorkerChatRoomMobile> {
   final messageTextController = TextEditingController();
 
   @override

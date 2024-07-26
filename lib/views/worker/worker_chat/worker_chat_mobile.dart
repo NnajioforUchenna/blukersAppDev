@@ -11,8 +11,8 @@ import '../../common_vieiws/icon_text_404.dart';
 import '../../common_vieiws/page_template/page_template.dart';
 import 'components/chat_recipient_widget.dart';
 
-class WorkerChat extends StatelessWidget {
-  const WorkerChat({super.key});
+class WorkerChatMobile extends StatelessWidget {
+  const WorkerChatMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class WorkerChat extends StatelessWidget {
                   .getChatRecipientsStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return Center(child: const CircularProgressIndicator());
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return IconText404(
