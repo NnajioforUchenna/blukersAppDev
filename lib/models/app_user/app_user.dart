@@ -126,7 +126,6 @@ class AppUser {
   }
 
   static AppUser fromMap(Map<String, dynamic> map) {
-    print(map);
     AppUser user = AppUser(
       uid: map['uid'] ?? '',
       email: map['email'] ?? '',
