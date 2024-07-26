@@ -45,6 +45,7 @@ class UserJourney {
   void printStatuses() {
     statusHistory.forEach((status, timestamp) {
       DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+      print('Status: $status, Timestamp: $date');
     });
   }
 
@@ -57,8 +58,15 @@ class UserJourney {
 
   // Create a UserJourney object from a Map
   factory UserJourney.fromMap(Map<String, dynamic> map) {
+    Map<String, int> parsedStatusHistory = {};
+    if (map['statusHistory'] != null) {
+      map['statusHistory'].forEach((key, value) {
+        parsedStatusHistory[key] = value as int;
+      });
+    }
+
     return UserJourney(
-      statusHistory: map['statusHistory'] as Map<String, int>? ?? {},
+      statusHistory: parsedStatusHistory,
     );
   }
 }

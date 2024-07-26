@@ -1,32 +1,36 @@
-import 'jobs_perference.dart';
+import 'package:blukers/models/app_user/components/registration_status.dart';
+
+import 'preference.dart';
 
 class RegistrationDetails {
   // Login Details
   String email;
-  String registeredAs;
+  String? registeredAs;
 
   // Basic Details
-  String phoneNumber;
-  String firstName;
-  String? middleName;
-  String lastName;
+  String? phoneNumber;
+  String? firstName;
+  String? lastName;
   String? shortDescription;
 
   // Preferences
   Preference? jobsPreference;
   Preference? workersPreference;
 
+  // Tracking Registration Status
+  RegistrationStatus status;
+
   RegistrationDetails({
     required this.email,
-    required this.registeredAs,
-    required this.phoneNumber,
-    required this.firstName,
-    this.middleName,
-    required this.lastName,
+    this.registeredAs,
+    this.phoneNumber,
+    this.firstName,
+    this.lastName,
     this.shortDescription,
     this.jobsPreference,
     this.workersPreference,
-  });
+    RegistrationStatus? status,
+  }) : status = status ?? RegistrationStatus();
 
   Map<String, dynamic> toMap() {
     return {
@@ -34,11 +38,11 @@ class RegistrationDetails {
       'registeredAs': registeredAs,
       'phoneNumber': phoneNumber,
       'firstName': firstName,
-      'middleName': middleName,
       'lastName': lastName,
       'shortDescription': shortDescription,
       'jobsPreference': jobsPreference?.toMap(),
       'workersPreference': workersPreference?.toMap(),
+      'status': status.toMap(),
     };
   }
 
@@ -48,7 +52,6 @@ class RegistrationDetails {
       registeredAs: map['registeredAs'],
       phoneNumber: map['phoneNumber'],
       firstName: map['firstName'],
-      middleName: map['middleName'],
       lastName: map['lastName'],
       shortDescription: map['shortDescription'],
       jobsPreference: map['jobsPreference'] != null
@@ -57,6 +60,7 @@ class RegistrationDetails {
       workersPreference: map['workersPreference'] != null
           ? Preference.fromMap(map['workersPreference'])
           : null,
+      status: RegistrationStatus.fromMap(map['status']),
     );
   }
 }

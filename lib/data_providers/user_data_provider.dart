@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/company.dart';
 import '../models/job_application_tracker.dart';
 import '../models/reference_form.dart';

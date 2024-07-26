@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 
 FirebaseMessaging messaging = FirebaseMessaging.instance;
 Future<void> requestForNotificationPermission(AppUser? appUser) async {

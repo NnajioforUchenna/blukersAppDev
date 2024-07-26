@@ -2,7 +2,7 @@ import 'dart:convert'; // Required for JSON encoding/decoding
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 
 class UserSharedPreferencesServices {
   static const String USER_KEY = 'user';

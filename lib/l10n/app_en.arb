@@ -478,5 +478,6 @@
   "choose_your_user_type": "Choose Your User Type",
   "update": "Update",
   "delete": "Delete",
-  "noworkersfound": "No workers found"
+  "noworkersfound": "No workers found",
+  "appUserInformation": "App User Information"
 }

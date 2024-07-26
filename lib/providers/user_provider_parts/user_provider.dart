@@ -4,9 +4,11 @@ import 'dart:io';
 
 import 'package:blukers/data_providers/user_data_provider.dart';
 import 'package:blukers/data_providers/user_journey_data_provider.dart';
+import 'package:blukers/models/app_user/components/preference.dart';
+import 'package:blukers/models/app_user/components/registration_details.dart';
+import 'package:blukers/models/app_user/components/registration_status.dart';
 import 'package:blukers/models/authResult.dart';
 import 'package:blukers/models/job_post.dart';
-import 'package:blukers/models/jobs_perference.dart';
 import 'package:blukers/services/stripe_data.dart';
 import 'package:blukers/services/user_shared_preferences_services.dart';
 import 'package:file_picker/file_picker.dart';
@@ -21,7 +23,7 @@ import '../../common_files/constants.dart';
 import '../../data_providers/app_user_stream_service.dart';
 import '../../data_providers/job_posts_data_provider.dart';
 import '../../data_providers/worker_data_provider.dart';
-import '../../models/app_user.dart';
+import '../../models/app_user/app_user.dart';
 import '../../models/company.dart';
 import '../../models/reference_form.dart';
 import '../../models/work_experience.dart';
@@ -273,11 +275,17 @@ class UserProvider with ChangeNotifier {
   void updateJobsPreference(
       List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
     if (appUser != null) {
-      Preference jobsPreference = Preference(
+      Preference preference = Preference(
         industryIds: selectedIndustries,
         jobIds: selectedJobs,
       );
-      appUser?.worker?.jobsPreference = jobsPreference;
+
+      if (appUser?.userRole == 'worker') {
+        appUser?.registrationDetails?.jobsPreference = preference;
+      } else {
+        appUser?.registrationDetails?.workersPreference = preference;
+      }
+      UserDataProvider.updateJobsPreference(appUser!);
     }
   }
 

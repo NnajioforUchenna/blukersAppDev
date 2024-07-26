@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
 import '../views/auth/please_login_dialog.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';

@@ -10,7 +10,7 @@ import '../data_providers/company_data_provider.dart';
 import '../data_providers/user_data_provider.dart';
 import '../data_providers/user_journey_data_provider.dart';
 import '../data_providers/worker_data_provider.dart';
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
 import '../models/reference_form.dart';
 import '../models/work_experience.dart';

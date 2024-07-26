@@ -16,7 +16,7 @@ import '../../common_files/constants.dart';
 import '../../data_providers/data_constants.dart';
 import '../../data_providers/payments_data_provider.dart';
 import '../../data_providers/user_journey_data_provider.dart';
-import '../../models/app_user.dart';
+import '../../models/app_user/app_user.dart';
 import '../../models/payment_model/transaction_record.dart';
 import '../../models/payment_model/url_info.dart';
 import '../../services/platform_check.dart';

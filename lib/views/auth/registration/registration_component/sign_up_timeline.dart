@@ -51,7 +51,7 @@ class SignUpTimeline extends StatelessWidget {
 
     List<String> stepsLocalized = [
       AppLocalizations.of(context)!.createYourAccount,
-      AppLocalizations.of(context)!.basicInformation,
+      AppLocalizations.of(context)!.appUserInformation,
       AppLocalizations.of(context)!.selectjobspreference,
     ];
 

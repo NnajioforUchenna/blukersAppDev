@@ -472,5 +472,6 @@
   "choose_your_user_type": "Elige tu tipo de usuario",
   "update": "Actualizar",
   "delete": "Eliminar",
-  "noworkersfound": "No se encontraron trabajadores"
+  "noworkersfound": "No se encontraron trabajadores",
+  "appUserInformation": "Información del Usuario de la Aplicación"
 }

@@ -1,28 +1,26 @@
 part of 'user_provider.dart';
 
 extension CreatingUserProfile on UserProvider {
-  void updateWorker(
-      {required String name,
-      required String lastName,
-      required String description}) {
+  void updateWorker({
+    required String name,
+    required String lastName,
+    required String description,
+  }) {
     EasyLoading.show(
       status: 'Adding Basic Information...',
       maskType: EasyLoadingMaskType.black,
     );
 
-    Worker? worker = Worker.fromMap({
-      'workerId': appUser!.uid,
-      'lastName': lastName,
-      'firstName': name,
-      'emails': [appUser!.email],
-      'workerBriefDescription': description,
-      'isBasicProfileCompleted': true,
-    });
+    if (appUser != null) {
+      appUser?.registrationDetails?.firstName = name;
+      appUser?.registrationDetails?.lastName = lastName;
+      appUser?.registrationDetails?.shortDescription = description;
+      appUser?.registrationDetails?.status.isAppUserInformation = true;
 
-    if (worker != null) {
-      UserDataProvider.updateWorkerBasicInformation(worker);
+      // Update the user data in the database.
+      UserDataProvider.registerUserToDatabase(appUser!);
     }
-    _appUser!.worker = worker;
+
     EasyLoading.dismiss();
     setRegisterPageIndex();
   }

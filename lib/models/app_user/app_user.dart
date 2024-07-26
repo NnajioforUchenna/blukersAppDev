@@ -1,13 +1,13 @@
-import 'package:blukers/models/registration_details.dart';
+import 'package:blukers/models/app_user/components/registration_details.dart';
 import 'package:blukers/models/userJourney.dart';
 
-import '../data_providers/user_data_provider.dart';
-import 'address.dart';
-import 'company.dart';
-import 'job_application_tracker.dart';
-import 'payment_model/paid_order.dart';
-import 'payment_model/subscription_model.dart';
-import 'worker.dart';
+import '../../data_providers/user_data_provider.dart';
+import '../address.dart';
+import '../company.dart';
+import '../job_application_tracker.dart';
+import '../payment_model/paid_order.dart';
+import '../payment_model/subscription_model.dart';
+import '../worker.dart';
 
 class AppUser {
   // User Information
@@ -126,6 +126,7 @@ class AppUser {
   }
 
   static AppUser fromMap(Map<String, dynamic> map) {
+    print(map);
     AppUser user = AppUser(
       uid: map['uid'] ?? '',
       email: map['email'] ?? '',
@@ -138,6 +139,9 @@ class AppUser {
               map['registrationDetails'] is Map<String, dynamic>)
           ? RegistrationDetails.fromMap(map['registrationDetails'])
           : null,
+      userRole: map['userRole'] as String?,
+      workerTimelineStep: map['workerTimelineStep'] as int?,
+      companyTimelineStep: map['companyTimelineStep'] as int?,
       worker: (map['worker'] != null && map['worker'] is Map<String, dynamic>)
           ? Worker.fromMap(map['worker'])
           : null,
@@ -158,7 +162,7 @@ class AppUser {
           : null,
       deviceTokenU: map['deviceTokenU'] as String?,
       tokens: map['tokens'] != null
-          ? List<String>.from(map['tokens'].map((x) => x))
+          ? List<String>.from(map['tokens'].map((x) => x as String))
           : [],
     );
 

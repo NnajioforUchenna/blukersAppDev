@@ -1,6 +1,6 @@
 import '../common_files/get_time_ago.dart';
 import 'address.dart';
-import 'jobs_perference.dart';
+import 'app_user/components/preference.dart';
 import 'reference_form.dart';
 import 'work_experience.dart';
 
