@@ -26,7 +26,6 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
-import '../views/worker/worker_messages/worker_messages.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
@@ -39,8 +38,7 @@ final goRouter = GoRouter(routes: routes, initialLocation: '/');
 final routes = [
   GoRoute(
       path: '/',
-      builder: (context, state) =>
-          const WorkerMessages()), // const LandingPage()
+      builder: (context, state) => const WorkerPath()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),

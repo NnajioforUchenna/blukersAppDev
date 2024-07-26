@@ -282,8 +282,10 @@ class UserProvider with ChangeNotifier {
 
       if (appUser?.userRole == 'worker') {
         appUser?.registrationDetails?.jobsPreference = preference;
+        appUser?.workerTimelineStep = 2;
       } else {
         appUser?.registrationDetails?.workersPreference = preference;
+        appUser?.companyTimelineStep = 2;
       }
       UserDataProvider.updateJobsPreference(appUser!);
     }

@@ -9,13 +9,14 @@ import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
 import '../../../utils/styles/index.dart';
 import '../../../utils/styles/theme_colors.dart';
+
 class WorkerPath extends StatelessWidget {
   const WorkerPath({super.key});
 
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    int currentStep = up.workerTimelineStep;
+    int currentStep = up.appUser?.workerTimelineStep ?? 0;
     double width = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
@@ -54,33 +55,38 @@ class WorkerPath extends StatelessWidget {
               String description = "";
               if (index == 0) {
                 title = AppLocalizations.of(context)!.workerJourneyStep1Title;
-                description = AppLocalizations.of(context)!.workerJourneyStep1Text;
+                description =
+                    AppLocalizations.of(context)!.workerJourneyStep1Text;
               }
               if (index == 1) {
                 title = 'Job Preference';
-                description = AppLocalizations.of(context)!.workerJourneyStep2Text;
+                description =
+                    AppLocalizations.of(context)!.workerJourneyStep2Text;
               }
               if (index == 2) {
                 title = 'Create a Resume';
-                description = AppLocalizations.of(context)!.workerJourneyStep3Text;
+                description =
+                    AppLocalizations.of(context)!.workerJourneyStep3Text;
               }
               if (index == 3) {
                 title = 'Apply or save Jobs';
-                description = AppLocalizations.of(context)!.workerJourneyStep4Text;
+                description =
+                    AppLocalizations.of(context)!.workerJourneyStep4Text;
               }
               if (index == 4) {
                 // title = AppLocalizations.of(context)!.workerJourneyStep5Title;
                 title = 'Subscribe to Apply to More Jobs';
                 // description = AppLocalizations.of(context)!.workerJourneyStep5Text;
-                description = 'Subscribe to our premium service to unlock more job applications. Get access to exclusive job listings and increase your chances of finding the perfect job by applying to more opportunities.';
-
+                description =
+                    'Subscribe to our premium service to unlock more job applications. Get access to exclusive job listings and increase your chances of finding the perfect job by applying to more opportunities.';
               }
-               if (index == 5) {
+              if (index == 5) {
                 // title = AppLocalizations.of(context)!.workerJourneyStep5Title;
-                title = 'If Employed, Congratulations! The Company Will Likely Process the Work Visa for This Job';
+                title =
+                    'If Employed, Congratulations! The Company Will Likely Process the Work Visa for This Job';
                 // description = AppLocalizations.of(context)!.workerJourneyStep5Text;
-                description = 'If you get employed, congratulations! The company will likely process the work visa for this job, making your transition to the new role smoother and hassle-free.';
-
+                description =
+                    'If you get employed, congratulations! The company will likely process the work visa for this job, making your transition to the new role smoother and hassle-free.';
               }
               final record = jobRecords[index];
               return MyJobTimeLine(
@@ -159,31 +165,39 @@ class WorkerPath extends StatelessWidget {
 final jobRecords = [
   {
     'title': 'Register',
-    'description': 'Start your journey with us by creating an account. Registration is quick and easy. With just a few clicks, you\'ll gain access to countless job opportunities tailored to your interests and skills. Join us now and open the door to your next career adventure.',
+    'description':
+        'Start your journey with us by creating an account. Registration is quick and easy. With just a few clicks, you\'ll gain access to countless job opportunities tailored to your interests and skills. Join us now and open the door to your next career adventure.',
   },
   {
     'title': 'Job Preference',
-    'description': 'Specify your job preferences to help us match you with the most relevant job opportunities. Define your desired job roles, locations, and other preferences to streamline your job search.',
+    'description':
+        'Specify your job preferences to help us match you with the most relevant job opportunities. Define your desired job roles, locations, and other preferences to streamline your job search.',
   },
   {
     'title': 'Create a Resume',
-    'description': 'Create a professional resume to showcase your skills and experience to potential employers. A well-crafted resume can significantly increase your chances of landing your dream job.',
+    'description':
+        'Create a professional resume to showcase your skills and experience to potential employers. A well-crafted resume can significantly increase your chances of landing your dream job.',
   },
   {
     'title': 'Apply to Jobs',
-    'description': 'Browse through our extensive list of job postings and apply directly to the ones that match your career goals. Take the next step towards your new career by submitting your applications.',
+    'description':
+        'Browse through our extensive list of job postings and apply directly to the ones that match your career goals. Take the next step towards your new career by submitting your applications.',
   },
   {
     'title': 'Subscribe to Apply to More Jobs',
-    'description': 'Subscribe to our premium service to unlock more job applications. Get access to exclusive job listings and increase your chances of finding the perfect job by applying to more opportunities.',
+    'description':
+        'Subscribe to our premium service to unlock more job applications. Get access to exclusive job listings and increase your chances of finding the perfect job by applying to more opportunities.',
   },
   {
-    'title': 'If Employed, Congratulations! The Company Will Likely Process the Work Visa for This Job',
-    'description': 'If you get employed, congratulations! The company will likely process the work visa for this job, making your transition to the new role smoother and hassle-free.',
+    'title':
+        'If Employed, Congratulations! The Company Will Likely Process the Work Visa for This Job',
+    'description':
+        'If you get employed, congratulations! The company will likely process the work visa for this job, making your transition to the new role smoother and hassle-free.',
   },
 ];
 
-Widget buildButton(double width, int currentStep, String text, BuildContext context, VoidCallback onClick) {
+Widget buildButton(double width, int currentStep, String text,
+    BuildContext context, VoidCallback onClick) {
   return Center(
     child: SizedBox(
       width: width < 600 ? 250 : 400,
