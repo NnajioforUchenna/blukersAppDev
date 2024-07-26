@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/chat_provider.dart';
-import '../../../providers/user_provider_parts/user_provider.dart';
-import '../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
-import 'components/message_stream.dart';
+import '../../../../providers/chat_provider.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
+import '../components/message_stream.dart';
 
 class WorkerChatRoomWeb extends StatelessWidget {
   WorkerChatRoomWeb({super.key});

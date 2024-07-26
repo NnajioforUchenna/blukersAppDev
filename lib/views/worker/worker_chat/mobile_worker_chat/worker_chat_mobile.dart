@@ -3,13 +3,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../../models/chat_recipient.dart';
-import '../../../providers/chat_provider.dart';
-import '../../../providers/user_provider_parts/user_provider.dart';
-import '../../auth/common_widget/login_or_register.dart';
-import '../../common_vieiws/icon_text_404.dart';
-import '../../common_vieiws/page_template/page_template.dart';
-import 'components/chat_recipient_widget.dart';
+import '../../../../models/chat_recipient.dart';
+import '../../../../providers/chat_provider.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../auth/common_widget/login_or_register.dart';
+import '../../../common_vieiws/icon_text_404.dart';
+import '../../../common_vieiws/page_template/page_template.dart';
+import '../components/chat_recipient_widget.dart';
 
 class WorkerChatMobile extends StatelessWidget {
   const WorkerChatMobile({super.key});

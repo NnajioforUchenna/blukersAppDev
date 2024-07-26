@@ -1,4 +1,5 @@
 import 'package:blukers/views/common_vieiws/all_search_bar_components/search_page.dart';
+import 'package:blukers/views/worker/worker_chat/dummy_chat_intereface_web.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/payment_model/url_info.dart';
@@ -25,8 +26,8 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
-import '../views/worker/worker_chat/worker_chat_room_mobile.dart';
-import '../views/worker/worker_chat/worker_chat_mobile.dart';
+import '../views/worker/worker_chat/mobile_worker_chat/worker_chat_room_mobile.dart';
+import '../views/worker/worker_chat/mobile_worker_chat/worker_chat_mobile.dart';
 import '../views/worker/worker_chat/worker_chat_platforms.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
@@ -77,7 +78,7 @@ final routes = [
   // Worker Routes
 
   GoRoute(path: '/search', builder: (context, state) => const SearchPage()),
-  GoRoute(path: '/chat', builder: (context, state) => const WorkerChatPlatforms()),
+  GoRoute(path: '/chat', builder: (context, state) => const DummyWorkerChatWeb()),
   GoRoute(
       path: '/workerChatRoom',
       builder: (context, state) => const WorkerChatRoomMobile()),

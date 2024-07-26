@@ -3,8 +3,8 @@ import 'package:blukers/views/common_vieiws/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider_parts/user_provider.dart';
-import 'components/message_stream.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../components/message_stream.dart';
 
 class WorkerChatRoomMobile extends StatefulWidget {
   const WorkerChatRoomMobile({
@@ -35,7 +35,7 @@ class _WorkerChatRoomMobileState extends State<WorkerChatRoomMobile> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
+            children: [
               Expanded(
                 child: MessagesStream(
                   currentUserId: currentUserId,
@@ -50,7 +50,7 @@ class _WorkerChatRoomMobileState extends State<WorkerChatRoomMobile> {
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
+                  children: [
                     Expanded(
                       child: TextField(
                         controller: messageTextController,
