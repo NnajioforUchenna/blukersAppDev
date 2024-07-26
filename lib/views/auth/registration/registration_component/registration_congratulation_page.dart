@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import '../../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../utils/styles/index.dart';
 import '../../../old_common_views/components/animations/index.dart';
 // import 'package:blukers/views/auth/common_widget/submit_button.dart';
 
@@ -20,7 +20,7 @@ class RegistrationCongratulationPage extends StatefulWidget {
 
 class _RegistrationCongratulationPageState
     extends State<RegistrationCongratulationPage> {
-  int countdownValue = 10;
+  int countdownValue = 5;
   late Timer _timer;
   late UserProvider up;
 
@@ -106,17 +106,6 @@ class _RegistrationCongratulationPageState
             ],
           ),
         ),
-        // SubmitButton(
-        //   onTap: () {
-        //     if (up.userRole == "company") {
-        //       Navigator.pushReplacementNamed(context, '/workers');
-        //     } else {
-        //       Navigator.pushReplacementNamed(context, '/jobs');
-        //     }
-        //   },
-        //   text: 'Continue',
-        //   isDisabled: false,
-        // ),
       ],
     );
   }

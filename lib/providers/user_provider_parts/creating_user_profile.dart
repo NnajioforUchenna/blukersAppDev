@@ -51,13 +51,6 @@ extension CreatingUserProfile on UserProvider {
       maskType: EasyLoadingMaskType.black,
     );
 
-    // Address address = Address(
-    //     street: street,
-    //     city: city,
-    //     state: state,
-    //     postalCode: postalCode,
-    //     country: country);
-
     String completePhoneNumber = "$ext-$phoneNumber";
 
     UserDataProvider.updateContactInformation(

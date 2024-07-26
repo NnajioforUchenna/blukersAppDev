@@ -479,5 +479,6 @@
   "update": "Update",
   "delete": "Delete",
   "noworkersfound": "No workers found",
-  "appUserInformation": "App User Information"
+  "appUserInformation": "App User Information",
+  "selectWorkersPreference": "Select Workers Preference"
 }

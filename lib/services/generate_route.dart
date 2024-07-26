@@ -8,7 +8,6 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
-import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/common_vieiws/page_template/page_template.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat.dart';
@@ -27,6 +26,7 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
+import '../views/worker/worker_messages/worker_messages.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
@@ -37,7 +37,10 @@ import 'authentication_wrapper.dart';
 final goRouter = GoRouter(routes: routes, initialLocation: '/');
 
 final routes = [
-  GoRoute(path: '/', builder: (context, state) => const LandingPage()),
+  GoRoute(
+      path: '/',
+      builder: (context, state) =>
+          const WorkerMessages()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),

@@ -68,7 +68,7 @@ class _PageSliderState extends State<PageSlider> {
             ),
             MakeResponsiveWeb(
               image: AssetImage('assets/images/contactInfo.png'),
-              child: SelectJobsPreference(),
+              child: SelectPreference(),
             ),
             RegistrationCongratulationPage(),
           ],
