@@ -27,8 +27,6 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
-import '../views/worker/worker_chat/workerChatRoom.dart';
-import '../views/worker/worker_chat/worker_chat.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
@@ -59,9 +57,11 @@ final routes = [
           builder: (context, state) => const WorkerProfile()),
       GoRoute(
           path: '/offers', builder: (context, state) => const ServicesList()),
-          GoRoute(path: '/pathToJob', builder: (context, state) => const WorkerPath()),
-           GoRoute(path: '/jobPreference', builder: (context, state) => const JobPreferncePath()),
-          
+      GoRoute(
+          path: '/pathToJob', builder: (context, state) => const WorkerPath()),
+      GoRoute(
+          path: '/jobPreference',
+          builder: (context, state) => const JobPreferncePath()),
     ],
   ),
 
@@ -81,10 +81,6 @@ final routes = [
   // Worker Routes
 
   GoRoute(path: '/search', builder: (context, state) => const SearchPage()),
-  GoRoute(path: '/workerChat', builder: (context, state) => const WorkerChat()),
-  GoRoute(
-      path: '/workerChatRoom',
-      builder: (context, state) => const WorkerChatRoom()),
   GoRoute(
       path: '/worker_chat-message',
       builder: (context, state) => const ChatMessageScreen()),
@@ -163,9 +159,6 @@ final routes = [
   GoRoute(path: '/services', builder: (context, state) => const Products()),
 
   GoRoute(path: '/orders', builder: (context, state) => const OrdersList()),
-
-  
-  
 ];
 
 void verifyCurrentPath() {

@@ -3,16 +3,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../../models/chat_recipient.dart';
-import '../../../providers/chat_provider.dart';
-import '../../../providers/user_provider_parts/user_provider.dart';
-import '../../auth/common_widget/login_or_register.dart';
-import '../../common_vieiws/icon_text_404.dart';
-import '../../common_vieiws/page_template/page_template.dart';
-import 'components/chat_recipient_widget.dart';
+import '../../../../models/chat_recipient.dart';
+import '../../../../providers/chat_provider.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../auth/common_widget/login_or_register.dart';
+import '../../../common_vieiws/icon_text_404.dart';
+import '../../../common_vieiws/page_template/page_template.dart';
+import '../components/chat_recipient_widget.dart';
 
-class WorkerChat extends StatelessWidget {
-  const WorkerChat({super.key});
+class WorkerChatMobile extends StatelessWidget {
+  const WorkerChatMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class WorkerChat extends StatelessWidget {
                   .getChatRecipientsStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return Center(child: const CircularProgressIndicator());
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return IconText404(

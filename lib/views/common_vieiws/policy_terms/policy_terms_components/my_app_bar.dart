@@ -20,13 +20,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       // title: Text(title),
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.pop(
-              context); // This line pops the current route and goes back
-        },
-      ),
+
 
       actions: actions,
       //

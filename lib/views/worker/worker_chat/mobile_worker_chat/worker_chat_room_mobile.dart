@@ -3,19 +3,19 @@ import 'package:blukers/views/common_vieiws/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider_parts/user_provider.dart';
-import 'components/message_stream.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../components/message_stream.dart';
 
-class WorkerChatRoom extends StatefulWidget {
-  const WorkerChatRoom({
+class WorkerChatRoomMobile extends StatefulWidget {
+  const WorkerChatRoomMobile({
     super.key,
   });
 
   @override
-  _WorkerChatRoomState createState() => _WorkerChatRoomState();
+  _WorkerChatRoomMobileState createState() => _WorkerChatRoomMobileState();
 }
 
-class _WorkerChatRoomState extends State<WorkerChatRoom> {
+class _WorkerChatRoomMobileState extends State<WorkerChatRoomMobile> {
   final messageTextController = TextEditingController();
 
   @override
@@ -35,7 +35,7 @@ class _WorkerChatRoomState extends State<WorkerChatRoom> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
+            children: [
               Expanded(
                 child: MessagesStream(
                   currentUserId: currentUserId,
@@ -50,7 +50,7 @@ class _WorkerChatRoomState extends State<WorkerChatRoom> {
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
+                  children: [
                     Expanded(
                       child: TextField(
                         controller: messageTextController,
