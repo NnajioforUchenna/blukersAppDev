@@ -1,4 +1,6 @@
 import 'package:blukers/views/common_vieiws/all_search_bar_components/search_page.dart';
+import 'package:blukers/views/worker/workers_path/worker_path.dart';
+import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/payment_model/url_info.dart';
@@ -57,6 +59,9 @@ final routes = [
           builder: (context, state) => const WorkerProfile()),
       GoRoute(
           path: '/offers', builder: (context, state) => const ServicesList()),
+          GoRoute(path: '/pathToJob', builder: (context, state) => const WorkerPath()),
+           GoRoute(path: '/jobPreference', builder: (context, state) => const JobPreferncePath()),
+          
     ],
   ),
 
@@ -158,6 +163,9 @@ final routes = [
   GoRoute(path: '/services', builder: (context, state) => const Products()),
 
   GoRoute(path: '/orders', builder: (context, state) => const OrdersList()),
+
+  
+  
 ];
 
 void verifyCurrentPath() {
