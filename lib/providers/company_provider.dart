@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../data_providers/company_data_provider.dart';
 import '../models/address.dart';
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/company.dart';
 import '../models/job_post.dart';
 import '../models/social_media_platform.dart';

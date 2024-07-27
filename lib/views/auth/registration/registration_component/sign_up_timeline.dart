@@ -49,10 +49,14 @@ class SignUpTimeline extends StatelessWidget {
       _scrollController.jumpTo(currentStep * 120.0);
     });
 
+    String whichPreference = up.userRole == "worker"
+        ? AppLocalizations.of(context)!.selectjobspreference
+        : AppLocalizations.of(context)!.selectWorkersPreference;
+
     List<String> stepsLocalized = [
       AppLocalizations.of(context)!.createYourAccount,
-      AppLocalizations.of(context)!.basicInformation,
-      AppLocalizations.of(context)!.selectjobspreference,
+      AppLocalizations.of(context)!.appUserInformation,
+      whichPreference,
     ];
 
     return Center(

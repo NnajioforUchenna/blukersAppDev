@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/job_post.dart';
-import '../../../providers/job_posts_provider.dart';
-import '../../../providers/user_provider_parts/user_provider.dart';
-import '../../../services/responsive.dart';
-import '../../old_common_views/components/animations/index.dart';
-import '../saved/animate_job_post_details.dart';
-import 'display_job_card.dart';
-import 'display_job_post_dialog.dart';
-import 'no_more_jobs_found_card.dart';
+import '../../../../../models/job_post.dart';
+import '../../../../../providers/job_posts_provider.dart';
+import '../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../services/responsive.dart';
+import '../../../../old_common_views/components/animations/index.dart';
+import '../../../saved/animate_job_post_details.dart';
+import '../../../saved/display_job_card.dart';
+import '../../../saved/display_job_post_dialog.dart';
+import '../../../saved/no_more_jobs_found_card.dart';
 
 class CompleteJobPostWidget extends StatefulWidget {
   final List<JobPost> jobPosts;

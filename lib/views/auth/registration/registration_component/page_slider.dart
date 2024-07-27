@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../services/make_responsive_web.dart';
-import 'basic_information.dart';
+import 'app_user_information.dart';
 import 'login_information.dart';
 import 'registration_congratulation_page.dart';
 
@@ -64,11 +64,11 @@ class _PageSliderState extends State<PageSlider> {
             ),
             MakeResponsiveWeb(
               image: AssetImage('assets/images/basicInfo.png'),
-              child: BasicInformation(),
+              child: AppUserInformation(),
             ),
             MakeResponsiveWeb(
               image: AssetImage('assets/images/contactInfo.png'),
-              child: SelectJobsPreference(),
+              child: SelectPreference(),
             ),
             RegistrationCongratulationPage(),
           ],

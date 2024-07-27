@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
 import '../views/auth/please_login_dialog.dart';
 import '../views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
@@ -238,14 +238,15 @@ class JobPostsProvider with ChangeNotifier {
     nameSearch = nameRelated;
     locationSearch = locationRelated;
 
-    List<JobPost> listJobPosts = [];
     displayedJobPosts.clear();
 
-    listJobPosts = await JobPostsDataProvider.searchJobPosts(
+    List<JobPost> listJobPosts = await JobPostsDataProvider.searchJobPosts(
         nameRelated: nameRelated,
         locationRelated: locationRelated,
         pageNumber: 0,
         targetLanguage: language);
+
+    print('listJobPosts: $listJobPosts');
 
     hasMore = listJobPosts.isNotEmpty;
 

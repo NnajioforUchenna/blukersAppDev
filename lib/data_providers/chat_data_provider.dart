@@ -2,7 +2,7 @@ import 'package:blukers/models/chat_recipient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/chat_message.dart';
 import '../models/chat_room.dart';
 

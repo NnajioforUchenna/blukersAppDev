@@ -7,14 +7,14 @@ import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../services/responsive.dart';
 import '../../common_widget/submit_button.dart';
 
-class SelectJobsPreference extends StatefulWidget {
-  const SelectJobsPreference({super.key});
+class SelectPreference extends StatefulWidget {
+  const SelectPreference({super.key});
 
   @override
-  State<SelectJobsPreference> createState() => _SelectJobsPreferenceState();
+  State<SelectPreference> createState() => _SelectPreferenceState();
 }
 
-class _SelectJobsPreferenceState extends State<SelectJobsPreference> {
+class _SelectPreferenceState extends State<SelectPreference> {
   final _formKey = GlobalKey<FormState>();
   bool isValidate = true;
 

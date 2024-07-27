@@ -11,7 +11,7 @@ class SmallPopButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).pushReplacement('/jobs');
+        GoRouter.of(context).pop();
       },
       child: Material(
         elevation: 4.0, // Set the elevation here

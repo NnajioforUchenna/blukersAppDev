@@ -98,11 +98,21 @@ extension AuthenticationAuthorization on UserProvider {
 
   void followRegistrationFlow(AuthResult authResult, BuildContext context) {
     if (authResult.isSuccess) {
+      // Track the registration status.
+      RegistrationStatus status = RegistrationStatus();
+      status.isLoginInformation = true;
+
+      // Store registration details.
+      RegistrationDetails registrationDetails = RegistrationDetails(
+        email: authResult.userCredential?.user!.email ?? '',
+        status: status,
+        registeredAs: userRole,
+      );
+
       Map<String, dynamic> userData = {
         'uid': authResult.userCredential?.user!.uid,
         'email': authResult.userCredential?.user!.email,
-        'isLoginInformation': true,
-        'registeredAs': userRole,
+        'registrationDetails': registrationDetails.toMap(),
         'userRole': userRole,
         'workerTimelineStep': 1,
         'companyTimelineStep': 1,

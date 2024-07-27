@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../data_providers/chat_data_provider.dart';
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/chat_message.dart';
 import '../models/chat_room.dart';
 import '../models/worker.dart';

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import 'data_constants.dart';
 
 class StreamService {

@@ -5,10 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/job_posts_provider.dart';
-import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import '../../old_common_views/small_pop_button_widget.dart';
-import 'jobs_search_result_page/job_search_result_page.dart';
 
 class SearchJobsUi extends StatefulWidget {
   const SearchJobsUi({super.key});
@@ -19,7 +17,6 @@ class SearchJobsUi extends StatefulWidget {
 
 class _SearchJobsUiState extends State<SearchJobsUi> {
   TextEditingController nameController = TextEditingController();
-
   TextEditingController locationController = TextEditingController();
 
   String buttonLabel = 'Search Jobs';
@@ -31,17 +28,11 @@ class _SearchJobsUiState extends State<SearchJobsUi> {
     // Determine screen size for responsive design
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    UserProvider up = Provider.of<UserProvider>(context);
-    if (up.userRole == 'Company') {
-      buttonLabel = AppLocalizations.of(context)!.searchWorkers;
-      searchName =
-          AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
-    } else {
-      buttonLabel = AppLocalizations.of(context)!.searchJobs;
-      searchName =
-          AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
-    }
+
+    buttonLabel = AppLocalizations.of(context)!.searchJobs;
+    searchName = AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
 
     nameController.text = jp.nameSearch;
     locationController.text = jp.locationSearch;
@@ -59,7 +50,6 @@ class _SearchJobsUiState extends State<SearchJobsUi> {
           children: [
             Column(
               children: [
-                JobSearchResultPage(),
                 SizedBox(height: height * 0.12),
                 Card(
                   elevation: 4.0,
@@ -131,7 +121,7 @@ class _SearchJobsUiState extends State<SearchJobsUi> {
                       jp.setSearching(true);
                       jp.searchJobPosts(
                           nameController.text, locationController.text);
-                      GoRouter.of(context).pushReplacement('/jobs');
+                      GoRouter.of(context).pushReplacement('/jobSearchResults');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ThemeColors.blukersOrangeThemeColor,

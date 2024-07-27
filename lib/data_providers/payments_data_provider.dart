@@ -9,7 +9,7 @@ import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 import '../common_files/constants.dart';
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/payment_model/subscription_model.dart';
 import '../models/payment_model/transaction_record.dart';
 import '../services/platform_check.dart';

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '../models/app_user.dart';
+import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
 import '../models/worker.dart';
 import 'data_constants.dart';

@@ -1,5 +1,6 @@
 import 'package:blukers/views/common_vieiws/all_search_bar_components/search_page.dart';
-import 'package:blukers/views/worker/worker_chat/dummy_chat_intereface_web.dart';
+import 'package:blukers/views/worker/workers_path/worker_path.dart';
+import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/payment_model/url_info.dart';
@@ -18,6 +19,7 @@ import '../views/company/my_job_posts_components/create_job_post_components/crea
 import '../views/company/workers.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
+import '../views/worker/search_jobs/jobs_search_result_page/job_search_result_page.dart';
 import '../views/worker/services/services_components/orders/orders_list.dart';
 import '../views/worker/services/services_components/products/products.dart';
 import '../views/worker/services/services_components/subscription/subscription.dart';
@@ -26,9 +28,6 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
-import '../views/worker/worker_chat/mobile_worker_chat/worker_chat_room_mobile.dart';
-import '../views/worker/worker_chat/mobile_worker_chat/worker_chat_mobile.dart';
-import '../views/worker/worker_chat/worker_chat_platforms.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/worker_profile/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
@@ -39,7 +38,9 @@ import 'authentication_wrapper.dart';
 final goRouter = GoRouter(routes: routes, initialLocation: '/');
 
 final routes = [
-  GoRoute(path: '/', builder: (context, state) => const LandingPage()),
+  GoRoute(
+      path: '/',
+      builder: (context, state) => const LandingPage()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),
@@ -55,10 +56,18 @@ final routes = [
       GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
       GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),
       GoRoute(
+          path: '/jobSearchResults',
+          builder: (context, state) => const JobSearchResultPage()),
+      GoRoute(
           path: '/workerProfile',
           builder: (context, state) => const WorkerProfile()),
       GoRoute(
           path: '/offers', builder: (context, state) => const ServicesList()),
+      GoRoute(
+          path: '/pathToJob', builder: (context, state) => const WorkerPath()),
+      GoRoute(
+          path: '/jobPreference',
+          builder: (context, state) => const JobPreferncePath()),
     ],
   ),
 
@@ -78,10 +87,6 @@ final routes = [
   // Worker Routes
 
   GoRoute(path: '/search', builder: (context, state) => const SearchPage()),
-  GoRoute(path: '/chat', builder: (context, state) => const DummyWorkerChatWeb()),
-  GoRoute(
-      path: '/workerChatRoom',
-      builder: (context, state) => const WorkerChatRoomMobile()),
   GoRoute(
       path: '/worker_chat-message',
       builder: (context, state) => const ChatMessageScreen()),
