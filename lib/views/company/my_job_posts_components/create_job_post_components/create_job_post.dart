@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import 'job_post_page_slider.dart';
 import 'job_post_time_line.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateJobPost extends StatelessWidget {
   const CreateJobPost({super.key});
@@ -47,12 +45,8 @@ class CreateJobPost extends StatelessWidget {
     // );
 
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   elevation: 0,
-      // ),
-      appBar: MyAppBar(
-        title: AppLocalizations.of(context)!.createJobPost,
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.createJobPost),
       ),
       body: Column(
         children: [

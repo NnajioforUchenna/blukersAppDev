@@ -7,7 +7,8 @@ import '../company.dart';
 import '../job_application_tracker.dart';
 import '../payment_model/paid_order.dart';
 import '../payment_model/subscription_model.dart';
-import '../worker.dart';
+import 'components/worker_records.dart';
+import 'components/worker_resume_details.dart';
 
 class AppUser {
   // User Information
@@ -23,7 +24,8 @@ class AppUser {
   RegistrationDetails? registrationDetails;
 
   // Tracking Worker Profile form
-  Worker? worker;
+  WorkerResumeDetails? workerResumeDetails;
+  WorkerRecords? workerRecords;
 
   Company? company;
   Address? address;
@@ -67,7 +69,8 @@ class AppUser {
     this.photoUrl,
     this.isEmailVerified,
     this.registrationDetails,
-    this.worker,
+    this.workerResumeDetails,
+    this.workerRecords,
     this.company,
     this.address,
     this.deviceTokenU,
@@ -95,7 +98,9 @@ class AppUser {
     if (isEmailVerified != null) data['isEmailVerified'] = isEmailVerified;
     if (registrationDetails != null)
       data['registrationDetails'] = registrationDetails!.toMap();
-    if (worker != null) data['worker'] = worker!.toMap();
+    if (workerResumeDetails != null)
+      data['workerResumeDetails'] = workerResumeDetails!.toMap();
+    if (workerRecords != null) data['workerRecords'] = workerRecords!.toMap();
     if (company != null) data['company'] = company!.toMap();
     if (address != null) data['address'] = address!.toMap();
     if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
@@ -141,8 +146,13 @@ class AppUser {
       userRole: map['userRole'] as String?,
       workerTimelineStep: map['workerTimelineStep'] as int?,
       companyTimelineStep: map['companyTimelineStep'] as int?,
-      worker: (map['worker'] != null && map['worker'] is Map<String, dynamic>)
-          ? Worker.fromMap(map['worker'])
+      workerResumeDetails: (map['workerResumeDetails'] != null &&
+              map['workerResumeDetails'] is Map<String, dynamic>)
+          ? WorkerResumeDetails.fromMap(map['workerResumeDetails'])
+          : null,
+      workerRecords: (map['workerRecords'] != null &&
+              map['workerRecords'] is Map<String, dynamic>)
+          ? WorkerRecords.fromMap(map['workerRecords'])
           : null,
       company:
           (map['company'] != null && map['company'] is Map<String, dynamic>)
@@ -208,8 +218,8 @@ class AppUser {
   String get getDisplayName {
     if (displayName != null && displayName!.isNotEmpty) {
       return displayName!;
-    } else if (worker != null) {
-      return '${worker!.firstName} ${worker!.lastName}';
+    } else if (workerResumeDetails != null) {
+      return '${workerResumeDetails!.firstName} ${workerResumeDetails!.lastName}';
     } else if (company != null) {
       return company!.name;
     } else {

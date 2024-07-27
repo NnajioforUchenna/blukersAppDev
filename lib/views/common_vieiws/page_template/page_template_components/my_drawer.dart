@@ -74,6 +74,12 @@ class MyDrawer extends StatelessWidget {
           ),
           _createDrawerItem(
             context: context,
+            icon: Icons.work_history,
+            text: 'Create your Resume',
+            route: '/createResume',
+          ),
+          _createDrawerItem(
+            context: context,
             icon: Icons.route,
             text: 'Path to a Successful Job',
             route: '/pathToJob',

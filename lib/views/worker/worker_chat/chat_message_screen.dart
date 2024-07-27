@@ -6,7 +6,6 @@ import '../../../models/chat_message.dart';
 import '../../../providers/chat_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
-import '../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import '../../company/workers_components/chat_component.dart';
 
 class ChatMessageScreen extends StatefulWidget {
@@ -44,8 +43,8 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
         return true;
       },
       child: Scaffold(
-        appBar: MyAppBar(
-          title: roomName,
+        appBar: AppBar(
+          title: Text(roomName),
         ),
         backgroundColor: ThemeColors.chatScreenBackgroundColor,
         body: SafeArea(

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
-import '../../../../../auth/common_widget/auth_input.dart';
+import '../../../../auth/common_widget/auth_input.dart';
 import '../timeline_navigation_button.dart';
 
 class PersonalInformationPage extends StatefulWidget {

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../providers/chat_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import '../components/message_stream.dart';
 
 class WorkerChatRoomWeb extends StatelessWidget {
@@ -17,8 +16,8 @@ class WorkerChatRoomWeb extends StatelessWidget {
         Provider.of<UserProvider>(context, listen: false).appUser?.uid;
     ChatProvider cp = Provider.of<ChatProvider>(context);
     return Scaffold(
-      appBar: MyAppBar(
-        title: cp.selectedChatRecipient?.displayName ?? 'Not Given',
+      appBar: AppBar(
+        title: Text(cp.selectedChatRecipient?.displayName ?? 'Not Given'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,8 +42,8 @@ class WorkerChatRoomWeb extends StatelessWidget {
                   child: TextField(
                     controller: messageTextController,
                     decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       hintText: 'Message...',
                       hintStyle: TextStyle(fontSize: 14),
                       border: InputBorder.none,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../old_common_views/info_display_component.dart';
+import '../../../old_common_views/info_display_component.dart';
 
 class WorkerBasicProfileDetail extends StatelessWidget {
   const WorkerBasicProfileDetail(
@@ -20,14 +20,6 @@ class WorkerBasicProfileDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Text(
-        //   AppLocalizations.of(context)!.basicInformation,
-        //   style:
-        //       ThemeTextStyles.headingThemeTextStyle.apply(color: Colors.black),
-        // ),
-        // const SizedBox(
-        //   height: 20,
-        // ),
         InfoDisplayComponent(
           placeHolder: AppLocalizations.of(context)!.firstName,
           value: firstName,

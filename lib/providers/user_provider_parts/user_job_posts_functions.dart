@@ -11,12 +11,12 @@ extension UserJobPostsFunctions on UserProvider {
   }
 
   bool isJobPostApplied(String jobPostId) {
-    return appUser?.worker?.appliedJobPostIds.contains(jobPostId) ??
+    return appUser?.workerRecords?.appliedJobPostIds?.contains(jobPostId) ??
         false; // Change to JobPostId
   }
 
   bool isJobPostSaved(String jobPostId) {
-    return appUser?.worker?.savedJobPostIds.contains(jobPostId) ??
+    return appUser?.workerRecords?.savedJobPostIds?.contains(jobPostId) ??
         false; // Change to JobPostId
   }
 
@@ -41,11 +41,11 @@ extension UserJobPostsFunctions on UserProvider {
 
   void saveJobPost(JobPost jobPost) {
     // Update UI interFace
-    appUser?.worker?.savedJobPostIds.add(jobPost.jobPostId);
+    appUser?.workerRecords?.savedJobPostIds?.add(jobPost.jobPostId);
     notifyListeners();
     // Persist data to database
     UserDataProvider.updateWorkerSavedJobPostIds(
-        appUser!.worker!.savedJobPostIds, appUser!.uid);
+        appUser!.workerRecords!.savedJobPostIds!, appUser!.uid);
   }
 
   bool isWorkerSaved(String workerId) {

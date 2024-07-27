@@ -24,7 +24,7 @@ class ConfirmationDialog extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    'You are adding ${worker.firstName} ${worker.lastName} to the List of your Interesting Workers ?',
+                    'You are adding ${worker.workerResumeDetails?.firstName} ${worker.workerResumeDetails?.lastName} to the List of your Interesting Workers ?',
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),

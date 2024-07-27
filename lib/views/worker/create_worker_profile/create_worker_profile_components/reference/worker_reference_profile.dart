@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
 import '../../../../../../models/reference_form.dart';
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../../utils/styles/theme_text_styles.dart';
 import 'reference_form.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
 class WorkerReferenceProfile extends StatelessWidget {
   const WorkerReferenceProfile({super.key});
@@ -54,8 +55,8 @@ class WorkerReferenceProfile extends StatelessWidget {
                     email: wp.references[i]["email"],
                     relationship: wp.references[i]["relationship"]));
               }
-              up.appUser!.worker!.references = ref;
-              await up.updateWorkerInfo(up.appUser!.worker!);
+              up.appUser!.workerResumeDetails!.references = ref;
+
               Navigator.of(context).pop();
               print(wp.references);
             },

@@ -51,6 +51,7 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
                         isSelected: true,
                         onPress: () {
                           if (wp.appUser?.photoUrl != null) {
+                            wp.updateWorkerProfilePhoto(wp.appUser!.photoUrl!);
                             wp.workerProfileNextPage();
                           }
                         },

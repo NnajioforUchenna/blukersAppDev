@@ -17,25 +17,6 @@ class WorkExperiencePage extends StatefulWidget {
 class _WorkExperiencePageState extends State<WorkExperiencePage> {
   List<WorkExperienceForm> workExperienceForms = [];
   ScrollController scrollCtrl = ScrollController();
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      //added this listner to dismiss keyboard when scroll
-      scrollCtrl.addListener(() {
-        print('scrolling');
-      });
-      scrollCtrl.position.isScrollingNotifier.addListener(() {
-        if (!scrollCtrl.position.isScrollingNotifier.value) {
-          print('scroll is stopped');
-          FocusManager.instance.primaryFocus?.unfocus();
-        } else {
-          print('scroll is started');
-        }
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

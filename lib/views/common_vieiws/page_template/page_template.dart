@@ -1,10 +1,10 @@
 import 'package:blukers/providers/app_settings_provider.dart';
+import 'package:blukers/views/common_vieiws/page_template/page_template_components/my_app_bar.dart';
 import 'package:blukers/views/common_vieiws/page_template/page_template_components/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
-import '../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import 'page_template_components/my_buttom_navigation_bar.dart';
 import 'page_template_components/my_navigation_rail.dart';
 
@@ -14,14 +14,7 @@ class PageTemplate extends StatelessWidget {
   PageTemplate({
     super.key,
     required this.child,
-    this.showAppBar = false,
-    this.showAppBarBackButton = true,
-    this.appBarTitle = '',
   });
-
-  bool showAppBar;
-  bool showAppBarBackButton;
-  String appBarTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +22,7 @@ class PageTemplate extends StatelessWidget {
     return Scaffold(
       key: asp.scaffoldKey,
       endDrawer: const MyDrawer(),
-      appBar: showAppBar
-          ? MyAppBar(
-              title: appBarTitle,
-              showLeading: showAppBarBackButton,
-            )
-          : null,
+      appBar: const MyAppBar(),
       bottomNavigationBar:
           Responsive.isDesktop(context) ? null : const MyButtomNavigationBar(),
       body: SafeArea(

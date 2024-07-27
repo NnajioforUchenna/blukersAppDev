@@ -8,9 +8,8 @@ import '../../../../../../models/worker.dart';
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../../utils/styles/theme_text_styles.dart';
-import '../../../../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
-import '../../../../../old_common_views/profile_dialog.dart';
-import '../../../../../old_common_views/profile_section.dart';
+import '../../../../old_common_views/profile_dialog.dart';
+import '../../../../old_common_views/profile_section.dart';
 import '../edit_worker_basic_profile.dart';
 import '../worker_basic_profile_detail.dart';
 
@@ -27,10 +26,10 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    Worker worker = up.appUser!.worker!;
+    Worker worker = Worker.fromAppUser(up.appUser!);
     return Scaffold(
-      appBar: const MyAppBar(
-        title: "Online Resume",
+      appBar: AppBar(
+        title: const Text("Online Resume"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -265,9 +264,10 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: WorkerBasicProfileDetail(
-                  firstName: worker.firstName,
-                  lastName: worker.lastName,
-                  middleName: worker.middleName ?? "Not Available",
+                  firstName: worker.workerResumeDetails!.firstName!,
+                  lastName: worker.workerResumeDetails!.lastName!,
+                  middleName:
+                      worker.workerResumeDetails?.middleName ?? "Not Available",
                   description: worker.workerBriefDescription ?? "Not Available",
                 ),
               ),
@@ -276,7 +276,7 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
               icon: UniconsLine.arrow_right,
               showInfoInNewPage: true,
               onClickSection: () {
-                if (up.appUser!.worker != null) {
+                if (up.appUser!.workerResumeDetails != null) {
                   context.go("/onlineResumeAdditionalDetailScreen",
                       extra: {"isReference": true});
                 }
@@ -287,7 +287,7 @@ class _OnlineResumeScreenState extends State<OnlineResumeScreen> {
               icon: UniconsLine.arrow_right,
               showInfoInNewPage: true,
               onClickSection: () {
-                if (up.appUser!.worker != null) {
+                if (up.appUser!.workerResumeDetails != null) {
                   context.go("/onlineResumeAdditionalDetailScreen",
                       extra: {"isReference": false});
                 }

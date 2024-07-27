@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../auth/common_widget/auth_input.dart';
 import '../../../common_vieiws/address_form/address_form.dart';
-import '../../../worker/worker_profile/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
+import '../../../worker/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 
 class AdditionalInformationPage extends StatefulWidget {
   const AdditionalInformationPage({super.key});

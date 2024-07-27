@@ -122,9 +122,7 @@ extension CreatingUserProfile on UserProvider {
       maskType: EasyLoadingMaskType.black,
     );
 
-    await UserDataProvider.updateWorkerInfo(worker.toMap(), _appUser!.uid);
-
-    _appUser!.worker = worker;
+    UserDataProvider.updateUser(appUser!);
 
     EasyLoading.dismiss();
     notifyListeners();

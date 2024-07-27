@@ -24,12 +24,15 @@ class _UpdateBasicInformationState extends State<UpdateBasicInformation> {
     if (mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         UserProvider up = Provider.of<UserProvider>(context, listen: false);
-        if (up.appUser != null && up.appUser?.worker != null) {
-          firstNameController.text = up.appUser?.worker?.firstName ?? '';
-          lastNameController.text = up.appUser?.worker?.lastName ?? '';
-          middleNameController.text = up.appUser?.worker?.middleName ?? '';
+        if (up.appUser != null && up.appUser?.workerResumeDetails != null) {
+          firstNameController.text =
+              up.appUser?.workerResumeDetails?.firstName ?? '';
+          lastNameController.text =
+              up.appUser?.workerResumeDetails?.lastName ?? '';
+          middleNameController.text =
+              up.appUser?.workerResumeDetails?.middleName ?? '';
           descriptionController.text =
-              up.appUser?.worker?.workerBriefDescription ?? '';
+              up.appUser?.registrationDetails?.shortDescription ?? '';
         }
       });
     }

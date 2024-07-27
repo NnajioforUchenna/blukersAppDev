@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/company_provider.dart';
 import '../../../services/responsive.dart';
-import '../../worker/worker_profile/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
+import '../../worker/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 import 'your_company_logo.dart';
 
 class CompanyLogoPage extends StatefulWidget {

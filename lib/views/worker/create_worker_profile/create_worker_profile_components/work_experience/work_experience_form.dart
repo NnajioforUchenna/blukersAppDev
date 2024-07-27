@@ -3,39 +3,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../auth/common_widget/auth_input.dart';
+import '../../../../auth/common_widget/auth_input.dart';
+import 'work_experience_date.dart';
+import 'work_experience_location_form.dart';
 
-class ReferenceFormWidget extends StatefulWidget {
+class WorkExperienceForm extends StatefulWidget {
   final int index;
 
-  const ReferenceFormWidget({
-    super.key,
-    required this.index,
-  });
+  const WorkExperienceForm({super.key, required this.index});
 
   @override
-  State<ReferenceFormWidget> createState() => _ReferenceFormWidgetState();
+  State<WorkExperienceForm> createState() => _WorkExperienceFormState();
 }
 
-class _ReferenceFormWidgetState extends State<ReferenceFormWidget> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _relationshipController = TextEditingController();
+class _WorkExperienceFormState extends State<WorkExperienceForm> {
+  final TextEditingController _companyNameController = TextEditingController();
+  final TextEditingController _jobTitleController = TextEditingController();
+  final TextEditingController _jobDescriptionController =
+      TextEditingController();
+  late WorkerProvider wp;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Check if the widget is still in the widget tree
       if (mounted) {
-        WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
-        _nameController.text = wp.references[widget.index]['name'] ?? '';
-        _phoneNumberController.text =
-            wp.references[widget.index]['phoneNumber'] ?? '';
-        _emailController.text = wp.references[widget.index]['email'] ?? '';
-        _relationshipController.text =
-            wp.references[widget.index]['relationship'] ?? '';
+        // Check if the widget is still in the tree
+        wp = Provider.of<WorkerProvider>(context, listen: false);
+        if (wp.workExperience[widget.index]['companyName'] != null) {
+          _companyNameController.text =
+              wp.workExperience[widget.index]['companyName'] ?? '';
+        }
+        if (wp.workExperience[widget.index]['jobTitle'] != null) {
+          _jobTitleController.text =
+              wp.workExperience[widget.index]['jobTitle'] ?? '';
+        }
+        if (wp.workExperience[widget.index]['jobDescription'] != null) {
+          _jobDescriptionController.text =
+              wp.workExperience[widget.index]['jobDescription'] ?? '';
+        }
       }
     });
   }
@@ -45,7 +51,13 @@ class _ReferenceFormWidgetState extends State<ReferenceFormWidget> {
     final node = FocusScope.of(context);
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      margin: const EdgeInsets.only(top: 20, bottom: 10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black12),
+        // color: const Color.fromARGB(255, 250, 250, 250),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,7 +65,7 @@ class _ReferenceFormWidgetState extends State<ReferenceFormWidget> {
           children: <Widget>[
             const SizedBox(height: 20),
             Text(
-              "${AppLocalizations.of(context)!.personalReferences} #${widget.index + 1}",
+              "${AppLocalizations.of(context)!.workExperience} #${widget.index + 1}",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.deepOrangeAccent,
@@ -66,17 +78,17 @@ class _ReferenceFormWidgetState extends State<ReferenceFormWidget> {
             const Divider(),
             AuthInput(
               child: TextFormField(
-                controller: _nameController,
+                controller: _companyNameController,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => node.nextFocus(),
                 validator: (value) => value!.isEmpty
                     ? AppLocalizations.of(context)!.required
                     : null,
                 onChanged: (value) {
-                  wp.references[widget.index]['name'] = value;
+                  wp.workExperience[widget.index]['companyName'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.name,
+                  hintText: AppLocalizations.of(context)!.companyName,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
@@ -92,17 +104,17 @@ class _ReferenceFormWidgetState extends State<ReferenceFormWidget> {
             const SizedBox(height: 10),
             AuthInput(
               child: TextFormField(
-                controller: _phoneNumberController,
+                controller: _jobTitleController,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => node.nextFocus(),
                 validator: (value) => value!.isEmpty
                     ? AppLocalizations.of(context)!.required
                     : null,
                 onChanged: (value) {
-                  wp.references[widget.index]['phoneNumber'] = value;
+                  wp.workExperience[widget.index]['jobTitle'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.phoneNumber,
+                  hintText: AppLocalizations.of(context)!.jobTitle,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
@@ -118,17 +130,18 @@ class _ReferenceFormWidgetState extends State<ReferenceFormWidget> {
             const SizedBox(height: 10),
             AuthInput(
               child: TextFormField(
-                controller: _emailController,
-                textInputAction: TextInputAction.next,
+                maxLines: 3,
+                controller: _jobDescriptionController,
+                textInputAction: TextInputAction.newline,
                 onEditingComplete: () => node.nextFocus(),
                 validator: (value) => value!.isEmpty
                     ? AppLocalizations.of(context)!.required
                     : null,
                 onChanged: (value) {
-                  wp.references[widget.index]['email'] = value;
+                  wp.workExperience[widget.index]['jobDescription'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.email,
+                  hintText: AppLocalizations.of(context)!.jobDescription,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
@@ -142,34 +155,18 @@ class _ReferenceFormWidgetState extends State<ReferenceFormWidget> {
               ),
             ),
             const SizedBox(height: 10),
-            AuthInput(
-              child: TextFormField(
-                controller: _relationshipController,
-                textInputAction: TextInputAction.next,
-                onEditingComplete: () => node.nextFocus(),
-                validator: (value) => value!.isEmpty
-                    ? AppLocalizations.of(context)!.required
-                    : null,
-                onChanged: (value) {
-                  wp.references[widget.index]['relationship'] = value;
-                },
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.relationship,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  fillColor: Colors.white,
-                  filled: true,
-                ),
-              ),
+            WorkExperienceLocationForm(
+              intialIndex: widget.index,
+            ),
+            const SizedBox(height: 10),
+            WorkExperienceDate(
+              intialIndex: widget.index,
             ),
             const SizedBox(height: 10),
             const Divider(
               color: Colors.deepOrangeAccent,
+              height: 20,
+              thickness: 2,
             ),
           ],
         ),

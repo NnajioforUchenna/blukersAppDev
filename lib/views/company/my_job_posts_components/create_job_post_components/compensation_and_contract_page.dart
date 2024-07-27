@@ -8,7 +8,7 @@ import '../../../../models/job_post.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../../utils/localization/localized_job_types.dart';
 import '../../../../utils/localization/localized_salary_periods.dart';
-import '../../../worker/worker_profile/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
+import '../../../worker/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 import 'show_search_button.dart';
 
 enum SalaryPeriod { hourly, daily, monthly, yearly }

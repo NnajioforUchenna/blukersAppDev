@@ -1,5 +1,4 @@
 import 'package:blukers/views/worker/jobs_home/worker_home_components/jobs_mobile_view/jobs_mobile_view_compnents/search_and_translate_row.dart';
-import 'package:blukers/views/worker/jobs_home/worker_home_components/jobs_mobile_view/jobs_mobile_view_compnents/sign_in_row.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -48,7 +47,6 @@ class _SelectOrSearchJobsState extends State<SelectOrSearchJobs> {
 
     return Column(
       children: [
-        const SignInRow(),
         const SearchAndTranslateRow(),
         Expanded(
           child: AnimatedCrossFade(

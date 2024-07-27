@@ -64,7 +64,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                   Row(
                     children: [
                       Text(
-                        widget.worker?.firstName ?? '',
+                        widget.worker?.workerResumeDetails?.firstName ?? '',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -72,7 +72,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        widget.worker?.lastName ?? '',
+                        widget.worker?.workerResumeDetails?.lastName ?? '',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -104,7 +104,8 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.worker?.skillIds.join(', ') ??
+                              widget.worker?.workerResumeDetails?.skillIds
+                                      ?.join(', ') ??
                                   '', // TODO: Change this to worker?.jobIds?.join(', ') ?? '',
                               style: const TextStyle(
                                 fontSize: 18,
@@ -130,8 +131,9 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                       if (widget.worker?.profilePhotoUrl != null)
                         RoundedImageWidget(
                           imageUrl: widget.worker!.profilePhotoUrl,
-                          firstChar:
-                              getFirstChar(widget.worker?.lastName ?? ''),
+                          firstChar: getFirstChar(
+                              widget.worker?.workerResumeDetails?.lastName ??
+                                  ''),
                         ),
                     ],
                   )

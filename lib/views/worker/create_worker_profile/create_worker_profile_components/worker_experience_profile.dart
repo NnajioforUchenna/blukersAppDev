@@ -61,8 +61,8 @@ class WorkerExperienceProfile extends StatelessWidget {
                     isCurrentlyWorking:
                         wp.workExperience[i]["isCurrentlyWorking"] ?? false));
               }
-              up.appUser!.worker!.workExperiences = ref;
-              await up.updateWorkerInfo(up.appUser!.worker!);
+              up.appUser!.workerResumeDetails?.workExperiences = ref;
+              // await up.updateWorkerInfo(up.appUser!.worker!);
               Navigator.of(context).pop();
             },
             child: Container(

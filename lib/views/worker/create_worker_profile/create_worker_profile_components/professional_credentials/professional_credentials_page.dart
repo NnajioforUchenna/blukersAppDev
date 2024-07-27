@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
-import '../../../../../old_common_views/skills_form/skills_form.dart';
+import '../../../../old_common_views/skills_form/skills_form.dart';
 import '../credential_field.dart';
 import '../timeline_navigation_button.dart';
 

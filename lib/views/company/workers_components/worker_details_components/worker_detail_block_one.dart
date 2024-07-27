@@ -35,7 +35,8 @@ class WorkerDetailBlockOne extends StatelessWidget {
               child: RoundedImageWidget(
                 imageUrl: worker.profilePhotoUrl,
                 size: Responsive.isMobile(context) ? 80 : 100,
-                firstChar: getFirstChar(worker.lastName ?? ''),
+                firstChar:
+                    getFirstChar(worker.workerResumeDetails?.lastName ?? ''),
               ),
             ),
             const SizedBox(height: 15),
@@ -69,7 +70,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  worker.firstName ?? '',
+                  worker.workerResumeDetails?.firstName ?? '',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24 * scaleFactor,
@@ -77,7 +78,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  worker.middleName ?? '',
+                  worker.workerResumeDetails?.middleName ?? '',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -85,7 +86,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  worker.lastName ?? '',
+                  worker.workerResumeDetails?.lastName ?? '',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -117,7 +118,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        worker.skillIds.join(', ') ??
+                        worker.workerResumeDetails?.skillIds?.join(', ') ??
                             '', // TODO: Change this to worker?.jobIds?.join(', ') ?? '',
                         style: const TextStyle(
                           fontSize: 24,

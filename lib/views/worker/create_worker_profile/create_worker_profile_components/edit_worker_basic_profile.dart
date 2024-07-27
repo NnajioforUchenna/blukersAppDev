@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../../models/worker.dart';
 import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../utils/styles/index.dart';
-import '../../../../old_common_views/info_edit_component.dart';
+import '../../../old_common_views/info_edit_component.dart';
 
 class EditWorkerBasicProfile extends StatefulWidget {
   const EditWorkerBasicProfile({
@@ -20,7 +20,7 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    Worker worker = up.appUser!.worker!;
+    Worker worker = Worker.fromAppUser(up.appUser!);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -40,18 +40,18 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
         ),
         InfoEditComponent(
           placeHolder: AppLocalizations.of(context)!.firstName,
-          value: worker.firstName,
+          value: worker.workerResumeDetails!.firstName!,
           action: TextInputAction.next,
           onChangeValue: (value) {
-            worker.firstName = value;
+            worker.workerResumeDetails!.firstName != value;
           },
         ),
         InfoEditComponent(
           placeHolder: AppLocalizations.of(context)!.middleName,
-          value: worker.middleName ?? "",
+          value: worker.workerResumeDetails!.middleName ?? "",
           action: TextInputAction.next,
           onChangeValue: (value) {
-            worker.middleName = value;
+            worker.workerResumeDetails!.middleName = value;
           },
           // ext: ext,
           // onChangeExtValue: (value) {
@@ -60,10 +60,10 @@ class _EditBasicProfileState extends State<EditWorkerBasicProfile> {
         ),
         InfoEditComponent(
           placeHolder: AppLocalizations.of(context)!.lastName,
-          value: worker.lastName,
+          value: worker.workerResumeDetails!.lastName!,
           action: TextInputAction.done,
           onChangeValue: (value) {
-            worker.lastName = value;
+            worker.workerResumeDetails!.lastName = value;
           },
         ),
         InfoEditComponent(

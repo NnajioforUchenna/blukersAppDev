@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../providers/worker_provider.dart';
-import '../../../../../auth/common_widget/auth_input.dart';
+import '../../../../auth/common_widget/auth_input.dart';
 import '../timeline_navigation_button.dart';
 import '../your_resume.dart';
 

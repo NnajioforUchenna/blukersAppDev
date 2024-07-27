@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-import '../../../../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
-
 class ResumeScreen extends StatefulWidget {
   const ResumeScreen({Key? key}) : super(key: key);
 
@@ -33,8 +31,8 @@ class _ResumeScreenState extends State<ResumeScreen> {
     //docFile = DefaultCacheManager().getSingleFile("https://firebasestorage.googleapis.com/v0/b/Blukers-5275d.appspot.com/o/files%2FDocument%20from%20Jyot%20Vavadiya?alt=media&token=e8da4c45-8050-4022-bc4d-32b6b6703634");
     return Scaffold(
         backgroundColor: Colors.black,
-        appBar: MyAppBar(
-          title: "Resume",
+        appBar: AppBar(
+          title: const Text("Resume"),
         ),
         body: Container(
           width: MediaQuery.of(context).size.width,

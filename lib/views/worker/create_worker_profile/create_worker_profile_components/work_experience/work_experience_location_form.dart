@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../auth/common_widget/auth_input.dart';
+import '../../../../auth/common_widget/auth_input.dart';
+
 
 class WorkExperienceLocationForm extends StatefulWidget {
   final int intialIndex;
