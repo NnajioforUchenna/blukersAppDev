@@ -8,7 +8,7 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
-import '../views/common_vieiws/page_template/page_template.dart';
+import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
@@ -31,6 +31,7 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
+import '../views/worker/worker_page_template/worker_page_template.dart';
 import '../views/worker/worker_profile/worker_profile.dart';
 import 'authentication_wrapper.dart';
 
@@ -39,8 +40,7 @@ final goRouter = GoRouter(routes: routes, initialLocation: '/');
 final routes = [
   GoRoute(
       path: '/',
-      builder: (context, state) =>
-          const CreateWorkerProfile()), // const LandingPage()
+      builder: (context, state) => const LandingPage()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),
@@ -48,7 +48,7 @@ final routes = [
   // Routes with PageTemplate as Parent:
   ShellRoute(
     builder: (context, state, child) {
-      return PageTemplate(
+      return WorkerPageTemplate(
         child: child,
       );
     },
@@ -76,6 +76,9 @@ final routes = [
   GoRoute(path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
   GoRoute(
       path: '/companyChat', builder: (context, state) => const CompanyChat()),
+  GoRoute(
+      path: '/createResume',
+      builder: (context, state) => const CreateWorkerProfile()),
 
   GoRoute(
       path: '/companyProfile',

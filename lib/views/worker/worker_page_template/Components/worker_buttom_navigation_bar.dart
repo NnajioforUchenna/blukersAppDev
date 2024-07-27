@@ -8,14 +8,15 @@ import '../../../../providers/app_settings_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../utils/styles/index.dart';
 
-class MyButtomNavigationBar extends StatefulWidget {
-  const MyButtomNavigationBar({super.key});
+class WorkerButtomNavigationBar extends StatefulWidget {
+  const WorkerButtomNavigationBar({super.key});
 
   @override
-  State<MyButtomNavigationBar> createState() => _MyButtomNavigationBarState();
+  State<WorkerButtomNavigationBar> createState() =>
+      _WorkerButtomNavigationBarState();
 }
 
-class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
+class _WorkerButtomNavigationBarState extends State<WorkerButtomNavigationBar> {
   int currentPageIndex = 0;
 
   @override

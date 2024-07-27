@@ -8,8 +8,8 @@ import '../../providers/user_provider_parts/user_provider.dart';
 import '../../services/responsive.dart';
 import '../../utils/styles/theme_colors.dart';
 import '../auth/common_widget/login_or_register.dart';
-import '../common_vieiws/page_template/page_template.dart';
 import '../old_common_views/worker_timeline/display_worker_timeline_dialog.dart';
+import '../worker/worker_page_template/worker_page_template.dart';
 import 'my_job_posts_components/interesting_workers_tab.dart';
 import 'my_job_posts_components/my_job_posts_tab.dart';
 
@@ -20,7 +20,7 @@ class MyJobPosts extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    return PageTemplate(
+    return WorkerPageTemplate(
       child: up.appUser == null
           ? const LoginOrRegister()
           : DefaultTabController(

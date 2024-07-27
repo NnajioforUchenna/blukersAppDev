@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../utils/styles/index.dart';
+import '../../../../utils/styles/theme_colors.dart';
 
-class MyNavigationRail extends StatefulWidget {
-  const MyNavigationRail({super.key});
+class CompanyNavigationRail extends StatefulWidget {
+  const CompanyNavigationRail({super.key});
 
   @override
-  State<MyNavigationRail> createState() => _MyNavigationRailState();
+  State<CompanyNavigationRail> createState() => _CompanyNavigationRailState();
 }
 
-class _MyNavigationRailState extends State<MyNavigationRail> {
+class _CompanyNavigationRailState extends State<CompanyNavigationRail> {
   int _selectedIndex = 0;
 
   @override

@@ -1,17 +1,17 @@
 import 'package:blukers/providers/app_settings_provider.dart';
-import 'package:blukers/views/common_vieiws/page_template/page_template_components/my_app_bar.dart';
-import 'package:blukers/views/common_vieiws/page_template/page_template_components/my_drawer.dart';
+import 'package:blukers/views/worker/worker_page_template/Components/worker_app_bar.dart';
+import 'package:blukers/views/worker/worker_page_template/Components/worker_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/responsive.dart';
-import 'page_template_components/my_buttom_navigation_bar.dart';
-import 'page_template_components/my_navigation_rail.dart';
+import 'Components/worker_buttom_navigation_bar.dart';
+import 'Components/worker_navigation_rail.dart';
 
-class PageTemplate extends StatelessWidget {
+class WorkerPageTemplate extends StatelessWidget {
   final Widget child;
 
-  PageTemplate({
+  const WorkerPageTemplate({
     super.key,
     required this.child,
   });
@@ -21,10 +21,11 @@ class PageTemplate extends StatelessWidget {
     AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
     return Scaffold(
       key: asp.scaffoldKey,
-      endDrawer: const MyDrawer(),
-      appBar: const MyAppBar(),
-      bottomNavigationBar:
-          Responsive.isDesktop(context) ? null : const MyButtomNavigationBar(),
+      endDrawer: const WorkerDrawer(),
+      appBar: const WorkerAppBar(),
+      bottomNavigationBar: Responsive.isDesktop(context)
+          ? null
+          : const WorkerButtomNavigationBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -34,7 +35,7 @@ class PageTemplate extends StatelessWidget {
                 children: [
                   if (Responsive.isDesktop(context))
                     const Expanded(
-                      child: MyNavigationRail(),
+                      child: WorkerNavigationRail(),
                     ),
                   Expanded(
                     flex: 5,

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({super.key});
+class WorkerDrawer extends StatelessWidget {
+  const WorkerDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class MyDrawer extends StatelessWidget {
           _createDrawerItem(
             context: context,
             icon: Icons.person,
-            text: 'Choose UserType',
+            text: 'Choose Account Type',
             route: '/',
           ),
           _createDrawerItem(

@@ -7,8 +7,8 @@ import '../../providers/chat_provider.dart';
 import '../../providers/user_provider_parts/user_provider.dart';
 import '../auth/common_widget/login_or_register.dart';
 import '../common_vieiws/icon_text_404.dart';
-import '../common_vieiws/page_template/page_template.dart';
 import '../worker/worker_chat/components/chat_recipient_widget.dart';
+import '../worker/worker_page_template/worker_page_template.dart';
 
 class CompanyChat extends StatelessWidget {
   const CompanyChat({super.key});
@@ -18,7 +18,7 @@ class CompanyChat extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     ChatProvider cp = Provider.of<ChatProvider>(context);
 
-    return PageTemplate(
+    return WorkerPageTemplate(
         child: up.appUser == null
             ? const LoginOrRegister()
             : LayoutBuilder(

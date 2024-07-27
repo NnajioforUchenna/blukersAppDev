@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../../models/job_post.dart';
 import '../../../../../providers/job_posts_provider.dart';
 import '../../../../common_vieiws/loading_page.dart';
-import '../../../../common_vieiws/page_template/page_template.dart';
+import '../../../worker_page_template/worker_page_template.dart';
 import 'web_job_search_result_page.dart';
 import 'web_landing_page_search_bar.dart';
 
@@ -20,7 +20,7 @@ class WebSearchLandingPage extends StatelessWidget {
         : jp.recent50Jobs.isNotEmpty
             ? jp.recent50Jobs.values.toList()
             : [];
-    return PageTemplate(
+    return WorkerPageTemplate(
       child: SingleChildScrollView(
         child: Column(
           children: [
