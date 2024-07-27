@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../services/responsive.dart';
+import '../../../../services/responsive.dart';
 import 'desktop_search_bar.dart';
 import 'mobile_search_bar.dart';
 

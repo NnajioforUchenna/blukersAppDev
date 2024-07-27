@@ -1,12 +1,12 @@
-import '../../../providers/job_posts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider_parts/user_provider.dart';
-import '../../../utils/styles/theme_colors.dart';
-import 'search_page.dart';
+import '../../../../providers/job_posts_provider.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../utils/styles/theme_colors.dart';
+import '../search_jobs_ui.dart';
 
 class MobileSearchBar extends StatefulWidget {
   const MobileSearchBar({super.key});
@@ -58,7 +58,7 @@ class _MobileSearchBarState extends State<MobileSearchBar> {
                 onChanged: (value) {
                   showDialog(
                       context: context,
-                      builder: (context) => const SearchPage());
+                      builder: (context) => const SearchJobsUi());
                 },
                 decoration: InputDecoration(
                   isDense: true, // Added this
@@ -90,7 +90,7 @@ class _MobileSearchBarState extends State<MobileSearchBar> {
                   // Put your function here
                   showDialog(
                       context: context,
-                      builder: (context) => const SearchPage());
+                      builder: (context) => const SearchJobsUi());
                 },
                 style: GoogleFonts.montserrat(
                     fontSize: 14,

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/job_posts_provider.dart';
-import '../../../providers/user_provider_parts/user_provider.dart';
-import '../../../providers/worker_provider.dart';
-import '../../../services/responsive.dart';
-import '../../../utils/styles/theme_colors.dart';
+import '../../../../providers/job_posts_provider.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../providers/worker_provider.dart';
+import '../../../../services/responsive.dart';
+import '../../../../utils/styles/theme_colors.dart';
 
 class DesktopSearchBar extends StatefulWidget {
   const DesktopSearchBar({super.key});
@@ -153,6 +154,8 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
             await jp.searchJobPosts(nameRelated, locationRelated);
           }
 
+          GoRouter.of(context).pushReplacement('/jobSearchResults');
+
           setState(() {
             _isLoading = false; // End loading
           });
@@ -195,6 +198,7 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
                   wp.setSearching(false);
                   jp.setSearching(false);
                   jp.clearSearchParameters();
+                  GoRouter.of(context).go('/jobs');
                 });
               },
               style: ElevatedButton.styleFrom(

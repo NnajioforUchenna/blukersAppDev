@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../providers/job_posts_provider.dart';
-import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
-import '../../../../../common_vieiws/all_search_bar_components/search_page.dart';
+import '../../../../search_jobs/search_jobs_ui.dart';
 
 class JobMobileSearchBar extends StatefulWidget {
   const JobMobileSearchBar({super.key});
@@ -22,17 +22,11 @@ class _JobMobileSearchBarState extends State<JobMobileSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider up = Provider.of<UserProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    if (up.userRole == 'Company') {
-      buttonLabel = AppLocalizations.of(context)!.searchWorkers;
-      searchName =
-          AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
-    } else {
-      buttonLabel = AppLocalizations.of(context)!.searchJobs;
-      searchName =
-          AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
-    }
+
+    buttonLabel = AppLocalizations.of(context)!.searchJobs;
+    searchName = AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
+
     if (jp.nameSearch.isNotEmpty || jp.locationSearch.isNotEmpty) {
       controller.text = "${jp.nameSearch} ${jp.locationSearch}";
     }
@@ -44,7 +38,7 @@ class _JobMobileSearchBarState extends State<JobMobileSearchBar> {
         controller: controller,
         onChanged: (value) {
           showDialog(
-              context: context, builder: (context) => const SearchPage());
+              context: context, builder: (context) => const SearchJobsUi());
         },
         decoration: InputDecoration(
           isDense: true,
@@ -63,6 +57,7 @@ class _JobMobileSearchBarState extends State<JobMobileSearchBar> {
                   : () {
                       controller.clear();
                       jp.clearSearchParameters();
+                      GoRouter.of(context).pushReplacement('/jobs');
                     }),
           border: const OutlineInputBorder(),
           enabledBorder: const OutlineInputBorder(
@@ -77,7 +72,7 @@ class _JobMobileSearchBarState extends State<JobMobileSearchBar> {
         onTap: () {
           // Put your function here
           showDialog(
-              context: context, builder: (context) => const SearchPage());
+              context: context, builder: (context) => const SearchJobsUi());
         },
         style: GoogleFonts.montserrat(
             fontSize: 14,
