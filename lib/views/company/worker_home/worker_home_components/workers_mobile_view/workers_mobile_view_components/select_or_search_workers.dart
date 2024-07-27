@@ -1,3 +1,4 @@
+import 'package:blukers/views/company/worker_home/worker_home_components/workers_mobile_view/workers_mobile_view_components/search_and_translate_row.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -48,7 +49,7 @@ class _SelectOrSearchWorkersState extends State<SelectOrSearchWorkers> {
     return Column(
       children: [
         const SignInRow(),
-        const CompanySearchAndTranslateRow(),
+        const SearchAndTranslateRowCompany(),
         Expanded(
           child: AnimatedCrossFade(
             firstChild: const LoadingPage(),
@@ -74,14 +75,5 @@ class _SelectOrSearchWorkersState extends State<SelectOrSearchWorkers> {
         ),
       ],
     );
-  }
-}
-
-class CompanySearchAndTranslateRow extends StatelessWidget {
-  const CompanySearchAndTranslateRow({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(height: 10);
   }
 }

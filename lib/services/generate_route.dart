@@ -92,8 +92,6 @@ final routes = [
       builder: (context, state) => const CompanyChat()),
 
   // Worker Routes
-
-  GoRoute(path: '/search', builder: (context, state) => const SearchJobsUi()),
   GoRoute(
       path: '/worker_chat-message',
       builder: (context, state) => const ChatMessageScreen()),
