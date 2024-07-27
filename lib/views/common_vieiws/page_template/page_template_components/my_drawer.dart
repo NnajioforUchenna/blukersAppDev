@@ -1,13 +1,17 @@
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    UserProvider up = context.read<UserProvider>();
+
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -51,8 +55,8 @@ class MyDrawer extends StatelessWidget {
           _createDrawerItem(
             context: context,
             icon: Icons.search,
-            text: 'Search',
-            route: '/search',
+            text: 'search',
+            route: up.appUser == 'company' ? '/search_workers' : '/search_jobs',
           ),
           _createDrawerItem(
             context: context,

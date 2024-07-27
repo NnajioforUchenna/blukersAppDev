@@ -1,3 +1,4 @@
+import 'package:blukers/views/company/search_workers/workers_search_result_page/components/worker_pop_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +9,6 @@ import '../../../providers/job_posts_provider.dart';
 import '../../../providers/worker_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import '../../old_common_views/components/animations/index.dart';
-import '../../old_common_views/small_pop_button_widget.dart';
 
 class SearchWorkersUi extends StatefulWidget {
   const SearchWorkersUi({super.key});
@@ -133,13 +133,11 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
                                   _isLoading = false;
                                 });
 
-                                Navigator.of(context).pop();
+                                if (GoRouter.of(context).canPop())
+                                  GoRouter.of(context).pop();
 
-                                Future.delayed(
-                                    const Duration(milliseconds: 200), () {
-                                  GoRouter.of(context).pushReplacement(
-                                      '/workerSearchResultPage');
-                                });
+                                GoRouter.of(context)
+                                    .pushReplacement('/workerSearchResults');
                               },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ThemeColors.blukersOrangeThemeColor,
@@ -172,7 +170,7 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
               const Positioned(
                 top: 10,
                 left: 10,
-                child: SmallPopButtonWidget(),
+                child: WorkerPopButtonWidget(),
               ),
             ],
           ),

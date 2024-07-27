@@ -1,13 +1,15 @@
 import 'package:blukers/views/company/worker_home/worker_home_components/workers_mobile_view/workers_mobile_view_components/search_and_translate_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../../providers/app_settings_provider.dart';
 import '../../../../../../providers/industry_provider.dart';
-import '../../../../../../providers/job_posts_provider.dart';
-import '../../../../../Modules/select_by_industry/select_by_industry.dart';
+import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../common_vieiws/loading_page.dart';
+import '../../../../../worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/mobile_industry_headpanel.dart';
 import '../../../../../worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/sign_in_row.dart';
 
 class SelectOrSearchWorkers extends StatefulWidget {
@@ -43,30 +45,47 @@ class _SelectOrSearchWorkersState extends State<SelectOrSearchWorkers> {
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
-    JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     asp = Provider.of<AppSettingsProvider>(context);
 
     return Column(
       children: [
         const SignInRow(),
         const SearchAndTranslateRowCompany(),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 30.0),
+          child: Text(AppLocalizations.of(context)!.selectAnIndustry,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                fontSize: 22.0,
+                fontWeight: FontWeight.w700,
+                color: ThemeColors.secondaryThemeColor,
+              )),
+        ),
         Expanded(
           child: AnimatedCrossFade(
             firstChild: const LoadingPage(),
             secondChild: Showcase(
-                key: asp.selection,
-                description: 'Use this section to Select Jobs by industry',
-                targetShapeBorder: const CircleBorder(),
-                overlayOpacity: 0.6,
-                tooltipBackgroundColor: const Color.fromRGBO(30, 117, 187, 1),
-                descTextStyle: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              key: asp.selection,
+              description: 'Use this section to Select Jobs by industry',
+              targetShapeBorder: const CircleBorder(),
+              overlayOpacity: 0.6,
+              tooltipBackgroundColor: const Color.fromRGBO(30, 117, 187, 1),
+              descTextStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: ip.industries.values.map((industry) {
+                    return Container(
+                      margin: const EdgeInsets.only(
+                          bottom: 10.0, left: 30, right: 30),
+                      child: MobileIndustryHeadPanel(industry: industry),
+                    );
+                  }).toList(),
                 ),
-                child: SelectByIndustry(
-                  selectBy: 'Jobs',
-                  getRecords: jp.getJobPostsByJobID,
-                )),
+              ),
+            ),
             crossFadeState: ip.industries.isEmpty
                 ? CrossFadeState.showFirst
                 : CrossFadeState.showSecond,

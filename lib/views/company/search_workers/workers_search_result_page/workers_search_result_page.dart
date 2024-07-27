@@ -3,6 +3,11 @@ import 'package:provider/provider.dart';
 
 import '../../../../models/worker.dart';
 import '../../../../providers/worker_provider.dart';
+import '../../../../services/responsive.dart';
+import '../../../worker/jobs_home/job_home_components/jobs_desktop_view/select_desktop_language_dialog.dart';
+import '../../../worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/sign_in_row.dart';
+import '../../../worker/search_jobs/job_search_bar_components/all_search_bar.dart';
+import '../../worker_home/worker_home_components/workers_mobile_view/workers_mobile_view_components/search_and_translate_row.dart';
 import 'components/complete_worker_widget.dart';
 
 class WorkerSearchResultPage extends StatelessWidget {
@@ -12,6 +17,22 @@ class WorkerSearchResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     WorkerProvider wp = Provider.of<WorkerProvider>(context);
     List<Worker> workers = wp.selectedWorkers;
-    return CompleteWorkerWidget(workers: workers);
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          if (Responsive.isMobile(context)) ...[
+            const SignInRow(),
+            const SearchAndTranslateRowCompany(),
+          ] else ...[
+            const AllSearchBar(),
+            const SizedBox(height: 10),
+            const Center(child: SelectDesktopLanguageDialog()),
+            const SizedBox(height: 10),
+            const Divider(),
+          ],
+          CompleteWorkerWidget(workers: workers),
+        ],
+      ),
+    );
   }
 }
