@@ -6,7 +6,7 @@ import '../../../models/chat_message.dart';
 import '../../../providers/chat_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
-import '../../company/workers_components/chat_component.dart';
+import '../../company/workers_home/workers_components/chat_component.dart';
 
 class ChatMessageScreen extends StatefulWidget {
   const ChatMessageScreen({super.key});

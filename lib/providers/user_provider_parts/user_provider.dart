@@ -72,8 +72,7 @@ class UserProvider with ChangeNotifier {
   List<Map<String, dynamic>> references = [{}, {}];
 
   bool isUserRegistered() {
-    if (_appUser != null &&
-        _appUser?.registrationDetails?.jobsPreference != null) {
+    if (_appUser != null) {
       return true;
     } else {
       return false;

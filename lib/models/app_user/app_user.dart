@@ -27,7 +27,9 @@ class AppUser {
   WorkerResumeDetails? workerResumeDetails;
   WorkerRecords? workerRecords;
 
+  // Tracking Company Profile form
   Company? company;
+
   Address? address;
 
   // Device Token for Push Notification

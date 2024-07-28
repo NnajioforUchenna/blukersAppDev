@@ -16,12 +16,15 @@ class SelectByIndustry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
+    String headerText = selectBy == 'Jobs'
+        ? AppLocalizations.of(context)!.selectJobsAnIndustry
+        : AppLocalizations.of(context)!.selectWorkersByIndustry;
     return SingleChildScrollView(
       child: Column(
         children: [
           Container(
             margin: const EdgeInsets.symmetric(vertical: 30.0),
-            child: Text(AppLocalizations.of(context)!.selectAnIndustry,
+            child: Text(headerText,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserrat(
                   fontSize: 22.0,

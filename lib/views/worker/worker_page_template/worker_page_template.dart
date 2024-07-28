@@ -27,18 +27,15 @@ class WorkerPageTemplate extends StatelessWidget {
           ? null
           : const WorkerButtomNavigationBar(),
       body: SafeArea(
-        child: Column(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (Responsive.isDesktop(context)) const WorkerNavigationRail(),
             Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              flex: 5,
+              child: Column(
                 children: [
-                  if (Responsive.isDesktop(context))
-                    const Expanded(
-                      child: WorkerNavigationRail(),
-                    ),
                   Expanded(
-                    flex: 5,
                     child: child,
                   ),
                 ],

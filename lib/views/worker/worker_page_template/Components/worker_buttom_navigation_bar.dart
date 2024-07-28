@@ -40,15 +40,15 @@ class _WorkerButtomNavigationBarState extends State<WorkerButtomNavigationBar> {
           NavigationDestination(
             icon: buildCustomIcon(
               context,
-              'assets/icons/navicon-01.png',
+              'assets/icons/jobs-icon.png',
               ThemeColors.grey1ThemeColor,
             ),
             selectedIcon: buildCustomIcon(
               context,
-              'assets/icons/navicon-01-selected.png',
+              'assets/icons/jobs-icon-selected.png',
               ThemeColors.primaryThemeColor,
             ),
-            label: AppLocalizations.of(context)!.home,
+            label: AppLocalizations.of(context)!.jobs,
           ),
           NavigationDestination(
             icon: buildCustomIcon(
@@ -102,7 +102,7 @@ class _WorkerButtomNavigationBarState extends State<WorkerButtomNavigationBar> {
         ],
         onDestinationSelected: (int index) {
           asp.regenerateKeys();
-          up.navigate(context, index);
+          up.navigateWorker(context, index);
         },
         selectedIndex: currentPageIndex,
         backgroundColor: Colors.white,

@@ -8,9 +8,9 @@ import '../providers/job_posts_provider.dart';
 import '../providers/payment_providers/payments_provider.dart';
 import '../providers/user_provider_parts/user_provider.dart';
 import '../views/common_vieiws/splash_screen/splash_screen_main.dart';
-import '../views/company/workers.dart';
+import '../views/company/workers_home/workers_home.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
-import '../views/worker/jobs_home/worker_home_components/jobs_desktop_view/web_search_landing_page.dart';
+import '../views/worker/jobs_home/Components/jobs_desktop_view/web_search_landing_page.dart';
 
 class AuthenticationWrapper extends StatefulWidget {
   const AuthenticationWrapper({super.key});

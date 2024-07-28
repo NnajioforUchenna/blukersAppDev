@@ -7,7 +7,7 @@ import '../models/address.dart';
 import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
 import '../views/auth/please_login_dialog.dart';
-import '../views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
+import '../views/company/create_job_post/create_job_post_components/compensation_and_contract_page.dart';
 
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;

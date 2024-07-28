@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -68,6 +69,12 @@ class CompanyDrawer extends StatelessWidget {
           ),
           _createDrawerItem(
             context: context,
+            icon: Icons.person,
+            text: 'Create a Job Post',
+            route: '/createJobPost',
+          ),
+          _createDrawerItem(
+            context: context,
             icon: Icons.route,
             text: 'Path to Employing a Worker',
             route: '/pathToEmployingWorker',
@@ -107,12 +114,14 @@ class CompanyDrawer extends StatelessWidget {
           Row(
             children: <Widget>[
               Icon(icon),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  text,
-                  style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w600,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: AutoSizeText(
+                    text,
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),

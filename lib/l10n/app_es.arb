@@ -474,5 +474,7 @@
   "delete": "Eliminar",
   "noworkersfound": "No se encontraron trabajadores",
   "appUserInformation": "Información del Usuario de la Aplicación",
-  "selectWorkersPreference": "Seleccionar Preferencia de Trabajadores"
+  "selectWorkersPreference": "Seleccionar Preferencia de Trabajadores",
+  "selectJobsAnIndustry": "Seleccionar trabajos por industria",
+  "selectWorkersByIndustry": "Seleccionar trabajadores por industria"
 }

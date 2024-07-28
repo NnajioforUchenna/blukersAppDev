@@ -10,12 +10,13 @@ import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
 import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
-import '../views/company/company_chat.dart';
+import '../views/company/company_chat/company_chat.dart';
+import '../views/company/company_page_template/company_page_template.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
-import '../views/company/my_job_posts.dart';
-import '../views/company/my_job_posts_components/applicants/applicants.dart';
-import '../views/company/my_job_posts_components/create_job_post_components/create_job_post.dart';
-import '../views/company/workers.dart';
+import '../views/company/my_job_posts/my_job_posts.dart';
+import '../views/company/my_job_posts/my_job_posts_components/applicants/applicants.dart';
+import '../views/company/create_job_post/create_job_post.dart';
+import '../views/company/workers_home/workers_home.dart';
 import '../views/worker/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
@@ -71,11 +72,23 @@ final routes = [
     ],
   ),
 
-  // Company Routes
-  GoRoute(path: '/workers', builder: (context, state) => const Workers()),
-  GoRoute(path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
-  GoRoute(
-      path: '/companyChat', builder: (context, state) => const CompanyChat()),
+  ShellRoute(
+    builder: (context, state, child) {
+      return CompanyPageTemplate(
+        child: child,
+      );
+    },
+    routes: [
+      // Company Routes
+      GoRoute(path: '/workers', builder: (context, state) => const Workers()),
+      GoRoute(
+          path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
+      GoRoute(
+          path: '/companyChat',
+          builder: (context, state) => const CompanyChat()),
+    ],
+  ),
+
   GoRoute(
       path: '/createResume',
       builder: (context, state) => const CreateWorkerProfile()),

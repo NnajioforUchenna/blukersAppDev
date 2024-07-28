@@ -41,12 +41,12 @@ class _CompanyButtomNavigationBarState
           NavigationDestination(
             icon: buildCustomIcon(
               context,
-              'assets/icons/navicon-01.png',
+              'assets/icons/workers-icon.png',
               ThemeColors.grey1ThemeColor,
             ),
             selectedIcon: buildCustomIcon(
               context,
-              'assets/icons/navicon-01-selected.png',
+              'assets/icons/workers-icon-selected.png',
               ThemeColors.primaryThemeColor,
             ),
             label: AppLocalizations.of(context)!.workers,
@@ -116,7 +116,6 @@ class _CompanyButtomNavigationBarState
   Widget buildCustomIcon(context, src, color) {
     return Image.asset(
       src,
-      // width: 35,
       height: MediaQuery.of(context).size.height * 0.035,
       fit: BoxFit.contain,
       color: color,
