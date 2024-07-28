@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/worker.dart';
-import '../../../providers/worker_provider.dart';
-import '../../../services/responsive.dart';
-import 'animate_worker_details_page.dart';
-import 'display_worker_card.dart';
-import 'display_worker_dialog.dart';
+import '../../../../../models/worker.dart';
+import '../../../../../providers/worker_provider.dart';
+import '../../../../../services/responsive.dart';
+import '../../../workers_components/animate_worker_details_page.dart';
+import '../../../workers_components/display_worker_card.dart';
+import '../../../workers_components/display_worker_dialog.dart';
 
 class CompleteWorkerWidget extends StatelessWidget {
   final List<Worker> workers;

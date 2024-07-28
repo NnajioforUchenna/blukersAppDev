@@ -8,7 +8,7 @@ import '../../../providers/company_provider.dart';
 import '../../../providers/worker_provider.dart';
 import '../../common_vieiws/icon_text_404.dart';
 import '../../common_vieiws/policy_terms/policy_terms_components/loading_animation.dart';
-import '../workers_components/complete_worker_widget.dart';
+import '../search_workers/workers_search_result_page/components/complete_worker_widget.dart';
 
 class InterestingWorkersTab extends StatelessWidget {
   const InterestingWorkersTab({super.key});

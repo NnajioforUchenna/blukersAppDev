@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../../utils/styles/theme_colors.dart';
+import '../../../../search_jobs/job_search_bar_components/job_mobile_search_bar.dart';
 import 'job_mobile_choose_target_language.dart';
-import 'job_mobile_search_bar.dart';
 
 class SearchAndTranslateRow extends StatelessWidget {
   const SearchAndTranslateRow({super.key});

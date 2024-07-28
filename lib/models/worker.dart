@@ -51,7 +51,7 @@ class Worker {
   int createdAt;
   int modifiedAt;
 
-  // Set Jobs Perferences
+  // Set Jobs Preferences
   Preference? jobsPreference;
 
   Worker({

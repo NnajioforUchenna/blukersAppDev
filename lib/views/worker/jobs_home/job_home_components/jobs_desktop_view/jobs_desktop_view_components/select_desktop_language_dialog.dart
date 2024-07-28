@@ -4,8 +4,8 @@ import 'package:blukers/providers/app_settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../providers/job_posts_provider.dart';
-import '../../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../../../providers/job_posts_provider.dart';
+import '../../../../../../../providers/user_provider_parts/user_provider.dart';
 
 class LanguageManager {
   static Locale? _currentLocale;
@@ -31,10 +31,12 @@ class SelectDesktopLanguageDialog extends StatefulWidget {
   const SelectDesktopLanguageDialog({super.key});
 
   @override
-  State<SelectDesktopLanguageDialog> createState() => _SelectDesktopLanguageDialogState();
+  State<SelectDesktopLanguageDialog> createState() =>
+      _SelectDesktopLanguageDialogState();
 }
 
-class _SelectDesktopLanguageDialogState extends State<SelectDesktopLanguageDialog> {
+class _SelectDesktopLanguageDialogState
+    extends State<SelectDesktopLanguageDialog> {
   String? selectedLanguageCode;
 
   String jsonString = '''

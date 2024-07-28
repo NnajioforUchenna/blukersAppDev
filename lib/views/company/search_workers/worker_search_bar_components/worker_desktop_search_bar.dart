@@ -2,89 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../providers/job_posts_provider.dart';
-import '../../../../../services/responsive.dart';
-import '../../../../../utils/styles/theme_colors.dart';
+import '../../../../providers/job_posts_provider.dart';
+import '../../../../providers/worker_provider.dart';
+import '../../../../services/responsive.dart';
+import '../../../../utils/styles/theme_colors.dart';
 
-class WebSearchBar extends StatefulWidget {
-  const WebSearchBar({super.key});
+class WorkerDesktopSearchBar extends StatefulWidget {
+  const WorkerDesktopSearchBar({super.key});
 
   @override
-  State<WebSearchBar> createState() => _WebSearchBarState();
+  State<WorkerDesktopSearchBar> createState() => _WorkerDesktopSearchBarState();
 }
 
-class _WebSearchBarState extends State<WebSearchBar> {
+class _WorkerDesktopSearchBarState extends State<WorkerDesktopSearchBar> {
   final TextEditingController _searchController1 = TextEditingController();
   final TextEditingController _searchController2 = TextEditingController();
+  late WorkerProvider wp;
   late JobPostsProvider jp;
   bool _isLoading = false;
+
+  bool isMobileSearchBarVisible = false;
 
   @override
   void initState() {
     super.initState();
-
-    jp = Provider.of<JobPostsProvider>(context, listen: false);
+    wp = Provider.of<WorkerProvider>(context, listen: false);
   }
 
   String buttonLabel = 'Search Jobs';
-  String searchName = 'Company Name, Skill or Job Title';
-
-  void clearAll() {
-    _searchController1.clear();
-    _searchController2.clear();
-    jp.setSearching(false);
-  }
+  String searchName = 'Position, work area or company';
 
   @override
   Widget build(BuildContext context) {
-    return Responsive(
-      mobile: _buildMobileSearchBar(),
-      desktop: _buildDesktopSearchBar(),
-    );
-  }
+    buttonLabel = AppLocalizations.of(context)!.searchWorkers;
+    searchName =
+        AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
 
-  Widget _buildMobileSearchBar() {
-    return Container(
-      color: ThemeColors.searchBarPrimaryThemeColor,
-      height: MediaQuery.of(context).size.height * 0.35,
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 8.0.h),
-      child: Center(
-        child: SingleChildScrollView(
-          // Adding SingleChildScrollView
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildSearchField(
-                  _searchController1,
-                  AppLocalizations.of(context)!
-                      .workerSearchBarInput2Placeholder),
-              SizedBox(height: 15.h),
-              _buildSearchField(
-                  _searchController2,
-                  AppLocalizations.of(context)!
-                      .workerSearchBarInput2Placeholder),
-              SizedBox(height: 15.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildSearchButton(),
-                  const SizedBox(width: 10.0),
-                  Visibility(
-                      visible: jp.isWebSearching,
-                      child: _buildSmallCircleButton()),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDesktopSearchBar() {
     return Container(
       color: ThemeColors.searchBarPrimaryThemeColor,
       height: 150,
@@ -93,11 +49,12 @@ class _WebSearchBarState extends State<WebSearchBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildSearchField(_searchController1,
-              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder),
+          _buildSearchField(_searchController1, searchName, Icons.search),
           const SizedBox(width: 20.0),
-          _buildSearchField(_searchController2,
-              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder),
+          _buildSearchField(
+              _searchController2,
+              AppLocalizations.of(context)!.workerSearchBarInput2Placeholder,
+              Icons.location_on),
           const SizedBox(width: 20.0),
           _buildSearchButton(),
           const SizedBox(width: 10.0),
@@ -107,7 +64,8 @@ class _WebSearchBarState extends State<WebSearchBar> {
     );
   }
 
-  Widget _buildSearchField(TextEditingController controller, String hintText) {
+  Widget _buildSearchField(
+      TextEditingController controller, String hintText, IconData icon) {
     double widthFactor = Responsive.isMobile(context)
         ? 0.80
         : 0.28; // 80% for mobile, 28% for desktop
@@ -118,7 +76,9 @@ class _WebSearchBarState extends State<WebSearchBar> {
         onChanged: (value) {
           if (controller.text.isEmpty) {
             setState(() {
-              clearAll();
+              _searchController1.clear();
+              _searchController2.clear();
+              wp.setSearching(false);
             });
           }
         },
@@ -126,9 +86,7 @@ class _WebSearchBarState extends State<WebSearchBar> {
           filled: true,
           fillColor: Colors.white,
           hintText: hintText,
-          prefixIcon: hintText.contains('company')
-              ? const Icon(Icons.search)
-              : const Icon(Icons.location_on),
+          prefixIcon: Icon(icon),
           suffixIcon: IconButton(
             icon: const Icon(Icons.close),
             onPressed: controller.text.isEmpty
@@ -136,16 +94,18 @@ class _WebSearchBarState extends State<WebSearchBar> {
                 : () {
                     controller.clear();
                     setState(() {
-                      clearAll();
+                      _searchController1.clear();
+                      _searchController2.clear();
+                      wp.setSearching(false);
                     });
                   },
           ),
           border: const OutlineInputBorder(),
           enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: BorderSide(color: Colors.white),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: BorderSide(color: ThemeColors.blukersOrangeThemeColor),
           ),
         ),
       ),
@@ -154,7 +114,7 @@ class _WebSearchBarState extends State<WebSearchBar> {
 
   Widget _buildSearchButton() {
     double widthFactor = Responsive.isMobile(context)
-        ? 0.60
+        ? 0.80
         : 0.15; // 60% for mobile, 15% for desktop
     double heightFactor = Responsive.isMobile(context)
         ? 0.06
@@ -175,16 +135,16 @@ class _WebSearchBarState extends State<WebSearchBar> {
           String locationRelated = _searchController2.text;
 
           // Determine which provider to use
+          await wp.searchWorkers(nameRelated, locationRelated);
 
-          await jp.getJobsBySearchParameter(nameRelated, locationRelated);
+          GoRouter.of(context).pushReplacement('/workerSearchResults');
 
           setState(() {
             _isLoading = false; // End loading
           });
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor:
-              ThemeColors.searchBarSecondaryThemeColor, // Red color
+          backgroundColor: const Color.fromARGB(255, 243, 85, 7), // Red color
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -209,14 +169,18 @@ class _WebSearchBarState extends State<WebSearchBar> {
   }
 
   Widget _buildSmallCircleButton() {
-    return jp.isSearching
+    return wp.isSearching
         ? SizedBox(
-            width: 50, // Fixed width
-            height: 50, // Fixed height
+            width: 25.w, // Fixed width
+            height: 25.h, // Fixed height
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  clearAll();
+                  _searchController1.clear();
+                  _searchController2.clear();
+                  wp.setSearching(false);
+                  jp.clearSearchParameters();
+                  GoRouter.of(context).go('/workers');
                 });
               },
               style: ElevatedButton.styleFrom(
@@ -224,6 +188,7 @@ class _WebSearchBarState extends State<WebSearchBar> {
                 shape: const CircleBorder(), // Makes the button circular
               ),
               child: const Icon(Icons.close,
+                  size: 15,
                   color: Colors
                       .white), // Example icon, you can replace with your content
             ),

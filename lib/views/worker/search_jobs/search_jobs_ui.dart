@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/job_posts_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
-import '../../old_common_views/small_pop_button_widget.dart';
+import 'jobs_search_result_page/Components/job_pop_button_widget.dart';
 
 class SearchJobsUi extends StatefulWidget {
   const SearchJobsUi({super.key});
@@ -121,6 +121,8 @@ class _SearchJobsUiState extends State<SearchJobsUi> {
                       jp.setSearching(true);
                       jp.searchJobPosts(
                           nameController.text, locationController.text);
+                      if (GoRouter.of(context).canPop())
+                        GoRouter.of(context).pop();
                       GoRouter.of(context).pushReplacement('/jobSearchResults');
                     },
                     style: ElevatedButton.styleFrom(
@@ -147,7 +149,7 @@ class _SearchJobsUiState extends State<SearchJobsUi> {
             const Positioned(
               top: 10, // Adjust as needed
               left: 10, // Adjust as needed
-              child: SmallPopButtonWidget(),
+              child: JobPopButtonWidget(),
             ),
           ],
         ),
