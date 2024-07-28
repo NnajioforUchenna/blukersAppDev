@@ -11,7 +11,7 @@ class WorkersPageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    return up.isCompanyUserRegistered()
+    return up.isUserRegistered()
         ? const DisplayWorkersByPreference()
         : const DesktopSelectAndSearchWorkers();
   }
