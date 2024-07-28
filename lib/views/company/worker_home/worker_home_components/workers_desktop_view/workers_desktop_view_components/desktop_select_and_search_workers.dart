@@ -78,7 +78,7 @@ class _DesktopSelectAndSearchWorkersState
                   color: Colors.white,
                 ),
                 child: const DisplayIndustries()),
-            crossFadeState: ip.industries.isEmpty
+            crossFadeState: ip.industries.isEmptygit
                 ? CrossFadeState.showFirst
                 : CrossFadeState.showSecond,
             duration: const Duration(milliseconds: 500),
