@@ -1,11 +1,10 @@
-import '../../../services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
-
+import '../../../services/responsive.dart';
 import '../../old_common_views/components/animations/index.dart';
 import 'display_job_card.dart';
 import 'display_job_post_dialog.dart';
@@ -22,6 +21,7 @@ class _BuildListViewJobsState extends State<BuildListViewJobs> {
   final ScrollController controller = ScrollController();
   bool isRefilling = false;
   late List<JobPost> jobPosts;
+  int counter = 0;
 
   @override
   void dispose() {
@@ -63,7 +63,8 @@ class _BuildListViewJobsState extends State<BuildListViewJobs> {
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-
+    counter++;
+    print(counter);
     return ListView.separated(
       controller: controller,
       shrinkWrap: true,

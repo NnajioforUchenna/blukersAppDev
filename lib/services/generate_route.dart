@@ -21,6 +21,7 @@ import '../views/worker/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_screen.dart';
+import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/set_jobs_preferences.dart';
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
@@ -70,6 +71,13 @@ final routes = [
       GoRoute(
           path: '/jobPreference',
           builder: (context, state) => const JobPreferncePath()),
+      GoRoute(
+          path: '/showJobsByPreferences',
+          builder: (context, state) => const ShowJobsByPreferences()),
+      GoRoute(
+        path: '/setJobsPreferences',
+        builder: (context, state) => const SetJobsPreferences(),
+      )
     ],
   ),
 
@@ -182,9 +190,6 @@ final routes = [
   GoRoute(path: '/services', builder: (context, state) => const Products()),
 
   GoRoute(path: '/orders', builder: (context, state) => const OrdersList()),
-  GoRoute(
-      path: '/showJobsByPreferences',
-      builder: (context, state) => const ShowJobsByPreferences())
 ];
 
 void verifyCurrentPath() {

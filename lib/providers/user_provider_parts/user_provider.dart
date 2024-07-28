@@ -323,7 +323,6 @@ class UserProvider with ChangeNotifier {
     if (appUser == null) {
       return false;
     }
-    print(appUser!.registrationDetails?.jobsPreference);
     return appUser!.registrationDetails?.jobsPreference != null;
   }
 
