@@ -1,6 +1,4 @@
-import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../services/responsive.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +8,8 @@ import 'package:unicons/unicons.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../services/responsive.dart';
 import '../../../../services/rounded_image.dart';
 import '../../../../utils/styles/theme_colors.dart';
 import '../../../old_common_views/components/shaped_icon.dart';
@@ -129,7 +129,7 @@ class DetailPageBlockOne extends StatelessWidget {
                           },
                           child: Center(
                             // Center the text inside the button
-                            child: Text(
+                            child: AutoSizeText(
                               isJobApplied
                                   ? AppLocalizations.of(context)!
                                       .apply

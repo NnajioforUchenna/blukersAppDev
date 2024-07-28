@@ -66,7 +66,7 @@ class LandingPage extends StatelessWidget {
                       .toUpperCase(),
                   onTap: () {
                     up.userRole = "worker";
-                    context.pushReplacement('/jobs');
+                    context.go('/jobs');
                   },
                 ),
                 SizedBox(width: 20.w), // Responsive width
@@ -80,7 +80,7 @@ class LandingPage extends StatelessWidget {
                       .toUpperCase(),
                   onTap: () {
                     up.userRole = "company";
-                    context.pushReplacement('/workers');
+                    context.go('/workers');
                   },
                 ),
               ],

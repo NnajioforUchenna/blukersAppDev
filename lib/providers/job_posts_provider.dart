@@ -8,6 +8,7 @@ import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
 import '../views/auth/please_login_dialog.dart';
 import '../views/company/create_job_post/create_job_post_components/compensation_and_contract_page.dart';
+import '../views/worker/jobs_home/Components/display_selected_jobs/display_selected_jobs.dart';
 
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;
@@ -69,6 +70,43 @@ class JobPostsProvider with ChangeNotifier {
       searchComplete = true;
       notifyListeners();
     });
+  }
+
+  void getJobsBySelection(BuildContext context, String jobId) {
+    searchComplete = false;
+    selectedJobPostId = jobId;
+    nameSearch = jobId;
+    language = appUser?.language ?? 'en';
+
+    // Get all jobPosts for the job with the given jobId.
+    JobPostsDataProvider.getJobPostsByJobID(jobId, language).then((jobPosts) {
+      List<JobPost> listJobPosts = [];
+
+      listJobPosts = jobPosts
+          .map((jobPost) {
+            return JobPost.fromMap(jobPost);
+          })
+          .where((jobPost) => jobPost != null)
+          .cast<JobPost>()
+          .toList();
+
+      if (listJobPosts.isNotEmpty) {
+        selectedJobPost = listJobPosts.first;
+      }
+
+      displayedJobPosts = fillDisplayedJobPosts(listJobPosts);
+
+      searchComplete = true;
+      notifyListeners();
+    });
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DisplaySelectedJobs(
+          title: jobId,
+        ),
+      ),
+    );
   }
 
   Future<void> translateJobPosts(targetLanguage) async {

@@ -63,7 +63,7 @@ class _SelectOrSearchJobsState extends State<SelectOrSearchJobs> {
                 ),
                 child: SelectByIndustry(
                   selectBy: 'Jobs',
-                  getRecords: jp.getJobPostsByJobID,
+                  getRecords: jp.getJobsBySelection,
                 )),
             crossFadeState: ip.industries.isEmpty
                 ? CrossFadeState.showFirst

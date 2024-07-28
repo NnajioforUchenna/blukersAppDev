@@ -13,14 +13,15 @@ import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
 import '../views/company/company_page_template/company_page_template.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
+import '../views/company/create_job_post/create_job_post.dart';
 import '../views/company/my_job_posts/my_job_posts.dart';
 import '../views/company/my_job_posts/my_job_posts_components/applicants/applicants.dart';
-import '../views/company/create_job_post/create_job_post.dart';
 import '../views/company/workers_home/workers_home.dart';
 import '../views/worker/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_screen.dart';
+import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
 import '../views/worker/search_jobs/jobs_search_result_page/job_search_result_page.dart';
@@ -181,6 +182,9 @@ final routes = [
   GoRoute(path: '/services', builder: (context, state) => const Products()),
 
   GoRoute(path: '/orders', builder: (context, state) => const OrdersList()),
+  GoRoute(
+      path: '/showJobsByPreferences',
+      builder: (context, state) => const ShowJobsByPreferences())
 ];
 
 void verifyCurrentPath() {

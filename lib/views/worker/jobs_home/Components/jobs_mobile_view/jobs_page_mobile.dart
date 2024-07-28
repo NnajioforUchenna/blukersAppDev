@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
-import 'display_jobs_by_preference.dart';
+import '../display_jobs_by_preferences/display_jobs_by_preferences.dart';
 import 'select_or_search_jobs.dart';
 
 class JobsPageMobile extends StatelessWidget {
@@ -12,7 +12,7 @@ class JobsPageMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     return up.isUserRegistered()
-        ? const DisplayJobsByPreference()
+        ? const DisplayJobsByPreferences()
         : const SelectOrSearchJobs();
   }
 }

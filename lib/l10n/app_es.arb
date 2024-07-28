@@ -476,5 +476,7 @@
   "appUserInformation": "Información del Usuario de la Aplicación",
   "selectWorkersPreference": "Seleccionar Preferencia de Trabajadores",
   "selectJobsAnIndustry": "Seleccionar trabajos por industria",
-  "selectWorkersByIndustry": "Seleccionar trabajadores por industria"
+  "selectWorkersByIndustry": "Seleccionar trabajadores por industria",
+  "selectYourJobsPreferences": "Selecciona tus preferencias de trabajo",
+  "setJobPreferences": "Establecer preferencias de trabajo"
 }

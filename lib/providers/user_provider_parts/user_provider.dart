@@ -318,4 +318,34 @@ class UserProvider with ChangeNotifier {
       print('Failed to save job post: $e');
     }
   }
+
+  isJobsPreferencesSet() {
+    if (appUser == null) {
+      return false;
+    }
+    print(appUser!.registrationDetails?.jobsPreference);
+    return appUser!.registrationDetails?.jobsPreference != null;
+  }
+
+  void setJobsPreferences(
+      List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
+    if (appUser != null) {
+      Preference preference = Preference(
+        industryIds: selectedIndustries,
+        jobIds: selectedJobs,
+      );
+      if (appUser?.registrationDetails != null) {
+        appUser?.registrationDetails?.jobsPreference = preference;
+        appUser?.workerTimelineStep = 2;
+      } else {
+        RegistrationDetails registrationDetails = RegistrationDetails(
+          jobsPreference: preference,
+          email: appUser!.email,
+        );
+        appUser?.registrationDetails = registrationDetails;
+        appUser?.workerTimelineStep = 2;
+      }
+      UserDataProvider.updateUser(appUser!);
+    }
+  }
 }
