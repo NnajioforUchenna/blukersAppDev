@@ -1,4 +1,3 @@
-import 'package:blukers/views/worker/jobs_home/job_home_components/jobs_desktop_view/select_desktop_language_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,19 +5,21 @@ import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../../providers/app_settings_provider.dart';
 import '../../../../../../providers/industry_provider.dart';
-import '../../../../common_vieiws/loading_page.dart';
-import '../../../../old_common_views/select_industry_components/display_industries.dart';
-import '../../../search_jobs/job_search_bar_components/all_search_bar.dart';
+import '../../../../../common_vieiws/loading_page.dart';
+import '../../../../../old_common_views/select_industry_components/display_industries.dart';
+import '../../../../../worker/jobs_home/job_home_components/jobs_desktop_view/jobs_desktop_view_components/select_desktop_language_dialog.dart';
+import '../../../../search_workers/worker_search_bar_components/worker_all_search_bar.dart';
 
-class DesktopSelectOrSearchJobs extends StatefulWidget {
-  const DesktopSelectOrSearchJobs({super.key});
+class DesktopSelectAndSearchWorkers extends StatefulWidget {
+  const DesktopSelectAndSearchWorkers({super.key});
 
   @override
-  State<DesktopSelectOrSearchJobs> createState() =>
-      _DesktopSelectOrSearchJobsState();
+  State<DesktopSelectAndSearchWorkers> createState() =>
+      _DesktopSelectAndSearchWorkersState();
 }
 
-class _DesktopSelectOrSearchJobsState extends State<DesktopSelectOrSearchJobs> {
+class _DesktopSelectAndSearchWorkersState
+    extends State<DesktopSelectAndSearchWorkers> {
   @override
   late AppSettingsProvider asp;
 
@@ -53,7 +54,7 @@ class _DesktopSelectOrSearchJobsState extends State<DesktopSelectOrSearchJobs> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const AllSearchBar(),
+          const WorkerAllSearchBar(),
           const SizedBox(
             height: 10,
           ),
@@ -71,7 +72,7 @@ class _DesktopSelectOrSearchJobsState extends State<DesktopSelectOrSearchJobs> {
                 description: 'Use this section to Select Jobs by industry',
                 targetShapeBorder: const CircleBorder(),
                 overlayOpacity: 0.6,
-                tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+                tooltipBackgroundColor: const Color.fromRGBO(30, 117, 187, 1),
                 descTextStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,

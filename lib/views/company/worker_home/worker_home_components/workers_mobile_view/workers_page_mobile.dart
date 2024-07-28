@@ -11,7 +11,7 @@ class WorkersPageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    return up.isUserRegistered()
+    return up.isCompanyUserRegistered()
         ? const DisplayWorkersByPreference()
         : const SelectOrSearchWorkers();
   }

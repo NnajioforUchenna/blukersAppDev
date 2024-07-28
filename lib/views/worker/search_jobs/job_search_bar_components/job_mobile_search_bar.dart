@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../providers/job_posts_provider.dart';
-import '../../../../../../utils/styles/theme_colors.dart';
-import '../../../../search_jobs/search_jobs_ui.dart';
+import '../../../../providers/job_posts_provider.dart';
+import '../../../../utils/styles/theme_colors.dart';
+import '../search_jobs_ui.dart';
 
 class JobMobileSearchBar extends StatefulWidget {
   const JobMobileSearchBar({super.key});

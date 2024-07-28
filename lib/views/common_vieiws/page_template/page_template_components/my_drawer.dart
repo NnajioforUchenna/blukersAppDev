@@ -56,7 +56,7 @@ class MyDrawer extends StatelessWidget {
             context: context,
             icon: Icons.search,
             text: 'search',
-            route: up.appUser == 'company' ? '/search_workers' : '/search_jobs',
+            route: up.userRole == 'worker' ? '/search_jobs' : '/search_workers',
           ),
           _createDrawerItem(
             context: context,

@@ -1,8 +1,8 @@
+import 'package:blukers/views/company/worker_home/worker_home_components/workers_desktop_view/workers_desktop_view_components/desktop_select_and_search_workers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../worker/jobs_home/job_home_components/jobs_desktop_view/desktop_select_or_search_jobs.dart';
 import '../../display_worker_by_preference.dart';
 
 class WorkersPageDesktop extends StatelessWidget {
@@ -11,8 +11,8 @@ class WorkersPageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    return up.isUserRegistered()
+    return up.isCompanyUserRegistered()
         ? const DisplayWorkersByPreference()
-        : const DesktopSelectOrSearchJobs();
+        : const DesktopSelectAndSearchWorkers();
   }
 }

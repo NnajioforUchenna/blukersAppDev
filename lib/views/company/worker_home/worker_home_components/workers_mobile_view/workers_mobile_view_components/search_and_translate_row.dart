@@ -1,5 +1,5 @@
 import 'package:blukers/providers/app_settings_provider.dart';
-import 'package:blukers/views/company/worker_home/worker_home_components/workers_mobile_view/workers_mobile_view_components/worker_mobile_search_bar.dart';
+import 'package:blukers/views/company/search_workers/worker_search_bar_components/worker_mobile_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';

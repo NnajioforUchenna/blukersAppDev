@@ -6,24 +6,20 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/job_posts_provider.dart';
-import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../providers/worker_provider.dart';
 import '../../../../services/responsive.dart';
 import '../../../../utils/styles/theme_colors.dart';
 
-class DesktopSearchBar extends StatefulWidget {
-  const DesktopSearchBar({super.key});
+class JobDesktopSearchBar extends StatefulWidget {
+  const JobDesktopSearchBar({super.key});
 
   @override
-  State<DesktopSearchBar> createState() => _DesktopSearchBarState();
+  State<JobDesktopSearchBar> createState() => _JobDesktopSearchBarState();
 }
 
-class _DesktopSearchBarState extends State<DesktopSearchBar> {
+class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
   final TextEditingController _searchController1 = TextEditingController();
   final TextEditingController _searchController2 = TextEditingController();
-  late WorkerProvider wp;
   late JobPostsProvider jp;
-  late UserProvider up;
   bool _isLoading = false;
 
   bool isMobileSearchBarVisible = false;
@@ -31,9 +27,7 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
   @override
   void initState() {
     super.initState();
-    wp = Provider.of<WorkerProvider>(context, listen: false);
     jp = Provider.of<JobPostsProvider>(context, listen: false);
-    up = Provider.of<UserProvider>(context, listen: false);
   }
 
   String buttonLabel = 'Search Jobs';
@@ -41,16 +35,8 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider up = Provider.of<UserProvider>(context);
-    if (up.userRole == 'Company') {
-      buttonLabel = AppLocalizations.of(context)!.searchWorkers;
-      searchName =
-          AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
-    } else {
-      buttonLabel = AppLocalizations.of(context)!.searchJobs;
-      searchName =
-          AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
-    }
+    buttonLabel = AppLocalizations.of(context)!.searchJobs;
+    searchName = AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
 
     return Container(
       color: ThemeColors.searchBarPrimaryThemeColor,
@@ -89,7 +75,6 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
             setState(() {
               _searchController1.clear();
               _searchController2.clear();
-              wp.setSearching(false);
               jp.setSearching(false);
             });
           }
@@ -108,7 +93,6 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
                     setState(() {
                       _searchController1.clear();
                       _searchController2.clear();
-                      wp.setSearching(false);
                       jp.setSearching(false);
                     });
                   },
@@ -148,11 +132,7 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
           String locationRelated = _searchController2.text;
 
           // Determine which provider to use
-          if (up.userRole == 'company') {
-            await wp.searchWorkers(nameRelated, locationRelated);
-          } else {
-            await jp.searchJobPosts(nameRelated, locationRelated);
-          }
+          await jp.searchJobPosts(nameRelated, locationRelated);
 
           GoRouter.of(context).pushReplacement('/jobSearchResults');
 
@@ -186,7 +166,7 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
   }
 
   Widget _buildSmallCircleButton() {
-    return wp.isSearching || jp.isSearching
+    return jp.isSearching
         ? SizedBox(
             width: 25.w, // Fixed width
             height: 25.h, // Fixed height
@@ -195,7 +175,6 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
                 setState(() {
                   _searchController1.clear();
                   _searchController2.clear();
-                  wp.setSearching(false);
                   jp.setSearching(false);
                   jp.clearSearchParameters();
                   GoRouter.of(context).go('/jobs');

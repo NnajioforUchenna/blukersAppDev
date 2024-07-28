@@ -81,6 +81,16 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  bool isCompanyUserRegistered() {
+    if (_appUser != null &&
+        _appUser?.company != null &&
+        _appUser?.company?.workersPreference != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   List<Map<String, dynamic>> getReferences() {
     if (appUser == null || appUser!.worker == null) {
       return [{}, {}];

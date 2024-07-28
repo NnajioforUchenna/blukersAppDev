@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../providers/job_posts_provider.dart';
-import '../../../../../../utils/styles/theme_colors.dart';
-import '../../../../search_workers/search_workers_ui.dart';
+import '../../../../providers/job_posts_provider.dart';
+import '../../../../utils/styles/theme_colors.dart';
+import '../search_workers_ui.dart';
 
 class WorkerMobileSearchBar extends StatefulWidget {
   const WorkerMobileSearchBar({super.key});
@@ -22,7 +22,6 @@ class _WorkerMobileSearchBarState extends State<WorkerMobileSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
 
     buttonLabel = AppLocalizations.of(context)!.searchWorkers;
