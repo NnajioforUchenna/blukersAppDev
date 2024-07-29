@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../../../../../models/worker.dart';
 import '../../../../../providers/worker_provider.dart';
 import '../../../../../services/responsive.dart';
@@ -78,7 +77,7 @@ class ListViewWorkers extends StatelessWidget {
                     builder: (context) => DisplayWorkerDialog(
                           worker: worker,
                         ));
-                print('worker: ${worker.workerResumeDetails?.firstName}');
+                print('worker: ${worker?.workerResumeDetails?.firstName}');
               }
             });
       },
