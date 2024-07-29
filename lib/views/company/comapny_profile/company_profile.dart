@@ -13,7 +13,7 @@ import '../../auth/common_widget/login_or_register.dart';
 import '../../old_common_views/components/app_version_display.dart';
 import '../../old_common_views/components/confirmation_dialog.dart';
 import '../../old_common_views/components/profile/profile_menu_button.dart';
-import '../../worker/worker_page_template/worker_page_template.dart';
+import '../company_page_template/company_page_template.dart';
 import 'components/update_company_basic_information.dart';
 import 'components/updatecompanyinformation.dart';
 
@@ -36,7 +36,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
       avp.checkForUpdate(context);
     }
 
-    return WorkerPageTemplate(
+    return CompanyPageTemplate(
       child: up.appUser == null
           ? const LoginOrRegister()
           : SingleChildScrollView(

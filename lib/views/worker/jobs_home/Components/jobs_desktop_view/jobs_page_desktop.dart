@@ -7,9 +7,9 @@ import 'package:showcaseview/showcaseview.dart';
 import '../../../../../providers/app_settings_provider.dart';
 import '../../../../../providers/industry_provider.dart';
 import '../../../../../providers/job_posts_provider.dart';
-import '../../../../common_vieiws/all_search_bar_components/all_search_bar.dart';
 import '../../../../common_vieiws/loading_page.dart';
 import '../../../../old_common_views/select_industry_components/display_industries.dart';
+import '../../../search_jobs/job_search_bar_components/job_all_search_bar.dart';
 import '../../../search_jobs/jobs_search_result_page/job_search_result_page.dart';
 
 class JobsPageDesktop extends StatefulWidget {
@@ -55,7 +55,7 @@ class _JobsPageDesktopState extends State<JobsPageDesktop> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const AllSearchBar(),
+          const JobAllSearchBar(),
           const SizedBox(
             height: 10,
           ),

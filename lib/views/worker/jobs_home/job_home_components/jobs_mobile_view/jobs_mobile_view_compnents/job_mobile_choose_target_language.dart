@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/select_language_dialog.dart';
+import 'select_language_dialog.dart';
 
-class JobsDeskTopChooseTargetLanguage extends StatefulWidget {
-  const JobsDeskTopChooseTargetLanguage({super.key});
+class JobsMobileChooseTargetLanguage extends StatefulWidget {
+  const JobsMobileChooseTargetLanguage({super.key});
 
   @override
-  State<JobsDeskTopChooseTargetLanguage> createState() =>
-      _JobsDeskTopChooseTargetLanguageState();
+  State<JobsMobileChooseTargetLanguage> createState() =>
+      _JobsMobileChooseTargetLanguageState();
 }
 
-class _JobsDeskTopChooseTargetLanguageState
-    extends State<JobsDeskTopChooseTargetLanguage> {
+class _JobsMobileChooseTargetLanguageState
+    extends State<JobsMobileChooseTargetLanguage> {
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.width * 0.085;

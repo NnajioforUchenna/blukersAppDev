@@ -1,14 +1,14 @@
 import 'package:blukers/providers/app_settings_provider.dart';
+import 'package:blukers/views/company/search_workers/worker_search_bar_components/worker_mobile_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../../utils/styles/theme_colors.dart';
-import '../../../../search_jobs/job_search_bar_components/job_mobile_search_bar.dart';
-import 'job_mobile_choose_target_language.dart';
+import '../../../../../worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/job_mobile_choose_target_language.dart';
 
-class SearchAndTranslateRow extends StatelessWidget {
-  const SearchAndTranslateRow({super.key});
+class SearchAndTranslateRowCompany extends StatelessWidget {
+  const SearchAndTranslateRowCompany({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class SearchAndTranslateRow extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
-              child: const JobMobileSearchBar()),
+              child: const WorkerMobileSearchBar()),
           Showcase(
               key: asp.translation,
               description:

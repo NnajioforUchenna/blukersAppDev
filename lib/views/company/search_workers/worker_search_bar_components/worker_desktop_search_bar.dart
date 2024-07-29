@@ -5,20 +5,22 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../providers/job_posts_provider.dart';
-import '../../../../../services/responsive.dart';
-import '../../../../../utils/styles/theme_colors.dart';
+import '../../../../providers/job_posts_provider.dart';
+import '../../../../providers/worker_provider.dart';
+import '../../../../services/responsive.dart';
+import '../../../../utils/styles/theme_colors.dart';
 
-class JobDesktopSearchBar extends StatefulWidget {
-  const JobDesktopSearchBar({super.key});
+class WorkerDesktopSearchBar extends StatefulWidget {
+  const WorkerDesktopSearchBar({super.key});
 
   @override
-  State<JobDesktopSearchBar> createState() => _JobDesktopSearchBarState();
+  State<WorkerDesktopSearchBar> createState() => _WorkerDesktopSearchBarState();
 }
 
-class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
+class _WorkerDesktopSearchBarState extends State<WorkerDesktopSearchBar> {
   final TextEditingController _searchController1 = TextEditingController();
   final TextEditingController _searchController2 = TextEditingController();
+  late WorkerProvider wp;
   late JobPostsProvider jp;
   bool _isLoading = false;
 
@@ -27,7 +29,7 @@ class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
   @override
   void initState() {
     super.initState();
-    jp = Provider.of<JobPostsProvider>(context, listen: false);
+    wp = Provider.of<WorkerProvider>(context, listen: false);
   }
 
   String buttonLabel = 'Search Jobs';
@@ -35,8 +37,9 @@ class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    buttonLabel = AppLocalizations.of(context)!.searchJobs;
-    searchName = AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
+    buttonLabel = AppLocalizations.of(context)!.searchWorkers;
+    searchName =
+        AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
 
     return Container(
       color: ThemeColors.searchBarPrimaryThemeColor,
@@ -75,7 +78,7 @@ class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
             setState(() {
               _searchController1.clear();
               _searchController2.clear();
-              jp.setSearching(false);
+              wp.setSearching(false);
             });
           }
         },
@@ -93,7 +96,7 @@ class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
                     setState(() {
                       _searchController1.clear();
                       _searchController2.clear();
-                      jp.setSearching(false);
+                      wp.setSearching(false);
                     });
                   },
           ),
@@ -132,9 +135,9 @@ class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
           String locationRelated = _searchController2.text;
 
           // Determine which provider to use
-          await jp.searchJobPosts(nameRelated, locationRelated);
+          await wp.searchWorkers(nameRelated, locationRelated);
 
-          GoRouter.of(context).pushReplacement('/jobSearchResults');
+          GoRouter.of(context).pushReplacement('/workerSearchResults');
 
           setState(() {
             _isLoading = false; // End loading
@@ -166,7 +169,7 @@ class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
   }
 
   Widget _buildSmallCircleButton() {
-    return jp.isSearching
+    return wp.isSearching
         ? SizedBox(
             width: 25.w, // Fixed width
             height: 25.h, // Fixed height
@@ -175,9 +178,9 @@ class _JobDesktopSearchBarState extends State<JobDesktopSearchBar> {
                 setState(() {
                   _searchController1.clear();
                   _searchController2.clear();
-                  jp.setSearching(false);
+                  wp.setSearching(false);
                   jp.clearSearchParameters();
-                  GoRouter.of(context).go('/jobs');
+                  GoRouter.of(context).go('/workers');
                 });
               },
               style: ElevatedButton.styleFrom(

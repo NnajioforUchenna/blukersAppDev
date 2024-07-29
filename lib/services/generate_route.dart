@@ -1,4 +1,3 @@
-import 'package:blukers/views/common_vieiws/all_search_bar_components/search_page.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
 import 'package:go_router/go_router.dart';
@@ -16,7 +15,9 @@ import '../views/company/create_company_profile/create_company_profile.dart';
 import '../views/company/create_job_post/create_job_post.dart';
 import '../views/company/my_job_posts/my_job_posts.dart';
 import '../views/company/my_job_posts/my_job_posts_components/applicants/applicants.dart';
-import '../views/company/workers_home/workers_home.dart';
+import '../views/company/search_workers/search_workers_ui.dart';
+import '../views/company/search_workers/workers_search_result_page/workers_search_result_page.dart';
+import '../views/company/worker_home/workers_home.dart';
 import '../views/worker/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
@@ -25,6 +26,7 @@ import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Compone
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
 import '../views/worker/search_jobs/jobs_search_result_page/job_search_result_page.dart';
+import '../views/worker/search_jobs/search_jobs_ui.dart';
 import '../views/worker/services/services_components/orders/orders_list.dart';
 import '../views/worker/services/services_components/products/products.dart';
 import '../views/worker/services/services_components/subscription/subscription.dart';
@@ -63,6 +65,10 @@ final routes = [
       GoRoute(
           path: '/workerProfile',
           builder: (context, state) => const WorkerProfile()),
+      GoRoute(path: '/workers', builder: (context, state) => const Workers()),
+      GoRoute(
+          path: '/workerSearchResults',
+          builder: (context, state) => const WorkerSearchResultPage()),
       GoRoute(
           path: '/offers', builder: (context, state) => const ServicesList()),
       GoRoute(
@@ -70,6 +76,12 @@ final routes = [
       GoRoute(
           path: '/jobPreference',
           builder: (context, state) => const JobPreferncePath()),
+      GoRoute(
+          path: '/search_jobs',
+          builder: (context, state) => const SearchJobsUi()),
+      GoRoute(
+          path: '/search_workers',
+          builder: (context, state) => const SearchWorkersUi()),
     ],
   ),
 
@@ -89,7 +101,6 @@ final routes = [
           builder: (context, state) => const CompanyChat()),
     ],
   ),
-
   GoRoute(
       path: '/createResume',
       builder: (context, state) => const CreateWorkerProfile()),
@@ -102,8 +113,6 @@ final routes = [
       builder: (context, state) => const CompanyChat()),
 
   // Worker Routes
-
-  GoRoute(path: '/search', builder: (context, state) => const SearchPage()),
   GoRoute(
       path: '/worker_chat-message',
       builder: (context, state) => const ChatMessageScreen()),

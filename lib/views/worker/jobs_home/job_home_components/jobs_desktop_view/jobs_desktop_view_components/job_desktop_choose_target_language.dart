@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/select_language_dialog.dart';
+import '../../jobs_mobile_view/jobs_mobile_view_compnents/select_language_dialog.dart';
 
 class JobsDeskTopChooseTargetLanguage extends StatefulWidget {
   const JobsDeskTopChooseTargetLanguage({super.key});
