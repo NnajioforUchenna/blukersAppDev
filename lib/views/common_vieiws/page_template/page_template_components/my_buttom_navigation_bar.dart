@@ -83,6 +83,15 @@ class _MyButtomNavigationBarState extends State<MyButtomNavigationBar> {
                 color: ThemeColors.primaryThemeColor),
             label: AppLocalizations.of(context)!.services,
           ),
+
+          NavigationDestination(
+            icon: SvgPicture.asset(
+              'assets/icons/chatIcon.svg',
+            ),
+            selectedIcon: SvgPicture.asset('assets/icons/navicon-03-selected.png',
+                color: ThemeColors.primaryThemeColor),
+            label: AppLocalizations.of(context)!.chat,
+          ),
           NavigationDestination(
             icon: buildCustomIcon(
               context,

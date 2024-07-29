@@ -19,6 +19,7 @@ final List<String> routesCompany = [
   '/myJobPosts',
   '/search',
   '/offers',
+  '/chat',
   '/companyProfile',
   '/login'
 ];
