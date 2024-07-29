@@ -1,15 +1,15 @@
-import '../../../models/industry.dart';
-import '../../../providers/industry_provider.dart';
-import '../../../providers/worker_provider.dart';
-import '../../../utils/styles/theme_colors.dart';
-import '../../../utils/styles/theme_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/industry.dart';
 import '../../../models/job.dart';
+import '../../../providers/industry_provider.dart';
+import '../../../providers/worker_provider.dart';
 import '../../../utils/localization/localized_industries.dart';
 import '../../../utils/localization/localized_jobs.dart';
+import '../../../utils/styles/theme_colors.dart';
+import '../../../utils/styles/theme_text_styles.dart';
 
 class IndustryJobsDropdownComponent extends StatefulWidget {
   const IndustryJobsDropdownComponent(
@@ -58,7 +58,7 @@ class _IndustryJobsDropdownComponentState
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     industries = ip.industries.values.toList();
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,

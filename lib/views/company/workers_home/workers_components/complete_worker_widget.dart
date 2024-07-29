@@ -58,7 +58,7 @@ class ListViewWorkers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return ListView.separated(
       padding:
           const EdgeInsets.all(10), // Added to give some space around cards

@@ -64,9 +64,9 @@ class MyApp extends StatelessWidget {
           update: (_, user, CompanyProvider? previous) =>
               previous!..update(user.appUser),
         ),
-        ChangeNotifierProxyProvider<UserProvider, WorkerProvider>(
-            create: (context) => WorkerProvider(),
-            update: (_, user, WorkerProvider? previous) =>
+        ChangeNotifierProxyProvider<UserProvider, WorkersProvider>(
+            create: (context) => WorkersProvider(),
+            update: (_, user, WorkersProvider? previous) =>
                 previous!..update(user.appUser)),
       ],
       child: ScreenUtilInit(

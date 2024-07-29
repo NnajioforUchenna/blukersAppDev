@@ -18,20 +18,20 @@ class ProfessionalCredentialsPage extends StatefulWidget {
 
 class _ProfessionalCredentialsPageState
     extends State<ProfessionalCredentialsPage> {
-  late WorkerProvider wp;
+  late WorkersProvider wp;
   List<String> selectedSkills = [];
   List<CredentialField> credentialForms = [];
 
   @override
   void initState() {
     super.initState();
-    wp = Provider.of<WorkerProvider>(context, listen: false);
+    wp = Provider.of<WorkersProvider>(context, listen: false);
     selectedSkills = wp.previousParams['skills'] ?? [];
   }
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     credentialForms = [];
     for (int i = 0; i < wp.professionalCredentials.length; i++) {
       credentialForms.add(CredentialField(index: i));

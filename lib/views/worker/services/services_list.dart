@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,10 +17,6 @@ class ServicesList extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     String? userRole = up.userRole;
 
-    if (!kIsWeb) {
-      avp.checkForUpdate(context);
-    }
-
     String getTitle(serviceTitle) {
       if (serviceTitle == "Subscriptions") {
         return AppLocalizations.of(context)!.subscriptions;
@@ -32,52 +27,40 @@ class ServicesList extends StatelessWidget {
       return "";
     }
 
-    bool isCompanyRole = userRole == "company" ? true : false;
-
-    return isCompanyRole
-        ? Center(
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 50.0, bottom: 10.0),
             child: Text(
-              AppLocalizations.of(context)!.comingSoon,
-              style: const TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 30,
+              AppLocalizations.of(context)!.services,
+              style: GoogleFonts.montserrat(
+                fontSize: 20.0,
+                // fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w700,
               ),
             ),
-          )
-        : SingleChildScrollView(
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 50.0, bottom: 10.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.services,
-                    style: GoogleFonts.montserrat(
-                      fontSize: 20.0,
-                      // fontWeight: FontWeight.bold,
-                      fontWeight: FontWeight.w700,
-                    ),
+                for (var service in listServices)
+                  ServiceCard(
+                    // title: service['title']!,
+                    title: getTitle(service['title']!),
+                    description: service['description']!,
+                    route: service['route']!,
+                    service: service['service']!,
+                    color: service['color'],
                   ),
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Column(
-                    children: [
-                      for (var service in listServices)
-                        ServiceCard(
-                          // title: service['title']!,
-                          title: getTitle(service['title']!),
-                          description: service['description']!,
-                          route: service['route']!,
-                          service: service['service']!,
-                          color: service['color'],
-                        ),
-                    ],
-                  ),
-                ),
               ],
             ),
-          );
+          ),
+        ],
+      ),
+    );
   }
 }

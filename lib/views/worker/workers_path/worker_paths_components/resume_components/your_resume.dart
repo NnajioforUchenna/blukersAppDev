@@ -24,8 +24,8 @@ class _ResumeState extends State<Resume> {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
-     UserProvider up = Provider.of<UserProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
 
     return Card(
       elevation: 8.0,

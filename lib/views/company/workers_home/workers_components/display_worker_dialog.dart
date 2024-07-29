@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../models/worker.dart';
 import 'animate_worker_details_page.dart';
@@ -18,19 +17,10 @@ class DisplayWorkerDialog extends StatelessWidget {
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(14.0.sp), // Add padding around the column
-            child: const Column(
-              children: [
-                Spacer(),
-                AnimateWorkerDetails(),
-                Spacer(),
-              ],
-            ),
-          ),
+          const AnimateWorkerDetails(),
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FloatingActionButton(

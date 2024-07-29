@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../../providers/app_settings_provider.dart';
 import '../../../providers/chat_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
@@ -13,7 +12,6 @@ import '../../auth/common_widget/login_or_register.dart';
 import '../../old_common_views/components/app_version_display.dart';
 import '../../old_common_views/components/confirmation_dialog.dart';
 import '../../old_common_views/components/profile/profile_menu_button.dart';
-import '../company_page_template/company_page_template.dart';
 import 'components/update_company_basic_information.dart';
 import 'components/updatecompanyinformation.dart';
 
@@ -30,53 +28,45 @@ class _CompanyProfileState extends State<CompanyProfile> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
 
-    if (!kIsWeb) {
-      avp.checkForUpdate(context);
-    }
-
-    return CompanyPageTemplate(
-      child: up.appUser == null
-          ? const LoginOrRegister()
-          : SingleChildScrollView(
-              child: Column(
-                children: [
-                  buildSignoutButton(context),
-                  const SizedBox(height: 10),
-                  buildProfilePicAndEdit(context, up),
-                  const SizedBox(height: 10),
-                  Text(up.appUser!.company!.name,
-                      style: ThemeTextStyles.headingThemeTextStyle),
-                  const SizedBox(height: 10),
-                  ProfileMenuButton(
-                    text: AppLocalizations.of(context)!.basicInformation,
-                    onPress: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) =>
-                              const UpdateCompanyBasicInformation());
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  ProfileMenuButton(
-                    text: AppLocalizations.of(context)!.companyInformation,
-                    onPress: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) =>
-                              const UpdateCompanyInformation());
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  buildDeleteAccountSection(context, up),
-                  const SizedBox(height: 40),
-                  const AppVersionDisplay(),
-                  const SizedBox(height: 30),
-                ],
-              ),
+    return up.appUser == null
+        ? const LoginOrRegister()
+        : SingleChildScrollView(
+            child: Column(
+              children: [
+                buildSignoutButton(context),
+                const SizedBox(height: 10),
+                buildProfilePicAndEdit(context, up),
+                const SizedBox(height: 10),
+                Text(up.appUser?.company?.name ?? "",
+                    style: ThemeTextStyles.headingThemeTextStyle),
+                const SizedBox(height: 10),
+                ProfileMenuButton(
+                  text: AppLocalizations.of(context)!.basicInformation,
+                  onPress: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) =>
+                            const UpdateCompanyBasicInformation());
+                  },
+                ),
+                const SizedBox(height: 10),
+                ProfileMenuButton(
+                  text: AppLocalizations.of(context)!.companyInformation,
+                  onPress: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => const UpdateCompanyInformation());
+                  },
+                ),
+                const SizedBox(height: 10),
+                buildDeleteAccountSection(context, up),
+                const SizedBox(height: 40),
+                const AppVersionDisplay(),
+                const SizedBox(height: 30),
+              ],
             ),
-    );
+          );
   }
 
   Widget buildProfilePicAndEdit(context, up) {

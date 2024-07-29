@@ -22,7 +22,7 @@ class JobPreferncePath extends StatefulWidget {
 
 class _ClassificationPageState extends State<JobPreferncePath> {
   AppUser? appUser;
-  late WorkerProvider wp;
+  late WorkersProvider wp;
   late List<Industry> industries;
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
@@ -32,7 +32,7 @@ class _ClassificationPageState extends State<JobPreferncePath> {
   @override
   void initState() {
     super.initState();
-    wp = Provider.of<WorkerProvider>(context, listen: false);
+    wp = Provider.of<WorkersProvider>(context, listen: false);
     selectedIndustries = wp.previousParams['industries'] ?? [];
     selectedJobs = wp.previousParams['jobs'] ?? {};
   }
@@ -42,7 +42,7 @@ class _ClassificationPageState extends State<JobPreferncePath> {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     industries = ip.industries.values.toList();
-    wp = Provider.of<WorkerProvider>(context);
+    wp = Provider.of<WorkersProvider>(context);
 
     bool areJobsSelected() {
       return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
@@ -154,8 +154,10 @@ class _ClassificationPageState extends State<JobPreferncePath> {
                   isSelected: areJobsSelected(),
                   onPress: areJobsSelected()
                       ? () async {
-                           UserDataProvider.updateJobsPreference(appUser); // Ensure this function returns a Future
-                          context.go('/pathToJob'); // Replace '/newScreen' with your actual route
+                          UserDataProvider.updateJobsPreference(
+                              appUser); // Ensure this function returns a Future
+                          context.go(
+                              '/pathToJob'); // Replace '/newScreen' with your actual route
                         }
                       : () {}, // Disable the button if no jobs are selected
                 )

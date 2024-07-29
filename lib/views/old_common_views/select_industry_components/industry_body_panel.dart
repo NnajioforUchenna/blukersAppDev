@@ -22,7 +22,7 @@ class IndustryBodyPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     return ListView.builder(

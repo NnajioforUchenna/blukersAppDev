@@ -23,7 +23,7 @@ class _YourResumeState extends State<YourResume> {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
 
     return Card(
       elevation: 8.0,

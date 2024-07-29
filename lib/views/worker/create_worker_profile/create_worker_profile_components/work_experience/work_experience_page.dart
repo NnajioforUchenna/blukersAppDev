@@ -20,7 +20,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     if (workExperienceForms.isEmpty) {
       for (int i = 0; i < wp.workExperience.length; i++) {
         workExperienceForms.add(WorkExperienceForm(index: i));

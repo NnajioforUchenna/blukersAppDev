@@ -17,7 +17,7 @@ class ClassificationPage extends StatefulWidget {
 }
 
 class _ClassificationPageState extends State<ClassificationPage> {
-  late WorkerProvider wp;
+  late WorkersProvider wp;
   late List<Industry> industries;
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
@@ -27,7 +27,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
   @override
   void initState() {
     super.initState();
-    wp = Provider.of<WorkerProvider>(context, listen: false);
+    wp = Provider.of<WorkersProvider>(context, listen: false);
     selectedIndustries = wp.previousParams['industries'] ?? [];
     selectedJobs = wp.previousParams['jobs'] ?? {};
   }
@@ -36,7 +36,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     industries = ip.industries.values.toList();
-    wp = Provider.of<WorkerProvider>(context);
+    wp = Provider.of<WorkersProvider>(context);
 
     bool areJobsSelected() {
       return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);

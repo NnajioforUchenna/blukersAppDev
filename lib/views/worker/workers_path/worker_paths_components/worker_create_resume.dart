@@ -1,13 +1,13 @@
 import 'package:blukers/views/auth/common_widget/auth_input.dart';
 import 'package:blukers/views/worker/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 import 'package:blukers/views/worker/workers_path/worker_paths_components/resume_components/your_resume.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../../providers/worker_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
 class WorkerCreateResume extends StatelessWidget {
   const WorkerCreateResume({super.key});
@@ -17,7 +17,7 @@ class WorkerCreateResume extends StatelessWidget {
     final node = FocusScope.of(context);
     final linkedInUrlController = TextEditingController();
     UserProvider up = Provider.of<UserProvider>(context);
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
 
     return Scaffold(
       body: Container(
@@ -69,7 +69,7 @@ class WorkerCreateResume extends StatelessWidget {
                       TimelineNavigationButton(
                           isSelected: true,
                           onPress: () {
-                           context.go('/pathToJob');
+                            context.go('/pathToJob');
                           }),
                       TimelineNavigationButton(
                         isSelected: true,

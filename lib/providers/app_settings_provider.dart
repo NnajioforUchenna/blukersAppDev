@@ -56,8 +56,6 @@ class AppSettingsProvider with ChangeNotifier {
   GlobalKey signInButton = GlobalKey();
   GlobalKey bottomNavigation = GlobalKey();
 
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   Future<bool?> _shouldUpdateApp() async {
     // bool shouldShowUpdateDialog = false;
 

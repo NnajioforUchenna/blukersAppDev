@@ -21,7 +21,7 @@ class _DetailPageBlockFiveState extends State<DetailPageBlockFive> {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return widget.jobPost.applicantUserIds.isEmpty
         ? Container()
         : Padding(

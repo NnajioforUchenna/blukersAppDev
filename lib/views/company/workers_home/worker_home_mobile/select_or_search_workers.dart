@@ -1,15 +1,13 @@
 import 'package:blukers/views/company/workers_home/worker_home_mobile/search_and_translate_row.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../../providers/app_settings_provider.dart';
 import '../../../../../../providers/industry_provider.dart';
-import '../../../../../../utils/styles/theme_colors.dart';
+import '../../../../providers/worker_provider.dart';
+import '../../../Modules/select_by_industry/select_by_industry.dart';
 import '../../../common_vieiws/loading_page.dart';
-import '../../../worker/jobs_home/Components/jobs_mobile_view/jobs_mobile_view_compnents/mobile_industry_headpanel.dart';
 
 class SelectOrSearchWorkers extends StatefulWidget {
   const SelectOrSearchWorkers({super.key});
@@ -44,21 +42,12 @@ class _SelectOrSearchWorkersState extends State<SelectOrSearchWorkers> {
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     asp = Provider.of<AppSettingsProvider>(context);
 
     return Column(
       children: [
         const SearchAndTranslateRowCompany(),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 30.0),
-          child: Text(AppLocalizations.of(context)!.selectAnIndustry,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.montserrat(
-                fontSize: 22.0,
-                fontWeight: FontWeight.w700,
-                color: ThemeColors.secondaryThemeColor,
-              )),
-        ),
         Expanded(
           child: AnimatedCrossFade(
             firstChild: const LoadingPage(),
@@ -72,16 +61,9 @@ class _SelectOrSearchWorkersState extends State<SelectOrSearchWorkers> {
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: ip.industries.values.map((industry) {
-                    return Container(
-                      margin: const EdgeInsets.only(
-                          bottom: 10.0, left: 30, right: 30),
-                      child: MobileIndustryHeadPanel(industry: industry),
-                    );
-                  }).toList(),
-                ),
+              child: SelectByIndustry(
+                selectBy: 'Workers',
+                getRecords: wp.getWorkersBySelection,
               ),
             ),
             crossFadeState: ip.industries.isEmpty

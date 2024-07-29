@@ -93,7 +93,7 @@ class UserProvider with ChangeNotifier {
     return references;
   }
 
-   void workeruploadResume() {
+  void workeruploadResume() {
     _isResumeUploaded = true;
     notifyListeners();
   }

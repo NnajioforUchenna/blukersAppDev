@@ -1,8 +1,8 @@
-import '../../../../../../providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../providers/worker_provider.dart';
 import '../../../../auth/common_widget/auth_input.dart';
 import 'work_experience_date.dart';
 import 'work_experience_location_form.dart';
@@ -21,7 +21,7 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
   final TextEditingController _jobTitleController = TextEditingController();
   final TextEditingController _jobDescriptionController =
       TextEditingController();
-  late WorkerProvider wp;
+  late WorkersProvider wp;
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         // Check if the widget is still in the tree
-        wp = Provider.of<WorkerProvider>(context, listen: false);
+        wp = Provider.of<WorkersProvider>(context, listen: false);
         if (wp.workExperience[widget.index]['companyName'] != null) {
           _companyNameController.text =
               wp.workExperience[widget.index]['companyName'] ?? '';
@@ -49,7 +49,7 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       margin: const EdgeInsets.only(top: 20, bottom: 10),

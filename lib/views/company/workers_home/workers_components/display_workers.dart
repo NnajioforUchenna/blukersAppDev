@@ -22,7 +22,7 @@ class DisplayWorkers extends StatefulWidget {
 class _DisplayWorkersState extends State<DisplayWorkers> {
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return Scaffold(
       appBar: AppBar(
           backgroundColor: ThemeColors.primaryThemeColor,

@@ -27,7 +27,7 @@ class _CredentialFieldState extends State<CredentialField> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
+      WorkersProvider wp = Provider.of<WorkersProvider>(context, listen: false);
       controller.text = wp.professionalCredentials[widget.index]['name'] ?? '';
       fileNameUrl = wp.professionalCredentials[widget.index]['url'] ?? '';
       isFileUploaded =
@@ -39,7 +39,7 @@ class _CredentialFieldState extends State<CredentialField> {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return Column(
       children: [
         Row(

@@ -281,4 +281,21 @@ class WorkerDataProvider {
 
     return result;
   }
+
+  static Future<List<Worker>> getAllWorkers() async {
+    List<Worker> workers = [];
+
+    await db.collection(workersCollections).get().then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        if (data['workerId'] != null) {
+          Worker? worker = Worker.fromMap(data);
+          if (worker != null) {
+            workers.add(worker);
+          }
+        }
+      });
+    });
+    return workers;
+  }
 }

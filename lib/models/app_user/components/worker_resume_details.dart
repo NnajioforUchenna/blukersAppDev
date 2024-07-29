@@ -39,7 +39,7 @@ class WorkerResumeDetails {
   String? linkedInUrl;
 
   WorkerResumeDetails({
-    required this.tracker,
+    WorkerResumeFormTracker? tracker,
     this.industryIds,
     this.jobIds,
     this.firstName,
@@ -53,7 +53,7 @@ class WorkerResumeDetails {
     this.references,
     this.pdfResumeUrl,
     this.linkedInUrl,
-  });
+  }) : tracker = tracker ?? WorkerResumeFormTracker();
 
   Map<String, dynamic> toMap() {
     return {
@@ -76,24 +76,36 @@ class WorkerResumeDetails {
 
   factory WorkerResumeDetails.fromMap(Map<String, dynamic> map) {
     return WorkerResumeDetails(
-      tracker: WorkerResumeFormTracker.fromMap(map['tracker']),
-      industryIds: List<String>.from(map['industryIds'] ?? []),
-      jobIds: List<String>.from(map['jobIds'] ?? []),
-      firstName: map['firstName'],
-      middleName: map['middleName'],
-      lastName: map['lastName'],
-      birthdate: map['birthdate'],
-      profilePhotoUrl: map['profilePhotoUrl'],
-      skillIds: List<String>.from(map['skillIds'] ?? []),
-      certificationsIds: List<String>.from(map['certificationsIds'] ?? []),
-      workExperiences: (map['workExperiences'] as List<dynamic>?)
-          ?.map((e) => WorkExperience.fromMap(e))
-          .toList(),
-      references: (map['references'] as List<dynamic>?)
-          ?.map((e) => ReferenceForm.fromMap(e))
-          .toList(),
-      pdfResumeUrl: map['pdfResumeUrl'],
-      linkedInUrl: map['linkedInUrl'],
+      tracker: map['tracker'] != null
+          ? WorkerResumeFormTracker.fromMap(map['tracker'])
+          : WorkerResumeFormTracker(),
+      industryIds: map['industryIds'] != null
+          ? List<String>.from(map['industryIds'])
+          : [],
+      jobIds: map['jobIds'] != null ? List<String>.from(map['jobIds']) : [],
+      firstName: map['firstName'] != null ? map['firstName'] : null,
+      middleName: map['middleName'] != null ? map['middleName'] : null,
+      lastName: map['lastName'] != null ? map['lastName'] : null,
+      birthdate: map['birthdate'] != null ? map['birthdate'] : null,
+      profilePhotoUrl:
+          map['profilePhotoUrl'] != null ? map['profilePhotoUrl'] : null,
+      skillIds:
+          map['skillIds'] != null ? List<String>.from(map['skillIds']) : [],
+      certificationsIds: map['certificationsIds'] != null
+          ? List<String>.from(map['certificationsIds'])
+          : [],
+      workExperiences: map['workExperiences'] != null
+          ? (map['workExperiences'] as List<dynamic>)
+              .map((e) => WorkExperience.fromMap(e))
+              .toList()
+          : [],
+      references: map['references'] != null
+          ? (map['references'] as List<dynamic>)
+              .map((e) => ReferenceForm.fromMap(e))
+              .toList()
+          : [],
+      pdfResumeUrl: map['pdfResumeUrl'] != null ? map['pdfResumeUrl'] : null,
+      linkedInUrl: map['linkedInUrl'] != null ? map['linkedInUrl'] : null,
     );
   }
 

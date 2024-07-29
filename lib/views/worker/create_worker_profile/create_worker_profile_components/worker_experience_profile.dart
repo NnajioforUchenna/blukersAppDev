@@ -14,7 +14,7 @@ class WorkerExperienceProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     return SingleChildScrollView(
       child: Column(

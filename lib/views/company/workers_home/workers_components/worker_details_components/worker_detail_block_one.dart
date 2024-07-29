@@ -21,7 +21,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
     double scaleFactor = Responsive.textScaleFactor(context);
     double width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     bool isWorkerSaved = up.isWorkerSaved(worker.workerId ?? '');
 
@@ -67,7 +67,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                     ))
               ],
             ),
-            Row(
+            Wrap(
               children: [
                 Text(
                   worker.workerResumeDetails?.firstName ?? '',

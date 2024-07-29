@@ -1,12 +1,12 @@
-import '../../../../../providers/worker_provider.dart';
-import '../../../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:unicons/unicons.dart';
 
+import '../../../../../providers/worker_provider.dart';
 import '../../../../../services/responsive.dart';
+import '../../../../../utils/styles/index.dart';
 
 const Color highlightColor = ThemeColors.blukersOrangeThemeColor;
 
@@ -68,7 +68,7 @@ class WorkerTimeLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Replace with your data provider
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     var currentStep = wp.workerProfileCurrentPageIndex;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(currentStep * 120.0);
