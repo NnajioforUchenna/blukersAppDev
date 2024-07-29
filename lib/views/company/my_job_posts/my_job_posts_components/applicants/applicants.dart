@@ -1,7 +1,8 @@
-import '../../../../../providers/worker_provider.dart';
-import '../../../workers_home/workers_components/complete_worker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../../providers/worker_provider.dart';
+import '../../../workers_home/workers_components/complete_worker_widget.dart';
 
 class Applicants extends StatelessWidget {
   const Applicants({super.key});

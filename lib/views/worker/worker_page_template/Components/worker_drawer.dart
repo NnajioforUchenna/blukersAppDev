@@ -52,7 +52,7 @@ class WorkerDrawer extends StatelessWidget {
             context: context,
             icon: Icons.search,
             text: 'Search',
-            route: '/search',
+            route: '/search_jobs',
           ),
           _createDrawerItem(
             context: context,

@@ -2,27 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/job_posts_provider.dart';
-import '../../../providers/user_provider_parts/user_provider.dart';
-import '../../../providers/worker_provider.dart';
-import '../../../services/responsive.dart';
-import '../../../utils/styles/theme_colors.dart';
+import '../../../../providers/job_posts_provider.dart';
+import '../../../../providers/worker_provider.dart';
+import '../../../../services/responsive.dart';
+import '../../../../utils/styles/theme_colors.dart';
 
-class DesktopSearchBar extends StatefulWidget {
-  const DesktopSearchBar({super.key});
+class WorkerDesktopSearchBar extends StatefulWidget {
+  const WorkerDesktopSearchBar({super.key});
 
   @override
-  State<DesktopSearchBar> createState() => _DesktopSearchBarState();
+  State<WorkerDesktopSearchBar> createState() => _WorkerDesktopSearchBarState();
 }
 
-class _DesktopSearchBarState extends State<DesktopSearchBar> {
+class _WorkerDesktopSearchBarState extends State<WorkerDesktopSearchBar> {
   final TextEditingController _searchController1 = TextEditingController();
   final TextEditingController _searchController2 = TextEditingController();
   late WorkerProvider wp;
   late JobPostsProvider jp;
-  late UserProvider up;
   bool _isLoading = false;
 
   bool isMobileSearchBarVisible = false;
@@ -32,7 +31,6 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
     super.initState();
     wp = Provider.of<WorkerProvider>(context, listen: false);
     jp = Provider.of<JobPostsProvider>(context, listen: false);
-    up = Provider.of<UserProvider>(context, listen: false);
   }
 
   String buttonLabel = 'Search Jobs';
@@ -40,16 +38,9 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider up = Provider.of<UserProvider>(context);
-    if (up.userRole == 'Company') {
-      buttonLabel = AppLocalizations.of(context)!.searchWorkers;
-      searchName =
-          AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
-    } else {
-      buttonLabel = AppLocalizations.of(context)!.searchJobs;
-      searchName =
-          AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
-    }
+    buttonLabel = AppLocalizations.of(context)!.searchWorkers;
+    searchName =
+        AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
 
     return Container(
       color: ThemeColors.searchBarPrimaryThemeColor,
@@ -89,7 +80,6 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
               _searchController1.clear();
               _searchController2.clear();
               wp.setSearching(false);
-              jp.setSearching(false);
             });
           }
         },
@@ -108,7 +98,6 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
                       _searchController1.clear();
                       _searchController2.clear();
                       wp.setSearching(false);
-                      jp.setSearching(false);
                     });
                   },
           ),
@@ -147,11 +136,9 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
           String locationRelated = _searchController2.text;
 
           // Determine which provider to use
-          if (up.userRole == 'company') {
-            await wp.searchWorkers(nameRelated, locationRelated);
-          } else {
-            await jp.searchJobPosts(nameRelated, locationRelated);
-          }
+          await wp.searchWorkers(nameRelated, locationRelated);
+
+          GoRouter.of(context).pushReplacement('/workerSearchResults');
 
           setState(() {
             _isLoading = false; // End loading
@@ -183,7 +170,7 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
   }
 
   Widget _buildSmallCircleButton() {
-    return wp.isSearching || jp.isSearching
+    return wp.isSearching
         ? SizedBox(
             width: 25.w, // Fixed width
             height: 25.h, // Fixed height
@@ -193,8 +180,9 @@ class _DesktopSearchBarState extends State<DesktopSearchBar> {
                   _searchController1.clear();
                   _searchController2.clear();
                   wp.setSearching(false);
-                  jp.setSearching(false);
                   jp.clearSearchParameters();
+                  GoRouter.of(context).go('/workers');
+                  print('called');
                 });
               },
               style: ElevatedButton.styleFrom(

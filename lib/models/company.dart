@@ -1,4 +1,5 @@
 import 'address.dart';
+import 'app_user/components/preference.dart';
 import 'social_media_platform.dart';
 
 class Company {
@@ -29,6 +30,9 @@ class Company {
   List<String> interestingWorkersIds;
   List<SocialMediaPlatform> socialMediaPlatforms;
   int dateCreated;
+
+  // Set Workers Preferences
+  Preference? workersPreference;
 
   Company({
     required this.companyId,

@@ -53,7 +53,7 @@ class CompanyDrawer extends StatelessWidget {
             context: context,
             icon: Icons.search,
             text: 'Search Workers',
-            route: '/searchWorkers',
+            route: '/search_workers',
           ),
           _createDrawerItem(
             context: context,

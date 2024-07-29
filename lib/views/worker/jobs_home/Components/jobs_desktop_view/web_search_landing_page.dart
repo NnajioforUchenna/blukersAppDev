@@ -7,7 +7,6 @@ import '../../../../../providers/job_posts_provider.dart';
 import '../../../../common_vieiws/loading_page.dart';
 import '../../../worker_page_template/worker_page_template.dart';
 import 'web_job_search_result_page.dart';
-import 'web_landing_page_search_bar.dart';
 
 class WebSearchLandingPage extends StatelessWidget {
   const WebSearchLandingPage({super.key});
@@ -24,7 +23,7 @@ class WebSearchLandingPage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const WebSearchBar(),
+            // const WebSearchBar(),
             SizedBox(height: 10.w),
             toDisplay.isEmpty
                 ? const LoadingPage()

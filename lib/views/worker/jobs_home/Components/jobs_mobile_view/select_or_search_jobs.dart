@@ -1,4 +1,4 @@
-import 'package:blukers/views/worker/jobs_home/Components/jobs_mobile_view/jobs_mobile_view_compnents/search_and_translate_row.dart';
+import 'package:blukers/views/worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/search_and_translate_row.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
