@@ -80,9 +80,6 @@ final routes = [
       GoRoute(
           path: '/search_jobs',
           builder: (context, state) => const SearchJobsUi()),
-      GoRoute(
-          path: '/search_workers',
-          builder: (context, state) => const SearchWorkersUi()),
     ],
   ),
 
@@ -100,6 +97,9 @@ final routes = [
       GoRoute(
           path: '/companyChat',
           builder: (context, state) => const CompanyChat()),
+      GoRoute(
+          path: '/search_workers',
+          builder: (context, state) => const SearchWorkersUi()),
     ],
   ),
   GoRoute(
