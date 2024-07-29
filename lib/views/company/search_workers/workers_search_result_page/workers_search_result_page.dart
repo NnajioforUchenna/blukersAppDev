@@ -5,8 +5,8 @@ import '../../../../models/worker.dart';
 import '../../../../providers/worker_provider.dart';
 import '../../../../services/responsive.dart';
 import '../../../worker/jobs_home/job_home_components/jobs_desktop_view/jobs_desktop_view_components/select_desktop_language_dialog.dart';
-import '../../../worker/search_jobs/job_search_bar_components/job_all_search_bar.dart';
-import '../../worker_home/worker_home_components/workers_mobile_view/workers_mobile_view_components/search_and_translate_row.dart';
+import '../../workers_home/worker_home_mobile/search_and_translate_row.dart';
+import '../worker_search_bar_components/worker_all_search_bar.dart';
 import 'components/complete_worker_widget.dart';
 
 class WorkerSearchResultPage extends StatelessWidget {
@@ -22,7 +22,7 @@ class WorkerSearchResultPage extends StatelessWidget {
           if (Responsive.isMobile(context)) ...[
             const SearchAndTranslateRowCompany(),
           ] else ...[
-            const JobAllSearchBar(),
+            const WorkerAllSearchBar(),
             const SizedBox(height: 10),
             const Center(child: SelectDesktopLanguageDialog()),
             const SizedBox(height: 10),

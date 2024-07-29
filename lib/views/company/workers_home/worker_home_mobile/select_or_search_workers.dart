@@ -1,4 +1,4 @@
-import 'package:blukers/views/company/worker_home/worker_home_components/workers_mobile_view/workers_mobile_view_components/search_and_translate_row.dart';
+import 'package:blukers/views/company/workers_home/worker_home_mobile/search_and_translate_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';

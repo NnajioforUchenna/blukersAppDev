@@ -30,6 +30,7 @@ class _WorkerDesktopSearchBarState extends State<WorkerDesktopSearchBar> {
   void initState() {
     super.initState();
     wp = Provider.of<WorkerProvider>(context, listen: false);
+    jp = Provider.of<JobPostsProvider>(context, listen: false);
   }
 
   String buttonLabel = 'Search Jobs';
@@ -181,6 +182,7 @@ class _WorkerDesktopSearchBarState extends State<WorkerDesktopSearchBar> {
                   wp.setSearching(false);
                   jp.clearSearchParameters();
                   GoRouter.of(context).go('/workers');
+                  print('called');
                 });
               },
               style: ElevatedButton.styleFrom(

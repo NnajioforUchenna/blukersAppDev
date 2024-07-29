@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 
-import '../../../../../../utils/styles/theme_colors.dart';
-import '../../../../../worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/job_mobile_choose_target_language.dart';
+import '../../../../utils/styles/theme_colors.dart';
+import '../../../worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/job_mobile_choose_target_language.dart';
 
 class SearchAndTranslateRowCompany extends StatelessWidget {
   const SearchAndTranslateRowCompany({super.key});

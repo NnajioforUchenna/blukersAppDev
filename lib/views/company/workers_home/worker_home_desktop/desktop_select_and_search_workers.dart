@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
 
-import '../../../../../../providers/app_settings_provider.dart';
-import '../../../../../../providers/industry_provider.dart';
-import '../../../../../common_vieiws/loading_page.dart';
-import '../../../../../old_common_views/select_industry_components/display_industries.dart';
-import '../../../../../worker/jobs_home/job_home_components/jobs_desktop_view/jobs_desktop_view_components/select_desktop_language_dialog.dart';
-import '../../../../search_workers/worker_search_bar_components/worker_all_search_bar.dart';
+import '../../../../providers/app_settings_provider.dart';
+import '../../../../providers/industry_provider.dart';
+import '../../../common_vieiws/loading_page.dart';
+import '../../../old_common_views/select_industry_components/display_industries.dart';
+import '../../../worker/jobs_home/job_home_components/jobs_desktop_view/jobs_desktop_view_components/select_desktop_language_dialog.dart';
+import '../../search_workers/worker_search_bar_components/worker_all_search_bar.dart';
 
 class DesktopSelectAndSearchWorkers extends StatefulWidget {
   const DesktopSelectAndSearchWorkers({super.key});
