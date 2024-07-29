@@ -7,19 +7,19 @@ import '../views/worker/services/services_components/products/products.dart';
 import '../views/worker/services/services_components/subscription/subscription_components/mobile_view/subscription_mobile_view_widget.dart';
 
 final List<String> routesWorker = [
-  '/',
+  '/jobs',
   '/myJobs',
-  '/search',
+  '/search_jobs',
   '/offers',
   '/workerProfile',
   '/login'
 ];
 final List<String> routesCompany = [
-  '/',
+  '/workers',
   '/myJobPosts',
-  '/search',
-  '/offers',
+  '/search_workers',
   '/chat',
+  '/offers',
   '/companyProfile',
   '/login'
 ];

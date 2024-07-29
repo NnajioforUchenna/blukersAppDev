@@ -143,14 +143,16 @@ class ChatProvider with ChangeNotifier {
         myUid: appUser!.uid,
         recipientUid: worker.workerId,
         myName: appUser.displayName ?? "Company",
-        recipientName: worker.firstName + worker.lastName,
+        recipientName: worker.workerResumeDetails!.firstName! +
+            worker.workerResumeDetails!.lastName!,
         message: "",
         myLogo: appUser.photoUrl ?? "",
         recipientLogo: worker.profilePhotoUrl ?? "");
 
     chatDetails["roomId"] = roomId ?? "";
     chatDetails["sentToId"] = worker.workerId;
-    chatDetails["roomName"] = worker.firstName + worker.lastName;
+    chatDetails["roomName"] = worker.workerResumeDetails!.firstName! +
+        worker.workerResumeDetails!.lastName!;
     notifyListeners();
   }
 }

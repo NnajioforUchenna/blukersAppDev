@@ -1,9 +1,9 @@
-import '../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../utils/styles/index.dart';
 import '../../../../old_common_views/small_pop_button_widget.dart';
 
 class UpdateUserInformation extends StatefulWidget {
@@ -23,12 +23,15 @@ class _UpdateUserInformationState extends State<UpdateUserInformation> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       UserProvider up = Provider.of<UserProvider>(context, listen: false);
-      if (up.appUser != null && up.appUser?.worker != null) {
-        firstNameController.text = up.appUser?.worker?.firstName ?? '';
-        lastNameController.text = up.appUser?.worker?.lastName ?? '';
-        middleNameController.text = up.appUser?.worker?.middleName ?? '';
+      if (up.appUser != null && up.appUser?.workerResumeDetails != null) {
+        firstNameController.text =
+            up.appUser?.workerResumeDetails?.firstName ?? '';
+        lastNameController.text =
+            up.appUser?.workerResumeDetails?.lastName ?? '';
+        middleNameController.text =
+            up.appUser?.workerResumeDetails?.middleName ?? '';
         descriptionController.text =
-            up.appUser?.worker?.workerBriefDescription ?? '';
+            up.appUser?.registrationDetails?.shortDescription ?? '';
       }
     });
 

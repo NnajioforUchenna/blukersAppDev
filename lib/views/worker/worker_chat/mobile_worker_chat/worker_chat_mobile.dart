@@ -7,7 +7,7 @@ import '../../../../models/chat_recipient.dart';
 import '../../../../providers/chat_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../common_vieiws/icon_text_404.dart';
-import '../../../common_vieiws/page_template/page_template.dart';
+import '../../worker_page_template/worker_page_template.dart';
 import '../components/chat_recipient_widget.dart';
 
 class WorkerChatMobile extends StatelessWidget {
@@ -17,7 +17,7 @@ class WorkerChatMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
 
-    return PageTemplate(
+    return WorkerPageTemplate(
       child: StreamBuilder<List<ChatRecipient>>(
         stream: Provider.of<ChatProvider>(context, listen: false)
             .getChatRecipientsStream(),

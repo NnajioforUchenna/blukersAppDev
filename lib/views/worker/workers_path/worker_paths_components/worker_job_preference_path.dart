@@ -1,5 +1,4 @@
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
-import 'package:blukers/views/worker/worker_profile/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -124,7 +123,8 @@ class _ClassificationPageState extends State<JobPreferncePath> {
                                 }
                                 setState(() {
                                   if (value == true) {
-                                    selectedJobs[industry.industryId]!.add(jobId);
+                                    selectedJobs[industry.industryId]!
+                                        .add(jobId);
                                   } else {
                                     selectedJobs[industry.industryId]!
                                         .remove(jobId);
@@ -141,21 +141,7 @@ class _ClassificationPageState extends State<JobPreferncePath> {
               ];
             }).toList(),
             const SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Spacer(),
-                TimelineNavigationButton(
-                  isSelected: areJobsSelected(),
-                  onPress: areJobsSelected()
-                      ? () {
-                          up.setRegisterPageIndex();
-                          // up.updateSelection();
-                        }
-                      : () {}, // Disable the button if no jobs are selected
-                ),
-              ],
-            ),
+
             const SizedBox(height: 20), // Reduced the space here
           ],
         ),

@@ -1,4 +1,3 @@
-import 'show_network_pdf.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +6,8 @@ import 'package:unicons/unicons.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../utils/styles/theme_colors.dart';
-import '../../create_worker_profile/create_worker_profile_components/ShowPDF.dart';
+import '../../../create_worker_profile/create_worker_profile_components/ShowPDF.dart';
+import 'show_network_pdf.dart';
 
 class UploadYourResume extends StatefulWidget {
   const UploadYourResume({super.key});
@@ -26,10 +26,10 @@ class _UploadYourResumeState extends State<UploadYourResume> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       UserProvider up = Provider.of<UserProvider>(context, listen: false);
       if (up.appUser != null &&
-          up.appUser?.worker != null &&
-          up.appUser?.worker?.pdfResumeUrl != null) {
+          up.appUser?.workerResumeDetails != null &&
+          up.appUser?.workerResumeDetails?.pdfResumeUrl != null) {
         setState(() {
-          fileNameUrl = up.appUser!.worker!.pdfResumeUrl;
+          fileNameUrl = up.appUser!.workerResumeDetails!.pdfResumeUrl!;
         });
       }
     });

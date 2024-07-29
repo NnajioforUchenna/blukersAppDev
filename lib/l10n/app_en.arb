@@ -480,5 +480,9 @@
   "delete": "Delete",
   "noworkersfound": "No workers found",
   "appUserInformation": "App User Information",
-  "selectWorkersPreference": "Select Workers Preference"
+  "selectWorkersPreference": "Select Workers Preference",
+  "selectJobsAnIndustry": "Select Jobs By Industry",
+  "selectWorkersByIndustry": "Select Workers By Industry",
+  "selectYourJobsPreferences": "Select Your Jobs Preferences",
+  "setJobPreferences": "Set Job Preferences"
 }

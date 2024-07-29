@@ -72,9 +72,7 @@ class UserProvider with ChangeNotifier {
   List<Map<String, dynamic>> references = [{}, {}];
 
   bool isUserRegistered() {
-    if (_appUser != null &&
-        _appUser?.worker != null &&
-        _appUser?.worker?.jobsPreference != null) {
+    if (_appUser != null) {
       return true;
     } else {
       return false;
@@ -82,16 +80,18 @@ class UserProvider with ChangeNotifier {
   }
 
   List<Map<String, dynamic>> getReferences() {
-    if (appUser == null || appUser!.worker == null) {
+    if (appUser == null || appUser!.workerResumeDetails == null) {
       return [{}, {}];
     }
-    references = appUser!.worker!.references.map((e) => e.toMap()).toList();
+    references = appUser!.workerResumeDetails!.references!
+        .map((e) => e.toMap())
+        .toList();
     return references;
   }
 
   void setReferences(List<Map<String, dynamic>> references) {
-    appUser!.worker!.references = [];
-    appUser!.worker!.references = references
+    appUser!.workerResumeDetails!.references = [];
+    appUser!.workerResumeDetails!.references = references
         .where((e) => e.isNotEmpty) // Filter out empty maps
         .map((e) => ReferenceForm.fromMap(e))
         .toList();
@@ -102,18 +102,19 @@ class UserProvider with ChangeNotifier {
 
   List<Map<String, dynamic>> getWorkExperiences() {
     if (appUser == null ||
-        appUser!.worker == null ||
-        appUser!.worker!.workExperiences.isEmpty) {
+        appUser!.workerResumeDetails == null ||
+        appUser!.workerResumeDetails!.workExperiences!.isEmpty) {
       return [{}, {}];
     }
-    workExperiences =
-        appUser!.worker!.workExperiences.map((e) => e.toMap()).toList();
+    workExperiences = appUser!.workerResumeDetails!.workExperiences!
+        .map((e) => e.toMap())
+        .toList();
     return workExperiences;
   }
 
   void setWorkExperiences(List<Map<String, dynamic>> newWorkExperiences) {
-    appUser!.worker!.workExperiences = [];
-    appUser!.worker!.workExperiences = newWorkExperiences
+    appUser!.workerResumeDetails!.workExperiences = [];
+    appUser!.workerResumeDetails!.workExperiences = newWorkExperiences
         .where((e) => e.isNotEmpty) // Filter out empty maps
         .map((e) => WorkExperience.fromMap(e))
         .toList();
@@ -153,11 +154,11 @@ class UserProvider with ChangeNotifier {
   void applyForJobPost(JobPost jobPost) {
     // print(jobPost.toString());
     // Update UI interFace
-    appUser?.worker?.appliedJobPostIds.add(jobPost.jobPostId);
+    appUser?.workerRecords?.appliedJobPostIds?.add(jobPost.jobPostId);
     notifyListeners();
     // Persist data to database
     UserDataProvider.updateWorkerAppliedJobPostIds(
-        appUser!.worker!.appliedJobPostIds, appUser!.uid);
+        appUser!.workerRecords!.appliedJobPostIds!, appUser!.uid);
     // update JobPost Records
     JobPostsDataProvider.updateJobPostAppliedWorkerIds(
         jobPost.jobPostId, appUser!.uid);
@@ -219,7 +220,7 @@ class UserProvider with ChangeNotifier {
     setReferences(references);
     updatingInformation(() async {
       await UserDataProvider.updateWorkerReferences(
-          appUser!.worker!.references, appUser!.uid);
+          appUser!.workerResumeDetails!.references!, appUser!.uid);
     });
   }
 
@@ -237,12 +238,12 @@ class UserProvider with ChangeNotifier {
     setWorkExperiences(workExperiences);
     updatingInformation(() async {
       await UserDataProvider.updateWorkerWorkExperiences(
-          appUser!.worker!.workExperiences, appUser!.uid);
+          appUser!.workerResumeDetails!.workExperiences!, appUser!.uid);
     });
   }
 
   void updateUserCountry(String country) {
-    if (appUser == null || appUser!.worker == null) {
+    if (appUser == null || appUser!.workerResumeDetails == null) {
       return;
     }
     appUser!.whereYouReside = country;
@@ -250,21 +251,21 @@ class UserProvider with ChangeNotifier {
   }
 
   bool getWhereDoYouReside() {
-    if (appUser == null || appUser!.worker == null) {
+    if (appUser == null || appUser!.workerResumeDetails == null) {
       return false;
     }
     return appUser!.whereYouReside.isNotEmpty;
   }
 
   String getWhyDeleteAccount() {
-    if (appUser == null || appUser!.worker == null) {
+    if (appUser == null || appUser!.workerResumeDetails == null) {
       return "";
     }
     return appUser!.deleteAccountReason;
   }
 
   void setWhyDeleteAccount(String selected) {
-    if (appUser == null || appUser!.worker == null) {
+    if (appUser == null || appUser!.workerResumeDetails == null) {
       return;
     }
     appUser!.deleteAccountReason = selected;
@@ -315,6 +316,36 @@ class UserProvider with ChangeNotifier {
       }
     } catch (e) {
       print('Failed to save job post: $e');
+    }
+  }
+
+  isJobsPreferencesSet() {
+    if (appUser == null) {
+      return false;
+    }
+    print(appUser!.registrationDetails?.jobsPreference);
+    return appUser!.registrationDetails?.jobsPreference != null;
+  }
+
+  void setJobsPreferences(
+      List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
+    if (appUser != null) {
+      Preference preference = Preference(
+        industryIds: selectedIndustries,
+        jobIds: selectedJobs,
+      );
+      if (appUser?.registrationDetails != null) {
+        appUser?.registrationDetails?.jobsPreference = preference;
+        appUser?.workerTimelineStep = 2;
+      } else {
+        RegistrationDetails registrationDetails = RegistrationDetails(
+          jobsPreference: preference,
+          email: appUser!.email,
+        );
+        appUser?.registrationDetails = registrationDetails;
+        appUser?.workerTimelineStep = 2;
+      }
+      UserDataProvider.updateUser(appUser!);
     }
   }
 }

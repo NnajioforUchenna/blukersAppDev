@@ -7,7 +7,8 @@ import '../models/address.dart';
 import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
 import '../views/auth/please_login_dialog.dart';
-import '../views/company/my_job_posts_components/create_job_post_components/compensation_and_contract_page.dart';
+import '../views/company/create_job_post/create_job_post_components/compensation_and_contract_page.dart';
+import '../views/worker/jobs_home/Components/display_selected_jobs/display_selected_jobs.dart';
 
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;
@@ -69,6 +70,43 @@ class JobPostsProvider with ChangeNotifier {
       searchComplete = true;
       notifyListeners();
     });
+  }
+
+  void getJobsBySelection(BuildContext context, String jobId) {
+    searchComplete = false;
+    selectedJobPostId = jobId;
+    nameSearch = jobId;
+    language = appUser?.language ?? 'en';
+
+    // Get all jobPosts for the job with the given jobId.
+    JobPostsDataProvider.getJobPostsByJobID(jobId, language).then((jobPosts) {
+      List<JobPost> listJobPosts = [];
+
+      listJobPosts = jobPosts
+          .map((jobPost) {
+            return JobPost.fromMap(jobPost);
+          })
+          .where((jobPost) => jobPost != null)
+          .cast<JobPost>()
+          .toList();
+
+      if (listJobPosts.isNotEmpty) {
+        selectedJobPost = listJobPosts.first;
+      }
+
+      displayedJobPosts = fillDisplayedJobPosts(listJobPosts);
+
+      searchComplete = true;
+      notifyListeners();
+    });
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DisplaySelectedJobs(
+          title: jobId,
+        ),
+      ),
+    );
   }
 
   Future<void> translateJobPosts(targetLanguage) async {
@@ -272,28 +310,28 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool isWebSearching = false;
+  // bool isWebSearching = false;
 
-  Future<void> getJobsBySearchParameter(
-      String nameSearch, String locationSearch) async {
-    nameSearch = nameSearch;
-    locationSearch = locationSearch;
-    List<JobPost> searchJobPosts = await JobPostsDataProvider.searchJobPosts(
-        nameRelated: nameSearch,
-        locationRelated: locationSearch,
-        pageNumber: 0,
-        targetLanguage: language);
-    hasMore = searchJobPosts.isNotEmpty;
-    if (searchJobPosts.isEmpty) {
-      EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
-    } else {
-      for (var element in searchJobPosts) {
-        searchJobs[element.jobPostId] = element;
-      }
-      isWebSearching = true;
-      notifyListeners();
-    }
-  }
+  // Future<void> getJobsBySearchParameter(
+  //     String nameSearch, String locationSearch) async {
+  //   nameSearch = nameSearch;
+  //   locationSearch = locationSearch;
+  //   List<JobPost> searchJobPosts = await JobPostsDataProvider.searchJobPosts(
+  //       nameRelated: nameSearch,
+  //       locationRelated: locationSearch,
+  //       pageNumber: 0,
+  //       targetLanguage: language);
+  //   hasMore = searchJobPosts.isNotEmpty;
+  //   if (searchJobPosts.isEmpty) {
+  //     EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
+  //   } else {
+  //     for (var element in searchJobPosts) {
+  //       searchJobs[element.jobPostId] = element;
+  //     }
+  //     isWebSearching = true;
+  //     notifyListeners();
+  //   }
+  // }
 
   void get50LastestJobPosts() async {
     // Get the 50 most recent job posts.

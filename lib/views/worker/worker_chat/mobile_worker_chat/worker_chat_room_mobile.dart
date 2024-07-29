@@ -1,5 +1,4 @@
 import 'package:blukers/providers/chat_provider.dart';
-import 'package:blukers/views/common_vieiws/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +23,8 @@ class _WorkerChatRoomMobileState extends State<WorkerChatRoomMobile> {
         Provider.of<UserProvider>(context, listen: false).appUser?.uid;
     ChatProvider cp = Provider.of<ChatProvider>(context);
     return Scaffold(
-      appBar: MyAppBar(
-        title: cp.selectedChatRecipient?.displayName ?? 'Not Given',
+      appBar: AppBar(
+        title: Text(cp.selectedChatRecipient?.displayName ?? 'Not Given'),
       ),
       body: SafeArea(
         child: GestureDetector(

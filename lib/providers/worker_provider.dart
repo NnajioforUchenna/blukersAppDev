@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:blukers/models/app_user/components/worker_resume_details.dart';
+import 'package:blukers/models/app_user/components/worker_resume_form_tracker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +73,6 @@ class WorkerProvider with ChangeNotifier {
   }
 
   //  Create Worker Profile Parameters
-  Worker? newWorker;
   int workerProfileCurrentPageIndex = 0;
   List<Map<String, dynamic>> workExperience = [{}, {}];
   List<Map<String, dynamic>> references = [{}, {}];
@@ -93,21 +94,26 @@ class WorkerProvider with ChangeNotifier {
   void createWorkerProfile(context, List<String> selectedIndustries,
       Map<String, List<String>> selectedJobs) {
     if (appUser != null) {
-      getMyProfile();
-
       // Saving the selected industries and jobs to the previousParams.
       previousParams['industries'] = selectedIndustries;
       previousParams['jobs'] = selectedJobs;
 
-      newWorker = Worker.fromMap({
-        'workerId': appUser!.uid,
-        'emails': [appUser!.email],
-      });
+      // Create Worker Resume Form Tracker
+      WorkerResumeFormTracker tracker = WorkerResumeFormTracker();
+      tracker.isIndustriesAndJobsCompleted = true;
 
-      // Add the selected industries to the newWorker.
-      newWorker!.industryIds = selectedIndustries;
-      newWorker!.jobIds =
+      // Create Worker Resume Details
+      WorkerResumeDetails details = WorkerResumeDetails(tracker: tracker);
+      // Store the selected industries and jobs in the details.
+      details.industryIds = selectedIndustries;
+      details.jobIds =
           selectedJobs.values.toList().expand((element) => element).toList();
+
+      // Add the details to the appUser.
+      appUser!.workerResumeDetails = details;
+
+      // Update the appUser
+      UserDataProvider.updateUser(appUser!);
 
       // Update User Journey Initialising Worker Profile
       UserJourneyDataProvider.updateInitiate(appUser!.uid);
@@ -123,6 +129,9 @@ class WorkerProvider with ChangeNotifier {
   // Add the worker's personal information to the newWorker.
   void addPersonalInformtion(String firstName, String middleName,
       String lastName, String day, String month, String year) {
+    // check if AppUser is null
+    checkIfAppUserIsNull();
+
     // Saving the personal information to the previousParams.
     previousParams['firstName'] = firstName;
     previousParams['middleName'] = middleName;
@@ -132,12 +141,16 @@ class WorkerProvider with ChangeNotifier {
     previousParams['birthYear'] = year;
 
     // Saving the personal information to the newWorker.
-    newWorker!.firstName = firstName;
-    newWorker!.middleName = middleName;
-    newWorker!.lastName = lastName;
-    newWorker!.birthdate =
+    appUser!.workerResumeDetails?.tracker!.isBasicInformationCompleted = true;
+    appUser!.workerResumeDetails?.firstName = firstName;
+    appUser!.workerResumeDetails?.middleName = middleName;
+    appUser!.workerResumeDetails?.lastName = lastName;
+    appUser!.workerResumeDetails?.birthdate =
         DateTime(int.parse(year), int.parse(month), int.parse(day))
             .millisecondsSinceEpoch;
+
+    // Update the appUser
+    UserDataProvider.updateUser(appUser!);
 
     workerProfileNextPage();
   }
@@ -203,7 +216,7 @@ class WorkerProvider with ChangeNotifier {
           await WorkerDataProvider.uploadCredentialToFirebaseStorageWeb(
               appUser!.uid, filePlatformFile.bytes!, filePlatformFile.name);
       if (resultUrl != 'error') {
-        appUser?.worker?.certificationsIds.add(resultUrl);
+        appUser?.workerResumeDetails?.certificationsIds?.add(resultUrl);
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your credential successfully.',
             duration: const Duration(seconds: 3));
@@ -244,7 +257,7 @@ class WorkerProvider with ChangeNotifier {
               appUser!.uid, file, result.files.single.name);
 
       if (resultUrl != 'error') {
-        appUser?.worker?.certificationsIds.add(resultUrl);
+        appUser?.workerResumeDetails?.certificationsIds?.add(resultUrl);
 
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your credential successfully.',
@@ -262,10 +275,17 @@ class WorkerProvider with ChangeNotifier {
   }
 
   void setSkills(List<String> selectedSkills) {
+    // check if AppUser is null
+    checkIfAppUserIsNull();
+
 // Saving the selected skills to the previousParams.
     previousParams['skills'] = selectedSkills;
 
-    newWorker!.skillIds = selectedSkills;
+    appUser!.workerResumeDetails?.tracker!.isSkillsCompleted = true;
+    appUser!.workerResumeDetails?.skillIds = selectedSkills;
+
+    UserDataProvider.updateUser(appUser!);
+
     workerProfileNextPage();
   }
 
@@ -287,57 +307,62 @@ class WorkerProvider with ChangeNotifier {
   }
 
   void setWorkExperience() {
+    // check if AppUser is null
+    checkIfAppUserIsNull();
+
     for (var element in workExperience) {
-      newWorker!.workExperiences = [];
-      newWorker!.workExperiences.add(WorkExperience.fromMap(element));
+      appUser!.workerResumeDetails?.workExperiences = [];
+      appUser!.workerResumeDetails?.workExperiences
+          ?.add(WorkExperience.fromMap(element));
     }
+    UserDataProvider.updateUser(appUser!);
     workerProfileNextPage();
   }
 
-  // void setReference() {
-  //   for (var element in references) {
-  //     newWorker!.references = [];
-  //     newWorker!.references.add(ReferenceForm.fromMap(element));
-  //   }
-  //   workerProfileNextPage();
-  // }
   void setReference() {
+    // check if AppUser is null
+    checkIfAppUserIsNull();
+
     if (references.isEmpty) {
       EasyLoading.showError('Add at least 1 reference');
     } else {
       for (var element in references) {
-        newWorker!.references = [];
+        appUser?.workerResumeDetails?.references = [];
         if (element.isNotEmpty) {
-          newWorker!.references.add(ReferenceForm.fromMap(element));
+          appUser?.workerResumeDetails?.references
+              ?.add(ReferenceForm.fromMap(element));
         }
       }
+      UserDataProvider.updateUser(appUser!);
       workerProfileNextPage();
     }
   }
 
   void setResumeUrl(String pdfUrl) {
-    newWorker!.pdfResumeUrl = pdfUrl;
+    // check if AppUser is null
+    checkIfAppUserIsNull();
+
+    appUser?.workerResumeDetails?.pdfResumeUrl = pdfUrl;
   }
 
   void setResume(String text) {
-    newWorker!.onlineResume = text;
+    // check if AppUser is null
+    checkIfAppUserIsNull();
+
+    appUser?.workerResumeDetails?.linkedInUrl = text;
+    UserDataProvider.updateUser(appUser!);
     workerProfileNextPage();
+
+    // Create New Worker and Add to Database
+    Worker newWorker = Worker.fromAppUser(appUser!);
     newWorker?.dateCreated = DateTime.now().millisecondsSinceEpoch;
     newWorker?.createdAt = DateTime.now().millisecondsSinceEpoch;
     newWorker?.modifiedAt = DateTime.now().millisecondsSinceEpoch;
     WorkerDataProvider.createWorkerProfile(newWorker!);
 
-    UserDataProvider.updateUserWorkerProfile(appUser!.uid, newWorker!);
-    // Update User Journey Worker Profile Created
+    // Update User Journey as Member
     UserJourneyDataProvider.updateMember(appUser!.uid);
     previousParams.clear();
-  }
-
-  void getMyProfile() {
-    WorkerDataProvider.getWorkerProfile(appUser!.uid).then((worker) {
-      appUser!.worker = worker;
-      notifyListeners();
-    });
   }
 
   // Create Parameter to Display Lists (Applied Users)
@@ -389,6 +414,18 @@ class WorkerProvider with ChangeNotifier {
   void setSearching(bool bool) {
     isSearching = bool;
     notifyListeners();
+  }
+
+  void updateWorkerProfilePhoto(String s) {
+    appUser!.workerResumeDetails?.profilePhotoUrl = s;
+    UserDataProvider.updateUser(appUser!);
+  }
+
+  void checkIfAppUserIsNull() {
+    if (appUser == null) {
+      EasyLoading.showError('Please Sign In');
+      return;
+    }
   }
 
 // Any other methods related to the Worker can be added as required.

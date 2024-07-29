@@ -316,16 +316,6 @@ class UserDataProvider {
     // }
   }
 
-  static void updateUserWorkerProfile(String uid, Worker worker) {
-    CollectionReference appUserCollection =
-        firestore.collection(appUserCollections);
-    appUserCollection.doc(uid).update({
-      'worker': worker.toMap(),
-    }).catchError((error) {
-      print("Error adding user to Firestore: $error");
-    });
-  }
-
   static Future<void> _deleteUserMessages(String roomId) async {
     // Reference to the main document
     DocumentReference mainDocRef =
@@ -552,8 +542,8 @@ class UserDataProvider {
         firestore.collection(appUserCollections);
 
     appUserCollection.doc(appUser!.uid).update({
-      'worker.industryIds': appUser.worker!.industryIds,
-      'worker.jobIds': appUser.worker!.jobIds,
+      'worker.industryIds': appUser.workerResumeDetails!.industryIds,
+      'worker.jobIds': appUser.workerResumeDetails!.jobIds,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
@@ -603,8 +593,9 @@ class UserDataProvider {
 
     appUserCollection.doc(appUser.uid).set({
       'jobsPreference': {
-        'industryIds': appUser.worker?.jobsPreference?.industryIds ?? [],
-        'jobIds': appUser.worker?.jobsPreference?.jobIds ?? {},
+        'industryIds':
+            appUser.registrationDetails?.jobsPreference?.industryIds ?? [],
+        'jobIds': appUser.registrationDetails?.jobsPreference?.jobIds ?? {},
       }
     }, SetOptions(merge: true)).catchError((error) {
       print("Error adding user to Firestore: $error");
@@ -746,5 +737,13 @@ class UserDataProvider {
 
     // Add the new job post IDs to the 'jobPostIds' field in the company document
     await companyDoc.update({'jobPostIds': FieldValue.arrayUnion(jobPostsIds)});
+  }
+
+  static void updateUser(AppUser appUser) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    appUserCollection.doc(appUser.uid).set(appUser.toMap()).catchError((error) {
+      print("Error adding user to Firestore: $error");
+    });
   }
 }

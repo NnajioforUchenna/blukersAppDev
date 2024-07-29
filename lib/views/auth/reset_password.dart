@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../providers/user_provider_parts/user_provider.dart';
 import '../../services/responsive.dart';
 import '../../utils/styles/index.dart';
-import '../common_vieiws/policy_terms/policy_terms_components/my_app_bar.dart';
 import 'common_widget/submit_button.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -26,8 +25,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
-      appBar: MyAppBar(
-        title: AppLocalizations.of(context)!.resetPassword,
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.resetPassword),
       ),
       body: Center(
         child: Container(

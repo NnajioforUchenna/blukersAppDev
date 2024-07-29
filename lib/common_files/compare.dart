@@ -5,7 +5,7 @@
 //
 // import '../../../providers/industry_provider.dart';
 // import '../../../providers/job_posts_provider.dart';
-// import '../../common_views/all_search_bar_components/all_search_bar.dart';
+// import '../../common_views/all_search_bar_components/job_all_search_bar.dart';
 // import '../../common_views/loading_page.dart';
 // import '../../common_views/page_template/page_template.dart';
 // import '../../common_views/select_industry_components/display_industries.dart';

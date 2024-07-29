@@ -11,7 +11,7 @@ import '../../../services/on_hover.dart';
 import '../../../utils/helpers/index.dart';
 import '../../../utils/localization/localized_jobs.dart';
 import '../../../utils/styles/index.dart';
-import '../../company/workers_components/display_workers.dart';
+import '../../company/workers_home/workers_components/display_workers.dart';
 import '../../worker/saved/display_jobs.dart';
 import '../applicant_count.dart';
 

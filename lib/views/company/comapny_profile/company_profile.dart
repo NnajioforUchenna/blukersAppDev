@@ -10,10 +10,10 @@ import '../../../providers/chat_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
 import '../../auth/common_widget/login_or_register.dart';
-import '../../common_vieiws/page_template/page_template.dart';
 import '../../old_common_views/components/app_version_display.dart';
 import '../../old_common_views/components/confirmation_dialog.dart';
 import '../../old_common_views/components/profile/profile_menu_button.dart';
+import '../company_page_template/company_page_template.dart';
 import 'components/update_company_basic_information.dart';
 import 'components/updatecompanyinformation.dart';
 
@@ -36,7 +36,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
       avp.checkForUpdate(context);
     }
 
-    return PageTemplate(
+    return CompanyPageTemplate(
       child: up.appUser == null
           ? const LoginOrRegister()
           : SingleChildScrollView(

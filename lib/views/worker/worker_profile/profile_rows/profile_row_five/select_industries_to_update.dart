@@ -38,11 +38,12 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
         Provider.of<IndustriesProvider>(context, listen: false);
     industries = ip.industries.values.toList();
 
-    if (up.appUser != null && up.appUser?.worker != null) {
-      selectedIndustries = up.appUser?.worker?.industryIds ?? [];
-      if (up.appUser?.worker?.jobIds != null && industries.isNotEmpty) {
+    if (up.appUser != null && up.appUser?.workerResumeDetails != null) {
+      selectedIndustries = up.appUser?.workerResumeDetails?.industryIds ?? [];
+      if (up.appUser?.workerResumeDetails?.jobIds != null &&
+          industries.isNotEmpty) {
         selectedJobs = {};
-        for (String jobId in up.appUser!.worker!.jobIds) {
+        for (String jobId in up.appUser!.workerResumeDetails!.jobIds!) {
           for (Industry industry in industries) {
             // Since jobs is a Map, use .containsKey to check if jobId exists
             if (industry.jobs.containsKey(jobId)) {

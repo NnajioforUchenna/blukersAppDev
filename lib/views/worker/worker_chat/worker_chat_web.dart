@@ -1,6 +1,6 @@
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
-import 'package:blukers/views/common_vieiws/page_template/page_template.dart';
 import 'package:blukers/views/worker/worker_chat/web_worker_chat/worker_chat_room_web.dart';
+import 'package:blukers/views/worker/worker_page_template/worker_page_template.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +27,7 @@ class WorkerChatWeb extends StatelessWidget {
         //     icon: UniconsLine.chat,
         //   );
         // }
-        return PageTemplate(
+        return WorkerPageTemplate(
           child: Row(
             children: [
               Expanded(

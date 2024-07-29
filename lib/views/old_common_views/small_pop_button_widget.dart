@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/styles/theme_colors.dart';
@@ -11,7 +10,7 @@ class SmallPopButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).pop();
+        Navigator.pop(context);
       },
       child: Material(
         elevation: 4.0, // Set the elevation here

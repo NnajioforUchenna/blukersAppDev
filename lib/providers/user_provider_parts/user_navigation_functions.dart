@@ -19,9 +19,16 @@ extension UserNavigationFunctions on UserProvider {
 
   void navigate(BuildContext context, int index) {
     currentPageIndex = index;
+    notifyListeners();
     String targetRoute =
         userRole == "company" ? routesCompany[index] : routesWorker[index];
     context.pushReplacement(targetRoute);
+  }
+
+  void navigateWorker(BuildContext context, int index) {
+    currentPageIndex = index;
+    notifyListeners();
+    context.go(routesWorker[index]);
   }
 
   void navigateBasedOnRole(BuildContext context) {

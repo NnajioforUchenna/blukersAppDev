@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../loading_animation.dart';
-import '../my_app_bar.dart';
 
 class TapToWebView extends StatelessWidget {
   final String url;
@@ -13,7 +12,8 @@ class TapToWebView extends StatelessWidget {
   final FontWeight fontWeight;
   final String appBarTitle;
 
-  const TapToWebView({super.key, 
+  const TapToWebView({
+    super.key,
     this.url = 'https://google.com',
     this.text = 'Tap to Web View',
     this.text2 = '',
@@ -103,7 +103,7 @@ Page resource error:
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Scaffold(
-          appBar: MyAppBar(title: title),
+          appBar: AppBar(title: title),
           body: WebViewWidget(controller: controller),
         ),
       ),

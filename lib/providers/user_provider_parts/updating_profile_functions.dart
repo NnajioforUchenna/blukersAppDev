@@ -60,9 +60,9 @@ extension UpdatingProfileFunctions on UserProvider {
 
   void updateAppUserCategory(
       List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
-    if (appUser != null && appUser?.worker != null) {
-      appUser?.worker?.industryIds = selectedIndustries;
-      appUser?.worker?.jobIds =
+    if (appUser != null && appUser?.workerResumeDetails != null) {
+      appUser?.workerResumeDetails?.industryIds = selectedIndustries;
+      appUser?.workerResumeDetails?.jobIds =
           selectedJobs.values.expand((element) => element).toList();
       UserDataProvider.updateWorkerIndustriesAndJobs(appUser);
     }
@@ -90,7 +90,7 @@ extension UpdatingProfileFunctions on UserProvider {
           await WorkerDataProvider.uploadCredentialToFirebaseStorageWeb(
               appUser!.uid, filePlatformFile.bytes!, filePlatformFile.name);
       if (resultUrl != 'error') {
-        appUser?.worker?.certificationsIds.add(resultUrl);
+        appUser?.workerResumeDetails?.certificationsIds?.add(resultUrl);
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your credential successfully.',
             duration: const Duration(seconds: 3));
@@ -131,7 +131,7 @@ extension UpdatingProfileFunctions on UserProvider {
               appUser!.uid, file, result.files.single.name);
 
       if (resultUrl != 'error') {
-        appUser?.worker?.certificationsIds.add(resultUrl);
+        appUser?.workerResumeDetails?.certificationsIds?.add(resultUrl);
 
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your credential successfully.',
@@ -159,8 +159,8 @@ extension UpdatingProfileFunctions on UserProvider {
     }
     String url = result['url'];
     if (url.isNotEmpty) {
-      if (appUser != null && appUser?.worker != null) {
-        appUser!.worker!.pdfResumeUrl = url;
+      if (appUser != null && appUser?.workerResumeDetails != null) {
+        appUser!.workerResumeDetails!.pdfResumeUrl = url;
         UserDataProvider.updateResumeUrl(appUser!.uid, url);
       }
 
