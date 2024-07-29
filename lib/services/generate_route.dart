@@ -1,3 +1,5 @@
+import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
+import 'package:blukers/views/company/company_chat/mobile_company_chat/company_chat_list.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +9,6 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
-import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
 import '../views/company/company_page_template/company_page_template.dart';
@@ -45,6 +46,7 @@ final routes = [
   GoRoute(
       path: '/',
       builder: (context, state) => const LandingPage()), // const LandingPage()
+      // builder: (context, state) => const CompanyChatList()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),
