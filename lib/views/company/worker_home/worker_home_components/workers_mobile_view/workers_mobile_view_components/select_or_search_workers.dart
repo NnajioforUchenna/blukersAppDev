@@ -10,7 +10,6 @@ import '../../../../../../providers/industry_provider.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../common_vieiws/loading_page.dart';
 import '../../../../../worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/mobile_industry_headpanel.dart';
-import '../../../../../worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/sign_in_row.dart';
 
 class SelectOrSearchWorkers extends StatefulWidget {
   const SelectOrSearchWorkers({super.key});
@@ -49,7 +48,6 @@ class _SelectOrSearchWorkersState extends State<SelectOrSearchWorkers> {
 
     return Column(
       children: [
-        const SignInRow(),
         const SearchAndTranslateRowCompany(),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 30.0),

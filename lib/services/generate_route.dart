@@ -17,7 +17,7 @@ import '../views/company/my_job_posts/my_job_posts.dart';
 import '../views/company/my_job_posts/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/search_workers/search_workers_ui.dart';
 import '../views/company/search_workers/workers_search_result_page/workers_search_result_page.dart';
-import '../views/company/worker_home/workers_home.dart';
+import '../views/company/workers_home/workers_home.dart';
 import '../views/worker/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
@@ -65,7 +65,6 @@ final routes = [
       GoRoute(
           path: '/workerProfile',
           builder: (context, state) => const WorkerProfile()),
-      GoRoute(path: '/workers', builder: (context, state) => const Workers()),
       GoRoute(
           path: '/workerSearchResults',
           builder: (context, state) => const WorkerSearchResultPage()),
