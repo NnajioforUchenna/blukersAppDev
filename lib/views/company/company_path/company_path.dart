@@ -10,13 +10,13 @@ import '../../../services/responsive.dart';
 import '../../../utils/styles/index.dart';
 import '../../../utils/styles/theme_colors.dart';
 
-class WorkerPath extends StatelessWidget {
-  const WorkerPath({super.key});
+class CompanyPath extends StatelessWidget {
+  const CompanyPath({super.key});
 
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    int currentStep = up.appUser?.workerTimelineStep ?? 0;
+    int currentStep = up.appUser?.companyTimelineStep ?? 0;  // Change this accordingly for company
     double width = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
@@ -26,7 +26,7 @@ class WorkerPath extends StatelessWidget {
           const SizedBox(height: 60),
           const Center(
             child: Icon(
-              UniconsLine.bag_alt,
+              UniconsLine.building,
               size: 60,
               color: ThemeColors.blukersBlueThemeColor,
             ),
@@ -35,7 +35,7 @@ class WorkerPath extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                AppLocalizations.of(context)!.workerJourneyTitle,
+                AppLocalizations.of(context)!.companyJourneyTitle,
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -49,44 +49,43 @@ class WorkerPath extends StatelessWidget {
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: jobRecords.length,
+            itemCount: companyRecords.length,
             itemBuilder: (context, index) {
               String title = "";
               String description = "";
               if (index == 0) {
-                title = AppLocalizations.of(context)!.workerJourneyStep1Title;
+                title = AppLocalizations.of(context)!.companyJourneyStep1Title;
                 description =
-                    AppLocalizations.of(context)!.workerJourneyStep1Text;
+                    AppLocalizations.of(context)!.companyJourneyStep1Text;
               }
               if (index == 1) {
-                title = AppLocalizations.of(context)!.workerJourneyStep2Title;
+                title = AppLocalizations.of(context)!.companyJourneyStep2Title;
                 description =
-                    AppLocalizations.of(context)!.workerJourneyStep2Text;
+                    AppLocalizations.of(context)!.companyJourneyStep2Text;
               }
               if (index == 2) {
-                title = AppLocalizations.of(context)!.workerJourneyStep3Title;
+                title = AppLocalizations.of(context)!.companyJourneyStep3Title;
                 description =
-                    AppLocalizations.of(context)!.workerJourneyStep3Text;
+                    AppLocalizations.of(context)!.companyJourneyStep3Text;
               }
               if (index == 3) {
-                title = AppLocalizations.of(context)!.workerJourneyStep4Title;
+                title = AppLocalizations.of(context)!.companyJourneyStep4Title;
                 description =
-                    AppLocalizations.of(context)!.workerJourneyStep4Text;
+                    AppLocalizations.of(context)!.companyJourneyStep4Text;
               }
               if (index == 4) {
-                title = AppLocalizations.of(context)!.workerJourneyStep5Title;
-                // title = 'Subscribe to Apply to More Jobs';
-                description = AppLocalizations.of(context)!.workerJourneyStep5Text;
+                title = AppLocalizations.of(context)!.companyJourneyStep5Title;
+                description = AppLocalizations.of(context)!.companyJourneyStep5Text;
               }
               if (index == 5) {
-                 title = AppLocalizations.of(context)!.workerJourneyStep6Title;
-                 description = AppLocalizations.of(context)!.workerJourneyStep6Text;
+                 title = AppLocalizations.of(context)!.companyJourneyStep6Title;
+                 description = AppLocalizations.of(context)!.companyJourneyStep6Text;
                    
               }
-              final record = jobRecords[index];
+              final record = companyRecords[index];
               return MyJobTimeLine(
                 isFirst: index == 0,
-                isLast: index == jobRecords.length - 1,
+                isLast: index == companyRecords.length - 1,
                 isPast: index <= currentStep,
                 title: title,
                 briefDescription: description,
@@ -98,7 +97,7 @@ class WorkerPath extends StatelessWidget {
             buildButton(
               width,
               currentStep,
-              AppLocalizations.of(context)!.workerJourneyStep1Title,
+              AppLocalizations.of(context)!.companyJourneyStep1Title,
               
               context,
               () {
@@ -109,40 +108,50 @@ class WorkerPath extends StatelessWidget {
             buildButton(
               width,
               currentStep,
-              AppLocalizations.of(context)!.workerJourneyStep2Title,
+              AppLocalizations.of(context)!.companyJourneyStep2Title,
               context,
               () {
-                context.go('/jobPreference');
+                context.go('/workerPreference');
               },
             ),
           if (currentStep == 2)
             buildButton(
               width,
               currentStep,
-              AppLocalizations.of(context)!.workerJourneyStep3Title,
+              AppLocalizations.of(context)!.companyJourneyStep3Title,
               context,
               () {
-                context.go('/createResume');
+                context.go('/viewWorkers');
               },
             ),
           if (currentStep == 3)
             buildButton(
               width,
               currentStep,
-            AppLocalizations.of(context)!.workerJourneyStep4Title,
+            AppLocalizations.of(context)!.companyJourneyStep4Title,
               context,
               () {
-                 context.go('/myJobs');
+                 context.go('/createProfile');
               },
             ),
           if (currentStep == 4)
             buildButton(
               width,
               currentStep,
-              AppLocalizations.of(context)!.subscribeToApplyMoreJobs,
+              AppLocalizations.of(context)!.companyJourneyStep5Title,
               context,
               () {
-                context.go('/offers');
+                context.go('/createJobPosts');
+              },
+            ),
+          if (currentStep == 5)
+            buildButton(
+              width,
+              currentStep,
+              AppLocalizations.of(context)!.companyJourneyStep6Title,
+              context,
+              () {
+                context.go('/chatWithWorkers');
               },
             ),
           const SizedBox(height: 20),
@@ -152,38 +161,38 @@ class WorkerPath extends StatelessWidget {
   }
 }
 
-// Define the job records and the current step here
-final jobRecords = [
+// Define the company records and the current step here
+final companyRecords = [
   {
     'title': 'Register',
     'description':
         'Start your journey with us by creating an account. Registration is quick and easy. With just a few clicks, you\'ll gain access to countless job opportunities tailored to your interests and skills. Join us now and open the door to your next career adventure.',
   },
   {
-    'title': 'Job Preference',
+    'title': 'Worker Preference',
     'description':
-        'Specify your job preferences to help us match you with the most relevant job opportunities. Define your desired job roles, locations, and other preferences to streamline your job search.',
+        'Specify your worker preferences to help us match you with the most relevant candidates. Define your desired job roles, locations, and other preferences to streamline your recruitment process.',
   },
   {
-    'title': 'Create a Resume',
+    'title': 'View Workers',
     'description':
-        'Create a professional resume to showcase your skills and experience to potential employers. A well-crafted resume can significantly increase your chances of landing your dream job.',
+        'Browse through our extensive list of workers and view their profiles. Find the best candidates that match your job requirements and get to know them better before making a decision.',
   },
   {
-    'title': 'Apply to Jobs',
+    'title': 'Create a Profile',
     'description':
-        'Browse through our extensive list of job postings and apply directly to the ones that match your career goals. Take the next step towards your new career by submitting your applications.',
+        'Create a company profile to attract potential workers. A well-crafted profile can significantly increase your chances of finding the right candidates for your job openings.',
   },
   {
-    'title': 'Subscribe to Apply to More Jobs',
+    'title': 'Create Job Posts',
     'description':
-        'Subscribe to our premium service to unlock more job applications. Get access to exclusive job listings and increase your chances of finding the perfect job by applying to more opportunities.',
+        'Post job openings and attract potential workers. Define the job roles, locations, and other details to help candidates understand the requirements and apply accordingly.',
   },
   {
     'title':
-        'If Employed, Congratulations! The Company Will Likely Process the Work Visa for This Job',
+        'Chat with Workers',
     'description':
-        'If you get employed, congratulations! The company will likely process the work visa for this job, making your transition to the new role smoother and hassle-free.',
+        'If you see a candidate you like, congratulations! You can chat with the workers directly and get to know them better before making a hiring decision.',
   },
 ];
 
@@ -216,4 +225,3 @@ Widget buildButton(double width, int currentStep, String text,
     ),
   );
 }
-
