@@ -1,3 +1,4 @@
+import 'package:blukers/providers/message_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -19,6 +20,7 @@ import 'providers/payment_providers/payments_provider.dart';
 import 'providers/user_provider_parts/user_provider.dart';
 import 'providers/worker_provider.dart';
 import 'services/generate_route.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +46,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppSettingsProvider()),
+        ChangeNotifierProvider(create: (context) => MessageProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => IndustriesProvider()),
         ChangeNotifierProxyProvider<UserProvider, ChatProvider>(

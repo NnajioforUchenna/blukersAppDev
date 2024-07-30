@@ -50,7 +50,7 @@ final goRouter = GoRouter(routes: routes, initialLocation: '/');
 final routes = [
   GoRoute(
       path: '/',
-      builder: (context, state) => const LandingPage()), // const LandingPage()
+      builder: (context, state) => const CompanyMessages()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),
