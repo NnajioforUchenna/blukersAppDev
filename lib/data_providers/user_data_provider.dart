@@ -235,10 +235,21 @@ class UserDataProvider {
     });
   }
 
+  static void updateworkertimestep(String uid, int step) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    appUserCollection.doc(uid).update({
+      'workerTimelineStep': step,
+    }).catchError((error) {
+      print("Error updating timeline step in Firestore: $error");
+    });
+  }
+
   static void updateWorkerAppliedJobPostIds(List<String> list, String uid) {
     CollectionReference appUserCollection =
         firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
+      'workerTimelineStep': 4,
       'worker.appliedJobPostIds': list,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
@@ -252,6 +263,26 @@ class UserDataProvider {
       'worker.savedJobPostIds': list,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
+    });
+  }
+
+  static void updatecompanyTimelineStep(String uid, int step) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    appUserCollection.doc(uid).update({
+      'companyTimelineStep': step,
+    }).catchError((error) {
+      print("Error updating timeline step in Firestore: $error");
+    });
+  }
+
+  static void createjobTimelineStep(String uid, int step) {
+    CollectionReference appUserCollection =
+        firestore.collection(appUserCollections);
+    appUserCollection.doc(uid).update({
+      'companyTimelineStep': step,
+    }).catchError((error) {
+      print("Error updating timeline step in Firestore: $error");
     });
   }
 
@@ -588,8 +619,7 @@ class UserDataProvider {
       return;
     }
 
-
-     RegistrationStatus status = RegistrationStatus();
+    RegistrationStatus status = RegistrationStatus();
     status.isJobsPreference = true;
     // Assuming 'firestore' is a correctly initialized FirebaseFirestore instance
     // and 'appUserCollections' holds the correct name of the collection
@@ -607,8 +637,6 @@ class UserDataProvider {
       print("Error adding user to Firestore: $error");
     });
   }
-
-  
 
   static void updateNotificationStatus(String uid, String notificationStatus) {
     CollectionReference appUserCollection =

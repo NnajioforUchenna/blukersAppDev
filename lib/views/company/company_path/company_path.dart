@@ -1,3 +1,5 @@
+import 'package:blukers/data_providers/user_data_provider.dart';
+import 'package:blukers/models/app_user/app_user.dart';
 import 'package:blukers/views/old_common_views/job_timeline/my_job_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,7 +18,8 @@ class CompanyPath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    int currentStep = up.appUser?.companyTimelineStep ?? 0;  // Change this accordingly for company
+    int currentStep = up.appUser?.companyTimelineStep ?? 0; // Change this accordingly for company
+      AppUser?appUser;
     double width = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
@@ -75,12 +78,13 @@ class CompanyPath extends StatelessWidget {
               }
               if (index == 4) {
                 title = AppLocalizations.of(context)!.companyJourneyStep5Title;
-                description = AppLocalizations.of(context)!.companyJourneyStep5Text;
+                description =
+                    AppLocalizations.of(context)!.companyJourneyStep5Text;
               }
               if (index == 5) {
-                 title = AppLocalizations.of(context)!.companyJourneyStep6Title;
-                 description = AppLocalizations.of(context)!.companyJourneyStep6Text;
-                   
+                title = AppLocalizations.of(context)!.companyJourneyStep6Title;
+                description =
+                    AppLocalizations.of(context)!.companyJourneyStep6Text;
               }
               final record = companyRecords[index];
               return MyJobTimeLine(
@@ -98,7 +102,6 @@ class CompanyPath extends StatelessWidget {
               width,
               currentStep,
               AppLocalizations.of(context)!.companyJourneyStep1Title,
-              
               context,
               () {
                 context.go('/register');
@@ -121,17 +124,18 @@ class CompanyPath extends StatelessWidget {
               AppLocalizations.of(context)!.companyJourneyStep3Title,
               context,
               () {
-                context.go('/viewWorkers');
+                UserDataProvider.updatecompanyTimelineStep(appUser!.uid, 3);
+                context.go('/myJobPosts');
               },
             ),
           if (currentStep == 3)
             buildButton(
               width,
               currentStep,
-            AppLocalizations.of(context)!.companyJourneyStep4Title,
+              AppLocalizations.of(context)!.companyJourneyStep4Title,
               context,
               () {
-                 context.go('/createProfile');
+                context.go('/createCompanyProfile');
               },
             ),
           if (currentStep == 4)
@@ -141,7 +145,7 @@ class CompanyPath extends StatelessWidget {
               AppLocalizations.of(context)!.companyJourneyStep5Title,
               context,
               () {
-                context.go('/createJobPosts');
+                context.go('/createJobPost');
               },
             ),
           if (currentStep == 5)
@@ -151,7 +155,7 @@ class CompanyPath extends StatelessWidget {
               AppLocalizations.of(context)!.companyJourneyStep6Title,
               context,
               () {
-                context.go('/chatWithWorkers');
+                context.go('/companyChat');
               },
             ),
           const SizedBox(height: 20),
@@ -189,8 +193,7 @@ final companyRecords = [
         'Post job openings and attract potential workers. Define the job roles, locations, and other details to help candidates understand the requirements and apply accordingly.',
   },
   {
-    'title':
-        'Chat with Workers',
+    'title': 'Chat with Workers',
     'description':
         'If you see a candidate you like, congratulations! You can chat with the workers directly and get to know them better before making a hiring decision.',
   },
