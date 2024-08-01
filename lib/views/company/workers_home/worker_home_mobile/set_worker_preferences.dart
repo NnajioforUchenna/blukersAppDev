@@ -1,49 +1,34 @@
-import 'package:blukers/data_providers/user_data_provider.dart';
-import 'package:blukers/models/app_user/app_user.dart';
-import 'package:blukers/providers/user_provider_parts/user_provider.dart';
-import 'package:blukers/views/worker/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
+import 'package:blukers/providers/worker_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../models/industry.dart';
-import '../../../../../../providers/industry_provider.dart';
-import '../../../../../../providers/worker_provider.dart';
-import '../../../../../../services/responsive.dart';
-import '../../../../../../utils/localization/localized_industries.dart';
-import '../../../../../../utils/localization/localized_jobs.dart';
+import '../../../../models/industry.dart';
+import '../../../../providers/industry_provider.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../services/responsive.dart';
+import '../../../../utils/localization/localized_industries.dart';
+import '../../../../utils/localization/localized_jobs.dart';
+import '../../../../utils/styles/theme_colors.dart';
 
-class JobPreferncePath extends StatefulWidget {
-  const JobPreferncePath({super.key});
+class SetWorkersPreferences extends StatefulWidget {
+  const SetWorkersPreferences({super.key});
 
   @override
-  _ClassificationPageState createState() => _ClassificationPageState();
+  State<SetWorkersPreferences> createState() => _SetWorkersPreferencesState();
 }
 
-class _ClassificationPageState extends State<JobPreferncePath> {
-  AppUser? appUser;
-  late WorkersProvider wp;
-  late List<Industry> industries;
+class _SetWorkersPreferencesState extends State<SetWorkersPreferences> {
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
-
-  ScrollController scrollCtrl = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    wp = Provider.of<WorkersProvider>(context, listen: false);
-    selectedIndustries = wp.previousParams['industries'] ?? [];
-    selectedJobs = wp.previousParams['jobs'] ?? {};
-  }
 
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
-    industries = ip.industries.values.toList();
-    wp = Provider.of<WorkersProvider>(context);
-
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    List<Industry> industries = ip.industries.values.toList();
     bool areJobsSelected() {
       return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
     }
@@ -55,15 +40,14 @@ class _ClassificationPageState extends State<JobPreferncePath> {
           : MediaQuery.of(context).size.width * 0.9,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
-        controller: scrollCtrl,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const SizedBox(height: 80),
-            const Text(
-              "Select Job Preference",
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.selectWorkersPreference,
+              style: const TextStyle(
                 color: Colors.deepOrangeAccent,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -146,24 +130,40 @@ class _ClassificationPageState extends State<JobPreferncePath> {
               ];
             }),
             const SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Spacer(),
-                TimelineNavigationButton(
-                  isSelected: areJobsSelected(),
-                  onPress: areJobsSelected()
-                      ? () async {
-                          UserDataProvider.updateJobsPreference(
-                              appUser); // Ensure this function returns a Future
-                          context.go(
-                              '/pathToJob'); // Replace '/newScreen' with your actual route
-                        }
-                      : () {}, // Disable the button if no jobs are selected
-                )
-              ],
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ThemeColors.blukersOrangeThemeColor,
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () {
+                if (areJobsSelected()) {
+                  up.setWorkersPreferences(selectedIndustries, selectedJobs);
+                  wp.getWorkersByPreferences();
+                  // go to this widget ShowJobsByPreferences()
+                  context.go('/showWorkersByPreferences');
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Please select at least one job"),
+                    ),
+                  );
+                }
+              },
+              child: Text(
+                AppLocalizations.of(context)!.setWorkerPreferences,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 24 * Responsive.textScaleFactor(context),
+                ),
+              ),
             ),
-            const SizedBox(height: 20), // Reduced the space here
+
+            const SizedBox(height: 40), // Reduced the space here
           ],
         ),
       ),

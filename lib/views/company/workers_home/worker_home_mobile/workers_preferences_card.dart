@@ -1,19 +1,19 @@
-import 'package:blukers/models/app_user/components/preference.dart';
-import 'package:blukers/providers/user_provider_parts/user_provider.dart';
-import 'package:blukers/utils/styles/index.dart';
-import 'package:blukers/views/common_vieiws/loading_page.dart';
-import 'package:blukers/views/worker/jobs_home/Components/display_jobs_by_preferences/Components/grey_container_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class JobsPreferencesCard extends StatelessWidget {
-  const JobsPreferencesCard({super.key});
+import '../../../../models/app_user/components/preference.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../utils/styles/theme_colors.dart';
+import '../../../common_vieiws/loading_page.dart';
+import '../../../worker/jobs_home/Components/display_jobs_by_preferences/Components/grey_container_text.dart';
 
+class WorkersPreferencesCard extends StatelessWidget {
+  const WorkersPreferencesCard({super.key});
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    Preference? preference = up.appUser?.registrationDetails?.jobsPreference;
+    Preference? preference = up.appUser?.registrationDetails?.workersPreference;
 
     if (preference == null) {
       return const LoadingPage();
@@ -28,7 +28,7 @@ class JobsPreferencesCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Your Jobs Preferences",
+                "Your Workers Preferences",
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -37,7 +37,7 @@ class JobsPreferencesCard extends StatelessWidget {
               IconButton(
                   onPressed: () {
                     // Add your edit button logic here
-                    context.go('/setJobsPreferences');
+                    context.go('/setWorkersPreferences');
                   },
                   icon: const Icon(Icons.edit,
                       color: ThemeColors.blukersBlueThemeColor)),

@@ -72,6 +72,9 @@ class UserProvider with ChangeNotifier {
   int registerCurrentPageIndex = 0;
   int currentPageIndex = 0;
 
+  // Navigation Functions
+  PageController pageController = PageController();
+
   // Variable holder for reference form
   List<Map<String, dynamic>> references = [{}, {}];
 
@@ -316,7 +319,7 @@ class UserProvider with ChangeNotifier {
     try {
       // Change the companyId in the jobPost to your companyId
       if (appUser?.company?.companyId != null) {
-        jobPost.companyId = appUser!.company!.companyId!;
+        jobPost.companyId = appUser!.company!.companyId;
       }
 
       // Add the job post to the list of job posts associated with the user's company ID
@@ -326,7 +329,7 @@ class UserProvider with ChangeNotifier {
       // Persist the changes to the database
       if (appUser?.company?.companyId != null) {
         UserDataProvider.saveOtherCompanyJobPosts(
-            [jobPost.jobPostId], appUser!.company!.companyId!);
+            [jobPost.jobPostId], appUser!.company!.companyId);
       }
     } catch (e) {
       print('Failed to save job post: $e');
@@ -338,6 +341,13 @@ class UserProvider with ChangeNotifier {
       return false;
     }
     return appUser!.registrationDetails?.jobsPreference != null;
+  }
+
+  isWorkerPreferencesSet() {
+    if (appUser == null) {
+      return false;
+    }
+    return appUser!.registrationDetails?.workersPreference != null;
   }
 
   void setJobsPreferences(
@@ -357,6 +367,28 @@ class UserProvider with ChangeNotifier {
         );
         appUser?.registrationDetails = registrationDetails;
         appUser?.workerTimelineStep = 2;
+      }
+      UserDataProvider.updateUser(appUser!);
+    }
+  }
+
+  void setWorkersPreferences(
+      List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
+    if (appUser != null) {
+      Preference preference = Preference(
+        industryIds: selectedIndustries,
+        jobIds: selectedJobs,
+      );
+      if (appUser?.registrationDetails != null) {
+        appUser?.registrationDetails?.workersPreference = preference;
+        appUser?.companyTimelineStep = 2;
+      } else {
+        RegistrationDetails registrationDetails = RegistrationDetails(
+          workersPreference: preference,
+          email: appUser!.email,
+        );
+        appUser?.registrationDetails = registrationDetails;
+        appUser?.companyTimelineStep = 2;
       }
       UserDataProvider.updateUser(appUser!);
     }

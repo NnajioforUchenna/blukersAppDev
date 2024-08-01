@@ -60,7 +60,7 @@ class _MyElevatedButtonState extends State<MyElevatedButton> {
                   ),
                   child: Icon(
                     Icons.check,
-                    color: _isHovering ? Color(0xffF16523) : Colors.transparent,
+                    color: _isHovering ? const Color(0xffF16523) : Colors.transparent,
                     size: 14,
                   ),
                 ),

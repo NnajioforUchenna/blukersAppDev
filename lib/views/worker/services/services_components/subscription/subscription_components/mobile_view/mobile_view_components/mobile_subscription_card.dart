@@ -39,7 +39,7 @@ class MobileMembershipCard extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    Center(
+                    const Center(
                       child: DiagonallyCutRoundedRectangle(),
                     ),
                     Positioned(
@@ -75,7 +75,7 @@ class MobileMembershipCard extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.montserrat(
                                 color: Colors.white, fontSize: 20.sp))
-                        : SizedBox(),
+                        : const SizedBox(),
                     Text(bodyTitle,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
@@ -87,13 +87,12 @@ class MobileMembershipCard extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.montserrat(
                                 color: Colors.white, fontSize: 20.sp))
-                        : SizedBox(),
+                        : const SizedBox(),
                   ],
                 ))
               ],
             ),
           )),
     );
-    ;
   }
 }

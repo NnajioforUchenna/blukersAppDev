@@ -14,20 +14,11 @@ class Registration extends StatelessWidget {
         elevation: 0,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SignUpTimeline(),
-          Expanded(
-            child: CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      const PageSlider(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          const Expanded(
+            child: PageSlider(),
           ),
         ],
       ),

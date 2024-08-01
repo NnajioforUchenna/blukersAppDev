@@ -21,7 +21,7 @@ class InterestingWorkersTab extends StatelessWidget {
       stream: cp.getInterestingWorkersStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return LoadingAnimation();
+          return const LoadingAnimation();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {

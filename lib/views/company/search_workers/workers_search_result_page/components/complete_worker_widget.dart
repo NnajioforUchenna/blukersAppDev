@@ -77,7 +77,7 @@ class ListViewWorkers extends StatelessWidget {
                     builder: (context) => DisplayWorkerDialog(
                           worker: worker,
                         ));
-                print('worker: ${worker?.workerResumeDetails?.firstName}');
+                print('worker: ${worker.workerResumeDetails?.firstName}');
               }
             });
       },

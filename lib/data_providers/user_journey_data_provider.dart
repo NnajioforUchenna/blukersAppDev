@@ -1,107 +1,83 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data_constants.dart';
 
-final firestore = FirebaseFirestore.instance;
-
 class UserJourneyDataProvider {
+  static String baseUrl = '$baseUrlAppEngineFunctions/user_journey';
+
   static Future<void> updateProspects(String deviceId) async {
     int currentTime = DateTime.now().millisecondsSinceEpoch;
-    await firestore.collection('prospects').doc(deviceId).set({
-      'prospect_uid': deviceId,
-      'first_load_time': currentTime,
-    });
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/update_prospects'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'deviceId': deviceId, 'firstLoadTime': currentTime}),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update prospects: ${response.body}');
+      }
+    } catch (e) {
+      print('Error updating prospects: $e');
+    }
   }
 
   static Future<void> updateNewcomer(String uid) async {
-    // 1. get Device ID
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? deviceId = prefs.getString('device_id');
-
-    // 2. Using the Device ID, get Prospect data
-    DocumentSnapshot prospectData =
-        await firestore.collection('prospects').doc(deviceId).get();
-
-    // Cast the data to Map<String, dynamic>
-    Map<String, dynamic>? prospectDataMap =
-        prospectData.data() as Map<String, dynamic>?;
-    int firstLoadTime = prospectDataMap?['first_load_time'] ?? 0;
-
-    // 3. Update AppUser UserJourney with the Prospect data and NewComer status
-    await firestore.collection('AppUsers').doc(uid).update({
-      'userJourney': {
-        'prospect': firstLoadTime,
-        'newcomer': DateTime.now().millisecondsSinceEpoch,
-      },
-    });
-
-    // Update Crm that a new User have been registered
-    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
-
-    await crmFireStore
-        .collection('Dashboard')
-        .doc('Admin')
-        .collection('NewUser')
-        .doc(uid)
-        .set({
-      'uid': uid,
-      'userJourney': {
-        'prospect': firstLoadTime,
-        'newcomer': DateTime.now().millisecondsSinceEpoch,
+    try {
+      final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+      String? deviceId = await prefs.getString('device_id');
+      if (deviceId == null) {
+        print('Device ID not found');
+        return;
       }
-    });
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/update_newcomer'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'uid': uid, 'deviceId': deviceId}),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update newcomer: ${response.body}');
+      }
+    } catch (e) {
+      print('Error updating newcomer: $e');
+    }
   }
 
   static Future<void> updateInitiate(String uid) async {
-    // Update initiating profile creation
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/update_initiate'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'uid': uid}),
+      );
 
-    // update the user journey
-// Update the user journey
-    await firestore.collection('AppUsers').doc(uid).set({
-      'userJourney': {
-        'initiateProfileCreation': DateTime.now().millisecondsSinceEpoch,
-      },
-    }, SetOptions(merge: true));
-
-    // Update Crm that a new User have initiated profile creation
-    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
-
-    await crmFireStore
-        .collection('Dashboard')
-        .doc('Admin')
-        .collection('InitiateProfileCreation')
-        .doc(uid)
-        .set({
-      'uid': uid,
-      'userJourney': {
-        'initiate': DateTime.now().millisecondsSinceEpoch,
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update initiate: ${response.body}');
       }
-    });
+    } catch (e) {
+      print('Error updating initiate: $e');
+    }
   }
 
   static Future<void> updateMember(String uid) async {
-    // Update the user journey
-    await firestore.collection('AppUsers').doc(uid).set({
-      'userJourney': {
-        'member': DateTime.now().millisecondsSinceEpoch,
-      },
-    }, SetOptions(merge: true));
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/update_member'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'uid': uid}),
+      );
 
-    // Update Crm that a new User have been registered
-    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
-
-    await crmFireStore
-        .collection('Dashboard')
-        .doc('Admin')
-        .collection('Member')
-        .doc(uid)
-        .set({
-      'uid': uid,
-      'userJourney': {
-        'member': DateTime.now().millisecondsSinceEpoch,
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update member: ${response.body}');
       }
-    });
+    } catch (e) {
+      print('Error updating member: $e');
+    }
   }
 
   static Future<void> updateSubscriber(String? uid) async {
@@ -109,50 +85,34 @@ class UserJourneyDataProvider {
       return;
     }
 
-    // Update the user journey
-    await firestore.collection('AppUsers').doc(uid).set({
-      'userJourney': {
-        'subscriber': DateTime.now().millisecondsSinceEpoch,
-      },
-    }, SetOptions(merge: true));
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/update_subscriber'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'uid': uid}),
+      );
 
-    // Update Crm that a new User have been registered
-    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
-
-    await crmFireStore
-        .collection('Dashboard')
-        .doc('Admin')
-        .collection('Subscriber')
-        .doc(uid)
-        .set({
-      'uid': uid,
-      'userJourney': {
-        'subscriber': DateTime.now().millisecondsSinceEpoch,
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update subscriber: ${response.body}');
       }
-    });
+    } catch (e) {
+      print('Error updating subscriber: $e');
+    }
   }
 
   static Future<void> updateEliteClient(String uid) async {
-    // Update the user journey
-    await firestore.collection('AppUsers').doc(uid).set({
-      'userJourney': {
-        'eliteClient': DateTime.now().millisecondsSinceEpoch,
-      },
-    }, SetOptions(merge: true));
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/update_elite_client'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'uid': uid}),
+      );
 
-    // Update Crm that a new User have been registered
-    final FirebaseFirestore crmFireStore = await getCRMFireStoreInstance();
-
-    await crmFireStore
-        .collection('Dashboard')
-        .doc('Admin')
-        .collection('EliteClient')
-        .doc(uid)
-        .set({
-      'uid': uid,
-      'userJourney': {
-        'eliteClient': DateTime.now().millisecondsSinceEpoch,
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update elite client: ${response.body}');
       }
-    });
+    } catch (e) {
+      print('Error updating elite client: $e');
+    }
   }
 }

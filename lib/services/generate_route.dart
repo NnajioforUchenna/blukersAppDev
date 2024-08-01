@@ -1,4 +1,5 @@
 import 'package:blukers/views/company/company_path/company_path.dart';
+import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
@@ -21,6 +22,8 @@ import '../views/company/display_workers/display_workers.dart';
 import '../views/company/my_job_posts/my_job_posts.dart';
 import '../views/company/my_job_posts/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/search_workers/search_workers_ui.dart';
+import '../views/company/search_workers/workers_search_result_page/workers_search_result_page.dart';
+import '../views/company/workers_home/worker_home_mobile/show_workers_by_preferences.dart';
 import '../views/company/workers_home/workers_home.dart';
 import '../views/worker/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
@@ -115,6 +118,9 @@ final routes = [
           path: '/searchWorkers',
           builder: (context, state) => const SearchWorkersUi()),
       GoRoute(
+          path: '/workerSearchResults',
+          builder: (context, state) => const WorkerSearchResultPage()),
+      GoRoute(
           path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
       GoRoute(
           path: '/companyProfile',
@@ -128,9 +134,17 @@ final routes = [
       GoRoute(
           path: '/companyMessages',
           builder: (context, state) => const CompanyMessages()),
+
       GoRoute(
           path: '/displayWorkers',
           builder: (context, state) => const DisplayWorkers()),
+
+      GoRoute(
+          path: '/setWorkersPreferences',
+          builder: (context, state) => const SetWorkersPreferences()),
+      GoRoute(
+          path: '/showWorkersByPreferences',
+          builder: (context, state) => const ShowWorkersByPreferences()),
     ],
   ),
 

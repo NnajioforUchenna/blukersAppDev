@@ -83,12 +83,12 @@ class WorkerResumeDetails {
           ? List<String>.from(map['industryIds'])
           : [],
       jobIds: map['jobIds'] != null ? List<String>.from(map['jobIds']) : [],
-      firstName: map['firstName'] != null ? map['firstName'] : null,
-      middleName: map['middleName'] != null ? map['middleName'] : null,
-      lastName: map['lastName'] != null ? map['lastName'] : null,
-      birthdate: map['birthdate'] != null ? map['birthdate'] : null,
+      firstName: map['firstName'],
+      middleName: map['middleName'],
+      lastName: map['lastName'],
+      birthdate: map['birthdate'],
       profilePhotoUrl:
-          map['profilePhotoUrl'] != null ? map['profilePhotoUrl'] : null,
+          map['profilePhotoUrl'],
       skillIds:
           map['skillIds'] != null ? List<String>.from(map['skillIds']) : [],
       certificationsIds: map['certificationsIds'] != null
@@ -104,8 +104,8 @@ class WorkerResumeDetails {
               .map((e) => ReferenceForm.fromMap(e))
               .toList()
           : [],
-      pdfResumeUrl: map['pdfResumeUrl'] != null ? map['pdfResumeUrl'] : null,
-      linkedInUrl: map['linkedInUrl'] != null ? map['linkedInUrl'] : null,
+      pdfResumeUrl: map['pdfResumeUrl'],
+      linkedInUrl: map['linkedInUrl'],
     );
   }
 

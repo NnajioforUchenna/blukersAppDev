@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../models/industry.dart';
 import '../../../../../../providers/industry_provider.dart';
+import '../../../../../../providers/job_posts_provider.dart';
 import '../../../../../../services/responsive.dart';
 import '../../../../../../utils/localization/localized_industries.dart';
 import '../../../../../../utils/localization/localized_jobs.dart';
@@ -26,6 +27,7 @@ class _SetJobsPreferencesState extends State<SetJobsPreferences> {
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     List<Industry> industries = ip.industries.values.toList();
     bool areJobsSelected() {
       return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
@@ -126,7 +128,7 @@ class _SetJobsPreferencesState extends State<SetJobsPreferences> {
                 ),
                 const SizedBox(height: 20), // Space between industry boxes
               ];
-            }).toList(),
+            }),
             const SizedBox(height: 40),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -139,6 +141,7 @@ class _SetJobsPreferencesState extends State<SetJobsPreferences> {
               onPressed: () {
                 if (areJobsSelected()) {
                   up.setJobsPreferences(selectedIndustries, selectedJobs);
+                  jp.getJobsByPreferences();
                   // go to this widget ShowJobsByPreferences()
                   context.go('/showJobsByPreferences');
                 } else {

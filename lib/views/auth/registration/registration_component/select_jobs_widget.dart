@@ -116,7 +116,7 @@ class _SelectJobsWidgetState extends State<SelectJobsWidget> {
                             selectedIndustries, selectedJobs);
                         // isSelect(); // Ensure the isSelect method is defined or remove this comment
                       },
-                      child: Container(
+                      child: SizedBox(
                         height: 20,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

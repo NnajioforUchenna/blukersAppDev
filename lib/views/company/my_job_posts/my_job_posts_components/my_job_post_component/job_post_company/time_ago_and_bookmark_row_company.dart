@@ -29,7 +29,7 @@ class TimeAgoAndBookMarkRowCompany extends StatelessWidget {
                     up.saveOtherCompanyJobPosts(jobPost);
                   }
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.bookmark_add,
                   // color: isJobPostSaved
                   //     ? ThemeColors.secondaryThemeColor

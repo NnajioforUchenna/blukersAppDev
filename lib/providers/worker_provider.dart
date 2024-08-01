@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:blukers/models/app_user/components/worker_resume_details.dart';
-import 'package:blukers/models/app_user/components/worker_resume_form_tracker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../data_providers/company_data_provider.dart';
@@ -14,10 +11,14 @@ import '../data_providers/user_data_provider.dart';
 import '../data_providers/user_journey_data_provider.dart';
 import '../data_providers/worker_data_provider.dart';
 import '../models/app_user/app_user.dart';
+import '../models/app_user/components/worker_resume_details.dart';
+import '../models/app_user/components/worker_resume_form_tracker.dart';
+import '../models/job.dart';
 import '../models/job_post.dart';
 import '../models/reference_form.dart';
 import '../models/work_experience.dart';
 import '../models/worker.dart';
+import '../views/company/workers_home/worker_home_mobile/display_worker_from_selection.dart';
 // Assuming the file containing the Worker class is named 'worker.dart'.
 
 class WorkersProvider with ChangeNotifier {
@@ -33,12 +34,26 @@ class WorkersProvider with ChangeNotifier {
 
   List<Worker> workersToDisplay = [];
 
-  // TODO: Add a method to get all workers for the job with the given jobId.
-  Future<void> getWorkersBySelection(BuildContext context, String jobId) async {
-    print('Getting Workers for Job ID: $jobId');
+  WorkersProvider() {
+    getWorkers();
+  }
+
+  Future<void> getWorkers() async {
     workersToDisplay = await getAllWorkers();
     notifyListeners();
-    context.go('/displayWorkers');
+  }
+
+  // TODO: Add a method to get all workers for the job with the given jobId.
+  Future<void> getWorkersBySelection(BuildContext context, Job job) async {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DisplayWorkerFromSelection(
+          title: job.title,
+        ),
+      ),
+    );
+    workersToDisplay = await getAllWorkers();
+    notifyListeners();
   }
 
   update(AppUser? user) {
@@ -90,14 +105,27 @@ class WorkersProvider with ChangeNotifier {
   List<Map<String, dynamic>> professionalCredentials = [{}];
   Map<String, dynamic> previousParams = {};
 
+  PageController createProfilePageController = PageController();
+
   // Move to the next page in the worker's profile creation process.
   workerProfileNextPage() {
     workerProfileCurrentPageIndex++;
+    createProfilePageController.animateToPage(workerProfileCurrentPageIndex,
+        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
     notifyListeners();
+    // wait 5 seconds
+    Future.delayed(const Duration(seconds: 5), () {
+      EasyLoading.dismiss();
+    });
+
+    print(appUser?.workerResumeDetails);
+    print('');
   }
 
   workerProfileBackPage() {
     workerProfileCurrentPageIndex--;
+    createProfilePageController.animateToPage(workerProfileCurrentPageIndex,
+        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
     notifyListeners();
   }
 
@@ -105,11 +133,11 @@ class WorkersProvider with ChangeNotifier {
   void createWorkerProfile(context, List<String> selectedIndustries,
       Map<String, List<String>> selectedJobs) {
     if (appUser != null) {
-      // Saving the selected industries and jobs to the previousParams.
+      // // Saving the selected industries and jobs to the previousParams.
       previousParams['industries'] = selectedIndustries;
       previousParams['jobs'] = selectedJobs;
-
-      // Create Worker Resume Form Tracker
+      //
+      // // Create Worker Resume Form Tracker
       WorkerResumeFormTracker tracker = WorkerResumeFormTracker();
       tracker.isIndustriesAndJobsCompleted = true;
 
@@ -121,7 +149,7 @@ class WorkersProvider with ChangeNotifier {
           selectedJobs.values.toList().expand((element) => element).toList();
 
       // Add the details to the appUser.
-      appUser!.workerResumeDetails = details;
+      appUser?.workerResumeDetails = details;
 
       // Update the appUser
       UserDataProvider.updateUser(appUser!);
@@ -152,7 +180,7 @@ class WorkersProvider with ChangeNotifier {
     previousParams['birthYear'] = year;
 
     // Saving the personal information to the newWorker.
-    appUser!.workerResumeDetails?.tracker!.isBasicInformationCompleted = true;
+    appUser!.workerResumeDetails?.tracker.isBasicInformationCompleted = true;
     appUser!.workerResumeDetails?.firstName = firstName;
     appUser!.workerResumeDetails?.middleName = middleName;
     appUser!.workerResumeDetails?.lastName = lastName;
@@ -188,12 +216,13 @@ class WorkersProvider with ChangeNotifier {
             'Selected file is more than 10 MB. Please select a smaller file.');
         return;
       }
-      print(appUser!.uid);
+
       String result = await WorkerDataProvider.uploadImageToFirebaseStorage(
           appUser!.uid, await image.readAsBytes(), image.name.split('.').last);
       // If the result is not an error, then update the logoUrl of the Worker.
       if (result != 'error') {
         appUser?.photoUrl = result;
+        appUser?.workerResumeDetails?.profilePhotoUrl = result;
         EasyLoading.dismiss();
         EasyLoading.showSuccess('Uploaded your profile image successfully.');
         notifyListeners();
@@ -292,7 +321,7 @@ class WorkersProvider with ChangeNotifier {
 // Saving the selected skills to the previousParams.
     previousParams['skills'] = selectedSkills;
 
-    appUser!.workerResumeDetails?.tracker!.isSkillsCompleted = true;
+    appUser!.workerResumeDetails?.tracker.isSkillsCompleted = true;
     appUser!.workerResumeDetails?.skillIds = selectedSkills;
 
     UserDataProvider.updateUser(appUser!);
@@ -366,10 +395,10 @@ class WorkersProvider with ChangeNotifier {
 
     // Create New Worker and Add to Database
     Worker newWorker = Worker.fromAppUser(appUser!);
-    newWorker?.dateCreated = DateTime.now().millisecondsSinceEpoch;
-    newWorker?.createdAt = DateTime.now().millisecondsSinceEpoch;
-    newWorker?.modifiedAt = DateTime.now().millisecondsSinceEpoch;
-    WorkerDataProvider.createWorkerProfile(newWorker!);
+    newWorker.dateCreated = DateTime.now().millisecondsSinceEpoch;
+    newWorker.createdAt = DateTime.now().millisecondsSinceEpoch;
+    newWorker.modifiedAt = DateTime.now().millisecondsSinceEpoch;
+    WorkerDataProvider.createWorkerProfile(newWorker);
 
     // Update User Journey as Member
     UserJourneyDataProvider.updateMember(appUser!.uid);
@@ -429,6 +458,7 @@ class WorkersProvider with ChangeNotifier {
 
   void updateWorkerProfilePhoto(String s) {
     appUser!.workerResumeDetails?.profilePhotoUrl = s;
+    appUser?.workerResumeDetails?.tracker.isProfilePictureUploaded = true;
     UserDataProvider.updateUser(appUser!);
   }
 
@@ -441,6 +471,12 @@ class WorkersProvider with ChangeNotifier {
 
   Future<List<Worker>> getAllWorkers() async {
     return await WorkerDataProvider.getAllWorkers();
+  }
+
+  Future<void> getWorkersByPreferences() async {
+    workersToDisplay.clear();
+    workersToDisplay = await getAllWorkers();
+    notifyListeners();
   }
 
 // Any other methods related to the Worker can be added as required.

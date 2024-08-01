@@ -22,18 +22,8 @@ class CreateWorkerProfile extends StatelessWidget {
             body: Column(
               children: [
                 WorkerTimeLine(),
-                Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverList(
-                        delegate: SliverChildListDelegate(
-                          [
-                            const WorkerPageSlider(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                const Expanded(
+                  child: WorkerPageSlider(),
                 ),
               ],
             ),

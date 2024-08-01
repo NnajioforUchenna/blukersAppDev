@@ -113,7 +113,7 @@ class Worker {
 
   static Worker fromAppUser(AppUser appUser) {
     Worker worker = Worker(workerId: appUser.uid);
-    if (appUser.email != null) worker.emails.add(appUser.email!);
+    worker.emails.add(appUser.email);
     if (appUser.phoneNumber != null) worker.phoneNumber = appUser.phoneNumber!;
     if (appUser.workerResumeDetails != null) {
       worker.workerResumeDetails = appUser.workerResumeDetails;

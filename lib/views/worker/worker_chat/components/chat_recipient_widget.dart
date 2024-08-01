@@ -7,7 +7,7 @@ import '../../../../providers/chat_provider.dart';
 
 class ChatRecipientWidget extends StatelessWidget {
   final ChatRecipient? chatRecipient;
-  const ChatRecipientWidget({Key? key, this.chatRecipient}) : super(key: key);
+  const ChatRecipientWidget({super.key, this.chatRecipient});
 
   @override
   Widget build(BuildContext context) {

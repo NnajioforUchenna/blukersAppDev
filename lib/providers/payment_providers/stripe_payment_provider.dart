@@ -93,8 +93,8 @@ extension StripePaymentProvider on PaymentsProvider {
 
     String urlEx = Uri.base.origin.toString();
     String baseUrl = Uri.parse(urlEx).removeFragment().toString();
-    String successUrl = baseUrl + '/paymentSuccess';
-    String failedUrl = baseUrl + '/paymentFailed';
+    String successUrl = '$baseUrl/paymentSuccess';
+    String failedUrl = '$baseUrl/paymentFailed';
 
     String checkOutUrl = await getCheckOutUrl4Subscription(
         priceId, successUrl, failedUrl, productName, transactionId);
@@ -114,7 +114,7 @@ extension StripePaymentProvider on PaymentsProvider {
       DocumentSnapshot doc = await stripeDataDB.doc(docId).get();
       if (doc.exists) {
         Map<String, dynamic> currentData = doc.data() as Map<String, dynamic>;
-        servicesKey[docId] = currentData?['key'] ?? '';
+        servicesKey[docId] = currentData['key'] ?? '';
       }
     }
   }
@@ -158,8 +158,8 @@ extension StripePaymentProvider on PaymentsProvider {
     if (kIsWeb) {
       final baseUrl = Uri.base.origin.toString();
       print('This is the Base URl $baseUrl');
-      successUrl = baseUrl + '/paymentSuccess';
-      failedUrl = baseUrl + '/paymentFailed';
+      successUrl = '$baseUrl/paymentSuccess';
+      failedUrl = '$baseUrl/paymentFailed';
     } else {
       successUrl = 'https://success.com';
       failedUrl = 'https://www.cancel.com';

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../data_providers/job_posts_data_provider.dart';
 import '../models/address.dart';
 import '../models/app_user/app_user.dart';
+import '../models/job.dart';
 import '../models/job_post.dart';
 import '../views/auth/please_login_dialog.dart';
 import '../views/company/create_job_post/create_job_post_components/compensation_and_contract_page.dart';
@@ -72,14 +73,15 @@ class JobPostsProvider with ChangeNotifier {
     });
   }
 
-  void getJobsBySelection(BuildContext context, String jobId) {
+  void getJobsBySelection(BuildContext context, Job job) {
     searchComplete = false;
-    selectedJobPostId = jobId;
-    nameSearch = jobId;
+    selectedJobPostId = job.jobId;
+    nameSearch = job.title;
     language = appUser?.language ?? 'en';
 
     // Get all jobPosts for the job with the given jobId.
-    JobPostsDataProvider.getJobPostsByJobID(jobId, language).then((jobPosts) {
+    JobPostsDataProvider.getJobPostsByJobID(job.title, language)
+        .then((jobPosts) {
       List<JobPost> listJobPosts = [];
 
       listJobPosts = jobPosts
@@ -103,7 +105,7 @@ class JobPostsProvider with ChangeNotifier {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => DisplaySelectedJobs(
-          title: jobId,
+          title: job.title,
         ),
       ),
     );
@@ -434,5 +436,9 @@ class JobPostsProvider with ChangeNotifier {
   Future<void> deleteJobPost(String jobPostId) async {
     JobPostsDataProvider.deleteJobPost(jobPostId, appUser!.uid);
     notifyListeners();
+  }
+
+  void getJobsByPreferences() {
+    getJobPostsByJobID('electrician', 'en');
   }
 }

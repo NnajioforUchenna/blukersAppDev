@@ -22,7 +22,7 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
   TextEditingController locationController = TextEditingController();
   String buttonLabel = 'Search Jobs';
   String searchName = 'Position, work area or company';
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -120,24 +120,16 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
                         onPressed: _isLoading
                             ? null
                             : () async {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-
-                                await wp.searchWorkers(
+                                wp.searchWorkers(
                                   nameController.text,
                                   locationController.text,
                                 );
 
-                                setState(() {
-                                  _isLoading = false;
-                                });
-
-                                if (GoRouter.of(context).canPop())
+                                if (GoRouter.of(context).canPop()) {
                                   GoRouter.of(context).pop();
+                                }
 
-                                GoRouter.of(context)
-                                    .pushReplacement('/workerSearchResults');
+                                context.go('/workerSearchResults');
                               },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ThemeColors.blukersOrangeThemeColor,
