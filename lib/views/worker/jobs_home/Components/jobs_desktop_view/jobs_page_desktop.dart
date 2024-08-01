@@ -13,7 +13,7 @@ import '../../../search_jobs/job_search_bar_components/job_all_search_bar.dart';
 import '../../../search_jobs/jobs_search_result_page/job_search_result_page.dart';
 
 class JobsPageDesktop extends StatefulWidget {
-  const JobsPageDesktop({Key? key}) : super(key: key);
+  const JobsPageDesktop({super.key});
 
   @override
   State<JobsPageDesktop> createState() => _JobsPageDesktopState();
@@ -74,7 +74,7 @@ class _JobsPageDesktopState extends State<JobsPageDesktop> {
                     description: 'Use this section to Select Jobs by industry',
                     targetShapeBorder: const CircleBorder(),
                     overlayOpacity: 0.6,
-                    tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+                    tooltipBackgroundColor: const Color.fromRGBO(30, 117, 187, 1),
                     descTextStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CancelSubscriptionDialog extends StatelessWidget {
+  const CancelSubscriptionDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called.

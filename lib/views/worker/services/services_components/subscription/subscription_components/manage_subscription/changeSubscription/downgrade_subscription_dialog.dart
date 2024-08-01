@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DowngradeSubscriptionDialog extends StatelessWidget {
+  const DowngradeSubscriptionDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     PaymentsProvider pp = Provider.of<PaymentsProvider>(context);

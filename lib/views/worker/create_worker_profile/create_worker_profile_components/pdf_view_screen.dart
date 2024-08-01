@@ -5,7 +5,7 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class ResumeScreen extends StatefulWidget {
-  const ResumeScreen({Key? key}) : super(key: key);
+  const ResumeScreen({super.key});
 
   @override
   State<ResumeScreen> createState() => _ResumeScreenState();
@@ -34,7 +34,7 @@ class _ResumeScreenState extends State<ResumeScreen> {
         appBar: AppBar(
           title: const Text("Resume"),
         ),
-        body: Container(
+        body: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: SfPdfViewer.network(remotePDFpath),

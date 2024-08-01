@@ -1,6 +1,6 @@
-import '../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/styles/index.dart';
 import '../old_common_views/components/animations/index.dart';
 
 class LoadingPage extends StatelessWidget {
@@ -11,27 +11,29 @@ class LoadingPage extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Transform.scale(
-              scale: 2.0, // adjust the scale value to make it bigger or smaller
-              child: const MyAnimation(
-                name: 'blukersLoadingDots',
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Transform.scale(
+                scale:
+                    2.0, // adjust the scale value to make it bigger or smaller
+                child: const MyAnimation(
+                  name: 'blukersLoadingDots',
+                ),
               ),
-              // child: LoadingAnimation(),
-            ),
-            const SizedBox(height: 25), // space between progress bar and text
-            const Text(
-              'Loading...',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: ThemeColors.secondaryThemeColor,
+              const SizedBox(height: 25), // space between progress bar and text
+              const Text(
+                'Loading...',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColors.secondaryThemeColor,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

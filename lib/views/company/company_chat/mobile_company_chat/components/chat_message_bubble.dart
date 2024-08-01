@@ -6,25 +6,25 @@ class ChatMessageBubble extends StatelessWidget {
   final bool isMe;
 
   const ChatMessageBubble({
-    Key? key,
+    super.key,
     required this.message,
     required this.isMe,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         decoration: BoxDecoration(
           color: isMe ? Colors.blue : Colors.grey[300],
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-            bottomLeft: isMe ? Radius.circular(12) : Radius.circular(0),
-            bottomRight: isMe ? Radius.circular(0) : Radius.circular(12),
+            topLeft: const Radius.circular(12),
+            topRight: const Radius.circular(12),
+            bottomLeft: isMe ? const Radius.circular(12) : const Radius.circular(0),
+            bottomRight: isMe ? const Radius.circular(0) : const Radius.circular(12),
           ),
         ),
         child: Column(
@@ -36,7 +36,7 @@ class ChatMessageBubble extends StatelessWidget {
                 color: isMe ? Colors.white : Colors.black87,
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               message.timestamp.toIso8601String(),
               style: TextStyle(

@@ -53,8 +53,8 @@ Future<void> requestForNotificationPermission(AppUser? appUser) async {
 
     print('Got a message whilst in the foreground!');
     print('Message data: ${message.data}');
-    print('Message Title: ${title}');
-    print('Message Body: ${body}');
+    print('Message Title: $title');
+    print('Message Body: $body');
 
     if (message.notification != null) {
       print('Message also contained a notification: ${message.notification}');

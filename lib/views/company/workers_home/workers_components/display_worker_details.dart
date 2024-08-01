@@ -85,10 +85,10 @@ class _WorkerDisplayDetailsWidgetState extends State<WorkerDisplayDetailsWidget>
                         WorkerDetailBlockThree(worker: worker),
                         WorkerDetailBlockFour(
                           workExperiences:
-                              worker.workerResumeDetails!.workExperiences!,
+                              worker.workerResumeDetails?.workExperiences ?? [],
                         ),
                         WorkerDetailBlockFive(
-                          skills: worker.workerResumeDetails!.skillIds!,
+                          skills: worker.workerResumeDetails?.skillIds ?? [],
                         ),
                       ],
                     ),

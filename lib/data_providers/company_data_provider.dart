@@ -50,7 +50,7 @@ class CompanyDataProvider {
             JobPost? jobPost = JobPost.fromMap(jobPostData);
             if (jobPost != null) {
               print(
-                  'job post index: ${index} id as ${jobPostId} and company id as  ${jobPost.companyId}');
+                  'job post index: $index id as $jobPostId and company id as  ${jobPost.companyId}');
               returnJobPostList.add(jobPost);
               index++;
             }

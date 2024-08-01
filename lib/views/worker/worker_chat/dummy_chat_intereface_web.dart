@@ -80,7 +80,7 @@ class DummyWorkerChatWeb extends StatelessWidget {
                 ],
               ),
               padding: const EdgeInsets.all(10),
-              child: ChatRecipientDetails(),
+              child: const ChatRecipientDetails(),
             ),
           ),
         ],

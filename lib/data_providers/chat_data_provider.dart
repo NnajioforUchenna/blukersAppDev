@@ -93,7 +93,7 @@ class ChatDataProvider {
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) =>
-                ChatRecipient.fromMap(doc.data() as Map<String, dynamic>))
+                ChatRecipient.fromMap(doc.data()))
             .toList());
   }
 

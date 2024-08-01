@@ -1,7 +1,5 @@
-import 'package:blukers/services/generate_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../models/company_chat_models/recipient_chat_list_model.dart';
 import '../../../../providers/job_posts_provider.dart';
@@ -41,7 +39,7 @@ class _CompanyChatListState extends State<CompanyChatList> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Company Chat List'),
+        title: const Text('Company Chat List'),
       ),
       body: ListView.builder(
         itemCount: _chatList.length,

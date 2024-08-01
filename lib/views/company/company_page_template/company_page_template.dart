@@ -4,7 +4,6 @@ import '../../../services/responsive.dart';
 import 'Components/company_app_bar.dart';
 import 'Components/company_buttom_navigation_bar.dart';
 import 'Components/company_drawer.dart';
-import 'Components/company_navigation_rail.dart';
 
 class CompanyPageTemplate extends StatelessWidget {
   final Widget child;
@@ -18,27 +17,7 @@ class CompanyPageTemplate extends StatelessWidget {
       bottomNavigationBar: Responsive.isDesktop(context)
           ? null
           : const CompanyButtomNavigationBar(),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (Responsive.isDesktop(context))
-                    const Expanded(
-                      child: CompanyNavigationRail(),
-                    ),
-                  Expanded(
-                    flex: 5,
-                    child: child,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: SafeArea(child: child),
     );
   }
 }

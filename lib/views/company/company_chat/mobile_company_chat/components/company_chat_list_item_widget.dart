@@ -5,7 +5,7 @@ import 'package:timeago/timeago.dart' as timeago;
 class ChatListItemWidget extends StatelessWidget {
   final ChatRecipientListModel chatListItem;
 
-  ChatListItemWidget({required this.chatListItem});
+  const ChatListItemWidget({super.key, required this.chatListItem});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +24,11 @@ class ChatListItemWidget extends StatelessWidget {
               style: const TextStyle(fontSize: 12.0),
             ),
           ),
-          SizedBox(height: 4.0),
+          const SizedBox(height: 4.0),
           if (chatListItem.unreadMessageCount > 0)
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(6.0),
+                padding: const EdgeInsets.all(6.0),
                 decoration: BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(12.0),

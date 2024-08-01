@@ -20,7 +20,7 @@ class IndustryBodyPanel extends StatelessWidget {
         final job = jobs[index];
         return InkWell(
           onTap: () {
-            getRecords(context, job.jobId);
+            getRecords(context, job);
           },
           child: Container(
               margin: const EdgeInsets.only(bottom: 5),

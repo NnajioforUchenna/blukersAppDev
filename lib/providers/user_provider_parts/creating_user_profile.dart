@@ -11,15 +11,15 @@ extension CreatingUserProfile on UserProvider {
       maskType: EasyLoadingMaskType.black,
     );
 
-    if (appUser != null) {
-      appUser?.registrationDetails?.firstName = name;
-      appUser?.registrationDetails?.lastName = lastName;
-      appUser?.registrationDetails?.shortDescription = description;
-      appUser?.registrationDetails?.status.isAppUserInformation = true;
-
-      // Update the user data in the database.
-      UserDataProvider.registerUserToDatabase(appUser!);
-    }
+    // if (appUser != null) {
+    //   appUser?.registrationDetails?.firstName = name;
+    //   appUser?.registrationDetails?.lastName = lastName;
+    //   appUser?.registrationDetails?.shortDescription = description;
+    //   appUser?.registrationDetails?.status.isAppUserInformation = true;
+    //
+    //   // Update the user data in the database.
+    //   UserDataProvider.registerUserToDatabase(appUser!);
+    // }
 
     EasyLoading.dismiss();
     setRegisterPageIndex();
@@ -51,12 +51,12 @@ extension CreatingUserProfile on UserProvider {
       maskType: EasyLoadingMaskType.black,
     );
 
-    String completePhoneNumber = "$ext-$phoneNumber";
-
-    UserDataProvider.updateContactInformation(
-        completePhoneNumber, appUser!.uid);
-    // _appUser!.address = address;
-    _appUser!.phoneNumber = completePhoneNumber;
+    // String completePhoneNumber = "$ext-$phoneNumber";
+    //
+    // UserDataProvider.updateContactInformation(
+    //     completePhoneNumber, appUser!.uid);
+    // // _appUser!.address = address;
+    // _appUser!.phoneNumber = completePhoneNumber;
     EasyLoading.dismiss();
     // setRegisterPageIndex();
   }

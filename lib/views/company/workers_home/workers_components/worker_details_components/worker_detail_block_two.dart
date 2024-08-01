@@ -20,13 +20,9 @@ class WorkerDetailBlockTwo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Align content to start
         children: [
-          Row(
-            children: [
-              Text("Personal Information",
-                  style: TextStyle(
-                      fontSize: 20 * scaleFactor, fontWeight: FontWeight.bold)),
-            ],
-          ),
+          Text("Personal Information",
+              style: TextStyle(
+                  fontSize: 20 * scaleFactor, fontWeight: FontWeight.bold)),
           const SizedBox(height: 15),
           Row(
             children: [
@@ -34,14 +30,16 @@ class WorkerDetailBlockTwo extends StatelessWidget {
                 "Email: ",
                 style: TextStyle(fontSize: 18 * scaleFactor),
               ),
-              BlurOut(
-                isBlur: isBlur,
-                child: Text(
-                  worker.emails.isNotEmpty
-                      ? worker.emails.first
-                      : 'Email Not Provided',
-                  style: TextStyle(
-                    fontSize: 18 * scaleFactor,
+              Flexible(
+                child: BlurOut(
+                  isBlur: isBlur,
+                  child: Text(
+                    worker.emails.isNotEmpty
+                        ? worker.emails.first
+                        : 'Email Not Provided',
+                    style: TextStyle(
+                      fontSize: 18 * scaleFactor,
+                    ),
                   ),
                 ),
               ),
@@ -54,11 +52,13 @@ class WorkerDetailBlockTwo extends StatelessWidget {
                 "Phone Number: ",
                 style: TextStyle(fontSize: 18),
               ),
-              BlurOut(
-                isBlur: isBlur,
-                child: Text(
-                  worker.phoneNumber ?? 'Phone Number Not Provided',
-                  style: const TextStyle(fontSize: 18),
+              Flexible(
+                child: BlurOut(
+                  isBlur: isBlur,
+                  child: Text(
+                    worker.phoneNumber ?? 'Phone Number Not Provided',
+                    style: const TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
             ],
@@ -70,7 +70,7 @@ class WorkerDetailBlockTwo extends StatelessWidget {
                 "Address: ",
                 style: TextStyle(fontSize: 18),
               ),
-              Expanded(
+              Flexible(
                 child: BlurOut(
                   isBlur: isBlur,
                   child: Text(

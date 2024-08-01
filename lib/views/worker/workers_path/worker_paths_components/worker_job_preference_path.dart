@@ -144,7 +144,7 @@ class _ClassificationPageState extends State<JobPreferncePath> {
                 ),
                 const SizedBox(height: 20), // Space between industry boxes
               ];
-            }).toList(),
+            }),
             const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DiagonallyCutRoundedRectangle extends StatelessWidget {
+  const DiagonallyCutRoundedRectangle({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 100,
       child: CustomPaint(
@@ -29,8 +31,8 @@ class _DiagonalCutPainter extends CustomPainter {
     final roundedRectanglePath = Path()
       ..addRRect(
         RRect.fromRectAndRadius(
-          Rect.fromPoints(Offset(0, 0), Offset(size.width, size.height)),
-          Radius.circular(15),
+          Rect.fromPoints(const Offset(0, 0), Offset(size.width, size.height)),
+          const Radius.circular(15),
         ),
       );
 

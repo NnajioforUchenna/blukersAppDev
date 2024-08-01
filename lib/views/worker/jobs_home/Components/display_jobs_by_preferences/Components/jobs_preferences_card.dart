@@ -70,7 +70,7 @@ class JobsPreferencesCard extends StatelessWidget {
                         child: Wrap(
                           spacing: 8.0,
                           runSpacing: 4.0,
-                          children: preference!.industryIds.map((industryId) {
+                          children: preference.industryIds.map((industryId) {
                             return GreyContainerText(
                               child: Text(
                                 industryId,

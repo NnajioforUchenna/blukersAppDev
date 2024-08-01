@@ -9,11 +9,11 @@ class FlipCard extends StatefulWidget {
   final bool shouldFlip;
 
   const FlipCard({
-    Key? key,
+    super.key,
     required this.front,
     required this.back,
     this.shouldFlip = false,
-  }) : super(key: key);
+  });
 
   @override
   _FlipCardState createState() => _FlipCardState();
