@@ -125,7 +125,7 @@ final routes = [
           builder: (context, state) => const CompanyChat()),
       GoRoute(
           path: '/pathToEmployingWorker',
-          builder: (context, state) => const CompanyPath()),
+          builder: (context, state) =>  CompanyPath()),
       GoRoute(
           path: '/companyMessages',
           builder: (context, state) => const CompanyMessages()),
