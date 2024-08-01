@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -52,7 +53,7 @@ class WorkerDrawer extends StatelessWidget {
             context: context,
             icon: Icons.search,
             text: 'Search',
-            route: '/search_jobs',
+            route: '/searchJobs',
           ),
           _createDrawerItem(
             context: context,
@@ -64,7 +65,7 @@ class WorkerDrawer extends StatelessWidget {
             context: context,
             icon: Icons.support,
             text: 'Services',
-            route: '/offers',
+            route: '/workerOffers',
           ),
           _createDrawerItem(
             context: context,
@@ -87,14 +88,14 @@ class WorkerDrawer extends StatelessWidget {
           _createDrawerItem(
             context: context,
             icon: Icons.chat,
-            text: 'Chat',
-            route: '/chat',
+            text: 'Chat with Potential Employers',
+            route: '/workerChat',
           ),
           _createDrawerItem(
             context: context,
-            icon: Icons.message,
-            text: 'Messages',
-            route: '/messages',
+            icon: Icons.notifications,
+            text: 'Job Alerts & Messages',
+            route: '/workerMessages',
           ),
         ],
       ),
@@ -113,12 +114,14 @@ class WorkerDrawer extends StatelessWidget {
           Row(
             children: <Widget>[
               Icon(icon),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  text,
-                  style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w600,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: AutoSizeText(
+                    text,
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),

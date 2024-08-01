@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../../providers/worker_provider.dart';
 
 class YourProfilePhoto extends StatelessWidget {
@@ -11,7 +12,7 @@ class YourProfilePhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     String? logoUrl = wp.appUser?.photoUrl;
     return Card(
       elevation: 2.0,

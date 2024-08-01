@@ -14,7 +14,7 @@ class BuildListViewWorkers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     final List<Worker> workers = wp.selectedWorkers;
 
     return ListView.separated(

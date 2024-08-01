@@ -1,8 +1,8 @@
-import '../../../../../providers/worker_provider.dart';
-import '../../../../../services/make_responsive_web.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../providers/worker_provider.dart';
+import '../../../../../services/make_responsive_web.dart';
 // Import the necessary pages for the worker's timeline
 import 'classification/classification_page.dart';
 // import 'congratulation_page.dart'; // Name can be adjusted based on your actual page name
@@ -29,7 +29,7 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
   void initState() {
     super.initState();
 
-    _currentPageIndex = Provider.of<WorkerProvider>(context, listen: false)
+    _currentPageIndex = Provider.of<WorkersProvider>(context, listen: false)
         .workerProfileCurrentPageIndex; // This might need to be adjusted for the worker's timeline
     _pageController = PageController(
       initialPage: _currentPageIndex,
@@ -50,7 +50,7 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
   @override
   Widget build(BuildContext context) {
     // This provider might need to be adjusted for the worker's timeline
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     if (_currentPageIndex != wp.workerProfileCurrentPageIndex) {
       animateToNextPage(wp.workerProfileCurrentPageIndex);
       _currentPageIndex = wp.workerProfileCurrentPageIndex;

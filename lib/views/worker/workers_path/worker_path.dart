@@ -23,9 +23,7 @@ class WorkerPath extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 60),
           const Center(
             child: Icon(
               UniconsLine.bag_alt,
@@ -61,34 +59,29 @@ class WorkerPath extends StatelessWidget {
                     AppLocalizations.of(context)!.workerJourneyStep1Text;
               }
               if (index == 1) {
-                title = 'Job Preference';
+                title = AppLocalizations.of(context)!.workerJourneyStep2Title;
                 description =
                     AppLocalizations.of(context)!.workerJourneyStep2Text;
               }
               if (index == 2) {
-                title = 'Create a Resume';
+                title = AppLocalizations.of(context)!.workerJourneyStep3Title;
                 description =
                     AppLocalizations.of(context)!.workerJourneyStep3Text;
               }
               if (index == 3) {
-                title = 'Apply or save Jobs';
+                title = AppLocalizations.of(context)!.workerJourneyStep4Title;
                 description =
                     AppLocalizations.of(context)!.workerJourneyStep4Text;
               }
               if (index == 4) {
-                // title = AppLocalizations.of(context)!.workerJourneyStep5Title;
-                title = 'Subscribe to Apply to More Jobs';
-                // description = AppLocalizations.of(context)!.workerJourneyStep5Text;
-                description =
-                    'Subscribe to our premium service to unlock more job applications. Get access to exclusive job listings and increase your chances of finding the perfect job by applying to more opportunities.';
+                title = AppLocalizations.of(context)!.workerJourneyStep5Title;
+                // title = 'Subscribe to Apply to More Jobs';
+                description = AppLocalizations.of(context)!.workerJourneyStep5Text;
               }
               if (index == 5) {
-                // title = AppLocalizations.of(context)!.workerJourneyStep5Title;
-                title =
-                    'If Employed, Congratulations! The Company Will Likely Process the Work Visa for This Job';
-                // description = AppLocalizations.of(context)!.workerJourneyStep5Text;
-                description =
-                    'If you get employed, congratulations! The company will likely process the work visa for this job, making your transition to the new role smoother and hassle-free.';
+                 title = AppLocalizations.of(context)!.workerJourneyStep6Title;
+                 description = AppLocalizations.of(context)!.workerJourneyStep6Text;
+                   
               }
               final record = jobRecords[index];
               return MyJobTimeLine(
@@ -105,8 +98,8 @@ class WorkerPath extends StatelessWidget {
             buildButton(
               width,
               currentStep,
-              // AppLocalizations.of(context)!.register,
-              "Register",
+              AppLocalizations.of(context)!.workerJourneyStep1Title,
+              
               context,
               () {
                 context.go('/register');
@@ -116,8 +109,7 @@ class WorkerPath extends StatelessWidget {
             buildButton(
               width,
               currentStep,
-              // AppLocalizations.of(context)!.jobPreference,
-              "Job Preference",
+              AppLocalizations.of(context)!.workerJourneyStep2Title,
               context,
               () {
                 context.go('/jobPreference');
@@ -127,8 +119,7 @@ class WorkerPath extends StatelessWidget {
             buildButton(
               width,
               currentStep,
-              // AppLocalizations.of(context)!.createResume,
-              "Create Resume",
+              AppLocalizations.of(context)!.workerJourneyStep3Title,
               context,
               () {
                 context.go('/createResume');
@@ -138,22 +129,20 @@ class WorkerPath extends StatelessWidget {
             buildButton(
               width,
               currentStep,
-              // AppLocalizations.of(context)!.applyToJobs,
-              "Apply To Jobs",
+            AppLocalizations.of(context)!.workerJourneyStep4Title,
               context,
               () {
-                context.go('/applyToJobs');
+                 context.go('/myJobs');
               },
             ),
           if (currentStep == 4)
             buildButton(
               width,
               currentStep,
-              // AppLocalizations.of(context)!.subscribeToApplyMoreJobs,
-              "Subscribe To Apply More Jobs",
+              AppLocalizations.of(context)!.subscribeToApplyMoreJobs,
               context,
               () {
-                context.go('/subscribeToApplyMoreJobs');
+                context.go('/offers');
               },
             ),
           const SizedBox(height: 20),
@@ -227,3 +216,4 @@ Widget buildButton(double width, int currentStep, String text,
     ),
   );
 }
+

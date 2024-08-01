@@ -1,10 +1,10 @@
-import '../../../../../../providers/worker_provider.dart';
-import '../../../../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../../../providers/worker_provider.dart';
+import '../../../../../../utils/styles/index.dart';
 
 class WorkExperienceDate extends StatefulWidget {
   final int intialIndex;
@@ -18,12 +18,12 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
   DateTime? _startDate;
   DateTime? _endDate;
   bool _isCurrentlyWorking = false;
-  late WorkerProvider wp;
+  late WorkersProvider wp;
 
   @override
   void initState() {
     super.initState();
-    wp = Provider.of<WorkerProvider>(context, listen: false);
+    wp = Provider.of<WorkersProvider>(context, listen: false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (wp.workExperience[widget.intialIndex]['jobStartDate'] != null) {
@@ -68,7 +68,7 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
 
   @override
   Widget build(BuildContext context) {
-    wp = Provider.of<WorkerProvider>(context);
+    wp = Provider.of<WorkersProvider>(context);
     return Column(
       children: [
         Row(

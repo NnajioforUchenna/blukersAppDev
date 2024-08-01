@@ -49,6 +49,10 @@ class UserProvider with ChangeNotifier {
   AppUser? get appUser => _appUser;
   late StreamService streamService;
 
+  bool _isResumeUploaded = false;
+
+  bool get isResumeUploaded => _isResumeUploaded;
+
   // Language Variables
   String language = "en";
 
@@ -87,6 +91,16 @@ class UserProvider with ChangeNotifier {
         .map((e) => e.toMap())
         .toList();
     return references;
+  }
+
+  void workeruploadResume() {
+    _isResumeUploaded = true;
+    notifyListeners();
+  }
+
+  void resetResume() {
+    _isResumeUploaded = false;
+    notifyListeners();
   }
 
   void setReferences(List<Map<String, dynamic>> references) {
@@ -323,7 +337,6 @@ class UserProvider with ChangeNotifier {
     if (appUser == null) {
       return false;
     }
-    print(appUser!.registrationDetails?.jobsPreference);
     return appUser!.registrationDetails?.jobsPreference != null;
   }
 

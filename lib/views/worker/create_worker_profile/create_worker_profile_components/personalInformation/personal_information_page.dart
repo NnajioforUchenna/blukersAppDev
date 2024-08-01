@@ -40,7 +40,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
+      WorkersProvider wp = Provider.of<WorkersProvider>(context, listen: false);
       firstNameController.text = wp.previousParams["firstName"] ?? "";
       middleNameController.text = wp.previousParams["middleName"] ?? "";
       lastNameController.text = wp.previousParams["lastName"] ?? "";
@@ -54,7 +54,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final node = FocusScope.of(context);
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return SizedBox(
       height: height,
       width: Responsive.isDesktop(context)

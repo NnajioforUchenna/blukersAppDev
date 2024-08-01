@@ -17,7 +17,7 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
 
     return SizedBox(
       height: height * 0.7,

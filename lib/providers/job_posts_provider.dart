@@ -284,8 +284,6 @@ class JobPostsProvider with ChangeNotifier {
         pageNumber: 0,
         targetLanguage: language);
 
-    print('listJobPosts: $listJobPosts');
-
     hasMore = listJobPosts.isNotEmpty;
 
     if (listJobPosts.isEmpty) {

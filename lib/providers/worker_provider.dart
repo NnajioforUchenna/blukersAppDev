@@ -6,6 +6,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../data_providers/company_data_provider.dart';
@@ -19,7 +20,7 @@ import '../models/work_experience.dart';
 import '../models/worker.dart';
 // Assuming the file containing the Worker class is named 'worker.dart'.
 
-class WorkerProvider with ChangeNotifier {
+class WorkersProvider with ChangeNotifier {
   Worker? _worker;
   AppUser? appUser;
 
@@ -29,6 +30,16 @@ class WorkerProvider with ChangeNotifier {
 
   List<Worker> selectedWorkers = [];
   Worker? selectedWorker;
+
+  List<Worker> workersToDisplay = [];
+
+  // TODO: Add a method to get all workers for the job with the given jobId.
+  Future<void> getWorkersBySelection(BuildContext context, String jobId) async {
+    print('Getting Workers for Job ID: $jobId');
+    workersToDisplay = await getAllWorkers();
+    notifyListeners();
+    context.go('/displayWorkers');
+  }
 
   update(AppUser? user) {
     appUser = user;
@@ -426,6 +437,10 @@ class WorkerProvider with ChangeNotifier {
       EasyLoading.showError('Please Sign In');
       return;
     }
+  }
+
+  Future<List<Worker>> getAllWorkers() async {
+    return await WorkerDataProvider.getAllWorkers();
   }
 
 // Any other methods related to the Worker can be added as required.

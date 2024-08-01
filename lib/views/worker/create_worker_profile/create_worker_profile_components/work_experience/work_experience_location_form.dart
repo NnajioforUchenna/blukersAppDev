@@ -1,10 +1,9 @@
-import '../../../../../../providers/worker_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../providers/worker_provider.dart';
 import '../../../../auth/common_widget/auth_input.dart';
-
 
 class WorkExperienceLocationForm extends StatefulWidget {
   final int intialIndex;
@@ -30,7 +29,8 @@ class _WorkExperienceLocationFormState
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Check if the widget is still in the widget tree
       if (mounted) {
-        WorkerProvider wp = Provider.of<WorkerProvider>(context, listen: false);
+        WorkersProvider wp =
+            Provider.of<WorkersProvider>(context, listen: false);
         cityController.text =
             wp.workExperience[widget.intialIndex]['city'] ?? '';
         stateController.text =
@@ -44,7 +44,7 @@ class _WorkExperienceLocationFormState
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
 
     return Row(
       children: [

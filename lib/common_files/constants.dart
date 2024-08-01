@@ -9,17 +9,16 @@ import '../views/worker/services/services_components/subscription/subscription_c
 final List<String> routesWorker = [
   '/jobs',
   '/myJobs',
-  '/search_jobs',
-  '/offers',
+  '/searchJobs',
+  '/workerOffers',
   '/workerProfile',
   '/login'
 ];
 final List<String> routesCompany = [
   '/workers',
   '/myJobPosts',
-  '/search_workers',
-  '/chat',
-  '/offers',
+  '/searchWorkers',
+  '/companyOffers',
   '/companyProfile',
   '/login'
 ];

@@ -1,5 +1,5 @@
-import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
-import 'package:blukers/views/company/company_chat/mobile_company_chat/company_chat_list.dart';
+import 'package:blukers/views/company/company_path/company_path.dart';
+import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
 import 'package:go_router/go_router.dart';
@@ -9,20 +9,24 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
+import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
+import '../views/company/company_messages/company_messages.dart';
+import '../views/company/company_offers/company_offers.dart';
 import '../views/company/company_page_template/company_page_template.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
 import '../views/company/create_job_post/create_job_post.dart';
+import '../views/company/display_workers/display_workers.dart';
 import '../views/company/my_job_posts/my_job_posts.dart';
 import '../views/company/my_job_posts/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/search_workers/search_workers_ui.dart';
-import '../views/company/search_workers/workers_search_result_page/workers_search_result_page.dart';
 import '../views/company/workers_home/workers_home.dart';
 import '../views/worker/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_screen.dart';
+import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/set_jobs_preferences.dart';
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
@@ -36,6 +40,7 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
+import '../views/worker/worker_chat/worker_chat_platforms.dart';
 import '../views/worker/worker_page_template/worker_page_template.dart';
 import '../views/worker/worker_profile/worker_profile.dart';
 import 'authentication_wrapper.dart';
@@ -46,7 +51,6 @@ final routes = [
   GoRoute(
       path: '/',
       builder: (context, state) => const LandingPage()), // const LandingPage()
-      // builder: (context, state) => const CompanyChatList()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),
@@ -60,6 +64,12 @@ final routes = [
     },
     routes: [
       GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
+      GoRoute(
+          path: '/searchJobs',
+          builder: (context, state) => const SearchJobsUi()),
+      GoRoute(
+          path: '/workerChat',
+          builder: (context, state) => const WorkerChatPlatforms()),
       GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),
       GoRoute(
           path: '/jobSearchResults',
@@ -68,18 +78,23 @@ final routes = [
           path: '/workerProfile',
           builder: (context, state) => const WorkerProfile()),
       GoRoute(
-          path: '/workerSearchResults',
-          builder: (context, state) => const WorkerSearchResultPage()),
-      GoRoute(
-          path: '/offers', builder: (context, state) => const ServicesList()),
+          path: '/workerOffers',
+          builder: (context, state) => const ServicesList()),
       GoRoute(
           path: '/pathToJob', builder: (context, state) => const WorkerPath()),
       GoRoute(
           path: '/jobPreference',
           builder: (context, state) => const JobPreferncePath()),
       GoRoute(
-          path: '/search_jobs',
-          builder: (context, state) => const SearchJobsUi()),
+          path: '/showJobsByPreferences',
+          builder: (context, state) => const ShowJobsByPreferences()),
+      GoRoute(
+        path: '/setJobsPreferences',
+        builder: (context, state) => const SetJobsPreferences(),
+      ),
+      GoRoute(
+          path: '/workerMessages',
+          builder: (context, state) => const WorkerMessages()),
     ],
   ),
 
@@ -91,29 +106,44 @@ final routes = [
     },
     routes: [
       // Company Routes
+
       GoRoute(path: '/workers', builder: (context, state) => const Workers()),
       GoRoute(
+          path: '/companyOffers',
+          builder: (context, state) => const CompanyOffers()),
+      GoRoute(
+          path: '/searchWorkers',
+          builder: (context, state) => const SearchWorkersUi()),
+      GoRoute(
           path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
+      GoRoute(
+          path: '/companyProfile',
+          builder: (context, state) => const CompanyProfile()),
       GoRoute(
           path: '/companyChat',
           builder: (context, state) => const CompanyChat()),
       GoRoute(
-          path: '/search_workers',
-          builder: (context, state) => const SearchWorkersUi()),
+          path: '/pathToEmployingWorker',
+          builder: (context, state) => const CompanyPath()),
+      GoRoute(
+          path: '/companyMessages',
+          builder: (context, state) => const CompanyMessages()),
+      GoRoute(
+          path: '/displayWorkers',
+          builder: (context, state) => const DisplayWorkers()),
     ],
   ),
+
   GoRoute(
       path: '/createResume',
       builder: (context, state) => const CreateWorkerProfile()),
 
   GoRoute(
-      path: '/companyProfile',
-      builder: (context, state) => const CompanyProfile()),
-  GoRoute(
       path: '/company-worker_chat',
       builder: (context, state) => const CompanyChat()),
 
   // Worker Routes
+
   GoRoute(
       path: '/worker_chat-message',
       builder: (context, state) => const ChatMessageScreen()),
@@ -192,9 +222,6 @@ final routes = [
   GoRoute(path: '/services', builder: (context, state) => const Products()),
 
   GoRoute(path: '/orders', builder: (context, state) => const OrdersList()),
-  GoRoute(
-      path: '/showJobsByPreferences',
-      builder: (context, state) => const ShowJobsByPreferences())
 ];
 
 void verifyCurrentPath() {

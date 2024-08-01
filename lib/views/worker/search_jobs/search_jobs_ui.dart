@@ -121,8 +121,9 @@ class _SearchJobsUiState extends State<SearchJobsUi> {
                       jp.setSearching(true);
                       jp.searchJobPosts(
                           nameController.text, locationController.text);
-                      if (GoRouter.of(context).canPop())
+                      if (GoRouter.of(context).canPop()) {
                         GoRouter.of(context).pop();
+                      }
                       GoRouter.of(context).pushReplacement('/jobSearchResults');
                     },
                     style: ElevatedButton.styleFrom(

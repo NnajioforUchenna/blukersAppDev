@@ -28,7 +28,7 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     buttonLabel = AppLocalizations.of(context)!.searchWorkers;
     searchName =

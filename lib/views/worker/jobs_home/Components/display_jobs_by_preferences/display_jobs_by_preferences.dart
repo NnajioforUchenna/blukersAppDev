@@ -11,7 +11,6 @@ class DisplayJobsByPreferences extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    print(up.isJobsPreferencesSet());
     return up.isJobsPreferencesSet()
         ? const ShowJobsByPreferences()
         : const SetJobsPreferences();

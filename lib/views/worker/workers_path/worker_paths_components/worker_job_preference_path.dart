@@ -1,5 +1,9 @@
+import 'package:blukers/data_providers/user_data_provider.dart';
+import 'package:blukers/models/app_user/app_user.dart';
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
+import 'package:blukers/views/worker/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/industry.dart';
@@ -17,7 +21,8 @@ class JobPreferncePath extends StatefulWidget {
 }
 
 class _ClassificationPageState extends State<JobPreferncePath> {
-  late WorkerProvider wp;
+  AppUser? appUser;
+  late WorkersProvider wp;
   late List<Industry> industries;
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
@@ -27,7 +32,7 @@ class _ClassificationPageState extends State<JobPreferncePath> {
   @override
   void initState() {
     super.initState();
-    wp = Provider.of<WorkerProvider>(context, listen: false);
+    wp = Provider.of<WorkersProvider>(context, listen: false);
     selectedIndustries = wp.previousParams['industries'] ?? [];
     selectedJobs = wp.previousParams['jobs'] ?? {};
   }
@@ -37,7 +42,7 @@ class _ClassificationPageState extends State<JobPreferncePath> {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     industries = ip.industries.values.toList();
-    wp = Provider.of<WorkerProvider>(context);
+    wp = Provider.of<WorkersProvider>(context);
 
     bool areJobsSelected() {
       return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
@@ -141,7 +146,23 @@ class _ClassificationPageState extends State<JobPreferncePath> {
               ];
             }).toList(),
             const SizedBox(height: 40),
-
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Spacer(),
+                TimelineNavigationButton(
+                  isSelected: areJobsSelected(),
+                  onPress: areJobsSelected()
+                      ? () async {
+                          UserDataProvider.updateJobsPreference(
+                              appUser); // Ensure this function returns a Future
+                          context.go(
+                              '/pathToJob'); // Replace '/newScreen' with your actual route
+                        }
+                      : () {}, // Disable the button if no jobs are selected
+                )
+              ],
+            ),
             const SizedBox(height: 20), // Reduced the space here
           ],
         ),

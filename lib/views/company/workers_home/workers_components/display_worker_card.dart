@@ -25,7 +25,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
 
     bool isWorkerSelected() {
       return wp.selectedWorker?.workerId == widget.worker?.workerId;

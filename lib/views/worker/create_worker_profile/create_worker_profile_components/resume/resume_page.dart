@@ -16,7 +16,7 @@ class ResumePage extends StatelessWidget {
     final node = FocusScope.of(context);
     final linkedInUrlController = TextEditingController();
     UserProvider up = Provider.of<UserProvider>(context);
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
 
     return Scaffold(
       body: Container(

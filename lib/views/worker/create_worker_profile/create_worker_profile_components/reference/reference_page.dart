@@ -37,7 +37,7 @@ class _ReferencePageState extends State<ReferencePage> {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     if (referenceForms.isEmpty) {
       for (int i = 0; i < wp.references.length; i++) {
         referenceForms.add(ReferenceFormWidget(index: i));

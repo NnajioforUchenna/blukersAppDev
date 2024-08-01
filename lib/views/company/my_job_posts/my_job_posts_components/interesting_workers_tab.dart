@@ -16,7 +16,7 @@ class InterestingWorkersTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CompanyProvider cp = Provider.of<CompanyProvider>(context);
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return StreamBuilder<List<Worker>>(
       stream: cp.getInterestingWorkersStream(),
       builder: (context, snapshot) {

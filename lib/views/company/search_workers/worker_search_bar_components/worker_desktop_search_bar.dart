@@ -20,7 +20,7 @@ class WorkerDesktopSearchBar extends StatefulWidget {
 class _WorkerDesktopSearchBarState extends State<WorkerDesktopSearchBar> {
   final TextEditingController _searchController1 = TextEditingController();
   final TextEditingController _searchController2 = TextEditingController();
-  late WorkerProvider wp;
+  late WorkersProvider wp;
   late JobPostsProvider jp;
   bool _isLoading = false;
 
@@ -29,7 +29,7 @@ class _WorkerDesktopSearchBarState extends State<WorkerDesktopSearchBar> {
   @override
   void initState() {
     super.initState();
-    wp = Provider.of<WorkerProvider>(context, listen: false);
+    wp = Provider.of<WorkersProvider>(context, listen: false);
     jp = Provider.of<JobPostsProvider>(context, listen: false);
   }
 

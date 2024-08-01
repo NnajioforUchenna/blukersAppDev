@@ -25,6 +25,12 @@ extension UserNavigationFunctions on UserProvider {
     context.pushReplacement(targetRoute);
   }
 
+  void navigateCompany(BuildContext context, int index) {
+    currentPageIndex = index;
+    notifyListeners();
+    context.go(routesCompany[index]);
+  }
+
   void navigateWorker(BuildContext context, int index) {
     currentPageIndex = index;
     notifyListeners();

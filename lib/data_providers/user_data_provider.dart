@@ -1,8 +1,10 @@
+import 'package:blukers/models/app_user/components/registration_status.dart';
 import 'package:blukers/models/authResult.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -586,12 +588,16 @@ class UserDataProvider {
       return;
     }
 
+
+     RegistrationStatus status = RegistrationStatus();
+    status.isJobsPreference = true;
     // Assuming 'firestore' is a correctly initialized FirebaseFirestore instance
     // and 'appUserCollections' holds the correct name of the collection
     CollectionReference appUserCollection = firestore.collection(
         appUserCollections); // Use the actual name of your collection
 
     appUserCollection.doc(appUser.uid).set({
+      'workerTimelineStep': 2,
       'jobsPreference': {
         'industryIds':
             appUser.registrationDetails?.jobsPreference?.industryIds ?? [],
@@ -601,6 +607,8 @@ class UserDataProvider {
       print("Error adding user to Firestore: $error");
     });
   }
+
+  
 
   static void updateNotificationStatus(String uid, String notificationStatus) {
     CollectionReference appUserCollection =

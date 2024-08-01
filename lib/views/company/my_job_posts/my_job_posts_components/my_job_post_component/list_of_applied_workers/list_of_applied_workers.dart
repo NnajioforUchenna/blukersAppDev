@@ -12,7 +12,7 @@ class ListOfAppliedWorkers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WorkerProvider wp = Provider.of<WorkerProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
     return wp.appliedWorkers.isEmpty
         ? const LoadingInterestingWorkers()
         : ListView.separated(
