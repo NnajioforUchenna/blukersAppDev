@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:blukers/data_providers/user_data_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -142,6 +143,7 @@ class PaymentsProvider with ChangeNotifier {
         selectedProduct: subscriptionType,
         amount: subscriptionType == 'premium' ? 4.99 : 9.99);
 
+    UserDataProvider.updateworkertimestep(appUser!.uid, 5);
     if (paymentPlatform == "Stripe") {
       getStripePayment(context, subscriptionType, transactionId);
     } else if (paymentPlatform == "Apple") {

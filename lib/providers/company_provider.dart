@@ -214,7 +214,7 @@ class CompanyProvider with ChangeNotifier {
     await CompanyDataProvider.createCompanyProfile(
         appUser!.uid, company.toMap());
 
-    appUser?.companyTimelineStep = 2;
+    // appUser?.companyTimelineStep = 4;
 
     notifyListeners();
     updateCompanyTimelineStep();
@@ -223,7 +223,7 @@ class CompanyProvider with ChangeNotifier {
   }
 
   void updateCompanyTimelineStep() {
-    CompanyDataProvider.updateCompanyTimelineStep(appUser!.uid, 2);
+    CompanyDataProvider.updateCompanyTimelineStep(appUser!.uid, 4);
     notifyListeners();
   }
 

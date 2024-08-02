@@ -98,7 +98,8 @@ class MyApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 builder: (context, widget) {
-                  return EasyLoading.init()(context, widget);
+                  return
+                    EasyLoading.init()(context, widget);
                 },
                 theme: ThemeData(
                   primarySwatch: Colors.blue,

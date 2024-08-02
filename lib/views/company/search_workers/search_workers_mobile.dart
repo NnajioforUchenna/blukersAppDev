@@ -1,6 +1,3 @@
-import 'package:blukers/services/responsive.dart';
-import 'package:blukers/views/company/search_workers/search_workers_mobile.dart';
-import 'package:blukers/views/company/search_workers/search_workers_web.dart';
 import 'package:blukers/views/company/search_workers/workers_search_result_page/components/worker_pop_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,31 +10,32 @@ import '../../../providers/worker_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import '../../old_common_views/components/animations/index.dart';
 
-class SearchWorkersUi extends StatefulWidget {
-  const SearchWorkersUi({super.key});
+class SearchWorkersUiMobile extends StatefulWidget {
+  const SearchWorkersUiMobile({super.key});
 
   @override
-  State<SearchWorkersUi> createState() => _SearchWorkersUiState();
+  State<SearchWorkersUiMobile> createState() => _SearchWorkersUiMobileState();
 }
 
-class _SearchWorkersUiState extends State<SearchWorkersUi> {
-<<<<<<< HEAD
-
-=======
+class _SearchWorkersUiMobileState extends State<SearchWorkersUiMobile> {
   TextEditingController nameController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   String buttonLabel = 'Search Jobs';
   String searchName = 'Position, work area or company';
-  final bool _isLoading = false;
->>>>>>> d3b720476d20cbb329af8f36edf07b9bf45bdc48
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+    buttonLabel = AppLocalizations.of(context)!.searchWorkers;
+    searchName =
+        AppLocalizations.of(context)!.companySearchBarInput1Placeholder;
+    nameController.text = jp.nameSearch;
+    locationController.text = jp.locationSearch;
 
-<<<<<<< HEAD
-
-    return Responsive.isMobile(context) ? const SearchWorkersUiMobile() : const SearchWorkersUiWeb();
-=======
     return Center(
       child: Dialog(
         shape: const RoundedRectangleBorder(
@@ -65,7 +63,7 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
                           controller: nameController,
                           decoration: InputDecoration(
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 10),
+                            const EdgeInsets.symmetric(vertical: 10),
                             hintText: searchName,
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.grey,
@@ -95,9 +93,9 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
                           controller: locationController,
                           decoration: InputDecoration(
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 10),
+                            const EdgeInsets.symmetric(vertical: 10),
                             hintText:
-                                AppLocalizations.of(context)!.cityandzipcode,
+                            AppLocalizations.of(context)!.cityandzipcode,
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.grey,
                               fontSize: 13.0,
@@ -122,17 +120,25 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
                         onPressed: _isLoading
                             ? null
                             : () async {
-                                wp.searchWorkers(
-                                  nameController.text,
-                                  locationController.text,
-                                );
+                          setState(() {
+                            _isLoading = true;
+                          });
 
-                                if (GoRouter.of(context).canPop()) {
-                                  GoRouter.of(context).pop();
-                                }
+                          await wp.searchWorkers(
+                            nameController.text,
+                            locationController.text,
+                          );
 
-                                context.go('/workerSearchResults');
-                              },
+                          setState(() {
+                            _isLoading = false;
+                          });
+
+                          if (GoRouter.of(context).canPop())
+                            GoRouter.of(context).pop();
+
+                          GoRouter.of(context)
+                              .pushReplacement('/workerSearchResults');
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ThemeColors.blukersOrangeThemeColor,
                           shape: RoundedRectangleBorder(
@@ -171,6 +177,5 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
         ),
       ),
     );
->>>>>>> d3b720476d20cbb329af8f36edf07b9bf45bdc48
   }
 }
