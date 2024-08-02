@@ -1,4 +1,4 @@
-import 'package:blukers/providers/chat_provider.dart';
+import 'package:blukers/providers/company_chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +21,7 @@ class _WorkerChatRoomMobileState extends State<WorkerChatRoomMobile> {
   Widget build(BuildContext context) {
     String? currentUserId =
         Provider.of<UserProvider>(context, listen: false).appUser?.uid;
-    ChatProvider cp = Provider.of<ChatProvider>(context);
+    CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(cp.selectedChatRecipient?.displayName ?? 'Not Given'),

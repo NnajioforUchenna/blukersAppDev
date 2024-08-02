@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../common_files/constants.dart';
 import '../../../../../models/worker.dart';
-import '../../../../../providers/chat_provider.dart';
+import '../../../../../providers/company_chat_provider.dart';
 import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../providers/worker_provider.dart';
 import '../../../../../services/responsive.dart';
 import '../../../../../services/rounded_image.dart';
 import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../old_common_views/worker_timeline/display_worker_timeline_dialog.dart';
+import '../../../company_chat/mobile_company_chat/components/company_chat_room_dialog.dart';
 
 class WorkerDetailBlockOne extends StatelessWidget {
   final Worker worker;
@@ -22,7 +22,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
     WorkersProvider wp = Provider.of<WorkersProvider>(context);
-    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
+    CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
     bool isWorkerSaved = up.isWorkerSaved(worker.workerId ?? '');
 
     return SingleChildScrollView(
@@ -177,8 +177,11 @@ class WorkerDetailBlockOne extends StatelessWidget {
                             builder: (context) =>
                                 const DisplayWorkerTimelineDialog());
                       } else {
-                        chatProvider.startRoom(up.appUser, worker);
-                        context.push('/worker_chat-message');
+                        cp.companyStartChat(up.appUser, worker);
+                        showDialog(
+                            context: context,
+                            builder: (context) =>
+                                const CompanyChatRoomDialog());
                       }
                     },
                   ),

@@ -13,6 +13,7 @@ import '../views/auth/reset_password.dart';
 import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
+import '../views/company/company_chat/mobile_company_chat/components/company_chat_room.dart';
 import '../views/company/company_messages/company_messages.dart';
 import '../views/company/company_offers/company_offers.dart';
 import '../views/company/company_page_template/company_page_template.dart';
@@ -43,6 +44,7 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
+import '../views/worker/worker_chat/components/worker_chat_room.dart';
 import '../views/worker/worker_chat/worker_chat_platforms.dart';
 import '../views/worker/worker_page_template/worker_page_template.dart';
 import '../views/worker/worker_profile/worker_profile.dart';
@@ -156,7 +158,13 @@ final routes = [
       path: '/company-worker_chat',
       builder: (context, state) => const CompanyChat()),
 
-  // Worker Routes
+  GoRoute(
+      path: '/workerChatRoom',
+      builder: (context, state) => const WorkerChatRoom()),
+
+  GoRoute(
+      path: '/companyChatRoom',
+      builder: (context, state) => const CompanyChatRoom()),
 
   GoRoute(
       path: '/worker_chat-message',

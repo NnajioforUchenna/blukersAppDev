@@ -1,3 +1,6 @@
+import 'package:blukers/models/app_user/app_user.dart';
+import 'package:blukers/models/worker.dart';
+
 class ChatRecipient {
   final String uid;
   final String displayName;
@@ -40,5 +43,26 @@ class ChatRecipient {
       'unreadMessageCount':
           unreadMessageCount, // Include unread message count in the map
     };
+  }
+
+  // Static method to create a ChatRecipient from a Worker
+  static ChatRecipient fromWorker(Worker worker) {
+    return ChatRecipient(
+      uid: worker.workerId,
+      displayName: worker.getDisplayName(),
+      email: worker.emails.firstOrNull ?? '',
+      photoUrl: worker.workerResumeDetails?.profilePhotoUrl ?? '',
+      clientType: 'worker',
+    );
+  }
+
+  static ChatRecipient fromAppUser(AppUser appUser) {
+    return ChatRecipient(
+      uid: appUser.uid,
+      displayName: appUser.displayName ?? '',
+      email: appUser.registrationDetails?.email ?? '',
+      photoUrl: appUser.photoUrl ?? '',
+      clientType: appUser.userRole ?? '',
+    );
   }
 }
