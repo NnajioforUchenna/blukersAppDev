@@ -47,10 +47,10 @@ class _RegistrationCongratulationPageState
   _navigateAfterDelay() {
     Future.delayed(Duration(seconds: countdownValue), () {
       _timer.cancel(); // Cancel the timer if it's still active
-      if (up.userRole == "company") {
-        context.go('/workers');
-      } else {
+      if (up.userRole == "worker") {
         context.go('/jobs');
+      } else {
+        context.go('/workers');
       }
     });
   }

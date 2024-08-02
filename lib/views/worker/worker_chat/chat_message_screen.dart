@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/chat_message.dart';
-import '../../../providers/chat_provider.dart';
+import '../../../providers/company_chat_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
 import '../../company/workers_home/workers_components/chat_component.dart';
@@ -23,7 +23,8 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
+    CompanyChatProvider chatProvider =
+        Provider.of<CompanyChatProvider>(context);
     String roomId = chatProvider.chatDetails["roomId"] as String;
     String sentToId = chatProvider.chatDetails["sentToId"] as String;
     String roomName = chatProvider.chatDetails["roomName"] as String;
@@ -33,8 +34,7 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
       _textController.clear();
       _scrollController.animateTo(0,
           duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-      await chatProvider.sendMessage(
-          textMessage, up.appUser!.uid, roomId, sentToId, roomName);
+      await chatProvider.sendMessage(textMessage);
     }
 
     return WillPopScope(

@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/chat_provider.dart';
+import '../../../../providers/worker_chat_provider.dart';
 
 class ChatRecipientWidget extends StatelessWidget {
   final ChatRecipient? chatRecipient;
-  const ChatRecipientWidget({Key? key, this.chatRecipient}) : super(key: key);
+  const ChatRecipientWidget({super.key, this.chatRecipient});
 
   @override
   Widget build(BuildContext context) {
-    ChatProvider cp = Provider.of<ChatProvider>(context);
+    WorkerChatProvider cp = Provider.of<WorkerChatProvider>(context);
+    String photoUrl =
+        chatRecipient?.photoUrl ?? 'assets/images/companyLogoPage.png';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: GestureDetector(
@@ -23,8 +25,8 @@ class ChatRecipientWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           elevation: 3,
           child: ListTile(
-            leading: const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/companyLogoPage.png'),
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(photoUrl),
             ),
             title: Text(chatRecipient?.displayName ?? 'Not Given'),
             subtitle: Text(chatRecipient?.clientType ?? 'Not Given'),

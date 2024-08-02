@@ -94,6 +94,8 @@ class JobPostsDataProvider {
             .toLowerCase()
             .replaceAll(' ', '%20');
 
+    print('Keyword: $keyword');
+
     final docRef = FirebaseFirestore.instance.collection('cache2').doc(keyword);
     final docSnapshot = await docRef.get();
     if (docSnapshot.exists) {

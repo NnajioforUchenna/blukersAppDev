@@ -13,16 +13,14 @@ class ClassificationPage extends StatefulWidget {
   const ClassificationPage({super.key});
 
   @override
-  _ClassificationPageState createState() => _ClassificationPageState();
+  State<ClassificationPage> createState() => _ClassificationPageState();
 }
 
 class _ClassificationPageState extends State<ClassificationPage> {
   late WorkersProvider wp;
-  late List<Industry> industries;
+  List<Industry> industries = [];
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
-
-  ScrollController scrollCtrl = ScrollController();
 
   @override
   void initState() {
@@ -49,7 +47,6 @@ class _ClassificationPageState extends State<ClassificationPage> {
           : MediaQuery.of(context).size.width * 0.9,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
-        controller: scrollCtrl,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

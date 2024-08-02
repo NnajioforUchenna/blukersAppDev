@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../../../../providers/worker_provider.dart';
 import '../../../../../services/responsive.dart';
+import 'resume_profile_photo.dart';
 import 'timeline_navigation_button.dart';
-import 'yourProfilePhoto.dart';
 
 class ProfilePhotoPage extends StatefulWidget {
   const ProfilePhotoPage({super.key});
@@ -35,7 +35,7 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
               const SizedBox(height: 20),
               Column(
                 children: [
-                  const YourProfilePhoto(),
+                  const ResumeProfilePhoto(),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

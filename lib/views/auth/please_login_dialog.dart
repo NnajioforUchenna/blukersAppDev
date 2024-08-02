@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/responsive.dart';
 import '../../utils/styles/index.dart';
 import 'common_widget/login_or_register.dart';
 
@@ -8,11 +9,14 @@ class PleaseLoginDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Adjusted logic to use context if Responsive requires it
+    bool isDesktop = Responsive.isDesktop(context);
     return Dialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0))),
       child: IntrinsicHeight(
         child: Container(
+          width: isDesktop ? MediaQuery.of(context).size.width * 0.5 : null,
           alignment: Alignment.topCenter,
           child: Column(
             children: [

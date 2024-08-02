@@ -94,4 +94,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'blukers-development.appspot.com',
     measurementId: 'G-8RDP0NVN61',
   );
+
 }

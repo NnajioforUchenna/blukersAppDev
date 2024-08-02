@@ -602,7 +602,7 @@ class _FlutterFormBuilderState extends State<FlutterFormBuilder> {
       child: TextButton(
         style: ButtonStyle(
           backgroundColor:
-              MaterialStateProperty.all<Color>(Colors.blue.shade800),
+              WidgetStateProperty.all<Color>(Colors.blue.shade800),
         ),
         onPressed: () => _handleOnSubmit(onSubmit),
         child: Text(

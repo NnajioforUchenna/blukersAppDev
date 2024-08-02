@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -328,25 +327,6 @@ class UserDataProvider {
       print(e);
       return 'error';
     }
-    // if (flow != null) {
-    //   //  File(image.path);
-    //   //Upload to Firebase
-    //   var snapshot = firebaseStorage.ref().child(path!).putFile(flow).snapshot;
-    //   await Future.delayed(Duration(seconds: 5));
-    //   String downloadUrl = await snapshot.ref.getDownloadURL();
-    //   // setState(() {
-    //   imageUrl = downloadUrl;
-    //   if (kDebugMode) {
-    //     print(imageUrl);
-    //   }
-    //   return imageUrl;
-    //   // });
-    // } else {
-    //   if (kDebugMode) {
-    //     print('No Image Path Received');
-    //   }
-    //   return '';
-    // }
   }
 
   static Future<void> _deleteUserMessages(String roomId) async {

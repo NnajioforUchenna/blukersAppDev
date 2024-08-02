@@ -15,25 +15,6 @@ class ReferencePage extends StatefulWidget {
 
 class _ReferencePageState extends State<ReferencePage> {
   List<ReferenceFormWidget> referenceForms = [];
-  ScrollController scrollCtrl = ScrollController();
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      //added this listner to dismiss keyboard when scroll
-      scrollCtrl.addListener(() {
-        print('scrolling');
-      });
-      scrollCtrl.position.isScrollingNotifier.addListener(() {
-        if (!scrollCtrl.position.isScrollingNotifier.value) {
-          print('scroll is stopped');
-          FocusManager.instance.primaryFocus?.unfocus();
-        } else {
-          print('scroll is started');
-        }
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +28,6 @@ class _ReferencePageState extends State<ReferencePage> {
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SingleChildScrollView(
-        controller: scrollCtrl,
         child: Column(
           children: [
             const SizedBox(height: 20),

@@ -1,3 +1,4 @@
+import 'package:blukers/data_providers/push_notification.dart';
 import 'package:blukers/models/chat_recipient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
@@ -53,6 +54,12 @@ class ChatDataProvider {
         .doc(roomId)
         .collection('messages')
         .add(chatMessage.toMap());
+
+    DataNotificationProvider.sendPushNotification(
+        title: '$sentByName sent you a message',
+        body: chatMessage.message,
+        uid: sentToId);
+
     var res = await http.post(
         Uri.parse(
             "https://sendmessagepushnotifications-v2xxr3wlvq-uc.a.run.app"),
@@ -87,15 +94,25 @@ class ChatDataProvider {
 
   static Stream<List<ChatRecipient>> getChatRecipientsStream(String uid) {
     return firestore
-        .collection('chat')
+        .collection('ChatLists')
         .doc(uid)
-        .collection('chat-recipients')
+        .collection('CompanyChatLists')
         .snapshots()
         .map((snapshot) => snapshot.docs
-            .map((doc) =>
-                ChatRecipient.fromMap(doc.data() as Map<String, dynamic>))
+            .map((doc) => ChatRecipient.fromMap(doc.data()))
             .toList());
   }
+
+  // static Stream<List<ChatRecipient>> getChatRecipientsStream(String uid) {
+  //   return firestore
+  //       .collection('chat')
+  //       .doc(uid)
+  //       .collection('chat-recipients')
+  //       .snapshots()
+  //       .map((snapshot) => snapshot.docs
+  //       .map((doc) => ChatRecipient.fromMap(doc.data()))
+  //       .toList());
+  // }
 
   static Future<int> getUnreadMessageCount(
       String currentUserUid, String recipientUid) async {
@@ -173,5 +190,35 @@ class ChatDataProvider {
         .collection('chat-recipients')
         .doc(uid2)
         .update({'unreadMessageCount': i});
+  }
+
+  static void updateBothChatLists(
+      AppUser? appUser, ChatRecipient? selectedChatRecipient) {
+    ChatRecipient chatRecipient = ChatRecipient.fromAppUser(appUser!);
+
+    firestore
+        .collection('ChatLists')
+        .doc(appUser.uid)
+        .collection('CompanyChatLists')
+        .doc(selectedChatRecipient!.uid)
+        .set(selectedChatRecipient.toMap());
+
+    firestore
+        .collection('ChatLists')
+        .doc(selectedChatRecipient.uid)
+        .collection('WorkerChatLists')
+        .doc(appUser.uid)
+        .set(chatRecipient.toMap());
+  }
+
+  static Stream<List<ChatRecipient>> getWorkerChatRecipientsStream(String uid) {
+    return firestore
+        .collection('ChatLists')
+        .doc(uid)
+        .collection('WorkerChatLists')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => ChatRecipient.fromMap(doc.data()))
+            .toList());
   }
 }

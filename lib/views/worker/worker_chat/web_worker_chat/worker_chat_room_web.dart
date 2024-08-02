@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/chat_provider.dart';
+import '../../../../providers/company_chat_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../components/message_stream.dart';
 
@@ -14,7 +14,7 @@ class WorkerChatRoomWeb extends StatelessWidget {
   Widget build(BuildContext context) {
     String? currentUserId =
         Provider.of<UserProvider>(context, listen: false).appUser?.uid;
-    ChatProvider cp = Provider.of<ChatProvider>(context);
+    CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(cp.selectedChatRecipient?.displayName ?? 'Not Given'),

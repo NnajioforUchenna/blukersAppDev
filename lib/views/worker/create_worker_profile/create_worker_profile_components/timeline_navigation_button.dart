@@ -18,7 +18,7 @@ class TimelineNavigationButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () => onPress(),
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(
+        backgroundColor: WidgetStateProperty.all<Color>(
           isSelected ? Colors.deepOrangeAccent : Colors.grey,
         ),
       ),

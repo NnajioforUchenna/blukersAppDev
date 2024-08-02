@@ -98,33 +98,40 @@ class AppUser {
     if (phoneNumber != null) data['phoneNumber'] = phoneNumber;
     if (photoUrl != null) data['photoUrl'] = photoUrl;
     if (isEmailVerified != null) data['isEmailVerified'] = isEmailVerified;
-    if (registrationDetails != null)
+    if (registrationDetails != null) {
       data['registrationDetails'] = registrationDetails!.toMap();
-    if (workerResumeDetails != null)
+    }
+    if (workerResumeDetails != null) {
       data['workerResumeDetails'] = workerResumeDetails!.toMap();
+    }
     if (workerRecords != null) data['workerRecords'] = workerRecords!.toMap();
     if (company != null) data['company'] = company!.toMap();
     if (address != null) data['address'] = address!.toMap();
     if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
     if (tokens != null) data['tokens'] = tokens;
     if (userRole != null) data['userRole'] = userRole;
-    if (workerTimelineStep != null)
+    if (workerTimelineStep != null) {
       data['workerTimelineStep'] = workerTimelineStep;
-    if (companyTimelineStep != null)
+    }
+    if (companyTimelineStep != null) {
       data['companyTimelineStep'] = companyTimelineStep;
+    }
     if (createdAt != 0) data['createdAt'] = createdAt;
     if (modifiedAt != 0) data['modifiedAt'] = modifiedAt;
-    if (activeSubscription != null)
+    if (activeSubscription != null) {
       data['activeSubscription'] = activeSubscription?.toMap();
-    if (deferredSubscription != null)
+    }
+    if (deferredSubscription != null) {
       data['deferredSubscription'] = deferredSubscription?.toMap();
+    }
     data['isSubscriptionActive'] = isSubscriptionActive;
     if (listActiveOrders.isNotEmpty) {
       data['listActiveOrders'] =
           listActiveOrders.map((key, value) => MapEntry(key, value.toMap()));
     }
-    if (jobApplicationTracker != null)
+    if (jobApplicationTracker != null) {
       data['jobApplicationTracker'] = jobApplicationTracker?.toMap();
+    }
     if (userJourney != null) data['userJourney'] = userJourney?.toMap();
     data['deleteAccountReason'] = deleteAccountReason;
     data['whereYouReside'] = whereYouReside;

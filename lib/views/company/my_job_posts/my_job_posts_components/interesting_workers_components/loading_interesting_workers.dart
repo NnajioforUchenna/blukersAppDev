@@ -38,7 +38,7 @@ class LoadingInterestingWorkers extends StatelessWidget {
               // const CircularProgressIndicator(
               //   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               // ),
-              LoadingAnimation(),
+              const LoadingAnimation(),
               const SizedBox(height: 16.0),
               Text(
                 AppLocalizations.of(context)!.loadingSavedWorkers,

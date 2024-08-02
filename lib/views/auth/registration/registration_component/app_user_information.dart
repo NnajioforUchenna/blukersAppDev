@@ -36,8 +36,6 @@ class _AppUserInformationState extends State<AppUserInformation> {
         _phoneController.text.isNotEmpty;
   }
 
-  ScrollController scrollCtrl = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -54,7 +52,6 @@ class _AppUserInformationState extends State<AppUserInformation> {
       child: Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: SingleChildScrollView(
-          controller: scrollCtrl,
           child: ConstrainedBox(
             constraints: BoxConstraints(
                 minHeight: MediaQuery.of(context).size.height * 0.6),
@@ -261,5 +258,14 @@ class _AppUserInformationState extends State<AppUserInformation> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    descriptionController.dispose();
+    nameController.dispose();
+    lastNameController.dispose();
+    _phoneController.dispose();
+    super.dispose();
   }
 }

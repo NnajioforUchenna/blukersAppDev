@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../../../services/responsive.dart';
 import '../../../../../../../utils/styles/theme_colors.dart';
 
 class AlreadyPremiumPlus extends StatelessWidget {
@@ -8,11 +9,15 @@ class AlreadyPremiumPlus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Adjusted logic to use context if Responsive requires it
+    bool isDesktop = Responsive.isDesktop(context);
+
     return Dialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0))),
       child: IntrinsicHeight(
         child: Container(
+          width: isDesktop ? MediaQuery.of(context).size.width * 0.5 : null,
           alignment: Alignment.topCenter,
           child: Column(
             children: [

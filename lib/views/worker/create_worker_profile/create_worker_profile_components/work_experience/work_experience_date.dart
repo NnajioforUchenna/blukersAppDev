@@ -78,7 +78,7 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
+                    backgroundColor: WidgetStateProperty.all<Color>(
                       ThemeColors.blukersBlueThemeColor,
                     ),
                   ),
@@ -97,7 +97,7 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
+                    backgroundColor: WidgetStateProperty.all<Color>(
                       ThemeColors.blukersBlueThemeColor,
                     ),
                   ),
