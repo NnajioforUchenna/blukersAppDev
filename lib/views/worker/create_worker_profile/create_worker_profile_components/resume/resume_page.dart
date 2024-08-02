@@ -13,7 +13,6 @@ class ResumePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final node = FocusScope.of(context);
     final linkedInUrlController = TextEditingController();
     UserProvider up = Provider.of<UserProvider>(context);
     WorkersProvider wp = Provider.of<WorkersProvider>(context);
@@ -64,7 +63,7 @@ class ResumePage extends StatelessWidget {
                       isSelected: true,
                       onPress: () {
                         // Handle "submit" or "next" logic here
-                        up.setJobTimelineStep(2);
+                        up.setJobTimelineStep(3);
                         wp.setResume(linkedInUrlController.text);
                       },
                     ),

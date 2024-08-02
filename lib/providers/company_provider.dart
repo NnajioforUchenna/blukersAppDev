@@ -232,7 +232,7 @@ class CompanyProvider with ChangeNotifier {
     try {
       // Change the companyId in the jobPost to your companyId
       if (companyId != null) {
-        jobPost.companyId = companyId!;
+        jobPost.companyId = companyId;
       }
 
       // Add the job post to the list of job posts associated with the user's company ID

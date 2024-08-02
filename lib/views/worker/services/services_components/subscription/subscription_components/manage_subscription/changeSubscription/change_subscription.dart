@@ -26,7 +26,7 @@ class ChangeSubscription extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return UpgradeSubscriptionDialog();
+                    return const UpgradeSubscriptionDialog();
                   },
                 );
               }),
@@ -37,7 +37,7 @@ class ChangeSubscription extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return DowngradeSubscriptionDialog();
+                    return const DowngradeSubscriptionDialog();
                   },
                 );
               }),
@@ -50,7 +50,7 @@ class ChangeSubscription extends StatelessWidget {
                   barrierDismissible: false,
                   // User must tap button to close the dialog
                   builder: (BuildContext context) {
-                    return CancelSubscriptionDialog();
+                    return const CancelSubscriptionDialog();
                   },
                 );
               })

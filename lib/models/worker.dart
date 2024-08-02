@@ -28,19 +28,20 @@ class Worker {
 
   Worker({
     required this.workerId,
-    this.emails = const [],
+    List<String>? emails,
     this.phoneNumber = '',
     this.workerBriefDescription = '',
     this.profilePhotoUrl = 'https://picsum.photos/200/300',
     this.workerResumeDetails,
     this.workerRecords,
     this.workStatus = 0,
-    this.addresses = const [],
+    List<Address>? addresses,
     this.address,
     this.dateCreated = 0,
     this.createdAt = 0,
     this.modifiedAt = 0,
-  });
+  })  : emails = emails ?? [],
+        addresses = addresses ?? [];
 
   get timeAgo => getTimeAgo(dateCreated.toString());
   get location =>
@@ -113,15 +114,46 @@ class Worker {
 
   static Worker fromAppUser(AppUser appUser) {
     Worker worker = Worker(workerId: appUser.uid);
-    if (appUser.email != null) worker.emails.add(appUser.email!);
+
+    if (appUser.registrationDetails != null) {
+      worker.emails.add(appUser.registrationDetails!.email);
+      worker.phoneNumber = appUser.registrationDetails!.phoneNumber ?? '';
+      worker.workerBriefDescription =
+          appUser.registrationDetails!.shortDescription ?? '';
+    }
+
     if (appUser.phoneNumber != null) worker.phoneNumber = appUser.phoneNumber!;
     if (appUser.workerResumeDetails != null) {
       worker.workerResumeDetails = appUser.workerResumeDetails;
+      worker.profilePhotoUrl = appUser.workerResumeDetails?.profilePhotoUrl ??
+          'https://picsum.photos/200/300';
     }
     if (appUser.workerRecords != null) {
       worker.workerRecords = appUser.workerRecords;
     }
 
     return worker;
+  }
+
+  String getDisplayName() {
+    // Initialize an empty string to store the display name
+    String displayName = '';
+
+    // Append the first name if it is not null
+    if (workerResumeDetails?.firstName != null) {
+      displayName += workerResumeDetails!.firstName!;
+    }
+
+    // Append the last name if it is not null
+    if (workerResumeDetails?.lastName != null) {
+      // Add a space only if the first name is not empty
+      if (displayName.isNotEmpty) {
+        displayName += ' ';
+      }
+      displayName += workerResumeDetails!.lastName!;
+    }
+
+    // Return the constructed display name, or 'Unnamed Worker' if both are null
+    return displayName.isNotEmpty ? displayName : 'Name Not Given';
   }
 }

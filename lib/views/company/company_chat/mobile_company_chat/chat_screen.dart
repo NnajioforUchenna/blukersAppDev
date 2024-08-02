@@ -1,9 +1,7 @@
 import 'package:blukers/views/company/company_chat/mobile_company_chat/components/chat_message_bubble.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../models/company_chat_models/message_model.dart';
-import '../../../worker/worker_chat/components/message_bubble.dart';
 
 class CompanyChatScreen extends StatefulWidget {
   const CompanyChatScreen({super.key});
@@ -52,7 +50,7 @@ class _CompanyChatScreenState extends State<CompanyChatScreen> {
                 itemBuilder: (context, index) {
                   final message = messages[index];
                   // Assume currentUserId is the ID of the logged-in user
-                  final bool isMe = true;
+                  const bool isMe = true;
 
                   return ChatMessageBubble(
 

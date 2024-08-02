@@ -286,16 +286,28 @@ class WorkerDataProvider {
     List<Worker> workers = [];
 
     await db.collection(workersCollections).get().then((querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      for (var doc in querySnapshot.docs) {
+        Map<String, dynamic> data = doc.data();
         if (data['workerId'] != null) {
           Worker? worker = Worker.fromMap(data);
           if (worker != null) {
             workers.add(worker);
           }
         }
-      });
+      }
     });
+
+    // Sorting the workers list
+    workers.sort((a, b) {
+      // Handle dateCreated being 0 by considering 0 dates as "less recent"
+      if (a.dateCreated == 0 && b.dateCreated == 0) return 0;
+      if (a.dateCreated == 0) return 1;
+      if (b.dateCreated == 0) return -1;
+
+      // Both dates are non-zero, sort in descending order
+      return b.dateCreated.compareTo(a.dateCreated);
+    });
+
     return workers;
   }
 }

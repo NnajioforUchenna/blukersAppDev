@@ -9,10 +9,10 @@ Widget showSearchButton({
     padding: const EdgeInsets.symmetric(vertical: 5.0),
     child: ElevatedButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
-        padding: MaterialStateProperty.all<EdgeInsets>(
+        backgroundColor: WidgetStateProperty.all<Color>(Colors.orange),
+        padding: WidgetStateProperty.all<EdgeInsets>(
             const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),
           ),

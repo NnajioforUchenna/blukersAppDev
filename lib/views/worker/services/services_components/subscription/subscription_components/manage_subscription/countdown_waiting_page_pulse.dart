@@ -18,7 +18,7 @@ class _CountDownState extends State<CountDown> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: LoadingAnimation(
         // text: widget.platform,
         // text: AppLocalizations.of(context)!.connecting + '...',

@@ -16,7 +16,6 @@ class WorkExperiencePage extends StatefulWidget {
 
 class _WorkExperiencePageState extends State<WorkExperiencePage> {
   List<WorkExperienceForm> workExperienceForms = [];
-  ScrollController scrollCtrl = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,6 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
           ? MediaQuery.of(context).size.width * 0.3
           : MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
-        controller: scrollCtrl,
         child: Column(
           children: [
             ...workExperienceForms,

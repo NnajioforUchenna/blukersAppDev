@@ -1,4 +1,6 @@
+import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
+import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
 import 'package:blukers/views/worker/workers_path/moblie_worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
@@ -10,9 +12,9 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
-import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
+import '../views/company/company_chat/mobile_company_chat/components/company_chat_room.dart';
 import '../views/company/company_messages/company_messages.dart';
 import '../views/company/company_offers/company_offers.dart';
 import '../views/company/company_page_template/company_page_template.dart';
@@ -22,6 +24,8 @@ import '../views/company/display_workers/display_workers.dart';
 import '../views/company/my_job_posts/my_job_posts.dart';
 import '../views/company/my_job_posts/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/search_workers/search_workers_ui.dart';
+import '../views/company/search_workers/workers_search_result_page/workers_search_result_page.dart';
+import '../views/company/workers_home/worker_home_mobile/show_workers_by_preferences.dart';
 import '../views/company/workers_home/workers_home.dart';
 import '../views/worker/create_worker_profile/create_worker_profile.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/pdf_view_screen.dart';
@@ -41,6 +45,7 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
 import '../views/worker/worker_chat/chat_message_screen.dart';
+import '../views/worker/worker_chat/components/worker_chat_room.dart';
 import '../views/worker/worker_chat/worker_chat_platforms.dart';
 import '../views/worker/worker_page_template/worker_page_template.dart';
 import '../views/worker/worker_profile/worker_profile.dart';
@@ -116,6 +121,9 @@ final routes = [
           path: '/searchWorkers',
           builder: (context, state) => const SearchWorkersUi()),
       GoRoute(
+          path: '/workerSearchResults',
+          builder: (context, state) => const WorkerSearchResultPage()),
+      GoRoute(
           path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
       GoRoute(
           path: '/companyProfile',
@@ -129,9 +137,17 @@ final routes = [
       GoRoute(
           path: '/companyMessages',
           builder: (context, state) => const CompanyMessages()),
+
       GoRoute(
           path: '/displayWorkers',
           builder: (context, state) => const DisplayWorkers()),
+
+      GoRoute(
+          path: '/setWorkersPreferences',
+          builder: (context, state) => const SetWorkersPreferences()),
+      GoRoute(
+          path: '/showWorkersByPreferences',
+          builder: (context, state) => const ShowWorkersByPreferences()),
     ],
   ),
 
@@ -143,7 +159,13 @@ final routes = [
       path: '/company-worker_chat',
       builder: (context, state) => const CompanyChat()),
 
-  // Worker Routes
+  GoRoute(
+      path: '/workerChatRoom',
+      builder: (context, state) => const WorkerChatRoom()),
+
+  GoRoute(
+      path: '/companyChatRoom',
+      builder: (context, state) => const CompanyChatRoom()),
 
   GoRoute(
       path: '/worker_chat-message',

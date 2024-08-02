@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../../providers/chat_provider.dart';
+import '../../../providers/company_chat_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
 import '../../auth/common_widget/login_or_register.dart';
@@ -339,7 +339,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
 
   Widget buildSignoutButton(context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
+    CompanyChatProvider chatProvider =
+        Provider.of<CompanyChatProvider>(context);
     return Container(
       margin: const EdgeInsets.only(top: 40.0, bottom: 20.0),
       child: Stack(

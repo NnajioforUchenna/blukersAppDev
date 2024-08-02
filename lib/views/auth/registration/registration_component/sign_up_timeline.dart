@@ -44,7 +44,9 @@ class SignUpTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
+
     var currentStep = up.registerCurrentPageIndex;
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(currentStep * 120.0);
     });
@@ -61,6 +63,7 @@ class SignUpTimeline extends StatelessWidget {
 
     return Center(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             color: Colors.white,

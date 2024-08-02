@@ -231,7 +231,7 @@ class PaymentsProvider with ChangeNotifier {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return UpgradeSubscriptionDialog();
+          return const UpgradeSubscriptionDialog();
         },
       );
     }
@@ -295,10 +295,10 @@ class PaymentsProvider with ChangeNotifier {
     if (paymentPlatform == "Stripe") {
       await cancelSubscriptionStripe();
     } else if (paymentPlatform == "Apple") {
-      final String url = 'https://apple.co/2Th4vqI';
+      const String url = 'https://apple.co/2Th4vqI';
       launchURL(url);
     } else if (paymentPlatform == "Google") {
-      final String url = 'https://play.google.com/store/account/subscriptions';
+      const String url = 'https://play.google.com/store/account/subscriptions';
       launchURL(url);
     }
   }

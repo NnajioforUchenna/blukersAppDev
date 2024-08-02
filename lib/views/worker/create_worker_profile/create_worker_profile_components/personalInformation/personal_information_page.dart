@@ -13,7 +13,7 @@ class PersonalInformationPage extends StatefulWidget {
   const PersonalInformationPage({super.key});
 
   @override
-  _PersonalInformationPageState createState() =>
+  State<PersonalInformationPage> createState() =>
       _PersonalInformationPageState();
 }
 
@@ -24,7 +24,6 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
   TextEditingController birthDayController = TextEditingController();
   TextEditingController birthMonthController = TextEditingController();
   TextEditingController birthYearController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isFormComplete() {
     return firstNameController.text.isNotEmpty &&
@@ -33,8 +32,6 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
         birthMonthController.text.isNotEmpty &&
         birthYearController.text.isNotEmpty;
   }
-
-  ScrollController scrollCtrl = ScrollController();
 
   @override
   void initState() {
@@ -66,244 +63,248 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
             color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
-              controller: scrollCtrl,
-              child: Form(
-                key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(height: 20),
-                    AuthInput(
-                      child: TextFormField(
-                        controller: firstNameController,
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        validator: (value) => value!.isEmpty
-                            ? AppLocalizations.of(context)!.required
-                            : null,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.firstName,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
-                            ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(height: 20),
+                  AuthInput(
+                    child: TextFormField(
+                      controller: firstNameController,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => node.nextFocus(),
+                      validator: (value) => value!.isEmpty
+                          ? AppLocalizations.of(context)!.required
+                          : null,
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.firstName,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
+                        fillColor: Colors.white,
+                        filled: true,
                       ),
                     ),
-                    SizedBox(height: height * 0.015),
-                    AuthInput(
-                      child: TextFormField(
-                        controller: middleNameController,
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        // validator: (value) => value!.isEmpty
-                        //     ? AppLocalizations.of(context)!.required
-                        //     : null,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.middleName,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
-                            ),
+                  ),
+                  SizedBox(height: height * 0.015),
+                  AuthInput(
+                    child: TextFormField(
+                      controller: middleNameController,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => node.nextFocus(),
+                      // validator: (value) => value!.isEmpty
+                      //     ? AppLocalizations.of(context)!.required
+                      //     : null,
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.middleName,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
+                        fillColor: Colors.white,
+                        filled: true,
                       ),
                     ),
-                    SizedBox(height: height * 0.015),
-                    AuthInput(
-                      child: TextFormField(
-                        controller: lastNameController,
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        validator: (value) => value!.isEmpty
-                            ? AppLocalizations.of(context)!.required
-                            : null,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.lastName,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
-                            ),
+                  ),
+                  SizedBox(height: height * 0.015),
+                  AuthInput(
+                    child: TextFormField(
+                      controller: lastNameController,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () => node.nextFocus(),
+                      validator: (value) => value!.isEmpty
+                          ? AppLocalizations.of(context)!.required
+                          : null,
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.lastName,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
+                        fillColor: Colors.white,
+                        filled: true,
                       ),
                     ),
-                    SizedBox(height: height * 0.05),
-                    // Add birthdate inputs (Day, Month, Year)
-                    // You can adjust these fields based on your design preferences.
-                    Text(
-                      AppLocalizations.of(context)!.birthdate,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: ThemeColors.blukersOrangeThemeColor,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25,
-                      ),
+                  ),
+                  SizedBox(height: height * 0.05),
+                  // Add birthdate inputs (Day, Month, Year)
+                  // You can adjust these fields based on your design preferences.
+                  Text(
+                    AppLocalizations.of(context)!.birthdate,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: ThemeColors.blukersOrangeThemeColor,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      height: 1.25,
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: AuthInput(
-                            child: TextFormField(
-                              controller: birthDayController,
-                              keyboardType: TextInputType.number,
-                              textInputAction: TextInputAction.next,
-                              onEditingComplete: () => node.nextFocus(),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return AppLocalizations.of(context)!.required;
-                                }
-                                final int? day = int.tryParse(value);
-                                if (day == null || day < 1 || day > 31) {
-                                  return "Enter a valid day (1-31)";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context)!.day,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: const BorderSide(
-                                    width: 0,
-                                    style: BorderStyle.none,
-                                  ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AuthInput(
+                          child: TextFormField(
+                            controller: birthDayController,
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => node.nextFocus(),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return AppLocalizations.of(context)!.required;
+                              }
+                              final int? day = int.tryParse(value);
+                              if (day == null || day < 1 || day > 31) {
+                                return "Enter a valid day (1-31)";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.day,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
                                 ),
-                                fillColor: Colors.white,
-                                filled: true,
                               ),
+                              fillColor: Colors.white,
+                              filled: true,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 4),
-                        Expanded(
-                          child: AuthInput(
-                            child: TextFormField(
-                              controller: birthMonthController,
-                              keyboardType: TextInputType.number,
-                              textInputAction: TextInputAction.next,
-                              onEditingComplete: () => node.nextFocus(),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return AppLocalizations.of(context)!.required;
-                                }
-                                final int? month = int.tryParse(value);
-                                if (month == null || month < 1 || month > 12) {
-                                  return "Enter a valid month (1-12)";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context)!.month,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: const BorderSide(
-                                    width: 0,
-                                    style: BorderStyle.none,
-                                  ),
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: AuthInput(
+                          child: TextFormField(
+                            controller: birthMonthController,
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => node.nextFocus(),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return AppLocalizations.of(context)!.required;
+                              }
+                              final int? month = int.tryParse(value);
+                              if (month == null || month < 1 || month > 12) {
+                                return "Enter a valid month (1-12)";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.month,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
                                 ),
-                                fillColor: Colors.white,
-                                filled: true,
                               ),
+                              fillColor: Colors.white,
+                              filled: true,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 4),
-                        Expanded(
-                          child: AuthInput(
-                            child: TextFormField(
-                              controller: birthYearController,
-                              keyboardType: TextInputType.number,
-                              textInputAction: TextInputAction.next,
-                              onEditingComplete: () => node.nextFocus(),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return AppLocalizations.of(context)!.required;
-                                }
-                                final int currentYear = DateTime.now().year;
-                                final int? year = int.tryParse(value);
-                                if (year == null ||
-                                    year < 1900 ||
-                                    year > currentYear) {
-                                  return "Enter a valid year (1900-$currentYear)";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context)!.year,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: const BorderSide(
-                                    width: 0,
-                                    style: BorderStyle.none,
-                                  ),
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: AuthInput(
+                          child: TextFormField(
+                            controller: birthYearController,
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => node.nextFocus(),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return AppLocalizations.of(context)!.required;
+                              }
+                              final int currentYear = DateTime.now().year;
+                              final int? year = int.tryParse(value);
+                              if (year == null ||
+                                  year < 1900 ||
+                                  year > currentYear) {
+                                return "Enter a valid year (1900-$currentYear)";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.year,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
                                 ),
-                                fillColor: Colors.white,
-                                filled: true,
                               ),
+                              fillColor: Colors.white,
+                              filled: true,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
 
-                    const SizedBox(height: 40),
-                    SizedBox(height: height * 0.02),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TimelineNavigationButton(
-                          isSelected: true,
-                          onPress: () {
-                            wp.workerProfileBackPage();
-                          },
-                          navDirection: "back",
-                        ),
-                        TimelineNavigationButton(
-                          isSelected: isFormComplete(),
-                          onPress: () {
-                            if (_formKey.currentState!.validate() &&
-                                isFormComplete()) {
-                              wp.addPersonalInformtion(
-                                firstNameController.text,
-                                middleNameController.text,
-                                lastNameController.text,
-                                birthDayController.text,
-                                birthMonthController.text,
-                                birthYearController.text,
-                              );
-                            } else {
-                              EasyLoading.showError(
-                                  "Please fill all the fields");
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: height * .05),
-                  ],
-                ),
+                  const SizedBox(height: 40),
+                  SizedBox(height: height * 0.02),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TimelineNavigationButton(
+                        isSelected: true,
+                        onPress: () {
+                          wp.workerProfileBackPage();
+                        },
+                        navDirection: "back",
+                      ),
+                      TimelineNavigationButton(
+                        isSelected: isFormComplete(),
+                        onPress: () {
+                          if (isFormComplete()) {
+                            wp.addPersonalInformtion(
+                              firstNameController.text,
+                              middleNameController.text,
+                              lastNameController.text,
+                              birthDayController.text,
+                              birthMonthController.text,
+                              birthYearController.text,
+                            );
+                          } else {
+                            EasyLoading.showError("Please fill all the fields");
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: height * .05),
+                ],
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    middleNameController.dispose();
+    lastNameController.dispose();
+    birthDayController.dispose();
+    birthMonthController.dispose();
+    birthYearController.dispose();
+    super.dispose();
   }
 }

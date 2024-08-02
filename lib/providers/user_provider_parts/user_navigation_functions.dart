@@ -2,9 +2,9 @@ part of 'user_provider.dart';
 
 extension UserNavigationFunctions on UserProvider {
   void updateNavigationVariables() {
-    userRole = _appUser!.userRole;
-    companyTimelineStep = _appUser!.companyTimelineStep!;
-    workerTimelineStep = _appUser!.workerTimelineStep!;
+    userRole = _appUser?.userRole;
+    companyTimelineStep = _appUser?.companyTimelineStep ?? 0;
+    workerTimelineStep = _appUser?.workerTimelineStep ?? 0;
   }
 
   void setJobTimelineStep(int step) {
@@ -15,6 +15,8 @@ extension UserNavigationFunctions on UserProvider {
   void setRegisterPageIndex() {
     registerCurrentPageIndex++;
     notifyListeners();
+    pageController.nextPage(
+        duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
   }
 
   void navigate(BuildContext context, int index) {

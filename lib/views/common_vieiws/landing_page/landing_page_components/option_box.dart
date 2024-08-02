@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OptionBox extends StatefulWidget {
   final String imgSrc;
@@ -79,7 +78,7 @@ class _OptionBoxState extends State<OptionBox> {
                       ),
                       Text(
                         widget.subtitle,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,

@@ -45,7 +45,7 @@ class DesktopMembershipCard extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      WebDiagonallyCutRoundedRectangle(),
+                      const WebDiagonallyCutRoundedRectangle(),
                       Positioned(
                         right: 10, // Adjust for desired padding
                         top: 10, // Adjust for desired padding

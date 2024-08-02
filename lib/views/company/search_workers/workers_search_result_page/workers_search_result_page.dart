@@ -1,3 +1,4 @@
+import 'package:blukers/views/common_vieiws/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,11 @@ class WorkerSearchResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     WorkersProvider wp = Provider.of<WorkersProvider>(context);
     List<Worker> workers = wp.selectedWorkers;
+
+    if (workers.isEmpty) {
+      return const LoadingPage();
+    }
+
     return SingleChildScrollView(
       child: Column(
         children: [
