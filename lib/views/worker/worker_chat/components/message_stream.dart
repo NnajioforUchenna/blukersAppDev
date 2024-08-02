@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/chat_provider.dart';
+import '../../../../providers/company_chat_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import 'message_bubble.dart';
 
@@ -20,7 +20,7 @@ class MessagesStream extends StatelessWidget {
   Widget build(BuildContext context) {
     String? currentUserId =
         Provider.of<UserProvider>(context, listen: false).appUser?.uid;
-    ChatProvider cp = Provider.of<ChatProvider>(context);
+    CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
           .collection('chat')

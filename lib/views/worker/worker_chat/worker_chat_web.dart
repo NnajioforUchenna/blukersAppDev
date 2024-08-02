@@ -2,10 +2,13 @@ import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/views/worker/worker_chat/web_worker_chat/worker_chat_room_web.dart';
 import 'package:blukers/views/worker/worker_page_template/worker_page_template.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../models/chat_recipient.dart';
-import '../../../providers/chat_provider.dart';
+import '../../../providers/company_chat_provider.dart';
+import '../../common_vieiws/icon_text_404.dart';
 import 'components/chat_recipient_widget.dart';
 
 class WorkerChatWeb extends StatelessWidget {
@@ -15,18 +18,18 @@ class WorkerChatWeb extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     return StreamBuilder<List<ChatRecipient>>(
-      stream: Provider.of<ChatProvider>(context, listen: false)
+      stream: Provider.of<CompanyChatProvider>(context, listen: false)
           .getChatRecipientsStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
-        // if (!snapshot.hasData || snapshot.data!.isEmpty) {
-        //   return IconText404(
-        //     text: AppLocalizations.of(context)!.youHaveNoChats,
-        //     icon: UniconsLine.chat,
-        //   );
-        // }
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return IconText404(
+            text: AppLocalizations.of(context)!.youHaveNoChats,
+            icon: UniconsLine.chat,
+          );
+        }
         return WorkerPageTemplate(
           child: Row(
             children: [

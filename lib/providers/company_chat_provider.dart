@@ -9,7 +9,7 @@ import '../models/chat_message.dart';
 import '../models/chat_room.dart';
 import '../models/worker.dart';
 
-class ChatProvider with ChangeNotifier {
+class CompanyChatProvider with ChangeNotifier {
   AppUser? appUser;
 
   List<ChatRecipient> chatRecipients = [];
@@ -21,6 +21,8 @@ class ChatProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  //______________________________________________________
 
   Stream<List<ChatRecipient>> getChatRecipientsStream() {
     if (appUser == null) return const Stream.empty();
@@ -108,27 +110,6 @@ class ChatProvider with ChangeNotifier {
     activeRoomId = "";
   }
 
-  sendMessage(String message, String sentById, String roomId, String sentToId,
-      String sentByName) async {
-    ChatMessage chatMessage = ChatMessage(
-        message: message,
-        sentAt: DateTime.now(),
-        sentBy: sentById,
-        roomId: roomId);
-
-    await ChatDataProvider.sendMessage(
-        chatMessage: chatMessage,
-        roomId: roomId,
-        sentToId: sentToId,
-        sentByName: sentByName);
-    await ChatDataProvider.updateLastMEssage(message, roomId);
-    int index = _chatRooms.indexWhere((element) => element.id == roomId);
-
-    _chatRooms[index].lastMessage = message;
-
-    notifyListners();
-  }
-
   Stream<QuerySnapshot> getMessagesByGroupId(String groupId) {
     return ChatDataProvider.fetchMessagesByGroupId(groupId);
   }
@@ -138,6 +119,7 @@ class ChatProvider with ChangeNotifier {
     "sentToId": "<Sent To ID>",
     "roomName": "<Room Name>",
   };
+
   Future<void> startRoom(AppUser? appUser, Worker worker) async {
     String? roomId = await createChatRoom(
         myUid: appUser!.uid,
@@ -154,5 +136,59 @@ class ChatProvider with ChangeNotifier {
     chatDetails["roomName"] = worker.workerResumeDetails!.firstName! +
         worker.workerResumeDetails!.lastName!;
     notifyListeners();
+  }
+
+  //________________________________________________________________________
+
+  void companyStartChat(AppUser? appUser, Worker worker) {
+    //update selectedChatRecipient
+    selectedChatRecipient = ChatRecipient.fromWorker(worker);
+
+    //1. Create a chat room
+    //2. Add worker to the ChatRecipient list of Company
+    //3. Add Company to the ChatRecipient list of Worker
+  }
+
+  String getRoomId() {
+    String appUserId = appUser!.uid;
+    String workerId = selectedChatRecipient!.uid;
+    String roomId = appUserId.compareTo(workerId) > 0
+        ? appUserId + workerId
+        : workerId + appUserId;
+    return roomId;
+  }
+
+  getMessagesByRoomId() {
+    String roomId = getRoomId();
+    return ChatDataProvider.fetchMessagesByGroupId(roomId);
+  }
+
+  sendMessage(String message) async {
+    String sentById = appUser!.uid;
+    String roomId = getRoomId();
+    String sentToId = selectedChatRecipient!.uid;
+    String sentByName = appUser!.getDisplayName ?? "Company";
+
+    ChatMessage chatMessage = ChatMessage(
+        message: message,
+        sentAt: DateTime.now(),
+        sentBy: sentById,
+        roomId: roomId);
+
+    ChatDataProvider.sendMessage(
+        chatMessage: chatMessage,
+        roomId: roomId,
+        sentToId: sentToId,
+        sentByName: sentByName);
+
+    ChatDataProvider.updateBothChatLists(appUser, selectedChatRecipient);
+
+    await ChatDataProvider.updateLastMEssage(message, roomId);
+
+    int index = _chatRooms.indexWhere((element) => element.id == roomId);
+
+    _chatRooms[index].lastMessage = message;
+
+    notifyListners();
   }
 }

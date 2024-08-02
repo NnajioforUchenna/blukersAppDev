@@ -1,4 +1,5 @@
 import 'package:blukers/providers/message_provider.dart';
+import 'package:blukers/providers/worker_chat_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -12,7 +13,7 @@ import 'package:url_strategy/url_strategy.dart';
 import 'firebase_options.dart';
 import 'l10n/l10n.dart';
 import 'providers/app_settings_provider.dart';
-import 'providers/chat_provider.dart';
+import 'providers/company_chat_provider.dart';
 import 'providers/company_provider.dart';
 import 'providers/industry_provider.dart';
 import 'providers/job_posts_provider.dart';
@@ -20,7 +21,6 @@ import 'providers/payment_providers/payments_provider.dart';
 import 'providers/user_provider_parts/user_provider.dart';
 import 'providers/worker_provider.dart';
 import 'services/generate_route.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,9 +49,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => MessageProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => IndustriesProvider()),
-        ChangeNotifierProxyProvider<UserProvider, ChatProvider>(
-            create: (context) => ChatProvider(),
-            update: (_, user, ChatProvider? previous) =>
+        ChangeNotifierProxyProvider<UserProvider, CompanyChatProvider>(
+            create: (context) => CompanyChatProvider(),
+            update: (_, user, CompanyChatProvider? previous) =>
+                previous!..update(user.appUser)),
+        ChangeNotifierProxyProvider<UserProvider, WorkerChatProvider>(
+            create: (context) => WorkerChatProvider(),
+            update: (_, user, WorkerChatProvider? previous) =>
                 previous!..update(user.appUser)),
         ChangeNotifierProxyProvider<UserProvider, JobPostsProvider>(
             create: (context) => JobPostsProvider(),

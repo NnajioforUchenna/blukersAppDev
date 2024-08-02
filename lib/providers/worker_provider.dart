@@ -117,9 +117,6 @@ class WorkersProvider with ChangeNotifier {
     Future.delayed(const Duration(seconds: 5), () {
       EasyLoading.dismiss();
     });
-
-    print(appUser?.workerResumeDetails);
-    print('');
   }
 
   workerProfileBackPage() {
@@ -395,6 +392,7 @@ class WorkersProvider with ChangeNotifier {
 
     // Create New Worker and Add to Database
     Worker newWorker = Worker.fromAppUser(appUser!);
+
     newWorker.dateCreated = DateTime.now().millisecondsSinceEpoch;
     newWorker.createdAt = DateTime.now().millisecondsSinceEpoch;
     newWorker.modifiedAt = DateTime.now().millisecondsSinceEpoch;
@@ -402,7 +400,7 @@ class WorkersProvider with ChangeNotifier {
 
     // Update User Journey as Member
     UserJourneyDataProvider.updateMember(appUser!.uid);
-    previousParams.clear();
+    // previousParams.clear();
   }
 
   // Create Parameter to Display Lists (Applied Users)
