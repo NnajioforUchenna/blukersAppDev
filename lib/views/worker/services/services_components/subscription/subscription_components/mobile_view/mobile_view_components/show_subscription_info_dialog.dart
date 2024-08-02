@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../../../services/responsive.dart';
 import 'color_small_pop_button_widget.dart';
 import 'subscription_info_page.dart';
 
@@ -10,6 +11,10 @@ class ShowMembershipInfoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
+    // Adjusted logic to use context if Responsive requires it
+    bool isDesktop = Responsive.isDesktop(context);
+
     return Dialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -17,7 +22,7 @@ class ShowMembershipInfoDialog extends StatelessWidget {
       insetPadding:
           EdgeInsets.only(left: 16, right: 16, top: height * 0.13, bottom: 100),
       child: SizedBox(
-        width: width * 0.95,
+        width: isDesktop ? width * 0.35 : width * 0.15,
         height: height * 0.95,
         child: const Stack(
           alignment: Alignment.topCenter,

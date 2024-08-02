@@ -1,3 +1,4 @@
+import 'package:blukers/providers/message_provider.dart';
 import 'package:blukers/providers/worker_chat_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppSettingsProvider()),
+        ChangeNotifierProvider(create: (context) => MessageProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => IndustriesProvider()),
         ChangeNotifierProxyProvider<UserProvider, CompanyChatProvider>(
@@ -96,7 +98,8 @@ class MyApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 builder: (context, widget) {
-                  return EasyLoading.init()(context, widget);
+                  return
+                    EasyLoading.init()(context, widget);
                 },
                 theme: ThemeData(
                   primarySwatch: Colors.blue,

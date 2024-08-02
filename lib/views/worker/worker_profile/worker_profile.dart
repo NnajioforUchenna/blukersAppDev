@@ -38,31 +38,54 @@ class _WorkerProfileState extends State<WorkerProfile> {
       avp.checkForUpdate(context);
     }
 
-    return up.appUser == null
+     return up.appUser == null
         ? const LoginOrRegister()
-        : const SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ProfileRowOne(),
-                ProfileRowTwo(),
-                ProfileRowThree(),
-                ProfileRowFour(),
-                SizedBox(height: 10),
-                ProfileRowFive(),
-                SizedBox(height: 10),
-                ProfileRowSix(),
-                SizedBox(height: 10),
-                ProfileRowSeven(),
-                SizedBox(height: 10),
-                ProfileRowEight(),
-                SizedBox(height: 10),
-                ProfileRowNine(),
-                SizedBox(height: 20),
-                AppVersionDisplay(),
-                SizedBox(height: 20),
-              ],
-            ),
+        : LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (constraints.maxWidth >= 600)
+                      Container(
+                        margin: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Image.asset(
+                            '../../../assets/images/desktopprofilepic.png', 
+                            width: 900,
+                            height: 1000, 
+                          ),
+                        ),
+                      ),
+                    // Profile content on the right
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ProfileRowOne(),
+                          ProfileRowTwo(),
+                          ProfileRowThree(),
+                          ProfileRowFour(),
+                          SizedBox(height: 10),
+                          ProfileRowFive(),
+                          SizedBox(height: 10),
+                          ProfileRowSix(),
+                          SizedBox(height: 10),
+                          ProfileRowSeven(),
+                          SizedBox(height: 10),
+                          ProfileRowEight(),
+                          SizedBox(height: 10),
+                          ProfileRowNine(),
+                          SizedBox(height: 20),
+                          AppVersionDisplay(),
+                          SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           );
   }
 }

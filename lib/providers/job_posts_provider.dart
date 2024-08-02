@@ -1,3 +1,4 @@
+import 'package:blukers/data_providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
@@ -263,6 +264,8 @@ class JobPostsProvider with ChangeNotifier {
     if (jobPost != null) {
       jobPost.dateCreated = DateTime.now().millisecondsSinceEpoch;
       await JobPostsDataProvider.createJobPost(jobPost);
+      UserDataProvider.createjobTimelineStep(appUser!.uid, 5);
+      
       notifyListeners();
       // in 20 seconds reset the Used Paramters
       print('Job Post Created Successfully');
