@@ -13,8 +13,7 @@ class YourCompanyLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CompanyProvider cp = Provider.of<CompanyProvider>(context);
-    String? logoUrl = cp.appUser
-        ?.photoUrl; // Change to the appropriate property for the company logo URL
+    String? logoUrl = cp.createCompanyProfileData['logoUrl'];
     return Card(
       elevation: 1.0,
       shape: RoundedRectangleBorder(

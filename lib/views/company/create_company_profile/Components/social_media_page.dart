@@ -12,7 +12,7 @@ class SocialMediaPage extends StatefulWidget {
   const SocialMediaPage({super.key});
 
   @override
-  _SocialMediaPageState createState() => _SocialMediaPageState();
+  State<SocialMediaPage> createState() => _SocialMediaPageState();
 }
 
 class _SocialMediaPageState extends State<SocialMediaPage> {
@@ -184,35 +184,6 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
                         ],
                       ),
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //     InkWell(
-                    //       onTap: removeLastSocialMediaField,
-                    //       child: Text(
-                    //         AppLocalizations.of(context)!.removeLast,
-                    //         style: const TextStyle(
-                    //           color: Colors.red,
-                    //           fontSize: 20,
-                    //           fontWeight: FontWeight.bold,
-                    //           fontFamily: "Montserrat",
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     InkWell(
-                    //       onTap: addSocialMediaField,
-                    //       child: Text(
-                    //         AppLocalizations.of(context)!.addMore,
-                    //         style: const TextStyle(
-                    //           color: Colors.blueAccent,
-                    //           fontSize: 20,
-                    //           fontWeight: FontWeight.bold,
-                    //           fontFamily: "Montserrat",
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     InkWell(
                       onTap: removeLastSocialMediaField,
                       child: Row(
@@ -286,36 +257,6 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
                             }
                           },
                         ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     cp.companyProfileBackPage();
-                        //   },
-                        //   child: const Text("Previous"),
-                        //   style: ButtonStyle(
-                        //     backgroundColor: MaterialStateProperty.all<Color>(
-                        //         ThemeColors.secondaryThemeColor),
-                        //   ),
-                        // ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     if (_formKey.currentState!.validate()) {
-                        //       // All text fields are filled. You can navigate to the next page or perform your action here
-                        //       cp.addSocialMediaInfo(
-                        //         websiteController.text,
-                        //         platformControllers,
-                        //         linkControllers,
-                        //       );
-                        //     } else {
-                        //       // Validation error
-                        //       EasyLoading.showToast("Please fill all fields");
-                        //     }
-                        //   },
-                        //   style: ButtonStyle(
-                        //     backgroundColor: MaterialStateProperty.all<Color>(
-                        //         ThemeColors.secondaryThemeColor),
-                        //   ),
-                        //   child: const Text("Next"),
-                        // ),
                       ],
                     ),
                     SizedBox(height: height * .05),

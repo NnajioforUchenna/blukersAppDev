@@ -16,19 +16,7 @@ class CreateJobPost extends StatelessWidget {
       body: Column(
         children: [
           JobPostTimeline(),
-          Expanded(
-            child: CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      const JobPostPageSlider(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const Expanded(child: JobPostPageSlider()),
         ],
       ),
     );

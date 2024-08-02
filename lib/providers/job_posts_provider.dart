@@ -14,8 +14,6 @@ import '../views/worker/jobs_home/Components/display_selected_jobs/display_selec
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;
 
-  Map<String, dynamic> newJobPostData = {};
-
   Map<String, JobPost> searchJobs = {};
   Map<String, JobPost> recent50Jobs = {};
 
@@ -123,7 +121,9 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // Create Job Post Container
   Map<String, dynamic> previousParams = {};
+  Map<String, dynamic> newJobPostData = {};
 
   void createNewJobPost(AppUser? appUser, BuildContext context) {
     if (appUser == null) {
@@ -133,11 +133,21 @@ class JobPostsProvider with ChangeNotifier {
       newJobPostData['companyId'] = appUser.uid;
       newJobPostData['companyName'] = appUser.company?.name;
       newJobPostData['companyLogo'] = appUser.company?.logoUrl;
-      context.push('/createJobPost');
+      context.go('/createJobPost');
     }
   }
 
   void setIndustryAndJob(String industryId, String jobId) {
+    if (appUser == null || appUser!.company == null) {
+      EasyLoading.showError(
+          'You need to Create a Company Profile before a job post');
+      return;
+    } else {
+      newJobPostData['companyId'] = appUser?.uid;
+      newJobPostData['companyName'] = appUser?.company?.name;
+      newJobPostData['companyLogo'] = appUser?.company?.logoUrl;
+    }
+
     // store previous params
     previousParams['industryId'] = industryId;
     previousParams['jobId'] = jobId;
@@ -147,13 +157,25 @@ class JobPostsProvider with ChangeNotifier {
     setJobPostPageNext();
   }
 
+  PageController createJobPostPageController = PageController();
+
   void setJobPostPageNext() {
     jobPostCurrentPageIndex++;
+    createJobPostPageController.animateToPage(
+      jobPostCurrentPageIndex,
+      duration: const Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
     notifyListeners();
   }
 
   void setJobPostPagePrevious() {
     jobPostCurrentPageIndex--;
+    createJobPostPageController.animateToPage(
+      jobPostCurrentPageIndex,
+      duration: const Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
     notifyListeners();
   }
 
@@ -221,13 +243,13 @@ class JobPostsProvider with ChangeNotifier {
   }
 
   void updateUserAddress(String street, String city, String state,
-      String postalCode, String Country) {
+      String postalCode, String country) {
     Address address = Address(
         street: street,
         city: city,
         state: state,
         postalCode: postalCode,
-        country: Country);
+        country: country);
 
     newJobPostData['addresses'] = [address.toMap()];
     newJobPostData['address'] = address.toMap();
@@ -243,10 +265,12 @@ class JobPostsProvider with ChangeNotifier {
       await JobPostsDataProvider.createJobPost(jobPost);
       notifyListeners();
       // in 20 seconds reset the Used Paramters
-      Future.delayed(const Duration(seconds: 20), () {
+      print('Job Post Created Successfully');
+      Future.delayed(const Duration(seconds: 10), () {
         newJobPostData = {};
         previousParams = {};
         jobPostCurrentPageIndex = 0;
+        notifyListeners();
       });
     } else {
       // Handle the error case when jobPost is null
