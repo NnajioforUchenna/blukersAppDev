@@ -59,7 +59,7 @@ class MobileProductDetailsWidget extends StatelessWidget {
                       title.toUpperCase(),
                       style: GoogleFonts.montserrat(
                           color: Colors.grey[800],
-                          fontSize: 40.0.sp,
+                          fontSize: 40,
                           fontWeight: FontWeight.w800),
                       maxLines: 1,
                     ),
@@ -68,14 +68,14 @@ class MobileProductDetailsWidget extends StatelessWidget {
                         subtitle.toUpperCase(),
                         style: GoogleFonts.montserrat(
                           color: Colors.grey[800],
-                          fontSize: 30.0.sp,
+                          fontSize: 30,
                         ),
                       ),
                     AutoSizeText(
                       "\$$amount",
                       style: GoogleFonts.montserrat(
                           color: color,
-                          fontSize: 70.0.sp,
+                          fontSize: 70,
                           fontWeight: FontWeight.bold),
                     ),
                   ],
