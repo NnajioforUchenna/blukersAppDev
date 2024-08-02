@@ -10,7 +10,6 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
-import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
 import '../views/company/company_messages/company_messages.dart';
@@ -53,7 +52,7 @@ final goRouter = GoRouter(routes: routes, initialLocation: '/');
 final routes = [
   GoRoute(
       path: '/',
-      builder: (context, state) => const CompanyMessages()), // const LandingPage()
+      builder: (context, state) => const WorkerMessages()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),

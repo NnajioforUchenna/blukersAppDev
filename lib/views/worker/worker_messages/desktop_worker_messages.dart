@@ -1,6 +1,8 @@
+import 'package:blukers/views/worker/worker_messages/workers_message_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/messages.dart';
 import '../../../providers/message_provider.dart';
 
 class DesktopWorkerMessages extends StatefulWidget {
@@ -19,11 +21,36 @@ class _DesktopWorkerMessagesState extends State<DesktopWorkerMessages> {
     });
   }
 
+  void _replyMessage() {
+    if (_selectedMessage == null) return;
+
+    showDialog(
+      context: context,
+      builder: (context) => ReplyMessageDialog(
+        onSend: (message) {
+          Provider.of<MessageProvider>(context, listen: false).addMessage(message);
+          Navigator.of(context).pop();
+        },
+        // isReply: true,
+        replyTo: _selectedMessage!,
+      ),
+    );
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inbox'),
+        title: const Text('Inbox'),
+        actions: [
+           IconButton(
+             icon: const Icon(Icons.reply),
+              onPressed: _replyMessage,
+              tooltip: 'Reply to Message',
+            ),
+        ],
       ),
       body: Row(
         children: [
@@ -31,7 +58,7 @@ class _DesktopWorkerMessagesState extends State<DesktopWorkerMessages> {
             flex: 2,
             child: MessageList(onMessageSelected: _selectMessage),
           ),
-          VerticalDivider(thickness: 1, width: 1),
+          const VerticalDivider(thickness: 1, width: 1),
           Expanded(
             flex: 3,
             child: MessageDetails(message: _selectedMessage),
@@ -72,17 +99,17 @@ class MessageDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (message == null) {
-      return Center(child: Text('Select a message'));
+      return const Center(child: Text('Select a message'));
     }
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('From: ${message!.sender}', style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
-          Text('Sent: ${message!.timestamp}', style: TextStyle(color: Colors.grey)),
-          SizedBox(height: 20),
+          Text('From: ${message!.sender}', style: const TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 10),
+          Text('Sent: ${message!.timestamp}', style: const TextStyle(color: Colors.grey)),
+          const SizedBox(height: 20),
           Text(message!.content),
         ],
       ),
