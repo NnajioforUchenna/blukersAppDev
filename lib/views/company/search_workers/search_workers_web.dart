@@ -39,7 +39,8 @@ class _SearchWorkersUiWebState extends State<SearchWorkersUiWeb> {
     return Row(
       children: [
         Expanded(child: Container(color: const Color(0xffF16523),
-          child: Image.network('https://lh3.googleusercontent.com/proxy/WiMA2bhghqUoQxdQPXcPi-dIdydEeSmlEk7glVS3Ohh1DYTm4FULQWmmOTIvg7y1eqPix2lt0f0-iWIl5w7_JmMmVlSJmhD7av4CKm8FylgaLkZsBFnw_i4xDCg'),
+          padding: EdgeInsets.all(30),
+          child: Image.asset('images/company_search.gif')
 
         )),
         Expanded(
