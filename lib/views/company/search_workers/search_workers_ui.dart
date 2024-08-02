@@ -21,156 +21,17 @@ class SearchWorkersUi extends StatefulWidget {
 }
 
 class _SearchWorkersUiState extends State<SearchWorkersUi> {
-<<<<<<< HEAD
 
-=======
   TextEditingController nameController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   String buttonLabel = 'Search Jobs';
   String searchName = 'Position, work area or company';
   final bool _isLoading = false;
->>>>>>> d3b720476d20cbb329af8f36edf07b9bf45bdc48
 
   @override
   Widget build(BuildContext context) {
-
-<<<<<<< HEAD
-
-    return Responsive.isMobile(context) ? const SearchWorkersUiMobile() : const SearchWorkersUiWeb();
-=======
-    return Center(
-      child: Dialog(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-        ),
-        insetPadding: const EdgeInsets.all(16),
-        child: SizedBox(
-          width: width * 0.95,
-          height: height * 0.9,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Builder(
-                builder: (context) => Column(
-                  children: [
-                    SizedBox(height: height * 0.12),
-                    Card(
-                      elevation: 4.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
-                          controller: nameController,
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 10),
-                            hintText: searchName,
-                            hintStyle: GoogleFonts.montserrat(
-                              color: Colors.grey,
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            prefixIcon: const Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          onChanged: (value) {
-                            jp.nameSearch = value;
-                          },
-                        ),
-                      ),
-                    ),
-                    Card(
-                      elevation: 4.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
-                          controller: locationController,
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 10),
-                            hintText:
-                                AppLocalizations.of(context)!.cityandzipcode,
-                            hintStyle: GoogleFonts.montserrat(
-                              color: Colors.grey,
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            prefixIcon: const Icon(Icons.location_on_outlined),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          onChanged: (value) {
-                            jp.locationSearch = value;
-                          },
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: ElevatedButton(
-                        onPressed: _isLoading
-                            ? null
-                            : () async {
-                                wp.searchWorkers(
-                                  nameController.text,
-                                  locationController.text,
-                                );
-
-                                if (GoRouter.of(context).canPop()) {
-                                  GoRouter.of(context).pop();
-                                }
-
-                                context.go('/workerSearchResults');
-                              },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ThemeColors.blukersOrangeThemeColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                        ),
-                        child: Text(buttonLabel,
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                            )),
-                      ),
-                    ),
-                    SizedBox(height: height * 0.05),
-                  ],
-                ),
-              ),
-              if (_isLoading)
-                Positioned.fill(
-                  child: Container(
-                    color: Colors.black.withOpacity(0.5),
-                    child: const Center(
-                      child: MyAnimation(name: 'blukersLoadingDots'),
-                    ),
-                  ),
-                ),
-              const Positioned(
-                top: 10,
-                left: 10,
-                child: WorkerPopButtonWidget(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
->>>>>>> d3b720476d20cbb329af8f36edf07b9bf45bdc48
+    return Responsive.isMobile(context)
+        ? const SearchWorkersUiMobile()
+        : const SearchWorkersUiWeb();
   }
 }
