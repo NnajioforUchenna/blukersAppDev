@@ -17,6 +17,7 @@ class WorkerSearchResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     WorkersProvider wp = Provider.of<WorkersProvider>(context);
     List<Worker> workers = wp.selectedWorkers;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     if (workers.isEmpty) {
       return const LoadingPage();
@@ -30,7 +31,11 @@ class WorkerSearchResultPage extends StatelessWidget {
           ] else ...[
             const WorkerAllSearchBar(),
             const SizedBox(height: 10),
-            const Center(child: SelectDesktopLanguageDialog()),
+            Center(
+              child: SizedBox(
+                  width: screenWidth * 0.6,
+                  child: const SelectDesktopLanguageDialog()),
+            ),
             const SizedBox(height: 10),
             const Divider(),
           ],

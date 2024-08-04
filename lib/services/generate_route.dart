@@ -2,7 +2,6 @@ import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
 import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
-import 'package:blukers/views/worker/workers_path/moblie_worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
 import 'package:go_router/go_router.dart';
@@ -25,6 +24,8 @@ import '../views/company/my_job_posts/my_job_posts.dart';
 import '../views/company/my_job_posts/my_job_posts_components/applicants/applicants.dart';
 import '../views/company/search_workers/search_workers_ui.dart';
 import '../views/company/search_workers/workers_search_result_page/workers_search_result_page.dart';
+import '../views/company/workers_home/worker_home_desktop/set_worker_preferences_desktop.dart';
+import '../views/company/workers_home/worker_home_desktop/show_workers_by_preferences_desktop.dart';
 import '../views/company/workers_home/worker_home_mobile/show_workers_by_preferences.dart';
 import '../views/company/workers_home/workers_home.dart';
 import '../views/worker/create_worker_profile/create_worker_profile.dart';
@@ -32,7 +33,9 @@ import '../views/worker/create_worker_profile/create_worker_profile_components/p
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_additional_detail_screen.dart';
 import '../views/worker/create_worker_profile/create_worker_profile_components/resume/online_resume_screen.dart';
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/set_jobs_preferences.dart';
+import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/set_jobs_preferences_desktop.dart';
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences.dart';
+import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences_desktop.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
 import '../views/worker/search_jobs/jobs_search_result_page/job_search_result_page.dart';
@@ -86,8 +89,7 @@ final routes = [
       GoRoute(
           path: '/workerOffers',
           builder: (context, state) => const ServicesList()),
-      GoRoute(
-          path: '/pathToJob', builder: (context, state) => WorkerPath()),
+      GoRoute(path: '/pathToJob', builder: (context, state) => WorkerPath()),
       GoRoute(
           path: '/jobPreference',
           builder: (context, state) => const JobPreferncePath()),
@@ -97,6 +99,13 @@ final routes = [
       GoRoute(
         path: '/setJobsPreferences',
         builder: (context, state) => const SetJobsPreferences(),
+      ),
+      GoRoute(
+          path: '/showJobsByPreferencesDesktop',
+          builder: (context, state) => const ShowJobsByPreferencesDesktop()),
+      GoRoute(
+        path: '/setJobsPreferencesDesktop',
+        builder: (context, state) => const SetJobsPreferencesDesktop(),
       ),
       GoRoute(
           path: '/workerMessages',
@@ -133,7 +142,7 @@ final routes = [
           builder: (context, state) => const CompanyChat()),
       GoRoute(
           path: '/pathToEmployingWorker',
-          builder: (context, state) =>  CompanyPath()),
+          builder: (context, state) => CompanyPath()),
       GoRoute(
           path: '/companyMessages',
           builder: (context, state) => const CompanyMessages()),
@@ -146,8 +155,14 @@ final routes = [
           path: '/setWorkersPreferences',
           builder: (context, state) => const SetWorkersPreferences()),
       GoRoute(
+          path: '/setWorkersPreferencesDesktop',
+          builder: (context, state) => const DesktopSetWorkersPreferences()),
+      GoRoute(
           path: '/showWorkersByPreferences',
           builder: (context, state) => const ShowWorkersByPreferences()),
+      GoRoute(
+          path: '/showWorkersByPreferencesDesktop',
+          builder: (context, state) => const DesktopShowWorkersByPreferences()),
     ],
   ),
 

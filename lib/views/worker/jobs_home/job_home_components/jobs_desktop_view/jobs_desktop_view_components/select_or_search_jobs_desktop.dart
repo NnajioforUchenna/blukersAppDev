@@ -63,7 +63,8 @@ class _SelectOrSearchJobsDesktopState extends State<SelectOrSearchJobsDesktop> {
           ),
           Center(
             child: SizedBox(
-                width: screenWidth * 0.6, child: SelectDesktopLanguageDialog()),
+                width: screenWidth * 0.6,
+                child: const SelectDesktopLanguageDialog()),
           ),
           const SizedBox(
             height: 10,
