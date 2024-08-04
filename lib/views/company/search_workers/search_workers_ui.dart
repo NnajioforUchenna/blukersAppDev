@@ -21,23 +21,18 @@ class SearchWorkersUi extends StatefulWidget {
 }
 
 class _SearchWorkersUiState extends State<SearchWorkersUi> {
-<<<<<<< HEAD
-
-=======
   TextEditingController nameController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   String buttonLabel = 'Search Jobs';
   String searchName = 'Position, work area or company';
   final bool _isLoading = false;
->>>>>>> d3b720476d20cbb329af8f36edf07b9bf45bdc48
+  
 
   @override
   Widget build(BuildContext context) {
 
-<<<<<<< HEAD
-
     return Responsive.isMobile(context) ? const SearchWorkersUiMobile() : const SearchWorkersUiWeb();
-=======
+
     return Center(
       child: Dialog(
         shape: const RoundedRectangleBorder(
@@ -171,6 +166,5 @@ class _SearchWorkersUiState extends State<SearchWorkersUi> {
         ),
       ),
     );
->>>>>>> d3b720476d20cbb329af8f36edf07b9bf45bdc48
   }
 }

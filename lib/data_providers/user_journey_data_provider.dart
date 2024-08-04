@@ -48,6 +48,7 @@ class UserJourneyDataProvider {
   //   //   print('Error updating newcomer: $e');
   //   // }
   // }
+  
 
   static Future<void> updateInitiate(String uid) async {
     try {
@@ -100,6 +101,8 @@ class UserJourneyDataProvider {
       print('Error updating subscriber: $e');
     }
   }
+
+
 
   static Future<void> updateEliteClient(String uid) async {
     try {
