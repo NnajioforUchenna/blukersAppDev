@@ -1,3 +1,4 @@
+import 'package:blukers/views/worker/saved/animate_job_post_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,14 +11,51 @@ import 'display_job_card.dart';
 import 'display_job_post_dialog.dart';
 import 'no_more_jobs_found_card.dart';
 
-class BuildListViewJobs extends StatefulWidget {
+class BuildListViewJobs extends StatelessWidget {
   const BuildListViewJobs({super.key});
 
   @override
-  State<BuildListViewJobs> createState() => _BuildListViewJobsState();
+  Widget build(BuildContext context) {
+    return const ListViewBuildJobs();
+  }
 }
 
-class _BuildListViewJobsState extends State<BuildListViewJobs> {
+class BuildListViewJobsDesktop extends StatelessWidget {
+  const BuildListViewJobsDesktop({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // 1st column
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: ListViewBuildJobs(),
+          ),
+        ),
+        // 2nd column
+        Expanded(
+          flex: 2,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(child: AnimateJobPostDetails()),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ListViewBuildJobs extends StatefulWidget {
+  const ListViewBuildJobs({super.key});
+
+  @override
+  State<ListViewBuildJobs> createState() => _ListViewBuildJobsState();
+}
+
+class _ListViewBuildJobsState extends State<ListViewBuildJobs> {
   final ScrollController controller = ScrollController();
   bool isRefilling = false;
   late List<JobPost> jobPosts;
@@ -74,7 +112,6 @@ class _BuildListViewJobsState extends State<BuildListViewJobs> {
       itemBuilder: (context, index) {
         if (index < jobPosts.length) {
           JobPost jobPost = jobPosts[index];
-          // Todo Remember to remove the default values
           return DisplayJobCard(
               jobPost: jobPost,
               onTap: () {

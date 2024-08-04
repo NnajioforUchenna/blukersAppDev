@@ -11,13 +11,20 @@ class AnimateJobPostDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    return jp.selectedJobPost == null
-        ? const Center(
-            child: MyAnimation(
-            name: 'blukersLoadingDots',
-          ))
-        : JobPostDetailsWidget(
-            jobPost: jp.selectedJobPost,
-          );
+
+    if (jp.selectedJobPost != null) {
+      return JobPostDetailsWidget(
+        jobPost: jp.selectedJobPost,
+      );
+    } else if (jp.displayedJobPosts.isNotEmpty) {
+      return JobPostDetailsWidget(
+        jobPost: jp.displayedJobPosts.values.first,
+      );
+    } else {
+      return const Center(
+          child: MyAnimation(
+        name: 'blukersLoadingDots',
+      ));
+    }
   }
 }

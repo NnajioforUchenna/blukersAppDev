@@ -40,7 +40,6 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
         _countryController.text.isNotEmpty;
   }
 
-  ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -55,17 +54,6 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
       _postalCodeController.text = cp.previousParams['postalCode'] ?? '';
       _countryController.text = cp.previousParams['country'] ?? '';
       //added this listner to dismiss keyboard when scroll
-      scrollCtrl.addListener(() {
-        print('scrolling');
-      });
-      scrollCtrl.position.isScrollingNotifier.addListener(() {
-        if (!scrollCtrl.position.isScrollingNotifier.value) {
-          print('scroll is stopped');
-          FocusManager.instance.primaryFocus?.unfocus();
-        } else {
-          print('scroll is started');
-        }
-      });
     });
   }
 
@@ -86,7 +74,6 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
             color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
-              controller: scrollCtrl,
               child: Form(
                 key: _formKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,

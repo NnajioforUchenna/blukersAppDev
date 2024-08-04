@@ -22,19 +22,7 @@ class CreateCompanyProfile extends StatelessWidget {
             body: Column(
               children: [
                 CompanyTimeLine(),
-                Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverList(
-                        delegate: SliverChildListDelegate(
-                          [
-                            const CompanyPageSlider(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const Expanded(child: CompanyPageSlider()),
               ],
             ),
           );

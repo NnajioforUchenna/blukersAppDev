@@ -10,7 +10,7 @@ class QualificationAndSkillsPage extends StatefulWidget {
   const QualificationAndSkillsPage({super.key});
 
   @override
-  _QualificationAndSkillsPageState createState() =>
+  State<QualificationAndSkillsPage> createState() =>
       _QualificationAndSkillsPageState();
 }
 
@@ -30,7 +30,6 @@ class _QualificationAndSkillsPageState
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Container(

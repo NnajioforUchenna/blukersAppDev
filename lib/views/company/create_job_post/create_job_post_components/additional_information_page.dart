@@ -62,16 +62,6 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Text(
-                    //   AppLocalizations.of(context)!.jobLocation,
-                    //   textAlign: TextAlign.center,
-                    //   style: const TextStyle(
-                    //     color: Colors.deepOrangeAccent,
-                    //     fontSize: 20,
-                    //     fontWeight: FontWeight.w600,
-                    //     height: 1.25,
-                    //   ),
-                    // ),
                     const SizedBox(height: 20),
                     AddressForm(
                         streetController: _streetController,
@@ -107,37 +97,6 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
                             }
                           },
                         ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     jp.setJobPostPagePrevious();
-                        //   },
-                        //   child: const Text("Previous"),
-                        //   style: ButtonStyle(
-                        //     backgroundColor: MaterialStateProperty.all<Color>(
-                        //         ThemeColors.secondaryThemeColor),
-                        //   ),
-                        // ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     if (isFormComplete() &&
-                        //         _formKey.currentState!.validate()) {
-                        //       jp.updateUserAddress(
-                        //           _streetController.text,
-                        //           _cityController.text,
-                        //           _stateController.text,
-                        //           _postalCodeController.text,
-                        //           _countryController.text);
-                        //     } else {
-                        //       EasyLoading.showError(
-                        //           'Please fill all the fields');
-                        //     }
-                        //   },
-                        //   style: ButtonStyle(
-                        //     backgroundColor: MaterialStateProperty.all<Color>(
-                        //         ThemeColors.secondaryThemeColor),
-                        //   ),
-                        //   child: const Text("Submit"),
-                        // ),
                       ],
                     ),
                     SizedBox(height: height * .05),
