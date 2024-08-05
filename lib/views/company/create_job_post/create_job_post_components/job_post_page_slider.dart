@@ -11,52 +11,21 @@ import 'job_post_congratulation_page.dart';
 import 'qualification_and_skills_page.dart';
 
 class JobPostPageSlider extends StatefulWidget {
-  const JobPostPageSlider({
-    super.key,
-  });
+  const JobPostPageSlider({super.key});
 
   @override
-  _JobPostPageSliderState createState() => _JobPostPageSliderState();
+  State<JobPostPageSlider> createState() => _JobPostPageSliderState();
 }
 
 class _JobPostPageSliderState extends State<JobPostPageSlider> {
-  late PageController _pageController;
-  int _currentPageIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _currentPageIndex = Provider.of<JobPostsProvider>(context, listen: false)
-        .jobPostCurrentPageIndex;
-    _pageController = PageController(
-      initialPage: _currentPageIndex,
-    );
-  }
-
-  void animateToNextPage(index) {
-    if (_currentPageIndex < 5) {
-      // modified to fit the 5 steps in JobPost
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(seconds: 1),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    JobPostsProvider up = Provider.of<JobPostsProvider>(context);
-    if (_currentPageIndex != up.jobPostCurrentPageIndex) {
-      animateToNextPage(up.jobPostCurrentPageIndex);
-      _currentPageIndex = up.jobPostCurrentPageIndex;
-    }
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.7,
       child: PageView(
-        controller: _pageController,
+        controller: jp.createJobPostPageController,
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           ClassificationPage(),

@@ -19,7 +19,7 @@ class ChatRecipientWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           cp.setChatRecipient(chatRecipient!);
-          context.push('/workerChatRoom');
+          context.push('/companyChatRoomScreen');
         },
         child: Material(
           borderRadius: BorderRadius.circular(10),

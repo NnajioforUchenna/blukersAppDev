@@ -12,7 +12,7 @@ class GeneralInformationPage extends StatefulWidget {
   const GeneralInformationPage({super.key});
 
   @override
-  _GeneralInformationPageState createState() => _GeneralInformationPageState();
+  State<GeneralInformationPage> createState() => _GeneralInformationPageState();
 }
 
 class _GeneralInformationPageState extends State<GeneralInformationPage> {
@@ -27,28 +27,15 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
         shortDescriptionController.text.isNotEmpty;
   }
 
-  ScrollController scrollCtrl = ScrollController();
   @override
   void initState() {
     super.initState();
-    CompanyProvider cp = Provider.of<CompanyProvider>(context, listen: false);
-    companyNameController.text = cp.previousParams["companyName"] ?? "";
-    companySloganController.text = cp.previousParams["companySlogan"] ?? "";
-    shortDescriptionController.text =
-        cp.previousParams["shortDescription"] ?? "";
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      //added this listner to dismiss keyboard when scroll
-      scrollCtrl.addListener(() {
-        print('scrolling');
-      });
-      scrollCtrl.position.isScrollingNotifier.addListener(() {
-        if (!scrollCtrl.position.isScrollingNotifier.value) {
-          print('scroll is stopped');
-          FocusManager.instance.primaryFocus?.unfocus();
-        } else {
-          print('scroll is started');
-        }
-      });
+      CompanyProvider cp = Provider.of<CompanyProvider>(context, listen: false);
+      companyNameController.text = cp.previousParams["companyName"] ?? "";
+      companySloganController.text = cp.previousParams["companySlogan"] ?? "";
+      shortDescriptionController.text =
+          cp.previousParams["shortDescription"] ?? "";
     });
   }
 
@@ -67,7 +54,6 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
             color: Colors.white,
             padding: const EdgeInsets.all(20),
             child: SingleChildScrollView(
-              controller: scrollCtrl,
               child: Form(
                 key: _formKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,

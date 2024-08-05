@@ -13,7 +13,7 @@ class CompanyCharacteristicsPage extends StatefulWidget {
   const CompanyCharacteristicsPage({super.key});
 
   @override
-  _CompanyCharacteristicsPageState createState() =>
+  State<CompanyCharacteristicsPage> createState() =>
       _CompanyCharacteristicsPageState();
 }
 

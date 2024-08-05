@@ -51,6 +51,7 @@ class _DesktopSelectAndSearchWorkersState
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     asp = Provider.of<AppSettingsProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -58,8 +59,10 @@ class _DesktopSelectAndSearchWorkersState
           const SizedBox(
             height: 10,
           ),
-          const Center(
-            child: SelectDesktopLanguageDialog(),
+          Center(
+            child: SizedBox(
+                width: screenWidth * 0.6,
+                child: const SelectDesktopLanguageDialog()),
           ),
           const SizedBox(
             height: 10,

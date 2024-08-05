@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'data_constants.dart';
 
 class UserJourneyDataProvider {
@@ -48,7 +47,6 @@ class UserJourneyDataProvider {
       print('Error updating newcomer: $e');
     }
   }
-  
 
   static Future<void> updateInitiate(String uid) async {
     try {
