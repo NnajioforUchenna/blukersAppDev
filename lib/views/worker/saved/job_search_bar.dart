@@ -1,6 +1,10 @@
-import '../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/job_posts_provider.dart';
+import '../../../utils/styles/index.dart';
 
 class JobSearchBar extends StatefulWidget {
   const JobSearchBar({super.key});
@@ -15,6 +19,7 @@ class _JobSearchBarState extends State<JobSearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     return Container(
       color: ThemeColors.searchBarPrimaryThemeColor,
       width: double.infinity,
@@ -87,6 +92,9 @@ class _JobSearchBarState extends State<JobSearchBar> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Action for the button
+                    jp.searchJobPosts(
+                        _searchController1.text, _searchController2.text);
+                    GoRouter.of(context).pushReplacement('/jobSearchResults');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:

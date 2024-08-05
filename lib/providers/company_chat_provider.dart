@@ -24,20 +24,21 @@ class CompanyChatProvider with ChangeNotifier {
 
   //______________________________________________________
 
-
   // Fetch chat recipients from Firestore
-
 
   Future<void> fetchChatRecipients() async {
     try {
-      QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('chatRecipients').get();
-      chatRecipients = snapshot.docs.map((doc) => ChatRecipient.fromMap(doc.data() as Map<String, dynamic>)).toList();
+      QuerySnapshot snapshot =
+          await FirebaseFirestore.instance.collection('chatRecipients').get();
+      chatRecipients = snapshot.docs
+          .map((doc) =>
+              ChatRecipient.fromMap(doc.data() as Map<String, dynamic>))
+          .toList();
       notifyListeners();
     } catch (e) {
       print("Error fetching chat recipients: $e");
     }
   }
-
 
   Stream<List<ChatRecipient>> getChatRecipientsStream() {
     if (appUser == null) return const Stream.empty();
@@ -47,8 +48,8 @@ class CompanyChatProvider with ChangeNotifier {
   void setChatRecipient(ChatRecipient chatRecipient) {
     selectedChatRecipient = chatRecipient;
     selectedChatRecipient!.unreadMessageCount = 0;
-    ChatDataProvider.updateUnreadMessageCount(
-        appUser!.uid, selectedChatRecipient!.uid, 0);
+    // ChatDataProvider.updateUnreadMessageCount(
+    //     appUser!.uid, selectedChatRecipient!.uid, 0);
     notifyListeners();
   }
 

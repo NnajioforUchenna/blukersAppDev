@@ -1,11 +1,8 @@
-import 'package:blukers/views/company/company_chat/company_chat.dart';
-import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
-import 'package:blukers/views/company/company_chat/mobile_company_chat/components/chat_profile_dialogue.dart';
-import 'package:blukers/views/company/company_chat/mobile_company_chat/components/company_chat_list.dart';
 import 'package:blukers/views/company/company_chat/web_company_chat/components/chat_recipient_profile.dart';
-import 'package:blukers/views/company/company_chat/web_company_chat/components/web_chat_list.dart';
 import 'package:blukers/views/company/company_chat/web_company_chat/components/web_chat_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'components/web_chat_list.dart';
 
 class WebCompanyChat extends StatefulWidget {
   const WebCompanyChat({super.key});
@@ -18,22 +15,6 @@ class _WebCompanyChatState extends State<WebCompanyChat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: Row(
-      //     children: [
-      //       Expanded(child: Container(color: Colors.red,
-      //       child: WebCompanyChatList(),
-      //       )),
-      //       Expanded(child: Container(color: Colors.blue,
-      //       child: Column(
-      //         children: [
-      //           const WebCompanyChatRoomScreen(),
-      //         ],
-      //       ),)),
-      //       Expanded(child: Container(color: Colors.orangeAccent,)),
-      //     ],
-      //
-      // ),
-
       body: Row(
         children: [
           Expanded(
@@ -54,9 +35,7 @@ class _WebCompanyChatState extends State<WebCompanyChat> {
                   ],
                 ),
                 padding: const EdgeInsets.all(10),
-                child: const CompanyChatList(
-                    // chatRecipient: snapshot.data![index],
-                    )),
+                child: const WebCompanyChatList()),
           ),
           Expanded(
             child: Container(
