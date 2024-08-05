@@ -2,6 +2,7 @@ import 'package:blukers/models/app_user/components/preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import '../data_providers/job_posts_data_provider.dart';
 import '../data_providers/jobs_lists_data_provider.dart';
 import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
@@ -23,6 +24,38 @@ class JobsListsProvider extends ChangeNotifier {
   JobsListsProvider() {
     fillDisplayAllJobs();
   }
+
+  //____________________________________________________________________________________Saved Jobs
+  Map<String, JobPost> savedJobPosts = {};
+
+  Future<void> getSavedJobPostByIds() async {
+    // check appUser.workerRecords.savedJobPostIds
+    if (appUser?.workerRecords?.savedJobPostIds != null) {
+      List<JobPost> listJobPosts =
+          await JobPostsDataProvider.getJobPostsByCompanyIds(
+              appUser!.workerRecords!.savedJobPostIds);
+      savedJobPosts = {for (var e in listJobPosts) e.jobPostId: e};
+      notifyListeners();
+    }
+  }
+
+  //____________________________________________________________________________________End of Saved Jobs
+
+  //____________________________________________________________________________________Applied Jobs
+  Map<String, JobPost> appliedJobPosts = {};
+
+  Future<void> getAppliedJobPostByIds() async {
+    // check appUser.workerRecords.appliedJobPostIds
+    if (appUser?.workerRecords?.appliedJobPostIds != null) {
+      List<JobPost> listJobPosts =
+          await JobPostsDataProvider.getJobPostsByCompanyIds(
+              appUser!.workerRecords!.appliedJobPostIds);
+      appliedJobPosts = {for (var e in listJobPosts) e.jobPostId: e};
+      notifyListeners();
+    }
+  }
+
+  //____________________________________________________________________________________End of Applied Jobs
 
   //____________________________________________________________________________________All Jobs
   // Parameters for Displaying All Jobs
@@ -91,5 +124,6 @@ class JobsListsProvider extends ChangeNotifier {
 
   //____________________________________________________________________________________Jobs By JobId
   Map<String, JobPost> displayJobsByJobId = {};
+
   //____________________________________________________________________________________End of Jobs By JobId
 }

@@ -20,6 +20,19 @@ extension UserJobPostsFunctions on UserProvider {
         false; // Change to JobPostId
   }
 
+  void saveJobPost(JobPost jobPost) {
+    // Ensure workerRecords exist
+    appUser?.workerRecords ??= WorkerRecords();
+
+    // Update UI interFace
+    appUser?.workerRecords?.savedJobPostIds?.add(jobPost.jobPostId);
+    notifyListeners();
+    // Persist data to database
+    UserDataProvider.updateUser(appUser!);
+    UserDataProvider.updateWorkerSavedJobPostIds(
+        appUser!.workerRecords!.savedJobPostIds!, appUser!.uid);
+  }
+
   Future<void> checkAndApplyJobPost(
       BuildContext context, JobPost jobPost) async {
     if (workerTimelineStep < 3) {
@@ -37,15 +50,6 @@ extension UserJobPostsFunctions on UserProvider {
             builder: (context) => const JobPostEligibilityDialog());
       }
     }
-  }
-
-  void saveJobPost(JobPost jobPost) {
-    // Update UI interFace
-    appUser?.workerRecords?.savedJobPostIds?.add(jobPost.jobPostId);
-    notifyListeners();
-    // Persist data to database
-    UserDataProvider.updateWorkerSavedJobPostIds(
-        appUser!.workerRecords!.savedJobPostIds!, appUser!.uid);
   }
 
   bool isWorkerSaved(String workerId) {

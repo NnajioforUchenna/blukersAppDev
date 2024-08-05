@@ -1,7 +1,7 @@
-import '../../../models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/job_post.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
 import '../../old_common_views/job_timeline/display_job_timeline_dialog.dart';
@@ -23,7 +23,7 @@ class TimeAgoAndBookMarkRow extends StatelessWidget {
             ? const SizedBox()
             : IconButton(
                 onPressed: () {
-                  if (up.workerTimelineStep < 2) {
+                  if (up.workerTimelineStep < 3) {
                     showDialog(
                         context: context,
                         builder: (context) => const DisplayJobTimelineDialog());

@@ -180,10 +180,11 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
 
     // Persist data to database
-    UserDataProvider.updateWorkerAppliedJobPostIds(
-      appUser!.workerRecords!.appliedJobPostIds,
-      appUser!.uid,
-    );
+    UserDataProvider.updateUser(appUser!);
+    // UserDataProvider.updateWorkerAppliedJobPostIds(
+    //   appUser!.workerRecords!.appliedJobPostIds,
+    //   appUser!.uid,
+    // );
 
     // Update JobPost records
     JobPostsDataProvider.updateJobPostAppliedWorkerIds(
