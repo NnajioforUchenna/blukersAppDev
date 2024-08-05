@@ -1,8 +1,6 @@
-import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
 import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
-import 'package:blukers/views/worker/workers_path/moblie_worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +10,7 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
+import '../views/common_vieiws/landing_page/landing_page.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
 import '../views/company/company_chat/mobile_company_chat/components/company_chat_room.dart';
@@ -86,8 +85,7 @@ final routes = [
       GoRoute(
           path: '/workerOffers',
           builder: (context, state) => const ServicesList()),
-      GoRoute(
-          path: '/pathToJob', builder: (context, state) => WorkerPath()),
+      GoRoute(path: '/pathToJob', builder: (context, state) => WorkerPath()),
       GoRoute(
           path: '/jobPreference',
           builder: (context, state) => const JobPreferncePath()),
@@ -133,7 +131,7 @@ final routes = [
           builder: (context, state) => const CompanyChat()),
       GoRoute(
           path: '/pathToEmployingWorker',
-          builder: (context, state) =>  CompanyPath()),
+          builder: (context, state) => CompanyPath()),
       GoRoute(
           path: '/companyMessages',
           builder: (context, state) => const CompanyMessages()),

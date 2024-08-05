@@ -21,7 +21,7 @@ class WorkerPageTemplate extends StatelessWidget {
       bottomNavigationBar: Responsive.isDesktop(context)
           ? null
           : const WorkerButtomNavigationBar(),
-      body: SafeArea(child: child),
+      body: child,
     );
   }
 }

@@ -101,7 +101,6 @@ class _WorkerButtomNavigationBarState extends State<WorkerButtomNavigationBar> {
           ),
         ],
         onDestinationSelected: (int index) {
-          asp.regenerateKeys();
           up.navigateWorker(context, index);
         },
         selectedIndex: currentPageIndex,

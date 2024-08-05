@@ -265,7 +265,7 @@ class JobPostsProvider with ChangeNotifier {
       jobPost.dateCreated = DateTime.now().millisecondsSinceEpoch;
       await JobPostsDataProvider.createJobPost(jobPost);
       UserDataProvider.createjobTimelineStep(appUser!.uid, 5);
-      
+
       notifyListeners();
       // in 20 seconds reset the Used Paramters
       print('Job Post Created Successfully');
@@ -337,28 +337,28 @@ class JobPostsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // bool isWebSearching = false;
+  bool isWebSearching = false;
 
-  // Future<void> getJobsBySearchParameter(
-  //     String nameSearch, String locationSearch) async {
-  //   nameSearch = nameSearch;
-  //   locationSearch = locationSearch;
-  //   List<JobPost> searchJobPosts = await JobPostsDataProvider.searchJobPosts(
-  //       nameRelated: nameSearch,
-  //       locationRelated: locationSearch,
-  //       pageNumber: 0,
-  //       targetLanguage: language);
-  //   hasMore = searchJobPosts.isNotEmpty;
-  //   if (searchJobPosts.isEmpty) {
-  //     EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
-  //   } else {
-  //     for (var element in searchJobPosts) {
-  //       searchJobs[element.jobPostId] = element;
-  //     }
-  //     isWebSearching = true;
-  //     notifyListeners();
-  //   }
-  // }
+  Future<void> getJobsBySearchParameter(
+      String nameSearch, String locationSearch) async {
+    nameSearch = nameSearch;
+    locationSearch = locationSearch;
+    List<JobPost> searchJobPosts = await JobPostsDataProvider.searchJobPosts(
+        nameRelated: nameSearch,
+        locationRelated: locationSearch,
+        pageNumber: 0,
+        targetLanguage: language);
+    hasMore = searchJobPosts.isNotEmpty;
+    if (searchJobPosts.isEmpty) {
+      EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
+    } else {
+      for (var element in searchJobPosts) {
+        searchJobs[element.jobPostId] = element;
+      }
+      isWebSearching = true;
+      notifyListeners();
+    }
+  }
 
   void get50LastestJobPosts() async {
     // Get the 50 most recent job posts.
