@@ -102,7 +102,6 @@ class _CompanyButtomNavigationBarState
           ),
         ],
         onDestinationSelected: (int index) {
-          asp.regenerateKeys();
           up.navigateCompany(context, index);
         },
         selectedIndex: currentPageIndex,

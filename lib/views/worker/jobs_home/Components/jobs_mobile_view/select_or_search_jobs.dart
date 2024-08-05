@@ -17,35 +17,36 @@ class SelectOrSearchJobs extends StatefulWidget {
 }
 
 class _SelectOrSearchJobsState extends State<SelectOrSearchJobs> {
-  late AppSettingsProvider asp;
-
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final asp = Provider.of<AppSettingsProvider>(context, listen: false);
-      if (!asp.hasShowcased) {
-        final showcase = ShowCaseWidget.of(context);
-        showcase.startShowCase([
-          asp.signInButton,
-          asp.bottomNavigation,
-          asp.searchBar,
-          asp.selection,
-          asp.translation,
-        ]);
-        asp.setHasShowcased(true);
-      }
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        final asp = Provider.of<AppSettingsProvider>(context, listen: false);
+        if (!asp.hasShowcased) {
+          // wait 200ms to allow the page to build
+          await Future.delayed(const Duration(milliseconds: 200));
+          ShowCaseWidget.of(context).startShowCase([
+            asp.signInButton,
+            asp.bottomNavigation,
+            asp.searchBar,
+            asp.selection,
+            asp.translation,
+          ]);
+          asp.setHasShowcased(true);
+        }
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    asp = Provider.of<AppSettingsProvider>(context);
+    AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const SearchAndTranslateRow(),
         Expanded(
