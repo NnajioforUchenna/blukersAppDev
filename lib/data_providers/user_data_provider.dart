@@ -249,7 +249,7 @@ class UserDataProvider {
         firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
       'workerTimelineStep': 4,
-      'worker.appliedJobPostIds': list,
+      'worker.workerRecords.appliedJobPostIds': list,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
@@ -259,7 +259,7 @@ class UserDataProvider {
     CollectionReference appUserCollection =
         firestore.collection(appUserCollections);
     appUserCollection.doc(uid).update({
-      'worker.savedJobPostIds': list,
+      'worker.workerRecords.savedJobPostIds': list,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });

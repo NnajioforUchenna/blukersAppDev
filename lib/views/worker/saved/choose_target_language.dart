@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import '../../../providers/job_posts_provider.dart';
-import '../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/job_posts_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
+import '../../../utils/styles/index.dart';
 
 class LanguageManager {
   static Locale? _currentLocale;
@@ -74,6 +74,7 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: DropdownButton<String>(
+        isExpanded: true,
         hint: Text(
           AppLocalizations.of(context)?.language ?? "",
           style: TextStyle(
@@ -114,7 +115,6 @@ class _ChooseTargetLanguageState extends State<ChooseTargetLanguage> {
             ),
           );
         }).toList(),
-        isExpanded: false,
         underline: const SizedBox(),
         icon: Icon(
           Icons.language,

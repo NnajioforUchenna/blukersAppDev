@@ -23,7 +23,6 @@ class LandingPage extends StatelessWidget {
           children: [
             SizedBox(height: 0.15.sh),
             SizedBox(
-              // height: 0.4.sh, // Responsive height
               width: 0.6.sw,
               child: Image.asset(
                 'assets/images/blukers_logo.png',

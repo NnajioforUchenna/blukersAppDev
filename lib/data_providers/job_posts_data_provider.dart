@@ -66,13 +66,15 @@ class JobPostsDataProvider {
   static Future<List<String>> getSavedJobPostIds(String uid) async {
     DocumentSnapshot userDoc =
         await db.collection(appUserCollections).doc(uid).get();
-    return List<String>.from(userDoc['worker.savedJobPostIds'] ?? []);
+    return List<String>.from(
+        userDoc['worker.workerRecords.savedJobPostIds'] ?? []);
   }
 
   static Future<List<String>> getAppliedJobPostIds(String uid) async {
     DocumentSnapshot userDoc =
         await db.collection(appUserCollections).doc(uid).get();
-    return List<String>.from(userDoc['worker.appliedJobPostIds'] ?? []);
+    return List<String>.from(
+        userDoc['worker.workerRecords.appliedJobPostIds'] ?? []);
   }
 
   static Future<List<JobPost>> getJobPostsByCompanyIds(
@@ -199,23 +201,6 @@ class JobPostsDataProvider {
     }
 
     return translatedJobPosts;
-  }
-
-  static Future<List<Map<String, dynamic>>> getRecentJobPosts2() async {
-    // Create a reference to the Firestore collection
-    CollectionReference jobPosts = db.collection("ScrappedJobs");
-
-    // Query the collection: Order by dateCreated descending and limit to 50
-    QuerySnapshot querySnapshot =
-        await jobPosts.orderBy('dateCreated', descending: true).limit(50).get();
-
-    // Convert the documents to a list of maps, adding the document ID
-    return querySnapshot.docs
-        .map((doc) => {
-              'id': doc.id, // Add the document ID
-              ...doc.data() as Map<String, dynamic>,
-            })
-        .toList();
   }
 
   static Future<List<Map<String, dynamic>>> getAiJobPosts({

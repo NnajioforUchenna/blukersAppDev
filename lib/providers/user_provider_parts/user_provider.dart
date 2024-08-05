@@ -24,6 +24,7 @@ import '../../data_providers/app_user_stream_service.dart';
 import '../../data_providers/job_posts_data_provider.dart';
 import '../../data_providers/worker_data_provider.dart';
 import '../../models/app_user/app_user.dart';
+import '../../models/app_user/components/worker_records.dart';
 import '../../models/company.dart';
 import '../../models/reference_form.dart';
 import '../../models/work_experience.dart';
@@ -169,16 +170,27 @@ class UserProvider with ChangeNotifier {
   }
 
   void applyForJobPost(JobPost jobPost) {
-    // print(jobPost.toString());
-    // Update UI interFace
-    appUser?.workerRecords?.appliedJobPostIds?.add(jobPost.jobPostId);
+    // Ensure workerRecords exist
+    appUser?.workerRecords ??= WorkerRecords();
+
+    // Add job post ID to appliedJobPostIds
+    appUser!.workerRecords?.appliedJobPostIds.add(jobPost.jobPostId);
+
+    // Update UI interface
     notifyListeners();
+
     // Persist data to database
-    UserDataProvider.updateWorkerAppliedJobPostIds(
-        appUser!.workerRecords!.appliedJobPostIds!, appUser!.uid);
-    // update JobPost Records
+    UserDataProvider.updateUser(appUser!);
+    // UserDataProvider.updateWorkerAppliedJobPostIds(
+    //   appUser!.workerRecords!.appliedJobPostIds,
+    //   appUser!.uid,
+    // );
+
+    // Update JobPost records
     JobPostsDataProvider.updateJobPostAppliedWorkerIds(
-        jobPost.jobPostId, appUser!.uid);
+      jobPost.jobPostId,
+      appUser!.uid,
+    );
   }
 
   String whichMembership() {
@@ -392,5 +404,9 @@ class UserProvider with ChangeNotifier {
       }
       UserDataProvider.updateUser(appUser!);
     }
+  }
+
+  isUserCompanyProfile() {
+    return appUser!.company != null;
   }
 }

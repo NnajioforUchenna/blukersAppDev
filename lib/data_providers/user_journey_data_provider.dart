@@ -47,7 +47,6 @@ class UserJourneyDataProvider {
       print('Error updating newcomer: $e');
     }
   }
-
   static Future<void> updateInitiate(String uid) async {
     try {
       final response = await http.post(

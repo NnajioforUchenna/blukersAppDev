@@ -2,6 +2,7 @@ import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
 import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
 import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
+import 'package:blukers/views/worker/worker_chat/worker_chat.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
 import 'package:blukers/views/worker/workers_path/worker_paths_components/worker_job_preference_path.dart';
@@ -12,11 +13,11 @@ import '../providers/payment_providers/payments_provider.dart';
 import '../views/auth/login/login.dart';
 import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
-import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
 import '../views/company/company_messages/company_messages.dart';
 import '../views/company/company_offers/company_offers.dart';
 import '../views/company/company_page_template/company_page_template.dart';
+import '../views/company/company_profile/company_profile.dart';
 import '../views/company/create_company_profile/create_company_profile.dart';
 import '../views/company/create_job_post/create_job_post.dart';
 import '../views/company/display_workers/display_workers.dart';
@@ -47,9 +48,7 @@ import '../views/worker/services/services_components/subscription/subscription_c
 import '../views/worker/services/services_components/subscription/subscription_components/manage_subscription/payment_successful_widget.dart';
 import '../views/worker/services/services_components/subscription/subscription_components/show_subscription_dialog.dart';
 import '../views/worker/services/services_list.dart';
-import '../views/worker/worker_chat/chat_message_screen.dart';
-import '../views/worker/worker_chat/components/worker_chat_room.dart';
-import '../views/worker/worker_chat/worker_chat_platforms.dart';
+import '../views/worker/worker_chat/mobile_worker_chat/chat_screen.dart';
 import '../views/worker/worker_page_template/worker_page_template.dart';
 import '../views/worker/worker_profile/worker_profile.dart';
 import 'authentication_wrapper.dart';
@@ -78,7 +77,7 @@ final routes = [
           builder: (context, state) => const SearchJobsUi()),
       GoRoute(
           path: '/workerChat',
-          builder: (context, state) => const WorkerChatPlatforms()),
+          builder: (context, state) => const WorkerChat()),
       GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),
       GoRoute(
           path: '/jobSearchResults',
@@ -133,6 +132,9 @@ final routes = [
           path: '/workerSearchResults',
           builder: (context, state) => const WorkerSearchResultPage()),
       GoRoute(
+          path: '/workerChatRoomScreen',
+          builder: (context, state) => const WorkerChatRoomScreen()),
+      GoRoute(
           path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
       GoRoute(
           path: '/companyProfile',
@@ -174,17 +176,17 @@ final routes = [
       path: '/company-worker_chat',
       builder: (context, state) => const CompanyChat()),
 
-  GoRoute(
-      path: '/workerChatRoom',
-      builder: (context, state) => const WorkerChatRoom()),
+  // GoRoute(
+  //     path: '/workerChatRoom',
+  //     builder: (context, state) => const WorkerChatRoom()),
 
   GoRoute(
       path: '/companyChatRoomScreen',
       builder: (context, state) => const CompanyChatRoomScreen()),
 
-  GoRoute(
-      path: '/worker_chat-message',
-      builder: (context, state) => const ChatMessageScreen()),
+  // GoRoute(
+  //     path: '/worker_chat-message',
+  //     builder: (context, state) => const ChatMessageScreen()),
 
   // Profile Routes
   GoRoute(

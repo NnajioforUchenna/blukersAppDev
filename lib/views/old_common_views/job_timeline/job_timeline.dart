@@ -57,10 +57,10 @@ class JobTimeline extends StatelessWidget {
                 description =
                     AppLocalizations.of(context)!.workerJourneyStep1Text;
               }
-              if (index == 1) {
-                title = AppLocalizations.of(context)!.workerJourneyStep2Title;
+              if (index != 0) {
+                title = AppLocalizations.of(context)!.workerJourneyStep3Title;
                 description =
-                    AppLocalizations.of(context)!.workerJourneyStep2Text;
+                    AppLocalizations.of(context)!.workerJourneyStep3Text;
               }
               final record = jobRecords[index];
               return MyJobTimeLine(
@@ -83,7 +83,7 @@ class JobTimeline extends StatelessWidget {
                 context.go('/register');
               },
             ),
-          if (currentStep == 1)
+          if (currentStep != 0)
             buildButton(
               width,
               currentStep,

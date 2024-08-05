@@ -60,9 +60,9 @@ class WorkerTimeline extends StatelessWidget {
                     AppLocalizations.of(context)!.companyJourneyStep1Text;
               }
               if (index == 1) {
-                title = AppLocalizations.of(context)!.companyJourneyStep2Title;
+                title = AppLocalizations.of(context)!.companyJourneyStep4Title;
                 description =
-                    AppLocalizations.of(context)!.companyJourneyStep2Text;
+                    AppLocalizations.of(context)!.companyJourneyStep4Text;
               }
               // if (index == 2) {
               //   title = AppLocalizations.of(context)!.companyJourneyStep3Title;

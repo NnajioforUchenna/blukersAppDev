@@ -37,7 +37,8 @@ class JobApplicationTracker {
 
     switch (subscriptionType.toLowerCase()) {
       case 'basic':
-        return numberOfAppliedJobsToday < 2;
+        return numberOfAppliedJobsToday <
+            20; // TODO: Remember to change this to 2
       case 'blukers_workers_premium':
         return numberOfAppliedJobsToday < 10;
       case 'blukers_workers_premium_plus':

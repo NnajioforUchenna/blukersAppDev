@@ -24,6 +24,7 @@ class SearchAndTranslateRow extends StatelessWidget {
         ),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Showcase(
               key: asp.searchBar,
@@ -43,7 +44,7 @@ class SearchAndTranslateRow extends StatelessWidget {
               overlayOpacity: 0.6,
               targetShapeBorder: const CircleBorder(),
               targetBorderRadius: const BorderRadius.all(
-                Radius.circular(10.0), // Example border radius
+                Radius.circular(10.0),
               ),
               tooltipBackgroundColor: ThemeColors.primaryThemeColor,
               descTextStyle: const TextStyle(

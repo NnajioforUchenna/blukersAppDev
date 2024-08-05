@@ -112,12 +112,4 @@ class AppSettingsProvider with ChangeNotifier {
     prefs?.setBool('showcaseShown', bool);
     notifyListeners();
   }
-
-  void regenerateKeys() {
-    searchBar = GlobalKey();
-    translation = GlobalKey();
-    selection = GlobalKey();
-    signInButton = GlobalKey();
-    bottomNavigation = GlobalKey();
-  }
 }

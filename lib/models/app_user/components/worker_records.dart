@@ -1,17 +1,21 @@
 class WorkerRecords {
-  List<String>? savedJobPostIds;
-  List<String>? appliedJobPostIds;
-  List<String>? workerBadgeIds;
-  List<String>? workerVerificationsIds;
-  List<String>? activeMemberships;
+  List<String> savedJobPostIds;
+  List<String> appliedJobPostIds;
+  List<String> workerBadgeIds;
+  List<String> workerVerificationsIds;
+  List<String> activeMemberships;
 
   WorkerRecords({
-    this.savedJobPostIds,
-    this.appliedJobPostIds,
-    this.workerBadgeIds,
-    this.workerVerificationsIds,
-    this.activeMemberships,
-  });
+    List<String>? savedJobPostIds,
+    List<String>? appliedJobPostIds,
+    List<String>? workerBadgeIds,
+    List<String>? workerVerificationsIds,
+    List<String>? activeMemberships,
+  })  : savedJobPostIds = savedJobPostIds ?? [],
+        appliedJobPostIds = appliedJobPostIds ?? [],
+        workerBadgeIds = workerBadgeIds ?? [],
+        workerVerificationsIds = workerVerificationsIds ?? [],
+        activeMemberships = activeMemberships ?? [];
 
   Map<String, dynamic> toMap() {
     return {
