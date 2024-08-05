@@ -1,4 +1,5 @@
 import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
+import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
 import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
@@ -14,7 +15,6 @@ import '../views/auth/registration/registration.dart';
 import '../views/auth/reset_password.dart';
 import '../views/company/comapny_profile/company_profile.dart';
 import '../views/company/company_chat/company_chat.dart';
-import '../views/company/company_chat/mobile_company_chat/components/company_chat_room.dart';
 import '../views/company/company_messages/company_messages.dart';
 import '../views/company/company_offers/company_offers.dart';
 import '../views/company/company_page_template/company_page_template.dart';
@@ -164,8 +164,8 @@ final routes = [
       builder: (context, state) => const WorkerChatRoom()),
 
   GoRoute(
-      path: '/companyChatRoom',
-      builder: (context, state) => const CompanyChatRoom()),
+      path: '/companyChatRoomScreen',
+      builder: (context, state) => const CompanyChatRoomScreen()),
 
   GoRoute(
       path: '/worker_chat-message',

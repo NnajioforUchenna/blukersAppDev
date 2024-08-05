@@ -2,7 +2,6 @@ import 'package:blukers/views/worker/worker_chat/web_worker_chat/worker_chat_roo
 import 'package:blukers/views/worker/worker_page_template/worker_page_template.dart';
 import 'package:flutter/material.dart';
 
-import 'components/chat_recipient_details.dart';
 import 'components/chat_recipient_widget.dart';
 
 class DummyWorkerChatWeb extends StatelessWidget {
@@ -80,7 +79,7 @@ class DummyWorkerChatWeb extends StatelessWidget {
                 ],
               ),
               padding: const EdgeInsets.all(10),
-              child: const ChatRecipientDetails(),
+              // child: const ChatRecipientDetails(),
             ),
           ),
         ],
