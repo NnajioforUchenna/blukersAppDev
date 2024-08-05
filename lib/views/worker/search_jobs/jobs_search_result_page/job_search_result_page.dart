@@ -16,6 +16,7 @@ class JobSearchResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     List<JobPost> jobPosts = jp.displayedJobPosts.values.toList();
+    final screenWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -24,7 +25,11 @@ class JobSearchResultPage extends StatelessWidget {
           ] else ...[
             const JobAllSearchBar(),
             const SizedBox(height: 10),
-            const Center(child: SelectDesktopLanguageDialog()),
+            Center(
+              child: SizedBox(
+                  width: screenWidth * 0.6,
+                  child: const SelectDesktopLanguageDialog()),
+            ),
             const SizedBox(height: 10),
             const Divider(),
           ],

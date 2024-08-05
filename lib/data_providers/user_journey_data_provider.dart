@@ -100,6 +100,8 @@ class UserJourneyDataProvider {
     }
   }
 
+
+
   static Future<void> updateEliteClient(String uid) async {
     try {
       final response = await http.post(

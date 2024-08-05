@@ -1,22 +1,23 @@
+import 'package:blukers/models/chat_message.dart';
 import 'package:blukers/providers/company_chat_provider.dart';
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
+import 'package:blukers/views/company/workers_home/workers_components/chat_component.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../models/chat_message.dart';
-import '../../../common_vieiws/loading_page.dart';
-import '../../workers_home/workers_components/chat_component.dart';
-import 'components/chat_profile_dialogue.dart';
+import '../../../../common_vieiws/loading_page.dart';
+import '../../mobile_company_chat/components/chat_profile_dialogue.dart';
 
-class CompanyChatRoomScreen extends StatefulWidget {
-  const CompanyChatRoomScreen({super.key});
+
+class WebCompanyChatRoomScreen extends StatefulWidget {
+  const WebCompanyChatRoomScreen({super.key});
 
   @override
-  State<CompanyChatRoomScreen> createState() => _CompanyChatRoomScreenState();
+  State<WebCompanyChatRoomScreen> createState() => _WebCompanyChatRoomScreenState();
 }
 
-class _CompanyChatRoomScreenState extends State<CompanyChatRoomScreen> {
+class _WebCompanyChatRoomScreenState extends State<WebCompanyChatRoomScreen> {
   String textMessage = "";
   int messagesLength = 0;
   final ScrollController _scrollController = ScrollController();
@@ -36,28 +37,10 @@ class _CompanyChatRoomScreenState extends State<CompanyChatRoomScreen> {
     }
 
     if (cp.selectedChatRecipient == null) {
-      return const Text('Selected Chat Recipient appears to be null');
+      return const Center(child: Text('Select a user to chat'));
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(cp.selectedChatRecipient?.displayName ?? ""),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const ChatProfileWIndowDialogue();
-                  });
-            },
-          ),
-
-        ],
-
-      ),
-      body: Column(
+    return  Column(
         children: [
           Expanded(
             child: Container(
@@ -68,7 +51,7 @@ class _CompanyChatRoomScreenState extends State<CompanyChatRoomScreen> {
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasData) {
                       List<QueryDocumentSnapshot<Object?>>? messages =
-                          snapshot.data?.docs.reversed.toList();
+                      snapshot.data?.docs.reversed.toList();
                       return ListView.builder(
                           reverse: true,
                           controller: _scrollController,
@@ -79,7 +62,7 @@ class _CompanyChatRoomScreenState extends State<CompanyChatRoomScreen> {
                           itemBuilder: (context, index) {
                             ChatMessage chatMessage = ChatMessage.fromMap(
                                 messages![index].data()
-                                    as Map<String, dynamic>);
+                                as Map<String, dynamic>);
                             bool isMe = (chatMessage.sentBy == up.appUser!.uid);
                             return ChatComponent(
                               message: chatMessage.message,
@@ -138,7 +121,6 @@ class _CompanyChatRoomScreenState extends State<CompanyChatRoomScreen> {
             ),
           )
         ],
-      ),
     );
   }
 }

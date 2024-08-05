@@ -211,7 +211,7 @@ class ChatDataProvider {
         .set(chatRecipient.toMap());
   }
 
-  static Stream<List<ChatRecipient>> getWorkerChatRecipientsStream(String uid) {
+  static Stream<List<ChatRecipient>> getWorkerChatRecipientsStream(String uid ) {
     return firestore
         .collection('ChatLists')
         .doc(uid)
