@@ -12,12 +12,11 @@ class CompanyPageTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const CompanyDrawer(),
-      appBar: const CompanyAppBar(),
-      bottomNavigationBar: Responsive.isDesktop(context)
-          ? null
-          : const CompanyButtomNavigationBar(),
-      body: SafeArea(child: child),
-    );
+        endDrawer: const CompanyDrawer(),
+        appBar: const CompanyAppBar(),
+        bottomNavigationBar: Responsive.isDesktop(context)
+            ? null
+            : const CompanyButtomNavigationBar(),
+        body: child);
   }
 }

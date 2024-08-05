@@ -57,7 +57,7 @@ class _JobMobileSearchBarState extends State<JobMobileSearchBar> {
                   : () {
                       controller.clear();
                       jp.clearSearchParameters();
-                      GoRouter.of(context).pushReplacement('/jobs');
+                      GoRouter.of(context).go('/jobs');
                     }),
           border: const OutlineInputBorder(),
           enabledBorder: const OutlineInputBorder(

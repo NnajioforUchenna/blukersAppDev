@@ -63,7 +63,7 @@ class _SearchWorkersUiMobileState extends State<SearchWorkersUiMobile> {
                           controller: nameController,
                           decoration: InputDecoration(
                             contentPadding:
-                            const EdgeInsets.symmetric(vertical: 10),
+                                const EdgeInsets.symmetric(vertical: 10),
                             hintText: searchName,
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.grey,
@@ -93,9 +93,9 @@ class _SearchWorkersUiMobileState extends State<SearchWorkersUiMobile> {
                           controller: locationController,
                           decoration: InputDecoration(
                             contentPadding:
-                            const EdgeInsets.symmetric(vertical: 10),
+                                const EdgeInsets.symmetric(vertical: 10),
                             hintText:
-                            AppLocalizations.of(context)!.cityandzipcode,
+                                AppLocalizations.of(context)!.cityandzipcode,
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.grey,
                               fontSize: 13.0,
@@ -119,26 +119,18 @@ class _SearchWorkersUiMobileState extends State<SearchWorkersUiMobile> {
                       child: ElevatedButton(
                         onPressed: _isLoading
                             ? null
-                            : () async {
-                          setState(() {
-                            _isLoading = true;
-                          });
+                            : () {
+                                wp.searchWorkers(
+                                  nameController.text,
+                                  locationController.text,
+                                );
 
-                          await wp.searchWorkers(
-                            nameController.text,
-                            locationController.text,
-                          );
+                                if (GoRouter.of(context).canPop()) {
+                                  GoRouter.of(context).pop();
+                                }
 
-                          setState(() {
-                            _isLoading = false;
-                          });
-
-                          if (GoRouter.of(context).canPop())
-                            GoRouter.of(context).pop();
-
-                          GoRouter.of(context)
-                              .pushReplacement('/workerSearchResults');
-                        },
+                                GoRouter.of(context).go('/workerSearchResults');
+                              },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ThemeColors.blukersOrangeThemeColor,
                           shape: RoundedRectangleBorder(
