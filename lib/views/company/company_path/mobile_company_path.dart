@@ -114,7 +114,7 @@ class MobileCompanyPath extends StatelessWidget {
               AppLocalizations.of(context)!.companyJourneyStep2Title,
               context,
               () {
-                context.go('/workerPreference');
+                context.go('/setWorkersPreferences');
               },
             ),
           if (currentStep == 2)

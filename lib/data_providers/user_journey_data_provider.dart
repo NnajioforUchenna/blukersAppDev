@@ -26,28 +26,28 @@ class UserJourneyDataProvider {
     }
   }
 
-  // static Future<void> updateNewcomer(String uid) async {
-  //   try {
-  //     // final SharedPreferencesAsync prefs = SharedPreferencesAsync();
-  //     // String? deviceId = await prefs.getString('device_id');
-  //     // if (deviceId == null) {
-  //     //   print('Device ID not found');
-  //     //   return;
-  //     // }
+  static Future<void> updateNewcomer(String uid) async {
+    try {
+      final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+      String? deviceId = await prefs.getString('device_id');
+      if (deviceId == null) {
+        print('Device ID not found');
+        return;
+      }
 
-  //     // final response = await http.post(
-  //     //   Uri.parse('$baseUrl/update_newcomer'),
-  //     //   headers: {'Content-Type': 'application/json'},
-  //     //   body: json.encode({'uid': uid, 'deviceId': deviceId}),
-  //     // );
+      final response = await http.post(
+        Uri.parse('$baseUrl/update_newcomer'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'uid': uid, 'deviceId': deviceId}),
+      );
 
-  //   //   if (response.statusCode != 200) {
-  //   //     throw Exception('Failed to update newcomer: ${response.body}');
-  //   //   }
-  //   // } catch (e) {
-  //   //   print('Error updating newcomer: $e');
-  //   // }
-  // }
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update newcomer: ${response.body}');
+      }
+    } catch (e) {
+      print('Error updating newcomer: $e');
+    }
+  }
   
 
   static Future<void> updateInitiate(String uid) async {
