@@ -10,10 +10,12 @@ import '../../../../../services/responsive.dart';
 import '../../../../../services/rounded_image.dart';
 import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../old_common_views/worker_timeline/display_worker_timeline_dialog.dart';
+import '../../../common_widgets/please_create_company_profile.dart';
 import '../../../company_chat/mobile_company_chat/chat_screen.dart';
 
 class WorkerDetailBlockOne extends StatelessWidget {
   final Worker worker;
+
   const WorkerDetailBlockOne({super.key, required this.worker});
 
   @override
@@ -118,8 +120,8 @@ class WorkerDetailBlockOne extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        worker.workerResumeDetails?.skillIds?.join(', ') ??
-                            '', // TODO: Change this to worker?.jobIds?.join(', ') ?? '',
+                        worker.workerResumeDetails?.skillIds?.join(', ') ?? '',
+                        // TODO: Change this to worker?.jobIds?.join(', ') ?? '',
                         style: const TextStyle(
                           fontSize: 24,
                           color: Colors.grey,
@@ -180,8 +182,11 @@ class WorkerDetailBlockOne extends StatelessWidget {
                         cp.companyStartChat(up.appUser, worker);
                         showDialog(
                             context: context,
-                            builder: (context) =>
-                                const CompanyChatRoomScreen());
+                            builder: (context) => up.isUserCompanyProfile()
+                                ? Container(
+                              padding: Responsive.isDesktop(context) ? const EdgeInsets.all(150) : const EdgeInsets.all(30),
+                                    child: const CompanyChatRoomScreen())
+                                : const PleaseCreateCompanyProfile());
                       }
                     },
                   ),

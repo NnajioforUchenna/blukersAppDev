@@ -7,17 +7,14 @@ import 'package:unicons/unicons.dart';
 import '../../../services/make_responsive_web.dart';
 import '../../../utils/styles/theme_colors.dart';
 
-class PleaseCreateCompanyProfile extends StatelessWidget {
-  const PleaseCreateCompanyProfile({super.key});
+class PleaseCreateWorkerProfile extends StatelessWidget {
+  const PleaseCreateWorkerProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFFFEF7FF),
-      child: const MakeResponsiveWeb(
-        image: AssetImage('assets/images/pleaseCreateProfile.png'),
-        child: PleaseCreateProfile(),
-      ),
+    return const MakeResponsiveWeb(
+      image: AssetImage('assets/images/pleaseCreateProfile.png'),
+      child: PleaseCreateProfile(),
     );
   }
 }
@@ -32,7 +29,7 @@ class PleaseCreateProfile extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             Icon(
               UniconsLine.building,
               color: Colors.grey.shade400,
@@ -52,13 +49,14 @@ class PleaseCreateProfile extends StatelessWidget {
                   // const TextSpan(text: 'Please '),
                   TextSpan(text: '${AppLocalizations.of(context)!.please} '),
                   TextSpan(
-                    text: AppLocalizations.of(context)!.createCompanyProfile,
+                    // text: AppLocalizations.of(context)!.createCompanyProfile,
+                    text: 'Create Worker Profile',
                     style:
                         const TextStyle(color: ThemeColors.primaryThemeColor),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         // Navigate to create company profile page
-                        context.go('/createCompanyProfile');
+                        context.go('/createWorkerProfile');
                       },
                   ),
                   const TextSpan(text: '\n'),
