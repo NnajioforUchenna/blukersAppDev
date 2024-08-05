@@ -10,7 +10,7 @@ import '../../../../../services/responsive.dart';
 import '../../../../../services/rounded_image.dart';
 import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../old_common_views/worker_timeline/display_worker_timeline_dialog.dart';
-import '../../../company_chat/mobile_company_chat/components/company_chat_room_dialog.dart';
+import '../../../company_chat/mobile_company_chat/chat_screen.dart';
 
 class WorkerDetailBlockOne extends StatelessWidget {
   final Worker worker;
@@ -181,7 +181,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (context) =>
-                                const CompanyChatRoomDialog());
+                                const CompanyChatRoomScreen());
                       }
                     },
                   ),

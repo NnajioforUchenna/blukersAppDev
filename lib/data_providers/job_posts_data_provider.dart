@@ -37,11 +37,23 @@ class JobPostsDataProvider {
     await jobPostDoc
         .set(jobPost.toMap()); // Assuming JobPost has a toMap method
 
+    // Validate companyId
+    if (jobPost.companyId == null || jobPost.companyId.isEmpty) {
+      print('Company ID is null or empty');
+      return;
+    }
+
     // Add the retrieved document ID to the jobPostIds field in the relevant Companies document
     DocumentReference companyDoc = companies.doc(jobPost.companyId);
-    await companyDoc.update({
-      'jobPostIds': FieldValue.arrayUnion([jobPostId])
-    });
+
+    // Use a try-catch block to handle any errors during update
+    try {
+      await companyDoc.update({
+        'jobPostIds': FieldValue.arrayUnion([jobPostId])
+      });
+    } catch (e) {
+      print('Failed to update company document: $e');
+    }
   }
 
   static void updateJobPostAppliedWorkerIds(String jobPostId, String uid) {

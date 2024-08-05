@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:blukers/data_providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
@@ -72,13 +73,25 @@ class CompanyProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  PageController createCompanyProfilePageController = PageController();
+
   void companyProfileNextPage() {
     companyProfileCurrentPageIndex++;
+    createCompanyProfilePageController.animateToPage(
+      companyProfileCurrentPageIndex,
+      duration: const Duration(seconds: 2),
+      curve: Curves.easeInOut,
+    );
     notifyListeners();
   }
 
   void companyProfileBackPage() {
     companyProfileCurrentPageIndex--;
+    createCompanyProfilePageController.animateToPage(
+      companyProfileCurrentPageIndex,
+      duration: const Duration(seconds: 2),
+      curve: Curves.easeInOut,
+    );
     notifyListeners();
   }
 
@@ -161,8 +174,6 @@ class CompanyProvider with ChangeNotifier {
       'linkControllers': linkControllers,
     });
 
-    Map<String, dynamic> createCompanyProfileData = {};
-
     var socialPlatforms = [];
 
     // Run a pair loop on platformControllers and linkControllers
@@ -199,8 +210,8 @@ class CompanyProvider with ChangeNotifier {
       'yearFounded': yearFounded,
     });
     companyProfileNextPage();
-    bool result = await createCompanyProfile();
     EasyLoading.dismiss();
+    bool result = await createCompanyProfile();
     return result;
   }
 
@@ -214,16 +225,22 @@ class CompanyProvider with ChangeNotifier {
     await CompanyDataProvider.createCompanyProfile(
         appUser!.uid, company.toMap());
 
-    // appUser?.companyTimelineStep = 4;
+    appUser?.companyTimelineStep = 2;
+    appUser?.company = company;
 
-    notifyListeners();
-    updateCompanyTimelineStep();
+    UserDataProvider.updateUser(appUser!);
+
+    // Wait 5 seconds before returning
+    await Future.delayed(const Duration(seconds: 10));
+
+    createCompanyProfileData.clear();
     previousParams.clear();
+    companyProfileCurrentPageIndex = 0;
     return true;
   }
 
   void updateCompanyTimelineStep() {
-    CompanyDataProvider.updateCompanyTimelineStep(appUser!.uid, 4);
+    CompanyDataProvider.updateCompanyTimelineStep(appUser!.uid, 2);
     notifyListeners();
   }
 

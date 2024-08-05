@@ -41,18 +41,18 @@ app.*.symbols
 app.*.map.json
 
 # Android Studio will place build artifacts here
-#/android/app/debug
-#/android/app/profile
-#/android/app/release
-#
-#/lib/firebase_options.dart
-#android/app/google-services.json
-#ios/firebase_app_id_file.json
-#ios/Runner/GoogleService-Info.plist
-#
-#/android/app/google-services.json
-#/ios/firebase_app_id_file.json
-#/ios/Runner/GoogleService-Info.plist
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+/lib/firebase_options.dart
+android/app/google-services.json
+ios/firebase_app_id_file.json
+ios/Runner/GoogleService-Info.plist
+
+/android/app/google-services.json
+/ios/firebase_app_id_file.json
+/ios/Runner/GoogleService-Info.plist
 
 # FVM Version Cache
 .fvm/

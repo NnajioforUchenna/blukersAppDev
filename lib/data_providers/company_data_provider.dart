@@ -127,10 +127,6 @@ class CompanyDataProvider {
   }
 
   static updateOrAddUserPhoto(String uid, String photoUrl) async {
-    await db.collection(appUserCollections).doc(uid).set({
-      'photoUrl': photoUrl,
-    }, SetOptions(merge: true));
-
     // For AppUsers collection with worker map
     await db.collection(appUserCollections).doc(uid).set({
       'company': {

@@ -10,7 +10,7 @@ class CompanyLogoPage extends StatefulWidget {
   const CompanyLogoPage({super.key});
 
   @override
-  _CompanyLogoPageState createState() => _CompanyLogoPageState();
+  State<CompanyLogoPage> createState() => _CompanyLogoPageState();
 }
 
 class _CompanyLogoPageState extends State<CompanyLogoPage> {
@@ -34,7 +34,7 @@ class _CompanyLogoPageState extends State<CompanyLogoPage> {
             children: <Widget>[
               Column(
                 children: [
-                  const YourCompanyLogo(), // Replace with your widget to handle company logo
+                  const YourCompanyLogo(),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +47,7 @@ class _CompanyLogoPageState extends State<CompanyLogoPage> {
                       TimelineNavigationButton(
                         isSelected: true,
                         onPress: () {
-                          if (cp.appUser?.photoUrl != null) {
+                          if (cp.createCompanyProfileData['logoUrl'] != null) {
                             // Update the condition to check for company logo
                             cp.companyProfileNextPage();
                           }

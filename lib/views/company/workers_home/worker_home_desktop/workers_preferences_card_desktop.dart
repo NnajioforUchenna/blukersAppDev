@@ -8,8 +8,8 @@ import '../../../../utils/styles/theme_colors.dart';
 import '../../../common_vieiws/loading_page.dart';
 import '../../../worker/jobs_home/Components/display_jobs_by_preferences/Components/grey_container_text.dart';
 
-class WorkersPreferencesCard extends StatelessWidget {
-  const WorkersPreferencesCard({super.key});
+class WorkersPreferencesCardDesktop extends StatelessWidget {
+  const WorkersPreferencesCardDesktop({super.key});
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
@@ -36,7 +36,8 @@ class WorkersPreferencesCard extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    context.go('/setWorkersPreferences');
+                    context.go('/setWorkersPreferencesDesktop');
+                    ;
                   },
                   icon: const Icon(Icons.edit,
                       color: ThemeColors.blukersBlueThemeColor)),
