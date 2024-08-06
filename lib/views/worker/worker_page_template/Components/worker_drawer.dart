@@ -47,7 +47,7 @@ class WorkerDrawer extends StatelessWidget {
             context: context,
             icon: Icons.corporate_fare_outlined,
             text: 'Select By Industry',
-            route: '/jobs',
+            route: '/selectJobs',
           ),
           _createDrawerItem(
             context: context,
