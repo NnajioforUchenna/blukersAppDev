@@ -12,6 +12,7 @@ import 'components/worker_resume_details.dart';
 
 class AppUser {
   // User Information
+
   String uid;
   String email;
   String? language;
