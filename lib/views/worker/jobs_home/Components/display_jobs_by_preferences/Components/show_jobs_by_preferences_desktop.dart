@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../saved/build_list_view_jobs.dart';
+import '../build_list_view_jobs_by_preferences_desktop.dart';
 import 'jobs_preferences_card_desktop.dart';
 
 class ShowJobsByPreferencesDesktop extends StatelessWidget {
@@ -9,13 +8,10 @@ class ShowJobsByPreferencesDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 80.sp),
-          child: const JobsPreferencesCardDesktop(),
-        ),
-        const Expanded(child: BuildListViewJobsDesktop()),
+        JobsPreferencesCardDesktop(),
+        Expanded(child: BuildListViewJobsByPreferencesDesktop()),
       ],
     );
   }

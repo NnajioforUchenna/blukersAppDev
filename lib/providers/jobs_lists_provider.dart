@@ -6,6 +6,7 @@ import '../data_providers/job_posts_data_provider.dart';
 import '../data_providers/jobs_lists_data_provider.dart';
 import '../models/app_user/app_user.dart';
 import '../models/job_post.dart';
+import '../models/jobs_models/jobs_page_by_preferences.dart';
 import '../models/jobs_page.dart';
 
 class JobsListsProvider extends ChangeNotifier {
@@ -23,6 +24,7 @@ class JobsListsProvider extends ChangeNotifier {
 
   JobsListsProvider() {
     fillDisplayAllJobs();
+    fillDisplayJobsByPreferences();
   }
 
   //____________________________________________________________________________________Saved Jobs
@@ -96,19 +98,49 @@ class JobsListsProvider extends ChangeNotifier {
 
 //____________________________________________________________________________________Jobs By Preferences
   Map<String, JobPost> displayJobsByPreferences = {};
+  JobsPageByPreferences jobsPageByPreferences = JobsPageByPreferences();
+  bool hasMorePreferences = true;
 
   fillDisplayJobsByPreferences() async {
     // Fetch the jobs by preferences and update the displayJobsByPreferences map
     Preference? preference = appUser?.registrationDetails?.jobsPreference;
     if (preference != null) {
-      displayJobsByPreferences.clear();
-      displayJobsByPreferences =
-          await JobsListsDataProvider.getJobsByPreferences(preference);
+      jobsPageByPreferences = JobsPageByPreferences();
+      jobsPageByPreferences.preference = preference;
+      jobsPageByPreferences.language = language;
+      jobsPageByPreferences = await JobsListsDataProvider.getJobsByPreferences(
+          jobsPageByPreferences);
+
+      if (jobsPageByPreferences.jobs.isNotEmpty) {
+        displayJobsByPreferences.clear();
+        // Update the displayJobsByPreferences map with the new jobs
+        for (JobPost job in jobsPageByPreferences.jobs) {
+          displayJobsByPreferences[job.jobPostId] = job;
+        }
+      }
       notifyListeners();
     } else {
       // Display Error that no preferences are set
       EasyLoading.showError('No Preferences are set');
     }
+  }
+
+  loadMoreJobsByPreferences() async {
+    // Fetch the next page of jobs and update the jobs page
+    jobsPageByPreferences =
+        await JobsListsDataProvider.getJobsByPreferences(jobsPageByPreferences);
+
+    // Update  hasMore
+    hasMorePreferences = jobsPageByPreferences.jobs.isNotEmpty;
+
+    // Update the displayJobsByPreferences map with the new jobs
+    Map<String, JobPost> newJobs = {};
+
+    for (JobPost job in jobsPageByPreferences.jobs) {
+      newJobs[job.jobPostId] = job;
+    }
+
+    return newJobs;
   }
 
   //____________________________________________________________________________________End of Jobs By Preferences

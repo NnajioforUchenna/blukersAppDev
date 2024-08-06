@@ -110,7 +110,7 @@ class JobPostsDataProvider {
 
     print('Keyword: $keyword');
 
-    final docRef = FirebaseFirestore.instance.collection('cache2').doc(keyword);
+    final docRef = FirebaseFirestore.instance.collection('cache').doc(keyword);
     final docSnapshot = await docRef.get();
     if (docSnapshot.exists) {
       print('Getting Record from Cache in Firebase');
