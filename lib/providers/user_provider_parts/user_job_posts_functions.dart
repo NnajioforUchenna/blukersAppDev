@@ -22,7 +22,7 @@ extension UserJobPostsFunctions on UserProvider {
 
   Future<void> checkAndApplyJobPost(
       BuildContext context, JobPost jobPost) async {
-    if (workerTimelineStep < 2) {
+    if (workerTimelineStep < 3) {
       showDialog(
           context: context,
           builder: (context) => const DisplayJobTimelineDialog());

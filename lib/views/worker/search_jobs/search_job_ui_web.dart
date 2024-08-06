@@ -41,9 +41,9 @@ class _SearchJobsUiWebState extends State<SearchJobsUiWeb> {
       children: [
         Expanded(
             child: Container(
-          color: Color(0xffF16523),
-              padding: EdgeInsets.all(30),
-              child: Image.asset('images/searching.gif'),
+          color: const Color(0xffF16523),
+          padding: const EdgeInsets.all(30),
+          child: Image.asset('images/searching.gif'),
         )),
         Expanded(
           child: Dialog(
