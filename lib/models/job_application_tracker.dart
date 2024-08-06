@@ -20,8 +20,8 @@ class JobApplicationTracker {
 
   static JobApplicationTracker fromMap(Map<String, dynamic> map) {
     return JobApplicationTracker(
-      numberOfAppliedJobsToday: map['numberOfAppliedJobsToday'],
-      lastTimeApplied: map['lastTimeApplied'],
+      numberOfAppliedJobsToday: map['numberOfAppliedJobsToday'] ?? 0,
+      lastTimeApplied: map['lastTimeApplied'] ?? 0,
     );
   }
 

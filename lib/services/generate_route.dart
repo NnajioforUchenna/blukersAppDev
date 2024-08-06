@@ -36,6 +36,7 @@ import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Compone
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/set_jobs_preferences_desktop.dart';
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences.dart';
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences_desktop.dart';
+import '../views/worker/jobs_home/Components/jobs_mobile_view/select_or_search_jobs.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
 import '../views/worker/search_jobs/jobs_search_result_page/job_search_result_page.dart';
@@ -73,6 +74,9 @@ final routes = [
     },
     routes: [
       GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
+      GoRoute(
+          path: '/selectJobs',
+          builder: (context, state) => const SelectOrSearchJobs()),
       GoRoute(
           path: '/searchJobs',
           builder: (context, state) => const SearchJobsUi()),
