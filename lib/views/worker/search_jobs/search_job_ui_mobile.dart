@@ -63,7 +63,7 @@ class _SearchJobsUiMobileState extends State<SearchJobsUiMobile> {
                       controller: nameController,
                       decoration: InputDecoration(
                         contentPadding:
-                        const EdgeInsets.symmetric(vertical: 10),
+                            const EdgeInsets.symmetric(vertical: 10),
                         hintText: searchName,
                         hintStyle: GoogleFonts.montserrat(
                           color: Colors.grey,
@@ -94,7 +94,7 @@ class _SearchJobsUiMobileState extends State<SearchJobsUiMobile> {
                       controller: locationController,
                       decoration: InputDecoration(
                         contentPadding:
-                        const EdgeInsets.symmetric(vertical: 10),
+                            const EdgeInsets.symmetric(vertical: 10),
                         hintText: AppLocalizations.of(context)!.cityandzipcode,
                         hintStyle: GoogleFonts.montserrat(
                           color: Colors.grey,
@@ -124,7 +124,7 @@ class _SearchJobsUiMobileState extends State<SearchJobsUiMobile> {
                       if (GoRouter.of(context).canPop()) {
                         GoRouter.of(context).pop();
                       }
-                      GoRouter.of(context).pushReplacement('/jobSearchResults');
+                      GoRouter.of(context).go('/jobSearchResults');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ThemeColors.blukersOrangeThemeColor,

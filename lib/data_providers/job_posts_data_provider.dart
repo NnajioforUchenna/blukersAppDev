@@ -66,13 +66,15 @@ class JobPostsDataProvider {
   static Future<List<String>> getSavedJobPostIds(String uid) async {
     DocumentSnapshot userDoc =
         await db.collection(appUserCollections).doc(uid).get();
-    return List<String>.from(userDoc['worker.savedJobPostIds'] ?? []);
+    return List<String>.from(
+        userDoc['worker.workerRecords.savedJobPostIds'] ?? []);
   }
 
   static Future<List<String>> getAppliedJobPostIds(String uid) async {
     DocumentSnapshot userDoc =
         await db.collection(appUserCollections).doc(uid).get();
-    return List<String>.from(userDoc['worker.appliedJobPostIds'] ?? []);
+    return List<String>.from(
+        userDoc['worker.workerRecords.appliedJobPostIds'] ?? []);
   }
 
   static Future<List<JobPost>> getJobPostsByCompanyIds(
@@ -108,7 +110,7 @@ class JobPostsDataProvider {
 
     print('Keyword: $keyword');
 
-    final docRef = FirebaseFirestore.instance.collection('cache2').doc(keyword);
+    final docRef = FirebaseFirestore.instance.collection('cache').doc(keyword);
     final docSnapshot = await docRef.get();
     if (docSnapshot.exists) {
       print('Getting Record from Cache in Firebase');

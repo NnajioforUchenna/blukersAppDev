@@ -1,9 +1,10 @@
-import 'package:blukers/models/app_user/components/preference.dart';
 import 'package:blukers/models/job_post.dart';
+import 'package:blukers/models/jobs_models/jobs_page_by_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/jobs_page.dart';
 import 'data_constants.dart';
+import 'job_posts_data_provider.dart';
 
 final db = FirebaseFirestore.instance;
 
@@ -49,5 +50,23 @@ class JobsListsDataProvider {
     return jobsPage;
   }
 
-  static getJobsByPreferences(Preference preference) {}
+  static Future<JobsPageByPreferences> getJobsByPreferences(
+      JobsPageByPreferences jobsPageByPreferences) async {
+    String searchParameter = jobsPageByPreferences.getSearchParameter() ?? '';
+    int pageNumber = jobsPageByPreferences.pageNumJobsByPreferences;
+    String location = '';
+    String language = jobsPageByPreferences.language;
+
+    List<JobPost> jobPosts = await JobPostsDataProvider.searchJobPosts(
+      nameRelated: searchParameter,
+      locationRelated: location,
+      pageNumber: pageNumber,
+      targetLanguage: language,
+    );
+
+    jobsPageByPreferences.jobs.addAll(jobPosts);
+    jobsPageByPreferences.pageNumJobsByPreferences++;
+
+    return jobsPageByPreferences;
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../saved/build_list_view_jobs.dart';
+import 'build_list_view_jobs_by_preferences.dart';
 import 'jobs_preferences_card.dart';
 
 class ShowJobsByPreferences extends StatelessWidget {
@@ -11,7 +11,7 @@ class ShowJobsByPreferences extends StatelessWidget {
     return const Column(
       children: [
         JobsPreferencesCard(),
-        Expanded(child: BuildListViewJobs()),
+        Expanded(child: BuildListViewJobsByPreferences()),
       ],
     );
   }
