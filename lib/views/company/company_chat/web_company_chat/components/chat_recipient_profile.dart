@@ -21,25 +21,32 @@ class _ChatRecipientProfileState extends State<ChatRecipientProfile> {
         cp.selectedChatRecipient!.clientType != null;
 
     if (hasData) {
-      return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        CircleAvatar(
-          radius: 50,
-          backgroundImage:
-          NetworkImage(cp.selectedChatRecipient!.photoUrl),
+      return Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Material(
+          borderRadius: BorderRadius.circular(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircleAvatar(
+              radius: 50,
+              backgroundImage:
+              NetworkImage(cp.selectedChatRecipient!.photoUrl),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              cp.selectedChatRecipient!.displayName,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(cp.selectedChatRecipient!.email),
+            const SizedBox(height: 10),
+            Text(cp.selectedChatRecipient!.clientType),
+          ],
+              ),
         ),
-        const SizedBox(height: 10),
-        Text(
-          cp.selectedChatRecipient!.displayName,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 10),
-        Text(cp.selectedChatRecipient!.email),
-        const SizedBox(height: 10),
-        Text(cp.selectedChatRecipient!.clientType),
-      ],
-    );
+      );
     } else {
       return Center(child: const Text('Click on a user to view basic info'));
     }

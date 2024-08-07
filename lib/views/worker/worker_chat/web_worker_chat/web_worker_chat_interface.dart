@@ -17,6 +17,7 @@ class _WebWorkerChatState extends State<WebWorkerChat> {
       body: Row(
         children: [
           Expanded(
+            flex: 3,
             child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                 decoration: BoxDecoration(
@@ -37,6 +38,7 @@ class _WebWorkerChatState extends State<WebWorkerChat> {
                 child: const WebWorkerChatList()),
           ),
           Expanded(
+            flex: 4,
             child: Container(
               height: double.infinity,
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
@@ -59,6 +61,7 @@ class _WebWorkerChatState extends State<WebWorkerChat> {
             ),
           ),
           Expanded(
+            flex: 3,
             child: Container(
               height: double.infinity,
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
