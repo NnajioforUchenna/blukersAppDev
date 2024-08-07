@@ -140,70 +140,90 @@ class AppUser {
   }
 
   static AppUser fromMap(Map<String, dynamic> map) {
+    // Create AppUser with only uid and email
     AppUser user = AppUser(
       uid: map['uid'] ?? '',
       email: map['email'] ?? '',
-      language: map['language'] as String?,
-      displayName: map['displayName'] as String?,
-      phoneNumber: map['phoneNumber'] as String?,
-      photoUrl: map['photoUrl'] as String?,
-      isEmailVerified: map['isEmailVerified'] as bool?,
-      registrationDetails: (map['registrationDetails'] != null &&
-              map['registrationDetails'] is Map<String, dynamic>)
-          ? RegistrationDetails.fromMap(map['registrationDetails'])
-          : null,
-      userRole: map['userRole'] as String?,
-      workerTimelineStep: map['workerTimelineStep'] as int?,
-      companyTimelineStep: map['companyTimelineStep'] as int?,
-      workerResumeDetails: (map['workerResumeDetails'] != null &&
-              map['workerResumeDetails'] is Map<String, dynamic>)
-          ? WorkerResumeDetails.fromMap(map['workerResumeDetails'])
-          : null,
-      workerRecords: (map['workerRecords'] != null &&
-              map['workerRecords'] is Map<String, dynamic>)
-          ? WorkerRecords.fromMap(map['workerRecords'])
-          : null,
-      company:
-          (map['company'] != null && map['company'] is Map<String, dynamic>)
-              ? Company.fromMap(map['company'])
-              : null,
-      address:
-          (map['address'] != null && map['address'] is Map<String, dynamic>)
-              ? Address.fromMap(map['address'])
-              : null,
-      isSubscriptionActive: map['isSubscriptionActive'] ?? false,
-      activeSubscription: map['activeSubscription'] != null
-          ? SubscriptionPlan.fromMap(map['activeSubscription'])
-          : null,
-      deferredSubscription: map['deferredSubscription'] != null
-          ? SubscriptionPlan.fromMap(map['deferredSubscription'])
-          : null,
-      deviceTokenU: map['deviceTokenU'] as String?,
-      tokens: map['tokens'] != null
-          ? List<String>.from(map['tokens'].map((x) => x as String))
-          : [],
     );
 
-    if (map['listActiveOrders'] != null) {
-      Map<String, dynamic> ordersMap = map['listActiveOrders'];
-      user.listActiveOrders = ordersMap
-          .map((key, value) => MapEntry(key, PaidOrder.fromMap(value)));
+    // Add other parameters with null checks
+    try {
+      user.language = map['language'] as String?;
+      user.displayName = map['displayName'] as String?;
+      user.phoneNumber = map['phoneNumber'] as String?;
+      user.photoUrl = map['photoUrl'] as String?;
+      user.isEmailVerified = map['isEmailVerified'] as bool?;
+
+      if (map['registrationDetails'] != null &&
+          map['registrationDetails'] is Map<String, dynamic>) {
+        user.registrationDetails =
+            RegistrationDetails.fromMap(map['registrationDetails']);
+      }
+
+      user.userRole = map['userRole'] as String?;
+      user.workerTimelineStep = map['workerTimelineStep'] as int?;
+      user.companyTimelineStep = map['companyTimelineStep'] as int?;
+
+      if (map['workerResumeDetails'] != null &&
+          map['workerResumeDetails'] is Map<String, dynamic>) {
+        user.workerResumeDetails =
+            WorkerResumeDetails.fromMap(map['workerResumeDetails']);
+      }
+
+      if (map['workerRecords'] != null &&
+          map['workerRecords'] is Map<String, dynamic>) {
+        user.workerRecords = WorkerRecords.fromMap(map['workerRecords']);
+      }
+
+      if (map['company'] != null && map['company'] is Map<String, dynamic>) {
+        user.company = Company.fromMap(map['company']);
+      }
+
+      if (map['address'] != null && map['address'] is Map<String, dynamic>) {
+        user.address = Address.fromMap(map['address']);
+      }
+
+      user.isSubscriptionActive = map['isSubscriptionActive'] ?? false;
+
+      if (map['activeSubscription'] != null) {
+        user.activeSubscription =
+            SubscriptionPlan.fromMap(map['activeSubscription']);
+      }
+
+      if (map['deferredSubscription'] != null) {
+        user.deferredSubscription =
+            SubscriptionPlan.fromMap(map['deferredSubscription']);
+      }
+
+      user.deviceTokenU = map['deviceTokenU'] as String?;
+      user.tokens = map['tokens'] != null
+          ? List<String>.from(map['tokens'].map((x) => x as String))
+          : [];
+
+      if (map['listActiveOrders'] != null) {
+        Map<String, dynamic> ordersMap = map['listActiveOrders'];
+        user.listActiveOrders = ordersMap
+            .map((key, value) => MapEntry(key, PaidOrder.fromMap(value)));
+      }
+
+      if (map['jobApplicationTracker'] != null) {
+        user.jobApplicationTracker =
+            JobApplicationTracker.fromMap(map['jobApplicationTracker']);
+      }
+
+      if (map['userJourney'] != null) {
+        user.userJourney = UserJourney.fromMap(map['userJourney']);
+      }
+
+      user.deleteAccountReason = map['deleteAccountReason'] ?? '';
+      user.whereYouReside = map['whereYouReside'] ?? '';
+
+      user.createdAt = map['createdAt'] ?? 0;
+      user.modifiedAt = map['modifiedAt'] ?? 0;
+    } catch (e) {
+      print("Error in fromMap: $e");
+      // Returning the AppUser created with only uid and email
     }
-
-    if (map['jobApplicationTracker'] != null) {
-      user.jobApplicationTracker =
-          JobApplicationTracker.fromMap(map['jobApplicationTracker']);
-    }
-
-    if (map['userJourney'] != null) {
-      user.userJourney = UserJourney.fromMap(map['userJourney']);
-    }
-
-    user.deleteAccountReason = map['deleteAccountReason'] ?? '';
-    user.whereYouReside = map['whereYouReside'] ?? '';
-
-    user.createdAt = map['createdAt'] ?? 0;
-    user.modifiedAt = map['modifiedAt'] ?? 0;
 
     return user;
   }
