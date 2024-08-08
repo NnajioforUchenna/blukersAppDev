@@ -17,7 +17,7 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
     return Container(
         width: 15,
         height: 15,
-        margin: const EdgeInsets.only(right: 15.0),
+        margin: const EdgeInsets.only(right: 10.0),
         decoration: BoxDecoration(
           border: Border.all(
             color: ThemeColors.grey2ThemeColor,

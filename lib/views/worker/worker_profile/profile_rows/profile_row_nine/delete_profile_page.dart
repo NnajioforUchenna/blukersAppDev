@@ -1,14 +1,16 @@
-import 'question_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../services/responsive.dart';
 import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../old_common_views/components/confirmation_dialog.dart';
 import '../../../../old_common_views/small_pop_button_widget.dart';
 import 'custom_check_box.dart';
+import 'question_button.dart';
 import 'where_do_you_reside.dart';
 import 'why_delete_account_page.dart';
 
@@ -27,7 +29,7 @@ class DeleteAccountPage extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       insetPadding:
-          const EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 80),
+          const EdgeInsets.only(left: 5, right: 5, top: 26, bottom: 80),
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
@@ -119,7 +121,7 @@ class DeleteAccountPage extends StatelessWidget {
                       'Delete Account',
                       style: GoogleFonts.montserrat(
                         color: Colors.white,
-                        fontSize: 12.0,
+                        fontSize: Responsive.isMobile(context) ? 10.sp : 12,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

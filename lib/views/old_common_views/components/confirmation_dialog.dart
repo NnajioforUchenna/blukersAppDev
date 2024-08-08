@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../utils/styles/index.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../utils/styles/index.dart';
 
 void confirmationDialog({
   required BuildContext context,
@@ -45,22 +46,6 @@ void confirmationDialog({
           style: const TextStyle(color: ThemeColors.grey1ThemeColor),
         ),
         actions: <Widget>[
-          // TextButton(
-          //   onPressed: () {
-          //     // Close the dialog
-          //     Navigator.of(context).pop();
-          //   },
-          //   child: Text(cancelText.toUpperCase()),
-          // ),
-          // TextButton(
-          //   onPressed: () {
-          //     // Perform the action by calling the onConfirm callback
-          //     onConfirm();
-          //     // Close the dialog
-          //     Navigator.of(context).pop();
-          //   },
-          //   child: Text(confirmText.toUpperCase()),
-          // ),
           Column(
             children: [
               ElevatedButton(
