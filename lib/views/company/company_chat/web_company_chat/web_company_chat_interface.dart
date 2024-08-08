@@ -18,6 +18,7 @@ class _WebCompanyChatState extends State<WebCompanyChat> {
       body: Row(
         children: [
           Expanded(
+            flex: 3,
             child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                 decoration: BoxDecoration(
@@ -38,6 +39,7 @@ class _WebCompanyChatState extends State<WebCompanyChat> {
                 child: const WebCompanyChatList()),
           ),
           Expanded(
+            flex: 4,
             child: Container(
               height: double.infinity,
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
@@ -60,6 +62,7 @@ class _WebCompanyChatState extends State<WebCompanyChat> {
             ),
           ),
           Expanded(
+            flex: 3,
             child: Container(
               height: double.infinity,
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
