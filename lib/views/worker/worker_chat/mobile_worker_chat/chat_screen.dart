@@ -1,23 +1,21 @@
 import 'package:blukers/models/chat_message.dart';
-import 'package:blukers/providers/company_chat_provider.dart';
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
+import 'package:blukers/providers/worker_chat_provider.dart';
+import 'package:blukers/views/common_vieiws/loading_page.dart';
 import 'package:blukers/views/company/workers_home/workers_components/chat_component.dart';
+import 'package:blukers/views/worker/worker_chat/mobile_worker_chat/components/chat_profile_dialogue.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../common_vieiws/loading_page.dart';
-import '../../mobile_company_chat/components/chat_profile_dialogue.dart';
-
-
-class WebCompanyChatRoomScreen extends StatefulWidget {
-  const WebCompanyChatRoomScreen({super.key});
+class WorkerChatRoomScreen extends StatefulWidget {
+  const WorkerChatRoomScreen({super.key});
 
   @override
-  State<WebCompanyChatRoomScreen> createState() => _WebCompanyChatRoomScreenState();
+  State<WorkerChatRoomScreen> createState() => _WorkerChatRoomScreenState();
 }
 
-class _WebCompanyChatRoomScreenState extends State<WebCompanyChatRoomScreen> {
+class _WorkerChatRoomScreenState extends State<WorkerChatRoomScreen> {
   String textMessage = "";
   int messagesLength = 0;
   final ScrollController _scrollController = ScrollController();
@@ -25,7 +23,7 @@ class _WebCompanyChatRoomScreenState extends State<WebCompanyChatRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
+    WorkerChatProvider wcp = Provider.of<WorkerChatProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
 
     // Send message function
@@ -33,20 +31,38 @@ class _WebCompanyChatRoomScreenState extends State<WebCompanyChatRoomScreen> {
       _textController.clear();
       _scrollController.animateTo(0,
           duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-      await cp.sendMessage(textMessage);
+      await wcp.sendMessage(textMessage);
     }
 
-    if (cp.selectedChatRecipient == null) {
-      return const Center(child: Text('Select a user to chat'));
+    if (wcp.selectedChatRecipient == null) {
+      return const Text('Selected Chat Recipient appears to be null');
     }
 
-    return  Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(wcp.selectedChatRecipient?.displayName ?? ""),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.work_rounded),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const WorkerProfileDialogue();
+                  });
+            },
+          ),
+
+        ],
+
+      ),
+      body: Column(
         children: [
           Expanded(
             child: Container(
-              color: const Color(0xFFFEF7FF),
+              color: Color(0xFFFEF7FF),
               child: StreamBuilder<QuerySnapshot>(
-                  stream: cp.getMessagesByRoomId(),
+                  stream: wcp.getMessagesByRoomId(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasData) {
@@ -121,8 +137,7 @@ class _WebCompanyChatRoomScreenState extends State<WebCompanyChatRoomScreen> {
             ),
           )
         ],
+      ),
     );
   }
 }
-
-

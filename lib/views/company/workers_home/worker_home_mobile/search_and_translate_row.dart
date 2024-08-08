@@ -25,32 +25,37 @@ class SearchAndTranslateRowCompany extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Showcase(
-              key: asp.searchBar,
-              description: 'Use this search bar to search for jobs',
-              overlayOpacity: 0.6,
-              targetShapeBorder: const CircleBorder(),
-              tooltipBackgroundColor: ThemeColors.primaryThemeColor,
-              descTextStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              child: const WorkerMobileSearchBar()),
-          Showcase(
-              key: asp.translation,
-              description:
-                  'For selecting the target language of the job description',
-              overlayOpacity: 0.6,
-              targetShapeBorder: const CircleBorder(),
-              targetBorderRadius: const BorderRadius.all(
-                Radius.circular(10.0), // Example border radius
-              ),
-              tooltipBackgroundColor: ThemeColors.primaryThemeColor,
-              descTextStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              child: const JobsMobileChooseTargetLanguage()),
+          Expanded(
+            flex: 5,
+            child: Showcase(
+                key: asp.searchBar,
+                description: 'Use this search bar to search for jobs',
+                overlayOpacity: 0.6,
+                targetShapeBorder: const CircleBorder(),
+                tooltipBackgroundColor: ThemeColors.primaryThemeColor,
+                descTextStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                child: const WorkerMobileSearchBar()),
+          ),
+          Expanded(
+            child: Showcase(
+                key: asp.translation,
+                description:
+                    'For selecting the target language of the job description',
+                overlayOpacity: 0.6,
+                targetShapeBorder: const CircleBorder(),
+                targetBorderRadius: const BorderRadius.all(
+                  Radius.circular(10.0), // Example border radius
+                ),
+                tooltipBackgroundColor: ThemeColors.primaryThemeColor,
+                descTextStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                child: const JobsMobileChooseTargetLanguage()),
+          ),
         ],
       ),
     );

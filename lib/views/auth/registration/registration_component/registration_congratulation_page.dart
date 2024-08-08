@@ -57,56 +57,58 @@ class _RegistrationCongratulationPageState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        // const Icon(Icons.check_circle, color: Colors.green, size: 100),
-        const MyAnimation(
-          name: 'congratulationsConfetti',
-          width: 300,
-          height: 300,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          AppLocalizations.of(context)!.congratulations,
-          style: const TextStyle(
-            fontSize: 36,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Montserrat',
-            color: ThemeColors.secondaryThemeColor,
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          // const Icon(Icons.check_circle, color: Colors.green, size: 100),
+          const MyAnimation(
+            name: 'congratulationsConfetti',
+            width: 300,
+            height: 300,
           ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          AppLocalizations.of(context)!.youHaveSuccessfullySignedUp,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Montserrat',
-            color: ThemeColors.grey1ThemeColor,
-          ),
-        ),
-        const SizedBox(height: 20),
-        Text.rich(
-          TextSpan(
-            text: 'Wait/Espere ',
+          const SizedBox(height: 10),
+          Text(
+            AppLocalizations.of(context)!.congratulations,
             style: const TextStyle(
-                fontSize: 16,
-                color: ThemeColors.primaryThemeColor,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold),
-            children: <TextSpan>[
-              TextSpan(
-                text: '$countdownValue',
-                style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight
-                        .bold), // Increased font size for countdown value
-              ),
-              const TextSpan(text: '...'),
-            ],
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat',
+              color: ThemeColors.secondaryThemeColor,
+            ),
           ),
-        ),
-      ],
+          const SizedBox(height: 10),
+          Text(
+            AppLocalizations.of(context)!.youHaveSuccessfullySignedUp,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat',
+              color: ThemeColors.grey1ThemeColor,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text.rich(
+            TextSpan(
+              text: 'Wait/Espere ',
+              style: const TextStyle(
+                  fontSize: 16,
+                  color: ThemeColors.primaryThemeColor,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.bold),
+              children: <TextSpan>[
+                TextSpan(
+                  text: '$countdownValue',
+                  style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight
+                          .bold), // Increased font size for countdown value
+                ),
+                const TextSpan(text: '...'),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 

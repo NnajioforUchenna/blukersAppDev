@@ -143,6 +143,7 @@ class _UpdateWorkExperienceDateState extends State<UpdateWorkExperienceDate> {
                     },
                   ),
                 ),
+                const SizedBox(width: 5),
                 Transform.translate(
                   offset: const Offset(-10.0, 0.0),
                   child: Text('currently working here',

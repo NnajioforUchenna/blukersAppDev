@@ -28,39 +28,42 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
               ? MediaQuery.of(context).size.width * 0.3
               : MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              const SizedBox(height: 20),
-              Column(
-                children: [
-                  const ResumeProfilePhoto(),
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TimelineNavigationButton(
-                        isSelected: true,
-                        onPress: () {
-                          wp.workerProfileBackPage();
-                        },
-                        navDirection: "back",
-                      ),
-                      TimelineNavigationButton(
-                        isSelected: true,
-                        onPress: () {
-                          if (wp.appUser?.photoUrl != null) {
-                            wp.updateWorkerProfilePhoto(wp.appUser!.photoUrl!);
-                            wp.workerProfileNextPage();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(height: 20),
+                Column(
+                  children: [
+                    const ResumeProfilePhoto(),
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () {
+                            wp.workerProfileBackPage();
+                          },
+                          navDirection: "back",
+                        ),
+                        TimelineNavigationButton(
+                          isSelected: true,
+                          onPress: () {
+                            if (wp.appUser?.photoUrl != null) {
+                              wp.updateWorkerProfilePhoto(
+                                  wp.appUser!.photoUrl!);
+                              wp.workerProfileNextPage();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
