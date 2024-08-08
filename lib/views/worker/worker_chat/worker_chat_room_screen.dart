@@ -40,29 +40,27 @@ class _WorkerChatRoomScreenState extends State<WorkerChatRoomScreen> {
       return const Center(child: Text('Select a user to chat'));
     }
 
-    return  Column(
+    return Column(
       children: [
         Expanded(
           child: Container(
-            color: Color(0xFFFEF7FF),
+            color: const Color(0xFFFEF7FF),
             child: StreamBuilder<QuerySnapshot>(
                 stream: wcp.getMessagesByRoomId(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
                     List<QueryDocumentSnapshot<Object?>>? messages =
-                    snapshot.data?.docs.reversed.toList();
+                        snapshot.data?.docs.reversed.toList();
+
                     return ListView.builder(
                         reverse: true,
                         controller: _scrollController,
                         padding: const EdgeInsets.all(10),
                         itemCount: snapshot.data?.docs.length,
-                        // reverse: true,
-                        // controller: scrollController,
                         itemBuilder: (context, index) {
                           ChatMessage chatMessage = ChatMessage.fromMap(
-                              messages![index].data()
-                              as Map<String, dynamic>);
+                              messages![index].data() as Map<String, dynamic>);
                           bool isMe = (chatMessage.sentBy == up.appUser!.uid);
                           return ChatComponent(
                             message: chatMessage.message,
@@ -103,9 +101,8 @@ class _WorkerChatRoomScreenState extends State<WorkerChatRoomScreen> {
               IconButton(
                 icon: Icon(
                   Icons.send_outlined,
-                  color: (textMessage != "")
-                      ? Colors.blueGrey[900]
-                      : Colors.grey,
+                  color:
+                      (textMessage != "") ? Colors.blueGrey[900] : Colors.grey,
                 ),
                 onPressed: () {
                   if (textMessage == "") {

@@ -16,8 +16,6 @@ class DataNotificationProvider {
       'uid': uid,
     };
 
-    print('Sending notification with title: $title, body: $body, uid: $uid');
-
     try {
       final response = await http.post(
         Uri.parse(apiUrl),

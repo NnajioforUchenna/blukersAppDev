@@ -80,8 +80,10 @@ final routes = [
           path: '/searchJobs',
           builder: (context, state) => const SearchJobsUi()),
       GoRoute(
-          path: '/workerChat',
-          builder: (context, state) => const WorkerChat()),
+          path: '/workerChat', builder: (context, state) => const WorkerChat()),
+      GoRoute(
+          path: '/workerChatRoomScreen',
+          builder: (context, state) => const WorkerChatRoomScreen()),
       GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),
       GoRoute(
           path: '/jobSearchResults',
@@ -136,8 +138,8 @@ final routes = [
           path: '/workerSearchResults',
           builder: (context, state) => const WorkerSearchResultPage()),
       GoRoute(
-          path: '/workerChatRoomScreen',
-          builder: (context, state) => const WorkerChatRoomScreen()),
+          path: '/companyChatRoomScreen',
+          builder: (context, state) => const CompanyChatRoomScreen()),
       GoRoute(
           path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
       GoRoute(
@@ -177,22 +179,9 @@ final routes = [
       builder: (context, state) => const CreateWorkerProfile()),
 
   GoRoute(
-      path: '/company-worker_chat',
-      builder: (context, state) => const CompanyChat()),
-
-  // GoRoute(
-  //     path: '/workerChatRoom',
-  //     builder: (context, state) => const WorkerChatRoom()),
-
-  GoRoute(
       path: '/companyChatRoomScreen',
       builder: (context, state) => const CompanyChatRoomScreen()),
 
-  // GoRoute(
-  //     path: '/worker_chat-message',
-  //     builder: (context, state) => const ChatMessageScreen()),
-
-  // Profile Routes
   GoRoute(
       path: '/onlineResumeScreen',
       builder: (context, state) => const OnlineResumeScreen()),
