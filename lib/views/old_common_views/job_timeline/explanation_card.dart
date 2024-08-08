@@ -1,8 +1,9 @@
+import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
-
-import '../../../utils/styles/theme_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/styles/index.dart';
+import '../../../utils/styles/theme_colors.dart';
 
 class ExplanationCard extends StatelessWidget {
   final String title;
@@ -38,7 +39,7 @@ class ExplanationCard extends StatelessWidget {
             Text(
               title.toUpperCase(),
               style: TextStyle(
-                fontSize: 18,
+                fontSize: Responsive.isMobile(context) ? 16.sp : 18,
                 fontWeight: FontWeight.bold,
                 color: isPast
                     ? ThemeColors.secondaryThemeColor

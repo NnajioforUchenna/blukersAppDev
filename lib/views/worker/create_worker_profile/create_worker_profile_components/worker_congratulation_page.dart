@@ -49,36 +49,39 @@ class _WorkerCongratulationPageState extends State<WorkerCongratulationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Icon(Icons.check_circle, color: Colors.green, size: 100),
-            const SizedBox(height: 20),
-            Text(
-              '${AppLocalizations.of(context)!.congratulations}!',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            Text(AppLocalizations.of(context)!
-                .workerOnlineProfileCongratulationsDescription),
-            const SizedBox(height: 20),
-            Text.rich(
-              TextSpan(
-                text: 'Wait/Espere ',
-                style: const TextStyle(fontSize: 20),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: '$countdownValue',
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ), // Increased font size for countdown value
-                  ),
-                  const TextSpan(text: ' seconds...'),
-                ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Icon(Icons.check_circle, color: Colors.green, size: 100),
+              const SizedBox(height: 20),
+              Text(
+                '${AppLocalizations.of(context)!.congratulations}!',
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
+              Text(AppLocalizations.of(context)!
+                  .workerOnlineProfileCongratulationsDescription),
+              const SizedBox(height: 20),
+              Text.rich(
+                TextSpan(
+                  text: 'Wait/Espere ',
+                  style: const TextStyle(fontSize: 20),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '$countdownValue',
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ), // Increased font size for countdown value
+                    ),
+                    const TextSpan(text: ' seconds...'),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

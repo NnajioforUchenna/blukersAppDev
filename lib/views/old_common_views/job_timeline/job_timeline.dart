@@ -62,7 +62,6 @@ class JobTimeline extends StatelessWidget {
                 description =
                     AppLocalizations.of(context)!.workerJourneyStep3Text;
               }
-              final record = jobRecords[index];
               return MyJobTimeLine(
                 isFirst: index == 0,
                 isLast: index == jobRecords.length - 1,
@@ -90,7 +89,7 @@ class JobTimeline extends StatelessWidget {
               AppLocalizations.of(context)!.createProfile,
               context,
               () {
-                context.go('/createWorkerProfile');
+                context.go('/createResume');
               },
             ),
           const SizedBox(height: 20),

@@ -78,16 +78,19 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all<Color>(
+                    backgroundColor: MaterialStateProperty.all<Color>(
                       ThemeColors.blukersBlueThemeColor,
                     ),
                   ),
                   onPressed: () {
                     _selectDate(context);
                   },
-                  child: Text(_startDate == null
-                      ? AppLocalizations.of(context)!.startDate
-                      : "${AppLocalizations.of(context)!.startDate}: ${DateFormat('EEEE, d MMMM, y').format(_startDate!)}"),
+                  child: Text(
+                    _startDate == null
+                        ? AppLocalizations.of(context)!.startDate
+                        : "${AppLocalizations.of(context)!.startDate}: ${DateFormat('EEEE, d MMMM, y').format(_startDate!)}",
+                    style: const TextStyle(fontSize: 12, color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -108,9 +111,12 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
                           wp.workExperience[widget.intialIndex]
                               ['isCurrentlyWorking'] = false;
                         },
-                  child: Text(_endDate == null
-                      ? AppLocalizations.of(context)!.endDate
-                      : "${AppLocalizations.of(context)!.endDate}: ${DateFormat('EEEE, d MMMM, y').format(_endDate!)}"),
+                  child: Text(
+                    _endDate == null
+                        ? AppLocalizations.of(context)!.endDate
+                        : "${AppLocalizations.of(context)!.endDate}: ${DateFormat('EEEE, d MMMM, y').format(_endDate!)}",
+                    style: const TextStyle(fontSize: 12, color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -120,19 +126,21 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
           children: [
             const Spacer(),
             Text(AppLocalizations.of(context)!.areYouCurrentlyWorkingHere),
-            Checkbox(
-              value: _isCurrentlyWorking,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isCurrentlyWorking = value!;
-                  if (_isCurrentlyWorking) {
-                    _endDate = null;
-                  }
-                });
+            Expanded(
+              child: Checkbox(
+                value: _isCurrentlyWorking,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _isCurrentlyWorking = value!;
+                    if (_isCurrentlyWorking) {
+                      _endDate = null;
+                    }
+                  });
 
-                wp.workExperience[widget.intialIndex]['isCurrentlyWorking'] =
-                    _isCurrentlyWorking;
-              },
+                  wp.workExperience[widget.intialIndex]['isCurrentlyWorking'] =
+                      _isCurrentlyWorking;
+                },
+              ),
             )
           ],
         ),
