@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../common_files/constants.dart';
@@ -44,7 +45,11 @@ class WorkerDetailBlockOne extends StatelessWidget {
             const SizedBox(height: 15),
             Row(
               children: [
-                Text(worker.timeAgo ?? ''),
+                Text(
+                  worker.timeAgo ?? '',
+                  style: TextStyle(
+                      fontSize: Responsive.isMobile(context) ? 14.sp : 20),
+                ),
                 const Spacer(),
                 IconButton(
                     onPressed: () {
@@ -75,23 +80,23 @@ class WorkerDetailBlockOne extends StatelessWidget {
                   worker.workerResumeDetails?.firstName ?? '',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24 * scaleFactor,
+                    fontSize: Responsive.isMobile(context) ? 18.sp : 24,
                   ),
                 ),
                 const SizedBox(width: 10),
                 Text(
                   worker.workerResumeDetails?.middleName ?? '',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                    fontSize: Responsive.isMobile(context) ? 18.sp : 24,
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: Responsive.isMobile(context) ? 2.w : 10),
                 Text(
                   worker.workerResumeDetails?.lastName ?? '',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                    fontSize: Responsive.isMobile(context) ? 18.sp : 24,
                   ),
                 )
               ],
@@ -122,8 +127,8 @@ class WorkerDetailBlockOne extends StatelessWidget {
                       Text(
                         worker.workerResumeDetails?.skillIds?.join(', ') ?? '',
                         // TODO: Change this to worker?.jobIds?.join(', ') ?? '',
-                        style: const TextStyle(
-                          fontSize: 24,
+                        style: TextStyle(
+                          fontSize: Responsive.isMobile(context) ? 17.sp : 24,
                           color: Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),
@@ -184,7 +189,9 @@ class WorkerDetailBlockOne extends StatelessWidget {
                             context: context,
                             builder: (context) => up.isUserCompanyProfile()
                                 ? Container(
-                              padding: Responsive.isDesktop(context) ? const EdgeInsets.all(150) : const EdgeInsets.all(30),
+                                    padding: Responsive.isDesktop(context)
+                                        ? const EdgeInsets.all(150)
+                                        : const EdgeInsets.all(30),
                                     child: const CompanyChatRoomScreen())
                                 : const PleaseCreateCompanyProfile());
                       }

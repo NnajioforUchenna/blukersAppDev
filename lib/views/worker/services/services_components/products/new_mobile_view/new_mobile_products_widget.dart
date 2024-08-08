@@ -7,14 +7,10 @@ import '../../../../../../common_files/constants.dart';
 import 'product_card.dart';
 
 class NewMobileProductsWidget extends StatelessWidget {
-  // final ProductProvider productProvider;
-  // const NewMobileProductsWidget({super.key, required this.productProvider});
   const NewMobileProductsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // List<ProductModel> listProducts = productProvider.products;
-
     String getTitle(title) {
       if (title.toString().toLowerCase() == "employment") {
         return AppLocalizations.of(context)!.employmentVerification1;
@@ -42,22 +38,12 @@ class NewMobileProductsWidget extends StatelessWidget {
             for (var product in listProducts)
               ProductCard(
                 color: product['color'],
-                // title: product['title'],
                 title: getTitle(product['title']),
-                // subtitle: product['subtitle'],
                 subtitle: getTitle(product['subtitle']),
                 amount: product['amount'],
                 productId: product['productId'],
                 details: product['details'],
               )
-            // ProductCard(
-            //   color: Colors.blue.shade700,
-            //   title: product.name,
-            //   subtitle: '',
-            //   amount: product.regularPrice.toString(),
-            //   productId: product.id,
-            //   details: [''],
-            // )
           ],
         )
       ],

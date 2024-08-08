@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../../../../services/responsive.dart';
 import 'get_subscription_button.dart';
 
 class MobileSubscriptionDetailsWidget extends StatelessWidget {
@@ -89,7 +91,7 @@ class MobileSubscriptionDetailsWidget extends StatelessWidget {
                       title.toUpperCase(),
                       style: GoogleFonts.montserrat(
                           color: Colors.grey[800],
-                          fontSize: 40.0,
+                          fontSize: Responsive.isMobile(context) ? 20.sp : 40.0,
                           fontWeight: FontWeight.bold),
                     ),
                     if (subtitle.isNotEmpty)
@@ -97,21 +99,21 @@ class MobileSubscriptionDetailsWidget extends StatelessWidget {
                         subtitle.toUpperCase(),
                         style: GoogleFonts.montserrat(
                           color: Colors.grey[800],
-                          fontSize: 28.0,
+                          fontSize: Responsive.isMobile(context) ? 15.sp : 28.0,
                         ),
                       ),
                     Text(
                       "\$$amount",
                       style: GoogleFonts.montserrat(
                           color: color,
-                          fontSize: 80.0,
+                          fontSize: Responsive.isMobile(context) ? 30.sp : 80.0,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
                       AppLocalizations.of(context)!.monthly,
                       style: GoogleFonts.montserrat(
                         color: color,
-                        fontSize: 30.0,
+                        fontSize: Responsive.isMobile(context) ? 20.sp : 30.0,
                       ),
                     ),
                   ],

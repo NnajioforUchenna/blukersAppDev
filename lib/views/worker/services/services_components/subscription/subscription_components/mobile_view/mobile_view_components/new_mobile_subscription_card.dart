@@ -1,4 +1,6 @@
+import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -77,7 +79,8 @@ class MobileSubscriptionCard extends StatelessWidget {
                             TextSpan(
                               text: "${title.toUpperCase()} ",
                               style: GoogleFonts.montserrat(
-                                fontSize: 28.0,
+                                fontSize:
+                                    Responsive.isMobile(context) ? 18.sp : 28,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -87,7 +90,8 @@ class MobileSubscriptionCard extends StatelessWidget {
                                 text: subtitle
                                     .toUpperCase(), // Added a newline for separation
                                 style: GoogleFonts.montserrat(
-                                  fontSize: 20.0,
+                                  fontSize:
+                                      Responsive.isMobile(context) ? 13.sp : 20,
                                   color: Colors.white,
                                 ),
                               ),
@@ -118,8 +122,8 @@ class MobileSubscriptionCard extends StatelessWidget {
             bottom: 10,
             left: 10,
             child: DiagonalShape(
-              height: height * 0.1,
-              width: width * 0.4,
+              height: height * 0.12,
+              width: width * 0.45,
             ), // Replace with the widget you want to position
           ),
           Positioned(

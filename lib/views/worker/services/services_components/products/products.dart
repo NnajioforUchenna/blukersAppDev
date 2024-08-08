@@ -9,8 +9,4 @@ class Products extends StatelessWidget {
   Widget build(BuildContext context) {
     return const NewMobileProductsWidget();
   }
-
-  // return Responsive.isMobile(context)
-  // ? const NewMobileProductsWidget()
-  //     : const DesktopProductsWidget();
 }
