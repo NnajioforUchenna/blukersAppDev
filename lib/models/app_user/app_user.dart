@@ -255,4 +255,12 @@ class AppUser {
       return "Display Name";
     }
   }
+
+  String get getCompanyName {
+    if (company != null) {
+      return company!.name;
+    } else {
+      return 'Company Name not Given';
+    }
+  }
 }

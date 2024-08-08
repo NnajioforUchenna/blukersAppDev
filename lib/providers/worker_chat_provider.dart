@@ -11,9 +11,18 @@ class WorkerChatProvider with ChangeNotifier {
   List<ChatRecipient> chatRecipients = [];
   ChatRecipient? selectedChatRecipient;
 
+  int unreadMessageCount = 0;
+
+  WorkerChatProvider() {
+    if (appUser != null) {
+      startListeningToUnreadMessage(appUser!.uid);
+    }
+  }
+
   update(AppUser? user) {
     appUser = user;
     if (appUser != null) {
+      startListeningToUnreadMessage(appUser!.uid);
       notifyListeners();
     }
   }
@@ -49,6 +58,10 @@ class WorkerChatProvider with ChangeNotifier {
         roomId: roomId,
         sentToId: sentToId,
         sentByName: sentByName);
+
+    ChatDataProvider.updateBothChatListsWorker(appUser, selectedChatRecipient);
+
+    notifyListeners();
   }
 
   void setChatRecipient(ChatRecipient chatRecipient) {
@@ -61,6 +74,20 @@ class WorkerChatProvider with ChangeNotifier {
 
   getMessagesByRoomId() {
     String roomId = getRoomId();
+    updateReadStatus();
     return ChatDataProvider.fetchMessagesByGroupId(roomId);
+  }
+
+  void startListeningToUnreadMessage(String uid) {
+    ChatDataProvider.getUnreadMessageCountStream(uid).listen((event) {
+      unreadMessageCount = event;
+      notifyListeners();
+    });
+  }
+
+  Future<void> updateReadStatus() async {
+    selectedChatRecipient!.unreadMessageCount = 0;
+    await ChatDataProvider.updateUnreadMessageCount(
+        appUser!.uid, selectedChatRecipient!.uid, 0);
   }
 }

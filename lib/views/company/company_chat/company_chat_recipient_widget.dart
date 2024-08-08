@@ -1,25 +1,25 @@
-import 'package:blukers/models/chat_recipient.dart';
+import 'package:blukers/providers/company_chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/worker_chat_provider.dart';
+import '../../../models/chat_recipient.dart';
 
-class ChatRecipientWidget extends StatelessWidget {
+class CompanyChatRecipientWidget extends StatelessWidget {
   final ChatRecipient? chatRecipient;
-  const ChatRecipientWidget({super.key, this.chatRecipient});
+  const CompanyChatRecipientWidget({super.key, this.chatRecipient});
 
   @override
   Widget build(BuildContext context) {
-    WorkerChatProvider wp = Provider.of<WorkerChatProvider>(context);
+    CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
     String photoUrl =
         chatRecipient?.photoUrl ?? 'assets/images/companyLogoPage.png';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: GestureDetector(
         onTap: () {
-          wp.setChatRecipient(chatRecipient!);
-          context.push('/workerChatRoomScreen');
+          cp.setChatRecipient(chatRecipient!);
+          context.push('/companyChatRoomScreen');
         },
         child: Material(
           borderRadius: BorderRadius.circular(10),

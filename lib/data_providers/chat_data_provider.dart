@@ -1,7 +1,6 @@
 import 'package:blukers/data_providers/push_notification.dart';
 import 'package:blukers/models/chat_recipient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:http/http.dart' as http;
 
 import '../models/app_user/app_user.dart';
 import '../models/chat_message.dart';
@@ -59,21 +58,6 @@ class ChatDataProvider {
         title: '$sentByName sent you a message',
         body: chatMessage.message,
         uid: sentToId);
-
-    var res = await http.post(
-        Uri.parse(
-            "https://sendmessagepushnotifications-v2xxr3wlvq-uc.a.run.app"),
-        headers: {
-          // "Accept": "application/json",
-          "Access-Control-Allow-Origin": "*"
-        },
-        body: {
-          "sentToId": sentToId,
-          "roomId": roomId,
-          "sentByName": sentByName,
-          "message": chatMessage.message
-        });
-    print("res:: $res");
   }
 
   static updateLastMEssage(String chatMessage, String roomId) async {
@@ -183,18 +167,25 @@ class ChatDataProvider {
     });
   }
 
-  static void updateUnreadMessageCount(String uid, String uid2, int i) {
-    firestore
-        .collection('chat')
-        .doc(uid)
-        .collection('chat-recipients')
-        .doc(uid2)
+  static Future<void> updateUnreadMessageCount(
+      String workerUID, String companyUID, int i) async {
+    await firestore
+        .collection('ChatLists')
+        .doc(workerUID)
+        .collection('WorkerChatLists')
+        .doc(companyUID)
         .update({'unreadMessageCount': i});
   }
 
-  static void updateBothChatLists(
-      AppUser? appUser, ChatRecipient? selectedChatRecipient) {
+  static Future<void> updateBothChatLists(AppUser? appUser,
+      ChatRecipient? selectedChatRecipient, String userType) async {
     ChatRecipient chatRecipient = ChatRecipient.fromAppUser(appUser!);
+    chatRecipient.clientType = userType;
+
+    int previousUnreadMessageCount = await getPreviousUnreadMessageCount(
+        appUser.uid, selectedChatRecipient!.uid);
+
+    chatRecipient.unreadMessageCount = previousUnreadMessageCount + 1;
 
     firestore
         .collection('ChatLists')
@@ -211,7 +202,7 @@ class ChatDataProvider {
         .set(chatRecipient.toMap());
   }
 
-  static Stream<List<ChatRecipient>> getWorkerChatRecipientsStream(String uid ) {
+  static Stream<List<ChatRecipient>> getWorkerChatRecipientsStream(String uid) {
     return firestore
         .collection('ChatLists')
         .doc(uid)
@@ -220,5 +211,135 @@ class ChatDataProvider {
         .map((snapshot) => snapshot.docs
             .map((doc) => ChatRecipient.fromMap(doc.data()))
             .toList());
+  }
+
+  static Future<int> getPreviousUnreadMessageCount(
+      String companyUID, String workerUID) async {
+    try {
+      // Access the Firestore collection
+      var documentSnapshot = await firestore
+          .collection('ChatLists')
+          .doc(workerUID)
+          .collection('WorkerChatLists')
+          .doc(companyUID)
+          .get();
+
+      // Check if the document exists
+      if (documentSnapshot.exists) {
+        // Retrieve the unreadMessageCount parameter
+        var data = documentSnapshot.data();
+        return data?['unreadMessageCount'] ?? 0;
+      } else {
+        // Document does not exist
+        return 0;
+      }
+    } catch (e) {
+      // Handle any errors
+      print('Error getting unread message count: $e');
+      return 0;
+    }
+  }
+
+  static Stream<int> getUnreadMessageCountStream(String workerUID) async* {
+    await for (var querySnapshot in firestore
+        .collection('ChatLists')
+        .doc(workerUID)
+        .collection('WorkerChatLists')
+        .snapshots()) {
+      int totalUnreadMessages = 0;
+
+      // Iterate over all documents in the snapshot
+      for (var doc in querySnapshot.docs) {
+        var data = doc.data();
+        int unreadMessageCount = data['unreadMessageCount'] ?? 0;
+        totalUnreadMessages += unreadMessageCount;
+      }
+
+      // Yield the total unread messages count
+      yield totalUnreadMessages;
+    }
+  }
+
+  static Stream<int> getUnreadMessageCountStreamCompany(
+      String workerUID) async* {
+    await for (var querySnapshot in firestore
+        .collection('ChatLists')
+        .doc(workerUID)
+        .collection('CompanyChatLists')
+        .snapshots()) {
+      int totalUnreadMessages = 0;
+
+      // Iterate over all documents in the snapshot
+      for (var doc in querySnapshot.docs) {
+        var data = doc.data();
+        int unreadMessageCount = data['unreadMessageCount'] ?? 0;
+        totalUnreadMessages += unreadMessageCount;
+      }
+
+      // Yield the total unread messages count
+      yield totalUnreadMessages;
+    }
+  }
+
+  static Future<void> updateBothChatListsWorker(
+      AppUser? appUser, ChatRecipient? selectedChatRecipient) async {
+    ChatRecipient chatRecipient = ChatRecipient.fromAppUserWorker(appUser!);
+    chatRecipient.clientType = "Worker";
+
+    int previousUnreadMessageCount = await getPreviousUnreadMessageCount4Worker(
+        appUser.uid, selectedChatRecipient!.uid);
+
+    chatRecipient.unreadMessageCount = previousUnreadMessageCount + 1;
+
+    firestore
+        .collection('ChatLists')
+        .doc(appUser.uid)
+        .collection('WorkerChatLists')
+        .doc(selectedChatRecipient!.uid)
+        .set(selectedChatRecipient.toMap());
+
+    firestore
+        .collection('ChatLists')
+        .doc(selectedChatRecipient.uid)
+        .collection('CompanyChatLists')
+        .doc(appUser.uid)
+        .set(chatRecipient.toMap());
+  }
+
+  static Future<int> getPreviousUnreadMessageCount4Worker(
+      String companyUID, String workerUID) async {
+    try {
+      // Access the Firestore collection
+      var documentSnapshot = await firestore
+          .collection('ChatLists')
+          .doc(workerUID)
+          .collection('CompanyChatLists')
+          .doc(companyUID)
+          .get();
+
+      // Check if the document exists
+      if (documentSnapshot.exists) {
+        // Retrieve the unreadMessageCount parameter
+        var data = documentSnapshot.data();
+        return data?['unreadMessageCount'] ?? 0;
+      } else {
+        // Document does not exist
+        return 0;
+      }
+    } catch (e) {
+      // Handle any errors
+      print('Error getting unread message count: $e');
+      return 0;
+    }
+  }
+
+  static Future<void> updateUnreadMessageCountCompany(
+      String workerUID, String companyUID, int i) async {
+    await firestore
+        .collection('ChatLists')
+        .doc(workerUID)
+        .collection('CompanyChatLists')
+        .doc(companyUID)
+        .update({'unreadMessageCount': i});
   }
 }
