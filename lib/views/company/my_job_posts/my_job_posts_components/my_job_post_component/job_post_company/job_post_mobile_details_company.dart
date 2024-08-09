@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/job_post.dart';
 import '../../../../../../providers/company_provider.dart';
+import '../../../../../../services/responsive.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../old_common_views/small_pop_button_widget.dart';
 import '../../../../../worker/saved/mobile_job_post_details_components/mobile_detail_page_block_five.dart';
@@ -54,38 +56,45 @@ class _JobPostMobileDetailsCompanyState
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: ThemeColors.secondaryThemeColor,
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: ThemeColors.secondaryThemeColor,
+                            textStyle: TextStyle(
+                              fontSize:
+                                  Responsive.isMobile(context) ? 10.sp : 14,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return DeleteDialog(jobPost: widget.jobPost);
+                              },
+                            );
+                          },
+                          child: const Text('Delete Job Post'),
                         ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return DeleteDialog(jobPost: widget.jobPost);
-                            },
-                          );
-                        },
-                        child: const Text('Delete Job Post'),
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: ThemeColors.secondaryThemeColor,
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+                      SizedBox(width: 5.w),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: ThemeColors.secondaryThemeColor,
+                            textStyle: TextStyle(
+                              fontSize:
+                                  Responsive.isMobile(context) ? 10.sp : 14,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
+                          onPressed: () {
+                            // editJobPost(context);
+                          },
+                          child: const Text('Edit Job Post'),
                         ),
-                        onPressed: () {
-                          // editJobPost(context);
-                        },
-                        child: const Text('Edit Job Post'),
                       ),
                     ],
                   ),

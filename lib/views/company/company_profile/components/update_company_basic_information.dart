@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../utils/styles/index.dart';
+import '../../../../services/responsive.dart';
 import '../../../old_common_views/small_pop_button_widget.dart';
 
 class UpdateCompanyBasicInformation extends StatefulWidget {
@@ -96,7 +98,7 @@ class _UpdateCompanyBasicInformationState
                   ),
                   Container(
                     height: height * 0.03,
-                    width: width * 0.25,
+                    width: width * 0.30,
                     margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
                     child: ElevatedButton(
                       onPressed: () {
@@ -121,7 +123,7 @@ class _UpdateCompanyBasicInformationState
                         'Update',
                         style: GoogleFonts.montserrat(
                           color: Colors.white,
-                          fontSize: 12.0,
+                          fontSize: Responsive.isMobile(context) ? 9.sp : 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
