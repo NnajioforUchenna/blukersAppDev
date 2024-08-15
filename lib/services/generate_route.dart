@@ -92,6 +92,13 @@ final routes = [
           path: '/workerProfile',
           builder: (context, state) => const WorkerProfile()),
       GoRoute(
+          path: '/createResume',
+          builder: (context, state) => const CreateWorkerProfile()),
+
+      GoRoute(
+          path: '/createWorkerProfile',
+          builder: (context, state) => const CreateWorkerProfile()),
+      GoRoute(
           path: '/workerOffers',
           builder: (context, state) => const ServicesList()),
       GoRoute(path: '/pathToJob', builder: (context, state) => WorkerPath()),
@@ -142,9 +149,16 @@ final routes = [
           builder: (context, state) => const CompanyChatRoomScreen()),
       GoRoute(
           path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
+      // JobPost Routes
+      GoRoute(
+          path: '/createJobPost',
+          builder: (context, state) => const CreateJobPost()),
       GoRoute(
           path: '/companyProfile',
           builder: (context, state) => const CompanyProfile()),
+      GoRoute(
+          path: '/createCompanyProfile',
+          builder: (context, state) => const CreateCompanyProfile()),
       GoRoute(
           path: '/companyChat',
           builder: (context, state) => const CompanyChat()),
@@ -174,9 +188,7 @@ final routes = [
     ],
   ),
 
-  GoRoute(
-      path: '/createResume',
-      builder: (context, state) => const CreateWorkerProfile()),
+
 
   GoRoute(
       path: '/companyChatRoomScreen',
@@ -233,17 +245,9 @@ final routes = [
       path: '/forgot-password',
       builder: (context, state) => const ResetPasswordPage()),
 
-  // JobPost Routes
-  GoRoute(
-      path: '/createJobPost',
-      builder: (context, state) => const CreateJobPost()),
-  GoRoute(
-      path: '/createWorkerProfile',
-      builder: (context, state) => const CreateWorkerProfile()),
+
   GoRoute(path: '/applicants', builder: (context, state) => const Applicants()),
-  GoRoute(
-      path: '/createCompanyProfile',
-      builder: (context, state) => const CreateCompanyProfile()),
+
 
   // Services Routes
   GoRoute(

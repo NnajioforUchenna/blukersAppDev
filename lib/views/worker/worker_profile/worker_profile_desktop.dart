@@ -16,8 +16,7 @@ class WorkerProfileDesktop extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.all(8.0),
                   child: Center(
-                    child: Image.asset(
-                      '../../../assets/images/desktopprofilepic.png',
+                    child: Image.asset('assets/images/desktopprofilepic.png',
                       width: 900,
                       height: 1000,
                     ),
