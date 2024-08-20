@@ -169,6 +169,7 @@ class _CompanyCharacteristicsPageState
                           onPress: () async {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
+                              FocusScope.of(context).unfocus();
                               bool result = await cp.addCompanyCharacteristics(
                                 companySizeController.text,
                                 industryController.text,

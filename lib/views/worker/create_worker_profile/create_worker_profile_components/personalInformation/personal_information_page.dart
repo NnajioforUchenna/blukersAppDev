@@ -272,6 +272,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         isSelected: isFormComplete(),
                         onPress: () {
                           if (isFormComplete()) {
+                             FocusScope.of(context).unfocus();
                             wp.addPersonalInformtion(
                               firstNameController.text,
                               middleNameController.text,
