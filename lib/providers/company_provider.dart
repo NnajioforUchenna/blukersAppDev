@@ -100,38 +100,38 @@ class CompanyProvider with ChangeNotifier {
     ImagePicker imagePicker = ImagePicker();
     final XFile? image =
         await imagePicker.pickImage(source: ImageSource.gallery);
-
+    if (image == null) {
+      return;
+    }
     EasyLoading.show(
       status: 'Uploading Your Profile Image...',
       maskType: EasyLoadingMaskType.black,
     );
-    // Checking the size of the selected file
-    if (image != null) {
-      Uint8List bytes = await image.readAsBytes();
-      int sizeInBytes = bytes.lengthInBytes;
-      double sizeInMB = sizeInBytes / (1024 * 1024);
 
-      if (sizeInMB > 10) {
-        EasyLoading.dismiss();
-        EasyLoading.showError(
-            'Selected file is more than 10 MB. Please select a smaller file.');
-        return;
-      }
+    Uint8List bytes = await image.readAsBytes();
+    int sizeInBytes = bytes.lengthInBytes;
+    double sizeInMB = sizeInBytes / (1024 * 1024);
 
-      String result = await CompanyDataProvider.uploadImageToFirebaseStorage(
-          appUser!.uid, await image.readAsBytes(), image.name.split('.').last);
-      // If the result is not an error, then update the logoUrl of the Worker.
-      if (result != 'error') {
-        appUser?.photoUrl = result;
-        EasyLoading.dismiss();
-        EasyLoading.showSuccess('Uploaded your profile image successfully.');
-        notifyListeners();
-        createCompanyProfileData['logoUrl'] = result;
-      } else {
-        EasyLoading.dismiss();
-        EasyLoading.showError(
-            'An error occurred while uploading your profile image. Please try again.');
-      }
+    if (sizeInMB > 10) {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+          'Selected file is more than 10 MB. Please select a smaller file.');
+      return;
+    }
+
+    String result = await CompanyDataProvider.uploadImageToFirebaseStorage(
+        appUser!.uid, await image.readAsBytes(), image.name.split('.').last);
+    // If the result is not an error, then update the logoUrl of the Worker.
+    if (result != 'error') {
+      appUser?.photoUrl = result;
+      EasyLoading.dismiss();
+      EasyLoading.showSuccess('Uploaded your profile image successfully.');
+      notifyListeners();
+      createCompanyProfileData['logoUrl'] = result;
+    } else {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+          'An error occurred while uploading your profile image. Please try again.');
     }
   }
 
