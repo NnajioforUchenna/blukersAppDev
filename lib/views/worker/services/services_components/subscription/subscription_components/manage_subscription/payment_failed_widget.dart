@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentFailedWidget extends StatelessWidget {
   const PaymentFailedWidget({super.key});
@@ -53,8 +53,7 @@ class PaymentFailedWidget extends StatelessWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                // context.go('/membership');
-                context.go('/offers');
+                context.go('/workerOffers');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
