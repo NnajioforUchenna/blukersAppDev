@@ -14,7 +14,7 @@ class CreateJobPostMobile extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.createJobPost),
       ),
       body: SizedBox(
-        height:double.infinity ,
+        height:double.infinity,
         width: double.infinity,
         child: Column(
           children: [
