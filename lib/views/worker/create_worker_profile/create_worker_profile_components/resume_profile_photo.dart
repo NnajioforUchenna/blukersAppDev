@@ -12,23 +12,23 @@ class ResumeProfilePhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     WorkersProvider wp = Provider.of<WorkersProvider>(context);
     String? logoUrl = wp.appUser?.workerResumeDetails?.profilePhotoUrl;
-    return Card(
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 30),
-              InkWell(
-                onTap: () {
+    return InkWell(
+       onTap: () {
                   wp.selectProfilePhoto(context);
                 },
-                child: SizedBox(
+      child: Card(
+        elevation: 2.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 30),
+                SizedBox(
                   height: 150,
                   width: 150,
                   child: ClipRRect(
@@ -57,11 +57,11 @@ class ResumeProfilePhoto extends StatelessWidget {
                           ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 30),
-            ],
-          ),
-        ],
+                const SizedBox(height: 30),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
