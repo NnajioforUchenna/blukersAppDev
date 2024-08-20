@@ -24,34 +24,32 @@ class SearchAndTranslateRow extends StatelessWidget {
         ),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align items with space between them
         children: [
           Showcase(
-              key: asp.searchBar,
-              description: 'Use this search bar to search for jobs',
-              overlayOpacity: 0.6,
-              targetShapeBorder: const CircleBorder(),
-              tooltipBackgroundColor: ThemeColors.primaryThemeColor,
-              descTextStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              child: const JobMobileSearchBar()),
+            key: asp.searchBar,
+            description: 'Use this search bar to search for jobs',
+            overlayOpacity: 0.6,
+            
+            tooltipBackgroundColor: ThemeColors.primaryThemeColor,
+            descTextStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            child: const JobMobileSearchBar(),
+          ),
           Showcase(
-              key: asp.translation,
-              description:
-                  'For selecting the target language of the job description',
-              overlayOpacity: 0.6,
-              targetShapeBorder: const CircleBorder(),
-              targetBorderRadius: const BorderRadius.all(
-                Radius.circular(10.0),
-              ),
-              tooltipBackgroundColor: ThemeColors.primaryThemeColor,
-              descTextStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              child: const JobsMobileChooseTargetLanguage()),
+            key: asp.translation,
+            description: 'For selecting the target language of the job description',
+            overlayOpacity: 0.6,
+            tooltipBackgroundColor: ThemeColors.primaryThemeColor,
+            descTextStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            child: const JobsMobileChooseTargetLanguage(),
+          ),
         ],
       ),
     );
