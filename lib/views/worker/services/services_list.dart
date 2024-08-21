@@ -1,3 +1,5 @@
+import 'package:blukers/views/worker/services/services_components/show_service_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,13 +26,14 @@ class ServicesList extends StatelessWidget {
   Widget buildServiceCards(BuildContext context) {
     return Column(
       children: [
+
         for (var service in listServices)
           ServiceCard(
             title: getTitle(context, service['title']!),
             description: service['description']!,
             route: service['route']!,
             service: service['service']!,
-            color: service['color'],
+            color: service['color'], servicesDesc: service['services_desc']!,
           ),
       ],
     );

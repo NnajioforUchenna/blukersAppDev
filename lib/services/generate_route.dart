@@ -2,6 +2,7 @@ import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
 import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
 import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
+import 'package:blukers/views/worker/faq/worker_faq.dart';
 import 'package:blukers/views/worker/worker_chat/worker_chat.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
@@ -101,6 +102,9 @@ final routes = [
       GoRoute(
           path: '/showJobsByPreferences',
           builder: (context, state) => const ShowJobsByPreferences()),
+      GoRoute(
+          path: '/workerFAQ',
+          builder: (context, state) => const FrequentlyAskQuestions()),
       GoRoute(
         path: '/setJobsPreferences',
         builder: (context, state) => const SetJobsPreferences(),

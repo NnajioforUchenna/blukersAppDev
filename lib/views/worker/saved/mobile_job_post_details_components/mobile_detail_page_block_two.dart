@@ -40,7 +40,7 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                         text: "${AppLocalizations.of(context)!.industry}: ",
                         style: const TextStyle(
                           fontSize: 13,
-                          color: Color.fromARGB(255, 62, 62, 62),
+                          color: Colors.grey,
                           fontFamily: 'Montserrat',
                         )),
                     TextSpan(
@@ -49,7 +49,7 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                             : AppLocalizations.of(context)!.notSpecified,
                         style: const TextStyle(
                           fontSize: 13,
-                          color: Colors.grey,
+                          color: Color.fromARGB(255, 62, 62, 62),
                           fontFamily: 'Montserrat',
                         )),
                   ],
@@ -74,7 +74,7 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                         text: "${AppLocalizations.of(context)!.jobPosition}: ",
                         style: const TextStyle(
                           fontSize: 13,
-                          color: Color.fromARGB(255, 62, 62, 62),
+                          color: Colors.grey,
                           fontFamily: 'Montserrat',
                         )),
                     TextSpan(
@@ -83,7 +83,7 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                             : AppLocalizations.of(context)!.notSpecified,
                         style: const TextStyle(
                           fontSize: 13,
-                          color: Colors.grey,
+                          color: Colors.black,
                           fontFamily: 'Montserrat',
                         )),
                   ],
@@ -108,7 +108,7 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                         text: "${AppLocalizations.of(context)!.skills}: ",
                         style: const TextStyle(
                           fontSize: 13,
-                          color: Color.fromARGB(255, 62, 62, 62),
+                          color: Colors.grey,
                           fontFamily: 'Montserrat',
                         )),
                     TextSpan(
@@ -117,7 +117,7 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                             : AppLocalizations.of(context)!.notSpecified,
                         style: const TextStyle(
                           fontSize: 13,
-                          color: Colors.grey,
+                          color: Colors.black,
                           fontFamily: 'Montserrat',
                         )),
                   ],

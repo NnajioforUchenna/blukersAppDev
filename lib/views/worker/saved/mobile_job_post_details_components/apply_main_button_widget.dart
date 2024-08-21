@@ -13,47 +13,68 @@ class ApplyButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    double topPadding = MediaQuery.of(context).size.height * 0.05;
     bool isJobApplied = !up.isJobPostApplied(jobPost.jobPostId ?? '');
-    return Container(
-      margin: EdgeInsets.only(top: topPadding),
-      child: Row(
-        children: [
-          const Spacer(),
-          SizedBox(
-              width: 200,
-              child: ElevatedButton(
-                onPressed: isJobApplied
-                    ? () {
-                        up.checkAndApplyJobPost(context, jobPost);
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  textStyle: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        30.0), // Adjust the radius as needed
-                  ),
-                  backgroundColor: isJobApplied
-                      ? ThemeColors.secondaryThemeColor
-                      : Colors.grey,
-                ),
-                child: Center(
-                  // Center the text inside the button
-                  child: Text(
-                    isJobApplied
-                        ? AppLocalizations.of(context)!.apply.toUpperCase()
-                        : AppLocalizations.of(context)!.alreadyApplied,
-                    style: GoogleFonts.montserrat(color: Colors.white),
-                  ),
-                ),
-              )),
-          const Spacer(),
-        ],
+    return InkWell(
+      onTap: isJobApplied
+          ? () {
+        up.checkAndApplyJobPost(context, jobPost);
+      }
+          : null,
+      child: Container(
+        height: 50.0,
+        decoration:  BoxDecoration(
+          color: isJobApplied
+              ? ThemeColors.blukersBlueThemeColor
+              : Colors.grey, // Example background color
+          borderRadius: const BorderRadius.all(
+            Radius.circular(50.0), // Adjust the radius as needed
+          ),
+        ),
+
+        child: Center(
+          // Center the text inside the button
+          child: Text(
+            isJobApplied
+                ? AppLocalizations.of(context)!.apply.toUpperCase()
+                : AppLocalizations.of(context)!.alreadyApplied,
+            style: GoogleFonts.montserrat(color: Colors.white),
+          ),
+        ),
+        // child: Row(
+        //   children: [
+        //     const Spacer(),
+        //     SizedBox(
+        //         width: 200,
+        //         child: ElevatedButton(
+        //           onPressed: isJobApplied
+        //               ? () {
+        //                   up.checkAndApplyJobPost(context, jobPost);
+        //                 }
+        //               : null,
+        //           style: ElevatedButton.styleFrom(
+        //             padding: const EdgeInsets.symmetric(vertical: 10),
+        //             textStyle: const TextStyle(
+        //               fontSize: 14,
+        //               fontWeight: FontWeight.w600,
+        //             ),
+        //             shape: RoundedRectangleBorder(
+        //               borderRadius: BorderRadius.circular(
+        //                   30.0), // Adjust the radius as needed
+        //             ),
+        //           ),
+        //           child: Center(
+        //             // Center the text inside the button
+        //             child: Text(
+        //               isJobApplied
+        //                   ? AppLocalizations.of(context)!.apply.toUpperCase()
+        //                   : AppLocalizations.of(context)!.alreadyApplied,
+        //               style: GoogleFonts.montserrat(color: Colors.white),
+        //             ),
+        //           ),
+        //         )),
+        //     const Spacer(),
+        //   ],
+        // ),
       ),
     );
   }

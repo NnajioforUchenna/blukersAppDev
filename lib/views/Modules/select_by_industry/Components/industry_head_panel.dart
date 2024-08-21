@@ -71,8 +71,8 @@ class _IndustryHeadPanelState extends State<IndustryHeadPanel> {
                     )),
                     Container(
                         margin: const EdgeInsets.only(right: 10),
-                        child: const Icon(
-                          Icons.arrow_forward_ios,
+                        child: Icon( isExpanded ?
+                          Icons.keyboard_arrow_down : Icons.navigate_next_sharp,
                           color: ThemeColors.grey1ThemeColor,
                         ))
                   ],

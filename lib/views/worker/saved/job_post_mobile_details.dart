@@ -34,17 +34,28 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
           child: Container(
             padding: EdgeInsets.only(left: 25, top: topPadding, right: 15),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MobileDetailPageBlockOne(jobPost: widget.jobPost),
-                MobileDetailPageBlockTwo(jobPost: widget.jobPost),
-                MobileDetailPageBlockThree(jobPost: widget.jobPost),
-                MobileDetailPageBlockFour(jobPost: widget.jobPost),
-                MobileDetailPageBlockFive(jobPost: widget.jobPost),
-                FadeInOutWidget(
-                    child: ApplyButtonWidget(jobPost: widget.jobPost)),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MobileDetailPageBlockOne(jobPost: widget.jobPost),
+                    const SizedBox(height: 30),
+                    const Divider(),
+                    MobileDetailPageBlockTwo(jobPost: widget.jobPost),
+                    const SizedBox(height: 30),
+                    const Divider(),
+                    MobileDetailPageBlockThree(jobPost: widget.jobPost),
+                    const SizedBox(height: 30),
+                    const Divider(),
+                    MobileDetailPageBlockFour(jobPost: widget.jobPost),
+                    const SizedBox(height: 30),
+                    const Divider(),
+                    MobileDetailPageBlockFive(jobPost: widget.jobPost),
+                    const SizedBox(height: 30),
+                    const Divider(),
+                  ],
+                ),
               ],
             ),
           ),
@@ -53,6 +64,14 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
           top: 12, // Adjust as needed
           left: 10, // Adjust as needed
           child: SmallPopButtonWidget(),
+        ),
+        Positioned(
+          bottom: 12,
+          left: 15,
+          right: 15,
+          child: FadeInOutWidget(
+              child: ApplyButtonWidget(jobPost: widget.jobPost)),
+
         ),
       ],
     );

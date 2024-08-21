@@ -11,7 +11,10 @@ import '../../../utils/styles/theme_colors.dart';
 import 'my_job_timeline.dart';
 
 class JobTimeline extends StatelessWidget {
+
   const JobTimeline({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:blukers/services/responsive.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,17 +16,26 @@ class MobileSubscriptionCard extends StatelessWidget {
   final Color color;
   final String title;
   final String subtitle;
+  final String buttonText;
+  final String description;
   final String amount;
+  final Color moreIconColor;
+
   final String subscriptionId;
   final List<String> details;
-  const MobileSubscriptionCard(
-      {super.key,
-      required this.color,
-      required this.title,
-      required this.amount,
-      required this.subtitle,
-      required this.subscriptionId,
-      required this.details});
+
+  const MobileSubscriptionCard({
+    super.key,
+    required this.color,
+    required this.title,
+    required this.amount,
+    required this.subtitle,
+    required this.subscriptionId,
+    required this.details,
+    required this.description,
+    required this.moreIconColor,
+    required this.buttonText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,92 +60,85 @@ class MobileSubscriptionCard extends StatelessWidget {
                   color: color,
                 ));
       },
-      child: Stack(
-        children: [
-          Card(
-            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        padding: const EdgeInsets.all(15),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xFFF5F5F5), width: 1.9),
+          // Black border
+          borderRadius: BorderRadius.circular(8.0), // Optional: Rounded corners
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  title.toUpperCase(),
+                  style: GoogleFonts.montserrat(
+                      fontSize: 12,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Text(' '),
+                Text(
+                  subtitle,
+                  style: GoogleFonts.montserrat(fontSize: 8),
+                ),
+                ActiveIndicatorWidget(isActive: isActive),
+              ],
             ),
-            color: color,
-            child: Container(
-              height: height * 0.15,
-              width: width,
+            const SizedBox(height: 10),
+            Text(
+              '\$$amount',
+              style: GoogleFonts.montserrat(
+                  fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 17),
+            Row(
+              children: [
+                Text(
+                  description,
+                  style: GoogleFonts.montserrat(fontSize: 12),
+                ),
+                Icon(
+                  Icons.add_box,
+                  color: moreIconColor,
+                  size: 15,
+                ),
+              ],
+            ),
+            const SizedBox(height: 50),
+            Container(
+              height: 50,
+              width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
+                color: isActive ? Colors.transparent : Colors.blue,
+                // Background color
+                borderRadius: BorderRadius.circular(50.0),
+                // Rounded corners
+                border:
+                    Border.all(color: Colors.blue, width: 1.5), // Blue border
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "${title.toUpperCase()} ",
-                              style: GoogleFonts.montserrat(
-                                fontSize:
-                                    Responsive.isMobile(context) ? 18.sp : 28,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            if (subtitle != '')
-                              TextSpan(
-                                text: subtitle
-                                    .toUpperCase(), // Added a newline for separation
-                                style: GoogleFonts.montserrat(
-                                  fontSize:
-                                      Responsive.isMobile(context) ? 13.sp : 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 15.0),
-                      Container(
-                        margin: const EdgeInsets.only(right: 20.0),
-                        child: const Icon(
-                          Icons.info_outline,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                  const Spacer(),
-                ],
+              child: Center(
+                child: Text(
+                  buttonText,
+                  style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold,
+                      color: isActive ? Colors.black : Colors.white),
+                ),
               ),
             ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            child: ActiveIndicatorWidget(isActive: isActive),
-          ),
-          Positioned(
-            bottom: 10,
-            left: 10,
-            child: DiagonalShape(
-              height: height * 0.12,
-              width: width * 0.45,
-            ), // Replace with the widget you want to position
-          ),
-          Positioned(
-            bottom: 20,
-            left: 25,
-            child: AmountDisplayWidget(
-              amount: amount,
-              color: color,
-            ), // Replace with the widget you want to position
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+//
+// Positioned(
+// top: 0,
+// left: 0,
+
+// ),

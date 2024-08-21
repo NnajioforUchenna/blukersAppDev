@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -233,6 +234,63 @@ class _LoginInformationState extends State<LoginInformation> {
                   },
                   title: AppLocalizations.of(context)!.alreadyHaveAnAccount,
                   subTitle: AppLocalizations.of(context)!.signIn,
+                ),
+                const SizedBox(height: 20),
+                RichText(
+                  text: TextSpan(
+                    text: 'By signing up, you agree to our ',
+                    style: const TextStyle(color:  Color(0xFF8A8A8E),),
+                    children: [
+                      TextSpan(
+                        text: 'Privacy Policy',
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontSize: 14,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // Handle Privacy Policy tap
+                          },
+                      ),
+                      const TextSpan(
+                        text: ', ',
+                        style: TextStyle(color: Color(0xFF8A8A8E),),
+                      ),
+                      TextSpan(
+                        text: 'Terms of Service',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // Handle Terms of Service tap
+                          },
+                      ),
+                      const TextSpan(
+                        text: ', and ',
+                        style: TextStyle(color:  Color(0xFF8A8A8E),),
+                      ),
+                      TextSpan(
+                        text: 'EULA',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // Handle EULA tap
+                          },
+                      ),
+                      const TextSpan(
+                        text: '.',
+                        style: TextStyle(color:  Color(0xFF8A8A8E),fontSize: 14,),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -102,6 +102,7 @@ final List<Map<String, dynamic>> listProducts = [
     "color": const Color(0xffF16523),
     "title": "FOIA",
     "subtitle": "",
+    "description" : "Access public records and information from government agencies with ease. Our FOIA tool helps you navigate the process, track your requests, and receive updates on your journey to transparency.",
     "amount": "299.99",
     "productId": "foia",
     "details": [
@@ -113,6 +114,7 @@ final List<Map<String, dynamic>> listProducts = [
     "color": const Color(0xff1a75bb),
     "title": "Employment",
     "subtitle": "Verification",
+    "description" : "Access public records and information from government agencies with ease. Our FOIA tool helps you navigate the process, track your requests, and receive updates on your journey to transparency.",
     "amount": "99.99",
     "productId": "employmentVerification",
     "details": [
@@ -124,8 +126,11 @@ final List<Map<String, dynamic>> listProducts = [
 
 final List<Map<String, dynamic>> listSubscriptions = [
   {
-    "color": const Color(0xffF29500),
     "title": "Basic",
+    "color": const Color(0xffF29500),
+    "more_icon_color": Colors.transparent,
+    "upgrade_button_text" : "Stay on Free",
+    "description" : "Create your Resume\nApply to 2 Jobs Daily",
     "subtitle": "",
     "amount": "0",
     "subscriptionId": "basic",
@@ -140,8 +145,12 @@ final List<Map<String, dynamic>> listSubscriptions = [
   {
     "color": const Color(0xff1a75bb),
     "title": "Premium",
+    "upgrade_button_text" : "Upgrade to Premium",
+
     "subtitle": "",
+    "more_icon_color": const Color(0xffF16523),
     "amount": "4.99",
+    "description" : "Everything on Free Plan",
     "subscriptionId": "blukers_workers_premium",
     "details": [
       "Create your Resume",
@@ -155,6 +164,9 @@ final List<Map<String, dynamic>> listSubscriptions = [
     "color": const Color(0xffF16523),
     "title": "Premium",
     "subtitle": "Plus",
+    "upgrade_button_text" : "Upgrade to Premium Plus",
+    "more_icon_color": const Color(0xffF16523),
+    "description" : "Everything on Premium Plan",
     "amount": "9.99",
     "subscriptionId": "blukers_workers_premium_plus",
     "details": [
@@ -171,6 +183,7 @@ final List<Map<String, dynamic>> listSubscriptions = [
 final List<Map<String, dynamic>> listServices = [
   {
     'title': 'Subscriptions',
+    'services_desc' : 'Subscribe for exclusive content, priority support, and premium features.',
     'description':
         'Stay updated with the latest job opportunities in the USA tailored for international talents.',
     'route': '/membership',
@@ -179,6 +192,7 @@ final List<Map<String, dynamic>> listServices = [
   },
   {
     'title': 'Products',
+    'services_desc' : 'Unlock transparency and verification tools for a trusted experience.',
     'description':
         'Our comprehensive suite of services ensures that international workers transition smoothly into their new roles in the USA.',
     'route': '/products',

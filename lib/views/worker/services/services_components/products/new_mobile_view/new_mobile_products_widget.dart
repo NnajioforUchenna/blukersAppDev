@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:blukers/services/generate_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,31 +23,34 @@ class NewMobileProductsWidget extends StatelessWidget {
     }
 
     double height = MediaQuery.of(context).size.height;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: height * 0.05, bottom: height * 0.1),
-          child: AutoSizeText(
-            AppLocalizations.of(context)!.products,
-            style: GoogleFonts.montserrat(
-                fontWeight: FontWeight.bold, fontSize: 24),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: height * 0.05, bottom: 20),
+            child: AutoSizeText(
+              AppLocalizations.of(context)!.products,
+              style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.bold, fontSize: 24),
+            ),
           ),
-        ),
-        Column(
-          children: [
-            for (var product in listProducts)
-              ProductCard(
-                color: product['color'],
-                title: getTitle(product['title']),
-                subtitle: getTitle(product['subtitle']),
-                amount: product['amount'],
-                productId: product['productId'],
-                details: product['details'],
-              )
-          ],
-        )
-      ],
+          Column(
+            children: [
+              for (var product in listProducts)
+                ProductCard(
+                  color: product['color'],
+                  title: getTitle(product['title']),
+                  subtitle: getTitle(product['subtitle']),
+                  amount: product['amount'],
+                  productId: product['productId'],
+                  details: product['details'],
+                  description: product['description'],
+                )
+            ],
+          )
+        ],
+      ),
     );
   }
 }

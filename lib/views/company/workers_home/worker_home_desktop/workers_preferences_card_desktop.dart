@@ -37,7 +37,7 @@ class WorkersPreferencesCardDesktop extends StatelessWidget {
               IconButton(
                   onPressed: () {
                     context.go('/setWorkersPreferencesDesktop');
-                    ;
+
                   },
                   icon: const Icon(Icons.edit,
                       color: ThemeColors.blukersBlueThemeColor)),

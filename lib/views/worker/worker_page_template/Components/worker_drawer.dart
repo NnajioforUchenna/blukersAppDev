@@ -37,24 +37,14 @@ class WorkerDrawer extends StatelessWidget {
             text: 'Choose Account Type',
             route: '/',
           ),
-          _createDrawerItem(
-            context: context,
-            icon: Icons.work,
-            text: 'Jobs',
-            route: '/jobs',
-          ),
+
           _createDrawerItem(
             context: context,
             icon: Icons.corporate_fare_outlined,
             text: 'Select By Industry',
             route: '/selectJobs',
           ),
-          _createDrawerItem(
-            context: context,
-            icon: Icons.search,
-            text: 'Search',
-            route: '/searchJobs',
-          ),
+
           _createDrawerItem(
             context: context,
             icon: Icons.save,
@@ -63,39 +53,16 @@ class WorkerDrawer extends StatelessWidget {
           ),
           _createDrawerItem(
             context: context,
-            icon: Icons.support,
+            icon: Icons.design_services,
             text: 'Services',
             route: '/workerOffers',
           ),
+
           _createDrawerItem(
             context: context,
-            icon: Icons.person,
-            text: 'Profile',
-            route: '/workerProfile',
-          ),
-          _createDrawerItem(
-            context: context,
-            icon: Icons.work_history,
-            text: 'Create your Resume',
-            route: '/createResume',
-          ),
-          _createDrawerItem(
-            context: context,
-            icon: Icons.route,
-            text: 'Path to a Successful Job',
-            route: '/pathToJob',
-          ),
-          _createDrawerItem(
-            context: context,
-            icon: Icons.chat,
-            text: 'Chat with Potential Employers',
-            route: '/workerChat',
-          ),
-          _createDrawerItem(
-            context: context,
-            icon: Icons.notifications,
-            text: 'Job Alerts & Messages',
-            route: '/workerMessages',
+            icon: Icons.question_answer_outlined,
+            text: 'FAQ',
+            route: '/workerFAQ',
           ),
         ],
       ),

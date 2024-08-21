@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'show_service_dialog.dart';
 
 class ServiceCard extends StatelessWidget {
   final String title;
+  final String servicesDesc;
   final String description;
   final String route;
   final Widget service;
@@ -16,7 +16,7 @@ class ServiceCard extends StatelessWidget {
     required this.description,
     required this.route,
     required this.service,
-    required this.color,
+    required this.color, required this.servicesDesc,
   });
 
   @override
@@ -30,43 +30,29 @@ class ServiceCard extends StatelessWidget {
                   service: service,
                 ));
       },
-      child: Card(
-        margin: const EdgeInsets.symmetric(vertical: 8.0),
-        elevation: 5.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xFFF5F5F5), width: 1.9), // Black border
+          borderRadius: BorderRadius.circular(8.0), // Optional: Rounded corners
         ),
-        color: color,
-        child: Container(
-          height: height * 0.13,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      title.toUpperCase(),
-                      style: GoogleFonts.montserrat(
-                        fontSize: 20.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(right: 20.0),
-                  child: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                  ),
-                ) // Pointer icon at the trailing end
-              ],
-            ),
+        height: height * 0.13,
+
+        child: ListTile(
+          trailing: const Icon(Icons.navigate_next),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title.toUpperCase(),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              const SizedBox(height: 8.0), // Adjust the height to increase/decrease space
+              Text(
+                servicesDesc,
+                style: const TextStyle(color: Colors.grey, fontSize: 12), // Optional: Style subtitle text
+              ),
+            ],
           ),
         ),
       ),
