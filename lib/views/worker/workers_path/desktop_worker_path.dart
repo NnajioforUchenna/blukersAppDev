@@ -19,7 +19,7 @@ class DesktopWorkerPath extends StatelessWidget {
 
     return Scaffold(
       body: MakeResponsiveWeb(
-        image: const AssetImage('../../../assets/images/successPath.png'),
+        image: const AssetImage('assets/images/successpath.png'),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
