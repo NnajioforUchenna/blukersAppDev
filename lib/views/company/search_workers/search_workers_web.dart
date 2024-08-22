@@ -38,10 +38,20 @@ class _SearchWorkersUiWebState extends State<SearchWorkersUiWeb> {
 
     return Row(
       children: [
-        Expanded(child: Container(color: const Color(0xffF16523),
-          padding: EdgeInsets.all(30),
-          child: Image.asset('images/company_search.gif')
-
+        Expanded(child: Container(      margin: const EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color(0xffF16523),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 10.0,
+              ),
+            ],
+          ),
+          child: Image.asset('assets/images/company_search.gif')
+,
         )),
         Expanded(
           child: Center(

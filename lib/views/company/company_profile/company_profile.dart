@@ -44,7 +44,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Image.asset(
-                          '../../../assets/images/desktopprofilepic.png', // Update path if needed
+                          'assets/images/desktopprofilepic.png', // Update path if needed
                           width: 800, // Adjust width as needed
                           height: 1000, // Adjust height as needed
                         ),
