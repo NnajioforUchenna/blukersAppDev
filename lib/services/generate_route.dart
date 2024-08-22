@@ -1,3 +1,4 @@
+import 'package:blukers/services/responsive.dart';
 import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
 import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
@@ -38,6 +39,7 @@ import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Compone
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences.dart';
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences_desktop.dart';
 import '../views/worker/jobs_home/Components/jobs_mobile_view/select_or_search_jobs.dart';
+import '../views/worker/jobs_home/job_home_components/jobs_desktop_view/jobs_desktop_view_components/select_or_search_jobs_desktop.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
 import '../views/worker/search_jobs/jobs_search_result_page/job_search_result_page.dart';
@@ -75,7 +77,9 @@ final routes = [
       GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
       GoRoute(
           path: '/selectJobs',
-          builder: (context, state) => const SelectOrSearchJobs()),
+          builder: (context, state) => const Responsive(
+              mobile: SelectOrSearchJobs(),
+              desktop: SelectOrSearchJobsDesktop())),
       GoRoute(
           path: '/searchJobs',
           builder: (context, state) => const SearchJobsUi()),
@@ -94,7 +98,6 @@ final routes = [
       GoRoute(
           path: '/createResume',
           builder: (context, state) => const CreateWorkerProfile()),
-
       GoRoute(
           path: '/createWorkerProfile',
           builder: (context, state) => const CreateWorkerProfile()),
@@ -188,8 +191,6 @@ final routes = [
     ],
   ),
 
-
-
   GoRoute(
       path: '/companyChatRoomScreen',
       builder: (context, state) => const CompanyChatRoomScreen()),
@@ -245,9 +246,7 @@ final routes = [
       path: '/forgot-password',
       builder: (context, state) => const ResetPasswordPage()),
 
-
   GoRoute(path: '/applicants', builder: (context, state) => const Applicants()),
-
 
   // Services Routes
   GoRoute(
