@@ -45,7 +45,6 @@ class NewMobileProductsWidget extends StatelessWidget {
                   amount: product['amount'],
                   productId: product['productId'],
                   details: product['details'],
-                  description: product['description'],
                 )
             ],
           )

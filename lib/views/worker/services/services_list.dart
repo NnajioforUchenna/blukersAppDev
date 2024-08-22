@@ -33,7 +33,7 @@ class ServicesList extends StatelessWidget {
             description: service['description']!,
             route: service['route']!,
             service: service['service']!,
-            color: service['color'], servicesDesc: service['services_desc']!,
+            color: service['color'],
           ),
       ],
     );

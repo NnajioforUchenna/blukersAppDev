@@ -4,7 +4,6 @@ import 'show_service_dialog.dart';
 
 class ServiceCard extends StatelessWidget {
   final String title;
-  final String servicesDesc;
   final String description;
   final String route;
   final Widget service;
@@ -16,7 +15,7 @@ class ServiceCard extends StatelessWidget {
     required this.description,
     required this.route,
     required this.service,
-    required this.color, required this.servicesDesc,
+    required this.color,
   });
 
   @override
@@ -31,28 +30,25 @@ class ServiceCard extends StatelessWidget {
                 ));
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xFFF5F5F5), width: 1.9), // Black border
+          color: color,
+          border: Border.all(color: const Color(0xFFF5F5F5), width: 1.9),
+          // Black border
           borderRadius: BorderRadius.circular(8.0), // Optional: Rounded corners
         ),
         height: height * 0.13,
-
-        child: ListTile(
-          trailing: const Icon(Icons.navigate_next),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
+        child: Center(
+          child: ListTile(
+            trailing: const Icon(Icons.navigate_next, color: Colors.white,),
+            title: Center(
+              child: Text(
                 title.toUpperCase(),
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.white),
               ),
-              const SizedBox(height: 8.0), // Adjust the height to increase/decrease space
-              Text(
-                servicesDesc,
-                style: const TextStyle(color: Colors.grey, fontSize: 12), // Optional: Style subtitle text
-              ),
-            ],
+            ),
           ),
         ),
       ),

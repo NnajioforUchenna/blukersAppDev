@@ -53,9 +53,7 @@ class MobileSubscriptionWidget extends StatelessWidget {
                     amount: subscription['amount'],
                     subscriptionId: subscription['subscriptionId'],
                     details: subscription['details'],
-                    description: subscription['description'],
-                    moreIconColor: subscription['more_icon_color'],
-                    buttonText: subscription['upgrade_button_text'],
+
                   ),
                 const SizedBox(height: 10),
                 if (up.appUser != null &&
