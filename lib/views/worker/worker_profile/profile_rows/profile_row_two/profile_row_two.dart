@@ -46,16 +46,6 @@ class ProfileRowTwo extends StatelessWidget {
                 height: 150,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(1000),
-                  // child: imageContent.isNotEmpty
-                  //     ? FadeInImage.assetNetwork(
-                  //         placeholder: "assets/images/loading.jpeg",
-                  //         image: imageContent,
-                  //         fit: BoxFit.fitWidth,
-                  //       )
-                  //     : Image.asset(
-                  //         "assets/images/userDefaultProfilePic.png",
-                  //         fit: BoxFit.fill,
-                  //       ),
                   child: up.appUser!.photoUrl != null &&
                           up.appUser!.photoUrl != ""
                       ? FadeInImage.assetNetwork(

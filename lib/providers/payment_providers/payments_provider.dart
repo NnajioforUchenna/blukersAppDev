@@ -122,36 +122,47 @@ class PaymentsProvider with ChangeNotifier {
     return "Stripe";
   }
 
-  Future<void> pay4Subscription(
-      BuildContext context, String subscriptionType) async {
-    if (appUser == null) {
-      showDialog(
-          context: context, builder: (context) => const PleaseLoginDialog());
-      return;
-    }
-
-    String paymentPlatform = getPaymentPlatformName();
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => CountDown(platform: paymentPlatform)));
-
-    String transactionId = recordTransaction(
-        transactionType: 'subscription',
-        paymentPlatform: paymentPlatform,
-        selectedProduct: subscriptionType,
-        amount: subscriptionType == 'premium' ? 4.99 : 9.99);
-
-    UserDataProvider.updateworkertimestep(appUser!.uid, 5);
-    if (paymentPlatform == "Stripe") {
-      getStripePayment(context, subscriptionType, transactionId);
-    } else if (paymentPlatform == "Apple") {
-      getApplePayment(context, subscriptionType);
-    } else if (paymentPlatform == "Google") {
-      getGooglePayment(context, subscriptionType);
-    }
+ Future<void> pay4Subscription(
+    BuildContext context, String subscriptionType) async {
+  if (appUser == null) {
+    showDialog(
+        context: context, builder: (context) => const PleaseLoginDialog());
+    return;
   }
+
+  String paymentPlatform = getPaymentPlatformName();
+  String transactionId = recordTransaction(
+      transactionType: 'subscription',
+      paymentPlatform: paymentPlatform,
+      selectedProduct: subscriptionType,
+      amount: subscriptionType == 'premium' ? 4.99 : 9.99);
+
+  UserDataProvider.updateworkertimestep(appUser!.uid, 5);
+
+  // Use a Future to ensure the payment process completes
+  Future<void> paymentFuture;
+  if (paymentPlatform == "Stripe") {
+    paymentFuture = getStripePayment(context, subscriptionType, transactionId);
+  } else if (paymentPlatform == "Apple") {
+    paymentFuture = getApplePayment(context, subscriptionType);
+  } else if (paymentPlatform == "Google") {
+    paymentFuture = getGooglePayment(context, subscriptionType);
+  } else {
+    // Handle unsupported payment platform
+    return;
+  }
+
+  // Wait for the payment process to complete
+  await paymentFuture;
+
+  // Navigate to the CountDown screen
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+        builder: (context) => CountDown(platform: paymentPlatform)),
+  );
+}
+
 
   Future<void> pay4Services(BuildContext context, String service) async {
     if (appUser == null) {

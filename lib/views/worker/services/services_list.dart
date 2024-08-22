@@ -60,9 +60,9 @@ class ServicesList extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Image.asset('assets/images/service_payments.png'),
-                  ),
+                  // Expanded(
+                  //   // child: Image.asset('assets/images/service_payments.png'),
+                  // ),
                   SizedBox(width: 20.sp),
                   Expanded(
                     child: buildServiceCards(context),

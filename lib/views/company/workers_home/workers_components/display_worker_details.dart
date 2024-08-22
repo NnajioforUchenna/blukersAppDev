@@ -62,7 +62,7 @@ class _WorkerDisplayDetailsWidgetState extends State<WorkerDisplayDetailsWidget>
         ? const Center(
             child: SizedBox(height: 100, width: 100, child: LoadingPage()))
         : Container(
-            margin: EdgeInsets.symmetric(horizontal: width * 0.04),
+            margin: EdgeInsets.symmetric(horizontal: width * 0.01),
             child: Card(
               elevation: 5,
               child: Container(

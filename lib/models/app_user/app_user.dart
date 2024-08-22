@@ -12,6 +12,7 @@ import 'components/worker_resume_details.dart';
 
 class AppUser {
   // User Information
+
   String uid;
   String email;
   String? language;
@@ -253,6 +254,14 @@ class AppUser {
       return company!.name;
     } else {
       return "Display Name";
+    }
+  }
+
+  String get getCompanyName {
+    if (company != null) {
+      return company!.name;
+    } else {
+      return 'Company Name not Given';
     }
   }
 }

@@ -61,7 +61,7 @@ class _CompanyChatRoomScreenState extends State<CompanyChatRoomScreen> {
         children: [
           Expanded(
             child: Container(
-              color: Colors.blueGrey,
+              color: Color(0xFFFEF7FF),
               child: StreamBuilder<QuerySnapshot>(
                   stream: cp.getMessagesByRoomId(),
                   builder: (BuildContext context,

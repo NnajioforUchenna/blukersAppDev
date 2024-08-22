@@ -12,9 +12,12 @@ class PleaseCreateCompanyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MakeResponsiveWeb(
-      image: AssetImage('assets/images/pleaseCreateProfile.png'),
-      child: PleaseCreateProfile(),
+    return Container(
+      color: Color(0xFFFEF7FF),
+      child: const MakeResponsiveWeb(
+        image: AssetImage('assets/images/pleaseCreateProfile.png'),
+        child: PleaseCreateProfile(),
+      ),
     );
   }
 }

@@ -28,45 +28,47 @@ class BuildYourResume extends StatelessWidget {
           Container(
             width: double.infinity,
             margin: EdgeInsets.only(top: height * 0.04, bottom: height * 0.05),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: height * 0.02),
-                  child: Text(
-                    'Online Resume',
-                    style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.bold, fontSize: 24),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: height * 0.02),
+                    child: Text(
+                      'Online Resume',
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.bold, fontSize: 24),
+                    ),
                   ),
-                ),
-                const ProfileRowTwo(),
-                const ProfileRowThree(),
-                ProfileMenuButton(
-                  text: "Basic Information",
-                  onPress: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const UpdateBasicInformation());
-                  },
-                ),
-                SizedBox(height: height * 0.02),
-                ProfileMenuButton(
-                  text: "References",
-                  onPress: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const UpdateReferences());
-                  },
-                ),
-                SizedBox(height: height * 0.02),
-                ProfileMenuButton(
-                  text: "Work Experiences",
-                  onPress: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const UpdateWorkExperiences());
-                  },
-                )
-              ],
+                  const ProfileRowTwo(),
+                  const ProfileRowThree(),
+                  ProfileMenuButton(
+                    text: "Basic Information",
+                    onPress: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => const UpdateBasicInformation());
+                    },
+                  ),
+                  SizedBox(height: height * 0.02),
+                  ProfileMenuButton(
+                    text: "References",
+                    onPress: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => const UpdateReferences());
+                    },
+                  ),
+                  SizedBox(height: height * 0.02),
+                  ProfileMenuButton(
+                    text: "Work Experiences",
+                    onPress: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => const UpdateWorkExperiences());
+                    },
+                  )
+                ],
+              ),
             ),
           ),
           const Positioned(

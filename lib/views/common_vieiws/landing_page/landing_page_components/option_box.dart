@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../services/responsive.dart';
 
 class OptionBox extends StatefulWidget {
   final String imgSrc;
@@ -73,14 +76,14 @@ class _OptionBoxState extends State<OptionBox> {
                         widget.title,
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.9),
-                          fontSize: 14,
+                          fontSize: Responsive.isMobile(context) ? 14.sp : 14,
                         ),
                       ),
                       Text(
                         widget.subtitle,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: Responsive.isMobile(context) ? 14.sp : 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -94,7 +97,7 @@ class _OptionBoxState extends State<OptionBox> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.7),
-                      fontSize: 10,
+                      fontSize: Responsive.isMobile(context) ? 10.sp : 10,
                     ),
                   ),
                 ),

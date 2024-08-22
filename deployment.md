@@ -15,3 +15,8 @@
 2. Run the following command in the terminal
 ```flutter build appbundle
 ```
+
+# Deploying to Web
+1. flutter build web
+2. firebase deploy
+```

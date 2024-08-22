@@ -15,9 +15,18 @@ class CompanyChatProvider with ChangeNotifier {
   List<ChatRecipient> chatRecipients = [];
   ChatRecipient? selectedChatRecipient;
 
+  int unreadMessageCount = 0;
+
+  CompanyChatProvider() {
+    if (appUser != null) {
+      startListeningToUnreadMessage(appUser!.uid);
+    }
+  }
+
   update(AppUser? user) {
     appUser = user;
     if (appUser != null) {
+      startListeningToUnreadMessage(appUser!.uid);
       notifyListeners();
     }
   }
@@ -48,8 +57,8 @@ class CompanyChatProvider with ChangeNotifier {
   void setChatRecipient(ChatRecipient chatRecipient) {
     selectedChatRecipient = chatRecipient;
     selectedChatRecipient!.unreadMessageCount = 0;
-    // ChatDataProvider.updateUnreadMessageCount(
-    //     appUser!.uid, selectedChatRecipient!.uid, 0);
+    ChatDataProvider.updateUnreadMessageCountCompany(
+        appUser!.uid, selectedChatRecipient!.uid, 0);
     notifyListeners();
   }
 
@@ -157,12 +166,7 @@ class CompanyChatProvider with ChangeNotifier {
   //________________________________________________________________________
 
   void companyStartChat(AppUser? appUser, Worker worker) {
-    //update selectedChatRecipient
     selectedChatRecipient = ChatRecipient.fromWorker(worker);
-
-    //1. Create a chat room
-    //2. Add worker to the ChatRecipient list of Company
-    //3. Add Company to the ChatRecipient list of Worker
   }
 
   String getRoomId() {
@@ -176,6 +180,7 @@ class CompanyChatProvider with ChangeNotifier {
 
   getMessagesByRoomId() {
     String roomId = getRoomId();
+    updateReadStatus();
     return ChatDataProvider.fetchMessagesByGroupId(roomId);
   }
 
@@ -183,7 +188,7 @@ class CompanyChatProvider with ChangeNotifier {
     String sentById = appUser!.uid;
     String roomId = getRoomId();
     String sentToId = selectedChatRecipient!.uid;
-    String sentByName = appUser!.getDisplayName ?? "Company";
+    String sentByName = appUser!.getCompanyName;
 
     ChatMessage chatMessage = ChatMessage(
         message: message,
@@ -191,20 +196,28 @@ class CompanyChatProvider with ChangeNotifier {
         sentBy: sentById,
         roomId: roomId);
 
-    ChatDataProvider.sendMessage(
+    await ChatDataProvider.sendMessage(
         chatMessage: chatMessage,
         roomId: roomId,
         sentToId: sentToId,
         sentByName: sentByName);
 
-    ChatDataProvider.updateBothChatLists(appUser, selectedChatRecipient);
-
-    await ChatDataProvider.updateLastMEssage(message, roomId);
-
-    int index = _chatRooms.indexWhere((element) => element.id == roomId);
-
-    _chatRooms[index].lastMessage = message;
+    ChatDataProvider.updateBothChatLists(
+        appUser, selectedChatRecipient, "Company");
 
     notifyListners();
+  }
+
+  void startListeningToUnreadMessage(String uid) {
+    ChatDataProvider.getUnreadMessageCountStreamCompany(uid).listen((event) {
+      unreadMessageCount = event;
+      notifyListeners();
+    });
+  }
+
+  Future<void> updateReadStatus() async {
+    selectedChatRecipient!.unreadMessageCount = 0;
+    await ChatDataProvider.updateUnreadMessageCountCompany(
+        appUser!.uid, selectedChatRecipient!.uid, 0);
   }
 }

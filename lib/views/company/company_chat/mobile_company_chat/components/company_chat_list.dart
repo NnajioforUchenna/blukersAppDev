@@ -5,9 +5,8 @@ import 'package:unicons/unicons.dart';
 
 import '../../../../../models/chat_recipient.dart';
 import '../../../../../providers/company_chat_provider.dart';
-import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../common_vieiws/icon_text_404.dart';
-import '../../../../worker/worker_chat/components/chat_recipient_widget.dart';
+import '../../company_chat_recipient_widget.dart';
 
 class CompanyChatList extends StatefulWidget {
   const CompanyChatList({super.key});
@@ -19,7 +18,6 @@ class CompanyChatList extends StatefulWidget {
 class _CompanyChatListState extends State<CompanyChatList> {
   @override
   Widget build(BuildContext context) {
-    UserProvider up = Provider.of<UserProvider>(context);
     CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
 
     return StreamBuilder<List<ChatRecipient>>(
@@ -37,7 +35,7 @@ class _CompanyChatListState extends State<CompanyChatList> {
         return ListView.builder(
           itemCount: snapshot.data!.length,
           itemBuilder: (context, index) {
-            return ChatRecipientWidget(
+            return CompanyChatRecipientWidget(
               chatRecipient: snapshot.data![index],
             );
           },

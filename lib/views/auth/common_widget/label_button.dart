@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../services/responsive.dart';
 
 class LabelButton extends StatelessWidget {
   const LabelButton(
-      {super.key, required this.onTap, required this.title, this.subTitle = ''});
+      {super.key,
+      required this.onTap,
+      required this.title,
+      this.subTitle = ''});
   final VoidCallback onTap;
   final String title;
   final String subTitle;
@@ -19,9 +25,9 @@ class LabelButton extends StatelessWidget {
           children: <Widget>[
             Text(
               title,
-              style: const TextStyle(
-                color: Color(0xFF8A8A8E),
-                fontSize: 16,
+              style: TextStyle(
+                color: const Color(0xFF8A8A8E),
+                fontSize: Responsive.isMobile(context) ? 16.sp : 16,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -30,9 +36,9 @@ class LabelButton extends StatelessWidget {
             ),
             Text(
               subTitle,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.deepOrangeAccent,
-                fontSize: 16,
+                fontSize: Responsive.isMobile(context) ? 16.sp : 16,
                 fontWeight: FontWeight.w600,
               ),
             ),

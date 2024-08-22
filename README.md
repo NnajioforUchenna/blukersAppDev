@@ -48,6 +48,9 @@ showDialog(
 # Fixing Common Ios Build Errors
 1. cd ios
 2. rm Podfile.lock
-3. rm Podfile
-4. pod install
+3. cd ..
+4. flutter clean
+5. flutter pub get
+6. cd ios
+7. pod install
 
