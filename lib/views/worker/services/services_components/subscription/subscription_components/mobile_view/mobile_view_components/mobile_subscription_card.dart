@@ -47,7 +47,7 @@ class MobileMembershipCard extends StatelessWidget {
                       top: 10, // Adjust for desired padding
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
+                        children: [ 
                           Text(
                             headerTitle.toUpperCase(),
                             style: GoogleFonts.montserrat(
