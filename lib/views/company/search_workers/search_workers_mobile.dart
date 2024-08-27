@@ -36,6 +36,69 @@ class _SearchWorkersUiMobileState extends State<SearchWorkersUiMobile> {
     nameController.text = jp.nameSearch;
     locationController.text = jp.locationSearch;
 
+    final List<ListTile> recentSearchItems = [
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+          fontWeight: FontWeight.w400,
+          fontSize: 16,
+        ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+    ];
+
     return Center(
       child: Dialog(
         shape: const RoundedRectangleBorder(
@@ -49,105 +112,155 @@ class _SearchWorkersUiMobileState extends State<SearchWorkersUiMobile> {
             alignment: Alignment.center,
             children: [
               Builder(
-                builder: (context) => Column(
-                  children: [
-                    SizedBox(height: height * 0.12),
-                    Card(
-                      elevation: 4.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: height * 0.12),
+                    
+                    // NEW TEXT FIELDS
+                        TextField(
                           controller: nameController,
+                          onChanged: (value) {
+                            jp.nameSearch = value;
+                          },
                           decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 10),
                             hintText: searchName,
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.grey,
                               fontSize: 13.0,
                               fontWeight: FontWeight.w500,
                             ),
-                            prefixIcon: const Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                              borderSide: BorderSide.none,
+                            // Hint text
+                            prefixIcon: const Icon(Icons.search,
+                                size: 20, color: Colors.grey),
+                            // Icon at the start
+                            enabledBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0)), // Rounded border
+                              borderSide: BorderSide(
+                                  color:
+                                      Color(0xFFDEDEDE)), // Outline color and width
                             ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              // Rounded border on focus
+                              borderSide: BorderSide(
+                                  color: Colors
+                                      .orange), // Outline color and width on focus
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
                           ),
-                          onChanged: (value) {
-                            jp.nameSearch = value;
-                          },
                         ),
-                      ),
-                    ),
-                    Card(
-                      elevation: 4.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
+                        const SizedBox(height: 20),
+                        TextField(
                           controller: locationController,
+                          onChanged: (value) {
+                            jp.locationSearch = value;
+                          },
                           decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 10),
-                            hintText:
-                                AppLocalizations.of(context)!.cityandzipcode,
+                            hintText: AppLocalizations.of(context)!.cityandzipcode,
                             hintStyle: GoogleFonts.montserrat(
                               color: Colors.grey,
                               fontSize: 13.0,
                               fontWeight: FontWeight.w500,
                             ),
-                            prefixIcon: const Icon(Icons.location_on_outlined),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                              borderSide: BorderSide.none,
+                            // Hint text
+                            prefixIcon: const Icon(Icons.location_on_outlined,
+                                size: 20, color: Colors.grey),
+                            // Icon at the start
+                            enabledBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0)), // Rounded border
+                              borderSide: BorderSide(
+                                  color:
+                                      Color(0xFFDEDEDE)), // Outline color and width
                             ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              // Rounded border on focus
+                              borderSide: BorderSide(
+                                  color: Colors
+                                      .orange), // Outline color and width on focus
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
                           ),
-                          onChanged: (value) {
-                            jp.locationSearch = value;
-                          },
                         ),
-                      ),
-                    ),
-                    const Spacer(),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: ElevatedButton(
-                        onPressed: _isLoading
-                            ? null
-                            : () {
-                                wp.searchWorkers(
-                                  nameController.text,
-                                  locationController.text,
-                                );
-
-                                if (GoRouter.of(context).canPop()) {
-                                  GoRouter.of(context).pop();
-                                }
-
-                                GoRouter.of(context).go('/workerSearchResults');
-                              },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ThemeColors.blukersOrangeThemeColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                        const SizedBox(height: 50),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: _isLoading
+                                ? null
+                                : () {
+                                    wp.searchWorkers(
+                                      nameController.text,
+                                      locationController.text,
+                                    );
+                                    if (GoRouter.of(context).canPop()) {
+                                      GoRouter.of(context).pop();
+                                    }
+                    
+                                    GoRouter.of(context).go('/workerSearchResults');
+                                  },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ThemeColors.blukersOrangeThemeColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                            ),
+                            child: Text(buttonLabel,
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                )),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
-                        child: Text(buttonLabel,
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                            )),
-                      ),
+                        SizedBox(height: height * 0.05),
+                    
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Recent Searches',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  'Clear',
+                                  style: GoogleFonts.montserrat(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            SizedBox(
+                              height: 250,
+                              child: ListView.builder(
+                                itemCount: recentSearchItems.length,
+                    
+                                itemBuilder: (context, index) {
+                                  return recentSearchItems[index];
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
-                    SizedBox(height: height * 0.05),
-                  ],
+                  ),
                 ),
               ),
               if (_isLoading)

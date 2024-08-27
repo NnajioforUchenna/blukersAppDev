@@ -36,167 +36,251 @@ class _SearchWorkersUiWebState extends State<SearchWorkersUiWeb> {
     nameController.text = jp.nameSearch;
     locationController.text = jp.locationSearch;
 
-    return Row(
-      children: [
-        Expanded(child: Container(      margin: const EdgeInsets.all(30),
-          padding: const EdgeInsets.all(30),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: const Color(0xffF16523),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 10.0,
+    final List<ListTile> recentSearchItems = [
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search, color: Colors.grey,),
+        title: Text('Plumber',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),),
+        trailing: Icon(Icons.close),
+        onTap: () {
+          print('Tapped on Map');
+        },
+      ),
+    ];
+
+    return Center(
+      child: Dialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+        ),
+        insetPadding: const EdgeInsets.all(16),
+        child: SizedBox(
+          width: width * 0.95,
+          height: height * 0.9,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Builder(
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 389),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: height * 0.12),
+
+                        // NEW TEXT FIELDS
+                        TextField(
+                          controller: nameController,
+                          onChanged: (value) {
+                            jp.nameSearch = value;
+                          },
+                          decoration: InputDecoration(
+                            hintText: searchName,
+                            hintStyle: GoogleFonts.montserrat(
+                              color: Colors.grey,
+                              fontSize: 13.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            // Hint text
+                            prefixIcon: const Icon(Icons.search,
+                                size: 20, color: Colors.grey),
+                            // Icon at the start
+                            enabledBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0)), // Rounded border
+                              borderSide: BorderSide(
+                                  color:
+                                  Color(0xFFDEDEDE)), // Outline color and width
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              // Rounded border on focus
+                              borderSide: BorderSide(
+                                  color: Colors
+                                      .orange), // Outline color and width on focus
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        TextField(
+                          controller: locationController,
+                          onChanged: (value) {
+                            jp.locationSearch = value;
+                          },
+                          decoration: InputDecoration(
+                            hintText: AppLocalizations.of(context)!.cityandzipcode,
+                            hintStyle: GoogleFonts.montserrat(
+                              color: Colors.grey,
+                              fontSize: 13.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            // Hint text
+                            prefixIcon: const Icon(Icons.location_on_outlined,
+                                size: 20, color: Colors.grey),
+                            // Icon at the start
+                            enabledBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0)), // Rounded border
+                              borderSide: BorderSide(
+                                  color:
+                                  Color(0xFFDEDEDE)), // Outline color and width
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              // Rounded border on focus
+                              borderSide: BorderSide(
+                                  color: Colors
+                                      .orange), // Outline color and width on focus
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                          ),
+                        ),
+                        const SizedBox(height: 50),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: _isLoading
+                                ? null
+                                : () {
+                              wp.searchWorkers(
+                                nameController.text,
+                                locationController.text,
+                              );
+                              if (GoRouter.of(context).canPop()) {
+                                GoRouter.of(context).pop();
+                              }
+
+                              GoRouter.of(context).go('/workerSearchResults');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ThemeColors.blukersOrangeThemeColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                            ),
+                            child: Text(buttonLabel,
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                )),
+                          ),
+                        ),
+                        SizedBox(height: height * 0.05),
+
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Recent Searches',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  'Clear',
+                                  style: GoogleFonts.montserrat(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            SizedBox(
+                              height: 250,
+                              child: ListView.builder(
+                                itemCount: recentSearchItems.length,
+
+                                itemBuilder: (context, index) {
+                                  return recentSearchItems[index];
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              if (_isLoading)
+                Positioned.fill(
+                  child: Container(
+                    color: Colors.black.withOpacity(0.5),
+                    child: const Center(
+                      child: MyAnimation(name: 'blukersLoadingDots'),
+                    ),
+                  ),
+                ),
+              const Positioned(
+                top: 10,
+                left: 10,
+                child: WorkerPopButtonWidget(),
               ),
             ],
           ),
-          child: Image.asset('assets/images/company_search.gif')
-,
-        )),
-        Expanded(
-          child: Center(
-            child: Dialog(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-              ),
-              insetPadding: const EdgeInsets.all(16),
-              child: SizedBox(
-                width: width * 0.95,
-                height: height * 0.9,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Builder(
-                      builder: (context) => Column(
-                        children: [
-                          SizedBox(height: height * 0.12),
-                          Card(
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              child: TextField(
-                                controller: nameController,
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 10),
-                                  hintText: searchName,
-                                  hintStyle: GoogleFonts.montserrat(
-                                    color: Colors.grey,
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  prefixIcon: const Icon(Icons.search),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                                onChanged: (value) {
-                                  jp.nameSearch = value;
-                                },
-                              ),
-                            ),
-                          ),
-                          Card(
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              child: TextField(
-                                controller: locationController,
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 10),
-                                  hintText:
-                                  AppLocalizations.of(context)!.cityandzipcode,
-                                  hintStyle: GoogleFonts.montserrat(
-                                    color: Colors.grey,
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  prefixIcon: const Icon(Icons.location_on_outlined),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                                onChanged: (value) {
-                                  jp.locationSearch = value;
-                                },
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: ElevatedButton(
-                              onPressed: _isLoading
-                                  ? null
-                                  : () async {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-            
-                                await wp.searchWorkers(
-                                  nameController.text,
-                                  locationController.text,
-                                );
-            
-                                setState(() {
-                                  _isLoading = false;
-                                });
-            
-                                if (GoRouter.of(context).canPop())
-                                  GoRouter.of(context).pop();
-            
-                                GoRouter.of(context)
-                                    .pushReplacement('/workerSearchResults');
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: ThemeColors.blukersOrangeThemeColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                              ),
-                              child: Text(buttonLabel,
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                  )),
-                            ),
-                          ),
-                          SizedBox(height: height * 0.05),
-                        ],
-                      ),
-                    ),
-                    if (_isLoading)
-                      Positioned.fill(
-                        child: Container(
-                          color: Colors.black.withOpacity(0.5),
-                          child: const Center(
-                            child: MyAnimation(name: 'blukersLoadingDots'),
-                          ),
-                        ),
-                      ),
-                    const Positioned(
-                      top: 10,
-                      left: 10,
-                      child: WorkerPopButtonWidget(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
         ),
-      ],
+      ),
     );
   }
 }
