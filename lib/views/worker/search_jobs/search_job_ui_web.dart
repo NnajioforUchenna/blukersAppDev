@@ -40,10 +40,21 @@ class _SearchJobsUiWebState extends State<SearchJobsUiWeb> {
     return Row(
       children: [
         Expanded(
+
             child: Container(
-          color: const Color(0xffF16523),
-          padding: const EdgeInsets.all(30),
-          child: Image.asset('images/searching.gif'),
+                margin: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color(0xffF16523),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 10.0,
+              ),
+            ],
+          ),
+          child: Image.asset('assets/images/searching.gif')
         )),
         Expanded(
           child: Dialog(

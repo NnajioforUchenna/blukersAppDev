@@ -30,79 +30,79 @@ class _CompanyProfileState extends State<CompanyProfile> {
     UserProvider up = Provider.of<UserProvider>(context);
 
     return up.appUser == null
-        ? const LoginOrRegister()
-        : LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (constraints.maxWidth >= 600)
-                      // Show the image only on larger screens
-                      Container(
-                        margin: EdgeInsets.all(8.0),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Image.asset(
-                            '../../../assets/images/desktopprofilepic.png', // Update path if needed
-                            width: 800, // Adjust width as needed
-                            height: 1000, // Adjust height as needed
-                          ),
+      ? const LoginOrRegister()
+      : LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (constraints.maxWidth >= 600)
+                    // Show the image only on larger screens
+                    Container(
+                      margin: EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Image.asset(
+                          'assets/images/desktopprofilepic.png', // Update path if needed
+                          width: 800, // Adjust width as needed
+                          height: 1000, // Adjust height as needed
                         ),
                       ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          //buildSignoutButton(context),
-                          const SizedBox(height: 30),
-                          buildProfilePicAndEdit(context, up),
-                          const SizedBox(height: 10),
-                          Text(
-                            up.appUser?.company?.name ?? "",
-                            style: ThemeTextStyles.headingThemeTextStyle,
-                            textAlign:
-                                TextAlign.center, // Center-align the text
-                          ),
-                          const SizedBox(height: 10),
-                          ProfileMenuButton(
-                            text:
-                                AppLocalizations.of(context)!.basicInformation,
-                            onPress: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) =>
-                                    const UpdateCompanyBasicInformation(),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          ProfileMenuButton(
-                            text: AppLocalizations.of(context)!
-                                .companyInformation,
-                            onPress: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) =>
-                                    const UpdateCompanyInformation(),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          buildDeleteAccountSection(context, up),
-                          const SizedBox(height: 10),
-                          buildLogouttSection(context, up),
-                          const SizedBox(height: 40),
-                          const AppVersionDisplay(),
-                          const SizedBox(height: 30),
-                        ],
-                      ),
                     ),
-                  ],
-                ),
-              );
-            },
-          );
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        //buildSignoutButton(context),
+                        const SizedBox(height: 10),
+                        buildProfilePicAndEdit(context, up),
+                        const SizedBox(height: 10),
+                        Text(
+                          up.appUser?.company?.name ?? "",
+                          style: ThemeTextStyles.headingThemeTextStyle,
+                          textAlign:
+                              TextAlign.center, // Center-align the text
+                        ),
+                        const SizedBox(height: 10),
+                        ProfileMenuButton(
+                          text:
+                              AppLocalizations.of(context)!.basicInformation,
+                          onPress: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  const UpdateCompanyBasicInformation(),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        ProfileMenuButton(
+                          text: AppLocalizations.of(context)!
+                              .companyInformation,
+                          onPress: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  const UpdateCompanyInformation(),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        buildDeleteAccountSection(context, up),
+                        const SizedBox(height: 10),
+                        buildLogoutSection(context, up),
+                        const SizedBox(height: 40),
+                        const AppVersionDisplay(),
+                        const SizedBox(height: 30),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
   }
 
   Widget buildProfilePicAndEdit(context, up) {
@@ -339,7 +339,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
     );
   }
 
-  Widget buildLogouttSection(context, up) {
+  Widget buildLogoutSection(context, up) {
     UserProvider up = Provider.of<UserProvider>(context);
     CompanyChatProvider chatProvider =
         Provider.of<CompanyChatProvider>(context);
