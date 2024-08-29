@@ -161,6 +161,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
                           onPress: () {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
+                                   FocusScope.of(context).unfocus();
                               cp.addContactDetails(
                                 ext,
                                 _customerServicePhoneController.text,

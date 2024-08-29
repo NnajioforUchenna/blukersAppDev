@@ -31,6 +31,12 @@ class JobPostsProvider with ChangeNotifier {
   String locationSearch = '';
   String language = 'en';
   bool hasMore = true;
+  
+  void clearSearchParams() {
+    nameSearch = "";
+    locationSearch = "";
+    notifyListeners();
+  }
 
   update(AppUser? user) {
     appUser = user;

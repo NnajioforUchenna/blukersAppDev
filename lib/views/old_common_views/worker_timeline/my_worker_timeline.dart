@@ -10,6 +10,7 @@ class MyWorkerTimeLine extends StatelessWidget {
   final bool isPast;
   final String title;
   final String briefDescription;
+  final int index;
 
   const MyWorkerTimeLine(
       {super.key,
@@ -17,7 +18,8 @@ class MyWorkerTimeLine extends StatelessWidget {
       required this.isLast,
       required this.isPast,
       required this.title,
-      required this.briefDescription});
+      required this.briefDescription,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class MyWorkerTimeLine extends StatelessWidget {
           padding: const EdgeInsets.all(8),
         ),
         endChild: ExplanationCard(
+          index:  index,
           title: title,
           briefDescription: briefDescription,
           isPast: isPast,

@@ -68,7 +68,10 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
                 ),
                 TimelineNavigationButton(
                   isSelected: true,
-                  onPress: () => cwpp.setWorkExperience(),
+                  onPress: () {
+                    FocusScope.of(context).unfocus();
+                    cwpp.setWorkExperience();
+                  },
                 ),
               ],
             ),

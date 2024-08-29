@@ -1,21 +1,19 @@
+
+import 'package:blukers/providers/job_posts_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../utils/styles/theme_colors.dart';
 
 class JobPopButtonWidget extends StatelessWidget {
-  const JobPopButtonWidget({super.key});
+  const JobPopButtonWidget({super.key, });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (GoRouter.of(context).canPop()) {
-          GoRouter.of(context).pop();
-        } else {
-          GoRouter.of(context).go('/jobs');
-        }
+        context.read<JobPostsProvider>().clearSearchParameters();
       },
       child: Material(
         elevation: 4.0, // Set the elevation here

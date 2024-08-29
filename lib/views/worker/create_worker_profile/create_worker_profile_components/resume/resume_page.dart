@@ -65,6 +65,7 @@ class ResumePage extends StatelessWidget {
                         isSelected: true,
                         onPress: () {
                           // Handle "submit" or "next" logic here
+                          FocusScope.of(context).unfocus();
                           up.setJobTimelineStep(3);
                           cwpp.setResume(cwpp.linkedInUrlController.text);
                         },
