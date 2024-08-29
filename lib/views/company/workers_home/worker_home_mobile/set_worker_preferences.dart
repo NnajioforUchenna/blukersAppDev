@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../models/app_user/components/preference.dart';
 import '../../../../models/industry.dart';
 import '../../../../providers/industry_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
@@ -23,6 +24,17 @@ class _SetWorkersPreferencesState extends State<SetWorkersPreferences> {
   List<String> selectedIndustries = [];
   Map<String, List<String>> selectedJobs = {};
 
+
+ void initState() {
+    super.initState();
+    UserProvider up = Provider.of<UserProvider>(context, listen: false);
+    Preference? preference = up.appUser?.registrationDetails?.jobsPreference;
+
+    if (preference != null) {
+      selectedIndustries = preference.industryIds ?? [];
+      selectedJobs = preference.jobIds ?? {};
+    }
+  }
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
@@ -45,6 +57,14 @@ class _SetWorkersPreferencesState extends State<SetWorkersPreferences> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const SizedBox(height: 80),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: BackButton(
+                onPressed: () {
+                context.go('/workers');
+                },
+              ),
+            ),
             Text(
               AppLocalizations.of(context)!.selectWorkersPreference,
               style: const TextStyle(

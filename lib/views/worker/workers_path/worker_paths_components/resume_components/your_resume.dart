@@ -28,20 +28,8 @@ class _ResumeState extends State<Resume> {
         Provider.of<CreateWorkerProfileProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
 
-    return Card(
-      elevation: 8.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 30),
-              InkWell(
-                onTap: () async {
+    return InkWell(
+       onTap: () async {
                   // Upload logic
 
                   Map<String, dynamic> result = {
@@ -66,7 +54,19 @@ class _ResumeState extends State<Resume> {
                   }
                   wp.setResumeUrl(fileNameUrl!);
                 },
-                child: SizedBox(
+      child: Card(
+        elevation: 8.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 30),
+                SizedBox(
                   height: 150,
                   width: 150,
                   child: !isFileUploaded
@@ -82,11 +82,11 @@ class _ResumeState extends State<Resume> {
                         )
                       : ShowPDF(pdf: filePlatformFile!),
                 ),
-              ),
-              const SizedBox(height: 30),
-            ],
-          ),
-        ],
+                const SizedBox(height: 30),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/industry.dart';
@@ -118,6 +119,13 @@ class _ClassificationPageState extends State<ClassificationPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                TimelineNavigationButton(
+                  isSelected: true, // Always enable the home button
+                  onPress: () {
+                    context.go('/jobs');
+                  },
+                  navDirection: 'left',
+                ),
                 const Spacer(),
                 TimelineNavigationButton(
                   isSelected: areJobsSelected(),

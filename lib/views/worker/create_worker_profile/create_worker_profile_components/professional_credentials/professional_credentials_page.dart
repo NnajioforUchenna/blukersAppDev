@@ -86,6 +86,8 @@ class _ProfessionalCredentialsPageState
                 TimelineNavigationButton(
                   isSelected: true,
                   onPress: () {
+                    FocusScope.of(context).unfocus();
+
                     cwpp.setSkills(cwpp.selectedSkills);
                   },
                 ),

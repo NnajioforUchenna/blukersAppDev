@@ -67,7 +67,11 @@ class _ReferencePageState extends State<ReferencePage> {
                   ),
                   TimelineNavigationButton(
                     isSelected: true,
-                    onPress: () => cwpp.setReference(),
+                    onPress: () {
+                      FocusScope.of(context).unfocus();
+
+                      cwpp.setReference();
+                    },
                   ),
                 ],
               ),

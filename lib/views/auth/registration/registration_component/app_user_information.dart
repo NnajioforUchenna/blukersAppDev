@@ -239,6 +239,7 @@ class _AppUserInformationState extends State<AppUserInformation> {
                     const SizedBox(height: 40),
                     SubmitButton(
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         if (isFormComplete()) {
                           up.addingContactInformation(
                               ext, _phoneController.text);

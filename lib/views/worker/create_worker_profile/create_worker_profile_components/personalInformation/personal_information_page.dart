@@ -246,6 +246,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                         onPress: () {
                           if (cwpp.isFormComplete()) {
                             cwpp.addPersonalInformtion();
+                            FocusScope.of(context).unfocus();
                           } else {
                             EasyLoading.showError("Please fill all the fields");
                           }

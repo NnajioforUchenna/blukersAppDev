@@ -24,7 +24,7 @@ class JobsListsProvider extends ChangeNotifier {
 
   JobsListsProvider() {
     fillDisplayAllJobs();
-    fillDisplayJobsByPreferences();
+    // fillDisplayJobsByPreferences();
   }
 
   //____________________________________________________________________________________Saved Jobs

@@ -9,22 +9,34 @@ extension StripePaymentProvider on PaymentsProvider {
     }
   }
 
-  Future<StripeData> fetchStripeData() async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
+ Future<StripeData> fetchStripeData() async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    // dev: 1t9JfNnPqitkZFHkTL8x
-    // prod: Zh9frPRhBEPlSnlxdJyI
+  try {
+    // Fetch the document snapshot from Firestore
     var ds = await firestore
         .collection('stripe_data')
         .doc('1t9JfNnPqitkZFHkTL8x')
         .get();
 
-    return StripeData(
-      employeePremiumPriceId: ds.get('employeePremiumPriceId'),
-      employeePremiumPlusPriceId: ds.get('employeePremiumPlusPriceId'),
-      employerPremiumPriceId: ds.get('employerPremiumPriceId'),
-    );
+    // Check if the document exists
+    if (ds.exists) {
+      // Extract the data, handling any missing fields or type issues
+      return StripeData(
+        employeePremiumPriceId: ds.get('employeePremiumPriceId') ?? 'default_value',
+        employeePremiumPlusPriceId: ds.get('employeePremiumPlusPriceId') ?? 'default_value',
+        employerPremiumPriceId: ds.get('employerPremiumPriceId') ?? 'default_value',
+      );
+    } else {
+      throw Exception('Document does not exist');
+    }
+  } catch (e) {
+    // Handle and log errors
+    print('Error fetching Stripe data: $e');
+    rethrow; // Optional: Re-throw the error if you want to handle it further up the call stack
   }
+}
+
 
   Future<String> getCheckOutUrl4Subscription(
       priceId, successUrl, failedUrl, productName, transactionId) async {
@@ -93,8 +105,8 @@ extension StripePaymentProvider on PaymentsProvider {
 
     String urlEx = Uri.base.origin.toString();
     String baseUrl = Uri.parse(urlEx).removeFragment().toString();
-    String successUrl = '$baseUrl/paymentSuccess';
-    String failedUrl = '$baseUrl/paymentFailed';
+    String successUrl = baseUrl + '/paymentSuccess';
+    String failedUrl = baseUrl + '/paymentFailed';
 
     String checkOutUrl = await getCheckOutUrl4Subscription(
         priceId, successUrl, failedUrl, productName, transactionId);
@@ -114,7 +126,7 @@ extension StripePaymentProvider on PaymentsProvider {
       DocumentSnapshot doc = await stripeDataDB.doc(docId).get();
       if (doc.exists) {
         Map<String, dynamic> currentData = doc.data() as Map<String, dynamic>;
-        servicesKey[docId] = currentData['key'] ?? '';
+        servicesKey[docId] = currentData?['key'] ?? '';
       }
     }
   }
@@ -158,8 +170,8 @@ extension StripePaymentProvider on PaymentsProvider {
     if (kIsWeb) {
       final baseUrl = Uri.base.origin.toString();
       print('This is the Base URl $baseUrl');
-      successUrl = '$baseUrl/paymentSuccess';
-      failedUrl = '$baseUrl/paymentFailed';
+      successUrl = baseUrl + '/paymentSuccess';
+      failedUrl = baseUrl + '/paymentFailed';
     } else {
       successUrl = 'https://success.com';
       failedUrl = 'https://www.cancel.com';

@@ -48,6 +48,7 @@ class _CompanyLogoPageState extends State<CompanyLogoPage> {
                         isSelected: true,
                         onPress: () {
                           if (cp.createCompanyProfileData['logoUrl'] != null) {
+                             FocusScope.of(context).unfocus();
                             // Update the condition to check for company logo
                             cp.companyProfileNextPage();
                           }
