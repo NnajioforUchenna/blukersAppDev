@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../providers/app_settings_provider.dart';
 import '../providers/company_chat_provider.dart';
 import '../providers/company_provider.dart';
+import '../providers/create_worker_profile_provider.dart';
 import '../providers/industry_provider.dart';
 import '../providers/job_posts_provider.dart';
 import '../providers/jobs_lists_provider.dart';
@@ -47,5 +48,9 @@ final appProviders = [
   ChangeNotifierProxyProvider<UserProvider, WorkersProvider>(
       create: (context) => WorkersProvider(),
       update: (_, user, WorkersProvider? previous) =>
+          previous!..update(user.appUser)),
+  ChangeNotifierProxyProvider<UserProvider, CreateWorkerProfileProvider>(
+      create: (context) => CreateWorkerProfileProvider(),
+      update: (_, user, CreateWorkerProfileProvider? previous) =>
           previous!..update(user.appUser)),
 ];

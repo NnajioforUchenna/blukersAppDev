@@ -1,9 +1,9 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../../../providers/worker_provider.dart';
 import '../../../../auth/common_widget/auth_input.dart';
 import '../timeline_navigation_button.dart';
 import '../your_resume.dart';
@@ -13,9 +13,10 @@ class ResumePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final linkedInUrlController = TextEditingController();
     UserProvider up = Provider.of<UserProvider>(context);
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
 
     return Scaffold(
       body: Container(
@@ -30,7 +31,7 @@ class ResumePage extends StatelessWidget {
                 const SizedBox(height: 20),
                 AuthInput(
                   child: TextFormField(
-                    controller: linkedInUrlController,
+                    controller: cwpp.linkedInUrlController,
                     textInputAction: TextInputAction.done,
                     validator: (value) => value!.isEmpty
                         ? AppLocalizations.of(context)!.required
@@ -57,7 +58,7 @@ class ResumePage extends StatelessWidget {
                     children: [
                       TimelineNavigationButton(
                         isSelected: true,
-                        onPress: () => wp.workerProfileBackPage(),
+                        onPress: () => cwpp.workerProfileBackPage(),
                         navDirection: "back",
                       ),
                       TimelineNavigationButton(
@@ -66,7 +67,7 @@ class ResumePage extends StatelessWidget {
                           // Handle "submit" or "next" logic here
                           FocusScope.of(context).unfocus();
                           up.setJobTimelineStep(3);
-                          wp.setResume(linkedInUrlController.text);
+                          cwpp.setResume(cwpp.linkedInUrlController.text);
                         },
                       ),
                     ],

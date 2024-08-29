@@ -1,8 +1,8 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
 import '../../../../old_common_views/skills_form/skills_form.dart';
 import '../credential_field.dart';
@@ -18,23 +18,13 @@ class ProfessionalCredentialsPage extends StatefulWidget {
 
 class _ProfessionalCredentialsPageState
     extends State<ProfessionalCredentialsPage> {
-  late WorkersProvider wp;
-  List<String> selectedSkills = [];
-  List<CredentialField> credentialForms = [];
-
-  @override
-  void initState() {
-    super.initState();
-    wp = Provider.of<WorkersProvider>(context, listen: false);
-    selectedSkills = wp.previousParams['skills'] ?? [];
-  }
-
   @override
   Widget build(BuildContext context) {
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
-    credentialForms = [];
-    for (int i = 0; i < wp.professionalCredentials.length; i++) {
-      credentialForms.add(CredentialField(index: i));
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
+    cwpp.credentialForms = [];
+    for (int i = 0; i < cwpp.professionalCredentials.length; i++) {
+      cwpp.credentialForms.add(CredentialField(index: i));
     }
     return Container(
       color: Colors.white,
@@ -61,7 +51,7 @@ class _ProfessionalCredentialsPageState
               ),
             ),
             const SizedBox(height: 10),
-            ...credentialForms,
+            ...cwpp.credentialForms,
 
             Align(
               alignment: Alignment.centerRight,
@@ -71,7 +61,7 @@ class _ProfessionalCredentialsPageState
                   icon: const Icon(Icons.add),
                   onPressed: () {
                     setState(() {
-                      wp.addCredential();
+                      cwpp.addCredential();
                     });
                   },
                 ),
@@ -81,7 +71,7 @@ class _ProfessionalCredentialsPageState
             const SizedBox(height: 20),
             Divider(thickness: 1, color: Colors.grey[400]),
             const SizedBox(height: 20),
-            SkillsForm(selectedSkills: selectedSkills),
+            SkillsForm(selectedSkills: cwpp.selectedSkills),
             const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +79,7 @@ class _ProfessionalCredentialsPageState
                 TimelineNavigationButton(
                   isSelected: true,
                   onPress: () {
-                    wp.workerProfileBackPage();
+                    cwpp.workerProfileBackPage();
                   },
                   navDirection: "back",
                 ),
@@ -97,7 +87,8 @@ class _ProfessionalCredentialsPageState
                   isSelected: true,
                   onPress: () {
                     FocusScope.of(context).unfocus();
-                    wp.setSkills(selectedSkills);
+
+                    cwpp.setSkills(cwpp.selectedSkills);
                   },
                 ),
               ],

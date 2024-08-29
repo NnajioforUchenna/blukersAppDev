@@ -1,7 +1,7 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../providers/worker_provider.dart';
 import '../../../../../services/responsive.dart';
 import 'resume_profile_photo.dart';
 import 'timeline_navigation_button.dart';
@@ -17,7 +17,8 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
 
     return SizedBox(
       height: height * 0.7,
@@ -44,17 +45,17 @@ class _ProfilePhotoPageState extends State<ProfilePhotoPage> {
                         TimelineNavigationButton(
                           isSelected: true,
                           onPress: () {
-                            wp.workerProfileBackPage();
+                            cwpp.workerProfileBackPage();
                           },
                           navDirection: "back",
                         ),
                         TimelineNavigationButton(
                           isSelected: true,
                           onPress: () {
-                            if (wp.appUser?.photoUrl != null) {
-                              wp.updateWorkerProfilePhoto(
-                                  wp.appUser!.photoUrl!);
-                              wp.workerProfileNextPage();
+                            if (cwpp.appUser?.photoUrl != null) {
+                              cwpp.updateWorkerProfilePhoto(
+                                  cwpp.appUser!.photoUrl!);
+                              cwpp.workerProfileNextPage();
                             }
                           },
                         ),

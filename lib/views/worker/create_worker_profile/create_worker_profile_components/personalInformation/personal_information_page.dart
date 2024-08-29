@@ -1,9 +1,9 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../auth/common_widget/auth_input.dart';
@@ -18,40 +18,13 @@ class PersonalInformationPage extends StatefulWidget {
 }
 
 class _PersonalInformationPageState extends State<PersonalInformationPage> {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController middleNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController birthDayController = TextEditingController();
-  TextEditingController birthMonthController = TextEditingController();
-  TextEditingController birthYearController = TextEditingController();
-
-  bool isFormComplete() {
-    return firstNameController.text.isNotEmpty &&
-        lastNameController.text.isNotEmpty &&
-        birthDayController.text.isNotEmpty &&
-        birthMonthController.text.isNotEmpty &&
-        birthYearController.text.isNotEmpty;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      WorkersProvider wp = Provider.of<WorkersProvider>(context, listen: false);
-      firstNameController.text = wp.previousParams["firstName"] ?? "";
-      middleNameController.text = wp.previousParams["middleName"] ?? "";
-      lastNameController.text = wp.previousParams["lastName"] ?? "";
-      birthDayController.text = wp.previousParams["birthDay"] ?? "";
-      birthMonthController.text = wp.previousParams["birthMonth"] ?? "";
-      birthYearController.text = wp.previousParams["birthYear"] ?? "";
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
     final height = MediaQuery.of(context).size.height;
     final node = FocusScope.of(context);
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+
     return SizedBox(
       height: height,
       width: Responsive.isDesktop(context)
@@ -70,7 +43,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                   const SizedBox(height: 20),
                   AuthInput(
                     child: TextFormField(
-                      controller: firstNameController,
+                      controller: cwpp.firstNameController,
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
                       validator: (value) => value!.isEmpty
@@ -93,7 +66,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                   SizedBox(height: height * 0.015),
                   AuthInput(
                     child: TextFormField(
-                      controller: middleNameController,
+                      controller: cwpp.middleNameController,
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
                       // validator: (value) => value!.isEmpty
@@ -116,7 +89,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                   SizedBox(height: height * 0.015),
                   AuthInput(
                     child: TextFormField(
-                      controller: lastNameController,
+                      controller: cwpp.lastNameController,
                       textInputAction: TextInputAction.next,
                       onEditingComplete: () => node.nextFocus(),
                       validator: (value) => value!.isEmpty
@@ -155,7 +128,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                       Expanded(
                         child: AuthInput(
                           child: TextFormField(
-                            controller: birthDayController,
+                            controller: cwpp.birthDayController,
                             keyboardType: TextInputType.number,
                             textInputAction: TextInputAction.next,
                             onEditingComplete: () => node.nextFocus(),
@@ -188,7 +161,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                       Expanded(
                         child: AuthInput(
                           child: TextFormField(
-                            controller: birthMonthController,
+                            controller: cwpp.birthMonthController,
                             keyboardType: TextInputType.number,
                             textInputAction: TextInputAction.next,
                             onEditingComplete: () => node.nextFocus(),
@@ -221,7 +194,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                       Expanded(
                         child: AuthInput(
                           child: TextFormField(
-                            controller: birthYearController,
+                            controller: cwpp.birthYearController,
                             keyboardType: TextInputType.number,
                             textInputAction: TextInputAction.next,
                             onEditingComplete: () => node.nextFocus(),
@@ -264,23 +237,16 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                       TimelineNavigationButton(
                         isSelected: true,
                         onPress: () {
-                          wp.workerProfileBackPage();
+                          cwpp.workerProfileBackPage();
                         },
                         navDirection: "back",
                       ),
                       TimelineNavigationButton(
-                        isSelected: isFormComplete(),
+                        isSelected: cwpp.isFormComplete(),
                         onPress: () {
-                          if (isFormComplete()) {
-                             FocusScope.of(context).unfocus();
-                            wp.addPersonalInformtion(
-                              firstNameController.text,
-                              middleNameController.text,
-                              lastNameController.text,
-                              birthDayController.text,
-                              birthMonthController.text,
-                              birthYearController.text,
-                            );
+                          if (cwpp.isFormComplete()) {
+                            cwpp.addPersonalInformtion();
+                            FocusScope.of(context).unfocus();
                           } else {
                             EasyLoading.showError("Please fill all the fields");
                           }
@@ -296,16 +262,5 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    firstNameController.dispose();
-    middleNameController.dispose();
-    lastNameController.dispose();
-    birthDayController.dispose();
-    birthMonthController.dispose();
-    birthYearController.dispose();
-    super.dispose();
   }
 }
