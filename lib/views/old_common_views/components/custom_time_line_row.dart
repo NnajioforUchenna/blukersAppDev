@@ -24,7 +24,7 @@ class CustomTimeLineTile extends StatelessWidget {
     this.endChild,
     this.isFirst = false,
     this.isLast = false,
-    this.isCompleted = false,
+    required this.isPast,
     this.beforeLineStyle = const LineStyle(),
     LineStyle? afterLineStyle,
   }) : afterLineStyle = afterLineStyle ?? beforeLineStyle;
@@ -47,7 +47,7 @@ class CustomTimeLineTile extends StatelessWidget {
   /// Whether this is the last tile from the timeline.
   /// In this case, it won't be rendered a line after the indicator.
   final bool isLast;
-  final bool isCompleted;
+  final bool isPast;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class CustomTimeLineTile extends StatelessWidget {
             child: _Indicator(
               beforeLineStyle: beforeLineStyle,
               afterLineStyle: afterLineStyle,
-              isCompleted: isCompleted,
+              isCompleted: isPast,
               isLast: isLast,
               isFirst: isFirst,
             ),

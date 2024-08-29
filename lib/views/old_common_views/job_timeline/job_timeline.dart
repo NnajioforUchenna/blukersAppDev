@@ -67,6 +67,7 @@ class JobTimeline extends StatelessWidget {
                 isFirst: index == 0,
                 isLast: index == jobRecords.length - 1,
                 isPast: index <= currentStep,
+                isCurrent: index == currentStep,
                 title: title,
                 briefDescription: description,
               );

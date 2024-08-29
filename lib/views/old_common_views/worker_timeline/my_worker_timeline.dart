@@ -53,6 +53,7 @@ class MyWorkerTimeLine extends StatelessWidget {
           title: title,
           briefDescription: briefDescription,
           isPast: isPast,
+          isCurrent: false,
         ),
       ),
     );

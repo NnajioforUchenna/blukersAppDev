@@ -24,7 +24,8 @@ class SearchAndTranslateRow extends StatelessWidget {
         ),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align items with space between them
         children: [
           Expanded(
             flex: 5,

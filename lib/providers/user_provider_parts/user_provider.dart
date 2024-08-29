@@ -205,6 +205,7 @@ class UserProvider with ChangeNotifier {
     return getButtonAction(whichMembership(), subscriptionId);
   }
 
+
   String getButtonAction(String state, String subscriptionId) {
     Map<String, Map<String, String>> actions = {
       'basic': {

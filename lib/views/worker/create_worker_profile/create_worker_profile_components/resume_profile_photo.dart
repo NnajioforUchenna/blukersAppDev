@@ -11,7 +11,7 @@ class ResumeProfilePhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CreateWorkerProfileProvider cwpp =
-        Provider.of<CreateWorkerProfileProvider>(context);
+    Provider.of<CreateWorkerProfileProvider>(context);
     String? logoUrl = cwpp.appUser?.workerResumeDetails?.profilePhotoUrl;
 
     return InkWell(
@@ -37,24 +37,24 @@ class ResumeProfilePhoto extends StatelessWidget {
                     borderRadius: BorderRadius.circular(1000),
                     child: logoUrl == null || logoUrl.isEmpty
                         ? Center(
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              AppLocalizations.of(context)!
-                                  .tapToSelectAndUploadAFile,
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                fontFamily: "Montserrat",
-                              ),
-                            ),
-                          )
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        AppLocalizations.of(context)!
+                            .tapToSelectAndUploadAFile,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          fontFamily: "Montserrat",
+                        ),
+                      ),
+                    )
                         : CachedNetworkImage(
-                            imageUrl: logoUrl,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
-                          ),
+                      imageUrl: logoUrl,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 30),

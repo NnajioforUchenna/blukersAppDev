@@ -9,6 +9,9 @@ class MyJobTimeLine extends StatelessWidget {
   final bool isLast;
   final bool isPast;
   final String title;
+
+  final bool isCurrent;
+  
   final String briefDescription;
   final int index;
 
@@ -17,6 +20,7 @@ class MyJobTimeLine extends StatelessWidget {
       required this.isFirst,
       required this.isLast,
       required this.isPast,
+      required this.isCurrent,
       required this.title,
       required this.briefDescription,
       required this.index});
@@ -26,32 +30,17 @@ class MyJobTimeLine extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10),
       child: CustomTimeLineTile(
-        isCompleted: index == 0,
         isFirst: isFirst,
         isLast: isLast,
+         isPast: isPast,
         beforeLineStyle: LineStyle(
           color: isPast
               ? ThemeColors.secondaryThemeColor
               : ThemeColors.secondaryThemeColor.withOpacity(0.3),
           thickness: 2,
         ),
-        // indicatorStyle: IndicatorStyle(
-
-        //   width: 40,
-        //   color: isPast
-        //       ? ThemeColors.blukersBlueThemeColor
-        //       : ThemeColors.blukersBlueThemeColor.withOpacity(0.3),
-        //   iconStyle: IconStyle(
-        //     color: isPast
-        //         ? Colors.white
-        //         : ThemeColors.blukersBlueThemeColor.withOpacity(0.3),
-        //     // iconData: Icons.circle_rounded,
-        //     iconData: Icons.arrow_right_alt_sharp,
-        //   ),
-        //   padding: const EdgeInsets.all(8),
-        // ),
         endChild: ExplanationCard(
-          isCompleted: index == 0,
+          isCurrent: isCurrent,
           index: index,
           title: title,
           briefDescription: briefDescription,

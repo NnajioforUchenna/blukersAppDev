@@ -10,14 +10,17 @@ class ExplanationCard extends StatelessWidget {
   final String briefDescription;
   final bool isPast;
   final int index;
-  final bool isCompleted;
-  const ExplanationCard(
-      {super.key,
-      required this.title,
-      required this.briefDescription,
-      required this.isPast,
-      this.isCompleted = false,
-      required this.index});
+
+  final bool isCurrent; // Add a boolean to indicate the current step
+
+  const ExplanationCard({
+    super.key,
+    required this.title,
+    required this.briefDescription,
+    required this.isPast,
+    required this.index,
+    required this.isCurrent,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +28,12 @@ class ExplanationCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 32, right: 25),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       decoration: BoxDecoration(
-        color: isCompleted ? ThemeColors.lightGreenColor : Colors.white,
+        color: isCurrent ? Colors.white : (isPast ? ThemeColors.lightGreenColor : Colors.white), // Set background color
         borderRadius: BorderRadius.circular(10),
-        border: isCompleted
-            ? Border.all(
-                color: ThemeColors.greenColor,
-              )
-            : null,
+        border: Border.all(
+          color: isCurrent ? ThemeColors.blukersBlueThemeColor : (isPast ? ThemeColors.greenColor : Colors.transparent),
+          width: isCurrent ? 2 : 1, // Border width for current step
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
@@ -46,9 +48,7 @@ class ExplanationCard extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 10,
-            backgroundColor: isCompleted
-                ? ThemeColors.greenColor
-                : ThemeColors.secondaryThemeColor,
+            backgroundColor: isCurrent ? ThemeColors.secondaryThemeColor : (isPast ? ThemeColors.greenColor : ThemeColors.secondaryThemeColor),
             child: Text(
               (index + 1).toString(),
               style: const TextStyle(
@@ -74,22 +74,29 @@ class ExplanationCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: Responsive.isMobile(context) ? 16.sp : 18,
                           fontWeight: FontWeight.bold,
-                          color: isPast
-                              ? ThemeColors.darkBlueColor
-                              : ThemeColors.darkBlueColor.withOpacity(0.3),
+                          color: isCurrent ? ThemeColors.darkBlueColor : (isPast ? ThemeColors.darkBlueColor : ThemeColors.darkBlueColor.withOpacity(0.3)),
                         ),
                       ),
                     ),
                     const SizedBox(
                       width: 20,
                     ),
-                    if (isCompleted)
+                    if (isPast && !isCurrent)
                       const Text(
                         "Completed",
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                           color: ThemeColors.greenColor,
+                        ),
+                      ),
+                    if (isCurrent)
+                      const Text(
+                        "Start",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orange, // Use the same color as the image for the "Start" text
                         ),
                       ),
                   ],

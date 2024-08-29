@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../models/app_user/components/preference.dart';
 import '../../../../../../models/industry.dart';
 import '../../../../../../providers/industry_provider.dart';
 import '../../../../../../services/responsive.dart';
@@ -24,11 +25,24 @@ class _SetJobsPreferencesState extends State<SetJobsPreferences> {
   Map<String, List<String>> selectedJobs = {};
 
   @override
+  void initState() {
+    super.initState();
+    UserProvider up = Provider.of<UserProvider>(context, listen: false);
+    Preference? preference = up.appUser?.registrationDetails?.jobsPreference;
+
+    if (preference != null) {
+      selectedIndustries = preference.industryIds ?? [];
+      selectedJobs = preference.jobIds ?? {};
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context, listen: false);
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
-    UserProvider up = Provider.of<UserProvider>(context);
     JobsListsProvider jlp = Provider.of<JobsListsProvider>(context);
     List<Industry> industries = ip.industries.values.toList();
+
     bool areJobsSelected() {
       return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
     }
@@ -44,7 +58,16 @@ class _SetJobsPreferencesState extends State<SetJobsPreferences> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const SizedBox(height: 80),
+            const SizedBox(height: 40),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: BackButton(
+                onPressed: () {
+                context.go('/jobs');
+                },
+              ),
+            ),
+            const SizedBox(height: 40),
             Text(
               AppLocalizations.of(context)!.selectYourJobsPreferences,
               style: const TextStyle(
