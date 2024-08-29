@@ -68,7 +68,10 @@ class _ReferencePageState extends State<ReferencePage> {
                   ),
                   TimelineNavigationButton(
                     isSelected: true,
-                    onPress: () => wp.setReference(),
+                    onPress: () {
+                      FocusScope.of(context).unfocus();
+                      wp.setReference();
+                    },
                   ),
                 ],
               ),

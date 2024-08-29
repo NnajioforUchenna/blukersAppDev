@@ -64,6 +64,7 @@ class ResumePage extends StatelessWidget {
                         isSelected: true,
                         onPress: () {
                           // Handle "submit" or "next" logic here
+                          FocusScope.of(context).unfocus();
                           up.setJobTimelineStep(3);
                           wp.setResume(linkedInUrlController.text);
                         },

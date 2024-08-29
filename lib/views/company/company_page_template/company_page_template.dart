@@ -11,12 +11,45 @@ class CompanyPageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDesktop = Responsive.isDesktop(context);
+    final double maxWidth = 1200.0; // Set a max width for web
+
     return Scaffold(
-        endDrawer: const CompanyDrawer(),
-        appBar: const CompanyAppBar(),
-        bottomNavigationBar: Responsive.isDesktop(context)
-            ? null
-            : const CompanyButtomNavigationBar(),
-        body: child);
+      endDrawer: isDesktop
+          ? Align(
+              alignment: Alignment.centerRight,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: maxWidth),
+                child: const CompanyDrawer(),
+              ),
+            )
+          : const CompanyDrawer(),
+      appBar: isDesktop
+          ? PreferredSize(
+              preferredSize: Size(maxWidth, 56.0), // or whatever size you want
+              child: Align(
+                alignment: Alignment.center,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: maxWidth),
+                  child: const CompanyAppBar(),
+                ),
+              ),
+            )
+          : PreferredSize(
+              preferredSize:
+                  const Size.fromHeight(56.0), // or whatever size you want
+              child: const CompanyAppBar(),
+            ),
+      bottomNavigationBar:
+          isDesktop ? null : const CompanyButtomNavigationBar(),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: isDesktop
+              ? BoxConstraints(maxWidth: maxWidth)
+              : const BoxConstraints(),
+          child: child,
+        ),
+      ),
+    );
   }
 }

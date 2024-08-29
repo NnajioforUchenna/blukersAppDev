@@ -69,7 +69,10 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
                 ),
                 TimelineNavigationButton(
                   isSelected: true,
-                  onPress: () => wp.setWorkExperience(),
+                  onPress: () {
+                    FocusScope.of(context).unfocus();
+                    wp.setWorkExperience();
+                  },
                 ),
               ],
             ),

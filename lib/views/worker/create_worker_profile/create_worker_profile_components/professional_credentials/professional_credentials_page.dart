@@ -96,6 +96,7 @@ class _ProfessionalCredentialsPageState
                 TimelineNavigationButton(
                   isSelected: true,
                   onPress: () {
+                    FocusScope.of(context).unfocus();
                     wp.setSkills(selectedSkills);
                   },
                 ),

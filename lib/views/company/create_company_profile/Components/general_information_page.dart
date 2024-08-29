@@ -148,6 +148,7 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
                           onPress: () {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
+                              FocusScope.of(context).unfocus();
                               cp.addGeneralInformation(
                                   companyNameController.text,
                                   companySloganController.text,

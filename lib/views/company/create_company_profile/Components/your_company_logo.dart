@@ -14,23 +14,23 @@ class YourCompanyLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     CompanyProvider cp = Provider.of<CompanyProvider>(context);
     String? logoUrl = cp.createCompanyProfileData['logoUrl'];
-    return Card(
-      elevation: 1.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 30),
-              InkWell(
-                onTap: () {
-                  cp.selectCompanyLogo(context);
-                },
-                child: SizedBox(
+    return InkWell(
+      onTap: () {
+        cp.selectCompanyLogo(context);
+      },
+      child: Card(
+        elevation: 1.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 30),
+                SizedBox(
                   height: 150,
                   width: 150,
                   child: ClipRRect(
@@ -57,11 +57,11 @@ class YourCompanyLogo extends StatelessWidget {
                           ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 30),
-            ],
-          ),
-        ],
+                const SizedBox(height: 30),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
