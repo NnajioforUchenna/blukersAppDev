@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/worker_provider.dart';
+import '../../../../providers/create_worker_profile_provider.dart';
 
 class ResumeProfilePhoto extends StatelessWidget {
   const ResumeProfilePhoto({super.key});
 
   @override
   Widget build(BuildContext context) {
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
-    String? logoUrl = wp.appUser?.workerResumeDetails?.profilePhotoUrl;
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
+    String? logoUrl = cwpp.appUser?.workerResumeDetails?.profilePhotoUrl;
     return Card(
       elevation: 2.0,
       shape: RoundedRectangleBorder(
@@ -26,7 +27,7 @@ class ResumeProfilePhoto extends StatelessWidget {
               const SizedBox(height: 30),
               InkWell(
                 onTap: () {
-                  wp.selectProfilePhoto(context);
+                  cwpp.selectProfilePhoto(context);
                 },
                 child: SizedBox(
                   height: 150,

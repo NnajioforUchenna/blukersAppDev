@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../providers/worker_provider.dart';
+import '../../../../providers/create_worker_profile_provider.dart';
 import 'ShowPDF.dart';
 
 class YourResume extends StatefulWidget {
@@ -23,7 +23,9 @@ class _YourResumeState extends State<YourResume> {
 
   @override
   Widget build(BuildContext context) {
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    // WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    CreateWorkerProfileProvider wp =
+        Provider.of<CreateWorkerProfileProvider>(context);
 
     return Card(
       elevation: 8.0,

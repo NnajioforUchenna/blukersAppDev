@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../models/industry.dart';
 import '../../../../../../providers/industry_provider.dart';
-import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
 import '../../../../../../utils/localization/localized_industries.dart';
 import '../../../../../../utils/localization/localized_jobs.dart';
+import '../../../../../providers/create_worker_profile_provider.dart';
 import '../timeline_navigation_button.dart';
 
 class ClassificationPage extends StatefulWidget {
@@ -17,27 +17,16 @@ class ClassificationPage extends StatefulWidget {
 }
 
 class _ClassificationPageState extends State<ClassificationPage> {
-  late WorkersProvider wp;
-  List<Industry> industries = [];
-  List<String> selectedIndustries = [];
-  Map<String, List<String>> selectedJobs = {};
-
-  @override
-  void initState() {
-    super.initState();
-    wp = Provider.of<WorkersProvider>(context, listen: false);
-    selectedIndustries = wp.previousParams['industries'] ?? [];
-    selectedJobs = wp.previousParams['jobs'] ?? {};
-  }
-
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
-    industries = ip.industries.values.toList();
-    wp = Provider.of<WorkersProvider>(context);
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
+
+    List<Industry> industries = ip.industries.values.toList();
 
     bool areJobsSelected() {
-      return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
+      return cwpp.selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
     }
 
     return Container(
@@ -72,19 +61,20 @@ class _ClassificationPageState extends State<ClassificationPage> {
                           height: 1.25,
                         ),
                       ),
-                      value: selectedIndustries.contains(industry.industryId),
+                      value:
+                          cwpp.selectedIndustries.contains(industry.industryId),
                       onChanged: (bool? value) {
                         setState(() {
                           if (value ?? false) {
-                            selectedIndustries.add(industry.industryId);
+                            cwpp.selectedIndustries.add(industry.industryId);
                           } else {
-                            selectedIndustries.remove(industry.industryId);
-                            selectedJobs.remove(industry.industryId);
+                            cwpp.selectedIndustries.remove(industry.industryId);
+                            cwpp.selectedJobs.remove(industry.industryId);
                           }
                         });
                       },
                     ),
-                    if (selectedIndustries.contains(industry.industryId))
+                    if (cwpp.selectedIndustries.contains(industry.industryId))
                       ...industry.jobs.entries.map((entry) {
                         final jobId = entry.value.title;
                         return Padding(
@@ -99,19 +89,20 @@ class _ClassificationPageState extends State<ClassificationPage> {
                                 height: 1.25,
                               ),
                             ),
-                            value: selectedJobs[industry.industryId]
+                            value: cwpp.selectedJobs[industry.industryId]
                                     ?.contains(jobId) ??
                                 false,
                             onChanged: (bool? value) {
-                              if (!selectedJobs
+                              if (!cwpp.selectedJobs
                                   .containsKey(industry.industryId)) {
-                                selectedJobs[industry.industryId] = [];
+                                cwpp.selectedJobs[industry.industryId] = [];
                               }
                               setState(() {
                                 if (value == true) {
-                                  selectedJobs[industry.industryId]!.add(jobId);
+                                  cwpp.selectedJobs[industry.industryId]!
+                                      .add(jobId);
                                 } else {
-                                  selectedJobs[industry.industryId]!
+                                  cwpp.selectedJobs[industry.industryId]!
                                       .remove(jobId);
                                 }
                               });
@@ -132,10 +123,10 @@ class _ClassificationPageState extends State<ClassificationPage> {
                   isSelected: areJobsSelected(),
                   onPress: areJobsSelected()
                       ? () {
-                          wp.createWorkerProfile(
+                          cwpp.createWorkerProfile(
                             context,
-                            selectedIndustries,
-                            selectedJobs,
+                            cwpp.selectedIndustries,
+                            cwpp.selectedJobs,
                           );
                         }
                       : () {}, // Disable the button if no jobs are selected

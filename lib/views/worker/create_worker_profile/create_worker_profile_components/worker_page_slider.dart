@@ -1,7 +1,7 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../providers/worker_provider.dart';
 import '../../../../../services/make_responsive_web.dart';
 import 'classification/classification_page.dart';
 import 'personalInformation/personal_information_page.dart';
@@ -22,7 +22,8 @@ class WorkerPageSlider extends StatefulWidget {
 class _WorkerPageSliderState extends State<WorkerPageSlider> {
   @override
   Widget build(BuildContext context) {
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: SizedBox(
@@ -30,7 +31,7 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
         child: Padding(
           padding: const EdgeInsets.all(0),
           child: PageView(
-            controller: wp.createProfilePageController,
+            controller: cwpp.createProfilePageController,
             physics: const NeverScrollableScrollPhysics(),
             children: const [
               MakeResponsiveWeb(

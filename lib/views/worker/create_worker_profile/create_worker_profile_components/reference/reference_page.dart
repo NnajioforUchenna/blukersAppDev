@@ -1,8 +1,8 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../providers/worker_provider.dart';
 import '../timeline_navigation_button.dart';
 import 'reference_form.dart';
 
@@ -14,14 +14,13 @@ class ReferencePage extends StatefulWidget {
 }
 
 class _ReferencePageState extends State<ReferencePage> {
-  List<ReferenceFormWidget> referenceForms = [];
-
   @override
   Widget build(BuildContext context) {
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
-    if (referenceForms.isEmpty) {
-      for (int i = 0; i < wp.references.length; i++) {
-        referenceForms.add(ReferenceFormWidget(index: i));
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
+    if (cwpp.referenceForms.isEmpty) {
+      for (int i = 0; i < cwpp.references.length; i++) {
+        cwpp.referenceForms.add(ReferenceFormWidget(index: i));
       }
     }
     return Container(
@@ -31,12 +30,12 @@ class _ReferencePageState extends State<ReferencePage> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            ...referenceForms,
+            ...cwpp.referenceForms,
             Tooltip(
               message: AppLocalizations.of(context)!.addMorePersonalReferences,
               child: InkWell(
                 onTap: () {
-                  wp.addReference();
+                  cwpp.addReference();
                 },
                 child: Row(
                   children: [
@@ -44,7 +43,7 @@ class _ReferencePageState extends State<ReferencePage> {
                     IconButton(
                       icon: const Icon(Icons.add),
                       onPressed: () {
-                        wp.addReference();
+                        cwpp.addReference();
                       },
                     ),
                     const SizedBox(width: 10),
@@ -63,12 +62,12 @@ class _ReferencePageState extends State<ReferencePage> {
                 children: [
                   TimelineNavigationButton(
                     isSelected: true,
-                    onPress: () => wp.workerProfileBackPage(),
+                    onPress: () => cwpp.workerProfileBackPage(),
                     navDirection: "back",
                   ),
                   TimelineNavigationButton(
                     isSelected: true,
-                    onPress: () => wp.setReference(),
+                    onPress: () => cwpp.setReference(),
                   ),
                 ],
               ),

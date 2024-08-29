@@ -1,10 +1,10 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/reference_form.dart';
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../../utils/styles/theme_text_styles.dart';
 import 'reference_form.dart';
@@ -14,7 +14,9 @@ class WorkerReferenceProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    // WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    CreateWorkerProfileProvider wp =
+        Provider.of<CreateWorkerProfileProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     return SingleChildScrollView(
       child: Column(

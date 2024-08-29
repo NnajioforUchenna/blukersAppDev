@@ -36,8 +36,6 @@ class AppUser {
   // Device Token for Push Notification
   List<String>? tokens = [];
 
-  String? deviceTokenU;
-
   // Navigation Controls
   String? userRole;
   int? workerTimelineStep = 0;
@@ -76,7 +74,6 @@ class AppUser {
     this.workerRecords,
     this.company,
     this.address,
-    this.deviceTokenU,
     this.tokens,
     this.userRole,
     this.workerTimelineStep,
@@ -108,7 +105,6 @@ class AppUser {
     if (workerRecords != null) data['workerRecords'] = workerRecords!.toMap();
     if (company != null) data['company'] = company!.toMap();
     if (address != null) data['address'] = address!.toMap();
-    if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
     if (tokens != null) data['tokens'] = tokens;
     if (userRole != null) data['userRole'] = userRole;
     if (workerTimelineStep != null) {
@@ -196,7 +192,6 @@ class AppUser {
             SubscriptionPlan.fromMap(map['deferredSubscription']);
       }
 
-      user.deviceTokenU = map['deviceTokenU'] as String?;
       user.tokens = map['tokens'] != null
           ? List<String>.from(map['tokens'].map((x) => x as String))
           : [];
