@@ -4,12 +4,11 @@ extension OtherSignInOptions on UserProvider {
   Future<void> signInWithGoogle(BuildContext context) async {
     // Attempt to sign in with Google.
     try {
+      AuthResult authResult = await UserDataProvider.signInWithGoogle();
       EasyLoading.show(
         status: 'Authenticating...',
         maskType: EasyLoadingMaskType.black,
       );
-      AuthResult authResult = await UserDataProvider.signInWithGoogle();
-      log(authResult.isSuccess.toString());
       checkIfRegisteredOrLogin(authResult, context);
     } catch (e) {
       EasyLoading.dismiss();
@@ -25,12 +24,12 @@ extension OtherSignInOptions on UserProvider {
 
   Future<void> signInWithFacebook(BuildContext context) async {
     try {
+      // Attempt to sign in with Facebook.
+      AuthResult authResult = await UserDataProvider.signInWithFacebook();
       EasyLoading.show(
         status: 'Authenticating...',
         maskType: EasyLoadingMaskType.black,
       );
-      // Attempt to sign in with Facebook.
-      AuthResult authResult = await UserDataProvider.signInWithFacebook();
       // Check if the registration was successful.
       checkIfRegisteredOrLogin(authResult, context);
     } catch (e) {
