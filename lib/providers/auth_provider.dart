@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../models/app_user/app_user.dart';
 
-class RegistrationProvider with ChangeNotifier {
+class AuthProvider with ChangeNotifier {
   AppUser? appUser;
 
   update(AppUser? user) {

@@ -1,5 +1,6 @@
 // list_of_provider.dart
 import 'package:blukers/providers/message_provider.dart';
+import 'package:blukers/providers/registration_provider.dart';
 import 'package:blukers/providers/worker_chat_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,7 @@ import '../providers/industry_provider.dart';
 import '../providers/job_posts_provider.dart';
 import '../providers/jobs_lists_provider.dart';
 import '../providers/payment_providers/payments_provider.dart';
+import '../providers/profile_update_provider.dart';
 import '../providers/user_provider_parts/user_provider.dart';
 import '../providers/worker_provider.dart';
 
@@ -19,6 +21,14 @@ final appProviders = [
   ChangeNotifierProvider(create: (context) => MessageProvider()),
   ChangeNotifierProvider(create: (context) => UserProvider()),
   ChangeNotifierProvider(create: (context) => IndustriesProvider()),
+  ChangeNotifierProxyProvider<UserProvider, RegistrationProvider>(
+      create: (context) => RegistrationProvider(),
+      update: (_, user, RegistrationProvider? previous) =>
+          previous!..update(user.appUser)),
+  ChangeNotifierProxyProvider<UserProvider, ProfileUpdateProvider>(
+      create: (context) => ProfileUpdateProvider(),
+      update: (_, user, ProfileUpdateProvider? previous) =>
+          previous!..update(user.appUser)),
   ChangeNotifierProxyProvider<UserProvider, CompanyChatProvider>(
       create: (context) => CompanyChatProvider(),
       update: (_, user, CompanyChatProvider? previous) =>

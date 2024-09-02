@@ -8,9 +8,11 @@ extension OtherSignInOptions on UserProvider {
       maskType: EasyLoadingMaskType.black,
     );
     AuthResult authResult = await UserDataProvider.signInWithGoogle();
-    print('Signing in is done');
+
     print(authResult.toString());
-    checkIfRegisteredOrLogin(authResult, context);
+
+    // TODO: Check if it was Registration or Login and proceed accordingly.
+    print('Check if it was Registration or Login and proceed accordingly.');
   }
 
   Future<void> signInWithApple(BuildContext context) async {

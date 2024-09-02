@@ -555,8 +555,9 @@ class UserDataProvider {
         firestore.collection(appUserCollections);
 
     appUserCollection.doc(appUser!.uid).update({
-      'worker.industryIds': appUser.workerResumeDetails!.industryIds,
-      'worker.jobIds': appUser.workerResumeDetails!.jobIds,
+      'workerResumeDetails.industryIds':
+          appUser.workerResumeDetails!.industryIds,
+      'workerResumeDetails.jobIds': appUser.workerResumeDetails!.jobIds,
     }).catchError((error) {
       print("Error adding user to Firestore: $error");
     });
@@ -641,10 +642,6 @@ class UserDataProvider {
   }
 
   static Future<AuthResult> signInWithGoogle() async {
-    // Implement the Google Sign-In functionality here
-
-    // final googleAccount = await GoogleSignIn().signIn();
-
     GoogleSignInAccount? googleAccount;
 
     if (kIsWeb) {

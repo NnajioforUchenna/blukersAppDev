@@ -1,10 +1,10 @@
+import 'package:blukers/providers/profile_update_provider.dart';
 import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../utils/styles/index.dart';
 import '../../../../old_common_views/small_pop_button_widget.dart';
 
@@ -16,32 +16,9 @@ class UpdateUserInformation extends StatefulWidget {
 }
 
 class _UpdateUserInformationState extends State<UpdateUserInformation> {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController middleNameController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      UserProvider up = Provider.of<UserProvider>(context, listen: false);
-      if (up.appUser != null && up.appUser?.workerResumeDetails != null) {
-        firstNameController.text =
-            up.appUser?.workerResumeDetails?.firstName ?? '';
-        lastNameController.text =
-            up.appUser?.workerResumeDetails?.lastName ?? '';
-        middleNameController.text =
-            up.appUser?.workerResumeDetails?.middleName ?? '';
-        descriptionController.text =
-            up.appUser?.registrationDetails?.shortDescription ?? '';
-      }
-    });
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    ProfileUpdateProvider pup = Provider.of<ProfileUpdateProvider>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Dialog(
@@ -75,25 +52,25 @@ class _UpdateUserInformationState extends State<UpdateUserInformation> {
                         TextInputWigdet(
                           label: 'First Name',
                           maxlines: 1,
-                          controller: firstNameController,
+                          controller: pup.firstNameController,
                         ),
                         const SizedBox(height: 10),
                         TextInputWigdet(
                           label: 'Middle Name',
                           maxlines: 1,
-                          controller: middleNameController,
+                          controller: pup.middleNameController,
                         ),
                         const SizedBox(height: 10),
                         TextInputWigdet(
                           label: 'Last Name',
                           maxlines: 1,
-                          controller: lastNameController,
+                          controller: pup.lastNameController,
                         ),
                         const SizedBox(height: 10),
                         TextInputWigdet(
                           label: 'Description',
                           maxlines: 5,
-                          controller: descriptionController,
+                          controller: pup.descriptionController,
                         ),
                       ],
                     ),
@@ -104,14 +81,7 @@ class _UpdateUserInformationState extends State<UpdateUserInformation> {
                     margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        UserProvider up =
-                            Provider.of<UserProvider>(context, listen: false);
-                        up.updateUserInformation(
-                          firstName: firstNameController.text,
-                          middleName: middleNameController.text,
-                          lastName: lastNameController.text,
-                          description: descriptionController.text,
-                        );
+                        pup.updateAppUserInformation();
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(

@@ -243,8 +243,8 @@ class AppUser {
   String get getDisplayName {
     if (displayName != null && displayName!.isNotEmpty) {
       return displayName!;
-    } else if (workerResumeDetails != null) {
-      return '${workerResumeDetails!.firstName} ${workerResumeDetails!.lastName}';
+    } else if (registrationDetails != null) {
+      return '${registrationDetails!.firstName} ${registrationDetails!.lastName}';
     } else if (company != null) {
       return company!.name;
     } else {
