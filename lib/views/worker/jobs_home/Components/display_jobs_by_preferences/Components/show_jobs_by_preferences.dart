@@ -10,7 +10,7 @@ class ShowJobsByPreferences extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        //JobsPreferencesCard(),
+        JobsPreferencesCard(),
         Expanded(child: BuildListViewJobsByPreferences()),
       ],
     );

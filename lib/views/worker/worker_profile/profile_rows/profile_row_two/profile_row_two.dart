@@ -30,8 +30,8 @@ class ProfileRowTwo extends StatelessWidget {
                 width: 4.0, // Set the border width
               ),
             ),
-            width: 120,
-            height: 120,
+            width: 160,
+            height: 160,
             child: Center(
               child: Container(
                 decoration: BoxDecoration(
@@ -47,19 +47,19 @@ class ProfileRowTwo extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(1000),
                   child: up.appUser!.photoUrl != null &&
-                          up.appUser!.photoUrl != ""
+                      up.appUser!.photoUrl != ""
                       ? FadeInImage.assetNetwork(
-                          placeholder: "assets/images/loading.jpeg",
-                          image: up.appUser!.photoUrl!,
-                          //width: MediaQuery.of(context).size.width,
-                          fit: BoxFit.cover,
-                        )
-                      // : Image.asset("assets/images/userDefaultProfilePic.png"),
+                    placeholder: "assets/images/loading.jpeg",
+                    image: up.appUser!.photoUrl!,
+                    //width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  )
+                  // : Image.asset("assets/images/userDefaultProfilePic.png"),
                       : FittedBox(
-                          fit: BoxFit.fill,
-                          child: Image.asset(
-                              "assets/images/userDefaultProfilePic.png"),
-                        ),
+                    fit: BoxFit.fill,
+                    child: Image.asset(
+                        "assets/images/userDefaultProfilePic.png"),
+                  ),
                 ),
               ),
             ),
@@ -67,16 +67,13 @@ class ProfileRowTwo extends StatelessWidget {
           const Positioned(
             bottom: 0,
             right: 0,
-            child: SizedBox(
-              height: 35,
-              child: CircleAvatar(
-                radius: 20,
-                backgroundColor: ThemeColors.secondaryThemeColor,
-                child: Icon(
-                  UniconsLine.pen,
-                  size: 15,
-                  color: Colors.white,
-                ),
+            child: CircleAvatar(
+              radius: 20,
+              backgroundColor: ThemeColors.secondaryThemeColor,
+              child: Icon(
+                UniconsLine.pen,
+                size: 20,
+                color: Colors.white,
               ),
             ),
           ),

@@ -11,26 +11,28 @@ class CompanyMessageBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
     int messageCount = cp.unreadMessageCount;
-    return CompanyMessageBadgeAnimation(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.red,
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  messageCount.toString(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+    return messageCount == 0
+        ? Container()
+        : CompanyMessageBadgeAnimation(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.red,
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            messageCount.toString(),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
             ),
-          );
+          ),
+        ),
+      ),
+    );
   }
 }

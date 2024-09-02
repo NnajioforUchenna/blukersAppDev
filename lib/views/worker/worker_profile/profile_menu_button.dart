@@ -12,7 +12,7 @@ class ProfileMenuButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPress,
-    this.textColor = ThemeColors.black1ThemeColor
+    this.textColor = ThemeColors.grey1ThemeColor,
   });
 
   @override
@@ -23,7 +23,6 @@ class ProfileMenuButton extends StatelessWidget {
       },
       child: Container(
         // margin: const EdgeInsets.all(14.0),
-        height: 65,
         margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           color: Colors.white, // Background color of the container
