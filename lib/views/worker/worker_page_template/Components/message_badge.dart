@@ -11,9 +11,7 @@ class MessageBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     WorkerChatProvider wp = Provider.of<WorkerChatProvider>(context);
     int messageCount = wp.unreadMessageCount;
-    return messageCount == 0
-        ? Container()
-        : MessageBadgeAnimation(
+    return MessageBadgeAnimation(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(

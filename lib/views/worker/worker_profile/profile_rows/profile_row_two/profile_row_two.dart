@@ -30,8 +30,8 @@ class ProfileRowTwo extends StatelessWidget {
                 width: 4.0, // Set the border width
               ),
             ),
-            width: 160,
-            height: 160,
+            width: 120,
+            height: 120,
             child: Center(
               child: Container(
                 decoration: BoxDecoration(
@@ -67,13 +67,16 @@ class ProfileRowTwo extends StatelessWidget {
           const Positioned(
             bottom: 0,
             right: 0,
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: ThemeColors.secondaryThemeColor,
-              child: Icon(
-                UniconsLine.pen,
-                size: 20,
-                color: Colors.white,
+            child: SizedBox(
+              height: 35,
+              child: CircleAvatar(
+                radius: 20,
+                backgroundColor: ThemeColors.secondaryThemeColor,
+                child: Icon(
+                  UniconsLine.pen,
+                  size: 15,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

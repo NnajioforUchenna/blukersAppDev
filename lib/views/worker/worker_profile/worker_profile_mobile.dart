@@ -5,6 +5,7 @@ import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_nin
 import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_one/profile_row_one.dart';
 import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_seven/profile_row_seven.dart';
 import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_six/profile_row_six.dart';
+import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_ten/profile_row_ten.dart';
 import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_three/profile_row_three.dart';
 import 'package:blukers/views/worker/worker_profile/profile_rows/profile_row_two/profile_row_two.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,8 @@ class WorkerProfileMobile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ProfileRowOne(),
+         // ProfileRowOne(),
+          SizedBox(height: 50),
           ProfileRowTwo(),
           ProfileRowThree(),
           ProfileRowFour(),
@@ -34,6 +36,8 @@ class WorkerProfileMobile extends StatelessWidget {
           ProfileRowEight(),
           SizedBox(height: 10),
           ProfileRowNine(),
+          SizedBox(height: 20),
+          ProfileRowTen(),
           SizedBox(height: 20),
           AppVersionDisplay(),
           SizedBox(height: 20),

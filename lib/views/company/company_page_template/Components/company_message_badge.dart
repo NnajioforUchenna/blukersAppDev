@@ -11,9 +11,7 @@ class CompanyMessageBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     CompanyChatProvider cp = Provider.of<CompanyChatProvider>(context);
     int messageCount = cp.unreadMessageCount;
-    return messageCount == 0
-        ? Container()
-        : CompanyMessageBadgeAnimation(
+    return CompanyMessageBadgeAnimation(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
