@@ -10,6 +10,7 @@ class RegistrationDetails {
   // Basic Details
   String? phoneNumber;
   String? firstName;
+  String? middleName;
   String? lastName;
   String? shortDescription;
 
@@ -25,6 +26,7 @@ class RegistrationDetails {
     this.registeredAs,
     this.phoneNumber,
     this.firstName,
+    this.middleName,
     this.lastName,
     this.shortDescription,
     this.jobsPreference,
@@ -38,6 +40,7 @@ class RegistrationDetails {
       'registeredAs': registeredAs,
       'phoneNumber': phoneNumber,
       'firstName': firstName,
+      'middleName': middleName, // Added middleName
       'lastName': lastName,
       'shortDescription': shortDescription,
       'jobsPreference': jobsPreference?.toMap(),
@@ -52,6 +55,7 @@ class RegistrationDetails {
       registeredAs: map['registeredAs'],
       phoneNumber: map['phoneNumber'],
       firstName: map['firstName'],
+      middleName: map['middleName'],
       lastName: map['lastName'],
       shortDescription: map['shortDescription'],
       jobsPreference: map['jobsPreference'] != null

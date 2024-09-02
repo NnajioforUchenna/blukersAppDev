@@ -3,10 +3,16 @@ part of 'user_provider.dart';
 extension OtherSignInOptions on UserProvider {
   Future<void> signInWithGoogle(BuildContext context) async {
     // Attempt to sign in with Google.
+    EasyLoading.show(
+      status: 'Authenticating...',
+      maskType: EasyLoadingMaskType.black,
+    );
     AuthResult authResult = await UserDataProvider.signInWithGoogle();
-    print('Signing in is done');
+
     print(authResult.toString());
-    checkIfRegisteredOrLogin(authResult, context);
+
+    // TODO: Check if it was Registration or Login and proceed accordingly.
+    print('Check if it was Registration or Login and proceed accordingly.');
   }
 
   Future<void> signInWithApple(BuildContext context) async {
@@ -17,6 +23,10 @@ extension OtherSignInOptions on UserProvider {
   }
 
   Future<void> signInWithFacebook(BuildContext context) async {
+    EasyLoading.show(
+      status: 'Authenticating...',
+      maskType: EasyLoadingMaskType.black,
+    );
     // Attempt to sign in with Facebook.
     AuthResult authResult = await UserDataProvider.signInWithFacebook();
     // Check if the registration was successful.
@@ -31,6 +41,8 @@ extension OtherSignInOptions on UserProvider {
       } else {
         followLoginFlow(authResult, context);
       }
+    } else {
+      EasyLoading.dismiss();
     }
   }
 }

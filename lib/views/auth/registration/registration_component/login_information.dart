@@ -19,8 +19,6 @@ class LoginInformation extends StatefulWidget {
 }
 
 class _LoginInformationState extends State<LoginInformation> {
-  final _formKey = GlobalKey<FormState>();
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String groupValue = '';

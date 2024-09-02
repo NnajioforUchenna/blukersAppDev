@@ -41,56 +41,58 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDsxZh3EyfTEWgnRvA-MY-MNFEn4sqh5dk',
-    appId: '1:1059320284686:web:35a9fd319d4a74eaeb5e5f',
-    messagingSenderId: '1059320284686',
-    projectId: 'blukers-app',
-    authDomain: 'blukers-app.firebaseapp.com',
-    databaseURL: 'https://blukers-app-default-rtdb.firebaseio.com',
-    storageBucket: 'blukers-app.appspot.com',
-    measurementId: 'G-G3TKEV6S86',
+    apiKey: 'AIzaSyA8inIzoO71nuPDfH0ZED__OppLmbBkiYw',
+    appId: '1:25989559034:web:00bcd96fde3b747f64cf43',
+    messagingSenderId: '25989559034',
+    projectId: 'blukers-development',
+    authDomain: 'blukers-development.firebaseapp.com',
+    databaseURL: 'https://blukers-development-default-rtdb.firebaseio.com',
+    storageBucket: 'blukers-development.appspot.com',
+    measurementId: 'G-6RRZVJSLKK',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCCaH8vVOJ8nk77DqJotPBq56AIZoxvHhU',
-    appId: '1:1059320284686:android:ac943ae54f2834f5eb5e5f',
-    messagingSenderId: '1059320284686',
-    projectId: 'blukers-app',
-    databaseURL: 'https://blukers-app-default-rtdb.firebaseio.com',
-    storageBucket: 'blukers-app.appspot.com',
+    apiKey: 'AIzaSyDZnBA1yI928GjU892Q0_z3IrisrPB00CM',
+    appId: '1:25989559034:android:9d0ff9f7910a037664cf43',
+    messagingSenderId: '25989559034',
+    projectId: 'blukers-development',
+    databaseURL: 'https://blukers-development-default-rtdb.firebaseio.com',
+    storageBucket: 'blukers-development.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB50wjWkOigQ6ZATZDz-Jt2hRHjUZmCEdU',
-    appId: '1:1059320284686:ios:47f049e0935ea6c6eb5e5f',
-    messagingSenderId: '1059320284686',
-    projectId: 'blukers-app',
-    databaseURL: 'https://blukers-app-default-rtdb.firebaseio.com',
-    storageBucket: 'blukers-app.appspot.com',
-    iosClientId: '1059320284686-nmu60jnks6qdgsf7hu82msqo2ndm4jcd.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDDCHe61XTkxnjePSE6U6vJvHB3exzjHpk',
+    appId: '1:25989559034:ios:d028a7a2865bae0964cf43',
+    messagingSenderId: '25989559034',
+    projectId: 'blukers-development',
+    databaseURL: 'https://blukers-development-default-rtdb.firebaseio.com',
+    storageBucket: 'blukers-development.appspot.com',
+    androidClientId: '25989559034-8ld1mjucq0kti3ut5fcn9i6d28hqcolu.apps.googleusercontent.com',
+    iosClientId: '25989559034-32qt09e8cg860hqv86805fomh6n5cfq1.apps.googleusercontent.com',
     iosBundleId: 'talk2victormarius.blukersUITests',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB50wjWkOigQ6ZATZDz-Jt2hRHjUZmCEdU',
-    appId: '1:1059320284686:ios:80e0550170973d20eb5e5f',
-    messagingSenderId: '1059320284686',
-    projectId: 'blukers-app',
-    databaseURL: 'https://blukers-app-default-rtdb.firebaseio.com',
-    storageBucket: 'blukers-app.appspot.com',
-    iosClientId: '1059320284686-h4j3nd86vdgrj9sfg6s6ed8tepsditfd.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDDCHe61XTkxnjePSE6U6vJvHB3exzjHpk',
+    appId: '1:25989559034:ios:64a2b3282bec97b564cf43',
+    messagingSenderId: '25989559034',
+    projectId: 'blukers-development',
+    databaseURL: 'https://blukers-development-default-rtdb.firebaseio.com',
+    storageBucket: 'blukers-development.appspot.com',
+    androidClientId: '25989559034-8ld1mjucq0kti3ut5fcn9i6d28hqcolu.apps.googleusercontent.com',
+    iosClientId: '25989559034-mfrt0s7jjm06v82m7ltjgo6j1v9illbh.apps.googleusercontent.com',
     iosBundleId: 'com.terralabor.blukers',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDsxZh3EyfTEWgnRvA-MY-MNFEn4sqh5dk',
-    appId: '1:1059320284686:web:22b1deee86c38012eb5e5f',
-    messagingSenderId: '1059320284686',
-    projectId: 'blukers-app',
-    authDomain: 'blukers-app.firebaseapp.com',
-    databaseURL: 'https://blukers-app-default-rtdb.firebaseio.com',
-    storageBucket: 'blukers-app.appspot.com',
-    measurementId: 'G-8M7GNEGEND',
+    apiKey: 'AIzaSyA8inIzoO71nuPDfH0ZED__OppLmbBkiYw',
+    appId: '1:25989559034:web:21e3c0c831ed20ee64cf43',
+    messagingSenderId: '25989559034',
+    projectId: 'blukers-development',
+    authDomain: 'blukers-development.firebaseapp.com',
+    databaseURL: 'https://blukers-development-default-rtdb.firebaseio.com',
+    storageBucket: 'blukers-development.appspot.com',
+    measurementId: 'G-8RDP0NVN61',
   );
 
 }

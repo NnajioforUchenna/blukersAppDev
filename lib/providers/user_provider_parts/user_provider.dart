@@ -1,5 +1,6 @@
 // import 'dart:io';
 
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:blukers/data_providers/user_data_provider.dart';
@@ -203,6 +204,7 @@ class UserProvider with ChangeNotifier {
   String getButton(String subscriptionId) {
     return getButtonAction(whichMembership(), subscriptionId);
   }
+
 
   String getButtonAction(String state, String subscriptionId) {
     Map<String, Map<String, String>> actions = {

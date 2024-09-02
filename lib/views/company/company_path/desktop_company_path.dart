@@ -12,163 +12,186 @@ import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
 import '../../../utils/styles/index.dart';
 import '../../../utils/styles/theme_colors.dart';
+
 class DesktopCompanyPath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     int currentStep = up.appUser?.companyTimelineStep ?? 0;
-      AppUser?appUser;
-    double width = MediaQuery.of(context).size.width;
 
-    return  Scaffold(
-      body: MakeResponsiveWeb(
-        image: const AssetImage('assets/images/successpath.png'),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(
+      body: SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 154),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-             const SizedBox(height: 60),
-          const Center(
-            child: Icon(
-              UniconsLine.building,
-              size: 60,
-              color: ThemeColors.blukersBlueThemeColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Center(
-              child: Text(
-                AppLocalizations.of(context)!.companyJourneyTitle,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: ThemeColors.blukersBlueThemeColor,
-                  fontFamily: "Montserrat",
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/successpath.png',
+                      width: 370,
+                      height: 370,
+                    ),
+                    const SizedBox(height: 25),
+                    Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.companyJourneyTitle,
+                        style: const TextStyle(
+                          fontSize: 47,
+                          fontWeight: FontWeight.bold,
+                          color: ThemeColors.blukersBlueThemeColor,
+                          fontFamily: "Montserrat",
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ],
                 ),
-                textAlign: TextAlign.center,
               ),
-            ),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: companyRecords.length,
-            itemBuilder: (context, index) {
-              String title = "";
-              String description = "";
-              if (index == 0) {
-                title = AppLocalizations.of(context)!.companyJourneyStep1Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep1Text;
-              }
-              if (index == 1) {
-                title = AppLocalizations.of(context)!.companyJourneyStep2Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep2Text;
-              }
-              if (index == 2) {
-                title = AppLocalizations.of(context)!.companyJourneyStep3Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep3Text;
-              }
-              if (index == 3) {
-                title = AppLocalizations.of(context)!.companyJourneyStep4Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep4Text;
-              }
-              if (index == 4) {
-                title = AppLocalizations.of(context)!.companyJourneyStep5Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep5Text;
-              }
-              if (index == 5) {
-                title = AppLocalizations.of(context)!.companyJourneyStep6Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep6Text;
-              }
-              final record = companyRecords[index];
-              return MyJobTimeLine(
-                isFirst: index == 0,
-                isLast: index == companyRecords.length - 1,
-                isPast: index <= currentStep,
-                title: title,
-                briefDescription: description,
-              );
-            },
-          ),
-          const SizedBox(height: 10),
-          if (currentStep == 0)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep1Title,
-              context,
-              () {
-                context.go('/register');
-              },
-            ),
-          if (currentStep == 1)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep2Title,
-              context,
-              () {
-                context.go('/setWorkersPreferences');
-              },
-            ),
-          if (currentStep == 2)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep3Title,
-              context,
-              () {
-                UserDataProvider.updatecompanyTimelineStep(appUser!.uid, 3);
-                context.go('/myJobPosts');
-              },
-            ),
-          if (currentStep == 3)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep4Title,
-              context,
-              () {
-                context.go('/createCompanyProfile');
-              },
-            ),
-          if (currentStep == 4)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep5Title,
-              context,
-              () {
-                context.go('/createJobPost');
-              },
-            ),
-          if (currentStep == 5)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep6Title,
-              context,
-              () {
-                context.go('/companyChat');
-              },
-            ),
-          const SizedBox(height: 20),
+              const SizedBox(width: 116),
+              Expanded(
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 60),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: companyRecords.length,
+                            itemBuilder: (context, index) {
+                              String title = getTitle(index, context);
+                              String description =
+                                  getDescription(index, context);
+
+                              return MyJobTimeLine(
+                                index: index,
+                                isFirst: index == 0,
+                                isLast: index == companyRecords.length - 1,
+                                isPast: index <= currentStep,
+                                isCurrent: index == currentStep,
+                                title: title,
+                                briefDescription: description,
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 30),
+                        ],
+                      ),
+                    ),
+                    if (currentStep >= 0 && currentStep <= 5)
+                      Positioned(
+                        bottom: 10,
+                        right: 0,
+                        left: 0,
+                        child: buildButton(
+                          context,
+                          currentStep,
+                          getButtonTitle(currentStep, context),
+                          () {
+                            navigateBasedOnStep(currentStep, context);
+                          },
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  String getTitle(int index, BuildContext context) {
+    switch (index) {
+      case 0:
+        return AppLocalizations.of(context)!.companyJourneyStep1Title;
+      case 1:
+        return AppLocalizations.of(context)!.companyJourneyStep2Title;
+      case 2:
+        return AppLocalizations.of(context)!.companyJourneyStep3Title;
+      case 3:
+        return AppLocalizations.of(context)!.companyJourneyStep4Title;
+      case 4:
+        return AppLocalizations.of(context)!.companyJourneyStep5Title;
+      case 5:
+        return AppLocalizations.of(context)!.companyJourneyStep6Title;
+      default:
+        return '';
+    }
+  }
+
+  String getDescription(int index, BuildContext context) {
+    switch (index) {
+      case 0:
+        return AppLocalizations.of(context)!.companyJourneyStep1Text;
+      case 1:
+        return AppLocalizations.of(context)!.companyJourneyStep2Text;
+      case 2:
+        return AppLocalizations.of(context)!.companyJourneyStep3Text;
+      case 3:
+        return AppLocalizations.of(context)!.companyJourneyStep4Text;
+      case 4:
+        return AppLocalizations.of(context)!.companyJourneyStep5Text;
+      case 5:
+        return AppLocalizations.of(context)!.companyJourneyStep6Text;
+      default:
+        return '';
+    }
+  }
+
+  String getButtonTitle(int currentStep, BuildContext context) {
+    switch (currentStep) {
+      case 0:
+        return AppLocalizations.of(context)!.companyJourneyStep1Title;
+      case 1:
+        return AppLocalizations.of(context)!.companyJourneyStep2Title;
+      case 2:
+        return AppLocalizations.of(context)!.companyJourneyStep3Title;
+      case 3:
+        return AppLocalizations.of(context)!.companyJourneyStep4Title;
+      case 4:
+        return AppLocalizations.of(context)!.companyJourneyStep5Title;
+      case 5:
+        return AppLocalizations.of(context)!.companyJourneyStep6Title;
+      default:
+        return '';
+    }
+  }
+
+  void navigateBasedOnStep(int currentStep, BuildContext context) {
+    AppUser? appUser;
+    switch (currentStep) {
+      case 0:
+        context.go('/register');
+        break;
+      case 1:
+        context.go('/setWorkersPreferences');
+        break;
+      case 2:
+        UserDataProvider.updatecompanyTimelineStep(appUser!.uid, 3);
+        context.go('/myJobPosts');
+        break;
+      case 3:
+        context.go('/createCompanyProfile');
+        break;
+      case 4:
+        context.go('/createJobPost');
+        break;
+      case 5:
+        context.go('/companyChat');
+        break;
+      default:
+        break;
+    }
+  }
 }
-
-
 
 final companyRecords = [
   {
@@ -203,12 +226,18 @@ final companyRecords = [
   },
 ];
 
-Widget buildButton(double width, int currentStep, String text,
-    BuildContext context, VoidCallback onClick) {
+Widget buildButton(
+  BuildContext context,
+  int currentStep,
+  String text,
+  VoidCallback onClick,
+) {
+  double width = MediaQuery.of(context).size.width;
+
   return Center(
     child: SizedBox(
-      width: width < 600 ? 250 : 400,
-      height: width < 600 ? 50 : 80,
+      width: width < 600 ? 250 : double.infinity,
+      height: width < 600 ? 50 : 55,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: ThemeColors.blukersOrangeThemeColor,
@@ -223,6 +252,7 @@ Widget buildButton(double width, int currentStep, String text,
             text.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 24 * Responsive.textScaleFactor(context),
             ),

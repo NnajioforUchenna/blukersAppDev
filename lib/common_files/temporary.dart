@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/company_provider.dart';
+import '../../../../providers/create_worker_profile_provider.dart';
 
-class YourCompanyLogo extends StatelessWidget {
-  const YourCompanyLogo({
-    super.key,
-  });
+class ResumeProfilePhoto extends StatelessWidget {
+  const ResumeProfilePhoto({super.key});
 
   @override
   Widget build(BuildContext context) {
-    CompanyProvider cp = Provider.of<CompanyProvider>(context);
-    String? logoUrl = cp.createCompanyProfileData['logoUrl'];
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
+    String? logoUrl = cwpp.appUser?.workerResumeDetails?.profilePhotoUrl;
+
     return InkWell(
       onTap: () {
-        cp.selectCompanyLogo(context);
+        cwpp.selectProfilePhoto(context);
       },
       child: Card(
-        elevation: 1.0,
+        elevation: 2.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

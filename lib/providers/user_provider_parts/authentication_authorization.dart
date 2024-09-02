@@ -172,7 +172,6 @@ extension AuthenticationAuthorization on UserProvider {
 
       // Dismiss the loading indicator.
       EasyLoading.dismiss();
-
       // Navigate to the home page.
       if (userRole == "worker") {
         GoRouter.of(context).go('/jobs');

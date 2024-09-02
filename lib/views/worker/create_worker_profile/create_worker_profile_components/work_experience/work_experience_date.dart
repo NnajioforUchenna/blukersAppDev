@@ -1,9 +1,9 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../utils/styles/index.dart';
 
 class WorkExperienceDate extends StatefulWidget {
@@ -18,12 +18,13 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
   DateTime? _startDate;
   DateTime? _endDate;
   bool _isCurrentlyWorking = false;
-  late WorkersProvider wp;
+  late CreateWorkerProfileProvider wp;
 
   @override
   void initState() {
     super.initState();
-    wp = Provider.of<WorkersProvider>(context, listen: false);
+    // wp = Provider.of<WorkersProvider>(context, listen: false);
+    wp = Provider.of<CreateWorkerProfileProvider>(context, listen: false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (wp.workExperience[widget.intialIndex]['jobStartDate'] != null) {
@@ -68,7 +69,9 @@ class _WorkExperienceDateState extends State<WorkExperienceDate> {
 
   @override
   Widget build(BuildContext context) {
-    wp = Provider.of<WorkersProvider>(context);
+    CreateWorkerProfileProvider wp =
+        Provider.of<CreateWorkerProfileProvider>(context);
+
     return Column(
       children: [
         Row(
