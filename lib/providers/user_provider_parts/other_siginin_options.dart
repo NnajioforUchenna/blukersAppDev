@@ -3,16 +3,16 @@ part of 'user_provider.dart';
 extension OtherSignInOptions on UserProvider {
   Future<void> signInWithGoogle(BuildContext context) async {
     // Attempt to sign in with Google.
-    EasyLoading.show(
-      status: 'Authenticating...',
-      maskType: EasyLoadingMaskType.black,
-    );
-    AuthResult authResult = await UserDataProvider.signInWithGoogle();
-
-    print(authResult.toString());
-
-    // TODO: Check if it was Registration or Login and proceed accordingly.
-    print('Check if it was Registration or Login and proceed accordingly.');
+    try {
+      AuthResult authResult = await UserDataProvider.signInWithGoogle();
+      EasyLoading.show(
+        status: 'Authenticating...',
+        maskType: EasyLoadingMaskType.black,
+      );
+      checkIfRegisteredOrLogin(authResult, context);
+    } catch (e) {
+      EasyLoading.dismiss();
+    }
   }
 
   Future<void> signInWithApple(BuildContext context) async {
@@ -23,14 +23,18 @@ extension OtherSignInOptions on UserProvider {
   }
 
   Future<void> signInWithFacebook(BuildContext context) async {
-    EasyLoading.show(
-      status: 'Authenticating...',
-      maskType: EasyLoadingMaskType.black,
-    );
-    // Attempt to sign in with Facebook.
-    AuthResult authResult = await UserDataProvider.signInWithFacebook();
-    // Check if the registration was successful.
-    checkIfRegisteredOrLogin(authResult, context);
+    try {
+      // Attempt to sign in with Facebook.
+      AuthResult authResult = await UserDataProvider.signInWithFacebook();
+      EasyLoading.show(
+        status: 'Authenticating...',
+        maskType: EasyLoadingMaskType.black,
+      );
+      // Check if the registration was successful.
+      checkIfRegisteredOrLogin(authResult, context);
+    } catch (e) {
+      EasyLoading.dismiss();
+    }
   }
 
   checkIfRegisteredOrLogin(AuthResult authResult, BuildContext context) {
