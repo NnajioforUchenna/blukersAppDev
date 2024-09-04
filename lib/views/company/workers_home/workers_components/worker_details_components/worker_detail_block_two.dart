@@ -14,7 +14,7 @@ class WorkerDetailBlockTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double scaleFactor = Responsive.textScaleFactor(context);
-    bool isBlur = true; // You can change this value based on your requirements
+    bool isBlur = false; // You can change this value based on your requirements
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
