@@ -19,11 +19,10 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
   Widget build(BuildContext context) {
     CreateWorkerProfileProvider cwpp =
         Provider.of<CreateWorkerProfileProvider>(context);
-    if (cwpp.workExperienceForms.isEmpty) {
+    List<WorkExperienceForm> workExperienceForms = [];
       for (int i = 0; i < cwpp.workExperience.length; i++) {
-        cwpp.workExperienceForms.add(WorkExperienceForm(index: i));
+        workExperienceForms.add(WorkExperienceForm(index: i));
       }
-    }
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -33,7 +32,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            ...cwpp.workExperienceForms,
+           ...workExperienceForms,
             Tooltip(
               message: AppLocalizations.of(context)!.addMoreWorkExperience,
               child: InkWell(
