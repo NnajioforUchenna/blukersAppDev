@@ -14,7 +14,7 @@ class WorkerDetailBlockTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double scaleFactor = Responsive.textScaleFactor(context);
-    bool isBlur = true; // You can change this value based on your requirements
+    bool isBlur = false; // You can change this value based on your requirements
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -88,24 +88,24 @@ class WorkerDetailBlockTwo extends StatelessWidget {
             ],
           ),
           const Divider(),
-          Row(
-            children: [
-              const Spacer(),
-              if (isBlur) // If the member is not active, show the "Activate Your Membership" button
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 5.w, vertical: 3.h), // Custom padding
-                  ),
-                  child: Text(
-                    "Activate Your Membership",
-                    style: TextStyle(
-                        fontSize: Responsive.isMobile(context) ? 10.sp : 16),
-                  ),
-                ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     const Spacer(),
+          //     if (isBlur) // If the member is not active, show the "Activate Your Membership" button
+          //       ElevatedButton(
+          //         onPressed: () {},
+          //         style: ElevatedButton.styleFrom(
+          //           padding: EdgeInsets.symmetric(
+          //               horizontal: 5.w, vertical: 3.h), // Custom padding
+          //         ),
+          //         child: Text(
+          //           "Activate Your Membership",
+          //           style: TextStyle(
+          //               fontSize: Responsive.isMobile(context) ? 10.sp : 16),
+          //         ),
+          //       ),
+          //   ],
+          // ),
         ],
       ),
     );
