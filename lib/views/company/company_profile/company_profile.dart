@@ -1,3 +1,4 @@
+import 'package:blukers/providers/company_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,6 +29,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
+    CompanyProvider cp = Provider.of<CompanyProvider>(context);
 
     return up.appUser == null
         ? const LoginOrRegister()
@@ -56,7 +58,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   children: [
                     buildSignoutButton(context),
                     const SizedBox(height: 10),
-                    buildProfilePicAndEdit(context, up),
+                    buildProfilePicAndEdit(context, up, cp),
                     const SizedBox(height: 10),
                     Text(
                       up.appUser?.company?.name ?? "",
@@ -103,7 +105,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
     );
   }
 
-  Widget buildProfilePicAndEdit(context, up) {
+  Widget buildProfilePicAndEdit(context, up, cp) {
     return Stack(
       children: [
         buildProfileImage(context, up),
@@ -158,10 +160,10 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                   children: [
                                     InkWell(
                                       onTap: () async {
-                                        String? imageUrl = await up
+                                        String? imageUrl = await cp
                                             .ontapCamera("/profile_images/");
                                         if (imageUrl != "") {
-                                          await up
+                                          await cp
                                               .updateUserProfilePic(imageUrl!);
                                         }
                                         Navigator.of(context).pop();
@@ -210,10 +212,10 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                 children: [
                                   InkWell(
                                     onTap: () async {
-                                      String? imageUrl = await up
+                                      String? imageUrl = await cp
                                           .ontapGallery("/profile_images/");
                                       if (imageUrl != "") {
-                                        await up
+                                        await cp
                                             .updateUserProfilePic(imageUrl!);
                                       }
                                       Navigator.of(context).pop();
