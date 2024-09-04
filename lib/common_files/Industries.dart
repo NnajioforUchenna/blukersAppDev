@@ -37,6 +37,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Driver",
     "imageUrl": "assets/industryImages/driver.png",
+    "imageUrlSvg": "assets/industryImages/driver.svg",
     "description":
         "The driver industry involves operating various types of vehicles for transporting goods or passengers.",
     "name": "Driver"
@@ -57,6 +58,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "General Laborer",
     "imageUrl": "assets/industryImages/carpenters.png",
+     "imageUrlSvg": "assets/industryImages/carpenters.svg",
     "description":
         "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
     "name": "General Laborer"
@@ -110,6 +112,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Fitter",
     "imageUrl": "assets/industryImages/fitter.png",
+     "imageUrlSvg": "assets/industryImages/fitter.svg",
     "description":
         "The Fitter involves assembling, installing, and maintaining mechanical components and systems.",
     "name": "Fitter"
@@ -141,6 +144,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "PipeWelder",
     "imageUrl": "assets/industryImages/pipeWelder.png",
+       "imageUrlSvg": "assets/industryImages/pipeWelder.svg",
     "description":
         "Pipe welding involves joining metal pipes using specialized welding techniques. It is essential in industries such as construction, manufacturing, and oil and gas.",
     "name": "PipeWelder"
@@ -194,6 +198,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "welding",
     "imageUrl": "assets/industryImages/Welder.png",
+     "imageUrlSvg": "assets/industryImages/Welder.svg",
     "description":
         "Welding involves joining metals and materials using heat and pressure. It is essential in construction, manufacturing, and fabrication industries.",
     "name": "Welder"
@@ -225,6 +230,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Machinist",
     "imageUrl": "assets/industryImages/Machinist.png",
+     "imageUrlSvg": "assets/industryImages/Machinist.svg",
     "description":
         "A Machinist operates and maintains machine tools to produce precision parts and components according to engineering drawings and specifications.",
     "name": "Machinist"

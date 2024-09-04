@@ -1,22 +1,25 @@
-import 'package:blukers/views/worker/jobs_home/job_home_components/jobs_mobile_view/jobs_mobile_view_compnents/search_and_translate_row.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:blukers/views/worker/select_job_industry/widgets/industry_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../providers/app_settings_provider.dart';
 import '../../../../../providers/industry_provider.dart';
 import '../../../../../providers/job_posts_provider.dart';
-import '../../../../Modules/select_by_industry/select_by_industry.dart';
-import '../../../../common_vieiws/loading_page.dart';
+import '../../common_vieiws/loading_page.dart';
+import 'widgets/search_header_mobile.dart';
 
-class SelectOrSearchJobs extends StatefulWidget {
-  const SelectOrSearchJobs({super.key});
+class SelectIndustryScreen extends StatefulWidget {
+  const SelectIndustryScreen({super.key});
 
   @override
-  State<SelectOrSearchJobs> createState() => _SelectOrSearchJobsState();
+  State<SelectIndustryScreen> createState() => _SelectIndustryScreenState();
 }
 
-class _SelectOrSearchJobsState extends State<SelectOrSearchJobs> {
+class _SelectIndustryScreenState extends State<SelectIndustryScreen> {
   @override
   void initState() {
     super.initState();
@@ -47,7 +50,8 @@ class _SelectOrSearchJobsState extends State<SelectOrSearchJobs> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const SearchAndTranslateRow(),
+        // const SearchAndTranslateRow(),
+        const SearchHeaderMobile(),
         Expanded(
           child: AnimatedCrossFade(
             firstChild: const LoadingPage(),
@@ -61,9 +65,35 @@ class _SelectOrSearchJobsState extends State<SelectOrSearchJobs> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-                child: SelectByIndustry(
-                  selectBy: 'Jobs',
-                  getRecords: jp.getJobsBySelection,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 30.0),
+                        child: Text(
+                            AppLocalizations.of(context)!.selectJobsAnIndustry,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.montserrat(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w700,
+                              color: ThemeColors.black1ThemeColor,
+                            )),
+                      ),
+                      Column(
+                        children: ip.industries.values.map((industry) {
+                          return Container(
+                            margin: const EdgeInsets.only(
+                                bottom: 17.0, left: 14, right: 14),
+                            child: IndustryWidget(
+                              industry: industry,
+                              getRecords: jp.getJobsBySelection,
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 60),
+                    ],
+                  ),
                 )),
             crossFadeState: ip.industries.isEmpty
                 ? CrossFadeState.showFirst

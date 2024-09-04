@@ -17,7 +17,7 @@ class _OnHoverState extends State<OnHover> {
       onExit: (_) => setState(() => _isHovering = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
-        padding: const EdgeInsets.only(left: 10),
+        // padding: const EdgeInsets.only(left: 10),
         decoration: BoxDecoration(
           color: _isHovering ? Colors.grey.shade100 : Colors.white,
           borderRadius: BorderRadius.circular(10),

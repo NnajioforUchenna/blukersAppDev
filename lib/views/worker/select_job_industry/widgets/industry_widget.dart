@@ -1,25 +1,26 @@
-import 'package:blukers/utils/localization/localized_industries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../../models/industry.dart';
-import '../../../../../../services/on_hover.dart';
-import '../../../../../../services/responsive.dart';
-import '../../../../../../utils/styles/theme_colors.dart';
-import 'mobile_industry_bodypanel.dart';
+import '../../../../../models/industry.dart';
+import '../../../../../services/on_hover.dart';
+import '../../../../../services/responsive.dart';
+import '../../../../../utils/localization/localized_industries.dart';
+import '../../../../../utils/styles/theme_colors.dart';
+import '../../../../models/job.dart';
+import '../../../../utils/localization/localized_job_ids.dart';
 
-class MobileIndustryHeadPanel extends StatefulWidget {
+class IndustryWidget extends StatefulWidget {
   final Industry industry;
-
-  const MobileIndustryHeadPanel({super.key, required this.industry});
+  final Function getRecords;
+  const IndustryWidget(
+      {super.key, required this.industry, required this.getRecords});
 
   @override
-  State<MobileIndustryHeadPanel> createState() =>
-      _MobileIndustryHeadPanelState();
+  State<IndustryWidget> createState() => _IndustryWidgetState();
 }
 
-class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
+class _IndustryWidgetState extends State<IndustryWidget> {
   bool isExpanded = false;
 
   @override
@@ -53,8 +54,8 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
               ),
               child: Row(
                 children: [
-                  widget.industry.imageUrl!.contains('.svg')
-                      ? SvgPicture.asset(widget.industry.imageUrl!,
+                  widget.industry.imageUrlSvg != null
+                      ? SvgPicture.asset(widget.industry.imageUrlSvg!,
                           colorFilter: ColorFilter.mode(
                               isExpanded
                                   ? ThemeColors.secondaryThemeColor
@@ -92,7 +93,7 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
                     duration: const Duration(milliseconds: 300),
                     child: Icon(
                       Icons.arrow_forward_ios,
-                      size: 20,
+                      size: Responsive.isDesktop(context) ? 25 : null,
                       color: isExpanded
                           ? ThemeColors.secondaryThemeColor
                           : ThemeColors.black1ThemeColor,
@@ -118,9 +119,82 @@ class _MobileIndustryHeadPanelState extends State<MobileIndustryHeadPanel> {
               )
             : Container(),
         isExpanded
-            ? IndustryBodyPanel(jobs: widget.industry.jobs.values.toList())
-            : Container(),
+            ? IndustryBodyPanel(
+                jobs: widget.industry.jobs.values.toList(),
+                getRecords: widget.getRecords,
+              )
+            : const SizedBox.shrink(),
       ],
+    );
+  }
+}
+
+class IndustryBodyPanel extends StatelessWidget {
+  final List<Job> jobs;
+  final Function getRecords;
+  const IndustryBodyPanel(
+      {super.key, required this.jobs, required this.getRecords});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: jobs.length,
+      itemBuilder: (context, index) {
+        final job = jobs[index];
+        return InkWell(
+          onTap: () {
+            getRecords(context, job);
+          },
+          child: Container(
+              margin: const EdgeInsets.only(bottom: 5),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                      flex: 7,
+                      child: Container(
+                        margin: const EdgeInsets.all(15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                text: LocalizedJobIds.get(context, job.title),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: ThemeColors.primaryThemeColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                  Expanded(
+                      flex: 3,
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.groups,
+                              color: ThemeColors.primaryThemeColor,
+                            ),
+                            Icon(Icons.arrow_forward_ios, color: Colors.grey)
+                          ],
+                        ),
+                      )),
+                ],
+              )),
+        );
+      },
     );
   }
 }

@@ -10,10 +10,9 @@ import '../../../../../common_vieiws/loading_page.dart';
 import '../../../../../old_common_views/select_industry_components/display_industries.dart';
 import '../../../../search_jobs/job_search_bar_components/job_all_search_bar.dart';
 import '../../../../search_jobs/jobs_search_result_page/job_search_result_page.dart';
-import '../../../job_home_components/jobs_desktop_view/jobs_desktop_view_components/select_desktop_language_dialog.dart';
 
 class SelectOrSearchJobsDesktop extends StatefulWidget {
-  const SelectOrSearchJobsDesktop({Key? key}) : super(key: key);
+  const SelectOrSearchJobsDesktop({super.key});
 
   @override
   State<SelectOrSearchJobsDesktop> createState() =>
@@ -57,19 +56,10 @@ class _SelectOrSearchJobsDesktopState extends State<SelectOrSearchJobsDesktop> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const JobAllSearchBar(),
+          SizedBox(width: screenWidth * 0.6, child: const JobAllSearchBar()),
           const SizedBox(
             height: 10,
           ),
-          Center(
-            child: SizedBox(
-                width: screenWidth * 0.6,
-                child: const SelectDesktopLanguageDialog()),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Divider(),
           AnimatedCrossFade(
             firstChild: ip.industries.isEmpty
                 ? const LoadingPage()
@@ -78,7 +68,8 @@ class _SelectOrSearchJobsDesktopState extends State<SelectOrSearchJobsDesktop> {
                     description: 'Use this section to Select Jobs by industry',
                     targetShapeBorder: const CircleBorder(),
                     overlayOpacity: 0.6,
-                    tooltipBackgroundColor: Color.fromRGBO(30, 117, 187, 1),
+                    tooltipBackgroundColor:
+                        const Color.fromRGBO(30, 117, 187, 1),
                     descTextStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
