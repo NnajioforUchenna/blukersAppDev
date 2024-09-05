@@ -5,10 +5,12 @@ class SubmitButton extends StatelessWidget {
       {super.key,
       required this.onTap,
       required this.text,
+      this.backgroundColor = Colors.deepOrangeAccent,
       required this.isDisabled});
   final VoidCallback onTap;
   final String text;
   final bool isDisabled;
+  final Color backgroundColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -19,7 +21,7 @@ class SubmitButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isDisabled ? Colors.grey : Colors.deepOrangeAccent,
+          color: isDisabled ? Colors.grey : backgroundColor,
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           boxShadow: <BoxShadow>[
             BoxShadow(

@@ -115,15 +115,17 @@ class _ChooseLanguageWidgetDesktopState
     AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
 
     return Container(
+      height: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: const Color.fromRGBO(207, 207, 207, 1)),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: DropdownButton<String>(
-        value: selectedLanguageCode,
-        onChanged: (String? newValue) {
+      child: PopupMenuButton<String>(
+        color: Colors.blue[100],
+        position: PopupMenuPosition.under,
+        onSelected: (String newValue) {
           setState(() {
             selectedLanguageCode = newValue;
             up.updateTargetLanguage(selectedLanguageCode);
@@ -131,15 +133,21 @@ class _ChooseLanguageWidgetDesktopState
             asp.setLocale(selectedLanguageCode);
           });
         },
-        items: languageMap.keys.map<DropdownMenuItem<String>>((key) {
-          return DropdownMenuItem<String>(
-            value: key,
-            child: SizedBox(width: 200, child: Text(languageMap[key])),
-          );
-        }).toList(),
-        isExpanded: true,
-        underline: const SizedBox.shrink(),
-        icon: const Row(
+        itemBuilder: (BuildContext context) {
+          return languageMap.keys.map<PopupMenuEntry<String>>((String key) {
+            bool isSelected = selectedLanguageCode == key;
+            return PopupMenuItem<String>(
+              value: key,
+              child: Text(languageMap[key],
+                  style: TextStyle(
+                      fontWeight:
+                          isSelected ? FontWeight.bold : FontWeight.normal,
+                      color:
+                          isSelected ? ThemeColors.secondaryThemeColor : null)),
+            );
+          }).toList();
+        },
+        child: const Row(
           children: [
             Icon(
               Icons.language,
@@ -156,7 +164,6 @@ class _ChooseLanguageWidgetDesktopState
             ),
           ],
         ),
-        dropdownColor: Colors.blue[100],
       ),
     );
   }

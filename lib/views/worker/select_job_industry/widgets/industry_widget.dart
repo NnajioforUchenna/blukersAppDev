@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../models/industry.dart';
 import '../../../../../services/on_hover.dart';
@@ -59,7 +60,7 @@ class _IndustryWidgetState extends State<IndustryWidget> {
                           colorFilter: ColorFilter.mode(
                               isExpanded
                                   ? ThemeColors.secondaryThemeColor
-                                  : ThemeColors.black1ThemeColor,
+                                  : const Color.fromRGBO(117, 117, 117, 1),
                               BlendMode.srcIn),
                           width: Responsive.isDesktop(context) ? 40 : 28,
                           height: Responsive.isDesktop(context) ? 40 : 28,
@@ -81,11 +82,11 @@ class _IndustryWidgetState extends State<IndustryWidget> {
                       child: Text(
                     LocalizedIndustries.get(
                         context, widget.industry.industryId),
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: Responsive.isDesktop(context) ? 25 : 16,
                       color: isExpanded
                           ? ThemeColors.secondaryThemeColor
-                          : ThemeColors.black1ThemeColor,
+                          :  const Color.fromRGBO(117, 117, 117, 1),
                     ),
                   )),
                   AnimatedRotation(
@@ -96,7 +97,7 @@ class _IndustryWidgetState extends State<IndustryWidget> {
                       size: Responsive.isDesktop(context) ? 25 : null,
                       color: isExpanded
                           ? ThemeColors.secondaryThemeColor
-                          : ThemeColors.black1ThemeColor,
+                          :  const Color.fromRGBO(117, 117, 117, 1),
                     ),
                   )
                 ],

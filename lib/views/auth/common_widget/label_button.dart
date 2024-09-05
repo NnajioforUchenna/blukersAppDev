@@ -2,23 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../services/responsive.dart';
+import '../../../utils/styles/theme_colors.dart';
 
 class LabelButton extends StatelessWidget {
   const LabelButton(
       {super.key,
       required this.onTap,
       required this.title,
+      this.titleColor = const Color(0xFF8A8A8E),
+      this.subTitleColor = Colors.deepOrangeAccent,
       this.subTitle = ''});
   final VoidCallback onTap;
   final String title;
   final String subTitle;
+  final Color titleColor;
+  final Color subTitleColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 20),
-        padding: const EdgeInsets.all(15),
+        padding: Responsive.isMobile(context)
+            ? const EdgeInsets.symmetric(vertical: 15)
+            : EdgeInsets.zero,
+        decoration: Responsive.isMobile(context)
+            ? const BoxDecoration(
+                border: Border(
+                    top: BorderSide(color: ThemeColors.secondaryThemeColorDark),
+                    bottom:
+                        BorderSide(color: ThemeColors.secondaryThemeColorDark)),
+              )
+            : null,
         alignment: Alignment.bottomCenter,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,8 +40,8 @@ class LabelButton extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: const Color(0xFF8A8A8E),
-                fontSize: Responsive.isMobile(context) ? 16.sp : 16,
+                color: titleColor,
+                fontSize: Responsive.isMobile(context) ? 12.sp : 12,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -37,8 +51,8 @@ class LabelButton extends StatelessWidget {
             Text(
               subTitle,
               style: TextStyle(
-                color: Colors.deepOrangeAccent,
-                fontSize: Responsive.isMobile(context) ? 16.sp : 16,
+                color: subTitleColor,
+                fontSize: Responsive.isMobile(context) ? 12.sp : 12,
                 fontWeight: FontWeight.w600,
               ),
             ),

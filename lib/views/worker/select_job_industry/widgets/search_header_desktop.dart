@@ -77,7 +77,7 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
             ),
           ),
           const SizedBox(width: 20.0),
-          const SizedBox(width: 90, child: ChooseLanguageWidgetDesktop())
+          const SizedBox(width:100, child: ChooseLanguageWidgetDesktop())
           // const SizedBox(width: 20.0),
           // _buildSmallCircleButton(),
         ],
@@ -104,8 +104,8 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
             });
           }
         },
-        onSubmitted: (val)async{
-            String nameRelated = _searchController1.text;
+        onSubmitted: (val) async {
+          String nameRelated = _searchController1.text;
           String locationRelated = _searchController2.text;
 
           // Determine which provider to use
@@ -123,7 +123,7 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           // Adjust padding
-          
+
           hintStyle: GoogleFonts.montserrat(
               fontSize: 14,
               fontWeight: FontWeight.w500,
