@@ -1,3 +1,4 @@
+import 'package:blukers/providers/jobs_lists_provider.dart';
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -42,6 +43,7 @@ class _SetJobsPreferencesDesktopState extends State<SetJobsPreferencesDesktop> {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+    JobsListsProvider jlp = Provider.of<JobsListsProvider>(context);
     List<Industry> industries = ip.industries.values.toList();
     bool areJobsSelected() {
       return selectedJobs.entries.any((entry) => entry.value.isNotEmpty);
@@ -174,7 +176,7 @@ class _SetJobsPreferencesDesktopState extends State<SetJobsPreferencesDesktop> {
                     onPressed: () {
                       if (areJobsSelected()) {
                         up.setJobsPreferences(selectedIndustries, selectedJobs);
-                        jp.getJobsByPreferences();
+                     jlp.fillDisplayJobsByPreferences();
                         // go to this widget ShowJobsByPreferences()
                         context.go('/showJobsByPreferencesDesktop');
                       } else {
