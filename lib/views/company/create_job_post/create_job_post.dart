@@ -18,7 +18,7 @@ class CreateJobPost extends StatelessWidget {
         ? const LoginOrRegister()
         : up.isUserCompanyProfile()
             ? Responsive.isDesktop(context)
-                ? const CreateJobPostWeb()
+                ? const PleaseCreateCompanyProfile()
                 : const CreateJobPostMobile()
             : const PleaseCreateCompanyProfile();
   }
