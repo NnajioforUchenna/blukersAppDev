@@ -23,3 +23,4 @@ class CreateJobPost extends StatelessWidget {
             : const PleaseCreateCompanyProfile();
   }
 }
+// CreateJobPostWeb()

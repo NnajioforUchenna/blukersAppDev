@@ -13,18 +13,18 @@ class CreateCompanyProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     return up.appUser == null
-        ? const LoginOrRegister()
-        : Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-            ),
-            body: Column(
-              children: [
-                CompanyTimeLine(),
-                const Expanded(child: CompanyPageSlider()),
-              ],
-            ),
-          );
+    ? const LoginOrRegister()
+    : Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        body: Column(
+          children: [
+            CompanyTimeLine(),
+            const Expanded(child: CompanyPageSlider()),
+          ],
+        ),
+      );
   }
 }
