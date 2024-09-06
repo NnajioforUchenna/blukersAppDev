@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
                           child: Column(
                             children: [
                               AuthTextFieldWrapper(
-                                label: "Email Address",
+                                label:  AppLocalizations.of(context)!.emailAddress,
                                 child: FormBuilderTextField(
                                   controller: emailController,
                                   key: const Key('email'),
@@ -126,7 +126,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     contentPadding: const EdgeInsets.all(20),
                                     hintText:
-                                        AppLocalizations.of(context)!.email,
+                                        AppLocalizations.of(context)!.enterEmailAddress,
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                       borderSide: const BorderSide(
@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
                                   },
                                   decoration: InputDecoration(
                                       hintText: AppLocalizations.of(context)!
-                                          .password,
+                                          .enterPassword,
                                       hintStyle: GoogleFonts.montserrat(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
