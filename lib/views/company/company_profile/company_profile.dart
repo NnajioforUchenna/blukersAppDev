@@ -1,3 +1,4 @@
+import 'package:blukers/providers/company_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,82 +29,83 @@ class _CompanyProfileState extends State<CompanyProfile> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
+    CompanyProvider cp = Provider.of<CompanyProvider>(context);
 
     return up.appUser == null
-      ? const LoginOrRegister()
-      : LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (constraints.maxWidth >= 600)
-                    // Show the image only on larger screens
-                    Container(
-                      margin: EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Image.asset(
-                          'assets/images/desktopprofilepic.png', // Update path if needed
-                          width: 800, // Adjust width as needed
-                          height: 1000, // Adjust height as needed
-                        ),
-                      ),
-                    ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        buildSignoutButton(context),
-                        const SizedBox(height: 10),
-                        buildProfilePicAndEdit(context, up),
-                        const SizedBox(height: 10),
-                        Text(
-                          up.appUser?.company?.name ?? "",
-                          style: ThemeTextStyles.headingThemeTextStyle,
-                          textAlign:
-                              TextAlign.center, // Center-align the text
-                        ),
-                        const SizedBox(height: 10),
-                        ProfileMenuButton(
-                          text:
-                              AppLocalizations.of(context)!.basicInformation,
-                          onPress: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  const UpdateCompanyBasicInformation(),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        ProfileMenuButton(
-                          text: AppLocalizations.of(context)!
-                              .companyInformation,
-                          onPress: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  const UpdateCompanyInformation(),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        buildDeleteAccountSection(context, up),
-                        const SizedBox(height: 40),
-                        const AppVersionDisplay(),
-                        const SizedBox(height: 30),
-                      ],
+        ? const LoginOrRegister()
+        : LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (constraints.maxWidth >= 600)
+              // Show the image only on larger screens
+                Container(
+                  margin: EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Image.asset(
+                      '../../../assets/images/desktopprofilepic.png', // Update path if needed
+                      width: 800, // Adjust width as needed
+                      height: 1000, // Adjust height as needed
                     ),
                   ),
-                ],
+                ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    buildSignoutButton(context),
+                    const SizedBox(height: 10),
+                    buildProfilePicAndEdit(context, up, cp),
+                    const SizedBox(height: 10),
+                    Text(
+                      up.appUser?.company?.name ?? "",
+                      style: ThemeTextStyles.headingThemeTextStyle,
+                      textAlign:
+                      TextAlign.center, // Center-align the text
+                    ),
+                    const SizedBox(height: 10),
+                    ProfileMenuButton(
+                      text:
+                      AppLocalizations.of(context)!.basicInformation,
+                      onPress: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                          const UpdateCompanyBasicInformation(),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    ProfileMenuButton(
+                      text: AppLocalizations.of(context)!
+                          .companyInformation,
+                      onPress: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                          const UpdateCompanyInformation(),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    buildDeleteAccountSection(context, up),
+                    const SizedBox(height: 40),
+                    const AppVersionDisplay(),
+                    const SizedBox(height: 30),
+                  ],
+                ),
               ),
-            );
-          },
+            ],
+          ),
         );
+      },
+    );
   }
 
-  Widget buildProfilePicAndEdit(context, up) {
+  Widget buildProfilePicAndEdit(context, up, cp) {
     return Stack(
       children: [
         buildProfileImage(context, up),
@@ -158,10 +160,10 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                   children: [
                                     InkWell(
                                       onTap: () async {
-                                        String? imageUrl = await up
+                                        String? imageUrl = await cp
                                             .ontapCamera("/profile_images/");
                                         if (imageUrl != "") {
-                                          await up
+                                          await cp
                                               .updateUserProfilePic(imageUrl!);
                                         }
                                         Navigator.of(context).pop();
@@ -173,9 +175,9 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                             horizontal: 100, vertical: 10),
                                         decoration: BoxDecoration(
                                           color:
-                                              ThemeColors.blukersBlueThemeColor,
+                                          ThemeColors.blukersBlueThemeColor,
                                           borderRadius:
-                                              BorderRadius.circular(80),
+                                          BorderRadius.circular(80),
                                         ),
                                         child: const Icon(
                                           Icons.camera_alt,
@@ -187,7 +189,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                     Text(
                                       AppLocalizations.of(context)!.takePhoto,
                                       style:
-                                          ThemeTextStyles.headingThemeTextStyle,
+                                      ThemeTextStyles.headingThemeTextStyle,
                                     ),
                                   ],
                                 ),
@@ -210,10 +212,10 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                 children: [
                                   InkWell(
                                     onTap: () async {
-                                      String? imageUrl = await up
+                                      String? imageUrl = await cp
                                           .ontapGallery("/profile_images/");
                                       if (imageUrl != "") {
-                                        await up
+                                        await cp
                                             .updateUserProfilePic(imageUrl!);
                                       }
                                       Navigator.of(context).pop();
@@ -226,7 +228,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                           horizontal: 100, vertical: 10),
                                       decoration: BoxDecoration(
                                         color:
-                                            ThemeColors.blukersBlueThemeColor,
+                                        ThemeColors.blukersBlueThemeColor,
                                         borderRadius: BorderRadius.circular(80),
                                       ),
                                       child: const Image(
@@ -239,7 +241,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                   Text(
                                     AppLocalizations.of(context)!.fromGallery,
                                     style:
-                                        ThemeTextStyles.headingThemeTextStyle,
+                                    ThemeTextStyles.headingThemeTextStyle,
                                   ),
                                 ],
                               ),
@@ -295,17 +297,17 @@ class _CompanyProfileState extends State<CompanyProfile> {
             borderRadius: BorderRadius.circular(1000),
             child: up.appUser!.photoUrl != null && up.appUser!.photoUrl != ""
                 ? FadeInImage.assetNetwork(
-                    placeholder: "assets/images/loading.jpeg",
-                    image: up.appUser!.photoUrl!,
-                    //width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                  )
-                // : Image.asset("assets/images/userDefaultProfilePic.png"),
+              placeholder: "assets/images/loading.jpeg",
+              image: up.appUser!.photoUrl!,
+              //width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            )
+            // : Image.asset("assets/images/userDefaultProfilePic.png"),
                 : FittedBox(
-                    fit: BoxFit.fill,
-                    child:
-                        Image.asset("assets/images/userDefaultProfilePic.png"),
-                  ),
+              fit: BoxFit.fill,
+              child:
+              Image.asset("assets/images/userDefaultProfilePic.png"),
+            ),
           ),
         ),
       ),
@@ -340,7 +342,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
   Widget buildSignoutButton(context) {
     UserProvider up = Provider.of<UserProvider>(context);
     CompanyChatProvider chatProvider =
-        Provider.of<CompanyChatProvider>(context);
+    Provider.of<CompanyChatProvider>(context);
     return Container(
       margin: const EdgeInsets.only(top: 40.0, bottom: 20.0),
       child: Stack(

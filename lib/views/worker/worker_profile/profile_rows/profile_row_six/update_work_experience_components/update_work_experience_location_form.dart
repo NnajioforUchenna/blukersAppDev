@@ -1,8 +1,8 @@
 import '../../../../../../providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../../../../../../data_providers/country_state_city_provider.dart';
 
 class UpdateWorkExperienceLocationForm extends StatefulWidget {
   final int intialIndex;
@@ -16,108 +16,175 @@ class UpdateWorkExperienceLocationForm extends StatefulWidget {
 
 class _UpdateWorkExperienceLocationFormState
     extends State<UpdateWorkExperienceLocationForm> {
-  final TextEditingController cityController = TextEditingController();
-
-  final TextEditingController stateController = TextEditingController();
-
-  final TextEditingController countryController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Check if the widget is still in the widget tree
       if (mounted) {
-        UserProvider up = Provider.of<UserProvider>(context, listen: false);
-        cityController.text =
-            up.workExperiences[widget.intialIndex]['city'] ?? '';
-        stateController.text =
-            up.workExperiences[widget.intialIndex]['state'] ?? '';
-        countryController.text =
-            up.workExperiences[widget.intialIndex]['country'] ?? '';
+        CountryStateCityProvider cscp =
+            Provider.of<CountryStateCityProvider>(context, listen: false);
+        cscp.getCountries(widget.intialIndex);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final node = FocusScope.of(context);
     UserProvider up = Provider.of<UserProvider>(context);
+    CountryStateCityProvider cscp =
+        Provider.of<CountryStateCityProvider>(context);
 
     return Row(
       children: [
-        // City Input
+        // Country Dropdown
         Expanded(
-          child: TextInputWigdet(
-            label: AppLocalizations.of(context)!.city,
-            maxlines: 1,
-            controller: cityController,
+          child: DropdownButtonFormField<String>(
+            value: up.workExperiences[widget.intialIndex]['country'],
+            isExpanded: true,
             onChanged: (value) {
-              up.workExperiences[widget.intialIndex]['city'] = value;
+              setState(() {
+                up.workExperiences[widget.intialIndex]['country'] = value!;
+                cscp.setSelectedCountry(widget.intialIndex, value);
+                cscp.getStates(widget.intialIndex, value);
+                up.workExperiences[widget.intialIndex]['state'] = null;
+                up.workExperiences[widget.intialIndex]['city'] = null;
+              });
             },
+            validator: (value) =>
+                value == null ? AppLocalizations.of(context)!.required : null,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.country,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.grey,
+                ),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.black,
+                ),
+              ),
+              fillColor: Colors.white,
+              filled: true,
+            ),
+            items: cscp.countries[widget.intialIndex]
+                    ?.map((country) => DropdownMenuItem<String>(
+                          value: country.isoCode,
+                          child: Text(
+                            country.name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ))
+                    .toList() ??
+                [],
           ),
         ),
         const SizedBox(width: 10),
-        // State Input
+        // State Dropdown
         Expanded(
-            child: TextInputWigdet(
-                label: AppLocalizations.of(context)!.state,
-                maxlines: 1,
-                controller: stateController,
-                onChanged: (value) {
-                  up.workExperiences[widget.intialIndex]['state'] = value;
-                })),
-        const SizedBox(width: 10),
-        // Country Input
-        Expanded(
-            child: TextInputWigdet(
-                label: AppLocalizations.of(context)!.country,
-                maxlines: 1,
-                controller: countryController,
-                onChanged: (value) {
-                  up.workExperiences[widget.intialIndex]['country'] = value;
-                })),
-      ],
-    );
-  }
-
-  TextInputWigdet(
-      {required String label,
-      required int maxlines,
-      required TextEditingController controller,
-      required Null Function(dynamic value) onChanged}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(left: 10),
-          child: Text(
-            label,
-            style: GoogleFonts.montserrat(
-              fontWeight: FontWeight.w400,
-              fontSize: 10,
+          child: DropdownButtonFormField<String>(
+            value: up.workExperiences[widget.intialIndex]['state'],
+            isExpanded: true,
+            onChanged: (value) {
+              setState(() {
+                up.workExperiences[widget.intialIndex]['state'] = value!;
+                cscp.setSelectedState(widget.intialIndex, value);
+                cscp.getCities(
+                    widget.intialIndex,
+                    cscp.selectedCountry[widget.intialIndex]!,
+                    cscp.states[widget.intialIndex]!
+                        .firstWhere((state) => state.name == value)
+                        .isoCode);
+                up.workExperiences[widget.intialIndex]['city'] = null;
+              });
+            },
+            validator: (value) =>
+                value == null ? AppLocalizations.of(context)!.required : null,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.state,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.grey,
+                ),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.black,
+                ),
+              ),
+              fillColor: Colors.white,
+              filled: true,
             ),
+            items: cscp.states[widget.intialIndex]
+                    ?.map((state) => DropdownMenuItem<String>(
+                          value: state.name,
+                          child: Text(state.name,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1),
+                        ))
+                    .toList() ??
+                [],
           ),
         ),
-        const SizedBox(height: 5),
-        TextFormField(
-          controller: controller,
-          validator: (value) =>
-              value!.isEmpty ? AppLocalizations.of(context)!.required : null,
-          onChanged: onChanged,
-          maxLines: maxlines,
-          decoration: InputDecoration(
-            filled: true,
-            isDense: true,
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 7.0, horizontal: 10.0),
-            fillColor: Colors.grey[200],
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
+        const SizedBox(width: 10),
+        // City Dropdown
+        Expanded(
+          child: DropdownButtonFormField<String>(
+            value: up.workExperiences[widget.intialIndex]['city'],
+            isExpanded: true,
+            onChanged: (value) {
+              setState(() {
+                up.workExperiences[widget.intialIndex]['city'] = value!;
+                cscp.setSelectedCity(widget.intialIndex, value);
+              });
+            },
+            validator: (value) =>
+                value == null ? AppLocalizations.of(context)!.required : null,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.city,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.grey,
+                ),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.black,
+                ),
+              ),
+              fillColor: Colors.white,
+              filled: true,
             ),
+            items: cscp.cities[widget.intialIndex]
+                    ?.map((city) => DropdownMenuItem<String>(
+                          value: city.name,
+                          child: Text(city.name,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1),
+                        ))
+                    .toList() ??
+                [],
           ),
-        )
+        ),
       ],
     );
   }

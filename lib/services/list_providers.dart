@@ -1,4 +1,5 @@
 // list_of_provider.dart
+import 'package:blukers/data_providers/country_state_city_provider.dart';
 import 'package:blukers/providers/message_provider.dart';
 import 'package:blukers/providers/registration_provider.dart';
 import 'package:blukers/providers/worker_chat_provider.dart';
@@ -21,6 +22,7 @@ final appProviders = [
   ChangeNotifierProvider(create: (context) => MessageProvider()),
   ChangeNotifierProvider(create: (context) => UserProvider()),
   ChangeNotifierProvider(create: (context) => IndustriesProvider()),
+  ChangeNotifierProvider(create: (context) => CountryStateCityProvider()),
   ChangeNotifierProxyProvider<UserProvider, RegistrationProvider>(
       create: (context) => RegistrationProvider(),
       update: (_, user, RegistrationProvider? previous) =>

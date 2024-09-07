@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class WorkerDrawer extends StatelessWidget {
   const WorkerDrawer({super.key});
@@ -42,6 +44,7 @@ class WorkerDrawer extends StatelessWidget {
             icon: Icons.work,
             text: 'Jobs',
             route: '/jobs',
+            currentPageIndex: 0,
           ),
           _createDrawerItem(
             context: context,
@@ -54,24 +57,28 @@ class WorkerDrawer extends StatelessWidget {
             icon: Icons.search,
             text: 'Search',
             route: '/searchJobs',
+            currentPageIndex: 2,
           ),
           _createDrawerItem(
             context: context,
             icon: Icons.save,
             text: 'Saved Jobs',
             route: '/myJobs',
+            currentPageIndex: 1,
           ),
           _createDrawerItem(
             context: context,
             icon: Icons.support,
             text: 'Services',
             route: '/workerOffers',
+            currentPageIndex: 3,
           ),
           _createDrawerItem(
             context: context,
             icon: Icons.person,
             text: 'Profile',
             route: '/workerProfile',
+            currentPageIndex: 4,
           ),
           _createDrawerItem(
             context: context,
@@ -107,6 +114,7 @@ class WorkerDrawer extends StatelessWidget {
     required IconData icon,
     required String text,
     required String route,
+    int? currentPageIndex,
   }) {
     return ListTile(
       title: Column(
@@ -131,6 +139,10 @@ class WorkerDrawer extends StatelessWidget {
         ],
       ),
       onTap: () {
+        if (currentPageIndex != null) {
+          Provider.of<UserProvider>(context, listen: false)
+              .updateNavigationIndex(currentPageIndex);
+        }
         Navigator.pop(context);
         context.go(route);
       },
