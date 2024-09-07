@@ -55,7 +55,7 @@ class _LoginInformationState extends State<LoginInformation> {
               children: <Widget>[
                 const SizedBox(height: 10),
                 AuthTextFieldWrapper(
-                  label: AppLocalizations.of(context)!.emailAddress,
+                  label: AppLocalizations.of(context)!.email,
                   child: TextFormField(
                     controller: emailController,
                     textInputAction: TextInputAction.next,
@@ -85,7 +85,7 @@ class _LoginInformationState extends State<LoginInformation> {
                             width: 0, color: ThemeColors.secondaryThemeColor),
                       ),
                       contentPadding: const EdgeInsets.all(20),
-                      hintText: AppLocalizations.of(context)!.enterEmailAddress,
+                      hintText: AppLocalizations.of(context)!.email,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: const BorderSide(
@@ -124,7 +124,7 @@ class _LoginInformationState extends State<LoginInformation> {
                       }
                     }),
                     decoration: InputDecoration(
-                      hintText: AppLocalizations.of(context)!.enterPassword,
+                      hintText: AppLocalizations.of(context)!.password,
                       suffixIcon: IconButton(
                         icon: Icon(
                           isPasswordVisible
