@@ -1,15 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
-import '../policy_terms/privacy_policy_terms_and_conditions.dart';
-import 'landing_page_components/option_box.dart';
 
 class LandingPageMobile extends StatefulWidget {
   const LandingPageMobile({super.key});
@@ -25,7 +19,6 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider up = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: 
@@ -148,7 +141,7 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                                "I am a\nworker",
                                style: TextStyle(
                                  color: ThemeColors.black2ThemeColor,
-                                 fontSize: 18.sp,
+                                 fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
                                ),
                              ),
@@ -224,7 +217,7 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                                 "I am a\ncompany",
                                 style: TextStyle(
                                   color: ThemeColors.black2ThemeColor,
-                                  fontSize: 18.sp,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
