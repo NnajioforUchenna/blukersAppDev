@@ -37,6 +37,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Driver",
     "imageUrl": "assets/industryImages/driver.png",
+    "imageUrlSvg": "assets/industryImages/driver.svg",
     "description":
         "The driver industry involves operating various types of vehicles for transporting goods or passengers.",
     "name": "Driver"
@@ -57,6 +58,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "General Laborer",
     "imageUrl": "assets/industryImages/carpenters.png",
+     "imageUrlSvg": "assets/industryImages/carpenters.svg",
     "description":
         "General Laborers perform various tasks that require physical labor and may include construction, cleaning, loading, and unloading materials, and assisting skilled workers.",
     "name": "General Laborer"
@@ -110,6 +112,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Fitter",
     "imageUrl": "assets/industryImages/fitter.png",
+     "imageUrlSvg": "assets/industryImages/fitter.svg",
     "description":
         "The Fitter involves assembling, installing, and maintaining mechanical components and systems.",
     "name": "Fitter"
@@ -141,6 +144,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "PipeWelder",
     "imageUrl": "assets/industryImages/pipeWelder.png",
+       "imageUrlSvg": "assets/industryImages/pipeWelder.svg",
     "description":
         "Pipe welding involves joining metal pipes using specialized welding techniques. It is essential in industries such as construction, manufacturing, and oil and gas.",
     "name": "PipeWelder"
@@ -194,6 +198,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "welding",
     "imageUrl": "assets/industryImages/Welder.png",
+     "imageUrlSvg": "assets/industryImages/Welder.svg",
     "description":
         "Welding involves joining metals and materials using heat and pressure. It is essential in construction, manufacturing, and fabrication industries.",
     "name": "Welder"
@@ -225,6 +230,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Machinist",
     "imageUrl": "assets/industryImages/Machinist.png",
+     "imageUrlSvg": "assets/industryImages/Machinist.svg",
     "description":
         "A Machinist operates and maintains machine tools to produce precision parts and components according to engineering drawings and specifications.",
     "name": "Machinist"
@@ -345,6 +351,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Electrician Industrial",
     "imageUrl": "assets/industryImages/electricians.png",
+    "imageUrlSvg": "assets/industryImages/electricians.svg",
     "description":
         "The industrial electrician industry involves electrical work in industrial settings, including installation, maintenance, and repair of electrical systems and equipment used in factories, plants, and manufacturing facilities.",
     "name": "Electrician Industrial"
@@ -365,6 +372,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Painter/Sand Blaster",
     "imageUrl": "assets/industryImages/painter_sand_blaster.png",
+    "imageUrlSvg": "assets/industryImages/painter.svg",
     "description":
         "The Painter and Sand Blaster industry involves working on various surfaces to remove old paint or rust, clean, and apply new paint.",
     "name": "Painter/Sand Blaster"
@@ -462,6 +470,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Food Preparation",
     "imageUrl": "assets/industryImages/food Preparation.png",
+    "imageUrlSvg": "assets/industryImages/food_prep.svg",
     "description":
         "The food preparation and serving industry involves the creation, cooking, and serving of food and beverages in various settings such as restaurants, cafes, and food establishments. It encompasses a range of roles from chefs and cooks to servers and bartenders, contributing to culinary experiences and hospitality services.",
     "name": "Food Preparation and Serving"
@@ -536,6 +545,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Farming",
     "imageUrl": "assets/industryImages/farming.png",
+    "imageUrlSvg": "assets/industryImages/farmer.svg",
     "description":
         "The farming industry involves agricultural activities such as cultivating crops, raising livestock, and managing farm operations. It plays a crucial role in food production, contributing to global food supply and economic development.",
     "name": "Farming"
@@ -556,6 +566,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Fishing",
     "imageUrl": "assets/industryImages/fishing.png",
+    "imageUrlSvg": "assets/industryImages/fisher.svg",
     "description":
         "The farming industry involves agricultural activities such as cultivating crops, raising livestock, and managing farm operations. It plays a crucial role in food production, contributing to global food supply and economic development.",
     "name": "Fishing"
@@ -631,6 +642,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Maintenance",
     "imageUrl": "assets/industryImages/maintenance.png",
+    "imageUrlSvg": "assets/industryImages/memory_toolbox.svg",
     "description":
         "The maintenance industry involves activities focused on the upkeep and preservation of buildings, facilities, and outdoor spaces. It encompasses cleaning, repair, and management of property to ensure functionality and safety.",
     "name": "Maintenance"
@@ -673,6 +685,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "LandScaping",
     "imageUrl": "assets/industryImages/landscaping.png",
+    "imageUrlSvg": "assets/industryImages/landscaping.svg",
     "description":
         "The landscaping industry involves modifying and beautifying outdoor spaces by incorporating elements of nature, architecture, and design. It includes activities such as gardening, lawn care, and landscape design, enhancing aesthetics and functionality.",
     "name": "Landscaping"
@@ -715,6 +728,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Construction and Extraction",
     "imageUrl": "assets/industryImages/constructionandextraction.png",
+    "imageUrlSvg": "assets/industryImages/construction.svg",
     "description":
         "The construction and extraction industry includes jobs that involve building new structures, repairing existing ones, and extracting natural resources.",
     "name": "Construction and Extraction"
@@ -735,6 +749,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Carpentry",
     "imageUrl": "assets/industryImages/carpenters.png",
+    "imageUrlSvg": "assets/industryImages/capentry.svg",
     "description":
         "The carpentry industry involves creating and repairing building structures and furniture.",
     "name": "Carpenters"
@@ -766,6 +781,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Construction Building",
     "imageUrl": "assets/industryImages/construction_building.png",
+    "imageUrlSvg": "assets/industryImages/construction_building.svg",
     "description":
         "The construction and building industry involves the planning, design, and construction of various structures and facilities. It includes a wide range of skilled trades and labor-intensive activities to create buildings, roads, bridges, and infrastructure.",
     "name": "Construction and Building"
@@ -787,6 +803,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     "industryId": "Elevator and Escalator Installers",
     "imageUrl":
         "assets/industryImages/Elevator and Escalator Installers and Repairers.png",
+    "imageUrlSvg": "assets/industryImages/elevator.svg",
     "description":
         "Elevator and Escalator Installers and Repairers install, maintain, and repair elevators, escalators, and related equipment.",
     "name": "Elevator and Escalator Installers and Repairers"
@@ -807,6 +824,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Excavating and Loading Machine and Dragline Operators",
     "imageUrl": "assets/industryImages/warehousing-300.png",
+    "imageUrlSvg": "assets/industryImages/escavating.svg",
     "description":
         "Excavating and Loading Machine and Dragline Operators operate heavy machinery for digging, loading, and moving earth and materials at construction sites.",
     "name": "Excavating and Loading Machine and Dragline Operators"
@@ -867,6 +885,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Construction",
     "imageUrl": "assets/industryImages/constructionandextraction.png",
+    "imageUrlSvg": "assets/industryImages/construction.svg",
     "description":
         "The construction industry involves building, repairing, and maintaining structures such as buildings, roads, bridges, and utilities.",
     "name": "Construction"
@@ -887,6 +906,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Roofer",
     "imageUrl": "assets/industryImages/roofing.png",
+    "imageUrlSvg": "assets/industryImages/roofer.svg",
     "description":
         "The roofing industry involves the installation, repair, and maintenance of roofs on buildings and structures. Roofers work with various materials such as shingles, tiles, and metal to protect buildings from weather elements.",
     "name": "Roofer"
@@ -907,6 +927,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Structural Iron And Steel",
     "imageUrl": "assets/industryImages/Machinist.png",
+    "imageUrlSvg": "assets/industryImages/structural_iron.svg",
     "description":
         "The structural iron and steel industry involves the construction and installation of structural steel components used in buildings, bridges, and other large structures.",
     "name": "Structural Iron and Steel"
@@ -938,6 +959,8 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "Production",
     "imageUrl": "assets/industryImages/production.png",
+
+    "imageUrlSvg": "assets/industryImages/production.svg",
     "description":
         "The production industry involves the manufacturing of goods through various processes such as assembly, packaging, and quality control. Production workers play a vital role in producing consumer products and industrial goods.",
     "name": "Production"
@@ -958,6 +981,7 @@ final List<Map<String, dynamic>> IndustriesData = [
     ],
     "industryId": "WoodWorker",
     "imageUrl": "assets/industryImages/woodworker.png",
+    "imageUrlSvg": "assets/industryImages/wood_worker.svg",
     "description":
         "The woodworker industry involves setting up, operating, or tending woodworking machines.",
     "name": "Woodworker"

@@ -1,9 +1,11 @@
-import '../../../../../providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../services/responsive.dart';
 import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../old_common_views/small_pop_button_widget.dart';
 import 'update_work_experience_components/update_work_experience_form.dart';
@@ -83,7 +85,7 @@ class _UpdateWorkExperiencesState extends State<UpdateWorkExperiences> {
                   ),
                   Container(
                     height: height * 0.03,
-                    width: width * 0.23,
+                    width: width * 0.30,
                     margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
                     child: ElevatedButton(
                       onPressed: () {
@@ -101,7 +103,7 @@ class _UpdateWorkExperiencesState extends State<UpdateWorkExperiences> {
                         'Update',
                         style: GoogleFonts.montserrat(
                           color: Colors.white,
-                          fontSize: 12.0,
+                          fontSize: Responsive.isMobile(context) ? 9.sp : 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

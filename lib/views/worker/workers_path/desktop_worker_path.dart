@@ -1,10 +1,9 @@
-import 'package:blukers/services/make_responsive_web.dart';
 import 'package:blukers/views/old_common_views/job_timeline/my_job_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
@@ -12,142 +11,192 @@ import '../../../utils/styles/index.dart';
 import '../../../utils/styles/theme_colors.dart';
 
 class DesktopWorkerPath extends StatelessWidget {
+  const DesktopWorkerPath({super.key});
+
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     int currentStep = up.appUser?.workerTimelineStep ?? 0;
 
     return Scaffold(
-      body: MakeResponsiveWeb(
-        image: const AssetImage('../../../assets/images/successPath.png'),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 154),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 60),
-              const Center(
-                child: Icon(
-                  UniconsLine.bag_alt,
-                  size: 60,
-                  color: ThemeColors.blukersBlueThemeColor,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Center(
-                  child: Text(
-                    AppLocalizations.of(context)!.workerJourneyTitle,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: ThemeColors.blukersBlueThemeColor,
-                      fontFamily: "Montserrat",
-                    ),
-                    textAlign: TextAlign.center,
+              Expanded(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/find_jobs.svg",
+                    width: 370,
+                    height: 370,
                   ),
-                ),
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: jobRecords.length,
-                itemBuilder: (context, index) {
-                  String title = "";
-                  String description = "";
-                  if (index == 0) {
-                    title =
-                        AppLocalizations.of(context)!.workerJourneyStep1Title;
-                    description =
-                        AppLocalizations.of(context)!.workerJourneyStep1Text;
-                  } else if (index == 1) {
-                    title =
-                        AppLocalizations.of(context)!.workerJourneyStep2Title;
-                    description =
-                        AppLocalizations.of(context)!.workerJourneyStep2Text;
-                  } else if (index == 2) {
-                    title =
-                        AppLocalizations.of(context)!.workerJourneyStep3Title;
-                    description =
-                        AppLocalizations.of(context)!.workerJourneyStep3Text;
-                  } else if (index == 3) {
-                    title =
-                        AppLocalizations.of(context)!.workerJourneyStep4Title;
-                    description =
-                        AppLocalizations.of(context)!.workerJourneyStep4Text;
-                  } else if (index == 4) {
-                    title =
-                        AppLocalizations.of(context)!.workerJourneyStep5Title;
-                    description =
-                        AppLocalizations.of(context)!.workerJourneyStep5Text;
-                  } else if (index == 5) {
-                    title =
-                        AppLocalizations.of(context)!.workerJourneyStep6Title;
-                    description =
-                        AppLocalizations.of(context)!.workerJourneyStep6Text;
-                  }
+                  const SizedBox(height: 25),
+                  Center(
+                    child: Text(
+                      AppLocalizations.of(context)!.workerJourneyTitle,
+                      style: const TextStyle(
+                        fontSize: 47,
+                        fontWeight: FontWeight.bold,
+                        color: ThemeColors.blukersBlueThemeColor,
+                        fontFamily: "Montserrat",
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              )),
+              const SizedBox(width: 116),
+              Expanded(
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 60),
+                          // const Center(
+                          //   child: Icon(
+                          //     UniconsLine.bag_alt,
+                          //     size: 60,
+                          //     color: ThemeColors.blukersBlueThemeColor,
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(10.0),
+                          //   child: Center(
+                          //     child: Text(
+                          //       AppLocalizations.of(context)!.workerJourneyTitle,
+                          //       style: const TextStyle(
+                          //         fontSize: 24,
+                          //         fontWeight: FontWeight.bold,
+                          //         color: ThemeColors.blukersBlueThemeColor,
+                          //         fontFamily: "Montserrat",
+                          //       ),
+                          //       textAlign: TextAlign.center,
+                          //     ),
+                          //   ),
+                          // ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: jobRecords.length,
+                            itemBuilder: (context, index) {
+                              String title = "";
+                              String description = "";
+                              if (index == 0) {
+                                title = AppLocalizations.of(context)!
+                                    .workerJourneyStep1Title;
+                                description = AppLocalizations.of(context)!
+                                    .workerJourneyStep1Text;
+                              } else if (index == 1) {
+                                title = AppLocalizations.of(context)!
+                                    .workerJourneyStep2Title;
+                                description = AppLocalizations.of(context)!
+                                    .workerJourneyStep2Text;
+                              } else if (index == 2) {
+                                title = AppLocalizations.of(context)!
+                                    .workerJourneyStep3Title;
+                                description = AppLocalizations.of(context)!
+                                    .workerJourneyStep3Text;
+                              } else if (index == 3) {
+                                title = AppLocalizations.of(context)!
+                                    .workerJourneyStep4Title;
+                                description = AppLocalizations.of(context)!
+                                    .workerJourneyStep4Text;
+                              } else if (index == 4) {
+                                title = AppLocalizations.of(context)!
+                                    .workerJourneyStep5Title;
+                                description = AppLocalizations.of(context)!
+                                    .workerJourneyStep5Text;
+                              } else if (index == 5) {
+                                title = AppLocalizations.of(context)!
+                                    .workerJourneyStep6Title;
+                                description = AppLocalizations.of(context)!
+                                    .workerJourneyStep6Text;
+                              }
 
-                  final record = jobRecords[index];
-                  return MyJobTimeLine(
-                    isFirst: index == 0,
-                    isLast: index == jobRecords.length - 1,
-                    isPast: index <= currentStep,
-                    title: title,
-                    briefDescription: description,
-                  );
-                },
+                              // final record = jobRecords[index];
+                              return MyJobTimeLine(
+                                index: index,
+                                isFirst: index == 0,
+                                isLast: index == jobRecords.length - 1,
+                                isPast: index <= currentStep,
+                                isCurrent: index == currentStep,
+                                title: title,
+                                briefDescription: description,
+                              );
+                            },
+                          ),
+
+                          const SizedBox(height: 30),
+                        ],
+                      ),
+                    ),
+                    if (currentStep > 0 && currentStep < 5)
+                      Positioned(
+                        bottom: 10,
+                        right: 0,
+                        left: 0,
+                        child: buildButton(
+                          context,
+                          currentStep,
+                          getButtonTitle(currentStep, context),
+                          () {
+                            navigateBasedOnStep(currentStep, context);
+                          },
+                        ),
+                      ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 10),
-              if (currentStep == 0)
-                buildButton(
-                  context,
-                  currentStep,
-                  AppLocalizations.of(context)!.workerJourneyStep1Title,
-                  () {
-                    context.go('/register');
-                  },
-                ),
-              if (currentStep == 1)
-                buildButton(
-                  context,
-                  currentStep,
-                  AppLocalizations.of(context)!.workerJourneyStep2Title,
-                  () {
-                    context.go('/jobPreference');
-                  },
-                ),
-              if (currentStep == 2)
-                buildButton(
-                  context,
-                  currentStep,
-                  AppLocalizations.of(context)!.workerJourneyStep3Title,
-                  () {
-                    context.go('/createResume');
-                  },
-                ),
-              if (currentStep == 3)
-                buildButton(
-                  context,
-                  currentStep,
-                  AppLocalizations.of(context)!.workerJourneyStep4Title,
-                  () {
-                    context.go('/myJobs');
-                  },
-                ),
-              if (currentStep == 4)
-                buildButton(
-                  context,
-                  currentStep,
-                  AppLocalizations.of(context)!.subscribeToApplyMoreJobs,
-                  () {
-                    context.go('/offers');
-                  },
-                ),
-              const SizedBox(height: 20),
             ],
           ),
         ),
       ),
     );
+  }
+
+  String getButtonTitle(int currentStep, BuildContext context) {
+    switch (currentStep) {
+      case 0:
+        return AppLocalizations.of(context)!.workerJourneyStep1Title;
+      case 1:
+        return AppLocalizations.of(context)!.workerJourneyStep2Title;
+      case 2:
+        return AppLocalizations.of(context)!.workerJourneyStep3Title;
+      case 3:
+        return AppLocalizations.of(context)!.workerJourneyStep4Title;
+      case 4:
+        return AppLocalizations.of(context)!.subscribeToApplyMoreJobs;
+      default:
+        return '';
+    }
+  }
+
+  void navigateBasedOnStep(int currentStep, BuildContext context) {
+    switch (currentStep) {
+      case 0:
+        context.go('/register');
+        break;
+      case 1:
+        context.go('/jobPreference');
+        break;
+      case 2:
+        context.go('/createResume');
+        break;
+      case 3:
+        context.go('/myJobs');
+        break;
+      case 4:
+        context.go('/offers');
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -196,8 +245,8 @@ Widget buildButton(
 
   return Center(
     child: SizedBox(
-      width: width < 600 ? 250 : 400,
-      height: width < 600 ? 50 : 80,
+      width: width < 600 ? 250 : double.infinity,
+      height: width < 600 ? 50 : 55,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: ThemeColors.blukersOrangeThemeColor,
@@ -212,6 +261,7 @@ Widget buildButton(
             text.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 24 * Responsive.textScaleFactor(context),
             ),

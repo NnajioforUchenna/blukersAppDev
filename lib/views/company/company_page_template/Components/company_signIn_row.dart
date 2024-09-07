@@ -8,6 +8,7 @@ import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../providers/app_settings_provider.dart';
 import '../../../../utils/styles/theme_colors.dart';
+import 'company_message_badge.dart';
 
 class CompanySignInRow extends StatelessWidget {
   const CompanySignInRow({super.key});
@@ -60,7 +61,7 @@ class CompanySignInRow extends StatelessWidget {
                   ),
                 ),
               )
-            : Container(),
+            : const CompanyMessageBadge(),
       ],
     );
   }

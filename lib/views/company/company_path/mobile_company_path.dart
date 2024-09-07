@@ -88,9 +88,11 @@ class MobileCompanyPath extends StatelessWidget {
               }
               final record = companyRecords[index];
               return MyJobTimeLine(
+                index: index,
                 isFirst: index == 0,
                 isLast: index == companyRecords.length - 1,
                 isPast: index <= currentStep,
+                isCurrent: index == currentStep,
                 title: title,
                 briefDescription: description,
               );

@@ -1,7 +1,9 @@
-import 'package:blukers/views/common_vieiws/landing_page/landing_page.dart';
+import 'package:blukers/services/responsive.dart';
 import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
 import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
+import 'package:blukers/views/worker/select_job_industry/select_industry_desktop.dart';
+import 'package:blukers/views/worker/select_job_industry/select_industry_widgets.dart';
 import 'package:blukers/views/worker/worker_chat/worker_chat.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
@@ -38,6 +40,7 @@ import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Compone
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences.dart';
 import '../views/worker/jobs_home/Components/display_jobs_by_preferences/Components/show_jobs_by_preferences_desktop.dart';
 import '../views/worker/jobs_home/Components/jobs_mobile_view/select_or_search_jobs.dart';
+import '../views/worker/jobs_home/job_home_components/jobs_desktop_view/jobs_desktop_view_components/select_or_search_jobs_desktop.dart';
 import '../views/worker/jobs_home/jobs_home.dart';
 import '../views/worker/my_jobs/my_jobs.dart';
 import '../views/worker/search_jobs/jobs_search_result_page/job_search_result_page.dart';
@@ -59,7 +62,8 @@ final goRouter = GoRouter(routes: routes, initialLocation: '/');
 final routes = [
   GoRoute(
       path: '/',
-      builder: (context, state) => const LandingPage()), // const LandingPage()
+      builder: (context, state) =>
+          const AuthenticationWrapper()), // const LandingPage()
   GoRoute(
       path: '/auth',
       builder: (context, state) => const AuthenticationWrapper()),
@@ -75,13 +79,17 @@ final routes = [
       GoRoute(path: '/jobs', builder: (context, state) => const Jobs()),
       GoRoute(
           path: '/selectJobs',
-          builder: (context, state) => const SelectOrSearchJobs()),
+          builder: (context, state) => const Responsive(
+              mobile: SelectIndustryScreen(),
+              desktop: SelectIndustryScreenDesktop())),
       GoRoute(
           path: '/searchJobs',
           builder: (context, state) => const SearchJobsUi()),
       GoRoute(
-          path: '/workerChat',
-          builder: (context, state) => const WorkerChat()),
+          path: '/workerChat', builder: (context, state) => const WorkerChat()),
+      GoRoute(
+          path: '/workerChatRoomScreen',
+          builder: (context, state) => const WorkerChatRoomScreen()),
       GoRoute(path: '/myJobs', builder: (context, state) => const MyJobs()),
       GoRoute(
           path: '/jobSearchResults',
@@ -90,9 +98,16 @@ final routes = [
           path: '/workerProfile',
           builder: (context, state) => const WorkerProfile()),
       GoRoute(
+          path: '/createResume',
+          builder: (context, state) => const CreateWorkerProfile()),
+      GoRoute(
+          path: '/createWorkerProfile',
+          builder: (context, state) => const CreateWorkerProfile()),
+      GoRoute(
           path: '/workerOffers',
           builder: (context, state) => const ServicesList()),
-      GoRoute(path: '/pathToJob', builder: (context, state) => WorkerPath()),
+      GoRoute(
+          path: '/pathToJob', builder: (context, state) => const WorkerPath()),
       GoRoute(
           path: '/jobPreference',
           builder: (context, state) => const JobPreferncePath()),
@@ -136,13 +151,20 @@ final routes = [
           path: '/workerSearchResults',
           builder: (context, state) => const WorkerSearchResultPage()),
       GoRoute(
-          path: '/workerChatRoomScreen',
-          builder: (context, state) => const WorkerChatRoomScreen()),
+          path: '/companyChatRoomScreen',
+          builder: (context, state) => const CompanyChatRoomScreen()),
       GoRoute(
           path: '/myJobPosts', builder: (context, state) => const MyJobPosts()),
+      // JobPost Routes
+      GoRoute(
+          path: '/createJobPost',
+          builder: (context, state) => const CreateJobPost()),
       GoRoute(
           path: '/companyProfile',
           builder: (context, state) => const CompanyProfile()),
+      GoRoute(
+          path: '/createCompanyProfile',
+          builder: (context, state) => const CreateCompanyProfile()),
       GoRoute(
           path: '/companyChat',
           builder: (context, state) => const CompanyChat()),
@@ -173,26 +195,9 @@ final routes = [
   ),
 
   GoRoute(
-      path: '/createResume',
-      builder: (context, state) => const CreateWorkerProfile()),
-
-  GoRoute(
-      path: '/company-worker_chat',
-      builder: (context, state) => const CompanyChat()),
-
-  // GoRoute(
-  //     path: '/workerChatRoom',
-  //     builder: (context, state) => const WorkerChatRoom()),
-
-  GoRoute(
       path: '/companyChatRoomScreen',
       builder: (context, state) => const CompanyChatRoomScreen()),
 
-  // GoRoute(
-  //     path: '/worker_chat-message',
-  //     builder: (context, state) => const ChatMessageScreen()),
-
-  // Profile Routes
   GoRoute(
       path: '/onlineResumeScreen',
       builder: (context, state) => const OnlineResumeScreen()),
@@ -244,17 +249,7 @@ final routes = [
       path: '/forgot-password',
       builder: (context, state) => const ResetPasswordPage()),
 
-  // JobPost Routes
-  GoRoute(
-      path: '/createJobPost',
-      builder: (context, state) => const CreateJobPost()),
-  GoRoute(
-      path: '/createWorkerProfile',
-      builder: (context, state) => const CreateWorkerProfile()),
   GoRoute(path: '/applicants', builder: (context, state) => const Applicants()),
-  GoRoute(
-      path: '/createCompanyProfile',
-      builder: (context, state) => const CreateCompanyProfile()),
 
   // Services Routes
   GoRoute(

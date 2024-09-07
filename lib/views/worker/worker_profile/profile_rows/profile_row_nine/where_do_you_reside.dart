@@ -1,4 +1,6 @@
+import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../utils/styles/theme_colors.dart';
@@ -44,7 +46,7 @@ class WhereDoYouResidePage extends StatelessWidget {
                 const Spacer(),
                 Container(
                   height: height * 0.03,
-                  width: width * 0.23,
+                  width: width * 0.30,
                   margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
                   child: ElevatedButton(
                     onPressed: () {
@@ -61,7 +63,7 @@ class WhereDoYouResidePage extends StatelessWidget {
                       'Update',
                       style: GoogleFonts.montserrat(
                         color: Colors.white,
-                        fontSize: 12.0,
+                        fontSize: Responsive.isMobile(context) ? 9.sp : 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

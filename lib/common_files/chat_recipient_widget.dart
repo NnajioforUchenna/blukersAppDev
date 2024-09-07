@@ -11,14 +11,14 @@ class ChatRecipientWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WorkerChatProvider cp = Provider.of<WorkerChatProvider>(context);
+    WorkerChatProvider wp = Provider.of<WorkerChatProvider>(context);
     String photoUrl =
         chatRecipient?.photoUrl ?? 'assets/images/companyLogoPage.png';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: GestureDetector(
         onTap: () {
-          cp.setChatRecipient(chatRecipient!);
+          wp.setChatRecipient(chatRecipient!);
           context.push('/workerChatRoomScreen');
         },
         child: Material(

@@ -1,10 +1,10 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../../../../providers/worker_provider.dart';
 import '../../../../../services/responsive.dart';
 import '../../../../../utils/styles/index.dart';
 
@@ -68,87 +68,13 @@ class WorkerTimeLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Replace with your data provider
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    CreateWorkerProfileProvider wp =
+        Provider.of<CreateWorkerProfileProvider>(context);
+
     var currentStep = wp.workerProfileCurrentPageIndex;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(currentStep * 120.0);
     });
-
-    // return Container(
-    //   color: Colors.white,
-    //   // margin: const EdgeInsets.all(8),
-    //   constraints: const BoxConstraints(maxHeight: 140),
-    //   // decoration: BoxDecoration(
-    //   //   color: ThemeColors.primaryThemeColor,
-    //   //   boxShadow: [
-    //   //     BoxShadow(
-    //   //       color: Colors.grey,
-    //   //       offset: Offset(0.0, 1.0), //(x,y)
-    //   //       blurRadius: 6.0,
-    //   //     ),
-    //   //   ],
-    //   //   borderRadius: BorderRadius.circular(10),
-    //   //   border: Border.all(
-    //   //     color: ThemeColors.secondaryThemeColor,
-    //   //     width: 2,
-    //   //   ),
-    //   // ),
-    //   child: ListView.builder(
-    //     scrollDirection: Axis.horizontal,
-    //     controller: _scrollController,
-    //     itemCount: workerSteps.length,
-    //     itemBuilder: (BuildContext context, int index) {
-    //       final step = workerSteps[index];
-    //       var indicatorSize = 30.0;
-    //       var beforeLineStyle = const LineStyle(
-    //         // color: Colors.white.withOpacity(0.8),
-    //         color: ThemeColors.secondaryThemeColor,
-    //       );
-    //       LineStyle afterLineStyle =
-    //           const LineStyle(color: ThemeColors.grey1ThemeColor);
-
-    //       _WorkerStatus status;
-
-    //       if (index < currentStep) {
-    //         status = _WorkerStatus.done;
-    //         afterLineStyle =
-    //             const LineStyle(color: ThemeColors.secondaryThemeColor);
-    //       } else if (index > currentStep) {
-    //         status = _WorkerStatus.todo;
-    //         indicatorSize = 20;
-    //         beforeLineStyle =
-    //             const LineStyle(color: ThemeColors.grey1ThemeColor);
-    //       } else {
-    //         status = _WorkerStatus.doing;
-    //       }
-
-    //       return SizedBox(
-    //         width: Responsive.isDesktop(context)
-    //             ? MediaQuery.of(context).size.width / 6
-    //             : null,
-    //         child: TimelineTile(
-    //           axis: TimelineAxis.horizontal,
-    //           alignment: TimelineAlign.manual,
-    //           lineXY: 0.6,
-    //           isFirst: index == 0,
-    //           isLast: index == workerSteps.length - 1,
-    //           beforeLineStyle: beforeLineStyle,
-    //           afterLineStyle: afterLineStyle,
-    //           indicatorStyle: IndicatorStyle(
-    //             width: indicatorSize,
-    //             height: indicatorSize,
-    //             indicator: _IndicatorWorker(status: status),
-    //           ),
-    //           startChild: _StartChildWorker(index: index),
-    //           endChild: _EndChildWorker(
-    //             text: step,
-    //             current: index == currentStep,
-    //           ),
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
 
     List<String> stepsLocalized = [
       AppLocalizations.of(context)!.selectYourIndustriesAndJobs,

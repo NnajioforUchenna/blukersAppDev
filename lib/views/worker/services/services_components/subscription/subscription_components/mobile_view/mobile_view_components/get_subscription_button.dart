@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../../../providers/payment_providers/payments_provider.dart';
 import '../../../../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../../../../services/responsive.dart';
 
 class GetMembershipButton extends StatelessWidget {
   final String subscriptionId;
@@ -21,7 +23,7 @@ class GetMembershipButton extends StatelessWidget {
 
     return Container(
       height: height * 0.025,
-      width: width * 0.28,
+      width: width * 0.29,
       margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
       child: ElevatedButton(
         onPressed: () {
@@ -38,7 +40,7 @@ class GetMembershipButton extends StatelessWidget {
           buttonText,
           style: GoogleFonts.montserrat(
             color: buttonText == "Active" ? Colors.white : color,
-            fontSize: 12.0,
+            fontSize: Responsive.isMobile(context) ? 10.sp : 12.0,
             fontWeight: FontWeight.bold,
           ),
         ),

@@ -44,7 +44,6 @@ class _SelectOrSearchJobsState extends State<SelectOrSearchJobs> {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

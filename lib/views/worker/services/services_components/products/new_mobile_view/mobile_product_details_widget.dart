@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../providers/payment_providers/payments_provider.dart';
+import '../../../../../../services/responsive.dart';
 
 class MobileProductDetailsWidget extends StatelessWidget {
   final Color color;
@@ -55,27 +56,27 @@ class MobileProductDetailsWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    AutoSizeText(
+                    Text(
                       title.toUpperCase(),
                       style: GoogleFonts.montserrat(
                           color: Colors.grey[800],
-                          fontSize: 40,
+                          fontSize: Responsive.isMobile(context) ? 25.sp : 40,
                           fontWeight: FontWeight.w800),
                       maxLines: 1,
                     ),
                     if (subtitle.isNotEmpty)
-                      AutoSizeText(
+                      Text(
                         subtitle.toUpperCase(),
                         style: GoogleFonts.montserrat(
                           color: Colors.grey[800],
-                          fontSize: 30,
+                          fontSize: Responsive.isMobile(context) ? 20.sp : 30,
                         ),
                       ),
-                    AutoSizeText(
+                    Text(
                       "\$$amount",
                       style: GoogleFonts.montserrat(
                           color: color,
-                          fontSize: 70,
+                          fontSize: Responsive.isMobile(context) ? 40.sp : 70,
                           fontWeight: FontWeight.bold),
                     ),
                   ],

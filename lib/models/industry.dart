@@ -5,6 +5,7 @@ class Industry {
   final String name;
   final String? description;
   final String? imageUrl;
+  final String? imageUrlSvg;
   final Map<String, Job> jobs;
 
   Industry({
@@ -12,6 +13,7 @@ class Industry {
     required this.name,
     this.description,
     this.imageUrl,
+    this.imageUrlSvg,
     required this.jobs,
   });
 
@@ -41,6 +43,7 @@ class Industry {
       name: map['name'],
       description: map['description'],
       imageUrl: map['imageUrl'],
+      imageUrlSvg: map['imageUrlSvg'],
       jobs: jobsMap,
     );
   }

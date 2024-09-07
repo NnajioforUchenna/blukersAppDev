@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/app_user/components/preference.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../services/responsive.dart';
 import '../../../../utils/styles/theme_colors.dart';
 import '../../../common_vieiws/loading_page.dart';
 import '../../../worker/jobs_home/Components/display_jobs_by_preferences/Components/grey_container_text.dart';
@@ -27,10 +29,10 @@ class WorkersPreferencesCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Your Workers Preferences",
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: Responsive.isMobile(context) ? 20.sp : 20,
                     fontWeight: FontWeight.bold,
                     color: ThemeColors.blukersOrangeThemeColor),
               ),

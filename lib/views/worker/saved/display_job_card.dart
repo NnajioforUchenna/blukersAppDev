@@ -1,5 +1,3 @@
-import 'grey_container.dart';
-import 'time_ago_and_bookmark_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +8,8 @@ import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../services/rounded_image.dart';
 import '../../../utils/styles/theme_colors.dart';
+import 'grey_container.dart';
+import 'time_ago_and_bookmark_row.dart';
 
 class DisplayJobCard extends StatefulWidget {
   final JobPost jobPost;
@@ -30,9 +30,6 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
 
   @override
   Widget build(BuildContext context) {
-    double width =
-        MediaQuery.of(context).size.width; // Getting the screen width
-
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
 
     bool isJobPostSelected() {

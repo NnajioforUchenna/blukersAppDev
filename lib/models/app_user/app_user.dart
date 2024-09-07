@@ -12,6 +12,7 @@ import 'components/worker_resume_details.dart';
 
 class AppUser {
   // User Information
+
   String uid;
   String email;
   String? language;
@@ -34,8 +35,6 @@ class AppUser {
 
   // Device Token for Push Notification
   List<String>? tokens = [];
-
-  String? deviceTokenU;
 
   // Navigation Controls
   String? userRole;
@@ -75,7 +74,6 @@ class AppUser {
     this.workerRecords,
     this.company,
     this.address,
-    this.deviceTokenU,
     this.tokens,
     this.userRole,
     this.workerTimelineStep,
@@ -107,7 +105,6 @@ class AppUser {
     if (workerRecords != null) data['workerRecords'] = workerRecords!.toMap();
     if (company != null) data['company'] = company!.toMap();
     if (address != null) data['address'] = address!.toMap();
-    if (deviceTokenU != null) data['deviceTokenU'] = deviceTokenU;
     if (tokens != null) data['tokens'] = tokens;
     if (userRole != null) data['userRole'] = userRole;
     if (workerTimelineStep != null) {
@@ -195,7 +192,6 @@ class AppUser {
             SubscriptionPlan.fromMap(map['deferredSubscription']);
       }
 
-      user.deviceTokenU = map['deviceTokenU'] as String?;
       user.tokens = map['tokens'] != null
           ? List<String>.from(map['tokens'].map((x) => x as String))
           : [];
@@ -247,12 +243,20 @@ class AppUser {
   String get getDisplayName {
     if (displayName != null && displayName!.isNotEmpty) {
       return displayName!;
-    } else if (workerResumeDetails != null) {
-      return '${workerResumeDetails!.firstName} ${workerResumeDetails!.lastName}';
+    } else if (registrationDetails != null) {
+      return '${registrationDetails!.firstName} ${registrationDetails!.lastName}';
     } else if (company != null) {
       return company!.name;
     } else {
       return "Display Name";
+    }
+  }
+
+  String get getCompanyName {
+    if (company != null) {
+      return company!.name;
+    } else {
+      return 'Company Name not Given';
     }
   }
 }

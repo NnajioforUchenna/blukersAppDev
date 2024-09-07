@@ -32,6 +32,12 @@ class JobPostsProvider with ChangeNotifier {
   String language = 'en';
   bool hasMore = true;
 
+  void clearSearchParams() {
+    nameSearch = "";
+    locationSearch = "";
+    notifyListeners();
+  }
+
   update(AppUser? user) {
     appUser = user;
     if (appUser != null && appUser!.language != null) {
@@ -343,11 +349,13 @@ class JobPostsProvider with ChangeNotifier {
       String nameSearch, String locationSearch) async {
     nameSearch = nameSearch;
     locationSearch = locationSearch;
+
     List<JobPost> searchJobPosts = await JobPostsDataProvider.searchJobPosts(
         nameRelated: nameSearch,
         locationRelated: locationSearch,
         pageNumber: 0,
         targetLanguage: language);
+
     hasMore = searchJobPosts.isNotEmpty;
     if (searchJobPosts.isEmpty) {
       EasyLoading.showError('No Jobs Found with $nameSearch $locationSearch');
@@ -360,27 +368,28 @@ class JobPostsProvider with ChangeNotifier {
     }
   }
 
-  void get50LastestJobPosts() async {
-    // Get the 50 most recent job posts.
-    List<Map<String, dynamic>> jobPosts =
-        await JobPostsDataProvider.getAiJobPosts(
-            queryName: "",
-            queryLocation: "",
-            pageNumber: 0,
-            targetLanguage: language);
-    hasMore = jobPosts.isNotEmpty;
-    recent50Jobs = {};
-    for (var jobPost in jobPosts) {
-      if (jobPost['id'] != null) {
-        JobPost? parsedJobPost = JobPost.fromMap(jobPost);
-        if (parsedJobPost != null) {
-          recent50Jobs[jobPost['id']] = parsedJobPost;
-        }
-      }
-    }
-
-    notifyListeners();
-  }
+  // void get50LastestJobPosts() async {
+  //   print('Getting 50 Lastest Job Posts');
+  //   // Get the 50 most recent job posts.
+  //   List<Map<String, dynamic>> jobPosts =
+  //       await JobPostsDataProvider.getAiJobPosts(
+  //           queryName: "",
+  //           queryLocation: "",
+  //           pageNumber: 0,
+  //           targetLanguage: language);
+  //   hasMore = jobPosts.isNotEmpty;
+  //   recent50Jobs = {};
+  //   for (var jobPost in jobPosts) {
+  //     if (jobPost['id'] != null) {
+  //       JobPost? parsedJobPost = JobPost.fromMap(jobPost);
+  //       if (parsedJobPost != null) {
+  //         recent50Jobs[jobPost['id']] = parsedJobPost;
+  //       }
+  //     }
+  //   }
+  //   print(recent50Jobs.length);
+  //   notifyListeners();
+  // }
 
   Future<void> getRealJobPosts() async {
     // Get the 50 most recent job posts.

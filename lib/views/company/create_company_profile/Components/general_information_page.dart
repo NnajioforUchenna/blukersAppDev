@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/company_provider.dart';
@@ -134,12 +135,20 @@ class _GeneralInformationPageState extends State<GeneralInformationPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        TimelineNavigationButton(
+                          isSelected: true, // Always enable the home button
+                          onPress: () {
+                            context.go('/workers');
+                          },
+                          navDirection: 'left',
+                        ),
                         const Spacer(),
                         TimelineNavigationButton(
                           isSelected: true,
                           onPress: () {
                             if (_formKey.currentState!.validate() &&
                                 isFormComplete()) {
+                              FocusScope.of(context).unfocus();
                               cp.addGeneralInformation(
                                   companyNameController.text,
                                   companySloganController.text,

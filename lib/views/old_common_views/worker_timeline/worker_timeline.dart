@@ -76,6 +76,7 @@ class WorkerTimeline extends StatelessWidget {
               // }
               final record = workerRecords[index];
               return MyWorkerTimeLine(
+                index:  index,
                 // You might need to create or adapt MyJobTimeLine for worker flow
                 isFirst: index == 0,
                 isLast: index == workerRecords.length - 1,

@@ -12,7 +12,7 @@ class DisplayWorkerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        borderRadius: BorderRadius.all(Radius.circular(20.0)),
       ),
       child: Stack(
         alignment: Alignment.topCenter,

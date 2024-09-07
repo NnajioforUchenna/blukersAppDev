@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../utils/styles/index.dart';
+
 import '../../../utils/helpers/index.dart';
+import '../../../utils/styles/index.dart';
 
 class AppVersionDisplay extends StatelessWidget {
   const AppVersionDisplay({
     super.key,
-    // required this.icon,
-    // required this.text,
-    // this.color = ThemeColors.grey1ThemeColor,
   });
-
-  // IconData icon;
-  // String text;
-  // Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +15,6 @@ class AppVersionDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // const Icon(
-        //   UniconsLine.info_circle,
-        //   color: ThemeColors.grey1ThemeColor,
-        //   size: 25,
-        // ),
         Container(
           // height: double.infinity,
           alignment: Alignment.center, // This is needed

@@ -6,7 +6,7 @@ class ChatRecipient {
   final String displayName;
   final String email;
   final String photoUrl;
-  final String clientType;
+  String clientType;
   int unreadMessageCount; // Added property for unread message count
 
   // Constructor
@@ -59,12 +59,22 @@ class ChatRecipient {
   static ChatRecipient fromAppUser(AppUser appUser) {
     return ChatRecipient(
       uid: appUser.uid,
-      displayName: appUser.displayName ?? '',
+      displayName: appUser.getCompanyName ?? '',
       email: appUser.registrationDetails?.email ?? '',
-      photoUrl: appUser.photoUrl ?? '',
+      photoUrl: appUser?.company?.logoUrl ?? '',
+      clientType: appUser.userRole ?? '',
+    );
+  }
+
+  static ChatRecipient fromAppUserWorker(AppUser appUser) {
+    return ChatRecipient(
+      uid: appUser.uid,
+      displayName: appUser.getDisplayName ?? '',
+      email: appUser.registrationDetails?.email ?? '',
+      photoUrl: appUser?.workerResumeDetails?.profilePhotoUrl ??
+          appUser.photoUrl ??
+          '',
       clientType: appUser.userRole ?? '',
     );
   }
 }
-
-

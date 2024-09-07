@@ -1,8 +1,8 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../providers/worker_provider.dart';
 import '../../../../../../services/responsive.dart';
 import '../timeline_navigation_button.dart';
 import 'work_experience_form.dart';
@@ -15,14 +15,13 @@ class WorkExperiencePage extends StatefulWidget {
 }
 
 class _WorkExperiencePageState extends State<WorkExperiencePage> {
-  List<WorkExperienceForm> workExperienceForms = [];
-
   @override
   Widget build(BuildContext context) {
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
-    if (workExperienceForms.isEmpty) {
-      for (int i = 0; i < wp.workExperience.length; i++) {
-        workExperienceForms.add(WorkExperienceForm(index: i));
+    CreateWorkerProfileProvider cwpp =
+        Provider.of<CreateWorkerProfileProvider>(context);
+    if (cwpp.workExperienceForms.isEmpty) {
+      for (int i = 0; i < cwpp.workExperience.length; i++) {
+        cwpp.workExperienceForms.add(WorkExperienceForm(index: i));
       }
     }
     return Container(
@@ -34,12 +33,12 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            ...workExperienceForms,
+            ...cwpp.workExperienceForms,
             Tooltip(
               message: AppLocalizations.of(context)!.addMoreWorkExperience,
               child: InkWell(
                 onTap: () {
-                  wp.addWorkExperience();
+                  cwpp.addWorkExperience();
                 },
                 child: Row(
                   children: [
@@ -47,7 +46,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
                     IconButton(
                       icon: const Icon(Icons.add),
                       onPressed: () {
-                        wp.addWorkExperience();
+                        cwpp.addWorkExperience();
                       },
                     ),
                     const SizedBox(width: 10),
@@ -64,12 +63,15 @@ class _WorkExperiencePageState extends State<WorkExperiencePage> {
               children: [
                 TimelineNavigationButton(
                   isSelected: true,
-                  onPress: () => wp.workerProfileBackPage(),
+                  onPress: () => cwpp.workerProfileBackPage(),
                   navDirection: "back",
                 ),
                 TimelineNavigationButton(
                   isSelected: true,
-                  onPress: () => wp.setWorkExperience(),
+                  onPress: () {
+                    FocusScope.of(context).unfocus();
+                    cwpp.setWorkExperience();
+                  },
                 ),
               ],
             ),

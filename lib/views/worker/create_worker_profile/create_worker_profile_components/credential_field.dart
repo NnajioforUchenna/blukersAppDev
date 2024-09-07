@@ -1,10 +1,10 @@
+import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../providers/worker_provider.dart';
 import '../../../../../utils/styles/index.dart';
 import 'show_pdf_dialog.dart';
 
@@ -27,7 +27,9 @@ class _CredentialFieldState extends State<CredentialField> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      WorkersProvider wp = Provider.of<WorkersProvider>(context, listen: false);
+      // WorkersProvider wp = Provider.of<WorkersProvider>(context, listen: false);
+      CreateWorkerProfileProvider wp =
+          Provider.of<CreateWorkerProfileProvider>(context, listen: false);
       controller.text = wp.professionalCredentials[widget.index]['name'] ?? '';
       fileNameUrl = wp.professionalCredentials[widget.index]['url'] ?? '';
       isFileUploaded =
@@ -39,7 +41,9 @@ class _CredentialFieldState extends State<CredentialField> {
 
   @override
   Widget build(BuildContext context) {
-    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    // WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    CreateWorkerProfileProvider wp =
+        Provider.of<CreateWorkerProfileProvider>(context);
     return Column(
       children: [
         Row(

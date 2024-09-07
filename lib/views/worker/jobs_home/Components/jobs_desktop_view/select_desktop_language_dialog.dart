@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blukers/providers/app_settings_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -65,11 +66,11 @@ class _SelectDesktopLanguageDialogState
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.blueAccent),
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+        border: Border.all(color: const Color.fromRGBO(207, 207, 207, 1)),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: DropdownButton<String>(
-        hint: const Text('Choose a language'),
         value: selectedLanguageCode,
         onChanged: (String? newValue) {
           setState(() {
@@ -86,8 +87,24 @@ class _SelectDesktopLanguageDialogState
           );
         }).toList(),
         isExpanded: true,
-        underline: const SizedBox(),
-        icon: const Icon(Icons.language),
+        underline: const SizedBox.shrink(),
+        icon: const Row(
+          children: [
+            Icon(
+              Icons.language,
+              color: ThemeColors.black1ThemeColor,
+              size: 25,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Icon(
+              Icons.keyboard_arrow_down,
+              color: ThemeColors.black1ThemeColor,
+              size: 25,
+            ),
+          ],
+        ),
         dropdownColor: Colors.blue[100],
       ),
     );

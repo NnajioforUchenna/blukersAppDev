@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart' show Showcase;
 
 import '../../../../utils/styles/index.dart';
+import 'message_badge.dart';
 
 class SignInRow extends StatelessWidget {
   const SignInRow({super.key});
@@ -60,7 +61,7 @@ class SignInRow extends StatelessWidget {
                   ),
                 ),
               )
-            : Container(),
+            : const MessageBadge(),
       ],
     );
   }
