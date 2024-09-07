@@ -39,6 +39,11 @@ extension UserNavigationFunctions on UserProvider {
     context.go(routesWorker[index]);
   }
 
+  void updateNavigationIndex(int index) {
+    currentPageIndex = index;
+    notifyListeners();
+  }
+
   void navigateBasedOnRole(BuildContext context) {
     if (userRole == "worker") {
       context.go('/jobs');

@@ -1,9 +1,8 @@
+import 'package:blukers/data_providers/country_state_city_provider.dart';
 import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../auth/common_widget/auth_input.dart';
 
 class WorkExperienceLocationForm extends StatefulWidget {
   final int intialIndex;
@@ -17,127 +16,177 @@ class WorkExperienceLocationForm extends StatefulWidget {
 
 class _WorkExperienceLocationFormState
     extends State<WorkExperienceLocationForm> {
-  final TextEditingController cityController = TextEditingController();
-
-  final TextEditingController stateController = TextEditingController();
-
-  final TextEditingController countryController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Check if the widget is still in the widget tree
       if (mounted) {
-        // WorkersProvider wp =
-        //     Provider.of<WorkersProvider>(context, listen: false);
-
-        CreateWorkerProfileProvider wp =
-            Provider.of<CreateWorkerProfileProvider>(context, listen: false);
-
-        cityController.text =
-            wp.workExperience[widget.intialIndex]['city'] ?? '';
-        stateController.text =
-            wp.workExperience[widget.intialIndex]['state'] ?? '';
-        countryController.text =
-            wp.workExperience[widget.intialIndex]['country'] ?? '';
+        CountryStateCityProvider cscp =
+            Provider.of<CountryStateCityProvider>(context, listen: false);
+        cscp.getCountries(widget.intialIndex);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final node = FocusScope.of(context);
-    // WorkersProvider wp = Provider.of<WorkersProvider>(context);
     CreateWorkerProfileProvider wp =
         Provider.of<CreateWorkerProfileProvider>(context);
+    CountryStateCityProvider cscp =
+        Provider.of<CountryStateCityProvider>(context);
 
     return Row(
       children: [
-        // City Input
+        // Country Dropdown
         Expanded(
-          child: AuthInput(
-            child: TextFormField(
-              controller: cityController,
-              textInputAction: TextInputAction.next,
-              onEditingComplete: () => node.nextFocus(),
-              validator: (value) => value!.isEmpty
-                  ? AppLocalizations.of(context)!.required
-                  : null,
-              onChanged: (value) {
-                wp.workExperience[widget.intialIndex]['city'] = value;
-              },
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.city,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: const BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
-                  ),
+          child: DropdownButtonFormField<String>(
+            value: wp.workExperience[widget.intialIndex]['country'],
+            isExpanded: true,
+            onChanged: (value) {
+              setState(() {
+                wp.workExperience[widget.intialIndex]['country'] = value!;
+                cscp.setSelectedCountry(widget.intialIndex, value);
+                cscp.getStates(widget.intialIndex, value);
+                wp.workExperience[widget.intialIndex]['state'] = null;
+                wp.workExperience[widget.intialIndex]['city'] = null;
+              });
+            },
+            validator: (value) =>
+                value == null ? AppLocalizations.of(context)!.required : null,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.country,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.grey,
                 ),
-                fillColor: Colors.white,
-                filled: true,
               ),
+              focusedBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.black,
+                ),
+              ),
+              fillColor: Colors.white,
+              filled: true,
             ),
+            items: cscp.countries[widget.intialIndex]
+                    ?.map((country) => DropdownMenuItem<String>(
+                          value: country.isoCode,
+                          child: Text(
+                            country.name,
+                            overflow: TextOverflow
+                                .ellipsis, // Truncate text with ellipsis
+                            maxLines: 1,
+                          ),
+                        ))
+                    .toList() ??
+                [],
           ),
         ),
         const SizedBox(width: 10),
-        // State Input
+        // State Dropdown
         Expanded(
-          child: AuthInput(
-            child: TextFormField(
-              controller: stateController,
-              textInputAction: TextInputAction.next,
-              onEditingComplete: () => node.nextFocus(),
-              validator: (value) => value!.isEmpty
-                  ? AppLocalizations.of(context)!.required
-                  : null,
-              onChanged: (value) {
-                wp.workExperience[widget.intialIndex]['state'] = value;
-              },
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.state,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: const BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
-                  ),
+          child: DropdownButtonFormField<String>(
+            value: wp.workExperience[widget.intialIndex]['state'],
+            isExpanded: true,
+            onChanged: (value) {
+              setState(() {
+                wp.workExperience[widget.intialIndex]['state'] = value!;
+                cscp.setSelectedState(widget.intialIndex, value);
+                cscp.getCities(
+                    widget.intialIndex,
+                    cscp.selectedCountry[widget.intialIndex]!,
+                    cscp.states[widget.intialIndex]!
+                        .firstWhere((state) => state.name == value)
+                        .isoCode);
+                wp.workExperience[widget.intialIndex]['city'] = null;
+              });
+            },
+            validator: (value) =>
+                value == null ? AppLocalizations.of(context)!.required : null,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.state,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.grey,
                 ),
-                fillColor: Colors.white,
-                filled: true,
               ),
+              focusedBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.black,
+                ),
+              ),
+              fillColor: Colors.white,
+              filled: true,
             ),
+            items: cscp.states[widget.intialIndex]
+                    ?.map((state) => DropdownMenuItem<String>(
+                          value: state.name,
+                          child: Text(state.name,
+                              overflow: TextOverflow
+                                  .ellipsis, // Truncate text with ellipsis
+                              maxLines: 1),
+                        ))
+                    .toList() ??
+                [],
           ),
         ),
         const SizedBox(width: 10),
-        // Country Input
+        // City Dropdown
         Expanded(
-          child: AuthInput(
-            child: TextFormField(
-              controller: countryController,
-              textInputAction: TextInputAction.done,
-              onEditingComplete: () => node.unfocus(),
-              validator: (value) => value!.isEmpty
-                  ? AppLocalizations.of(context)!.required
-                  : null,
-              onChanged: (value) {
-                wp.workExperience[widget.intialIndex]['country'] = value;
-              },
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.country,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: const BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
-                  ),
+          child: DropdownButtonFormField<String>(
+            value: wp.workExperience[widget.intialIndex]['city'],
+            isExpanded: true,
+            onChanged: (value) {
+              setState(() {
+                wp.workExperience[widget.intialIndex]['city'] = value!;
+                cscp.setSelectedCity(widget.intialIndex, value);
+              });
+            },
+            validator: (value) =>
+                value == null ? AppLocalizations.of(context)!.required : null,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.city,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.grey,
                 ),
-                fillColor: Colors.white,
-                filled: true,
               ),
+              focusedBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid,
+                  color: Colors.black,
+                ),
+              ),
+              fillColor: Colors.white,
+              filled: true,
             ),
+            items: cscp.cities[widget.intialIndex]
+                    ?.map((city) => DropdownMenuItem<String>(
+                          value: city.name,
+                          child: Text(city.name,
+                              overflow: TextOverflow
+                                  .ellipsis, // Truncate text with ellipsis
+                              maxLines: 1),
+                        ))
+                    .toList() ??
+                [],
           ),
         ),
       ],

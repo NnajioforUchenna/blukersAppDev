@@ -9,6 +9,9 @@
       }
     }
   },
+  "emailAddress": "\u90ae\u4ef6\u5730\u5740",
+  "enterEmailAddress": "\u8f93\u5165\u90ae\u4ef6\u5730\u5740",
+  "enterPassword": "\u8f93\u5165\u5bc6\u7801",
   "dreamBuildConnect": "\u68a6\u60f3\u3002\u5efa\u7acb\u3002\u8fde\u63a5\u3002",
   "whatDoYouIdentifyAs": "\u4f60\u8ba4\u4e3a\u4f60\u662f\u8c01\uff1f",
   "home": "\u5bb6",

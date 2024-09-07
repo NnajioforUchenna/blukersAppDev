@@ -2,6 +2,8 @@ import 'package:blukers/services/responsive.dart';
 import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
 import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
+import 'package:blukers/views/worker/select_job_industry/select_industry_desktop.dart';
+import 'package:blukers/views/worker/select_job_industry/select_industry_widgets.dart';
 import 'package:blukers/views/worker/worker_chat/worker_chat.dart';
 import 'package:blukers/views/worker/worker_messages/worker_messages.dart';
 import 'package:blukers/views/worker/workers_path/worker_path.dart';
@@ -78,8 +80,8 @@ final routes = [
       GoRoute(
           path: '/selectJobs',
           builder: (context, state) => const Responsive(
-              mobile: SelectOrSearchJobs(),
-              desktop: SelectOrSearchJobsDesktop())),
+              mobile: SelectIndustryScreen(),
+              desktop: SelectIndustryScreenDesktop())),
       GoRoute(
           path: '/searchJobs',
           builder: (context, state) => const SearchJobsUi()),
@@ -104,7 +106,8 @@ final routes = [
       GoRoute(
           path: '/workerOffers',
           builder: (context, state) => const ServicesList()),
-      GoRoute(path: '/pathToJob', builder: (context, state) => WorkerPath()),
+      GoRoute(
+          path: '/pathToJob', builder: (context, state) => const WorkerPath()),
       GoRoute(
           path: '/jobPreference',
           builder: (context, state) => const JobPreferncePath()),

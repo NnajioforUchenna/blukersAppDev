@@ -1,9 +1,9 @@
-import '../../../services/responsive.dart';
-import '../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../services/responsive.dart';
+import '../../../utils/styles/index.dart';
 import 'list_industries.dart';
 
 class DisplayIndustries extends StatelessWidget {
@@ -19,15 +19,15 @@ class DisplayIndustries extends StatelessWidget {
             child: Text(AppLocalizations.of(context)!.selectAnIndustry,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserrat(
-                  fontSize: 22.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.w700,
-                  color: ThemeColors.secondaryThemeColor,
+                  color: ThemeColors.black1ThemeColor,
                 )),
           ),
 
           Container(
             width: (Responsive.isDesktop(context))
-                ? MediaQuery.of(context).size.width * 0.6
+                ? MediaQuery.of(context).size.width * 0.45
                 : MediaQuery.of(context).size.width * 0.8,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(

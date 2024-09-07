@@ -1,4 +1,7 @@
-{
+{ 
+  "emailAddress": "Adresse électronique",
+  "enterEmailAddress": "Entrez l'adresse électronique",
+  "enterPassword": "Entrez le mot de passe",
   "iAmA": "Je suis un",
   "iAmA2": "Je suis un",
   "worker": "Travailleur",

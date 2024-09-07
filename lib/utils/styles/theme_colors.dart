@@ -15,6 +15,8 @@ class ThemeColors {
       Color.fromRGBO(6, 101, 173, 1); // #1E75BB
   static const searchBarSecondaryThemeColor =
       Color.fromRGBO(239, 87, 11, 1); // #
+      static const secondaryThemeColorDark =
+      Color.fromRGBO(242, 100, 34, 1); // #
 
   static const black1ThemeColor = Color.fromRGBO(25, 25, 25, 0.95); // #
   static const black2ThemeColor = Color.fromRGBO(0, 0, 0, 0.85); // #

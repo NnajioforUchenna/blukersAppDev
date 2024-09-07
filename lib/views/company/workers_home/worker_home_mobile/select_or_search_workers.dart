@@ -44,7 +44,6 @@ class _SelectOrSearchWorkersState extends State<SelectOrSearchWorkers> {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
     WorkersProvider wp = Provider.of<WorkersProvider>(context);
     asp = Provider.of<AppSettingsProvider>(context);
-
     return Column(
       children: [
         const SearchAndTranslateRowCompany(),
