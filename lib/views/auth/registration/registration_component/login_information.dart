@@ -1,13 +1,14 @@
+import 'package:blukers/views/auth/common_widget/auth_field_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../services/validation.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../services/responsive.dart';
 import '../../../../utils/styles/theme_colors.dart';
-import '../../common_widget/auth_input.dart';
 import '../../common_widget/label_button.dart';
 import '../../common_widget/submit_button.dart';
 
@@ -53,7 +54,8 @@ class _LoginInformationState extends State<LoginInformation> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(height: 10),
-                AuthInput(
+                AuthTextFieldWrapper(
+                  label: AppLocalizations.of(context)!.email,
                   child: TextFormField(
                     controller: emailController,
                     textInputAction: TextInputAction.next,
@@ -67,13 +69,34 @@ class _LoginInformationState extends State<LoginInformation> {
                       return Validation().validateEmail(value);
                     }),
                     decoration: InputDecoration(
-                      hintText: AppLocalizations.of(context)!.email,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                      hintStyle: GoogleFonts.montserrat(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: ThemeColors.black1ThemeColor.withOpacity(.30),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
                         borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
+                            width: 0, color: ThemeColors.red1ThemeColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(
+                            width: 0, color: ThemeColors.secondaryThemeColor),
+                      ),
+                      contentPadding: const EdgeInsets.all(20),
+                      hintText: AppLocalizations.of(context)!.email,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(
+                            width: 0.5,
+                            color: Color.fromRGBO(227, 238, 246, 1)),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(
+                            width: 0.5,
+                            color: Color.fromRGBO(227, 238, 246, 1)),
                       ),
                       fillColor: Colors.white,
                       filled: true,
@@ -81,7 +104,8 @@ class _LoginInformationState extends State<LoginInformation> {
                   ),
                 ),
                 SizedBox(height: height * 0.010),
-                AuthInput(
+                AuthTextFieldWrapper(
+                  label: AppLocalizations.of(context)!.password,
                   child: TextFormField(
                     controller: passwordController,
                     obscureText: isPasswordVisible,
@@ -114,12 +138,33 @@ class _LoginInformationState extends State<LoginInformation> {
                           });
                         },
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                      hintStyle: GoogleFonts.montserrat(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: ThemeColors.black1ThemeColor.withOpacity(.30),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
                         borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
+                            width: 0, color: ThemeColors.red1ThemeColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(
+                            width: 0, color: ThemeColors.secondaryThemeColor),
+                      ),
+                      contentPadding: const EdgeInsets.all(20),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(
+                            width: 0.5,
+                            color: Color.fromRGBO(227, 238, 246, 1)),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(
+                            width: 0.5,
+                            color: Color.fromRGBO(227, 238, 246, 1)),
                       ),
                       fillColor: Colors.white,
                       filled: true,

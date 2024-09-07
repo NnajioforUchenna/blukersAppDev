@@ -16,6 +16,7 @@ class WorkerPageTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
       endDrawer: const WorkerDrawer(),
       appBar: const WorkerAppBar(),
       bottomNavigationBar: Responsive.isDesktop(context)
