@@ -85,7 +85,7 @@ class _DisplayWorkerCardState extends State<DisplayWorkerCard> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        widget.worker?.workStatus == WorkStatus.activelyLooking
+                        widget.worker?.workStatus == 0
                             ? 'Actively Looking'
                             : 'Hired',
                         style: const TextStyle(

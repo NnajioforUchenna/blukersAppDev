@@ -82,19 +82,19 @@ class _UpdateWorkExperienceFormState extends State<UpdateWorkExperienceForm> {
               maxlines: 1,
               controller: _jobTitleController,
               onChanged: (value) {
-                up.workExperiences[widget.index]['jobTitle'] = value;
+                up.workExperiences[widget.index]['jobTitle'] = value; 
               },
             ),
             const SizedBox(height: 7),
             TextInputWigdet(
-              label: AppLocalizations.of(context)!.jobTitle,
+              label: AppLocalizations.of(context)!.jobDescription,
               maxlines: 2,
               controller: _jobDescriptionController,
               onChanged: (value) {
                 up.workExperiences[widget.index]['jobDescription'] = value;
               },
             ),
-            const SizedBox(height: 7),
+            const SizedBox(height: 15),
             UpdateWorkExperienceLocationForm(
               intialIndex: widget.index,
             ),

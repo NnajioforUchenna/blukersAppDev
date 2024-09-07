@@ -12,6 +12,7 @@ class CompanyPageTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         endDrawer: const CompanyDrawer(),
         appBar: const CompanyAppBar(),
         bottomNavigationBar: Responsive.isDesktop(context)

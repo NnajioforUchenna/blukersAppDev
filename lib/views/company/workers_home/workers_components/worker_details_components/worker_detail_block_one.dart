@@ -106,7 +106,7 @@ class WorkerDetailBlockOne extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  worker.workStatus == WorkStatus.activelyLooking
+                  worker.workStatus == 0
                       ? 'Actively Looking'
                       : 'Hired',
                   style: const TextStyle(

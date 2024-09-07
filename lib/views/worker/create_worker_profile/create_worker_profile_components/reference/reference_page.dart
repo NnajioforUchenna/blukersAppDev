@@ -18,10 +18,9 @@ class _ReferencePageState extends State<ReferencePage> {
   Widget build(BuildContext context) {
     CreateWorkerProfileProvider cwpp =
         Provider.of<CreateWorkerProfileProvider>(context);
-    if (cwpp.referenceForms.isEmpty) {
+    List<ReferenceFormWidget> referenceForms = [];
       for (int i = 0; i < cwpp.references.length; i++) {
-        cwpp.referenceForms.add(ReferenceFormWidget(index: i));
-      }
+        referenceForms.add(ReferenceFormWidget(index: i));
     }
     return Container(
       color: Colors.white,
@@ -30,7 +29,7 @@ class _ReferencePageState extends State<ReferencePage> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            ...cwpp.referenceForms,
+            ...referenceForms,
             Tooltip(
               message: AppLocalizations.of(context)!.addMorePersonalReferences,
               child: InkWell(

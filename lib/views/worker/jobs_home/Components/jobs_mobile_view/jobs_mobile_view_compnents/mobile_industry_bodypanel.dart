@@ -10,10 +10,10 @@ import '../../../../../../utils/styles/theme_colors.dart';
 import '../../../../../company/workers_home/workers_components/display_workers.dart';
 import '../../../../saved/display_jobs.dart';
 
-class MobileIndustryBodyPanel extends StatelessWidget {
+class IndustryBodyPanel extends StatelessWidget {
   final List<Job> jobs;
 
-  const MobileIndustryBodyPanel({super.key, required this.jobs});
+  const IndustryBodyPanel({super.key, required this.jobs});
 
   @override
   Widget build(BuildContext context) {

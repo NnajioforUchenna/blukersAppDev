@@ -135,6 +135,83 @@ class CompanyProvider with ChangeNotifier {
     }
   }
 
+    Future<String?> ontapGallery(String storagePath) async {
+    // FilePickerResult? gallery = await FilePicker.platform.pickFiles(
+    //   type: FileType.custom,
+    //   allowedExtensions: ['png'],
+    // );
+    ImagePicker imagePicker = ImagePicker();
+    final XFile? gallery =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (gallery == null) {
+      return "";
+    }
+    EasyLoading.show(
+      status: 'Uploading your Profile Pic...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    Uint8List bytes = await gallery.readAsBytes();
+    int sizeInBytes = bytes.lengthInBytes;
+    double sizeInMB = sizeInBytes / (1024 * 1024);
+
+    if (sizeInMB > 10) {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+          'Selected file is more than 10 MB. Please select a smaller file.');
+      return "";
+    }
+
+    String? result = await UserDataProvider.uploadImage(
+      image: await gallery.readAsBytes(),
+      path: "$storagePath${appUser!.uid}",
+    );
+    // If the result is not an error, then update the logoUrl of the Worker.
+    if (result != 'error') {
+      // appUser?.photoUrl = result;
+      EasyLoading.dismiss();
+      EasyLoading.showSuccess('Uploaded your profile image successfully.');
+      return result;
+    } else {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+          'An error occurred while uploading your profile image. Please try again.');
+      return "";
+    }
+
+    //Get.back();
+    // EasyLoading.show(
+    //   status: 'Uploading your Profile Pic...',
+    //   maskType: EasyLoadingMaskType.black,
+    // );
+    // String path = gallery.path;
+    // File image = File(path);
+    // String? imageUrl = await UserDataProvider.uploadImage(
+    //     flow: image, path: "$storagePath${appUser!.uid}");
+
+    // // await PrefService.setValue(PrefKeys.imageId, imageUrl ?? "");
+    // //fbImageUrl.value = imageUrl ?? "";
+    // await Future.delayed(Duration(seconds: 2));
+
+    // EasyLoading.dismiss();
+    // return imageUrl;
+    // // imagePicker();
+  }
+
+
+  Future<String?> ontapCamera(String storagePath) async {
+    // return "";
+    ImagePicker picker = ImagePicker();
+    XFile? gallery = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 15,
+        preferredCameraDevice: CameraDevice.front);
+    if (gallery == null) {
+      return "";
+    }
+    return null;
+  }
+
   void addContactDetails(String ext, String phoneNumber, String street,
       String city, String state, String postalCode, String country) {
     // Storing Previous Parameters

@@ -9,6 +9,9 @@
       }
     }
   },
+  "emailAddress": "Dirección de correo electrónico",
+  "enterEmailAddress": "Ingrese la dirección de correo electrónico",
+  "enterPassword": "Ingrese la contraseña",
   "dreamBuildConnect": "Sue\u00f1a. Construye. Conecta.",
   "whatDoYouIdentifyAs": "\u00bfC\u00f3mo te identificas?",
   "home": "Hogar",

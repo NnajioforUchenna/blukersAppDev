@@ -1,3 +1,4 @@
+import 'package:blukers/views/worker/select_job_industry/select_industry_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,6 @@ class JobsPageMobile extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     return up.isUserRegistered()
         ? const DisplayJobsByPreferences()
-        : const SelectOrSearchJobs();
+        : const SelectIndustryScreen();
   }
 }

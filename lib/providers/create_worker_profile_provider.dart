@@ -359,6 +359,7 @@ class CreateWorkerProfileProvider with ChangeNotifier {
 
   void addNewReference() {
     // Get all workers for the job with the given jobId.
+    print('Adding new reference');
     references.add({});
     notifyListeners();
   }
