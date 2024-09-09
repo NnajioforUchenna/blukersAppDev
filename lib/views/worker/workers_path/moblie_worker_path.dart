@@ -20,6 +20,7 @@ class MoblieWorkerPath extends StatelessWidget {
     int currentStep = up.appUser?.workerTimelineStep ?? 0;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

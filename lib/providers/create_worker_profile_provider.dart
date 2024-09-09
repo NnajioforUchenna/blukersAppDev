@@ -35,15 +35,15 @@ class CreateWorkerProfileProvider with ChangeNotifier {
   PageController createProfilePageController = PageController();
 
   // Move to the next page in the worker's profile creation process.
-  workerProfileNextPage() {
-    workerProfileCurrentPageIndex++;
-    createProfilePageController.animateToPage(workerProfileCurrentPageIndex,
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-    notifyListeners();
-    // wait 5 seconds
-    Future.delayed(const Duration(seconds: 5), () {
-      EasyLoading.dismiss();
-    });
+    workerProfileNextPage() {
+      workerProfileCurrentPageIndex++;
+      createProfilePageController.animateToPage(workerProfileCurrentPageIndex,
+          duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+      notifyListeners();
+      // wait 5 seconds
+      Future.delayed(const Duration(seconds: 5), () {
+        EasyLoading.dismiss();
+      });
   }
 
   workerProfileBackPage() {
@@ -137,9 +137,9 @@ class CreateWorkerProfileProvider with ChangeNotifier {
     appUser!.workerResumeDetails?.middleName = middleNameController.text;
     appUser!.workerResumeDetails?.lastName = lastNameController.text;
     appUser!.workerResumeDetails?.birthdate = DateTime(
-            int.parse(birthYearController.text),
-            int.parse(birthMonthController.text),
-            int.parse(birthDayController.text))
+        int.parse(birthYearController.text),
+        int.parse(birthMonthController.text),
+        int.parse(birthDayController.text))
         .millisecondsSinceEpoch;
 
     // Update the appUser
@@ -154,7 +154,7 @@ class CreateWorkerProfileProvider with ChangeNotifier {
   Future<void> selectProfilePhoto(BuildContext context) async {
     ImagePicker imagePicker = ImagePicker();
     final XFile? image =
-        await imagePicker.pickImage(source: ImageSource.gallery);
+    await imagePicker.pickImage(source: ImageSource.gallery);
 
     EasyLoading.show(
       status: 'Uploading Your Profile Image...',
@@ -239,8 +239,8 @@ class CreateWorkerProfileProvider with ChangeNotifier {
         maskType: EasyLoadingMaskType.black,
       );
       String resultUrl =
-          await WorkerDataProvider.uploadCredentialToFirebaseStorageWeb(
-              appUser!.uid, filePlatformFile.bytes!, filePlatformFile.name);
+      await WorkerDataProvider.uploadCredentialToFirebaseStorageWeb(
+          appUser!.uid, filePlatformFile.bytes!, filePlatformFile.name);
       if (resultUrl != 'error') {
         appUser?.workerResumeDetails?.certificationsIds?.add(resultUrl);
         EasyLoading.dismiss();
@@ -279,8 +279,8 @@ class CreateWorkerProfileProvider with ChangeNotifier {
       // get File path
       File file = File(result.files.single.path!);
       String resultUrl =
-          await WorkerDataProvider.uploadCredentialToFirebaseStorageMobile(
-              appUser!.uid, file, result.files.single.name);
+      await WorkerDataProvider.uploadCredentialToFirebaseStorageMobile(
+          appUser!.uid, file, result.files.single.name);
 
       if (resultUrl != 'error') {
         appUser?.workerResumeDetails?.certificationsIds?.add(resultUrl);

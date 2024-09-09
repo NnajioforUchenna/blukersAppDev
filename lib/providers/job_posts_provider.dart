@@ -10,6 +10,7 @@ import '../models/job.dart';
 import '../models/job_post.dart';
 import '../views/auth/please_login_dialog.dart';
 import '../views/company/create_job_post/create_job_post_components/compensation_and_contract_page.dart';
+import '../views/company/create_job_post/create_job_post_components/job_post_time_line.dart';
 import '../views/worker/jobs_home/Components/display_selected_jobs/display_selected_jobs.dart';
 
 class JobPostsProvider with ChangeNotifier {
@@ -20,6 +21,8 @@ class JobPostsProvider with ChangeNotifier {
 
   // Controls Displayed Job Posts
   Map<String, JobPost> displayedJobPosts = {};
+  List<bool> stepCompletion = List.generate(jobPostSteps.length, (index) => false);
+  
   JobPost? selectedJobPost;
 
   // List<JobPost> selectedJobPosts = displayedJobPosts.values.toList();
@@ -249,6 +252,13 @@ class JobPostsProvider with ChangeNotifier {
     setJobPostPageNext();
   }
 
+   void updateStepCompletion(int stepIndex, bool isCompleted) {
+    if (stepIndex < stepCompletion.length) {
+      stepCompletion[stepIndex] = isCompleted;
+      notifyListeners();
+    }
+  }
+
   void updateUserAddress(String street, String city, String state,
       String postalCode, String country) {
     Address address = Address(
@@ -260,8 +270,8 @@ class JobPostsProvider with ChangeNotifier {
 
     newJobPostData['addresses'] = [address.toMap()];
     newJobPostData['address'] = address.toMap();
-    createJobPost();
-    setJobPostPageNext();
+    // createJobPost();
+     setJobPostPageNext();
   }
 
   Future<void> createJobPost() async {

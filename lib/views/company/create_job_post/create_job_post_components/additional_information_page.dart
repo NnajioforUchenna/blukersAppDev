@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../../../../providers/job_posts_provider.dart';
 import '../../../auth/common_widget/auth_input.dart';
 import '../../../common_vieiws/address_form/address_form.dart';
-import '../../../worker/create_worker_profile/create_worker_profile_components/timeline_navigation_button.dart';
 
 class AdditionalInformationPage extends StatefulWidget {
   const AdditionalInformationPage({super.key});
@@ -16,7 +15,8 @@ class AdditionalInformationPage extends StatefulWidget {
       _AdditionalInformationPageState();
 }
 
-class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
+class _AdditionalInformationPageState
+    extends State<AdditionalInformationPage> {
   final _formKey = GlobalKey<FormState>();
   final _streetController = TextEditingController();
   final _cityController = TextEditingController();
@@ -42,96 +42,132 @@ class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
     final height = MediaQuery.of(context).size.height;
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
 
-    return SizedBox(
-      height: height,
-      child: Stack(
-        children: [
-          Positioned(
-            top: -MediaQuery.of(context).size.height * .15,
-            right: -MediaQuery.of(context).size.width * .4,
-            child: Container(),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => jp.setJobPostPagePrevious(),
+        ),
+        title: Text(
+          AppLocalizations.of(context)!.createJobPost,
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
-          Container(
-            color: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 20),
-                    AddressForm(
+        ),
+        centerTitle: true,
+      ),
+      body: SizedBox(
+        height: height,
+        child: Stack(
+          children: [
+            Positioned(
+              top: -MediaQuery.of(context).size.height * .15,
+              right: -MediaQuery.of(context).size.width * .4,
+              child: Container(),
+            ),
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 70),
+                      AddressForm(
                         streetController: _streetController,
                         cityController: _cityController,
                         stateController: _stateController,
                         postalCodeController: _postalCodeController,
                         countryController: _countryController,
                         label: AppLocalizations.of(context)!.address,
-                        validate: isFormComplete),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TimelineNavigationButton(
-                          isSelected: true,
-                          onPress: () => jp.setJobPostPagePrevious(),
-                          navDirection: "back",
-                        ),
-                        TimelineNavigationButton(
-                          isSelected: true,
-                          onPress: () {
-                            if (isFormComplete() &&
-                                _formKey.currentState!.validate()) {
-                              jp.updateUserAddress(
-                                  _streetController.text,
-                                  _cityController.text,
-                                  _stateController.text,
-                                  _postalCodeController.text,
-                                  _countryController.text);
-                            } else {
-                              EasyLoading.showError(
-                                  'Please fill all the fields');
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: height * .05),
-                  ],
+                        validate: isFormComplete,
+                      ),
+                      const SizedBox(height: 50),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: ElevatedButton(
+                              onPressed: () => jp.setJobPostPagePrevious(),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 80, vertical: 20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                side: const BorderSide(
+                                  color: Colors.deepOrange,
+                                  width: 1.0,
+                                ),
+                              ),
+                              child: FittedBox(
+                                child: Text(
+                                  AppLocalizations.of(context)!.previous,
+                                  style: const TextStyle(
+                                    color: Colors.deepOrange,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 50),
+                          Flexible(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (isFormComplete() &&
+                                    _formKey.currentState!.validate()) {
+                                  jp.updateUserAddress(
+                                      _streetController.text,
+                                      _cityController.text,
+                                      _stateController.text,
+                                      _postalCodeController.text,
+                                      _countryController.text);
+                                } else {
+                                  EasyLoading.showError(
+                                      'Please fill all the fields');
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.deepOrange,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 80, vertical: 20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                              child: const FittedBox(
+                                child: Text(
+                                  "Post Job",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      // const SizedBox(height: height * .05),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTextField(
-      String label, TextInputType type, TextEditingController controller) {
-    return AuthInput(
-      child: TextFormField(
-        controller: controller,
-        keyboardType: type,
-        onChanged: (value) {
-          setState(() {
-            isFormComplete();
-          });
-        },
-        decoration: InputDecoration(
-          hintText: label,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              width: 0,
-              style: BorderStyle.none,
-            ),
-          ),
-          fillColor: Colors.white,
-          filled: true,
+          ],
         ),
       ),
     );
