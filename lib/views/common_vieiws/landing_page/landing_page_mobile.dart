@@ -20,32 +20,32 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: 
-        Image.asset(
-          'assets/images/bluckers_logo_white.png',
-          fit: BoxFit.contain,
-        ),
-        //drawer for action
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
-              ),
-            onPressed: () {
+      // appBar: AppBar(
+      //   title: 
+      //   Image.asset(
+      //     'assets/images/bluckers_logo_white.png',
+      //     fit: BoxFit.contain,
+      //   ),
+      //   //drawer for action
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(
+      //         Icons.menu,
+      //         color: Colors.white,
+      //         ),
+      //       onPressed: () {
               
-            },
-          ),
-        ],
-        centerTitle: false,
-        backgroundColor: ThemeColors.blukersBlueThemeColor,
-        elevation: 0,
-      ),
+      //       },
+      //     ),
+      //   ],
+      //   centerTitle: false,
+      //   backgroundColor: ThemeColors.blukersBlueThemeColor,
+      //   elevation: 0,
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 0.05.sh), // Responsive height
+            SizedBox(height: 0.08.sh), // Responsive height
             SizedBox(
               width: 0.6.sw,
               child: Image.asset(
