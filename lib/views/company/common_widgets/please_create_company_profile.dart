@@ -112,7 +112,7 @@ class PleaseCreateCompanyProfile extends StatelessWidget {
                     SizedBox(width: 5),
                     // Image Section
                     SizedBox(
-                      width: screenWidth * 0.4,
+                      width: screenWidth * 0.5,
                       height: screenWidth * 0.6,
                     
                       child: Image.asset(
@@ -125,6 +125,7 @@ class PleaseCreateCompanyProfile extends StatelessWidget {
                     Flexible(
                       flex: 3,
                       child: Container(
+                        width: screenWidth * 0.5,
                         padding: const EdgeInsets.all(20),
                         constraints: const BoxConstraints(
                           maxWidth: 450,
@@ -175,10 +176,7 @@ class PleaseCreateCompanyProfile extends StatelessWidget {
                               onPressed: () {
                                 context.go('/createCompanyProfile');
                               },
-                              icon: const Icon(
-                                Icons.arrow_right_alt,
-                                color: Colors.white,
-                              ),
+                              
                               label:  Text(
                                 AppLocalizations.of(context)!.createCompanyProfile,
                                 style: const TextStyle(
@@ -187,6 +185,10 @@ class PleaseCreateCompanyProfile extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_right_alt,
+                                color: Colors.white,
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF007BFF),

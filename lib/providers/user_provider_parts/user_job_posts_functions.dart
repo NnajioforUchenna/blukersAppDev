@@ -20,7 +20,7 @@ extension UserJobPostsFunctions on UserProvider {
         false; // Change to JobPostId
   }
 
-  void saveJobPost(JobPost jobPost) {
+   saveJobPost(JobPost jobPost) {
     // Ensure workerRecords exist
     appUser?.workerRecords ??= WorkerRecords();
 

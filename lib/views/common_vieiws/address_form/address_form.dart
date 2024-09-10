@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:csc_picker/csc_picker.dart'; // Make sure to import the CSCPicker package
 
 import '../../../providers/industry_provider.dart';
 import '../../auth/common_widget/auth_input.dart';
@@ -12,7 +14,7 @@ class AddressForm extends StatefulWidget {
   final TextEditingController stateController;
   final TextEditingController postalCodeController;
   final TextEditingController countryController;
-   final bool enabled;
+  final bool enabled;
   final Function validate;
 
   const AddressForm({
@@ -59,27 +61,93 @@ class _AddressFormState extends State<AddressForm> {
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
-    return SizedBox(
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          // border: Border.all(color: Colors.black12),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(widget.label,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.deepOrange,)),
-            const SizedBox(height: 10),
-            Stack(
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            widget.label,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.deepOrange),
+          ),
+          const SizedBox(height: 40),
+
+          // CSCPicker for country, state, city comes first with white dropdowns
+          Material(
+            color: Colors.white,
+            // Change this to your desired background color
+            child: Padding(
+              padding: const EdgeInsets.all(
+                  16.0), // Add padding around the entire widget
+              child: Column(
+                children: [
+                  CSCPicker(
+                    layout: Layout.vertical,
+                    flagState: CountryFlag.ENABLE,
+                    onCountryChanged: (country) {
+                      setState(() {
+                        widget.countryController.text = country;
+                      });
+                      widget.validate();
+                    },
+                    onStateChanged: (state) {
+                      setState(() {
+                        widget.stateController.text = state ?? '';
+                      });
+                      widget.validate();
+                    },
+                    onCityChanged: (city) {
+                      setState(() {
+                        widget.cityController.text = city ?? '';
+                      });
+                      widget.validate();
+                    },
+                    countrySearchPlaceholder: "Country",
+                    stateSearchPlaceholder: "State",
+                    citySearchPlaceholder: "City",
+                    countryDropdownLabel: "Select Country",
+                    stateDropdownLabel: "Select State",
+                    cityDropdownLabel: "Select City",
+                    dropdownDialogRadius: 12.0,
+                    searchBarRadius: 30.0,
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    disabledDropdownDecoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      color: Colors.grey[200],
+                    ),
+                  ),
+                  // Add space between dropdowns
+                ],
+              ),
+            ),
+          ),
+
+          SizedBox(
+            width: 553,
+            child: Stack(
               children: [
                 AuthInput(
                   child: TextFormField(
                     controller: widget.streetController,
                     onChanged: (value) {
-                      // ip.getPredictions(value);
                       setState(() {
                         _showOptions =
                             true; // Show suggestions when there is text
@@ -87,8 +155,7 @@ class _AddressFormState extends State<AddressForm> {
                     },
                     onFieldSubmitted: (value) {
                       setState(() {
-                        _showOptions =
-                            false; // Hide suggestions when user submits the field
+                        _showOptions = false;
                       });
                       widget.validate();
                     },
@@ -108,55 +175,55 @@ class _AddressFormState extends State<AddressForm> {
                   ),
                 ),
                 AnimatedCrossFade(
-                    firstChild: Container(), // ShowSuggestions()
-                    secondChild: Container(),
-                    crossFadeState: _showOptions
-                        ? CrossFadeState.showFirst
-                        : CrossFadeState.showSecond,
-                    duration: const Duration(milliseconds: 500)),
+                  firstChild: Container(),
+                  secondChild: Container(),
+                  crossFadeState: _showOptions
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  duration: const Duration(milliseconds: 500),
+                ),
               ],
             ),
-            const SizedBox(height: 45),
-            _buildTextField(AppLocalizations.of(context)!.city,
-                TextInputType.text, widget.cityController),
-            const SizedBox(height: 45),
-            _buildTextField(AppLocalizations.of(context)!.state,
-                TextInputType.text, widget.stateController),
-            const SizedBox(height: 45),
-            _buildTextField(AppLocalizations.of(context)!.postalCode,
-                TextInputType.number, widget.postalCodeController),
-            const SizedBox(height: 45),
-            _buildTextField(AppLocalizations.of(context)!.country,
-                TextInputType.text, widget.countryController),
-          ],
-        ),
+          ),
+          const SizedBox(height: 10),
+          // Postal Code input field
+          _buildTextField(AppLocalizations.of(context)!.postalCode,
+              TextInputType.text, widget.postalCodeController),
+        ],
       ),
     );
   }
 
   Widget _buildTextField(
       String label, TextInputType type, TextEditingController controller) {
-    return AuthInput(
-      child: TextFormField(
-        controller: controller,
-        onChanged: (value) {
-          setState(() {
-            _showOptions = false;
-          });
-          widget.validate();
-        },
-        keyboardType: type,
-        decoration: InputDecoration(
-          hintText: label,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              width: 0,
-              style: BorderStyle.none,
+    return SizedBox(
+      width: 553,
+      child: AuthInput(
+        child: TextFormField(
+          controller: controller,
+          onChanged: (value) {
+            setState(() {
+              _showOptions = false;
+            });
+            widget.validate();
+          },
+          keyboardType: TextInputType.number, // Set keyboard type to number
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter
+                .digitsOnly, // Restrict input to digits only
+          ],
+          decoration: InputDecoration(
+            hintText: label,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: const BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+              ),
             ),
+            fillColor: Colors.white,
+            filled: true,
           ),
-          fillColor: Colors.white,
-          filled: true,
         ),
       ),
     );

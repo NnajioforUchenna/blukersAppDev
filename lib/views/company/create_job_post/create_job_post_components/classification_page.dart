@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/industry.dart';
@@ -41,9 +42,10 @@ class _ClassificationPageState extends State<ClassificationPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context);
+            GoRouter.of(context).go('/workers');
           },
         ),
+
         title: Text(
           AppLocalizations.of(context)!.createJobPost,
           style: const TextStyle(

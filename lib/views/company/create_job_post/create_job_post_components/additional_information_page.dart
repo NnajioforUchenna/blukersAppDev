@@ -91,7 +91,7 @@ class _AdditionalInformationPageState
                         label: AppLocalizations.of(context)!.address,
                         validate: isFormComplete,
                       ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 100),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

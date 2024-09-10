@@ -270,7 +270,7 @@ class JobPostsProvider with ChangeNotifier {
 
     newJobPostData['addresses'] = [address.toMap()];
     newJobPostData['address'] = address.toMap();
-    // createJobPost();
+     createJobPost();
      setJobPostPageNext();
   }
 
