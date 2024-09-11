@@ -25,14 +25,13 @@ class JobTimeline extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         SizedBox(height: width < 600 ? 60 : 0),
-          if (width < 600)
-            const Center(
+         SizedBox(height: Responsive.isMobile(context) || Responsive.isTablet(context) ? 60 : 0),
+          if(Responsive.isMobile(context) || Responsive.isTablet(context)) const Center(
               child: Image(
                 image: AssetImage('assets/images/worker_job_insp.png'),
               ),
             ),
-         if (width < 600) Padding(
+        if(Responsive.isMobile(context) || Responsive.isTablet(context)) Padding(
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
@@ -47,7 +46,7 @@ class JobTimeline extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: width < 600 ? 30 : 0),
+          SizedBox(height: Responsive.isMobile(context) || Responsive.isTablet(context) ? 30 : 0),
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

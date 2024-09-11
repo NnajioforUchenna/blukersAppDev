@@ -66,7 +66,7 @@ class DisplayImage extends StatelessWidget {
               child: Text(
                 AppLocalizations.of(context)!.workerJourneyTitle,
                 style: const TextStyle(
-                  fontSize: 35,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: ThemeColors.blukersBlueThemeColor,
                   fontFamily: "Montserrat",

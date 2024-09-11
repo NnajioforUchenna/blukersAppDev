@@ -11,14 +11,20 @@ class DisplayJobTimelineDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: SizedBox(
-        width: Responsive.isDesktop(context) ? 1500 : MediaQuery.of(context).size.width,
+        width: Responsive.isDesktop(context)
+            ? 1500
+            : MediaQuery.of(context).size.width,
         height: Responsive.isDesktop(context) ? 750 : null,
         child: Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
-            const MakeResponsiveWeb(
-                image: AssetImage('assets/images/worker_job_insp_desc.png'),
-                child: JobTimeline()),
+            const Responsive(
+              mobile: JobTimeline(),
+              desktop: MakeResponsiveWeb(
+                  image: AssetImage('assets/images/worker_job_insp_desc.png'),
+                  child: JobTimeline()),
+              tablet: JobTimeline(),
+            ),
             Row(
               children: [
                 const Spacer(),
