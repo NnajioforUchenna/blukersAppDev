@@ -26,7 +26,7 @@ class ExplanationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 32, right: 25),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      padding:  EdgeInsets.symmetric(horizontal: 16, vertical: Responsive.isMobile(context) ? 20 : 30),
       decoration: BoxDecoration(
         color: isCurrent ? Colors.white : (isPast ? ThemeColors.lightGreenColor : Colors.white), // Set background color
         borderRadius: BorderRadius.circular(10),
@@ -74,31 +74,31 @@ class ExplanationCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: Responsive.isMobile(context) ? 16.sp : 18,
                           fontWeight: FontWeight.bold,
-                          color: isCurrent ? ThemeColors.darkBlueColor : (isPast ? ThemeColors.darkBlueColor : ThemeColors.darkBlueColor.withOpacity(0.3)),
+                          color: isCurrent ? ThemeColors.darkBlueColor : (isPast ? ThemeColors.darkBlueColor : const Color.fromARGB(255, 19, 124, 210).withOpacity(0.3)),
                         ),
                       ),
                     ),
                     const SizedBox(
                       width: 20,
                     ),
-                    if (isPast && !isCurrent)
-                      const Text(
-                        "Completed",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: ThemeColors.greenColor,
-                        ),
-                      ),
-                    if (isCurrent)
-                      const Text(
-                        "Start",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orange, // Use the same color as the image for the "Start" text
-                        ),
-                      ),
+                    // if (isPast && !isCurrent)
+                    //   const Text(
+                    //     "Completed",
+                    //     style: TextStyle(
+                    //       fontSize: 12,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: ThemeColors.greenColor,
+                    //     ),
+                    //   ),
+                    // if (isCurrent)
+                    //   const Text(
+                    //     "Start",
+                    //     style: TextStyle(
+                    //       fontSize: 12,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: Colors.orange, // Use the same color as the image for the "Start" text
+                    //     ),
+                    //   ),
                   ],
                 ),
                 const SizedBox(height: 8),
