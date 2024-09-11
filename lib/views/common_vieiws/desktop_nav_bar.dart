@@ -416,17 +416,16 @@ class TooltipShape extends ShapeBorder {
     final Path path = Path();
     final RRect rrect = _borderRadius.resolve(textDirection).toRRect(rect);
 
-    // Increased width while keeping the starting position the same
-    const double arrowWidth = 50.0; // Increased arrow width
-    const double arrowHeight = 40.0; // Keep height the same
+    const double arrowWidth = 50.0; 
+    const double arrowHeight = 40.0; 
 
     path.moveTo(0, 10);
     path.quadraticBezierTo(0, 0, 10, 0);
     path.lineTo(rrect.width - (arrowWidth + 10), 0);
 
-    // Adjusted the arrow width, keeping the same position
-    path.lineTo(rrect.width - (arrowWidth / 2 + 10), -arrowHeight); // Arrow tip
-    path.lineTo(rrect.width - 10, 0); // Right side of the arrow
+
+    path.lineTo(rrect.width - (arrowWidth / 2 + 10), -arrowHeight); 
+    path.lineTo(rrect.width - 10, 0); 
 
     path.quadraticBezierTo(rrect.width, 0, rrect.width, 10);
     path.lineTo(rrect.width, rrect.height - 10);
