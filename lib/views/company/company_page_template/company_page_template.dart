@@ -1,3 +1,4 @@
+import 'package:blukers/views/common_vieiws/desktop_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../services/responsive.dart';
@@ -13,8 +14,10 @@ class CompanyPageTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        endDrawer: const CompanyDrawer(),
-        appBar: const CompanyAppBar(),
+        endDrawer: Responsive.isDesktop(context) ? null : const CompanyDrawer(),
+        appBar: Responsive.isDesktop(context)
+            ? const DesktopNavBar()
+            : const CompanyAppBar(),
         bottomNavigationBar: Responsive.isDesktop(context)
             ? null
             : const CompanyButtomNavigationBar(),

@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import '../../../../../providers/job_posts_provider.dart';
 import '../../../../../services/responsive.dart';
 import '../../../../../utils/styles/theme_colors.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../providers/worker_provider.dart';
 import 'choose_language_widget.dart';
 
 class SearchHeaderDesktop extends StatefulWidget {
@@ -20,13 +22,17 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
   final TextEditingController _searchController1 = TextEditingController();
   final TextEditingController _searchController2 = TextEditingController();
   late JobPostsProvider jp;
+  late WorkersProvider wp;
+  late UserProvider up;
 
   bool isMobileSearchBarVisible = false;
 
   @override
   void initState() {
     super.initState();
+    wp = Provider.of<WorkersProvider>(context, listen: false);
     jp = Provider.of<JobPostsProvider>(context, listen: false);
+    up = Provider.of<UserProvider>(context, listen: false);
   }
 
   String buttonLabel = 'Search Jobs';
@@ -77,7 +83,7 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
             ),
           ),
           const SizedBox(width: 20.0),
-          const SizedBox(width:100, child: ChooseLanguageWidgetDesktop())
+          const SizedBox(width: 100, child: ChooseLanguageWidgetDesktop())
           // const SizedBox(width: 20.0),
           // _buildSmallCircleButton(),
         ],
@@ -107,11 +113,19 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
         onSubmitted: (val) async {
           String nameRelated = _searchController1.text;
           String locationRelated = _searchController2.text;
-
+          if (up.userRole == 'company') {
+            await wp.searchWorkers(nameRelated, locationRelated);
+            GoRouter.of(context).go('/workerSearchResults');
+            return;
+          }
           // Determine which provider to use
           await jp.searchJobPosts(nameRelated, locationRelated);
-
-          GoRouter.of(context).pushReplacement('/jobSearchResults');
+          print("object");
+          if (GoRouter.of(context).canPop()) {
+              GoRouter.of(context).pop();
+            }
+          GoRouter.of(context).go('/jobSearchResults');
+          // Determine which provider to use
         },
         decoration: InputDecoration(
           filled: true,

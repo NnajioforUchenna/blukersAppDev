@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../models/industry.dart';
 import '../../../../../services/on_hover.dart';
@@ -9,7 +10,10 @@ import '../../../../../services/responsive.dart';
 import '../../../../../utils/localization/localized_industries.dart';
 import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../models/job.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../providers/worker_provider.dart';
 import '../../../../utils/localization/localized_job_ids.dart';
+import '../../../company/workers_home/workers_components/display_workers.dart';
 
 class IndustryWidget extends StatefulWidget {
   final Industry industry;
@@ -86,7 +90,7 @@ class _IndustryWidgetState extends State<IndustryWidget> {
                       fontSize: Responsive.isDesktop(context) ? 25 : 16,
                       color: isExpanded
                           ? ThemeColors.secondaryThemeColor
-                          :  const Color.fromRGBO(117, 117, 117, 1),
+                          : const Color.fromRGBO(117, 117, 117, 1),
                     ),
                   )),
                   AnimatedRotation(
@@ -97,7 +101,7 @@ class _IndustryWidgetState extends State<IndustryWidget> {
                       size: Responsive.isDesktop(context) ? 25 : null,
                       color: isExpanded
                           ? ThemeColors.secondaryThemeColor
-                          :  const Color.fromRGBO(117, 117, 117, 1),
+                          : const Color.fromRGBO(117, 117, 117, 1),
                     ),
                   )
                 ],
@@ -138,6 +142,8 @@ class IndustryBodyPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WorkersProvider wp = Provider.of<WorkersProvider>(context);
+    UserProvider up = Provider.of<UserProvider>(context);
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -146,7 +152,18 @@ class IndustryBodyPanel extends StatelessWidget {
         final job = jobs[index];
         return InkWell(
           onTap: () {
-            getRecords(context, job);
+            if (up.userRole == 'company') {
+              wp.getWorkersByJobID(job.jobId);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => DisplayWorkers(
+                    title: job.title,
+                  ),
+                ),
+              );
+            } else {
+              getRecords(context, job);
+            }
           },
           child: Container(
               margin: const EdgeInsets.only(bottom: 5),

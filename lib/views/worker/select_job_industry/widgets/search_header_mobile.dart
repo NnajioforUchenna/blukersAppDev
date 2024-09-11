@@ -1,3 +1,4 @@
+import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/views/worker/select_job_industry/widgets/choose_language_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../../../providers/app_settings_provider.dart';
 import '../../../../../providers/job_posts_provider.dart';
 import '../../../../../utils/styles/theme_colors.dart';
+import '../../../../providers/user_provider_parts/user_provider.dart';
 
 class SearchHeaderMobile extends StatefulWidget {
   const SearchHeaderMobile({super.key});
@@ -25,6 +27,8 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+    WorkersProvider wp = Provider.of<WorkersProvider>(context, listen: false);
+    UserProvider up = Provider.of<UserProvider>(context, listen: false);
     AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
 
     buttonLabel = AppLocalizations.of(context)!.searchJobs;
@@ -42,11 +46,17 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
           controller: controller,
           searchName: searchName,
           onDone: () {
+            if (up.userRole == 'company') {
+              wp.searchWorkers(controller.text, locationController.text);
+              GoRouter.of(context).go('/workerSearchResults');
+              return;
+            }
             jp.setSearching(true);
             jp.searchJobPosts(controller.text, locationController.text);
             if (GoRouter.of(context).canPop()) {
               GoRouter.of(context).pop();
             }
+            
             GoRouter.of(context).go('/jobSearchResults');
           },
           icon: Icons.search,
@@ -64,6 +74,12 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
                 flex: 4,
                 child: SearchField(
                     onDone: () {
+                      if (up.userRole == 'company') {
+                        wp.searchWorkers(
+                            controller.text, locationController.text);
+                        GoRouter.of(context).go('/workerSearchResults');
+                        return;
+                      }
                       jp.setSearching(true);
                       jp.searchJobPosts(
                           controller.text, locationController.text);

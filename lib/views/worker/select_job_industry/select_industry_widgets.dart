@@ -50,7 +50,6 @@ class _SelectIndustryScreenState extends State<SelectIndustryScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        // const SearchAndTranslateRow(),
         const SearchHeaderMobile(),
         Expanded(
           child: AnimatedCrossFade(
