@@ -1,7 +1,6 @@
 import 'package:blukers/services/list_providers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -65,14 +64,12 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                   appBarTheme: Theme.of(context).appBarTheme.copyWith(
-                    scrolledUnderElevation: 0,
-                  ),
+                        scrolledUnderElevation: 0,
+                        color:
+                            Colors.white, // Set your desired AppBar color here
+                        elevation: 0,
+                      ),
                   fontFamily: 'Montserrat',
-                  // Set a primary color for the app
-                  appBarTheme: const AppBarTheme(
-                    color: Colors.white, // Set your desired AppBar color here
-                    elevation: 0,
-                  ),
                 ),
               );
             },
