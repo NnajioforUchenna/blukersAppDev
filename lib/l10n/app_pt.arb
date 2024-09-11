@@ -9,9 +9,7 @@
       }
     }
   },
-  "emailAddress": "Endereço de e-mail",
-  "enterEmailAddress": "Insira o endereço de e-mail",
-  "enterPassword": "Insira a senha",
+  
   "dreamBuildConnect": "Sonhe. Construa. Conecte-se.",
   "whatDoYouIdentifyAs": "Como voc\u00ea se identifica?",
   "home": "Casa",
@@ -475,5 +473,11 @@
   "choose_your_user_type": "Escolha o seu tipo de usu\u00e1rio",
   "update": "Atualizar",
   "delete": "Excluir",
-  "noworkersfound": "Nenhum trabalhador encontrado"
+  "noworkersfound": "Nenhum trabalhador encontrado",
+  "findYour": "Encontre Seu ",
+  "dreamJob": "Trabalho dos Sonhos ",
+  "inBluckers": "No Bluckers",
+  "emailAddress": "Endereço de e-mail",
+  "enterEmailAddress": "Insira o endereço de e-mail",
+  "enterPassword": "Insira a senha"
 }

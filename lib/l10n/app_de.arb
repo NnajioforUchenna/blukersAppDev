@@ -9,9 +9,6 @@
       }
     }
   },
-  "emailAddress": "E-Mail-Adresse",
-  "enterEmailAddress": "E-Mail-Adresse eingeben",
-  "enterPassword": "Passwort eingeben",
   "dreamBuildConnect": "Tr\u00e4umen. Bauen. Verbinden.",
   "whatDoYouIdentifyAs": "Als was identifizierst du dich?",
   "home": "Zuhause",
@@ -475,5 +472,11 @@
   "choose_your_user_type": "W\u00e4hlen Sie Ihren Benutzertyp",
   "update": "Aktualisieren",
   "delete": "L\u00f6schen",
-  "noworkersfound": "Keine Arbeiter gefunden"
+  "noworkersfound": "Keine Arbeiter gefunden",
+  "findYour": "Finde Deinen",
+  "dreamJob": "Traumjob",
+  "inBluckers": "In Bluckers",
+  "emailAddress": "E-Mail-Adresse",
+  "enterEmailAddress": "E-Mail-Adresse eingeben",
+  "enterPassword": "Passwort eingeben"
 }

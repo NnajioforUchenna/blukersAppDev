@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
@@ -37,15 +38,28 @@ class DesktopWorkerPath extends StatelessWidget {
                   ),
                   const SizedBox(height: 25),
                   Center(
-                    child: Text(
-                      AppLocalizations.of(context)!.workerJourneyTitle,
-                      style: const TextStyle(
-                        fontSize: 47,
-                        fontWeight: FontWeight.bold,
-                        color: ThemeColors.blukersBlueThemeColor,
-                        fontFamily: "Montserrat",
-                      ),
+                    child: RichText(
                       textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: '${AppLocalizations.of(context)!.findYour} ',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 47,
+                          fontWeight: FontWeight.w700,
+                          color: ThemeColors.black1ThemeColor,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: '${AppLocalizations.of(context)!.dreamJob} ',
+                            style: GoogleFonts.montserrat(
+                              fontStyle: FontStyle.italic,
+                              color: ThemeColors.secondaryThemeColorDark,
+                            ),
+                          ),
+                          TextSpan(
+                            text: AppLocalizations.of(context)!.inBluckers,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],

@@ -322,6 +322,10 @@ class UserProvider with ChangeNotifier {
       UserDataProvider.updateJobsPreference(appUser!);
     }
   }
+  void setUserRole(String role) {
+    userRole = role;
+    notifyListeners();
+  }
 
   void updateSelection() {
     if (appUser != null) {
