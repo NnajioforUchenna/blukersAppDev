@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../providers/app_settings_provider.dart';
 import '../../../../../providers/job_posts_provider.dart';
 import '../../../../../utils/styles/theme_colors.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
@@ -29,7 +28,6 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     WorkersProvider wp = Provider.of<WorkersProvider>(context, listen: false);
     UserProvider up = Provider.of<UserProvider>(context, listen: false);
-    AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
 
     buttonLabel = AppLocalizations.of(context)!.searchJobs;
     searchName = AppLocalizations.of(context)!.workerSearchBarInput1Placeholder;
@@ -56,7 +54,7 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
             if (GoRouter.of(context).canPop()) {
               GoRouter.of(context).pop();
             }
-            
+
             GoRouter.of(context).go('/jobSearchResults');
           },
           icon: Icons.search,
