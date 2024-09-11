@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart'; // Import kIsWeb
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -16,39 +17,51 @@ class MyJobs extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
 
+    // Define a breakpoint for web-like widths
+    final bool isWebLayout = kIsWeb && MediaQuery.of(context).size.width > 600;
+
     return up.appUser == null
         ? const LoginOrRegister()
-        : DefaultTabController(
-            length: 2,
-            child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.white,
-                centerTitle: true,
-                title: Text(
-                  AppLocalizations.of(context)!.jobs,
-                  style: const TextStyle(
-                      color: ThemeColors.primaryThemeColor,
-                      fontWeight: FontWeight.bold),
+        : Container(
+            color: Colors.white, // Make the entire background white
+            child: Padding(
+              padding: isWebLayout
+                  ? const EdgeInsets.symmetric(horizontal:120) // Apply padding only on large web screens
+                  : EdgeInsets.zero, // No padding on mobile or smaller screens
+              child: DefaultTabController(
+                length: 2,
+                child: Scaffold(
+                  backgroundColor: Colors.white, // Ensure Scaffold background remains white
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    centerTitle: true,
+                    title: Text(
+                      AppLocalizations.of(context)!.jobs,
+                      style: const TextStyle(
+                          color: ThemeColors.primaryThemeColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    bottom: TabBar(
+                      indicatorColor: ThemeColors.primaryThemeColor,
+                      labelColor: ThemeColors.primaryThemeColor,
+                      unselectedLabelColor: ThemeColors.grey1ThemeColor,
+                      tabs: [
+                        Tab(
+                            text: AppLocalizations.of(context)!.applied,
+                            icon: const Icon(UniconsLine.file_edit_alt)),
+                        Tab(
+                            text: AppLocalizations.of(context)!.saved,
+                            icon: const Icon(UniconsLine.file_bookmark_alt)),
+                      ],
+                    ),
+                  ),
+                  body: const TabBarView(
+                    children: [
+                      AppliedJobs(),
+                      SavedJobs(),
+                    ],
+                  ),
                 ),
-                bottom: TabBar(
-                  indicatorColor: ThemeColors.primaryThemeColor,
-                  labelColor: ThemeColors.primaryThemeColor,
-                  unselectedLabelColor: ThemeColors.grey1ThemeColor,
-                  tabs: [
-                    Tab(
-                        text: AppLocalizations.of(context)!.applied,
-                        icon: const Icon(UniconsLine.file_edit_alt)),
-                    Tab(
-                        text: AppLocalizations.of(context)!.saved,
-                        icon: const Icon(UniconsLine.file_bookmark_alt)),
-                  ],
-                ),
-              ),
-              body: const TabBarView(
-                children: [
-                  AppliedJobs(),
-                  SavedJobs(),
-                ],
               ),
             ),
           );

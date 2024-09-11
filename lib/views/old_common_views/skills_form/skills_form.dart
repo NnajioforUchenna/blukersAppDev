@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/localization/deviceLocale.dart';
 import '../../../utils/styles/index.dart';
+import 'ChoiceChip/custom_chip.dart';
 import 'const_list_skills.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,13 +34,13 @@ class _SkillsFormState extends State<SkillsForm> {
                 .apply(color: ThemeColors.blukersOrangeThemeColor)),
         const SizedBox(height: 20),
         Container(
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.35,
             margin: const EdgeInsets.symmetric(horizontal: 30),
             decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey,
-                width: 1,
-              ),
+              // border: Border.all(
+              //   color: Colors.grey,
+              //   width: 1,
+              // ),
               borderRadius: BorderRadius.circular(10),
             ),
             child: ListView(
@@ -52,7 +53,7 @@ class _SkillsFormState extends State<SkillsForm> {
                     String skill = entry.value;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ChoiceChip(
+                      child: CustomChip(
                         label: Text(skill),
                         selected: widget.selectedSkills.contains(skill),
                         onSelected: (selected) {
@@ -64,8 +65,11 @@ class _SkillsFormState extends State<SkillsForm> {
                             }
                           });
                         },
-                        backgroundColor: const Color.fromARGB(255, 226, 226, 226),
-                        selectedColor: const Color.fromARGB(255, 255, 174, 137),
+                        // backgroundColor: Colors.white,
+                        selectedColor: Color.fromRGBO(251, 218, 202, 1),
+
+
+
                       ),
                     );
                   }).toList(),

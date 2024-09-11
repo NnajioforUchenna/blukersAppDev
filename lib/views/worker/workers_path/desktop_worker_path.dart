@@ -19,6 +19,7 @@ class DesktopWorkerPath extends StatelessWidget {
     int currentStep = up.appUser?.workerTimelineStep ?? 0;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SizedBox(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 154),

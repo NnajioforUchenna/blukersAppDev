@@ -20,6 +20,7 @@ class DesktopCompanyPath extends StatelessWidget {
     int currentStep = up.appUser?.companyTimelineStep ?? 0;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SizedBox(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 154),
