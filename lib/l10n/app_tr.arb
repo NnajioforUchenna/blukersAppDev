@@ -9,9 +9,6 @@
       }
     }
   },
-  "emailAddress": "\u0130mail Adresi",
-  "enterEmailAddress": "\u0130mail Adresini Girin",
-  "enterPassword": "\u015eifreyi Girin",
   "dreamBuildConnect": "Hayal et. \u0130n\u015fa et. Ba\u011flan.",
   "whatDoYouIdentifyAs": "Kendinizi ne olarak tan\u0131ml\u0131yorsunuz?",
   "home": "Ana Sayfa",
@@ -475,5 +472,11 @@
   "choose_your_user_type": "Kullan\u0131c\u0131 Tipinizi Se\u00e7in",
   "update": "G\u00fcncelle",
   "delete": "Sil",
-  "noworkersfound": "Hi\u00e7 i\u015f\u00e7i bulunamad\u0131"
+  "noworkersfound": "Hi\u00e7 i\u015f\u00e7i bulunamad\u0131",
+  "emailAddress": "\u0130mail Adresi",
+  "enterEmailAddress": "\u0130mail Adresini Girin",
+  "enterPassword": "\u015eifreyi Girin",
+  "findYour": "Hayalindeki ",
+  "dreamJob": "\u0130\u015fi Bul ",
+  "inBluckers": "Bluckers'\u0131nda"
 }

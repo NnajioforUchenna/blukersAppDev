@@ -63,12 +63,13 @@ class MyApp extends StatelessWidget {
                 },
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
+                  appBarTheme: Theme.of(context).appBarTheme.copyWith(
+                        scrolledUnderElevation: 0,
+                        color:
+                            Colors.white, // Set your desired AppBar color here
+                        elevation: 0,
+                      ),
                   fontFamily: 'Montserrat',
-                  // Set a primary color for the app
-                  appBarTheme: const AppBarTheme(
-                    color: Colors.white, // Set your desired AppBar color here
-                    elevation: 0,
-                  ),
                 ),
               );
             },

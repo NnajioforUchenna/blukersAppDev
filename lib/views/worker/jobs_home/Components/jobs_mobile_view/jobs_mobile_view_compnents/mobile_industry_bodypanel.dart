@@ -28,6 +28,7 @@ class IndustryBodyPanel extends StatelessWidget {
         final job = jobs[index];
         return InkWell(
           onTap: () {
+            print(up.userRole);
             if (up.userRole == 'company') {
               wp.getWorkersByJobID(job.jobId);
               // navigate anonymously to the DisplayWorkers page
