@@ -7,6 +7,7 @@ import '../../../../services/responsive.dart';
 import '../saved/animate_job_post_details.dart';
 import '../saved/display_job_card.dart';
 import '../saved/display_job_post_dialog.dart';
+import '../saved/savedandapply_job_card.dart';
 
 class ListJobPostsWidget extends StatelessWidget {
   final List<JobPost> jobPosts;
@@ -32,19 +33,12 @@ Widget buildWebContent(jobPosts) {
     children: [
       // 1st column
       Expanded(
+        flex: 1, // Ensure both columns are equally sized
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListViewJobs(
             jobPosts: jobPosts,
           ),
-        ),
-      ),
-      // 2nd column
-      const Expanded(
-        flex: 2,
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: AnimateJobPostDetails(),
         ),
       ),
     ],
@@ -59,26 +53,36 @@ class ListViewJobs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
+
     return ListView.separated(
       shrinkWrap: true,
       padding: const EdgeInsets.all(10),
-      // Added to give some space around cards
       itemCount: jobPosts.length,
       itemBuilder: (context, index) {
         JobPost jobPost = jobPosts[index];
-        // Todo Remember to remove the default values
-        return DisplayJobCard(
-            jobPost: jobPost,
-            onTap: () {
-              jp.setSelectedJobPost(jobPost);
-              if (Responsive.isMobile(context)) {
+
+        return Align(
+          alignment: Alignment.centerLeft, // Align it to the left
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context)
+                  .size
+                  .width, // Set max width to screen width
+            ),
+            child: SavedandapplyJobCard(
+              jobPost: jobPost,
+              onTap: () {
+                jp.setSelectedJobPost(jobPost);
+
                 showDialog(
                     context: context,
                     builder: (context) => DisplayJobPostDialog(
                           jobPost: jobPost,
                         ));
-              }
-            });
+              },
+            ),
+          ),
+        );
       },
       separatorBuilder: (BuildContext context, int index) {
         return const SizedBox(

@@ -45,6 +45,7 @@ class SearchAndTranslateRow extends StatelessWidget {
           Expanded(
             child: Showcase(
                 key: asp.translation,
+
                 description:
                     'For selecting the target language of the job description',
                 overlayOpacity: 0.6,

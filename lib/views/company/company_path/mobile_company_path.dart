@@ -22,146 +22,148 @@ class MobileCompanyPath extends StatelessWidget {
       AppUser?appUser;
     double width = MediaQuery.of(context).size.width;
 
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 60),
-          const Center(
-            child: Icon(
-              UniconsLine.building,
-              size: 60,
-              color: ThemeColors.blukersBlueThemeColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Center(
-              child: Text(
-                AppLocalizations.of(context)!.companyJourneyTitle,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: ThemeColors.blukersBlueThemeColor,
-                  fontFamily: "Montserrat",
-                ),
-                textAlign: TextAlign.center,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 60),
+            const Center(
+              child: Icon(
+                UniconsLine.building,
+                size: 60,
+                color: ThemeColors.blukersBlueThemeColor,
               ),
             ),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: companyRecords.length,
-            itemBuilder: (context, index) {
-              String title = "";
-              String description = "";
-              if (index == 0) {
-                title = AppLocalizations.of(context)!.companyJourneyStep1Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep1Text;
-              }
-              if (index == 1) {
-                title = AppLocalizations.of(context)!.companyJourneyStep2Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep2Text;
-              }
-              if (index == 2) {
-                title = AppLocalizations.of(context)!.companyJourneyStep3Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep3Text;
-              }
-              if (index == 3) {
-                title = AppLocalizations.of(context)!.companyJourneyStep4Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep4Text;
-              }
-              if (index == 4) {
-                title = AppLocalizations.of(context)!.companyJourneyStep5Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep5Text;
-              }
-              if (index == 5) {
-                title = AppLocalizations.of(context)!.companyJourneyStep6Title;
-                description =
-                    AppLocalizations.of(context)!.companyJourneyStep6Text;
-              }
-              final record = companyRecords[index];
-              return MyJobTimeLine(
-                index: index,
-                isFirst: index == 0,
-                isLast: index == companyRecords.length - 1,
-                isPast: index <= currentStep,
-                isCurrent: index == currentStep,
-                title: title,
-                briefDescription: description,
-              );
-            },
-          ),
-          const SizedBox(height: 10),
-          if (currentStep == 0)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep1Title,
-              context,
-              () {
-                context.go('/register');
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Center(
+                child: Text(
+                  AppLocalizations.of(context)!.companyJourneyTitle,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: ThemeColors.blukersBlueThemeColor,
+                    fontFamily: "Montserrat",
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: companyRecords.length,
+              itemBuilder: (context, index) {
+                String title = "";
+                String description = "";
+                if (index == 0) {
+                  title = AppLocalizations.of(context)!.companyJourneyStep1Title;
+                  description =
+                      AppLocalizations.of(context)!.companyJourneyStep1Text;
+                }
+                if (index == 1) {
+                  title = AppLocalizations.of(context)!.companyJourneyStep2Title;
+                  description =
+                      AppLocalizations.of(context)!.companyJourneyStep2Text;
+                }
+                if (index == 2) {
+                  title = AppLocalizations.of(context)!.companyJourneyStep3Title;
+                  description =
+                      AppLocalizations.of(context)!.companyJourneyStep3Text;
+                }
+                if (index == 3) {
+                  title = AppLocalizations.of(context)!.companyJourneyStep4Title;
+                  description =
+                      AppLocalizations.of(context)!.companyJourneyStep4Text;
+                }
+                if (index == 4) {
+                  title = AppLocalizations.of(context)!.companyJourneyStep5Title;
+                  description =
+                      AppLocalizations.of(context)!.companyJourneyStep5Text;
+                }
+                if (index == 5) {
+                  title = AppLocalizations.of(context)!.companyJourneyStep6Title;
+                  description =
+                      AppLocalizations.of(context)!.companyJourneyStep6Text;
+                }
+                final record = companyRecords[index];
+                return MyJobTimeLine(
+                  index: index,
+                  isFirst: index == 0,
+                  isLast: index == companyRecords.length - 1,
+                  isPast: index <= currentStep,
+                  isCurrent: index == currentStep,
+                  title: title,
+                  briefDescription: description,
+                );
               },
             ),
-          if (currentStep == 1)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep2Title,
-              context,
-              () {
-                context.go('/setWorkersPreferences');
-              },
-            ),
-          if (currentStep == 2)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep3Title,
-              context,
-              () {
-                UserDataProvider.updatecompanyTimelineStep(appUser!.uid, 3);
-                context.go('/myJobPosts');
-              },
-            ),
-          if (currentStep == 3)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep4Title,
-              context,
-              () {
-                context.go('/createCompanyProfile');
-              },
-            ),
-          if (currentStep == 4)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep5Title,
-              context,
-              () {
-                context.go('/createJobPost');
-              },
-            ),
-          if (currentStep == 5)
-            buildButton(
-              width,
-              currentStep,
-              AppLocalizations.of(context)!.companyJourneyStep6Title,
-              context,
-              () {
-                context.go('/companyChat');
-              },
-            ),
-          const SizedBox(height: 20),
-        ],
+            const SizedBox(height: 10),
+            if (currentStep == 0)
+              buildButton(
+                width,
+                currentStep,
+                AppLocalizations.of(context)!.companyJourneyStep1Title,
+                context,
+                () {
+                  context.go('/register');
+                },
+              ),
+            if (currentStep == 1)
+              buildButton(
+                width,
+                currentStep,
+                AppLocalizations.of(context)!.companyJourneyStep2Title,
+                context,
+                () {
+                  context.go('/setWorkersPreferences');
+                },
+              ),
+            if (currentStep == 2)
+              buildButton(
+                width,
+                currentStep,
+                AppLocalizations.of(context)!.companyJourneyStep3Title,
+                context,
+                () {
+                  UserDataProvider.updatecompanyTimelineStep(appUser!.uid, 3);
+                  context.go('/myJobPosts');
+                },
+              ),
+            if (currentStep == 3)
+              buildButton(
+                width,
+                currentStep,
+                AppLocalizations.of(context)!.companyJourneyStep4Title,
+                context,
+                () {
+                  context.go('/createCompanyProfile');
+                },
+              ),
+            if (currentStep == 4)
+              buildButton(
+                width,
+                currentStep,
+                AppLocalizations.of(context)!.companyJourneyStep5Title,
+                context,
+                () {
+                  context.go('/createJobPost');
+                },
+              ),
+            if (currentStep == 5)
+              buildButton(
+                width,
+                currentStep,
+                AppLocalizations.of(context)!.companyJourneyStep6Title,
+                context,
+                () {
+                  context.go('/companyChat');
+                },
+              ),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }

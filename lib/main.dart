@@ -64,6 +64,11 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                   fontFamily: 'Montserrat',
+                  // Set a primary color for the app
+                  appBarTheme: const AppBarTheme(
+                    color: Colors.white, // Set your desired AppBar color here
+                    elevation: 0,
+                  ),
                 ),
               );
             },

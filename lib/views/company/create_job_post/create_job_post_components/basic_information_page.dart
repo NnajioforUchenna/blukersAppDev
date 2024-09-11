@@ -42,9 +42,26 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
     final height = MediaQuery.of(context).size.height;
     final node = FocusScope.of(context);
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
-    return SizedBox(
-      height: height,
-      child: Stack(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => jp.setJobPostPagePrevious(),
+        ),
+        title: Text(
+          AppLocalizations.of(context)!.createJobPost,
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: Stack(
         children: <Widget>[
           Container(
             color: Colors.white,
@@ -56,81 +73,125 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const SizedBox(height: 20),
-                    AuthInput(
-                      child: TextFormField(
-                        controller: jobTitleController,
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        validator: (value) => value!.isEmpty
-                            ? AppLocalizations.of(context)!.required
-                            : null,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.jobTitle,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
+                    const SizedBox(height: 60),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.jobTitle,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrange,
+                          ),
+                        ),
+                        // Add some space between the title and the TextFormField
+                        const SizedBox(height: 20),
+                        // Your AuthInput widget with TextFormField
+                        AuthInput(
+                          child: TextFormField(
+                            controller: jobTitleController,
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => node.nextFocus(),
+                            validator: (value) => value!.isEmpty
+                                ? AppLocalizations.of(context)!.required
+                                : null,
+                            decoration: InputDecoration(
+                              hintText: "input job title",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
                             ),
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
-                      ),
+                      ],
                     ),
                     SizedBox(height: height * 0.05),
-                    AuthInput(
-                      child: TextFormField(
-                        maxLines: 5,
-                        controller: jobDescriptionController,
-                        textInputAction: TextInputAction.newline,
-                        onEditingComplete: () => node.nextFocus(),
-                        validator: (value) => value!.isEmpty
-                            ? AppLocalizations.of(context)!.required
-                            : null,
-                        decoration: InputDecoration(
-                          hintText:
-                              AppLocalizations.of(context)!.jobDescription,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Title for Job Description
+                        Text(
+                          AppLocalizations.of(context)!.jobDescription,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrange,
+                          ),
+                        ),
+                        const SizedBox(
+                            height: 20), // Space between title and text field
+                        // AuthInput widget with TextFormField for Job Description
+                        AuthInput(
+                          child: TextFormField(
+                            maxLines: 5,
+                            controller: jobDescriptionController,
+                            textInputAction: TextInputAction.newline,
+                            onEditingComplete: () => node.nextFocus(),
+                            validator: (value) => value!.isEmpty
+                                ? AppLocalizations.of(context)!.required
+                                : null,
+                            decoration: InputDecoration(
+                              hintText: "input job description",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
                             ),
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
-                      ),
-                    ),
-                    SizedBox(height: height * 0.05),
-                    AuthInput(
-                      child: TextFormField(
-                        controller: positionsAvailableController,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () => node.nextFocus(),
-                        validator: (value) => value!.isEmpty
-                            ? AppLocalizations.of(context)!.required
-                            : null,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!
+                        SizedBox(height: height * 0.05),
+
+                        // Title for Number of Positions Available
+                        Text(
+                          AppLocalizations.of(context)!
                               .numberOfPositionsAvailable,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrange,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        // AuthInput widget with TextFormField for Number of Positions Available
+                        AuthInput(
+                          child: TextFormField(
+                            controller: positionsAvailableController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => node.nextFocus(),
+                            validator: (value) => value!.isEmpty
+                                ? AppLocalizations.of(context)!.required
+                                : null,
+                            decoration: InputDecoration(
+                              hintText: "input number of positions available",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
                             ),
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
-                      ),
+                      ],
                     ),
                     SizedBox(height: height * 0.05),
                     Text(
@@ -164,32 +225,82 @@ class _BasicInformationPageState extends State<BasicInformationPage> {
                               ? Colors.blue
                               : Colors.red,
                     ),
-                    const SizedBox(height: 40),
-                    SizedBox(height: height * 0.02),
+                    const SizedBox(height: 25),
+                  
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TimelineNavigationButton(
-                          isSelected: true,
-                          onPress: () => jp.setJobPostPagePrevious(),
-                          navDirection: "back",
+                        Flexible(
+                          child: ElevatedButton(
+                            onPressed: () => jp.setJobPostPagePrevious(),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:Colors.white, // Background color
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 80,
+                                  vertical: 20), // Increased padding
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(8.0), // Rounded corners
+                              ),
+                          
+                              side: const BorderSide(
+                                color: Colors.deepOrange, // Border color
+                                width: 1.0, // Border width
+                              ),
+                            ),
+                            child: FittedBox(
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .previous, // Text for the button
+                                style: const TextStyle(
+                                  color: Colors.deepOrange,
+                                  fontSize: 16, // Increased font size
+                                  fontWeight: FontWeight.w600, // Font weight
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                        TimelineNavigationButton(
-                          isSelected: true,
-                          onPress: () {
-                            if (isFormComplete()) {
-                              jp.addBasicInformation(
-                                jobTitleController.text,
-                                jobDescriptionController.text,
-                                positionsAvailableController.text,
-                                urgencyValue.round(),
-                              );
-                            }
-                          },
+                        const SizedBox(width: 50),
+                        Flexible(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (isFormComplete()) {
+                                jp.addBasicInformation(
+                                  jobTitleController.text,
+                                  jobDescriptionController.text,
+                                  positionsAvailableController.text,
+                                  urgencyValue.round(),
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Colors.deepOrange, // Background color
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 80,
+                                  vertical: 20), // Increased padding
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(8.0), // Rounded corners
+                              ),
+                            ),
+                            child: FittedBox(
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .next, // Text for the button
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16, // Increased font size
+                                  fontWeight: FontWeight.w600, // Font weight
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(height: height * .05),
+                     const SizedBox(height: 20),
                   ],
                 ),
               ),
