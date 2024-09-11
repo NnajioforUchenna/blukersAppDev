@@ -9,7 +9,6 @@ class Jobs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("here");
     return Responsive.isMobile(context)
         ? const JobsPageMobile()
         : const JobsPageDesktop();
