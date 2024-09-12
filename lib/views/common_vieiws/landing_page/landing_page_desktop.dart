@@ -97,36 +97,38 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                                   size: 10.sp,
                                 ),
                         ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              height: 0.02.sh,
-                            ),
-                            Image.asset(
-                              'assets/images/worker_insp_desc.png',
-                              fit: BoxFit.contain,
-                            ),
-                            Text(
-                              textAlign: TextAlign.left,
-                              "I am a worker",
-                              style: TextStyle(
-                                color: ThemeColors.black2ThemeColor,
-                                fontSize: 5.sp,
-                                fontWeight: FontWeight.bold,
+                        SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                height: 0.02.sh,
                               ),
-                            ),
-                            Text(
-                              "Looking for jobs",
-                              style: TextStyle(
-                                color: ThemeColors.black1ThemeColor,
-                                fontSize: 3.sp,
-                                fontWeight: FontWeight.bold,
+                              Image.asset(
+                                'assets/images/worker_insp_desc.png',
+                                fit: BoxFit.contain,
                               ),
-                            ),
-                          ],
+                              Text(
+                                textAlign: TextAlign.left,
+                                "I am a worker",
+                                style: TextStyle(
+                                  color: ThemeColors.black2ThemeColor,
+                                  fontSize: 5.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "Looking for jobs",
+                                style: TextStyle(
+                                  color: ThemeColors.black1ThemeColor,
+                                  fontSize: 3.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -177,36 +179,38 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                                   size: 10.sp,
                                 ),
                         ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              height: 0.02.sh,
-                            ),
-                            Image.asset(
-                              'assets/images/company_insp_desc.png',
-                              fit: BoxFit.contain,
-                            ),
-                            Text(
-                              textAlign: TextAlign.left,
-                              "I am a company",
-                              style: TextStyle(
-                                color: ThemeColors.black2ThemeColor,
-                                fontSize: 5.sp,
-                                fontWeight: FontWeight.bold,
+                        SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                height: 0.02.sh,
                               ),
-                            ),
-                            Text(
-                              "Looking for workers",
-                              style: TextStyle(
-                                color: ThemeColors.black1ThemeColor,
-                                fontSize: 3.sp,
-                                fontWeight: FontWeight.bold,
+                              Image.asset(
+                                'assets/images/company_insp_desc.png',
+                                fit: BoxFit.contain,
                               ),
-                            ),
-                          ],
+                              Text(
+                                textAlign: TextAlign.left,
+                                "I am a company",
+                                style: TextStyle(
+                                  color: ThemeColors.black2ThemeColor,
+                                  fontSize: 5.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "Looking for workers",
+                                style: TextStyle(
+                                  color: ThemeColors.black1ThemeColor,
+                                  fontSize: 3.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
