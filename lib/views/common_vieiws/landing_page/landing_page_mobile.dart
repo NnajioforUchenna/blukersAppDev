@@ -13,39 +13,18 @@ class LandingPageMobile extends StatefulWidget {
 }
 
 class _LandingPageMobileState extends State<LandingPageMobile> {
-
   bool isWorkerSelected = false;
   bool isCompanySelected = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: 
-        Image.asset(
-          'assets/images/bluckers_logo_white.png',
-          fit: BoxFit.contain,
-        ),
-        //drawer for action
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
-              ),
-            onPressed: () {
-              
-            },
-          ),
-        ],
-        centerTitle: false,
-        backgroundColor: ThemeColors.blukersBlueThemeColor,
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        clipBehavior: Clip.none,
         child: Column(
           children: [
-            SizedBox(height: 0.05.sh), // Responsive height
+            SizedBox(height: 0.08.sh), // Responsive height
             SizedBox(
               width: 0.6.sw,
               child: Image.asset(
@@ -55,7 +34,7 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
             ),
             SizedBox(height: 0.015.sh), // Responsive height
             Text(
-              "Please Choose Your User Type", 
+              "Please Choose Your User Type",
               textAlign: TextAlign.center,
               style: GoogleFonts.montserrat(
                 color: ThemeColors.black2ThemeColor,
@@ -73,96 +52,103 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                 fontSize: 9.sp, // Responsive font size
               ),
             ),
-            // Text(
-            //   AppLocalizations.of(context)!.dreamBuildConnect,
-            //   textAlign: TextAlign.center,
-            //   style: ThemeTextStyles.landingPageSubtitleThemeTextStyle.copyWith(
-            //       fontSize: 18.sp,
-            //       fontWeight: FontWeight.bold), // Responsive font size
-            // ),
-       
             SizedBox(height: 0.08.sh), // Responsive height
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-               InkWell(
-                 onTap: (){
-                   setState(() {
-                     isWorkerSelected = true;
-                     isCompanySelected = false;
-                   });
-                 },
-                 child: Card(
-                   elevation: 5,
-                   clipBehavior: Clip.hardEdge,
-                   shape: RoundedRectangleBorder(
-                     borderRadius: BorderRadius.circular(15.0),
-                     side: isWorkerSelected
-                         ? const BorderSide(color: ThemeColors.blukersBlueThemeColor, width: 2.0)
-                         : const BorderSide(color: Colors.grey, width: 2.0),
-                   ),
-                   child: Container(
-                     color: isWorkerSelected ? ThemeColors.blukersBlueThemeColor.withOpacity(0.10) : Colors.transparent,
-                     width: 0.45.sw,
-                     height: 0.19.sh,
-                     padding: const EdgeInsets.all(16.0),
-                     child: Stack(
-                       children: [
-                        //checkbox
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: isWorkerSelected
-                              ? Icon(
-                                  Icons.check_box_sharp,
-                                  color: ThemeColors.blukersBlueThemeColor,
-                                  size: 30.sp,
-                                )
-                              : Icon(
-                                  Icons.check_box_outline_blank,
-                                  color: ThemeColors.blukersBlueThemeColor,
-                                  size: 30.sp,
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      isWorkerSelected = true;
+                      isCompanySelected = false;
+                    });
+                  },
+                  child: Card(
+                    elevation: 5,
+                    clipBehavior: Clip.hardEdge,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      side: isWorkerSelected
+                          ? const BorderSide(
+                              color: ThemeColors.blukersBlueThemeColor,
+                              width: 2.0,
+                            )
+                          : const BorderSide(color: Colors.grey, width: 2.0),
+                    ),
+                    child: Container(
+                      color: isWorkerSelected
+                          ? ThemeColors.blukersBlueThemeColor.withOpacity(0.10)
+                          : Colors.transparent,
+                      width: 0.45.sw,
+                      height: 0.19.sh,
+                      padding: const EdgeInsets.all(16.0),
+                      child: Stack(
+                        children: [
+                          // checkbox
+                          Positioned(
+                            top: 0,
+                            right: 0,
+                            child: isWorkerSelected
+                                ? Icon(
+                                    Icons.check_box_sharp,
+                                    color: ThemeColors.blukersBlueThemeColor,
+                                    size: 30.sp,
+                                  )
+                                : Icon(
+                                    Icons.check_box_outline_blank,
+                                    color: ThemeColors.blukersBlueThemeColor,
+                                    size: 30.sp,
+                                  ),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            clipBehavior: Clip.none,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  height: 0.02.sh,
                                 ),
-                        ),
-                         Column(
-                           mainAxisSize: MainAxisSize.min,
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           mainAxisAlignment: MainAxisAlignment.end,
-                           children: [
-                            SizedBox(
-                              height: 0.02.sh,
+                                Image.asset(
+                                  'assets/images/worker_insp.png',
+                                  fit: BoxFit.contain,
+                                ),
+                                Text(
+                                  "I am a\nworker",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: ThemeColors.black2ThemeColor,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width < 600
+                                            ? 14.sp
+                                            : 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Looking for jobs",
+                                  style: TextStyle(
+                                    color: ThemeColors.black1ThemeColor,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width < 600
+                                            ? 9.sp
+                                            : 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Image.asset(
-                              'assets/images/worker_insp.png',
-                              fit: BoxFit.contain,
-                            ),
-                             Text(
-                              textAlign: TextAlign.left,
-                               "I am a\nworker",
-                               style: TextStyle(
-                                 color: ThemeColors.black2ThemeColor,
-                                 fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                               ),
-                             ),
-                             Text(
-                               "Looking for jobs",
-                               style: TextStyle(
-                                 color: ThemeColors.black1ThemeColor,
-                                 fontSize: 10.sp,
-                                 fontWeight: FontWeight.bold,
-                               ),
-                             ),
-                           ],
-                         ),
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(width: 0.02.sw), // Responsive width
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       isWorkerSelected = false;
                       isCompanySelected = true;
@@ -174,17 +160,22 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                       side: isCompanySelected
-                          ? const BorderSide(color: ThemeColors.blukersBlueThemeColor, width: 2.0)
+                          ? const BorderSide(
+                              color: ThemeColors.blukersBlueThemeColor,
+                              width: 2.0,
+                            )
                           : const BorderSide(color: Colors.grey, width: 2.0),
                     ),
                     child: Container(
-                      color: isCompanySelected ? ThemeColors.blukersBlueThemeColor.withOpacity(0.10) : Colors.transparent,
+                      color: isCompanySelected
+                          ? ThemeColors.blukersBlueThemeColor.withOpacity(0.10)
+                          : Colors.transparent,
                       width: 0.45.sw,
                       height: 0.19.sh,
                       padding: const EdgeInsets.all(16.0),
                       child: Stack(
                         children: [
-                          //checkbox
+                          // checkbox
                           Positioned(
                             top: 0,
                             right: 0,
@@ -200,36 +191,46 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                                     size: 30.sp,
                                   ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              SizedBox(
-                                height: 0.02.sh,
-                              ),
-                              Image.asset(
-                                'assets/images/company_insp.png',
-                                fit: BoxFit.contain,
-                              ),
-                              Text(
-                                textAlign: TextAlign.left,
-                                "I am a\ncompany",
-                                style: TextStyle(
-                                  color: ThemeColors.black2ThemeColor,
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
+                          SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            clipBehavior: Clip.none,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  height: 0.02.sh,
                                 ),
-                              ),
-                              Text(
-                                "Looking for workers",
-                                style: TextStyle(
-                                  color: ThemeColors.black1ThemeColor,
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.bold,
+                                Image.asset(
+                                  'assets/images/company_insp.png',
+                                  fit: BoxFit.contain,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  "I am a\ncompany",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: ThemeColors.black2ThemeColor,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width < 600
+                                            ? 14.sp
+                                            : 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Looking for workers",
+                                  style: TextStyle(
+                                    color: ThemeColors.black1ThemeColor,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width < 600
+                                            ? 9.sp
+                                            : 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -241,9 +242,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
             SizedBox(height: 0.07.sh), // Responsive height
             ElevatedButton(
               onPressed: () {
-                if(isWorkerSelected){
+                if (isWorkerSelected) {
                   context.go('/jobs');
-                }else if(isCompanySelected){
+                } else if (isCompanySelected) {
                   context.go('/workers');
                 }
               },
@@ -276,32 +277,6 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                 ],
               ),
             ),
-            // if (up.appUser == null)
-            //   Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       buildAuthButton(
-            //         context,
-            //             () => context.go('/login'),
-            //         AppLocalizations.of(context)!.signIn,
-            //       ),
-            //       Text(
-            //         AppLocalizations.of(context)!.or,
-            //         style: const TextStyle(
-            //           color: ThemeColors.grey2ThemeColor,
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.w600,
-            //         ),
-            //       ),
-            //       buildAuthButton(
-            //         context,
-            //             () => context.go('/register'),
-            //         AppLocalizations.of(context)!.register,
-            //       ),
-            //     ],
-            //   ),
-            // if (!kIsWeb && up.appUser != null) SizedBox(height: 0.05.sh),
-            // if (!kIsWeb) const PrivacyPolicyTermsAndConditions(),
           ],
         ),
       ),

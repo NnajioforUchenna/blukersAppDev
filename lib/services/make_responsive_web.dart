@@ -1,3 +1,5 @@
+import 'package:blukers/utils/styles/theme_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class MakeResponsiveWeb extends StatelessWidget {
@@ -45,20 +47,34 @@ class DisplayImage extends StatelessWidget {
     return Row(
       children: [
         const Spacer(),
-        SizedBox(
-          width: MediaQuery.of(context).size.width / 3,
-          child: Material(
-            elevation: 10,
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 3,
               child: Image(
                 image: image,
                 fit: BoxFit.cover,
                 height: 400,
               ),
             ),
-          ),
+            const SizedBox(
+              height: 50,
+            ),
+            Center(
+              child: Text(
+                AppLocalizations.of(context)!.workerJourneyTitle,
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColors.blukersBlueThemeColor,
+                  fontFamily: "Montserrat",
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
         ),
         const Spacer(),
       ],
