@@ -244,9 +244,12 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
             SizedBox(height: 0.07.sh), // Responsive height
             ElevatedButton(
               onPressed: () {
+                final up = Provider.of<UserProvider>(context, listen: false);
                 if (isWorkerSelected) {
+                  up.setUserRole("worker");
                   context.go('/jobs');
                 } else if (isCompanySelected) {
+                  up.setUserRole("company");
                   context.go('/workers');
                 }
               },
