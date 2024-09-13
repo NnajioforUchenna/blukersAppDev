@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
                           child: Column(
                             children: [
                               AuthTextFieldWrapper(
-                                label:  AppLocalizations.of(context)!.email,
+                                label: AppLocalizations.of(context)!.email,
                                 child: FormBuilderTextField(
                                   controller: emailController,
                                   key: const Key('email'),
@@ -283,6 +283,7 @@ class _LoginState extends State<Login> {
                     title: AppLocalizations.of(context)!.dontHaveAnAccount,
                     subTitle: AppLocalizations.of(context)!.register,
                   ),
+                  const SizedBox(height: 50)
                 ],
               ),
             )
