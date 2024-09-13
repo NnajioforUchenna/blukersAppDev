@@ -479,5 +479,6 @@
   "inBluckers": "No Bluckers",
   "emailAddress": "Endereço de e-mail",
   "enterEmailAddress": "Insira o endereço de e-mail",
-  "enterPassword": "Insira a senha"
+  "enterPassword": "Insira a senha",
+  "path": "Caminho"
 }

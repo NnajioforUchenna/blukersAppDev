@@ -502,5 +502,6 @@
   "inBluckers": "In Bluckers",
   "emailAddress": "Email Address",
   "enterEmailAddress": "Enter Email Address",
-  "enterPassword": "Enter Password"
+  "enterPassword": "Enter Password",
+  "path": "Path"
 }

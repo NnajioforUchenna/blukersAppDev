@@ -1,12 +1,17 @@
 import 'package:blukers/utils/styles/index.dart';
 import 'package:blukers/views/worker/worker_page_template/Components/sign_in_row.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../common_vieiws/desktop_nav_bar.dart';
 
 class WorkerAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WorkerAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
     return SafeArea(
       child: AppBar(
         title: const SignInRow(),
@@ -14,6 +19,14 @@ class WorkerAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
+        actions: [
+          up.appUser == null
+              ? const SizedBox.shrink()
+              : const Padding(
+                  padding: EdgeInsets.only(right: 24),
+                  child: ProfileNavBar(),
+                )
+        ],
       ),
     );
   }

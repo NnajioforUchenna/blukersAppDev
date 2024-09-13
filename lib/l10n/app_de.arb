@@ -478,5 +478,6 @@
   "inBluckers": "In Bluckers",
   "emailAddress": "E-Mail-Adresse",
   "enterEmailAddress": "E-Mail-Adresse eingeben",
-  "enterPassword": "Passwort eingeben"
+  "enterPassword": "Passwort eingeben",
+  "path": "Pfad"
 }

@@ -120,7 +120,6 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
           }
           // Determine which provider to use
           await jp.searchJobPosts(nameRelated, locationRelated);
-          print("object");
           if (GoRouter.of(context).canPop()) {
               GoRouter.of(context).pop();
             }
