@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../providers/user_provider_parts/user_provider.dart';
+import '../../services/responsive.dart';
 import '../../utils/styles/theme_colors.dart';
 
 class DesktopNavBar extends StatefulWidget implements PreferredSizeWidget {
@@ -123,198 +124,201 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
                         ),
                       ),
                     )
-                  : PopupMenuButton<int>(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 10),
-                      color: Colors.white,
-                      position: PopupMenuPosition.under,
-                      offset: const Offset(20, 45),
-                      shape: const TooltipShape(),
-                      itemBuilder: (context) => [
-                        PopupMenuItem<int>(
-                          enabled: false,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 16),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: ThemeColors.primaryThemeColor),
-                                  width: 24,
-                                  height: 24,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: up.appUser!.photoUrl != null &&
-                                            up.appUser!.photoUrl != ""
-                                        ? FadeInImage.assetNetwork(
-                                            placeholder:
-                                                "assets/images/loading.jpeg",
-                                            image: up.appUser!.photoUrl!,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : FittedBox(
-                                            fit: BoxFit.fill,
-                                            child: Image.asset(
-                                                "assets/images/userDefaultProfilePic.png"),
-                                          ),
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    FittedBox(
-                                      child: Text(
-                                        userRole == "company"
-                                            ? up.appUser!.getCompanyName
-                                            : up.appUser!.displayName ??
-                                                "-- --",
-                                        style: GoogleFonts.montserrat(
-                                          color: ThemeColors.ash,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        PopupMenuItem<int>(
-                          enabled: false,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 16),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Switch to ${userRole == "company" ? "Worker" : "Company"} Account",
-                                  style: GoogleFonts.montserrat(
-                                    color: ThemeColors.ash,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 7,
-                                ),
-                                SizedBox(
-                                  height: 16,
-                                  width: 28,
-                                  child: Transform.scale(
-                                    scale: .5,
-                                    child: CupertinoSwitch(
-                                      trackColor:
-                                          ThemeColors.secondaryThemeColor,
-                                      value:
-                                          userRole == "company" ? false : true,
-                                      activeColor:
-                                          ThemeColors.primaryThemeColor,
-                                      onChanged: (value) {
-                                        Navigator.of(context).pop();
-                                        if (value) {
-                                          up.setUserRole("worker");
-                                          context.go("/jobs");
-                                        } else {
-                                          up.setUserRole("company");
-                                          context.go("/workers");
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        PopupMenuItem<int>(
-                          enabled: false,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: Color.fromRGBO(242, 242, 247, 1),
-                                        width: 1),
-                                    top: BorderSide(
-                                        color: Color.fromRGBO(242, 242, 247, 1),
-                                        width: 1))),
-                            child: Column(
-                              children: [
-                                userRole == "company"
-                                    ? const OverlayRow(
-                                        route: '/companyChat',
-                                        title: "Chat With Potential Employees",
-                                        icon: "assets/icons/chat.svg",
-                                      )
-                                    : const OverlayRow(
-                                        route: '/workerMessages',
-                                        title: "Job Alerts, Chats and Calls",
-                                        icon: "assets/icons/notif.svg",
-                                      ),
-                                userRole == "company"
-                                    ? const OverlayRow(
-                                        route: '/myJobPosts',
-                                        title: "My Workers",
-                                        icon: "assets/icons/saved.svg",
-                                      )
-                                    : const OverlayRow(
-                                        route: '/myJobs',
-                                        title: "My Saved Jobs",
-                                        icon: "assets/icons/saved.svg",
-                                      ),
-                                if (userRole == "worker")
-                                  const OverlayRow(
-                                    route: '/createResume',
-                                    title: "My Resume",
-                                    icon: "assets/icons/document.svg",
-                                  ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        PopupMenuItem<int>(
-                          enabled: false,
-                          child: OverlayRow(
-                            route: userRole == "company"
-                                ? '/companyProfile'
-                                : '/workerProfile',
-                            title: userRole == "company"
-                                ? "Company Profile"
-                                : "Profile",
-                            icon: "assets/icons/profile.svg",
-                          ),
-                        )
-                      ],
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        width: 24,
-                        height: 24,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: up.appUser!.photoUrl != null &&
-                                  up.appUser!.photoUrl != ""
-                              ? FadeInImage.assetNetwork(
-                                  placeholder: "assets/images/loading.jpeg",
-                                  image: up.appUser!.photoUrl!,
-                                  fit: BoxFit.cover,
-                                )
-                              : FittedBox(
-                                  fit: BoxFit.fill,
-                                  child: Image.asset(
-                                      "assets/images/userDefaultProfilePic.png"),
-                                ),
-                        ),
-                      ),
-                    )
+                  : const ProfileNavBar()
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class ProfileNavBar extends StatelessWidget {
+  const ProfileNavBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
+    final userRole = up.userRole;
+    return PopupMenuButton<int>(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      color: Colors.white,
+      position: PopupMenuPosition.under,
+      offset: Offset(Responsive.isDesktop(context) ? 20 : 80, 45),
+      shape: const TooltipShape(),
+      itemBuilder: (context) => [
+        PopupMenuItem<int>(
+          enabled: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Row(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ThemeColors.primaryThemeColor),
+                  width: 24,
+                  height: 24,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: up.appUser!.photoUrl != null &&
+                            up.appUser!.photoUrl != ""
+                        ? FadeInImage.assetNetwork(
+                            placeholder: "assets/images/loading.jpeg",
+                            image: up.appUser!.photoUrl!,
+                            fit: BoxFit.cover,
+                          )
+                        : FittedBox(
+                            fit: BoxFit.fill,
+                            child: Image.asset(
+                                "assets/images/userDefaultProfilePic.png"),
+                          ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FittedBox(
+                      child: Text(
+                        userRole == "company"
+                            ? up.appUser!.getCompanyName
+                            : up.appUser!.getDisplayName,
+                        style: GoogleFonts.montserrat(
+                          color: ThemeColors.black1ThemeColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        PopupMenuItem<int>(
+          enabled: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Row(
+              children: [
+                Text(
+                  "Switch to ${userRole == "company" ? "Worker" : "Company"} Account",
+                  style: GoogleFonts.montserrat(
+                    color: ThemeColors.black1ThemeColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(
+                  width: 7,
+                ),
+                SizedBox(
+                  height: 16,
+                  width: 28,
+                  child: Transform.scale(
+                    scale: .5,
+                    child: CupertinoSwitch(
+                      trackColor: ThemeColors.secondaryThemeColor,
+                      value: userRole == "company" ? false : true,
+                      activeColor: ThemeColors.primaryThemeColor,
+                      onChanged: (value) {
+                        Navigator.of(context).pop();
+                        if (value) {
+                          up.setUserRole("worker");
+
+                          context.go("/jobs");
+                        } else {
+                          up.setUserRole("company");
+                          context.go("/workers");
+                        }
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        PopupMenuItem<int>(
+          enabled: false,
+          child: Container(
+            decoration: const BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+                        color: Color.fromRGBO(242, 242, 247, 1), width: 1),
+                    top: BorderSide(
+                        color: Color.fromRGBO(242, 242, 247, 1), width: 1))),
+            child: Column(
+              children: [
+                userRole == "company"
+                    ? const OverlayRow(
+                        route: '/companyChat',
+                        title: "Chat With Potential Employees",
+                        icon: "assets/icons/chat.svg",
+                      )
+                    : const OverlayRow(
+                        route: '/workerMessages',
+                        title: "Job Alerts, Chats and Calls",
+                        icon: "assets/icons/notif.svg",
+                      ),
+                userRole == "company"
+                    ? const OverlayRow(
+                        route: '/myJobPosts',
+                        title: "My Workers",
+                        icon: "assets/icons/saved.svg",
+                      )
+                    : const OverlayRow(
+                        route: '/myJobs',
+                        title: "My Saved Jobs",
+                        icon: "assets/icons/saved.svg",
+                      ),
+                if (userRole == "worker")
+                  const OverlayRow(
+                    route: '/createResume',
+                    title: "My Resume",
+                    icon: "assets/icons/document.svg",
+                  ),
+              ],
+            ),
+          ),
+        ),
+        PopupMenuItem<int>(
+          enabled: false,
+          child: OverlayRow(
+            route: userRole == "company" ? '/companyProfile' : '/workerProfile',
+            title: userRole == "company" ? "Company Profile" : "Profile",
+            icon: "assets/icons/profile.svg",
+          ),
+        )
+      ],
+      child: Container(
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Responsive.isDesktop(context)
+                ? null
+                : Border.all(
+                    width: 2,
+                    color: userRole == "company"
+                        ? ThemeColors.secondaryThemeColor
+                        : ThemeColors.primaryThemeColor,
+                  )),
+        width: 28,
+        height: 28,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: up.appUser!.photoUrl != null && up.appUser!.photoUrl != ""
+              ? FadeInImage.assetNetwork(
+                  placeholder: "assets/images/loading.jpeg",
+                  image: up.appUser!.photoUrl!,
+                  fit: BoxFit.cover,
+                )
+              : FittedBox(
+                  fit: BoxFit.fill,
+                  child: Image.asset("assets/images/userDefaultProfilePic.png"),
+                ),
+        ),
       ),
     );
   }
@@ -349,7 +353,7 @@ class OverlayRow extends StatelessWidget {
             Text(
               title,
               style: GoogleFonts.montserrat(
-                color: ThemeColors.ash,
+                color: ThemeColors.black1ThemeColor,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),

@@ -478,5 +478,6 @@
   "enterPassword": "\u8f93\u5165\u5bc6\u7801",
   "findYour": "\u5bfb\u627e\u60a8\u7684 ",
   "dreamJob": "\u68a6\u60f3\u5de5\u4f5c ",
-  "inBluckers": "\u5728 Bluckers"
+  "inBluckers": "\u5728 Bluckers",
+  "path": "路径"
 }

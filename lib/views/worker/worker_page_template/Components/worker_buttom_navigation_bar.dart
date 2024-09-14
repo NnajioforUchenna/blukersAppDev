@@ -1,12 +1,13 @@
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../providers/app_settings_provider.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../utils/styles/index.dart';
 
 class WorkerButtomNavigationBar extends StatefulWidget {
   const WorkerButtomNavigationBar({super.key});
@@ -34,90 +35,88 @@ class _WorkerButtomNavigationBarState extends State<WorkerButtomNavigationBar> {
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
-      child: NavigationBar(
-        animationDuration: const Duration(milliseconds: 300),
-        destinations: <Widget>[
-          NavigationDestination(
+      child: BottomNavigationBar(
+        currentIndex: currentPageIndex,
+        onTap: (int index) {
+          up.navigateWorker(context, index);
+        },
+        unselectedLabelStyle: GoogleFonts.montserrat(
+          color: const Color.fromRGBO(140, 140, 140, 1),
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
+        selectedLabelStyle: GoogleFonts.montserrat(
+          color: ThemeColors.primaryThemeColor,
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
+        selectedItemColor: ThemeColors.primaryThemeColor,
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
             icon: buildCustomIcon(
               context,
-              'assets/icons/jobs-icon.png',
-              ThemeColors.grey1ThemeColor,
+              'assets/icons/jobs_icon.svg',
             ),
-            selectedIcon: buildCustomIcon(
+            activeIcon: buildCustomIcon(
               context,
-              'assets/icons/jobs-icon-selected.png',
-              ThemeColors.primaryThemeColor,
+              'assets/icons/jobs_icon_selected.svg',
             ),
             label: AppLocalizations.of(context)!.jobs,
           ),
-          NavigationDestination(
+          BottomNavigationBarItem(
             icon: buildCustomIcon(
               context,
-              'assets/icons/navicon-02.png',
-              ThemeColors.grey1ThemeColor,
+              'assets/icons/industry_icon.svg',
             ),
-            selectedIcon: buildCustomIcon(
+            activeIcon: buildCustomIcon(
               context,
-              'assets/icons/navicon-02-selected.png',
-              ThemeColors.primaryThemeColor,
+              'assets/icons/industry_icon_selected.svg',
             ),
-            label: AppLocalizations.of(context)!.saved,
+            label: AppLocalizations.of(context)!.industry,
           ),
-          NavigationDestination(
+          BottomNavigationBarItem(
             icon: buildCustomIcon(
               context,
-              'assets/icons/search-icon.png',
-              ThemeColors.grey1ThemeColor,
+              'assets/icons/search_icon.svg',
             ),
-            selectedIcon: buildCustomIcon(
+            activeIcon: buildCustomIcon(
               context,
-              'assets/icons/search-icon-selected.png',
-              ThemeColors.primaryThemeColor,
+              'assets/icons/search_icon_selected.svg',
             ),
             label: AppLocalizations.of(context)!.searchJobs,
           ),
-          NavigationDestination(
+          BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/servicesIcon.svg',
+              'assets/icons/services_icon.svg',
             ),
-            selectedIcon: SvgPicture.asset('assets/icons/servicesIcon.svg',
-                color: ThemeColors.primaryThemeColor),
+            activeIcon: SvgPicture.asset(
+              'assets/icons/services_icon_selected.svg',
+            ),
             label: AppLocalizations.of(context)!.services,
           ),
-          NavigationDestination(
-            icon: buildCustomIcon(
-              context,
-              'assets/icons/navicon-05.png',
-              ThemeColors.grey1ThemeColor,
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/icons/path_icon.svg',
             ),
-            selectedIcon: buildCustomIcon(
-              context,
-              'assets/icons/navicon-05-selected.png',
-              ThemeColors.primaryThemeColor,
+            activeIcon: SvgPicture.asset(
+              'assets/icons/path_icon_selected.svg',
             ),
-            label: up.appUser == null
-                ? AppLocalizations.of(context)!.loginRegister
-                : AppLocalizations.of(context)!.profile,
+            label: AppLocalizations.of(context)!.path,
           ),
         ],
-        onDestinationSelected: (int index) {
-          up.navigateWorker(context, index);
-        },
-        selectedIndex: currentPageIndex,
-        backgroundColor: Colors.white,
-        elevation: 10,
-        indicatorColor: Colors.white,
       ),
     );
   }
 
-  Widget buildCustomIcon(context, src, color) {
-    return Image.asset(
+  Widget buildCustomIcon(context, src, {Color? color}) {
+    return SvgPicture.asset(
       src,
-      // width: 35,
       height: MediaQuery.of(context).size.height * 0.035,
       fit: BoxFit.contain,
-      color: color,
+      colorFilter:
+          color == null ? null : ColorFilter.mode(color, BlendMode.srcIn),
     );
   }
 }

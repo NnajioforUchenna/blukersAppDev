@@ -495,5 +495,6 @@
   "inBluckers": "En Bluckers",
   "emailAddress": "Dirección de correo electrónico",
   "enterEmailAddress": "Ingrese la dirección de correo electrónico",
-  "enterPassword": "Ingrese la contraseña"
+  "enterPassword": "Ingrese la contraseña",
+  "path": "Camino"
 }
