@@ -1,12 +1,12 @@
 import 'package:blukers/data_providers/user_data_provider.dart';
 import 'package:blukers/models/app_user/app_user.dart';
-import 'package:blukers/services/make_responsive_web.dart';
 import 'package:blukers/views/old_common_views/job_timeline/my_job_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
@@ -14,6 +14,8 @@ import '../../../utils/styles/index.dart';
 import '../../../utils/styles/theme_colors.dart';
 
 class DesktopCompanyPath extends StatelessWidget {
+  const DesktopCompanyPath({super.key});
+
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
@@ -28,30 +30,42 @@ class DesktopCompanyPath extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/successpath.png',
-                      width: 370,
-                      height: 370,
-                    ),
-                    const SizedBox(height: 25),
-                    Center(
-                      child: Text(
-                        AppLocalizations.of(context)!.companyJourneyTitle,
-                        style: const TextStyle(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/find_jobs.svg",
+                    width: 370,
+                    height: 370,
+                  ),
+                  const SizedBox(height: 25),
+                  Center(
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: 'Find ',
+                        style: GoogleFonts.montserrat(
                           fontSize: 47,
-                          fontWeight: FontWeight.bold,
-                          color: ThemeColors.blukersBlueThemeColor,
-                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.w700,
+                          color: ThemeColors.black1ThemeColor,
                         ),
-                        textAlign: TextAlign.center,
+                        children: [
+                          TextSpan(
+                            text: 'Workers ',
+                            style: GoogleFonts.montserrat(
+                              fontStyle: FontStyle.italic,
+                              color: ThemeColors.secondaryThemeColorDark,
+                            ),
+                          ),
+                          TextSpan(
+                            text: AppLocalizations.of(context)!.inBluckers,
+                          ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              ),
+                    ),
+                  )
+                ],
+              )),
               const SizedBox(width: 116),
               Expanded(
                 child: Stack(
