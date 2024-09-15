@@ -56,7 +56,7 @@ class _LoginInformationState extends State<LoginInformation> {
               Container(
                 padding: Responsive.isDesktop(context)
                     ? EdgeInsets.zero
-                    : const EdgeInsets.symmetric(horizontal: 40),
+                    : const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -287,18 +287,16 @@ class _LoginInformationState extends State<LoginInformation> {
                 height: 48,
                 child: SubmitButton(
                   onTap: () {
-                    // if (isFormComplete()) {
-                    //   up.registerUser(
-                    //     context: context,
-                    //     email: emailController.text,
-                    //     password: passwordController.text,
-                    //   );
-                    // }
-                    up.setRegisterPageIndex();
+                    if (isFormComplete()) {
+                      up.registerUser(
+                        context: context,
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    }
                   },
                   text: "Continue",
-                  isDisabled: false,
-                  // isDisabled: !isFormComplete(),
+                  isDisabled: !isFormComplete(),
                 ),
               ),
               const SizedBox(height: 30),

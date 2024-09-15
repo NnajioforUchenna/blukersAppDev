@@ -243,21 +243,20 @@ class _AppUserInformationState extends State<AppUserInformation> {
                   const SizedBox(height: 40),
                   SubmitButton(
                     onTap: () {
-                      // FocusScope.of(context).unfocus();
-                      // if (isFormComplete()) {
-                      //   up.addingContactInformation(
-                      //       ext, _phoneController.text);
-                      //   up.updateWorker(
-                      //     name: nameController.text,
-                      //     lastName: lastNameController.text,
-                      //     description: descriptionController.text,
-                      //   );
-                      // }
-                      up.setRegisterPageIndex();
+                      FocusScope.of(context).unfocus();
+                      if (isFormComplete()) {
+                        up.addingContactInformation(
+                            ext, _phoneController.text);
+                        up.updateWorker(
+                          name: nameController.text,
+                          lastName: lastNameController.text,
+                          description: descriptionController.text,
+                        );
+                      }
                     },
                     text: "Continue",
-                    isDisabled: false,
-                    // isDisabled: !isFormComplete(),
+        
+                    isDisabled: !isFormComplete(),
                   ),
                   SizedBox(height: height * .1),
                   // SizedBox(height: 10),
