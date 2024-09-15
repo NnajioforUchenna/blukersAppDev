@@ -69,4 +69,43 @@ class JobsListsDataProvider {
 
     return jobsPageByPreferences;
   }
+
+
+  static Future<JobsPageByPreferences> getJobsByFilters(
+    JobsPageByPreferences jobsPageByPreferences,
+    List<String> selectedIndustries, // New parameter
+    List<JobType> selectedJobTypes,  // New parameter
+    JobUrgencyLevel urgencyValue,    // New parameter
+    SalaryType selectedSalaryType    // New parameter
+  ) async {
+    String searchParameter = jobsPageByPreferences.getSearchParameter() ?? '';
+    int pageNumber = jobsPageByPreferences.pageNumJobsByPreferences;
+    String location = '';
+    String language = jobsPageByPreferences.language;
+
+    // Fetch all jobs based on general parameters
+    List<JobPost> jobPosts = await JobPostsDataProvider.searchJobPosts(
+      nameRelated: searchParameter,
+      locationRelated: location,
+      pageNumber: pageNumber,
+      targetLanguage: language,
+    );
+
+    // Apply specific filters after fetching
+    jobsPageByPreferences.jobs = jobPosts
+        .where((job) => selectedIndustries.contains(job.industryIds))
+        .where((job) => selectedJobTypes.contains(job.jobType))
+        .where((job) => job.urgencyLevel == urgencyValue)
+        .where((job) => job.salaryType == selectedSalaryType)
+        .toList();
+
+    jobsPageByPreferences.pageNumJobsByPreferences++;
+
+    return jobsPageByPreferences;
+  }
+
+
+
+
+  
 }

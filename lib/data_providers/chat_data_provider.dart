@@ -191,7 +191,7 @@ class ChatDataProvider {
         .collection('ChatLists')
         .doc(appUser.uid)
         .collection('CompanyChatLists')
-        .doc(selectedChatRecipient!.uid)
+        .doc(selectedChatRecipient.uid)
         .set(selectedChatRecipient.toMap());
 
     firestore

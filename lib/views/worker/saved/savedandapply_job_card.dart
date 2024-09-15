@@ -36,7 +36,8 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
-  final bool isMobileLayout = !kIsWeb || MediaQuery.of(context).size.width < 600;
+    final bool isMobileLayout =
+        !kIsWeb || MediaQuery.of(context).size.width < 600;
     bool isJobApplied = up.isJobPostApplied(widget.jobPost.jobPostId ?? '');
     bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId ?? '');
     bool isHideButton = up.appUser?.uid == widget.jobPost.companyId;
@@ -49,29 +50,26 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
       hoverColor: Colors.transparent,
       onTap: widget.onTap,
       child: Card(
-        elevation: 4, 
-       
+        elevation: 4,
         child: ClipRRect(
-         
           child: Container(
-            width: double.infinity, 
+            width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color:
                   isJobPostSelected() ? const Color(0xFFE5EDFF) : Colors.white,
-               border: isMobileLayout
-            ? const Border(
-                left: BorderSide(
-                  width: 15,
-                  color: ThemeColors.primaryThemeColor,
-                ),
-              )
-            : null,
+              border: isMobileLayout
+                  ? const Border(
+                      left: BorderSide(
+                        width: 15,
+                        color: ThemeColors.primaryThemeColor,
+                      ),
+                    )
+                  : null,
             ),
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start, 
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Wrap(
                   spacing: 10,
@@ -104,16 +102,14 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
                 const SizedBox(height: 10),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment:
-                      MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Icon(
-                      Icons.location_on, 
-                      size: 16, 
-                      color: Colors.grey, 
+                      Icons.location_on,
+                      size: 16,
+                      color: Colors.grey,
                     ),
-                    const SizedBox(
-                        width: 4), 
+                    const SizedBox(width: 4),
                     Expanded(
                       child: Text(
                         widget.jobPost.location!,
@@ -145,50 +141,49 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
                 const SizedBox(height: 15),
                 Row(
                   children: [
-                    isHideButton
-                        ? const SizedBox()
-                        : SizedBox(
-                            height: 40,
-                            width: 150,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: isJobApplied
-                                    ? ThemeColors.primaryThemeColor
-                                    : Colors.grey,
-                                elevation: 8,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                ),
-                              ),
-                              onPressed: () async {
-                                setState(() {
-                                  isJobApplied =
-                                      !isJobApplied; 
-                                });
-                            
-                              },
-                              child: Center(
-                                child: AutoSizeText(
-                                  isJobApplied
-                                      ? AppLocalizations.of(context)!
-                                          .alreadyApplied
-                                      : AppLocalizations.of(context)!
-                                          .apply
-                                          .toUpperCase(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                  maxLines: 1, 
-                                  minFontSize:
-                                      12, 
-                                  overflow: TextOverflow
-                                      .ellipsis, 
-                                ),
-                              ),
+                    if (!isHideButton)
+                      SizedBox(
+                        height: 40,
+                        width: 150,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                isJobApplied ? Colors.transparent : Colors.grey,
+                            elevation: isJobApplied ? 0 : 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(9),
+                              side: isJobApplied
+                                  ? const BorderSide(
+                                      color: ThemeColors.primaryThemeColor)
+                                  : BorderSide.none,
                             ),
                           ),
+                          onPressed: () async {
+                            setState(() {
+                              isJobApplied = !isJobApplied;
+                            });
+                          },
+                          child: Center(
+                            child: AutoSizeText(
+                              isJobApplied
+                                  ? AppLocalizations.of(context)!.alreadyApplied
+                                  : AppLocalizations.of(context)!
+                                      .apply
+                                      .toUpperCase(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: isJobApplied
+                                    ? ThemeColors.primaryThemeColor
+                                    : Colors.white,
+                              ),
+                              maxLines: 1,
+                              minFontSize: 12,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 )
               ],
