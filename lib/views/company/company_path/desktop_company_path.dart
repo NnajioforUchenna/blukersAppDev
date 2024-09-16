@@ -43,7 +43,7 @@ class DesktopCompanyPath extends StatelessWidget {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: 'Find ',
+                        text: '${AppLocalizations.of(context)!.find} ',
                         style: GoogleFonts.montserrat(
                           fontSize: 47,
                           fontWeight: FontWeight.w700,
@@ -51,7 +51,7 @@ class DesktopCompanyPath extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: 'Workers ',
+                            text: '${AppLocalizations.of(context)!.workers} ',
                             style: GoogleFonts.montserrat(
                               fontStyle: FontStyle.italic,
                               color: ThemeColors.secondaryThemeColorDark,

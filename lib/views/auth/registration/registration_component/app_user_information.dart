@@ -78,7 +78,7 @@ class _AppUserInformationState extends State<AppUserInformation> {
                   ),
                   const SizedBox(height: 30),
                   AuthTextFieldWrapper(
-                    label: "Phone Number",
+                    label: AppLocalizations.of(context)!.phoneNumber,
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
@@ -121,7 +121,7 @@ class _AppUserInformationState extends State<AppUserInformation> {
                             showOnlyCountryWhenClosed: false,
                             alignLeft: false,
                           ),
-                          hintText: "Phone Number",
+                          hintText: AppLocalizations.of(context)!.phoneNumber,
                           errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             borderSide: const BorderSide(
@@ -155,9 +155,9 @@ class _AppUserInformationState extends State<AppUserInformation> {
                     children: [
                       Expanded(
                         child: AuthTextFieldWrapper(
-                          label: "First Name",
+                          label: AppLocalizations.of(context)!.firstName,
                           child: AuthTextFormField(
-                            hintText: "Your First Name",
+                            hintText: "Your ${AppLocalizations.of(context)!.firstName}",
                             controller: nameController,
                             textInputAction: TextInputAction.next,
                             onEditingComplete: () {
@@ -184,9 +184,9 @@ class _AppUserInformationState extends State<AppUserInformation> {
                       ),
                       Expanded(
                         child: AuthTextFieldWrapper(
-                          label: "Last Name",
+                          label: AppLocalizations.of(context)!.lastName,
                           child: AuthTextFormField(
-                            hintText: "Your Last Name",
+                            hintText: "Your ${AppLocalizations.of(context)!.lastName}",
                             controller: lastNameController,
                             textInputAction: TextInputAction.next,
                             onEditingComplete: () {
@@ -213,7 +213,7 @@ class _AppUserInformationState extends State<AppUserInformation> {
                   SizedBox(height: height * 0.005),
                   const SizedBox(height: 20),
                   AuthTextFieldWrapper(
-                    label: "Brief Description",
+                    label: AppLocalizations.of(context)!.briefDescrip,
                     child: AuthTextFormField(
                       maxLines: 5,
                       hintText: up.userRole == "worker"
@@ -245,8 +245,7 @@ class _AppUserInformationState extends State<AppUserInformation> {
                     onTap: () {
                       FocusScope.of(context).unfocus();
                       if (isFormComplete()) {
-                        up.addingContactInformation(
-                            ext, _phoneController.text);
+                        up.addingContactInformation(ext, _phoneController.text);
                         up.updateWorker(
                           name: nameController.text,
                           lastName: lastNameController.text,
@@ -254,8 +253,7 @@ class _AppUserInformationState extends State<AppUserInformation> {
                         );
                       }
                     },
-                    text: "Continue",
-        
+                    text: AppLocalizations.of(context)!.continueStr,
                     isDisabled: !isFormComplete(),
                   ),
                   SizedBox(height: height * .1),

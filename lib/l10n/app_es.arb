@@ -496,5 +496,13 @@
   "emailAddress": "Dirección de correo electrónico",
   "enterEmailAddress": "Ingrese la dirección de correo electrónico",
   "enterPassword": "Ingrese la contraseña",
-  "path": "Camino"
+  "path": "Camino",
+
+  "signupMessage": "Por favor regístrate para continuar o acceder a este contenido",
+  "signInMessage": "Por favor inicia sesión o regístrate para continuar o acceder a este contenido",
+  "identifyAs": "Me identifico como",
+  "briefDescrip": "Breve Descripción",
+  "jobsPrefs": "Preferencias de empleo",
+  "workersPrefs": "Preferencias de trabajadores",
+  "find": "Buscar"
 }

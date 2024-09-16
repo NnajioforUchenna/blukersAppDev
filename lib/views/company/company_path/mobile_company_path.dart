@@ -41,7 +41,7 @@ class MobileCompanyPath extends StatelessWidget {
               child: SizedBox(
                 width: 173.w,
                 child: Text(
-                  "Find Workers ${AppLocalizations.of(context)!.inBluckers}",
+                  "${AppLocalizations.of(context)!.find} ${AppLocalizations.of(context)!.workers} ${AppLocalizations.of(context)!.inBluckers}",
                   style: GoogleFonts.montserrat(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

@@ -11,7 +11,7 @@ import '../../../../utils/localization/localized_industries.dart';
 import '../../../../utils/localization/localized_jobs.dart';
 import '../../../../utils/styles/theme_colors.dart';
 import '../../common_widget/submit_button.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SelectPreference extends StatefulWidget {
   const SelectPreference({super.key});
 
@@ -54,8 +54,8 @@ class _SelectPreferenceState extends State<SelectPreference> {
                   Center(
                     child: Text(
                       up.userRole == "worker"
-                          ? "Job Preferences"
-                          : "Worker Preferences",
+                          ? AppLocalizations.of(context)!.jobsPrefs
+                          : AppLocalizations.of(context)!.workersPrefs,
                       style: GoogleFonts.montserrat(
                         color: ThemeColors.secondaryThemeColorDark,
                         fontSize: 19,
@@ -66,8 +66,8 @@ class _SelectPreferenceState extends State<SelectPreference> {
                   const SizedBox(height: 30),
                   Text(
                     up.userRole == "worker"
-                        ? "Select Job Preferences"
-                        : "Select Worker Preferences",
+                        ? AppLocalizations.of(context)!.selectYourJobsPreferences
+                        : AppLocalizations.of(context)!.selectWorkersPreference,
                     style: GoogleFonts.montserrat(
                       color: ThemeColors.black1ThemeColor,
                       fontSize: 14,
@@ -177,7 +177,7 @@ class _SelectPreferenceState extends State<SelectPreference> {
                   up.setJobsPreferences(selectedIndustries, selectedJobs);
                   up.setRegisterPageIndex();
                 },
-                text: "Continue",
+                text:AppLocalizations.of(context)!.continueStr,
                 isDisabled: !areJobsSelected(),
               ),
             ),

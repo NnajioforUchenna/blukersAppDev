@@ -460,5 +460,13 @@
   "findYour": "Trova il Tuo ",
   "dreamJob": "Lavoro dei Sogni ",
   "inBluckers": "In Bluckers",
-  "path": "Percorso"
+  "path": "Percorso",
+  "signupMessage": "Per favore iscriviti per continuare o accedere a questo contenuto",
+  "signInMessage": "Per favore accedi o registrati per continuare o accedere a questo contenuto",
+  "identifyAs": "Mi identifico come",
+  "briefDescrip": "Breve Descrizione",
+  "jobsPrefs": "Preferenze di lavoro",
+  "workersPrefs": "Preferenze dei lavoratori",
+  "find": "Trova"
+
 }

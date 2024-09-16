@@ -68,7 +68,7 @@ class _LoginState extends State<Login> {
                               ),
                               const SizedBox(height: 21),
                               Text(
-                                "Please Login or register to continue or to Access this content",
+                                AppLocalizations.of(context)!.signInMessage,
                                 style: GoogleFonts.montserrat(
                                   color: ThemeColors.black1ThemeColor,
                                   fontSize: 16,

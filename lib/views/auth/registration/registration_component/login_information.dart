@@ -67,7 +67,7 @@ class _LoginInformationState extends State<LoginInformation> {
                     ),
                     const SizedBox(height: 21),
                     Text(
-                      "Please Sign up continue or to Access this content",
+                     AppLocalizations.of(context)!.signupMessage,
                       style: GoogleFonts.montserrat(
                         color: ThemeColors.black1ThemeColor,
                         fontSize: 16,
@@ -82,7 +82,7 @@ class _LoginInformationState extends State<LoginInformation> {
                 const Timeline(currentStep: 0),
               if (!Responsive.isDesktop(context)) const SizedBox(height: 35),
               AuthTextFieldWrapper(
-                label: AppLocalizations.of(context)!.email,
+                label: AppLocalizations.of(context)!.emailAddress,
                 child: TextFormField(
                   controller: emailController,
                   textInputAction: TextInputAction.next,
@@ -112,7 +112,7 @@ class _LoginInformationState extends State<LoginInformation> {
                           width: 0, color: ThemeColors.secondaryThemeColor),
                     ),
                     contentPadding: const EdgeInsets.all(20),
-                    hintText: AppLocalizations.of(context)!.email,
+                    hintText: AppLocalizations.of(context)!.enterEmailAddress,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: const BorderSide(
@@ -196,7 +196,7 @@ class _LoginInformationState extends State<LoginInformation> {
               ),
               const SizedBox(height: 20),
               Text(
-                "I Identify As",
+                AppLocalizations.of(context)!.identifyAs,
                 style: GoogleFonts.montserrat(
                   color: ThemeColors.black1ThemeColor,
                   fontSize: 14,
@@ -295,7 +295,7 @@ class _LoginInformationState extends State<LoginInformation> {
                       );
                     }
                   },
-                  text: "Continue",
+                text:AppLocalizations.of(context)!.continueStr,
                   isDisabled: !isFormComplete(),
                 ),
               ),
