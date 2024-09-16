@@ -1,3 +1,5 @@
+import 'package:blukers/views/worker/select_job_industry/select_industry_desktop.dart';
+import 'package:blukers/views/worker/select_job_industry/select_industry_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +15,8 @@ class WorkersHomeDesktop extends StatelessWidget {
     UserProvider up = Provider.of<UserProvider>(context);
     return up.isUserRegistered()
         ? const DesktopDisplayWorkersByPreference()
-        : const DesktopSelectAndSearchWorkers();
+        : const SelectIndustryScreenDesktop();
   }
 }
+
+//  DesktopSelectAndSearchWorkers()

@@ -1,7 +1,5 @@
 { 
-  "emailAddress": "Adresse électronique",
-  "enterEmailAddress": "Entrez l'adresse électronique",
-  "enterPassword": "Entrez le mot de passe",
+
   "iAmA": "Je suis un",
   "iAmA2": "Je suis un",
   "worker": "Travailleur",
@@ -456,5 +454,12 @@
   "choose_your_user_type": "Choisissez votre type d'utilisateur",
   "update": "Mettre \u00e0 jour",
   "delete": "Supprimer",
-  "noworkersfound": "Aucun travailleur trouv\u00e9"
+  "noworkersfound": "Aucun travailleur trouv\u00e9",
+  "findYour": "Trouvez Votre ",
+  "dreamJob": "Emploi de Rêve ",
+  "inBluckers": "Dans Bluckers",
+  "emailAddress": "Adresse électronique",
+  "enterEmailAddress": "Entrez l'adresse électronique",
+  "enterPassword": "Entrez le mot de passe",
+  "path": "Chemin"
 }

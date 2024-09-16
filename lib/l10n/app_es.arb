@@ -9,9 +9,6 @@
       }
     }
   },
-  "emailAddress": "Dirección de correo electrónico",
-  "enterEmailAddress": "Ingrese la dirección de correo electrónico",
-  "enterPassword": "Ingrese la contraseña",
   "dreamBuildConnect": "Sue\u00f1a. Construye. Conecta.",
   "whatDoYouIdentifyAs": "\u00bfC\u00f3mo te identificas?",
   "home": "Hogar",
@@ -492,7 +489,12 @@
   "companyJourneyStep5Title": "Crear ofertas de trabajo",
   "companyJourneyStep5Text": "Publica ofertas de trabajo y atrae a trabajadores potenciales. Define los roles de trabajo, las ubicaciones y otros detalles para ayudar a los candidatos a comprender los requisitos y postularse en consecuencia.",
   "companyJourneyStep6Title": "Chatear con trabajadores",
-  "companyJourneyStep6Text": "Si ves un candidato que te gusta, ¡felicidades! Puedes chatear directamente con los trabajadores y conocerlos mejor antes de tomar una decisión de contratación."
-
-
+  "companyJourneyStep6Text": "Si ves un candidato que te gusta, ¡felicidades! Puedes chatear directamente con los trabajadores y conocerlos mejor antes de tomar una decisión de contratación.",
+  "findYour": "Encuentra Tu ",
+  "dreamJob": "Trabajo Soñado ",
+  "inBluckers": "En Bluckers",
+  "emailAddress": "Dirección de correo electrónico",
+  "enterEmailAddress": "Ingrese la dirección de correo electrónico",
+  "enterPassword": "Ingrese la contraseña",
+  "path": "Camino"
 }

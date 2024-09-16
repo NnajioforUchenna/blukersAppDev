@@ -8,19 +8,17 @@ import '../views/worker/services/services_components/subscription/subscription_c
 
 final List<String> routesWorker = [
   '/jobs',
-  '/myJobs',
+  "/selectJobs",
   '/searchJobs',
   '/workerOffers',
-  '/workerProfile',
-  '/login'
+  '/pathToJob',
 ];
 final List<String> routesCompany = [
   '/workers',
-  '/myJobPosts',
+  '/createJobPost',
   '/searchWorkers',
   '/companyOffers',
-  '/companyProfile',
-  '/login'
+  '/pathToEmployingWorker',
 ];
 
 String getAddressesInStringFormat(Address? address) {

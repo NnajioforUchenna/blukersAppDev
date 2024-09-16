@@ -1,7 +1,4 @@
 {
-  "emailAddress": "Indirizzo email",
-  "enterEmailAddress": "Inserisci l'indirizzo email",
-  "enterPassword": "Inserisci la password",
   "iAmA": "Io sono un",
   "iAmA2": "Io sono un",
   "worker": "Lavoratore",
@@ -456,5 +453,12 @@
   "choose_your_user_type": "Scegli il tuo Tipo di Utente",
   "update": "Aggiorna",
   "delete": "Elimina",
-  "noworkersfound": "Nessun lavoratore trovato"
+  "noworkersfound": "Nessun lavoratore trovato",
+  "emailAddress": "Indirizzo email",
+  "enterEmailAddress": "Inserisci l'indirizzo email",
+  "enterPassword": "Inserisci la password",
+  "findYour": "Trova il Tuo ",
+  "dreamJob": "Lavoro dei Sogni ",
+  "inBluckers": "In Bluckers",
+  "path": "Percorso"
 }

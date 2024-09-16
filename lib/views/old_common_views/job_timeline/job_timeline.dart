@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -22,21 +25,19 @@ class JobTimeline extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 60),
-          const Center(
-            child: Icon(
-              UniconsLine.bag_alt,
-              size: 60,
-              color: ThemeColors.blukersBlueThemeColor,
+         SizedBox(height: Responsive.isMobile(context) || Responsive.isTablet(context) ? 60 : 0),
+          if(Responsive.isMobile(context) || Responsive.isTablet(context)) const Center(
+              child: Image(
+                image: AssetImage('assets/images/worker_job_insp.png'),
+              ),
             ),
-          ),
-          Padding(
+        if(Responsive.isMobile(context) || Responsive.isTablet(context)) Padding(
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
                 AppLocalizations.of(context)!.workerJourneyTitle,
                 style: const TextStyle(
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: ThemeColors.blukersBlueThemeColor,
                   fontFamily: "Montserrat",
@@ -45,6 +46,7 @@ class JobTimeline extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: Responsive.isMobile(context) || Responsive.isTablet(context) ? 30 : 0),
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -73,7 +75,7 @@ class JobTimeline extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: width < 600 ? 20 : 50),
           if (currentStep == 0)
             buildButton(
               width,
@@ -129,7 +131,7 @@ Widget buildButton(
     double width, int currentStep, String text, context, onClick) {
   return Center(
     child: SizedBox(
-      width: width < 600 ? 250 : 400, // 300 on mobile, 500 on web or tablet
+      width: width < 600 ? 350 : 700, // 300 on mobile, 500 on web or tablet
       height: width < 600 ? 50 : 80, // 70 on mobile, 100 on web or tablet
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -147,6 +149,7 @@ Widget buildButton(
             text.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 24 * Responsive.textScaleFactor(context),
             ),

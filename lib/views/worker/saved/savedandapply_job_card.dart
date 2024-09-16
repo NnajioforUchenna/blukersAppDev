@@ -6,12 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-
 import '../../../common_files/constants.dart';
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
-
 import '../../../utils/styles/theme_colors.dart';
 import '../../old_common_views/components/shaped_icon.dart';
 import 'grey_container.dart';
@@ -57,8 +55,7 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color:
-                  isJobPostSelected() ? const Color(0xFFE5EDFF) : Colors.white,
+              color: isJobPostSelected() ? const Color(0xFFE5EDFF) : Colors.white,
               border: isMobileLayout
                   ? const Border(
                       left: BorderSide(
@@ -152,10 +149,7 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
                             elevation: isJobApplied ? 0 : 8,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
-                              side: isJobApplied
-                                  ? const BorderSide(
-                                      color: ThemeColors.primaryThemeColor)
-                                  : BorderSide.none,
+                              side: isJobApplied ? const BorderSide( color: ThemeColors.primaryThemeColor) : BorderSide.none,
                             ),
                           ),
                           onPressed: () async {
@@ -167,9 +161,7 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
                             child: AutoSizeText(
                               isJobApplied
                                   ? AppLocalizations.of(context)!.alreadyApplied
-                                  : AppLocalizations.of(context)!
-                                      .apply
-                                      .toUpperCase(),
+                                  : AppLocalizations.of(context)!.apply.toUpperCase(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,

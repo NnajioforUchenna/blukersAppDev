@@ -9,9 +9,8 @@
       }
     }
   },
-  "emailAddress": "\uc774\uba54\uc77c \uc8fc\uc18c",
-  "enterEmailAddress": "\uc774\uba54\uc77c \uc8fc\uc18c\ub97c \uc785\ub825\ud558\uc138\uc694",
-  "enterPassword": "\ube44\ubc00\ubc88\ud638\ub97c \uc785\ub825\ud558\uc138\uc694",
+  
+ 
   "dreamBuildConnect": "\uafc8. \uc9c0\uc5b4\ub77c. \uc5f0\uacb0\ud558\ub2e4.",
   "whatDoYouIdentifyAs": "\ubb34\uc5c7\uc73c\ub85c \uc790\uc2e0\uc744 \uc2dd\ubcc4\ud569\ub2c8\uae4c?",
   "home": "\uc9d1",
@@ -455,5 +454,12 @@
   "choose_your_user_type": "\uc0ac\uc6a9\uc790 \uc720\ud615\uc744 \uc120\ud0dd\ud558\uc138\uc694",
   "update": "\uc5c5\ub370\uc774\ud2b8",
   "delete": "\uc0ad\uc81c",
-  "noworkersfound": "\uc9c1\uc6d0\uc774 \uc5c6\uc2b5\ub2c8\ub2e4"
+  "noworkersfound": "\uc9c1\uc6d0\uc774 \uc5c6\uc2b5\ub2c8\ub2e4",
+  "emailAddress": "\uc774\uba54\uc77c \uc8fc\uc18c",
+  "enterEmailAddress": "\uc774\uba54\uc77c \uc8fc\uc18c\ub97c \uc785\ub825\ud558\uc138\uc694",
+  "enterPassword": "\ube44\ubc00\ubc88\ud638\ub97c \uc785\ub825\ud558\uc138\uc694",
+  "findYour": "\ub2f9\uc2e0\uc758 ",
+  "dreamJob": "\uae30\ub2a5\uc801\uc778 \uc77c ",
+  "inBluckers": "\ube14\ub7ec\uc2a4\uc5d0\uc11c",
+  "path": "경로"
 }

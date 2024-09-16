@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
@@ -35,12 +36,12 @@ class MoblieWorkerPath extends StatelessWidget {
               child: SizedBox(
                 width: 173.w,
                 child: Text(
-                  AppLocalizations.of(context)!.workerJourneyTitle,
-                  style: const TextStyle(
+                  "${AppLocalizations.of(context)!.findYour} ${AppLocalizations.of(context)!.dreamJob} ${AppLocalizations.of(context)!.inBluckers}",
+                  style: GoogleFonts.montserrat(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
-                    fontFamily: "Montserrat",
+                    // fontFamily: "Montserrat",
                   ),
                   textAlign: TextAlign.center,
                 ),

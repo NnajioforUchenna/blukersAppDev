@@ -35,23 +35,8 @@ class _TimeAgoAndBookMarkRowState extends State<TimeAgoAndBookMarkRow> {
                       builder: (context) => const DisplayJobTimelineDialog(),
                     );
                   } else {
-                    // Show loading spinner
-                    showDialog(
-                      context: context,
-                      barrierDismissible:
-                          false, // Prevent dismissing the dialog
-                      builder: (context) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                    );
-
-                    // Save or unsave the job post and wait until the action is completed
+                    // Save or unsave the job post without showing a loading spinner
                     await up.saveJobPost(widget.jobPost);
-
-                    // Close the loading spinner
-                    Navigator.of(context).pop();
 
                     // Trigger rebuild to reflect the change
                     setState(() {});

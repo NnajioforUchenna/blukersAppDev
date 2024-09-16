@@ -9,9 +9,6 @@
       }
     }
   },
-  "emailAddress": "Email Address",
-  "enterEmailAddress": "Enter Email Address",
-  "enterPassword": "Enter Password",
   "dreamBuildConnect": "Dream. Build. Connect.",
   "whatDoYouIdentifyAs": "What do you identify as?",
   "cityandzipcode": "City, State or Zip Code",
@@ -499,5 +496,12 @@
   "companyJourneyStep5Title": "Create Job Posts",
   "companyJourneyStep5Text": "Post job openings and attract potential workers. Define the job roles, locations, and other details to help candidates understand the requirements and apply accordingly.",
   "companyJourneyStep6Title": "Chat with Workers",
-  "companyJourneyStep6Text": "If you see a candidate you like, congratulations! You can chat with the workers directly and get to know them better before making a hiring decision."
+  "companyJourneyStep6Text": "If you see a candidate you like, congratulations! You can chat with the workers directly and get to know them better before making a hiring decision.",
+  "findYour": "Find Your",
+  "dreamJob": "Dream Job",
+  "inBluckers": "In Bluckers",
+  "emailAddress": "Email Address",
+  "enterEmailAddress": "Enter Email Address",
+  "enterPassword": "Enter Password",
+  "path": "Path"
 }
