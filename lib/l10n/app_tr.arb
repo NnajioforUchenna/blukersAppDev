@@ -479,5 +479,12 @@
   "findYour": "Hayalindeki ",
   "dreamJob": "\u0130\u015fi Bul ",
   "inBluckers": "Bluckers'\u0131nda",
-  "path": "Yol"
+  "path": "Yol",
+  "signupMessage": "Devam etmek veya bu içeriğe erişmek için lütfen kaydolun",
+  "signInMessage": "Devam etmek veya bu içeriğe erişmek için lütfen giriş yapın veya kaydolun",
+  "identifyAs": "Kendimi tanımlıyorum",
+  "briefDescrip": "Kısa Açıklama",
+  "jobsPrefs": "İş Tercihleri",
+  "workersPrefs": "Çalışan Tercihleri",
+  "find": "Bul"
 }

@@ -479,5 +479,12 @@
   "findYour": "\u5bfb\u627e\u60a8\u7684 ",
   "dreamJob": "\u68a6\u60f3\u5de5\u4f5c ",
   "inBluckers": "\u5728 Bluckers",
-  "path": "路径"
+  "path": "路径",
+  "signupMessage": "请注册以继续或访问此内容",
+  "signInMessage": "请登录或注册以继续或访问此内容",
+  "identifyAs": "我自认为",
+  "briefDescrip": "简要描述",
+  "jobsPrefs": "职位偏好",
+  "workersPrefs": "工人偏好",
+  "find": "寻找"
 }
