@@ -83,6 +83,7 @@ class JobTimeline extends StatelessWidget {
               AppLocalizations.of(context)!.register,
               context,
               () {
+                context.pop();
                 context.go('/register');
               },
             ),
@@ -93,6 +94,7 @@ class JobTimeline extends StatelessWidget {
               AppLocalizations.of(context)!.createProfile,
               context,
               () {
+                context.pop();
                 context.go('/createResume');
               },
             ),
