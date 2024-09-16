@@ -480,5 +480,13 @@
   "emailAddress": "Endereço de e-mail",
   "enterEmailAddress": "Insira o endereço de e-mail",
   "enterPassword": "Insira a senha",
-  "path": "Caminho"
+  "path": "Caminho",
+  "signupMessage": "Por favor, inscreva-se para continuar ou acessar este conteúdo",
+  "signInMessage": "Por favor, faça login ou registre-se para continuar ou acessar este conteúdo",
+  "identifyAs": "Eu me identifico como",
+  "briefDescrip": "Breve Descrição",
+  "jobsPrefs": "Preferências de emprego",
+  "workersPrefs": "Preferências dos trabalhadores",
+  "find": "Encontrar"
+
 }

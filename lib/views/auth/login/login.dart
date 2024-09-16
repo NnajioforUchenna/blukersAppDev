@@ -61,10 +61,14 @@ class _LoginState extends State<Login> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SvgPicture.asset("assets/icons/person_login.svg"),
+                              SvgPicture.asset(
+                                "assets/icons/person_login.svg",
+                                height: 75,
+                                width: 75,
+                              ),
                               const SizedBox(height: 21),
                               Text(
-                                "Please Login or register to continue or to Access this content",
+                                AppLocalizations.of(context)!.signInMessage,
                                 style: GoogleFonts.montserrat(
                                   color: ThemeColors.black1ThemeColor,
                                   fontSize: 16,
@@ -124,6 +128,13 @@ class _LoginState extends State<Login> {
                                           color:
                                               ThemeColors.secondaryThemeColor),
                                     ),
+                                       border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderSide: const BorderSide(
+                                          width: 0.5,
+                                          color:
+                                              Color.fromRGBO(227, 238, 246, 1)),
+                                    ),
                                     contentPadding: const EdgeInsets.all(20),
                                     hintText:
                                         AppLocalizations.of(context)!.email,
@@ -134,13 +145,7 @@ class _LoginState extends State<Login> {
                                           color:
                                               Color.fromRGBO(227, 238, 246, 1)),
                                     ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      borderSide: const BorderSide(
-                                          width: 0.5,
-                                          color:
-                                              Color.fromRGBO(227, 238, 246, 1)),
-                                    ),
+                                 
                                     fillColor: Colors.white,
                                     filled: true,
                                   ),
