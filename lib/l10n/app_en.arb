@@ -503,5 +503,12 @@
   "emailAddress": "Email Address",
   "enterEmailAddress": "Enter Email Address",
   "enterPassword": "Enter Password",
-  "path": "Path"
+  "path": "Path",
+  "signupMessage": "Please Sign up to continue or to Access this content",
+  "signInMessage":  "Please Login or register to continue or to Access this content",
+  "identifyAs": "I Identify As",
+  "briefDescrip": "Brief Description",
+  "jobsPrefs": "Job Preferences",
+  "workersPrefs": "Worker Preferences",
+  "find": "Find"
 }

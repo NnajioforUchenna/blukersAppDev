@@ -461,5 +461,14 @@
   "emailAddress": "Adresse électronique",
   "enterEmailAddress": "Entrez l'adresse électronique",
   "enterPassword": "Entrez le mot de passe",
-  "path": "Chemin"
+  "path": "Chemin",
+  
+  "signupMessage": "Veuillez vous inscrire pour continuer ou accéder à ce contenu",
+  "signInMessage": "Veuillez vous connecter ou vous inscrire pour continuer ou accéder à ce contenu",
+  "identifyAs": "Je m'identifie comme",
+  "briefDescrip": "Brève description",
+  "jobsPrefs": "Préférences d'emploi",
+  "workersPrefs": "Préférences des travailleurs",
+  "find": "Rechercher"
+
 }

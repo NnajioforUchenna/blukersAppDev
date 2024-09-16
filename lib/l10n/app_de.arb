@@ -479,5 +479,12 @@
   "emailAddress": "E-Mail-Adresse",
   "enterEmailAddress": "E-Mail-Adresse eingeben",
   "enterPassword": "Passwort eingeben",
-  "path": "Pfad"
+  "path": "Pfad",
+  "signupMessage": "Bitte melden Sie sich an, um fortzufahren oder auf diesen Inhalt zuzugreifen",
+  "signInMessage": "Bitte loggen Sie sich ein oder registrieren Sie sich, um fortzufahren oder auf diesen Inhalt zuzugreifen",
+  "identifyAs": "Ich identifiziere mich als",
+  "briefDescrip": "Kurze Beschreibung",
+  "jobsPrefs": "Job-Präferenzen",
+  "workersPrefs": "Arbeiterpräferenzen",
+  "find": "Finden"
 }

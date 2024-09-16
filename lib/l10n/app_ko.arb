@@ -461,5 +461,12 @@
   "findYour": "\ub2f9\uc2e0\uc758 ",
   "dreamJob": "\uae30\ub2a5\uc801\uc778 \uc77c ",
   "inBluckers": "\ube14\ub7ec\uc2a4\uc5d0\uc11c",
-  "path": "경로"
+  "path": "경로",
+  "signupMessage": "계속하려면 가입하거나 이 콘텐츠에 액세스하세요",
+  "signInMessage": "계속하려면 로그인하거나 등록하세요",
+  "identifyAs": "저는 ~로 확인합니다",
+  "briefDescrip": "간단한 설명",
+  "jobsPrefs": "직업 선호 사항",
+  "workersPrefs": "근로자 선호 사항",
+  "find": "찾다"
 }

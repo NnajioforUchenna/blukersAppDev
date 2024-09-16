@@ -3,9 +3,11 @@ import 'package:blukers/models/app_user/app_user.dart';
 import 'package:blukers/views/old_common_views/job_timeline/my_job_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
 
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../services/responsive.dart';
@@ -18,37 +20,40 @@ class MobileCompanyPath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    int currentStep = up.appUser?.companyTimelineStep ?? 0; // Change this accordingly for company
-      AppUser?appUser;
+    int currentStep = up.appUser?.companyTimelineStep ??
+        0; // Change this accordingly for company
+    AppUser? appUser;
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 60),
-            const Center(
-              child: Icon(
-                UniconsLine.building,
-                size: 60,
-                color: ThemeColors.blukersBlueThemeColor,
+            const SizedBox(height: 18),
+            Center(
+              child: SvgPicture.asset(
+                'assets/icons/find_jobs.svg',
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Center(
+            Center(
+              child: SizedBox(
+                width: 173.w,
                 child: Text(
-                  AppLocalizations.of(context)!.companyJourneyTitle,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: ThemeColors.blukersBlueThemeColor,
-                    fontFamily: "Montserrat",
+                  "${AppLocalizations.of(context)!.find} ${AppLocalizations.of(context)!.workers} ${AppLocalizations.of(context)!.inBluckers}",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    // fontFamily: "Montserrat",
                   ),
                   textAlign: TextAlign.center,
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 72,
             ),
             ListView.builder(
               shrinkWrap: true,
@@ -58,32 +63,38 @@ class MobileCompanyPath extends StatelessWidget {
                 String title = "";
                 String description = "";
                 if (index == 0) {
-                  title = AppLocalizations.of(context)!.companyJourneyStep1Title;
+                  title =
+                      AppLocalizations.of(context)!.companyJourneyStep1Title;
                   description =
                       AppLocalizations.of(context)!.companyJourneyStep1Text;
                 }
                 if (index == 1) {
-                  title = AppLocalizations.of(context)!.companyJourneyStep2Title;
+                  title =
+                      AppLocalizations.of(context)!.companyJourneyStep2Title;
                   description =
                       AppLocalizations.of(context)!.companyJourneyStep2Text;
                 }
                 if (index == 2) {
-                  title = AppLocalizations.of(context)!.companyJourneyStep3Title;
+                  title =
+                      AppLocalizations.of(context)!.companyJourneyStep3Title;
                   description =
                       AppLocalizations.of(context)!.companyJourneyStep3Text;
                 }
                 if (index == 3) {
-                  title = AppLocalizations.of(context)!.companyJourneyStep4Title;
+                  title =
+                      AppLocalizations.of(context)!.companyJourneyStep4Title;
                   description =
                       AppLocalizations.of(context)!.companyJourneyStep4Text;
                 }
                 if (index == 4) {
-                  title = AppLocalizations.of(context)!.companyJourneyStep5Title;
+                  title =
+                      AppLocalizations.of(context)!.companyJourneyStep5Title;
                   description =
                       AppLocalizations.of(context)!.companyJourneyStep5Text;
                 }
                 if (index == 5) {
-                  title = AppLocalizations.of(context)!.companyJourneyStep6Title;
+                  title =
+                      AppLocalizations.of(context)!.companyJourneyStep6Title;
                   description =
                       AppLocalizations.of(context)!.companyJourneyStep6Text;
                 }
