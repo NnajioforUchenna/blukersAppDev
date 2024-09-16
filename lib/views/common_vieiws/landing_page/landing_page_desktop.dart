@@ -62,7 +62,8 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                       });
                     },
                     child: Card(
-                      elevation: 5,
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
                       clipBehavior: Clip.hardEdge,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -77,7 +78,6 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                             ? ThemeColors.blukersBlueThemeColor.withOpacity(0.10)
                             : Colors.transparent,
                         width: 0.25.sw,
-                        height: 0.30.sh,
                         padding: const EdgeInsets.all(16.0),
                         child: Stack(
                           children: [
@@ -145,6 +145,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                     },
                     child: Card(
                       elevation: 5,
+                      shadowColor: Colors.transparent,
                       clipBehavior: Clip.hardEdge,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -159,7 +160,6 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                             ? ThemeColors.blukersBlueThemeColor.withOpacity(0.10)
                             : Colors.transparent,
                         width: 0.25.sw,
-                        height: 0.30.sh,
                         padding: const EdgeInsets.all(16.0),
                         child: Stack(
                           children: [

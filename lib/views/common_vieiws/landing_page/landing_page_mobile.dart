@@ -63,24 +63,23 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                       isCompanySelected = false;
                     });
                   },
-                  child: Card(
-                    elevation: 5,
-                    clipBehavior: Clip.hardEdge,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      side: isWorkerSelected
-                          ? const BorderSide(
-                        color: ThemeColors.blukersBlueThemeColor,
-                        width: 2.0,
-                      )
-                          : const BorderSide(color: Colors.grey, width: 2.0),
-                    ),
+                  child: Material(
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
                     child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        border: isWorkerSelected
+                            ? Border.all(
+                                color: ThemeColors.blukersBlueThemeColor,
+                                width: 2.0,
+                              )
+                            : Border.all(color: Colors.grey, width: 2.0),
                       color: isWorkerSelected
                           ? ThemeColors.blukersBlueThemeColor.withOpacity(0.10)
-                          : Colors.transparent,
+                          : Colors.transparent,      
+                      ),
                       width: 0.45.sw,
-                      height: 0.19.sh,
                       padding: const EdgeInsets.all(16.0),
                       child: Stack(
                         children: [
@@ -90,56 +89,52 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                             right: 0,
                             child: isWorkerSelected
                                 ? Icon(
-                              Icons.check_box_sharp,
-                              color: ThemeColors.blukersBlueThemeColor,
-                              size: 30.sp,
-                            )
+                                    Icons.check_box_sharp,
+                                    color: ThemeColors.blukersBlueThemeColor,
+                                    size: 27.sp,
+                                  )
                                 : Icon(
-                              Icons.check_box_outline_blank,
-                              color: ThemeColors.blukersBlueThemeColor,
-                              size: 30.sp,
-                            ),
+                                    Icons.check_box_outline_blank,
+                                    color: ThemeColors.blukersBlueThemeColor,
+                                    size: 27.sp,
+                                  ),
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            clipBehavior: Clip.none,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  height: 0.02.sh,
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                height: 0.02.sh,
+                              ),
+                              Image.asset(
+                                'assets/images/worker_insp.png',
+                                fit: BoxFit.contain,
+                              ),
+                              Text(
+                                "I am a\nworker",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color: ThemeColors.black2ThemeColor,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width < 600
+                                          ? 14.sp
+                                          : 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Image.asset(
-                                  'assets/images/worker_insp.png',
-                                  fit: BoxFit.contain,
+                              ),
+                              Text(
+                                "Looking for jobs",
+                                style: TextStyle(
+                                  color: ThemeColors.black1ThemeColor,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width < 600
+                                          ? 9.sp
+                                          : 15,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Text(
-                                  "I am a\nworker",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    color: ThemeColors.black2ThemeColor,
-                                    fontSize:
-                                    MediaQuery.of(context).size.width < 600
-                                        ? 14.sp
-                                        : 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "Looking for jobs",
-                                  style: TextStyle(
-                                    color: ThemeColors.black1ThemeColor,
-                                    fontSize:
-                                    MediaQuery.of(context).size.width < 600
-                                        ? 9.sp
-                                        : 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -154,24 +149,23 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                       isCompanySelected = true;
                     });
                   },
-                  child: Card(
-                    elevation: 5,
-                    clipBehavior: Clip.hardEdge,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      side: isCompanySelected
-                          ? const BorderSide(
-                        color: ThemeColors.blukersBlueThemeColor,
-                        width: 2.0,
-                      )
-                          : const BorderSide(color: Colors.grey, width: 2.0),
-                    ),
+                  child: Material(
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
                     child: Container(
+                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        border: isCompanySelected
+                            ? Border.all(
+                                color: ThemeColors.blukersBlueThemeColor,
+                                width: 2.0,
+                              )
+                            : Border.all(color: Colors.grey, width: 2.0),
                       color: isCompanySelected
                           ? ThemeColors.blukersBlueThemeColor.withOpacity(0.10)
-                          : Colors.transparent,
+                          : Colors.transparent,      
+                      ),
                       width: 0.45.sw,
-                      height: 0.19.sh,
                       padding: const EdgeInsets.all(16.0),
                       child: Stack(
                         children: [
@@ -181,56 +175,52 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                             right: 0,
                             child: isCompanySelected
                                 ? Icon(
-                              Icons.check_box_sharp,
-                              color: ThemeColors.blukersBlueThemeColor,
-                              size: 30.sp,
-                            )
+                                    Icons.check_box_sharp,
+                                    color: ThemeColors.blukersBlueThemeColor,
+                                    size: 27.sp,
+                                  )
                                 : Icon(
-                              Icons.check_box_outline_blank,
-                              color: ThemeColors.blukersBlueThemeColor,
-                              size: 30.sp,
-                            ),
+                                    Icons.check_box_outline_blank,
+                                    color: ThemeColors.blukersBlueThemeColor,
+                                    size: 27.sp,
+                                  ),
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            clipBehavior: Clip.none,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  height: 0.02.sh,
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                height: 0.02.sh,
+                              ),
+                              Image.asset(
+                                'assets/images/company_insp.png',
+                                fit: BoxFit.contain,
+                              ),
+                              Text(
+                                "I am a\ncompany",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color: ThemeColors.black2ThemeColor,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width < 600
+                                          ? 14.sp
+                                          : 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Image.asset(
-                                  'assets/images/company_insp.png',
-                                  fit: BoxFit.contain,
+                              ),
+                              Text(
+                                "Looking for workers",
+                                style: TextStyle(
+                                  color: ThemeColors.black1ThemeColor,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width < 600
+                                          ? 9.sp
+                                          : 15,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Text(
-                                  "I am a\ncompany",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    color: ThemeColors.black2ThemeColor,
-                                    fontSize:
-                                    MediaQuery.of(context).size.width < 600
-                                        ? 14.sp
-                                        : 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "Looking for workers",
-                                  style: TextStyle(
-                                    color: ThemeColors.black1ThemeColor,
-                                    fontSize:
-                                    MediaQuery.of(context).size.width < 600
-                                        ? 9.sp
-                                        : 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
