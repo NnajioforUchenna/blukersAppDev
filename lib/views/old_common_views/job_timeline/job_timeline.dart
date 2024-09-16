@@ -131,7 +131,7 @@ Widget buildButton(
     double width, int currentStep, String text, context, onClick) {
   return Center(
     child: SizedBox(
-      width: width < 600 ? 350 : 700, // 300 on mobile, 500 on web or tablet
+      width: width < 600 ? 350 : 400, // 300 on mobile, 500 on web or tablet
       height: width < 600 ? 50 : 80, // 70 on mobile, 100 on web or tablet
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

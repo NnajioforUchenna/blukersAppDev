@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
-import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/index.dart';
 
 class LandingPageMobile extends StatefulWidget {
@@ -72,9 +70,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                       borderRadius: BorderRadius.circular(15.0),
                       side: isWorkerSelected
                           ? const BorderSide(
-                              color: ThemeColors.blukersBlueThemeColor,
-                              width: 2.0,
-                            )
+                        color: ThemeColors.blukersBlueThemeColor,
+                        width: 2.0,
+                      )
                           : const BorderSide(color: Colors.grey, width: 2.0),
                     ),
                     child: Container(
@@ -92,15 +90,15 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                             right: 0,
                             child: isWorkerSelected
                                 ? Icon(
-                                    Icons.check_box_sharp,
-                                    color: ThemeColors.blukersBlueThemeColor,
-                                    size: 30.sp,
-                                  )
+                              Icons.check_box_sharp,
+                              color: ThemeColors.blukersBlueThemeColor,
+                              size: 30.sp,
+                            )
                                 : Icon(
-                                    Icons.check_box_outline_blank,
-                                    color: ThemeColors.blukersBlueThemeColor,
-                                    size: 30.sp,
-                                  ),
+                              Icons.check_box_outline_blank,
+                              color: ThemeColors.blukersBlueThemeColor,
+                              size: 30.sp,
+                            ),
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.vertical,
@@ -123,9 +121,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                                   style: TextStyle(
                                     color: ThemeColors.black2ThemeColor,
                                     fontSize:
-                                        MediaQuery.of(context).size.width < 600
-                                            ? 14.sp
-                                            : 20,
+                                    MediaQuery.of(context).size.width < 600
+                                        ? 14.sp
+                                        : 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -134,9 +132,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                                   style: TextStyle(
                                     color: ThemeColors.black1ThemeColor,
                                     fontSize:
-                                        MediaQuery.of(context).size.width < 600
-                                            ? 9.sp
-                                            : 15,
+                                    MediaQuery.of(context).size.width < 600
+                                        ? 9.sp
+                                        : 15,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -163,9 +161,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                       borderRadius: BorderRadius.circular(15.0),
                       side: isCompanySelected
                           ? const BorderSide(
-                              color: ThemeColors.blukersBlueThemeColor,
-                              width: 2.0,
-                            )
+                        color: ThemeColors.blukersBlueThemeColor,
+                        width: 2.0,
+                      )
                           : const BorderSide(color: Colors.grey, width: 2.0),
                     ),
                     child: Container(
@@ -183,15 +181,15 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                             right: 0,
                             child: isCompanySelected
                                 ? Icon(
-                                    Icons.check_box_sharp,
-                                    color: ThemeColors.blukersBlueThemeColor,
-                                    size: 30.sp,
-                                  )
+                              Icons.check_box_sharp,
+                              color: ThemeColors.blukersBlueThemeColor,
+                              size: 30.sp,
+                            )
                                 : Icon(
-                                    Icons.check_box_outline_blank,
-                                    color: ThemeColors.blukersBlueThemeColor,
-                                    size: 30.sp,
-                                  ),
+                              Icons.check_box_outline_blank,
+                              color: ThemeColors.blukersBlueThemeColor,
+                              size: 30.sp,
+                            ),
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.vertical,
@@ -214,9 +212,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                                   style: TextStyle(
                                     color: ThemeColors.black2ThemeColor,
                                     fontSize:
-                                        MediaQuery.of(context).size.width < 600
-                                            ? 14.sp
-                                            : 20,
+                                    MediaQuery.of(context).size.width < 600
+                                        ? 14.sp
+                                        : 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -225,9 +223,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
                                   style: TextStyle(
                                     color: ThemeColors.black1ThemeColor,
                                     fontSize:
-                                        MediaQuery.of(context).size.width < 600
-                                            ? 9.sp
-                                            : 15,
+                                    MediaQuery.of(context).size.width < 600
+                                        ? 9.sp
+                                        : 15,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -244,12 +242,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
             SizedBox(height: 0.07.sh), // Responsive height
             ElevatedButton(
               onPressed: () {
-                final up = Provider.of<UserProvider>(context, listen: false);
                 if (isWorkerSelected) {
-                  up.setUserRole("worker");
                   context.go('/jobs');
                 } else if (isCompanySelected) {
-                  up.setUserRole("company");
                   context.go('/workers');
                 }
               },
