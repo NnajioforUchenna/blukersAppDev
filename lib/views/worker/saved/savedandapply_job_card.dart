@@ -32,6 +32,7 @@ class SavedandapplyJobCard extends StatefulWidget {
 class _DisplayJobCardState extends State<SavedandapplyJobCard> {
   @override
   Widget build(BuildContext context) {
+   final JobPost jobPost = widget.jobPost; // Assign the value here
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
     final bool isMobileLayout =
@@ -55,7 +56,8 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: isJobPostSelected() ? const Color(0xFFE5EDFF) : Colors.white,
+              color:
+                  isJobPostSelected() ? const Color(0xFFE5EDFF) : Colors.white,
               border: isMobileLayout
                   ? const Border(
                       left: BorderSide(
@@ -136,48 +138,67 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
                   ],
                 ),
                 const SizedBox(height: 15),
+             
+                const SizedBox(height: 15),
                 Row(
                   children: [
                     if (!isHideButton)
-                      SizedBox(
-                        height: 40,
-                        width: 150,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                isJobApplied ? Colors.transparent : Colors.grey,
-                            elevation: isJobApplied ? 0 : 8,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                              side: isJobApplied ? const BorderSide( color: ThemeColors.primaryThemeColor) : BorderSide.none,
-                            ),
-                          ),
-                          onPressed: () async {
-                            setState(() {
-                              isJobApplied = !isJobApplied;
-                            });
-                          },
-                          child: Center(
-                            child: AutoSizeText(
-                              isJobApplied
-                                  ? AppLocalizations.of(context)!.alreadyApplied
-                                  : AppLocalizations.of(context)!.apply.toUpperCase(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: isJobApplied
-                                    ? ThemeColors.primaryThemeColor
-                                    : Colors.white,
+                      isJobApplied
+                          ? Container(
+                              height: 40,
+                              width: 150,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(9),
+                                border: Border.all(
+                                    color: ThemeColors.primaryThemeColor),
                               ),
-                              maxLines: 1,
-                              minFontSize: 12,
-                              overflow: TextOverflow.ellipsis,
+                              child: Text(
+                                AppLocalizations.of(context)!.alreadyApplied,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: ThemeColors.primaryThemeColor,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )
+                          : SizedBox(
+                              height: 40,
+                              width: 150,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: ThemeColors.primaryThemeColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(9),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  setState(() {
+                                 up.checkAndApplyJobPost(context, jobPost);
+                                  });
+                                },
+                                child: Center(
+                                  child: AutoSizeText(
+                                    AppLocalizations.of(context)!
+                                        .apply
+                                        ,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                    maxLines: 1,
+                                    minFontSize: 12,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
                   ],
-                )
+                ),
               ],
             ),
           ),

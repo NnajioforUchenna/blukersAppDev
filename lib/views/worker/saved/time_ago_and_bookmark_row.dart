@@ -29,18 +29,18 @@ class _TimeAgoAndBookMarkRowState extends State<TimeAgoAndBookMarkRow> {
             ? const SizedBox()
             : IconButton(
                 onPressed: () async {
-                  if (up.workerTimelineStep < 3) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const DisplayJobTimelineDialog(),
-                    );
-                  } else {
+                  // if (up.workerTimelineStep < 3) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (context) => const DisplayJobTimelineDialog(),
+                  //   );
+                  // } else {
                     // Save or unsave the job post without showing a loading spinner
                     await up.saveJobPost(widget.jobPost);
 
                     // Trigger rebuild to reflect the change
                     setState(() {});
-                  }
+                  // }
                 },
                 icon: Icon(
                   isJobSaved
