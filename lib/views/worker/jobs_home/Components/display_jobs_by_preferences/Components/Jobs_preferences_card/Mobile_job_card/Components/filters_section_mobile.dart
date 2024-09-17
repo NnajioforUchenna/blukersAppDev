@@ -47,7 +47,7 @@ class FiltersSection extends StatelessWidget {
         if (isExpandedFilters)
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text('Filter options go here...'),
+            child: Text('Filter options go here..'),
           ),
       ],
     );

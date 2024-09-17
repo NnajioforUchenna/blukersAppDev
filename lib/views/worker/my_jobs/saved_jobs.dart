@@ -19,6 +19,7 @@ class _SavedJobsState extends State<SavedJobs> {
   bool _isInitialized = false; // Flag to track initialization
 
   @override
+
   void didChangeDependencies() {
     super.didChangeDependencies();
 

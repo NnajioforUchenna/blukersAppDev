@@ -28,7 +28,7 @@ class ListJobPostsWidget extends StatelessWidget {
 }
 
 Widget buildWebContent(jobPosts) {
-  return Row(
+  return Row(     
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       // 1st column

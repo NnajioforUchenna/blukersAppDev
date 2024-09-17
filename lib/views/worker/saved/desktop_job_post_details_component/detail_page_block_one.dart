@@ -109,39 +109,57 @@ class DetailPageBlockOne extends StatelessWidget {
             SizedBox(height: 15.h),
             Row(
               children: [
-                isHideButton
-                    ? const SizedBox()
-                    : SizedBox(
-                        width: 100,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: isJobApplied
-                                ? ThemeColors.secondaryThemeColor
-                                : Colors.grey,
-                            elevation: 8,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                if (!isHideButton) // Correct usage of 'if' statement
+                  isJobApplied
+                      ? SizedBox(
+                          height: 40,
+                          width: 150,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ThemeColors.primaryThemeColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(9),
+                              ),
+                            ),
+                            onPressed: () async {
+                              up.checkAndApplyJobPost(context, jobPost);
+                            },
+                            child: Center(
+                              child: AutoSizeText(
+                                AppLocalizations.of(context)!.apply,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                                maxLines: 1,
+                                minFontSize: 12,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
-                          onPressed: () async {
-                            up.checkAndApplyJobPost(context, jobPost);
-                          },
-                          child: Center(
-                            // Center the text inside the button
-                            child: AutoSizeText(
-                              isJobApplied
-                                  ? AppLocalizations.of(context)!
-                                      .apply
-                                      .toUpperCase()
-                                  : AppLocalizations.of(context)!
-                                      .alreadyApplied,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
+                        )
+                      : Container(
+                          height: 40,
+                          width: 150,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(9),
+                            border: Border.all(
+                                color: ThemeColors.primaryThemeColor),
+                          ),
+                          child: Text(
+                            AppLocalizations.of(context)!.alreadyApplied,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: ThemeColors.primaryThemeColor,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                      ),
 
                 const Spacer(),
                 RoundedImageWidget(

@@ -12,6 +12,7 @@ class MobileJobsPreferencesCard extends StatefulWidget {
   const MobileJobsPreferencesCard({Key? key}) : super(key: key);
 
   @override
+
   State<MobileJobsPreferencesCard> createState() =>
       _JobsPreferencesCardState();
 }

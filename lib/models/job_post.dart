@@ -18,6 +18,7 @@ enum JobType {
 enum SalaryType { hourly, daily, weekly, biWeekly, monthly, yearly }
 
 class JobPost {
+   JobUrgencyLevel urgencyLevel;
   String jobPostId;
   String companyId;
   String companyName;
@@ -45,6 +46,7 @@ class JobPost {
   List<String> jobIds;
 
   JobPost({
+    this.urgencyLevel = JobUrgencyLevel.medium,
     this.jobPostId = '',
     this.companyId = '',
     this.companyName = '',
