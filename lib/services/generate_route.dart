@@ -1,5 +1,6 @@
 import 'package:blukers/services/responsive.dart';
 import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
+import 'package:blukers/views/company/company_messenger/bottom_nav.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
 import 'package:blukers/views/company/workers_home/worker_home_mobile/set_worker_preferences.dart';
 import 'package:blukers/views/worker/select_job_industry/select_industry_desktop.dart';
@@ -85,6 +86,8 @@ final routes = [
           builder: (context, state) => const SearchJobsUi()),
       GoRoute(
           path: '/workerChat', builder: (context, state) => const WorkerChat()),
+          GoRoute(
+          path: '/messenger', builder: (context, state) => const CompanyMessengerNavigationBar()),
       GoRoute(
           path: '/workerChatRoomScreen',
           builder: (context, state) => const WorkerChatRoomScreen()),
@@ -126,6 +129,9 @@ final routes = [
       GoRoute(
           path: '/workerMessages',
           builder: (context, state) => const WorkerMessages()),
+          GoRoute(
+          path: '/messenger',
+          builder: (context, state) => const CompanyMessengerNavigationBar()),
     ],
   ),
 

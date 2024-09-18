@@ -1,12 +1,9 @@
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
 
 import '../../../../../models/chat_recipient.dart';
 import '../../../../../providers/company_chat_provider.dart';
-import '../../../../common_vieiws/icon_text_404.dart';
 import 'web_chat_recipient_widget.dart';
 
 class WebCompanyChatList extends StatefulWidget {
@@ -29,10 +26,13 @@ class _WebCompanyChatListState extends State<WebCompanyChatList> {
           return const Center(child: CircularProgressIndicator());
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return IconText404(
-            text: AppLocalizations.of(context)!.youHaveNoChats,
-            icon: UniconsLine.chat,
-          );
+         return const Text(
+             "Your conversations with employers will show here.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+              ),
+            );
         }
         return ListView.builder(
           itemCount: snapshot.data!.length,

@@ -17,7 +17,7 @@ class WebChatRecipientWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Material(
         borderRadius: BorderRadius.circular(10),
-        elevation: 3,
+        color: Colors.white,
         child: InkWell(
           onTap: () {
             cp.setChatRecipient(chatRecipient!);
@@ -28,27 +28,35 @@ class WebChatRecipientWidget extends StatelessWidget {
             ),
             title: Text(chatRecipient?.displayName ?? 'Not Given'),
             subtitle: Text(chatRecipient?.clientType ?? 'Not Given'),
-            trailing: Visibility(
-              visible: chatRecipient?.unreadMessageCount != 0,
-              child: Container(
-                width: 23,
-                height: 23,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blueAccent,
-                ),
-                child: Center(
-                  child: Text(
-                    '${chatRecipient?.unreadMessageCount ?? 0}', // Use unreadMessageCount dynamically
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
+            trailing: const Text(
+              "12m",
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
               ),
             ),
+            // trailing: Visibility(
+            //   // visible: chatRecipient?.unreadMessageCount != 0,
+            //   visible: true,
+            //   child: Container(
+            //     width: 23,
+            //     height: 23,
+            //     decoration: const BoxDecoration(
+            //       shape: BoxShape.circle,
+            //       color: Colors.blueAccent,
+            //     ),
+            //     child: Center(
+            //       child: Text(
+            //         '${chatRecipient?.unreadMessageCount ?? 0}', // Use unreadMessageCount dynamically
+            //         style: const TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 10,
+            //           fontWeight: FontWeight.w700,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ),
         ),
       ),

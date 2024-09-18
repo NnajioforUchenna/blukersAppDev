@@ -102,7 +102,7 @@ class WorkerDrawer extends StatelessWidget {
             context: context,
             icon: Icons.notifications,
             text: 'Job Alerts & Messages',
-            route: '/workerMessages',
+            route: '/messenger',
           ),
         ],
       ),

@@ -21,6 +21,13 @@ final List<String> routesCompany = [
   '/pathToEmployingWorker',
 ];
 
+final List<String> routesMessenger = [
+  '/companyChat',
+  '/companyChat',
+  '/companyChat',
+  '/companyChat',
+];
+
 String getAddressesInStringFormat(Address? address) {
   if (address == null) {
     return 'Not specified';

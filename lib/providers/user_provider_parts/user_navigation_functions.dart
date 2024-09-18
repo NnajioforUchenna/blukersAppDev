@@ -33,6 +33,12 @@ extension UserNavigationFunctions on UserProvider {
     context.go(routesCompany[index]);
   }
 
+  void navigateMessenger(BuildContext context, int index) {
+    messengerIndex = index;
+    notifyListeners();
+  //  context.go(routesMessenger[index]);
+  }
+
   void navigateWorker(BuildContext context, int index) {
     currentPageIndex = index;
     notifyListeners();

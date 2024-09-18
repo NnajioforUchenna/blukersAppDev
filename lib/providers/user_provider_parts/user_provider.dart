@@ -73,6 +73,7 @@ class UserProvider with ChangeNotifier {
 
   int registerCurrentPageIndex = 0;
   int currentPageIndex = 0;
+  int messengerIndex = 1;
 
   // Navigation Functions
   PageController pageController = PageController();
