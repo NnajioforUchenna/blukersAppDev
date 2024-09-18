@@ -261,6 +261,7 @@ Widget buildButton(
   return Center(
     child: SizedBox(
       width: width < 600 ? 250 : double.infinity,
+      
       height: width < 600 ? 50 : 55,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

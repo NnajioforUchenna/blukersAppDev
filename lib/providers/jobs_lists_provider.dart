@@ -125,6 +125,60 @@ class JobsListsProvider extends ChangeNotifier {
     }
   }
 
+  // Update the displayJobsByPreferences map with the new jobs
+  Future<void> narrowJobsByPreferences({
+    required List<String> selectedIndustries,
+    required List<JobType> selectedJobTypes,
+    required JobUrgencyLevel urgencyValue,
+    required SalaryType selectedSalaryType,
+  }) async {
+    // Fetch the jobs by preferences, job type, and salary range
+    Preference? preference = appUser?.registrationDetails?.jobsPreference;
+
+    if (preference != null) {
+      // Initialize the jobs page object
+      jobsPageByPreferences = JobsPageByPreferences();
+      jobsPageByPreferences.preference = preference;
+      jobsPageByPreferences.language = language;
+
+      // Add the selected filters to the jobsPageByPreferences object
+      jobsPageByPreferences.jobs = jobsPageByPreferences.jobs
+          .where((job) => job.industryIds == selectedIndustries)
+          .where((job) => job.jobType == selectedJobTypes)
+          .where((job) => job.urgencyLevel == urgencyValue)
+          .where((job) => job.salaryType == selectedSalaryType)
+          .toList();
+
+    
+     // Assuming getJobsByPreferences now accepts the filters as parameters:
+      jobsPageByPreferences = await JobsListsDataProvider.getJobsByFilters(
+        jobsPageByPreferences,
+        selectedIndustries, // Pass selected industries
+        selectedJobTypes, // Pass selected job types
+        urgencyValue, // Pass urgency level
+        selectedSalaryType, // Pass salary type
+      );
+
+      // Check if any jobs were retrieved
+      if (jobsPageByPreferences.jobs.isNotEmpty) {
+        displayJobsByPreferences.clear();
+
+        // Update the displayJobsByPreferences map with the new jobs
+        for (JobPost job in jobsPageByPreferences.jobs) {
+          displayJobsByPreferences[job.jobPostId] = job;
+        }
+
+        // Notify listeners to update the UI
+        notifyListeners();
+      } else {
+        EasyLoading.showError('No jobs found matching your criteria');
+      }
+    } else {
+      // Display error if no preferences are set
+      EasyLoading.showError('No Preferences are set');
+    }
+  }
+
   loadMoreJobsByPreferences() async {
     // Fetch the next page of jobs and update the jobs page
     jobsPageByPreferences =

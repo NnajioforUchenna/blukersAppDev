@@ -369,8 +369,7 @@ class UserProvider with ChangeNotifier {
     return appUser!.registrationDetails?.workersPreference != null;
   }
 
-  void setJobsPreferences(
-      List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
+  void setJobsPreferences( List<String> selectedIndustries, Map<String, List<String>> selectedJobs) {
     if (appUser != null) {
       Preference preference = Preference(
         industryIds: selectedIndustries,

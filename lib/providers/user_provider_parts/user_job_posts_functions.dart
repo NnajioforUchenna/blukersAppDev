@@ -20,29 +20,27 @@ extension UserJobPostsFunctions on UserProvider {
         false; // Change to JobPostId
   }
 
-   saveJobPost(JobPost jobPost) {
-    // Ensure workerRecords exist
-    appUser?.workerRecords ??= WorkerRecords();
+  saveJobPost(JobPost jobPost) {
+  // Ensure workerRecords exist
+  appUser?.workerRecords ??= WorkerRecords();
 
-    // Check if the job post is already saved
-    if (isJobPostSaved(jobPost.jobPostId)) {
-      // Remove the job post from savedJobPostIds
-      appUser?.workerRecords?.savedJobPostIds?.remove(jobPost.jobPostId);
-      EasyLoading.showSuccess('Job Post Removed');
-    } else {
-      // Add the job post to savedJobPostIds
-      appUser?.workerRecords?.savedJobPostIds?.add(jobPost.jobPostId);
-      EasyLoading.showSuccess('Job Post Saved');
-    }
-
-    // Update UI interface
-    notifyListeners();
-
-    // Persist data to database
-    UserDataProvider.updateUser(appUser!);
-    UserDataProvider.updateWorkerSavedJobPostIds(
-      appUser!.workerRecords!.savedJobPostIds!, appUser!.uid);
+  // Check if the job post is already saved
+  if (isJobPostSaved(jobPost.jobPostId)) {
+    // Remove the job post from savedJobPostIds
+    appUser?.workerRecords?.savedJobPostIds?.remove(jobPost.jobPostId);
+    EasyLoading.showSuccess('Job Post Removed');
+  } else {
+    // Add the job post to savedJobPostIds
+    appUser?.workerRecords?.savedJobPostIds?.add(jobPost.jobPostId);
+    EasyLoading.showSuccess('Job Post Saved');
   }
+
+  // Persist data to database
+  UserDataProvider.updateUser(appUser!);
+  UserDataProvider.updateWorkerSavedJobPostIds(
+    appUser!.workerRecords!.savedJobPostIds!, appUser!.uid);
+}
+
 
   Future<void> checkAndApplyJobPost(
       BuildContext context, JobPost jobPost) async {
