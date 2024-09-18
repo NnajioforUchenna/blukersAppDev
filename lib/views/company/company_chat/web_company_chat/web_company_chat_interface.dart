@@ -36,7 +36,7 @@ class _WebCompanyChatState extends State<WebCompanyChat> {
       body: Row(
         children: [
           SizedBox(
-            width: 100,
+            width: 80,
               child: Container(
                 height: double.infinity,
                 margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
