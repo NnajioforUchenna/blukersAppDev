@@ -259,7 +259,7 @@ class ProfileNavBar extends StatelessWidget {
                         icon: "assets/icons/chat.svg",
                       )
                     : const OverlayRow(
-                        route: '/workerMessages',
+                        route: '/messenger',
                         title: "Job Alerts, Chats and Calls",
                         icon: "assets/icons/notif.svg",
                       ),

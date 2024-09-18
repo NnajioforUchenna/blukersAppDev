@@ -56,6 +56,7 @@ class AppSettingsProvider with ChangeNotifier {
   GlobalKey signInButton = GlobalKey();
   GlobalKey bottomNavigation = GlobalKey();
   GlobalKey bottomNavigationCompany = GlobalKey();
+  GlobalKey bottomNavigationMessenger = GlobalKey();
 
   Future<bool?> _shouldUpdateApp() async {
     // bool shouldShowUpdateDialog = false;

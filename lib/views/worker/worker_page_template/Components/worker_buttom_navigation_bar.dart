@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -35,7 +38,8 @@ class _WorkerButtomNavigationBarState extends State<WorkerButtomNavigationBar> {
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
-      child: BottomNavigationBar(
+      child: 
+       BottomNavigationBar(
         currentIndex: currentPageIndex,
         onTap: (int index) {
           up.navigateWorker(context, index);

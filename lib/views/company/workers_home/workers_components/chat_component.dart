@@ -35,20 +35,19 @@ class ChatComponent extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    color: isMe
-                        ? ThemeColors.chatScreenBackgroundColor
-                        : Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(42),
-                      topRight: const Radius.circular(42),
-                      bottomLeft: Radius.circular(isMe ? 42 : 0),
-                      bottomRight: Radius.circular(isMe ? 0 : 42),
+                    color: isMe ? ThemeColors.secondaryThemeColor : ThemeColors.grey2ThemeColor,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
                     )),
                 child: Text(
                   message,
                   // overflow: TextOverflow.ellipsis,
                   style: ThemeTextStyles.headingThemeTextStyle
-                      .apply(color: isMe ? Colors.white : Colors.black),
+                      .apply(color: isMe ? Colors.white : Colors.black,
+                      ).copyWith(fontWeight: FontWeight.w500)
                 ),
               ),
             ),

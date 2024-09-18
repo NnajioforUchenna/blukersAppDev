@@ -21,37 +21,49 @@ class CompanyChatRecipientWidget extends StatelessWidget {
           cp.setChatRecipient(chatRecipient!);
           context.push('/companyChatRoomScreen');
         },
-        child: Material(
-          borderRadius: BorderRadius.circular(10),
-          elevation: 3,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(photoUrl),
-            ),
-            title: Text(chatRecipient?.displayName ?? 'Not Given'),
-            subtitle: Text(chatRecipient?.clientType ?? 'Not Given'),
-            trailing: Visibility(
-              visible: chatRecipient?.unreadMessageCount != 0,
-              child: Container(
-                width: 23,
-                height: 23,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blueAccent,
-                ),
-                child: Center(
-                  child: Text(
-                    '${chatRecipient?.unreadMessageCount ?? 0}', // Use unreadMessageCount dynamically
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
+        child: ListTile(
+          leading: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: NetworkImage(photoUrl),
+                fit: BoxFit.cover,
               ),
             ),
           ),
+          title: Text(chatRecipient?.displayName ?? 'Not Given'),
+          subtitle: Text(chatRecipient?.clientType ?? 'Not Given'),
+          trailing: const Text(
+            "12m",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+          // trailing: Visibility(
+          //   visible: chatRecipient?.unreadMessageCount != 0,
+          //   child: Container(
+          //     width: 23,
+          //     height: 23,
+          //     decoration: const BoxDecoration(
+          //       shape: BoxShape.circle,
+          //       color: Colors.blueAccent,
+          //     ),
+          //     child: Center(
+          //       child: Text(
+          //         '${chatRecipient?.unreadMessageCount ?? 0}', // Use unreadMessageCount dynamically
+          //         style: const TextStyle(
+          //           color: Colors.white,
+          //           fontSize: 10,
+          //           fontWeight: FontWeight.w700,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ),
       ),
     );

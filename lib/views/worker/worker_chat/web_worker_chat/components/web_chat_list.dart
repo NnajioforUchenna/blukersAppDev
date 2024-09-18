@@ -1,6 +1,7 @@
 import 'package:blukers/models/chat_recipient.dart';
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/providers/worker_chat_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:blukers/views/common_vieiws/icon_text_404.dart';
 import 'package:blukers/views/worker/worker_chat/web_worker_chat/components/web_chat_recipient_widget.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,22 @@ class _WebWorkerChatListState extends State<WebWorkerChatList> {
           return const Center(child: CircularProgressIndicator());
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return IconText404(
-            text: AppLocalizations.of(context)!.youHaveNoChats,
-            icon: UniconsLine.chat,
+          // return IconText404(
+          //   text: AppLocalizations.of(context)!.youHaveNoChats,
+          //   icon: UniconsLine.chat,
+          // );
+          return const Center(
+            child: Text(
+               "Your conversations with employers will show here.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  color: ThemeColors.grey1ThemeColor,
+                  fontSize: 20,
+                  height: 1.5,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
           );
         }
         return ListView.builder(

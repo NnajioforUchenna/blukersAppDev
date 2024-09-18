@@ -2,6 +2,7 @@ import 'package:blukers/providers/company_chat_provider.dart';
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/chat_message.dart';
@@ -61,7 +62,7 @@ class _CompanyChatRoomScreenState extends State<CompanyChatRoomScreen> {
         children: [
           Expanded(
             child: Container(
-              color: Color(0xFFFEF7FF),
+              color: Color.fromARGB(255, 255, 255, 255),
               child: StreamBuilder<QuerySnapshot>(
                   stream: cp.getMessagesByRoomId(),
                   builder: (BuildContext context,
@@ -93,48 +94,71 @@ class _CompanyChatRoomScreenState extends State<CompanyChatRoomScreen> {
                   }),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextField(
-                      controller: _textController,
-                      onChanged: (value) {
-                        setState(() {
-                          textMessage = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Type a message',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          // Adjust radius as needed
+          Container(
+            color: Color.fromARGB(255, 255, 255, 255),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/attachment.svg',
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                        controller: _textController,
+                        onChanged: (value) {
+                          setState(() {
+                            textMessage = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Type a message',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            // Adjust radius as needed
+                          ),
+                          suffixIcon: IconButton(
+                            icon: SvgPicture.asset(
+                              'assets/icons/send.svg',
+                              color: (textMessage != "")
+                                  ? null
+                                  : Colors.grey,
+                            ),
+                            onPressed: () {
+                               if (textMessage == "") {
+                        return;
+                      }
+                      onSendMessage();
+                      setState(() {
+                        textMessage = "";
+                      });
+                            },
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.send_outlined,
-                    color: (textMessage != "")
-                        ? Colors.blueGrey[900]
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    if (textMessage == "") {
-                      return;
-                    }
-                    onSendMessage();
-                    setState(() {
-                      textMessage = "";
-                    });
-                  },
-                ),
-              ],
+                  // IconButton(
+                  //   icon: Icon(
+                  //     Icons.send_outlined,
+                  //     color: (textMessage != "")
+                  //         ? Colors.blueGrey[900]
+                  //         : Colors.grey,
+                  //   ),
+                  //   onPressed: () {
+                  //     if (textMessage == "") {
+                  //       return;
+                  //     }
+                  //     onSendMessage();
+                  //     setState(() {
+                  //       textMessage = "";
+                  //     });
+                  //   },
+                  // ),
+                ],
+              ),
             ),
           )
         ],
