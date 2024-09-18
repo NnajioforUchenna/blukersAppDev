@@ -38,7 +38,7 @@ class WorkerAppBar extends StatelessWidget implements PreferredSizeWidget {
               up.appUser == null
                   ? const SizedBox.shrink()
                   : const Padding(
-                      padding: EdgeInsets.only(right: 24),
+                      padding: EdgeInsets.only(right: 24, top: 15),
                       child: ProfileNavBar(),
                     )
             ],

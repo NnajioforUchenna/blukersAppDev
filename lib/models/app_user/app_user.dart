@@ -244,7 +244,7 @@ class AppUser {
     if (displayName != null && displayName!.isNotEmpty) {
       return displayName!;
     } else if (registrationDetails != null) {
-      return '${registrationDetails!.firstName} ${registrationDetails!.lastName}';
+      return '${registrationDetails!.firstName ?? "--"} ${registrationDetails!.lastName ?? "--"}';
     } else if (company != null) {
       return company!.name;
     } else {

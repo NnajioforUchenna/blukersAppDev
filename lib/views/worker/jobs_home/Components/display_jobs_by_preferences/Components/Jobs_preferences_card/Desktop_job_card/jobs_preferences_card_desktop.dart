@@ -1,6 +1,8 @@
 // jobs_preferences_card_desktop.dart
 
+import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:googleapis/keep/v1.dart';
 import 'package:provider/provider.dart';
 import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/providers/industry_provider.dart';
@@ -63,10 +65,9 @@ class _JobsPreferencesCardDesktopState
   @override
   Widget build(BuildContext context) {
     IndustriesProvider ip = Provider.of<IndustriesProvider>(context);
-
     return Center(
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 1500),
+        width: Responsive.isDesktop(context)?  MediaQuery.of(context).size.width * 0.85: null,
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(

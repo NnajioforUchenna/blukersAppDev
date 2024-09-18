@@ -10,14 +10,14 @@ class GreyContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: Colors.grey[300],
+        color: const Color.fromRGBO(243, 85, 7, 0.1),
       ),
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Text(
           child,
           style:
-              GoogleFonts.montserrat(fontSize: 10, fontWeight: FontWeight.w500),
+              GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.w600),
         ),
       ),
     );

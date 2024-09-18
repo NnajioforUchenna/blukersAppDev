@@ -66,7 +66,8 @@ class _BuildListViewJobsByPreferencesState
     return ListView.separated(
       controller: controller,
       shrinkWrap: true,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(top: 20),
+      // padding: const EdgeInsets.all(10),
       // Added to give some space around cards
       itemCount: jobPosts.length + 1,
       itemBuilder: (context, index) {
@@ -114,7 +115,7 @@ class _BuildListViewJobsByPreferencesState
       },
       separatorBuilder: (BuildContext context, int index) {
         return const SizedBox(
-          height: 5,
+          height: 20,
         );
       },
     );
