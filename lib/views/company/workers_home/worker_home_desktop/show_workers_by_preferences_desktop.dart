@@ -4,18 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../display_workers/display_workers.dart';
 
-class DesktopShowWorkersByPreferences extends StatelessWidget {
+class DesktopShowWorkersByPreferences extends StatefulWidget {
   const DesktopShowWorkersByPreferences({super.key});
 
   @override
+  State<DesktopShowWorkersByPreferences> createState() => _DesktopShowWorkersByPreferencesState();
+}
+
+class _DesktopShowWorkersByPreferencesState extends State<DesktopShowWorkersByPreferences> {
+  @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 80.sp),
-          child: const WorkersPreferencesCardDesktop(),
-        ),
-        const Expanded(child: DisplayWorkersDesktop()),
+        WorkersPreferencesCardDesktop(),
+        Expanded(child: DisplayWorkersDesktop()),
       ],
     );
   }
