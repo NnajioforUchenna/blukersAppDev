@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/job_posts_provider.dart';
@@ -16,6 +18,23 @@ class AnimateJobPostDetails extends StatelessWidget {
       return JobPostDetailsWidget(
         jobPost: jp.selectedJobPost,
       );
+    } else if (jp.selectedJobPost == null) {
+      return Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            'assets/icons/empty_job.svg',
+          ),
+          const SizedBox(height: 38),
+          Text(
+            'Click on Job to view',
+            style: GoogleFonts.montserrat(
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ));
     } else if (jp.displayedJobPosts.isNotEmpty) {
       return JobPostDetailsWidget(
         jobPost: jp.displayedJobPosts.values.first,

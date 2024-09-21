@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -94,14 +95,15 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  FittedBox(
-                                    child: Text(
-                                      toTitleCase(widget.jobPost.jobTitle),
-                                      style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 22,
-                                      ),
+                                  AutoSizeText(
+                                    toTitleCase(widget.jobPost.jobTitle),
+                                    style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w600,
+                                      
                                     ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxFontSize: 22,
+                                    minFontSize: 18,
                                   ),
                                   Text(
                                     widget.jobPost.companyName,
@@ -127,11 +129,13 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.location_on_outlined,
+                              const Icon(
+                                Icons.location_on_outlined,
                                   size: 12,
+                                  
                                   color: ThemeColors.black1ThemeColor),
                               const SizedBox(width: 5),
-                              FittedBox(
+                              Expanded(
                                 child: Text(
                                   widget.jobPost.location ?? "--",
                                   maxLines: 1,

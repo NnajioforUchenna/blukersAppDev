@@ -40,7 +40,7 @@ class BuildListViewWorkers extends StatelessWidget {
       },
       separatorBuilder: (BuildContext context, int index) {
         return const SizedBox(
-          height: 5,
+          height: 20,
         );
       },
     );

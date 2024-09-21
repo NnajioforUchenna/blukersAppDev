@@ -5,13 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:unicons/unicons.dart';
 
 import '../../../../common_files/constants.dart';
 import '../../../../models/job_post.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../utils/styles/theme_colors.dart';
-import '../../../old_common_views/components/shaped_icon.dart';
 import '../../../old_common_views/job_timeline/display_job_timeline_dialog.dart';
 
 class DetailPageBlockOne extends StatefulWidget {
@@ -26,8 +24,6 @@ class DetailPageBlockOne extends StatefulWidget {
 class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
   @override
   Widget build(BuildContext context) {
-    // Get screen width
-    double width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
     bool isJobApplied = !up.isJobPostApplied(widget.jobPost.jobPostId ?? '');
     bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId ?? '');
@@ -51,7 +47,7 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-             SvgPicture.asset("assets/icons/company_icon.svg"),
+              SvgPicture.asset("assets/icons/company_icon.svg"),
               SizedBox(width: 5.h),
               Text(
                   "${widget.jobPost.companyName}, ${widget.jobPost.location ?? AppLocalizations.of(context)!.notSpecified}",
@@ -68,7 +64,7 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
             children: [
               Row(
                 children: [
-                   SvgPicture.asset("assets/icons/cash_icon.svg"),
+                  SvgPicture.asset("assets/icons/cash_icon.svg"),
                   SizedBox(width: 5.h),
                   Text(
                     '\$ ${widget.jobPost.salaryAmount}  ${getSalaryType(widget.jobPost.salaryType)}',
@@ -115,15 +111,12 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
                         ),
                         onPressed: () async {
                           if (isJobApplied) return;
-
                           up.checkAndApplyJobPost(context, widget.jobPost);
                         },
                         child: Center(
                           child: AutoSizeText(
                             isJobApplied
-                                ? AppLocalizations.of(context)!
-                                    .alreadyApplied
-                                    .toUpperCase()
+                                ? AppLocalizations.of(context)!.alreadyApplied
                                 : AppLocalizations.of(context)!.apply,
                             style: GoogleFonts.montserrat(
                                 color: Colors.white,

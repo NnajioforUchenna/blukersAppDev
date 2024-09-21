@@ -102,11 +102,10 @@ class _ListViewBuildJobsState extends State<ListViewBuildJobs> {
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     counter++;
-    print(counter);
     return ListView.separated(
       controller: controller,
       shrinkWrap: true,
-      padding: const EdgeInsets.all(10),
+      padding:  EdgeInsets.only(bottom: 10, left: 10, right: 10, top: Responsive.isMobile(context) ? 10 :0),
       // Added to give some space around cards
       itemCount: jobPosts.length + 1,
       itemBuilder: (context, index) {
