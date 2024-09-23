@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../common_files/constants.dart';
@@ -11,17 +10,26 @@ class MobileDetailPageBlockFour extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double topPadding = MediaQuery.of(context).size.height * 0.05;
     return Container(
-      margin: EdgeInsets.only(top: topPadding),
+      margin: const EdgeInsets.only(top: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context)!.description,
-              style: GoogleFonts.montserrat(
-                  fontSize: 17, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 20),
-          displayParagraph(jobPost.jobDescription ?? ''),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Job Description",
+                    style: GoogleFonts.montserrat(
+                        fontSize: 16, fontWeight: FontWeight.w600)),
+                const SizedBox(height: 10),
+                displayParagraph(jobPost.jobDescription, size: 12),
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
+          const Divider()
         ],
       ),
     );

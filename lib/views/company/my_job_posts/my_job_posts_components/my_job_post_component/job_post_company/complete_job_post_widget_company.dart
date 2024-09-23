@@ -8,8 +8,7 @@ import '../../../../../../services/responsive.dart';
 import '../../../../../old_common_views/components/animations/index.dart';
 import '../../../../../worker/saved/animate_job_post_details.dart';
 import '../../../../../worker/saved/display_job_card.dart';
-import '../../../../../worker/saved/no_more_jobs_found_card.dart';
-import 'display_job_post_dialog_company.dart';
+import '../../../../../worker/saved/display_job_post_dialog.dart';
 
 class CompanyCompleteJobPostWidget extends StatefulWidget {
   final List<JobPost> jobPosts;
@@ -131,7 +130,8 @@ class _ListViewJobsState extends State<ListViewJobs> {
     return ListView.separated(
       controller: controller,
       shrinkWrap: true,
-      padding: const EdgeInsets.all(15),
+      padding: EdgeInsets.only(
+          top: Responsive.isMobile(context) ? 20 : 0, left: 15, right: 15),
       // Added to give some space around cards
       itemCount: widget.jobPosts.length + 1,
       itemBuilder: (context, index) {
@@ -144,7 +144,7 @@ class _ListViewJobsState extends State<ListViewJobs> {
                 if (Responsive.isMobile(context)) {
                   showDialog(
                       context: context,
-                      builder: (context) => DisplayJobPostDialogCompany(
+                      builder: (context) => DisplayJobPostDialog(
                             jobPost: jobPost,
                           ));
                 }
@@ -156,7 +156,6 @@ class _ListViewJobsState extends State<ListViewJobs> {
               refill();
             }
           }
-
           return jp.hasMore
               ? const Center(
                   child: SizedBox(
@@ -170,10 +169,7 @@ class _ListViewJobsState extends State<ListViewJobs> {
                     ),
                   ),
                 )
-              : NoJobsFoundCard(
-                  nameSearch: jp.nameSearch,
-                  locationSearch: jp.locationSearch,
-                );
+              : const SizedBox.shrink();
         }
       },
       separatorBuilder: (BuildContext context, int index) {

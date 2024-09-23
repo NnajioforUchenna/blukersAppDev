@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
@@ -12,8 +15,16 @@ import '../../old_common_views/worker_timeline/display_worker_timeline_dialog.da
 import 'my_job_posts_components/interesting_workers_tab.dart';
 import 'my_job_posts_components/my_job_posts_tab.dart';
 
-class MyJobPosts extends StatelessWidget {
+class MyJobPosts extends StatefulWidget {
   const MyJobPosts({super.key});
+
+  @override
+  State<MyJobPosts> createState() => _MyJobPostsState();
+}
+
+class _MyJobPostsState extends State<MyJobPosts>
+    with SingleTickerProviderStateMixin {
+  late final tabController = TabController(length: 2, vsync: this);
 
   @override
   Widget build(BuildContext context) {
@@ -24,26 +35,49 @@ class MyJobPosts extends StatelessWidget {
         : DefaultTabController(
             length: 2,
             child: Scaffold(
+              backgroundColor: Colors.white,
               appBar: AppBar(
+                leading: IconButton(
+                  onPressed: () {
+                    GoRouter.of(context).go('/workers');
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  ),
+                ),
                 backgroundColor: Colors.white,
                 centerTitle: true,
-                title: Text(
-                  AppLocalizations.of(context)!.jobs,
-                  style: const TextStyle(
-                      color: ThemeColors.primaryThemeColor,
-                      fontWeight: FontWeight.bold),
-                ),
                 bottom: TabBar(
-                  indicatorColor: ThemeColors.primaryThemeColor,
-                  labelColor: ThemeColors.primaryThemeColor,
-                  unselectedLabelColor: ThemeColors.grey1ThemeColor,
+                  onTap: (index) {
+                    setState(() {});
+                  },
+                  controller: tabController,
+                  indicatorColor: Colors.black,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicatorWeight: 3,
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Colors.black.withOpacity(0.30),
+                  labelStyle: GoogleFonts.montserrat(
+                      fontSize: Responsive.isMobile(context) ? 16 : 20,
+                      fontWeight: FontWeight.w500),
                   tabs: [
                     Tab(
+                    
                         text: AppLocalizations.of(context)!.savedWorkers,
-                        icon: const Icon(UniconsLine.constructor)),
+                        icon:  Icon(Icons.bookmark, size: Responsive.isMobile(context) ? 25 : 30, )),
                     Tab(
-                        text: AppLocalizations.of(context)!.myJobs,
-                        icon: const Icon(UniconsLine.file_alt)),
+                      text: AppLocalizations.of(context)!.myJobs,
+                      icon: SvgPicture.asset(
+                        'assets/icons/send_icon.svg',
+                        height: Responsive.isMobile(context) ? 25 : 30,
+                        colorFilter: ColorFilter.mode(
+                            tabController.index == 1
+                                ? Colors.black
+                                : Colors.black.withOpacity(0.30),
+                            BlendMode.srcIn),
+                      ),
+                    ),
                   ],
                 ),
                 actions: [
@@ -80,11 +114,22 @@ class MyJobPosts extends StatelessWidget {
                   ),
                 ],
               ),
-              body: const TabBarView(
-                children: [
-                  InterestingWorkersTab(),
-                  MyJobPostsTab(),
-                ],
+              body: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Center(
+                  child: SizedBox(
+                    width: Responsive.isMobile(context)
+                        ? double.infinity
+                        : MediaQuery.of(context).size.width * 0.9,
+                    child: TabBarView(
+                      controller: tabController,
+                      children: const [
+                        InterestingWorkersTab(),
+                        MyJobPostsTab(),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
           );

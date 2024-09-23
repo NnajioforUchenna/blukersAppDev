@@ -17,11 +17,21 @@ class MobileDetailPageBlockFive extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context)!.requirements,
-              style: GoogleFonts.montserrat(
-                  fontSize: 17, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 20),
-          displayParagraph(jobPost.requirements ?? ''),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(AppLocalizations.of(context)!.requirements,
+                    style: GoogleFonts.montserrat(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600)), // Responsive font size
+                const SizedBox(height: 10), // Responsive height
+                displayParagraph(jobPost.requirements, size: 12),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
         ],
       ),
     );

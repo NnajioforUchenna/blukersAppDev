@@ -10,28 +10,9 @@ class DisplayWorkerDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-      ),
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          const AnimateWorkerDetails(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FloatingActionButton(
-                  child: const Icon(Icons.close),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+    return const Dialog(
+   backgroundColor: Colors.transparent,
+      child: AnimateWorkerDetails(),
     );
   }
 }

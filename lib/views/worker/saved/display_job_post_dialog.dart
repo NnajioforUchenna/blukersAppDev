@@ -15,8 +15,10 @@ class DisplayJobPostDialog extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Dialog(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        
+        borderRadius: BorderRadius.all(Radius.circular(17)),
       ),
+      backgroundColor: Colors.white,
       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 26),
       child: ConstrainedBox(
           constraints: BoxConstraints(
