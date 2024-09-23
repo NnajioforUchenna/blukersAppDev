@@ -1,4 +1,6 @@
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:unicons/unicons.dart';
 
 class TimelineNavigationButton extends StatelessWidget {
@@ -15,19 +17,47 @@ class TimelineNavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return MaterialButton(
       onPressed: () => onPress(),
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all<Color>(
-          isSelected ? Colors.deepOrangeAccent : Colors.grey,
-        ),
+      elevation: 0,
+      color: navDirection.toString().toLowerCase() == "left" || navDirection.toString().toLowerCase() == "back" ?
+           const Color.fromARGB(172, 211, 235, 255)
+          : isSelected ? ThemeColors.primaryThemeColor : ThemeColors.primaryThemeColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
       ),
-      child: Icon(
-        navDirection.toString().toLowerCase() == "right"
-            ? UniconsLine.arrow_right
-            : UniconsLine.arrow_left,
-        color: Colors.white,
-        size: 30,
+      child: Row(
+        children: [
+          if (navDirection.toString().toLowerCase() == "right")
+            const Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                "Next",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          SvgPicture.asset(
+            navDirection.toString().toLowerCase() == "right"
+                ? "assets/icons/arrow_next.svg"
+                : "assets/icons/arrow_back.svg",
+            height: 20,
+            width: 20,
+          ),
+          if (navDirection.toString().toLowerCase() == "left" || navDirection.toString().toLowerCase() == "back")
+            const Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text("Back",
+                  style: TextStyle(
+                    color: ThemeColors.primaryThemeColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  )),
+            ),
+        ],
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:blukers/providers/create_worker_profile_provider.dart';
+import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,41 +27,63 @@ class _WorkerPageSliderState extends State<WorkerPageSlider> {
         Provider.of<CreateWorkerProfileProvider>(context);
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: SizedBox(
+      child: Container(
         height: MediaQuery.of(context).size.height * 0.7,
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(0),
           child: PageView(
             controller: cwpp.createProfilePageController,
             physics: const NeverScrollableScrollPhysics(),
-            children: const [
-              MakeResponsiveWeb(
-                  image: AssetImage('assets/images/classificationPage.png'),
-                  child: ClassificationPage()),
-              MakeResponsiveWeb(
-                  image:
-                      AssetImage('assets/images/personalInformationPage.png'),
-                  child: PersonalInformationPage()),
-              MakeResponsiveWeb(
-                  image: AssetImage('assets/images/profilePhotoPage.png'),
-                  child: ProfilePhotoPage()),
-              MakeResponsiveWeb(
-                  image: AssetImage(
-                      'assets/images/professionalCredentialsPage.png'),
-                  child: ProfessionalCredentialsPage()),
-              MakeResponsiveWeb(
-                  image: AssetImage('assets/images/workExperience.png'),
-                  child: WorkExperiencePage()),
-              MakeResponsiveWeb(
-                  image: AssetImage('assets/images/referencePage.png'),
-                  child: ReferencePage()),
-              MakeResponsiveWeb(
-                  image: AssetImage('assets/images/resumePage.png'),
-                  child: ResumePage()),
-              MakeResponsiveWeb(
-                  image:
-                      AssetImage('assets/images/workerCongratulationPage.png'),
-                  child: WorkerCongratulationPage()),
+            children:[
+              Padding(
+                padding: Responsive.isDesktop(context)
+                    ? const EdgeInsets.only(left: 100, right: 100)
+                    : const EdgeInsets.all(0),
+                child: const ClassificationPage(),
+              ),
+              Padding(
+                padding: Responsive.isDesktop(context)
+                    ? const EdgeInsets.only(left: 100, right: 100)
+                    : const EdgeInsets.all(0),
+                child: const PersonalInformationPage(),
+              ),
+              Padding(
+                padding: Responsive.isDesktop(context)
+                    ? const EdgeInsets.only(left: 100, right: 100)
+                    : const EdgeInsets.all(0),
+                child: const ProfilePhotoPage(),
+              ),
+              Padding(
+                padding: Responsive.isDesktop(context)
+                    ? const EdgeInsets.only(left: 100, right: 100)
+                    : const EdgeInsets.all(0),
+                child: const ProfessionalCredentialsPage(),
+              ),
+              Padding(
+                padding: Responsive.isDesktop(context)
+                    ? const EdgeInsets.only(left: 100, right: 100)
+                    : const EdgeInsets.all(0),
+                child: const WorkExperiencePage(),
+              ),
+              Padding(
+                padding: Responsive.isDesktop(context)
+                    ? const EdgeInsets.only(left: 100, right: 100)
+                    : const EdgeInsets.all(0),
+                child: const ReferencePage(),
+              ),
+              Padding(
+                padding: Responsive.isDesktop(context)
+                    ? const EdgeInsets.only(left: 100, right: 100)
+                    : const EdgeInsets.all(0),
+                child: const ResumePage(),
+              ),
+              Padding(
+                padding: Responsive.isDesktop(context)
+                    ? const EdgeInsets.only(left: 100, right: 100)
+                    : const EdgeInsets.all(0),
+                child: const WorkerCongratulationPage(),
+              ),
             ],
           ),
         ),
