@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../models/job_post.dart';
 import '../../../providers/user_provider_parts/user_provider.dart';
 import '../../../utils/styles/theme_colors.dart';
+import '../../company/my_job_posts/my_job_posts_components/my_job_post_component/job_post_company/delete_post_dialog.dart';
 import '../../old_common_views/job_timeline/display_job_timeline_dialog.dart';
 import 'mobile_job_post_details_components/mobile_detail_page_block_five.dart';
 import 'mobile_job_post_details_components/mobile_detail_page_block_four.dart';
@@ -28,7 +29,7 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
     UserProvider up = Provider.of<UserProvider>(context);
     bool isJobApplied = !up.isJobPostApplied(widget.jobPost.jobPostId);
     bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId);
-    bool isHideButton = up.appUser?.uid == widget.jobPost.companyId;
+    bool isOwner = up.appUser?.uid == widget.jobPost.companyId;
     // Create a ScrollController to track the scroll position
     ScrollController scrollController = ScrollController();
 
@@ -74,12 +75,73 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
                 ),
               ],
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                isHideButton
-                    ? const SizedBox.shrink()
-                    : Expanded(
+            child: isOwner
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 52,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  ThemeColors.secondaryThemeColorDark,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            onPressed: () async {
+                              if (isJobApplied) return;
+
+                              up.checkAndApplyJobPost(context, widget.jobPost);
+                            },
+                            child: Center(
+                              child: AutoSizeText(
+                                "Edit Listing",
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 21),
+                      Expanded(
+                        child: SizedBox(
+                          height: 48,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: const BorderSide(
+                                      color:
+                                          ThemeColors.secondaryThemeColorDark)),
+                            ),
+                            onPressed: () async {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return DeleteDialog(jobPost: widget.jobPost);
+                                },
+                              );
+                            },
+                            child: Text("Delete Listing",
+                                style: GoogleFonts.montserrat(
+                                    color: ThemeColors.secondaryThemeColorDark,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12)),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
                         child: SizedBox(
                           height: 52,
                           child: ElevatedButton(
@@ -112,70 +174,74 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
                           ),
                         ),
                       ),
-                const SizedBox(width: 21),
-                Expanded(
-                  child: SizedBox(
-                    height: 48,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 8,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            side: const BorderSide(
-                                color: ThemeColors.secondaryThemeColorDark)),
-                      ),
-                      onPressed: () async {
-                        if (isJobSaved) return;
-                        if (up.workerTimelineStep < 3) {
-                          showDialog(
-                            context: context,
-                            builder: (context) =>
-                                const DisplayJobTimelineDialog(),
-                          );
-                        } else {
-                          // Show loading spinner
-                          showDialog(
-                            context: context,
-                            barrierDismissible:
-                                false, // Prevent dismissing the dialog
-                            builder: (context) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
+                      const SizedBox(width: 21),
+                      Expanded(
+                        child: SizedBox(
+                          height: 48,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: const BorderSide(
+                                      color:
+                                          ThemeColors.secondaryThemeColorDark)),
+                            ),
+                            onPressed: () async {
+                              if (isJobSaved) return;
+                              if (up.workerTimelineStep < 3) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      const DisplayJobTimelineDialog(),
+                                );
+                              } else {
+                                // Show loading spinner
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // Prevent dismissing the dialog
+                                  builder: (context) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  },
+                                );
+
+                                // Save or unsave the job post and wait until the action is completed
+                                await up.saveJobPost(widget.jobPost);
+
+                                // Close the loading spinner
+                                Navigator.of(context).pop();
+
+                                // Trigger rebuild to reflect the change
+                                setState(() {});
+                              }
                             },
-                          );
-
-                          // Save or unsave the job post and wait until the action is completed
-                          await up.saveJobPost(widget.jobPost);
-
-                          // Close the loading spinner
-                          Navigator.of(context).pop();
-
-                          // Trigger rebuild to reflect the change
-                          setState(() {});
-                        }
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(isJobSaved ? 'Saved' : 'Save',
-                              style: GoogleFonts.montserrat(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(isJobSaved ? 'Saved' : 'Save',
+                                    style: GoogleFonts.montserrat(
+                                        color:
+                                            ThemeColors.secondaryThemeColorDark,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12)),
+                                const SizedBox(width: 5),
+                                Icon(
+                                  isJobSaved
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_border,
                                   color: ThemeColors.secondaryThemeColorDark,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12)),
-                          const SizedBox(width: 5),
-                          Icon(
-                            isJobSaved ? Icons.bookmark : Icons.bookmark_border,
-                            color: ThemeColors.secondaryThemeColorDark,
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
           ),
         ),
       ],

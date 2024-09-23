@@ -21,8 +21,9 @@ class JobPostsProvider with ChangeNotifier {
 
   // Controls Displayed Job Posts
   Map<String, JobPost> displayedJobPosts = {};
-  List<bool> stepCompletion = List.generate(jobPostSteps.length, (index) => false);
-  
+  List<bool> stepCompletion =
+      List.generate(jobPostSteps.length, (index) => false);
+
   JobPost? selectedJobPost;
 
   // List<JobPost> selectedJobPosts = displayedJobPosts.values.toList();
@@ -252,7 +253,7 @@ class JobPostsProvider with ChangeNotifier {
     setJobPostPageNext();
   }
 
-   void updateStepCompletion(int stepIndex, bool isCompleted) {
+  void updateStepCompletion(int stepIndex, bool isCompleted) {
     if (stepIndex < stepCompletion.length) {
       stepCompletion[stepIndex] = isCompleted;
       notifyListeners();
@@ -270,8 +271,8 @@ class JobPostsProvider with ChangeNotifier {
 
     newJobPostData['addresses'] = [address.toMap()];
     newJobPostData['address'] = address.toMap();
-     createJobPost();
-     setJobPostPageNext();
+    createJobPost();
+    setJobPostPageNext();
   }
 
   Future<void> createJobPost() async {
@@ -442,27 +443,34 @@ class JobPostsProvider with ChangeNotifier {
     required String targetLanguage,
   }) async {
     // Get the 50 most recent job posts.
-    Map<String, JobPost> newJobs = {};
+    try {
+      Map<String, JobPost> newJobs = {};
 
-    List<Map<String, dynamic>> jobPosts =
-        await JobPostsDataProvider.getAiJobPosts(
-            queryName: queryName,
-            queryLocation: queryLocation,
-            pageNumber: pageNumber,
-            targetLanguage: targetLanguage);
+      List<Map<String, dynamic>> jobPosts =
+          await JobPostsDataProvider.getAiJobPosts(
+              queryName: queryName,
+              queryLocation: queryLocation,
+              pageNumber: pageNumber,
+              targetLanguage: targetLanguage);
 
-    hasMore = jobPosts.isNotEmpty;
+      hasMore = jobPosts.isNotEmpty;
 
-    for (var jobPost in jobPosts) {
-      if (jobPost['jobPostId'] != null) {
-        JobPost? parsedJobPost = JobPost.fromMap(jobPost);
-        if (parsedJobPost != null) {
-          newJobs[jobPost['jobPostId']] = parsedJobPost;
+      for (var jobPost in jobPosts) {
+        if (jobPost['jobPostId'] != null) {
+          JobPost? parsedJobPost = JobPost.fromMap(jobPost);
+          if (parsedJobPost != null) {
+            newJobs[jobPost['jobPostId']] = parsedJobPost;
+          }
         }
       }
-    }
 
-    return newJobs;
+      return newJobs;
+    } on Exception catch (_) {
+      hasMore = false;
+      notifyListeners();
+      return {};
+
+    }
   }
 
   Map<String, JobPost> fillDisplayedJobPosts(List<JobPost> listJobPosts) {

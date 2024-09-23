@@ -30,25 +30,27 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                   children: [
                     SvgPicture.asset("assets/icons/industry_ic.svg"),
                     const SizedBox(width: 5),
-                    RichText(
-                      text: TextSpan(
-                        style: GoogleFonts.montserrat(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        children: [
-                          TextSpan(
-                              text: "${AppLocalizations.of(context)!.industry}: ",
-                              style: GoogleFonts.montserrat(
-                                color: const Color.fromRGBO(51, 51, 51, 0.7),
-                              )),
-                          TextSpan(
-                            text: jobPost.industryIds.isNotEmpty
-                                ? jobPost.industryIds.join(', ')
-                                : AppLocalizations.of(context)!.notSpecified,
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          style: GoogleFonts.montserrat(
+                            fontSize: 12,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
+                          children: [
+                            TextSpan(
+                                text: "${AppLocalizations.of(context)!.industry}: ",
+                                style: GoogleFonts.montserrat(
+                                  color: const Color.fromRGBO(51, 51, 51, 0.7),
+                                )),
+                            TextSpan(
+                              text: jobPost.industryIds.isNotEmpty
+                                  ? jobPost.industryIds.join(', ')
+                                  : AppLocalizations.of(context)!.notSpecified,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -58,25 +60,27 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                   children: [
                     SvgPicture.asset("assets/icons/industry_ic.svg"),
                     const SizedBox(width: 5),
-                    RichText(
-                      text: TextSpan(
-                        style: GoogleFonts.montserrat(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        children: [
-                          TextSpan(
-                              text: "${AppLocalizations.of(context)!.jobPosition}: ",
-                              style: GoogleFonts.montserrat(
-                                color: const Color.fromRGBO(51, 51, 51, 0.7),
-                              )),
-                          TextSpan(
-                            text: jobPost.jobIds.isNotEmpty
-                                ? jobPost.jobIds.join(', ')
-                                : AppLocalizations.of(context)!.notSpecified,
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          style: GoogleFonts.montserrat(
+                            fontSize: 12,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
+                          children: [
+                            TextSpan(
+                                text: "${AppLocalizations.of(context)!.jobPosition}: ",
+                                style: GoogleFonts.montserrat(
+                                  color: const Color.fromRGBO(51, 51, 51, 0.7),
+                                )),
+                            TextSpan(
+                              text: jobPost.jobIds.isNotEmpty
+                                  ? jobPost.jobIds.join(', ')
+                                  : AppLocalizations.of(context)!.notSpecified,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -86,25 +90,27 @@ class MobileDetailPageBlockTwo extends StatelessWidget {
                   children: [
                     SvgPicture.asset("assets/icons/industry_ic.svg"),
                     const SizedBox(width: 5),
-                    RichText(
-                      text: TextSpan(
-                        style: GoogleFonts.montserrat(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        children: [
-                          TextSpan(
-                              text: "${AppLocalizations.of(context)!.skills}: ",
-                              style: GoogleFonts.montserrat(
-                                color: const Color.fromRGBO(51, 51, 51, 0.7),
-                              )),
-                          TextSpan(
-                            text: jobPost.skills.isNotEmpty
-                                ? jobPost.skills.join(', ')
-                                : AppLocalizations.of(context)!.notSpecified,
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          style: GoogleFonts.montserrat(
+                            fontSize: 12,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
+                          children: [
+                            TextSpan(
+                                text: "${AppLocalizations.of(context)!.skills}: ",
+                                style: GoogleFonts.montserrat(
+                                  color: const Color.fromRGBO(51, 51, 51, 0.7),
+                                )),
+                            TextSpan(
+                              text: jobPost.skills.isNotEmpty
+                                  ? jobPost.skills.join(', ')
+                                  : AppLocalizations.of(context)!.notSpecified,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
