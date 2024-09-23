@@ -68,22 +68,20 @@ class ListViewWorkers extends StatelessWidget {
         return DisplayWorkerCard(
             worker: worker,
             onTap: () {
-              if (Responsive.isDesktop(context)) {
                 wp.setSelectedWorker(worker);
-                //
-              } else {
+              if (Responsive.isMobile(context)) {
                 showDialog(
                     context: context,
                     builder: (context) => DisplayWorkerDialog(
                           worker: worker,
                         ));
-                print('worker: ${worker.workerResumeDetails?.firstName}');
+               
               }
             });
       },
       separatorBuilder: (BuildContext context, int index) {
         return const SizedBox(
-          height: 5,
+                    height: 20,
         );
       },
     );

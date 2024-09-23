@@ -89,6 +89,7 @@ class AppUser {
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
+
     data['uid'] = uid; // Assuming uid will always be non-null
     data['email'] = email;
     if (language != null) data['language'] = language;
@@ -142,7 +143,6 @@ class AppUser {
       uid: map['uid'] ?? '',
       email: map['email'] ?? '',
     );
-
     // Add other parameters with null checks
     try {
       user.language = map['language'] as String?;
@@ -171,10 +171,10 @@ class AppUser {
           map['workerRecords'] is Map<String, dynamic>) {
         user.workerRecords = WorkerRecords.fromMap(map['workerRecords']);
       }
-
       if (map['company'] != null && map['company'] is Map<String, dynamic>) {
         user.company = Company.fromMap(map['company']);
       }
+    
 
       if (map['address'] != null && map['address'] is Map<String, dynamic>) {
         user.address = Address.fromMap(map['address']);
@@ -191,7 +191,7 @@ class AppUser {
         user.deferredSubscription =
             SubscriptionPlan.fromMap(map['deferredSubscription']);
       }
-
+      print(user.tokens);
       user.tokens = map['tokens'] != null
           ? List<String>.from(map['tokens'].map((x) => x as String))
           : [];
@@ -244,7 +244,7 @@ class AppUser {
     if (displayName != null && displayName!.isNotEmpty) {
       return displayName!;
     } else if (registrationDetails != null) {
-      return '${registrationDetails!.firstName} ${registrationDetails!.lastName}';
+      return '${registrationDetails!.firstName ?? "--"} ${registrationDetails!.lastName ?? "--"}';
     } else if (company != null) {
       return company!.name;
     } else {

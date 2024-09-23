@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../models/worker.dart';
 import '../../../../../services/responsive.dart';
@@ -13,26 +14,24 @@ class WorkerDetailBlockThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scaleFactor = Responsive.textScaleFactor(context);
 
     return Padding(
-      padding: const EdgeInsets.all(16.0), // Add padding around the column
+          padding:  EdgeInsets.only(top: Responsive.isMobile(context) ? 16 : 30),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Align content to start
+        crossAxisAlignment: CrossAxisAlignment.start, 
         children: [
-          Row(
-            children: [
-              Text("Short Description",
-                  style: TextStyle(
-                      fontSize: 20 * scaleFactor, fontWeight: FontWeight.bold)),
-            ],
-          ),
-          const SizedBox(height: 15),
+           Text("Bio", 
+                  style: GoogleFonts.montserrat(
+                      fontSize: Responsive.isMobile(context)? 14: 20, fontWeight: FontWeight.w600)),
+          SizedBox(height: Responsive.isMobile(context)? 8: 15),
           Text(
-            "Description: ${worker.workerBriefDescription}",
-            style: TextStyle(fontSize: 18 * scaleFactor),
+            worker.workerBriefDescription,
+            style: GoogleFonts.montserrat(fontSize: Responsive.isMobile(context)? 12: 16, fontWeight: FontWeight.w500),
           ),
-          const Divider(),
+           SizedBox(height: Responsive.isMobile(context)? 16: 30),
+         const Divider(
+           color: Color.fromRGBO(0, 0, 0, 0.2),
+         ),
         ],
       ),
     );

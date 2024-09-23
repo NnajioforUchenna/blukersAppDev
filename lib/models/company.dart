@@ -134,11 +134,11 @@ class Company {
 
   static Company fromMap(Map<String, dynamic> map) {
     return Company(
-      companyId: map['companyId'],
+      companyId: map['companyId'] ?? '',
       logoUrl: map['logoUrl'] ?? '',
       website: map['website'] ?? '',
       wallpaperUrl: map['wallpaperUrl'] ?? '',
-      name: map['name'],
+      name: map['name'] ?? "",
       companyDescription: map['companyDescription'] ?? '',
       companySlogan: map['companySlogan'] ?? '',
       companyIndustry: map['companyIndustry'] ?? '',

@@ -1,3 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +9,6 @@ import '../../../common_files/constants.dart';
 import '../../../models/job_post.dart';
 import '../../../providers/job_posts_provider.dart';
 import '../../../services/rounded_image.dart';
-import '../../../utils/styles/theme_colors.dart';
 import 'grey_container.dart';
 import 'time_ago_and_bookmark_row.dart';
 
@@ -48,93 +49,139 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
             elevation: _isHovering ? 10 : 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
+              side: BorderSide(
+                  width: isJobPostSelected() ? 2 : 1,
+                  color: isJobPostSelected()
+                      ? const Color(0xFF1E75BB).withOpacity(.20)
+                      : Colors.black.withOpacity(.2)),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: AnimatedContainer(
-                padding: const EdgeInsets.all(20),
+                // padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: isJobPostSelected()
-                      ? const Color(0xFFE5EDFF)
+                      ? const Color(0xFFEEF7FF)
                       : Colors.white,
-                  border: const Border(
-                    left: BorderSide(
-                      width: 15,
-                      color: ThemeColors.primaryThemeColor,
-                    ),
-                  ),
                 ),
                 duration: const Duration(milliseconds: 500),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TimeAgoAndBookMarkRow(jobPost: widget.jobPost),
-                    const SizedBox(height: 8),
-                    Text(
-                      toTitleCase(widget.jobPost.jobTitle),
-                      style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                    Container(
+                      padding: const EdgeInsets.only(
+                          bottom: 15, top: 20, right: 25, left: 25),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: isJobPostSelected()
+                                ? const Color(0xFF1E75BB).withOpacity(.20)
+                                : Colors.black.withOpacity(.2),
+                            width: isJobPostSelected() ? 2 : 1,
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 5),
-                    Wrap(
-                      spacing: 10,
-                      children: [
-                        widget.jobPost.salaryAmount == 0
-                            ? GreyContainer(
-                                child:
-                                    AppLocalizations.of(context)!.notSpecified,
-                              )
-                            : GreyContainer(
-                                child:
-                                    "${widget.jobPost.salaryAmount} ${getSalaryType(widget.jobPost.salaryType)}",
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RoundedImageWidget(
+                              size: 40,
+                              imageUrl: widget.jobPost.companyLogo,
+                              firstChar:
+                                  getFirstChar(widget.jobPost.companyName),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AutoSizeText(
+                                    toTitleCase(widget.jobPost.jobTitle),
+                                    style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w600,
+                                      
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxFontSize: 22,
+                                    minFontSize: 18,
+                                  ),
+                                  Text(
+                                    widget.jobPost.companyName,
+                                    style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: ThemeColors.primaryThemeColor),
+                                  ),
+                                ],
                               ),
-                        GreyContainer(
-                          child: getJobType(widget.jobPost.jobType),
-                        ),
-                        GreyContainer(
-                          child: widget.jobPost.schedule,
-                        ),
-                      ],
+                            ),
+                            const SizedBox(width: 10),
+                            SavedJobsIcon(jobPost: widget.jobPost)
+                          ]),
                     ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    // TimeAgoAndBookMarkRow(jobPost: widget.jobPost),
+                    const SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20, left: 20, bottom: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
-                              Text(
-                                widget.jobPost.companyName,
-                                style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
+                              const Icon(
+                                Icons.location_on_outlined,
+                                  size: 12,
+                                  
+                                  color: ThemeColors.black1ThemeColor),
+                              const SizedBox(width: 5),
+                              Expanded(
+                                child: Text(
+                                  widget.jobPost.location ?? "--",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 14,
+                                    color: ThemeColors.black1ThemeColor,
+                                  ),
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                widget.jobPost.location!,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.montserrat(),
                               ),
                             ],
                           ),
-                        ),
-                        Expanded(flex: 2, child: Container()),
-                        Expanded(
-                          flex: 1,
-                          child: RoundedImageWidget(
-                            imageUrl: widget.jobPost.companyLogo,
-                            firstChar:
-                                getFirstChar(widget.jobPost.companyName ?? ''),
+                          const SizedBox(height: 16),
+                          Wrap(
+                            spacing: 10,
+                            children: [
+                              widget.jobPost.salaryAmount == 0
+                                  ? GreyContainer(
+                                      child: AppLocalizations.of(context)!
+                                          .notSpecified,
+                                    )
+                                  : GreyContainer(
+                                      child:
+                                          "${widget.jobPost.salaryAmount} ${getSalaryType(widget.jobPost.salaryType)}",
+                                    ),
+                              GreyContainer(
+                                child: getJobType(widget.jobPost.jobType),
+                              ),
+                              GreyContainer(
+                                child: widget.jobPost.schedule,
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 16),
+                          Text(
+                            widget.jobPost.timeAgo,
+                            style: GoogleFonts.montserrat(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: isJobPostSelected()
+                                  ? const Color.fromRGBO(0, 35, 65, 1)
+                                  : const Color(0xFF000000),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

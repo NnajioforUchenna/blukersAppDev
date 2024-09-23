@@ -21,6 +21,9 @@ class CompanyPageTemplate extends StatelessWidget {
         bottomNavigationBar: Responsive.isDesktop(context)
             ? null
             : const CompanyButtomNavigationBar(),
-        body: child);
+        body: Padding(
+          padding: EdgeInsets.only(top: Responsive.isDesktop(context) ? 20 : 0),
+          child: child,
+        ));
   }
 }

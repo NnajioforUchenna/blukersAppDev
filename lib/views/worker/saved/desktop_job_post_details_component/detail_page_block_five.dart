@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/job_post.dart';
@@ -32,7 +33,7 @@ class _DetailPageBlockFiveState extends State<DetailPageBlockFive> {
                     CrossAxisAlignment.start, // Align content to start
                 children: [
                   Text(AppLocalizations.of(context)!.applicants,
-                      style: const TextStyle(
+                      style: GoogleFonts.montserrat(
                           fontSize: 20, fontWeight: FontWeight.bold)),
                   InkWell(
                     onTap: () async {
@@ -51,7 +52,7 @@ class _DetailPageBlockFiveState extends State<DetailPageBlockFive> {
                     child: Row(
                       children: [
                         Text(AppLocalizations.of(context)!.newApplicants,
-                            style: const TextStyle(
+                            style: GoogleFonts.montserrat(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                         const SizedBox(height: 15),
                         if (widget.jobPost.applicantUserIds.isNotEmpty)
@@ -61,8 +62,7 @@ class _DetailPageBlockFiveState extends State<DetailPageBlockFive> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 15.h),
-                  const Divider(),
+                  SizedBox(height: 10.h),
                 ],
               ),
             ),

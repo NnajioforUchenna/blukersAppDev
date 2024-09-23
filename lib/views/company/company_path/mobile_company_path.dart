@@ -234,6 +234,7 @@ Widget buildButton(double width, int currentStep, String text,
             text.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 24 * Responsive.textScaleFactor(context),
             ),

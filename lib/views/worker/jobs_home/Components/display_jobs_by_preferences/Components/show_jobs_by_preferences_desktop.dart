@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../services/responsive.dart';
 import '../build_list_view_jobs_by_preferences_desktop.dart';
 import 'Jobs_preferences_card/Desktop_job_card/jobs_preferences_card_desktop.dart';
 
@@ -13,11 +14,14 @@ class ShowJobsByPreferencesDesktop extends StatefulWidget {
 class _ShowJobsByPreferencesDesktopState extends State<ShowJobsByPreferencesDesktop> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        JobsPreferencesCardDesktop(),
-        Expanded(child: BuildListViewJobsByPreferencesDesktop()),
-      ],
+    return SizedBox(
+      width: Responsive.isDesktop(context) ? 500 : null,
+      child: const Column(
+        children: [
+          JobsPreferencesCardDesktop(),
+          Expanded(child: BuildListViewJobsByPreferencesDesktop()),
+        ],
+      ),
     );
   }
 }

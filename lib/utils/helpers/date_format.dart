@@ -85,6 +85,9 @@ class DateFormatHelper {
   int getMinutes(DateTime dateTime) {
     return dateTime.minute;
   }
+  static String formatMonthYear(DateTime dateTime) {
+  return DateFormat('MMMM yyyy').format(dateTime);
+}
 }
 
 /*
