@@ -45,8 +45,8 @@ class _ProfessionalCredentialsPageState
               textAlign: TextAlign.start,
               style: const TextStyle(
                 color: Colors.black87,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
                 height: 1.25,
               ),
             ),

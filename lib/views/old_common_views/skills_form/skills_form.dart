@@ -31,7 +31,10 @@ class _SkillsFormState extends State<SkillsForm> {
         Text(AppLocalizations.of(context)!.selectSkills,
             textAlign: TextAlign.center,
             style: ThemeTextStyles.landingPageBtnThemeTextStyle
-                .apply(color: ThemeColors.blukersOrangeThemeColor)),
+                .apply(color: ThemeColors.black1ThemeColor,).copyWith(
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+            )),
         const SizedBox(height: 20),
         Container(
             height: MediaQuery.of(context).size.height * 0.35,

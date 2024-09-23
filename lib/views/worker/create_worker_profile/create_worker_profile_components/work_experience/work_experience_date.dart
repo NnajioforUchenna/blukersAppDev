@@ -1,7 +1,5 @@
 import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../utils/styles/index.dart';
@@ -15,139 +13,244 @@ class WorkExperienceDate extends StatefulWidget {
 }
 
 class _WorkExperienceDateState extends State<WorkExperienceDate> {
-  DateTime? _startDate;
-  DateTime? _endDate;
+  List<String> years = List.generate(101, (index) => (2000 + index).toString()); // For year selection
+  List<String> months = [
+    '01', '02', '03', '04', '05', '06', 
+    '07', '08', '09', '10', '11', '12'
+  ]; // For month selection in 'MM' format
+  
+  String? _selectedStartYear;
+  String? _selectedStartMonth;
+  String? _selectedEndYear;
+  String? _selectedEndMonth;
   bool _isCurrentlyWorking = false;
   late CreateWorkerProfileProvider wp;
 
   @override
   void initState() {
     super.initState();
-    // wp = Provider.of<WorkersProvider>(context, listen: false);
     wp = Provider.of<CreateWorkerProfileProvider>(context, listen: false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (wp.workExperience[widget.intialIndex]['jobStartDate'] != null) {
-        _startDate = DateTime.parse(
-            wp.workExperience[widget.intialIndex]['jobStartDate']);
+      // Assuming jobStartDate and jobEndDate are stored in the format 'YYYY-MM'
+      String? jobStartDate = wp.workExperience[widget.intialIndex]['jobStartDate'];
+      if (jobStartDate != null) {
+        _selectedStartYear = jobStartDate.split('-')[0];
+        _selectedStartMonth = jobStartDate.split('-')[1];
       }
 
-      if (wp.workExperience[widget.intialIndex]['jobEndDate'] != null) {
-        _endDate =
-            DateTime.parse(wp.workExperience[widget.intialIndex]['jobEndDate']);
+      String? jobEndDate = wp.workExperience[widget.intialIndex]['jobEndDate'];
+      if (jobEndDate != null) {
+        _selectedEndYear = jobEndDate.split('-')[0];
+        _selectedEndMonth = jobEndDate.split('-')[1];
       }
-      if (wp.workExperience[widget.intialIndex]['isCurrentlyWorking'] != null) {
-        _isCurrentlyWorking =
-            wp.workExperience[widget.intialIndex]['isCurrentlyWorking'];
-        setState(() {});
-      }
+
+      _isCurrentlyWorking = wp.workExperience[widget.intialIndex]['isCurrentlyWorking'] ?? false;
+
+      setState(() {});
     });
-  }
-
-  Future<void> _selectDate(BuildContext context,
-      {bool isStartDate = true}) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-    if (pickedDate != null) {
-      setState(() {
-        if (isStartDate) {
-          _startDate = pickedDate;
-          wp.workExperience[widget.intialIndex]['jobStartDate'] =
-              _startDate.toString();
-        } else {
-          _endDate = pickedDate;
-          wp.workExperience[widget.intialIndex]['jobEndDate'] =
-              _endDate.toString();
-        }
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    CreateWorkerProfileProvider wp =
-        Provider.of<CreateWorkerProfileProvider>(context);
+    CreateWorkerProfileProvider wp = Provider.of<CreateWorkerProfileProvider>(context);
 
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      ThemeColors.blukersBlueThemeColor,
-                    ),
-                  ),
-                  onPressed: () {
-                    _selectDate(context);
+    return SizedBox(
+      height: _isCurrentlyWorking ? 240 : 400,
+      child: Column(
+        children: [
+          // Currently Working Checkbox
+          Row(
+            children: [
+              const Spacer(),
+              const Text('Are you currently working here?'),
+              Expanded(
+                child: Checkbox(
+                  value: _isCurrentlyWorking,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _isCurrentlyWorking = value!;
+                      if (_isCurrentlyWorking) {
+                        _selectedEndMonth = null;
+                        _selectedEndYear = null;
+                      }
+                    });
+                    wp.workExperience[widget.intialIndex]['isCurrentlyWorking'] = _isCurrentlyWorking;
                   },
-                  child: Text(
-                    _startDate == null
-                        ? AppLocalizations.of(context)!.startDate
-                        : "${AppLocalizations.of(context)!.startDate}: ${DateFormat('EEEE, d MMMM, y').format(_startDate!)}",
-                    style: const TextStyle(fontSize: 12, color: Colors.white),
-                  ),
                 ),
               ),
+            ],
+          ),
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+             "From",
+              style:TextStyle(
+                color: ThemeColors.black1ThemeColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all<Color>(
-                      ThemeColors.blukersBlueThemeColor,
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: DropdownButtonFormField<String>(
+              value: _selectedStartMonth,
+              isExpanded: true,
+              decoration: InputDecoration(
+                hintText: 'Month',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(width: 1, color: Colors.grey),
+                ),
+                fillColor: Colors.white,
+                filled: true,
+              ),
+              items: months.map((month) => DropdownMenuItem<String>(
+                value: month,
+                child: Text(month),
+              )).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _selectedStartMonth = value;
+                  // Update the start date in 'YYYY-MM' format
+                  if (_selectedStartYear != null) {
+                    wp.workExperience[widget.intialIndex]['jobStartDate'] =
+                        '$_selectedStartYear-$_selectedStartMonth';
+                  }
+                });
+              },
+              validator: (value) => value == null ? 'Start month is required' : null,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: DropdownButtonFormField<String>(
+              value: _selectedStartYear,
+              isExpanded: true,
+              decoration: InputDecoration(
+                hintText: 'Year',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(width: 1, color: Colors.grey),
+                ),
+                fillColor: Colors.white,
+                filled: true,
+              ),
+              items: years.map((year) => DropdownMenuItem<String>(
+                value: year,
+                child: Text(year),
+              )).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _selectedStartYear = value;
+                  // Update the start date in 'YYYY-MM' format
+                  if (_selectedStartMonth != null) {
+                    wp.workExperience[widget.intialIndex]['jobStartDate'] =
+                        '$_selectedStartYear-$_selectedStartMonth';
+                  }
+                });
+              },
+              validator: (value) => value == null ? 'Start year is required' : null,
+            ),
+          ),
+          
+          const SizedBox(height: 10),
+          
+          // End Date Selection
+          Visibility(
+            visible: !_isCurrentlyWorking,
+            child: SizedBox(
+              height: 160,
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "To",
+                      style:TextStyle(
+                        color: ThemeColors.black1ThemeColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  onPressed: _isCurrentlyWorking
-                      ? null
-                      : () {
-                          _selectDate(context, isStartDate: false);
-                          wp.workExperience[widget.intialIndex]
-                              ['isCurrentlyWorking'] = false;
-                        },
-                  child: Text(
-                    _endDate == null
-                        ? AppLocalizations.of(context)!.endDate
-                        : "${AppLocalizations.of(context)!.endDate}: ${DateFormat('EEEE, d MMMM, y').format(_endDate!)}",
-                    style: const TextStyle(fontSize: 12, color: Colors.white),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: DropdownButtonFormField<String>(
+                      value: _selectedEndMonth,
+                      isExpanded: true,
+                      decoration: InputDecoration(
+                        hintText: 'Month',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(width: 1, color: Colors.grey),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                      items: months.map((month) => DropdownMenuItem<String>(
+                        value: month,
+                        child: Text(month),
+                      )).toList(),
+                      onChanged: _isCurrentlyWorking
+                          ? null
+                          : (value) {
+                              setState(() {
+                                _selectedEndMonth = value;
+                                // Update the end date in 'YYYY-MM' format
+                                if (_selectedEndYear != null) {
+                                  wp.workExperience[widget.intialIndex]['jobEndDate'] =
+                                      '$_selectedEndYear-$_selectedEndMonth';
+                                }
+                              });
+                            },
+                      validator: (value) => !_isCurrentlyWorking && value == null
+                          ? 'End month is required'
+                          : null,
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: DropdownButtonFormField<String>(
+                      value: _selectedEndYear,
+                      isExpanded: true,
+                      decoration: InputDecoration(
+                        hintText: 'Year',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(width: 1, color: Colors.grey),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                      items: years.map((year) => DropdownMenuItem<String>(
+                        value: year,
+                        child: Text(year),
+                      )).toList(),
+                      onChanged: _isCurrentlyWorking
+                          ? null
+                          : (value) {
+                              setState(() {
+                                _selectedEndYear = value;
+                                // Update the end date in 'YYYY-MM' format
+                                if (_selectedEndMonth != null) {
+                                  wp.workExperience[widget.intialIndex]['jobEndDate'] =
+                                      '$_selectedEndYear-$_selectedEndMonth';
+                                }
+                              });
+                            },
+                      validator: (value) => !_isCurrentlyWorking && value == null
+                          ? 'End year is required'
+                          : null,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-        Row(
-          children: [
-            const Spacer(),
-            Text(AppLocalizations.of(context)!.areYouCurrentlyWorkingHere),
-            Expanded(
-              child: Checkbox(
-                value: _isCurrentlyWorking,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _isCurrentlyWorking = value!;
-                    if (_isCurrentlyWorking) {
-                      _endDate = null;
-                    }
-                  });
-
-                  wp.workExperience[widget.intialIndex]['isCurrentlyWorking'] =
-                      _isCurrentlyWorking;
-                },
-              ),
-            )
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

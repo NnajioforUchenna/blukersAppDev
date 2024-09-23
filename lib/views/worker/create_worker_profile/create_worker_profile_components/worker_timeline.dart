@@ -1,6 +1,7 @@
 import 'package:blukers/providers/create_worker_profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:unicons/unicons.dart';
@@ -20,42 +21,14 @@ const workerSteps = [
   'Resume',
 ];
 
-const List<Icon> workerIcons = [
-  Icon(
-    UniconsLine.constructor,
-    color: ThemeColors.secondaryThemeColor,
-    size: 30,
-  ),
-  Icon(
-    UniconsLine.user,
-    color: ThemeColors.secondaryThemeColor,
-    size: 30,
-  ),
-  Icon(
-    UniconsLine.user_square,
-    color: ThemeColors.secondaryThemeColor,
-    size: 30,
-  ),
-  Icon(
-    UniconsLine.award,
-    color: ThemeColors.secondaryThemeColor,
-    size: 30,
-  ),
-  Icon(
-    UniconsLine.briefcase_alt,
-    color: ThemeColors.secondaryThemeColor,
-    size: 30,
-  ),
-  Icon(
-    UniconsLine.postcard,
-    color: ThemeColors.secondaryThemeColor,
-    size: 30,
-  ),
-  Icon(
-    UniconsLine.file_alt,
-    color: ThemeColors.secondaryThemeColor,
-    size: 30,
-  ),
+const List<String> workerIcons = [
+  "assets/icons/industry_indicator.svg",
+  "assets/icons/profile_indicator.svg",
+  "assets/icons/upload_indicator.svg",
+  "assets/icons/certificate_indicator.svg",
+  "assets/icons/experience_indicator.svg",
+  "assets/icons/preference_indicator.svg",
+  "assets/icons/resume_indicator.svg",
 ];
 
 enum _WorkerStatus { done, doing, todo }
@@ -63,7 +36,7 @@ enum _WorkerStatus { done, doing, todo }
 class WorkerTimeLine extends StatelessWidget {
   WorkerTimeLine({super.key});
 
-  final ScrollController _scrollController = ScrollController();
+  //final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +45,9 @@ class WorkerTimeLine extends StatelessWidget {
         Provider.of<CreateWorkerProfileProvider>(context);
 
     var currentStep = wp.workerProfileCurrentPageIndex;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.jumpTo(currentStep * 120.0);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   _scrollController.jumpTo(currentStep * 120.0);
+    // });
 
     List<String> stepsLocalized = [
       AppLocalizations.of(context)!.selectYourIndustriesAndJobs,
@@ -95,29 +68,36 @@ class WorkerTimeLine extends StatelessWidget {
             constraints: const BoxConstraints(maxHeight: 140),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              controller: _scrollController,
+              //controller: _scrollController,
               itemCount: workerSteps.length,
               itemBuilder: (BuildContext context, int index) {
                 final step = workerSteps[index];
-                var indicatorSize = 30.0;
+                // var indicatorSize = 30.0;
                 var beforeLineStyle = const LineStyle(
                   // color: Colors.white.withOpacity(0.8),
                   color: ThemeColors.secondaryThemeColor,
+                  thickness: 10,
                 );
-                LineStyle afterLineStyle =
-                    const LineStyle(color: ThemeColors.grey1ThemeColor);
+                LineStyle afterLineStyle = const LineStyle(
+                  color: ThemeColors.grey1ThemeColor,
+                  thickness: 10,
+                );
 
                 _WorkerStatus status;
 
                 if (index < currentStep) {
                   status = _WorkerStatus.done;
-                  afterLineStyle =
-                      const LineStyle(color: ThemeColors.secondaryThemeColor);
+                  afterLineStyle = const LineStyle(
+                    color: ThemeColors.secondaryThemeColor,
+                    thickness: 10,
+                  );
                 } else if (index > currentStep) {
                   status = _WorkerStatus.todo;
-                  indicatorSize = 20;
-                  beforeLineStyle =
-                      const LineStyle(color: ThemeColors.grey1ThemeColor);
+                  //   indicatorSize = 20;
+                  beforeLineStyle = const LineStyle(
+                    color: ThemeColors.grey1ThemeColor,
+                    thickness: 10,
+                  );
                 } else {
                   status = _WorkerStatus.doing;
                 }
@@ -125,21 +105,30 @@ class WorkerTimeLine extends StatelessWidget {
                 return SizedBox(
                   width: Responsive.isDesktop(context)
                       ? MediaQuery.of(context).size.width / 6
-                      : null,
+                      : 60,
                   child: TimelineTile(
                     axis: TimelineAxis.horizontal,
                     alignment: TimelineAlign.manual,
-                    lineXY: 0.6,
+                    lineXY: 0.4,
                     isFirst: index == 0,
                     isLast: index == workerSteps.length - 1,
                     beforeLineStyle: beforeLineStyle,
                     afterLineStyle: afterLineStyle,
                     indicatorStyle: IndicatorStyle(
-                      width: indicatorSize,
-                      height: indicatorSize,
+                      width: 0,
+                      height: 0,
                       indicator: _IndicatorWorker(status: status),
                     ),
-                    startChild: _StartChildWorker(index: index),
+                    startChild: Visibility(
+                        visible: index == currentStep,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: SvgPicture.asset(
+                            workerIcons[index],
+                            height: 50,
+                            width: 50,
+                          ),
+                        )),
                     endChild: _EndChildWorker(
                       text: step,
                       current: index == currentStep,
@@ -161,27 +150,15 @@ class WorkerTimeLine extends StatelessWidget {
                 textAlign: TextAlign.center,
                 stepsLocalized[currentStep],
                 style: const TextStyle(
-                  // color: ThemeColors.grey1ThemeColor,
-                  color: ThemeColors.blukersBlueThemeColor,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+                  color: ThemeColors.black1ThemeColor,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w900,
                 ),
               ),
             ),
         ],
       ),
     );
-  }
-}
-
-class _StartChildWorker extends StatelessWidget {
-  const _StartChildWorker({required this.index});
-
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: workerIcons[index]);
   }
 }
 

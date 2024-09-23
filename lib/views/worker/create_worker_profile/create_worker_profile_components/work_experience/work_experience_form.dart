@@ -1,4 +1,5 @@
 import 'package:blukers/providers/create_worker_profile_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -69,18 +70,30 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const SizedBox(height: 20),
-            Text(
-              "${AppLocalizations.of(context)!.workExperience} #${widget.index + 1}",
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.deepOrangeAccent,
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-                height: 1.25,
+            // Text(
+            //   "${AppLocalizations.of(context)!.workExperience} #${widget.index + 1}",
+            //   textAlign: TextAlign.center,
+            //   style: const TextStyle(
+            //     color: Colors.deepOrangeAccent,
+            //     fontSize: 25,
+            //     fontWeight: FontWeight.w600,
+            //     height: 1.25,
+            //   ),
+            // ),
+            // const SizedBox(height: 10),
+            // const Divider(),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppLocalizations.of(context)!.companyName,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
-            const SizedBox(height: 10),
-            const Divider(),
             AuthInput(
               child: TextFormField(
                 controller: _companyNameController,
@@ -93,13 +106,20 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
                   wp.workExperience[widget.index]['companyName'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.companyName,
+                  // hintText: AppLocalizations.of(context)!.companyName,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
+                        width: 1,
+                        style: BorderStyle.solid,
+                        color: ThemeColors.black1ThemeColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                        width: 1,
+                        style: BorderStyle.solid,
+                        color: ThemeColors.black1ThemeColor),
                   ),
                   fillColor: Colors.white,
                   filled: true,
@@ -107,6 +127,18 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
               ),
             ),
             const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppLocalizations.of(context)!.jobTitle,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
             AuthInput(
               child: TextFormField(
                 controller: _jobTitleController,
@@ -119,13 +151,20 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
                   wp.workExperience[widget.index]['jobTitle'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.jobTitle,
+                  //hintText: AppLocalizations.of(context)!.jobTitle,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
+                        width: 1,
+                        style: BorderStyle.solid,
+                        color: ThemeColors.black1ThemeColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                        width: 1,
+                        style: BorderStyle.solid,
+                        color: ThemeColors.black1ThemeColor),
                   ),
                   fillColor: Colors.white,
                   filled: true,
@@ -133,6 +172,18 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
               ),
             ),
             const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppLocalizations.of(context)!.jobDescription,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
             AuthInput(
               child: TextFormField(
                 maxLines: 3,
@@ -146,13 +197,20 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
                   wp.workExperience[widget.index]['jobDescription'] = value;
                 },
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.jobDescription,
+                  // hintText: AppLocalizations.of(context)!.jobDescription,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
+                        width: 1,
+                        style: BorderStyle.solid,
+                        color: ThemeColors.black1ThemeColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                        width: 1,
+                        style: BorderStyle.solid,
+                        color: ThemeColors.black1ThemeColor),
                   ),
                   fillColor: Colors.white,
                   filled: true,
@@ -160,6 +218,18 @@ class _WorkExperienceFormState extends State<WorkExperienceForm> {
               ),
             ),
             const SizedBox(height: 10),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Location",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
             WorkExperienceLocationForm(
               intialIndex: widget.index,
             ),

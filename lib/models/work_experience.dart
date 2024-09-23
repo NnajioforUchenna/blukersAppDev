@@ -39,10 +39,15 @@ class WorkExperience {
       jobTitle: map['jobTitle'] ?? '',
       jobDescription: map['jobDescription'] ?? '',
       jobStartDate: map['jobStartDate'] != null
-          ? DateTime.parse(map['jobStartDate'])
+          ? DateTime.parse(map['jobStartDate'].length == 7
+              ? '${map['jobStartDate']}-01' // Add default day if format is 'YYYY-MM'
+              : map['jobStartDate'])
           : DateTime.now(),
-      jobEndDate:
-          map['jobEndDate'] != null ? DateTime.parse(map['jobEndDate']) : null,
+      jobEndDate: map['jobEndDate'] != null
+          ? DateTime.parse(map['jobEndDate'].length == 7
+              ? '${map['jobEndDate']}-01' // Add default day if format is 'YYYY-MM'
+              : map['jobEndDate'])
+          : null,
       isCurrentlyWorking: map['isCurrentlyWorking'] ?? false,
     );
   }
