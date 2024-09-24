@@ -16,7 +16,6 @@ import '../../../services/responsive.dart';
 import '../../../utils/styles/theme_colors.dart';
 import '../../common_vieiws/loading_page.dart';
 import '../saved/display_jobs.dart';
-import '../search_jobs/jobs_search_result_page/job_search_result_page.dart';
 
 class SelectIndustryScreenDesktop extends StatefulWidget {
   const SelectIndustryScreenDesktop({super.key});
@@ -126,10 +125,11 @@ class _SelectIndustryScreenDesktopState
                       ],
                     ),
                   ),
-            secondChild: const JobSearchResultPage(),
-            crossFadeState: jp.isSearching
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst,
+            secondChild: const SizedBox.shrink(),
+            crossFadeState: CrossFadeState.showFirst,
+            // crossFadeState: jp.isSearching
+            //     ? CrossFadeState.showSecond
+            //     : CrossFadeState.showFirst,
             duration: const Duration(milliseconds: 500),
           ),
         ],
