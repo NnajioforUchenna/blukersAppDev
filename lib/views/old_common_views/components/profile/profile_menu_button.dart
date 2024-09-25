@@ -1,19 +1,19 @@
-import '../../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unicons/unicons.dart';
 
 class ProfileMenuButton extends StatelessWidget {
-  String text;
-  Function onPress;
-  Color textColor;
+  final String text;
+  final Function onPress;
+  final Color textColor;
+  final Widget? trailing;
 
-  ProfileMenuButton({
-    super.key,
-    required this.text,
-    required this.onPress,
-    this.textColor = ThemeColors.grey1ThemeColor,
-  });
+  const ProfileMenuButton(
+      {super.key,
+      required this.text,
+      required this.onPress,
+      this.textColor = const Color(0xFF595959),
+      this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +22,15 @@ class ProfileMenuButton extends StatelessWidget {
         onPress();
       },
       child: Container(
-        // margin: const EdgeInsets.all(14.0),
-        margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
-          color: Colors.white, // Background color of the container
-          borderRadius: BorderRadius.circular(10.0), // Rounded corners
+          color: const Color(0xFFF9F9F9),
+          borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.25), // Box shadow color
+              color: Colors.grey.withOpacity(0.25),
               spreadRadius: 1,
               blurRadius: 2,
-              offset: const Offset(0, 2), // Shadow position
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -49,11 +47,12 @@ class ProfileMenuButton extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const Icon(
-                UniconsLine.angle_right,
-                size: 30.0,
-                color: ThemeColors.grey2ThemeColor,
-              ),
+              trailing ??
+                  const Icon(
+                    UniconsLine.angle_right,
+                    size: 30.0,
+                    color: Color(0xFF595959),
+                  ),
             ],
           ),
         ),

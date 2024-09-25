@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../services/responsive.dart';
 import 'Components/company_app_bar.dart';
 import 'Components/company_buttom_navigation_bar.dart';
-import 'Components/company_drawer.dart';
+// import 'Components/company_drawer.dart';
 
 class CompanyPageTemplate extends StatelessWidget {
   final Widget child;
@@ -14,7 +14,7 @@ class CompanyPageTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        endDrawer: Responsive.isDesktop(context) ? null : const CompanyDrawer(),
+        // endDrawer: Responsive.isDesktop(context) ? null : const CompanyDrawer(),
         appBar: Responsive.isDesktop(context)
             ? const DesktopNavBar()
             : const CompanyAppBar(),
@@ -23,7 +23,6 @@ class CompanyPageTemplate extends StatelessWidget {
             : const CompanyButtomNavigationBar(),
         body: Padding(
           padding: EdgeInsets.only(top: Responsive.isDesktop(context) ? 20 : 0),
-          child: child,
-        ));
+          child: child));
   }
 }
