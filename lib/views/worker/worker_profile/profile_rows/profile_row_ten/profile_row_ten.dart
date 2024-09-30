@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
-import '../../profile_menu_button.dart';
+import '../../../../old_common_views/components/profile/profile_menu_button.dart';
 
 class ProfileRowTen extends StatelessWidget {
   const ProfileRowTen({super.key});

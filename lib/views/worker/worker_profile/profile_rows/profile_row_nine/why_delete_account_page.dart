@@ -39,6 +39,7 @@ class _WhyDeleteAccountPageState extends State<WhyDeleteAccountPage> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
+      backgroundColor: Colors.white,
       insetPadding:
           const EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 80),
       child: Stack(

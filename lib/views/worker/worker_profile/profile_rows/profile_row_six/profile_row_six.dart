@@ -1,7 +1,8 @@
+import '../../../../old_common_views/components/profile/profile_menu_button.dart';
 import 'update_resume.dart';
 import 'package:flutter/material.dart';
 
-import '../../profile_menu_button.dart';
+
 
 class ProfileRowSix extends StatelessWidget {
   const ProfileRowSix({super.key});
@@ -12,7 +13,7 @@ class ProfileRowSix extends StatelessWidget {
       text: "Resume",
       onPress: () {
         showDialog(
-            context: context, builder: (context) => const UpdateResume());
+            context: context, builder: (context) => const UpdateUserInfoDialog(child: UpdateResume()));
       },
     );
   }

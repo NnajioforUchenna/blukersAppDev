@@ -1,8 +1,8 @@
-import 'update_user_information.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../profile_menu_button.dart';
+import '../../../../old_common_views/components/profile/profile_menu_button.dart';
+import 'update_user_information.dart';
 
 class ProfileRowFour extends StatelessWidget {
   const ProfileRowFour({super.key});
@@ -14,7 +14,8 @@ class ProfileRowFour extends StatelessWidget {
       onPress: () {
         showDialog(
             context: context,
-            builder: (context) => const UpdateUserInformation());
+            builder: (context) =>
+                const UpdateUserInfoDialog(child: UpdateUserInformation()));
       },
     );
   }

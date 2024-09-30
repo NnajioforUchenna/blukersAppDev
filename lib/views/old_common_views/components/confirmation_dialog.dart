@@ -14,11 +14,13 @@ void confirmationDialog({
   String confirmText = "Confirm",
   String stringsTemplate = "",
 }) {
+  Color bgColor = ThemeColors.blukersOrangeThemeColor;
   if (stringsTemplate == "logout") {
     title = AppLocalizations.of(context)!.logout;
     text = AppLocalizations.of(context)!.areYouSureYouWantToLogOut;
     cancelText = AppLocalizations.of(context)!.cancel;
     confirmText = AppLocalizations.of(context)!.logout;
+    bgColor = ThemeColors.blukersBlueThemeColor;
   }
 
   if (stringsTemplate == "deleteAccount") {
@@ -26,6 +28,7 @@ void confirmationDialog({
     text = AppLocalizations.of(context)!.areYouSureYouWantToDeleteYourAccount;
     cancelText = AppLocalizations.of(context)!.cancel;
     confirmText = AppLocalizations.of(context)!.delete;
+    bgColor = const Color(0xFFBC0101);
   }
 
   showDialog(
@@ -42,9 +45,7 @@ void confirmationDialog({
             title,
             style: GoogleFonts.montserrat(
               fontSize: Responsive.isMobile(context) ? 16 : 28,
-              color: stringsTemplate == "deleteAccount"
-                  ? const Color(0xFFBC0101)
-                  : ThemeColors.blukersBlueThemeColor,
+              color: bgColor,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -74,9 +75,7 @@ void confirmationDialog({
                       const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                   shape: RoundedRectangleBorder(
                     side: BorderSide(
-                      color: stringsTemplate == "deleteAccount"
-                          ? const Color(0xFFBC0101)
-                          : ThemeColors.blukersOrangeThemeColor,
+                      color: bgColor,
                       width: 1,
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(8.0)),
@@ -87,9 +86,7 @@ void confirmationDialog({
                   style: GoogleFonts.montserrat(
                     fontSize: Responsive.isMobile(context) ? 12 : 18,
                     fontWeight: FontWeight.w600,
-                    color: stringsTemplate == "deleteAccount"
-                        ? const Color(0xFFBC0101)
-                        : ThemeColors.blukersOrangeThemeColor,
+                    color: bgColor,
                   ),
                 ),
               ),
@@ -101,7 +98,9 @@ void confirmationDialog({
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(Responsive.isMobile(context) ? 110 : 180,
                       Responsive.isMobile(context) ? 42 : 50),
-                  backgroundColor: ThemeColors.blukersOrangeThemeColor,
+                  backgroundColor: stringsTemplate == "logout"
+                      ? bgColor
+                      : ThemeColors.blukersOrangeThemeColor,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                   shape: const RoundedRectangleBorder(

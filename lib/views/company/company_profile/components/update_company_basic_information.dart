@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../utils/styles/index.dart';
 import '../../../../services/responsive.dart';
-import 'info_input_widget.dart';
+import '../../../old_common_views/components/profile/info_input_widget.dart';
 
 class UpdateCompanyBasicInformation extends StatefulWidget {
   const UpdateCompanyBasicInformation({super.key});
@@ -125,7 +125,6 @@ class _UpdateCompanyBasicInformationState
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    elevation: 0,
                     backgroundColor: ThemeColors.secondaryThemeColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
