@@ -35,79 +35,98 @@ class _JobPostMobileDetailsCompanyState
     // Create a ScrollController to track the scroll position
     ScrollController scrollController = ScrollController();
 
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          controller: scrollController,
-          child: Container(
-            padding: EdgeInsets.only(
-                left: 25, top: topPadding, right: 15, bottom: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MobileDetailPageBlockOneCompany(jobPost: widget.jobPost),
-                MobileDetailPageBlockTwo(jobPost: widget.jobPost),
-                MobileDetailPageBlockThree(jobPost: widget.jobPost),
-                MobileDetailPageBlockFour(jobPost: widget.jobPost),
-                MobileDetailPageBlockFive(jobPost: widget.jobPost),
-                const SizedBox(height: 20),
-                if (canDelete)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: ThemeColors.secondaryThemeColor,
-                            textStyle: TextStyle(
-                              fontSize:
-                                  Responsive.isMobile(context) ? 10.sp : 14,
-                              fontWeight: FontWeight.w600,
+    return Dialog(
+      child: Stack(
+        children: [
+          Container(
+            padding: EdgeInsets.only(left: 25, top: topPadding, right: 15, bottom: 20),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MobileDetailPageBlockOneCompany(jobPost: widget.jobPost),
+                  MobileDetailPageBlockTwo(jobPost: widget.jobPost),
+                  MobileDetailPageBlockThree(jobPost: widget.jobPost),
+                  MobileDetailPageBlockFour(jobPost: widget.jobPost),
+                  MobileDetailPageBlockFive(jobPost: widget.jobPost),
+                  const SizedBox(height: 20),
+                  if (canDelete)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: ThemeColors.primaryThemeColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(9),
+                              ),
+                              textStyle: TextStyle(
+                                fontSize: Responsive.isMobile(context) ? 10.sp : 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            onPressed: () {
+                              // editJobPost(context);
+                            },
+                            child: const Text(
+                              'Edit Listing',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return DeleteDialog(jobPost: widget.jobPost);
-                              },
-                            );
-                          },
-                          child: const Text('Delete Job Post'),
                         ),
-                      ),
-                      SizedBox(width: 5.w),
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: ThemeColors.secondaryThemeColor,
-                            textStyle: TextStyle(
-                              fontSize:
-                                  Responsive.isMobile(context) ? 10.sp : 14,
-                              fontWeight: FontWeight.w600,
+                        SizedBox(width: 5.w),
+                        Expanded(
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              side: const BorderSide(
+                                  color: ThemeColors.primaryThemeColor),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(9),
+                              ),
+                              textStyle: TextStyle(
+                                fontSize: Responsive.isMobile(context) ? 10.sp : 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return DeleteJobDialog(jobPost: widget.jobPost);
+                                },
+                              );
+                            },
+                            child: const Text(
+                              'Delete Listing',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: ThemeColors.primaryThemeColor,
+                              ),
                             ),
                           ),
-                          onPressed: () {
-                            // editJobPost(context);
-                          },
-                          child: const Text('Edit Job Post'),
                         ),
-                      ),
-                    ],
-                  ),
-              ],
+                      ],
+                    ),
+                ],
+              ),
             ),
           ),
-        ),
-        const Positioned(
-          top: 12, // Adjust as needed
-          left: 10, // Adjust as needed
-          child: SmallPopButtonWidget(),
-        ),
-      ],
+          const Positioned(
+            top: 12,
+            left: 10,
+            child: SmallPopButtonWidget(),
+          ),
+        ],
+      ),
     );
   }
 }

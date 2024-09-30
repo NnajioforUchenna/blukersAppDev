@@ -54,7 +54,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
             color: Colors.black,
           ),
         ),
-        centerTitle: true, // Centers the title horizontally
+        centerTitle: true, 
       ),
       body: Container(
         color: Colors.white,
@@ -94,7 +94,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                   onChanged: (industryId) {
                     setState(() {
                       selectedIndustryId = industryId;
-                      selectedJobId = null; // Reset job selection
+                      selectedJobId = null; 
                     });
                   },
                   value: selectedIndustryId,
@@ -143,6 +143,7 @@ class _ClassificationPageState extends State<ClassificationPage> {
                     onChanged: (jobId) {
                       setState(() {
                         selectedJobId = jobId;
+                        print(selectedJobId);
                       });
                     },
                     value: selectedJobId,

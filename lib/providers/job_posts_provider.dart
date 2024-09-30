@@ -15,14 +15,18 @@ import '../views/worker/jobs_home/Components/display_selected_jobs/display_selec
 
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;
+  List<JobPost> _jobPosts = [];
 
   Map<String, JobPost> searchJobs = {};
   Map<String, JobPost> recent50Jobs = {};
 
+  
+
   // Controls Displayed Job Posts
   Map<String, JobPost> displayedJobPosts = {};
-  List<bool> stepCompletion = List.generate(jobPostSteps.length, (index) => false);
-  
+  List<bool> stepCompletion =
+      List.generate(jobPostSteps.length, (index) => false);
+
   JobPost? selectedJobPost;
 
   // List<JobPost> selectedJobPosts = displayedJobPosts.values.toList();
@@ -114,6 +118,7 @@ class JobPostsProvider with ChangeNotifier {
       MaterialPageRoute(
         builder: (context) => DisplaySelectedJobs(
           title: job.title,
+          JobId: job.jobId,
         ),
       ),
     );
@@ -252,7 +257,7 @@ class JobPostsProvider with ChangeNotifier {
     setJobPostPageNext();
   }
 
-   void updateStepCompletion(int stepIndex, bool isCompleted) {
+  void updateStepCompletion(int stepIndex, bool isCompleted) {
     if (stepIndex < stepCompletion.length) {
       stepCompletion[stepIndex] = isCompleted;
       notifyListeners();
@@ -270,8 +275,8 @@ class JobPostsProvider with ChangeNotifier {
 
     newJobPostData['addresses'] = [address.toMap()];
     newJobPostData['address'] = address.toMap();
-     createJobPost();
-     setJobPostPageNext();
+    createJobPost();
+    setJobPostPageNext();
   }
 
   Future<void> createJobPost() async {
@@ -478,13 +483,20 @@ class JobPostsProvider with ChangeNotifier {
 //       .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
 // }
 
+ 
+
 // delete jobs posted
+
   Future<void> deleteJobPost(String jobPostId) async {
-    JobPostsDataProvider.deleteJobPost(jobPostId, appUser!.uid);
+    await JobPostsDataProvider.deleteJobPost(jobPostId, appUser!.uid);
+  
+    // Notify listeners to refresh the UI
     notifyListeners();
   }
 
   void getJobsByPreferences() {
     getJobPostsByJobID('electrician', 'en');
   }
+
+  // Method to set all job posts (you might want to call this from your data fetching logic)
 }

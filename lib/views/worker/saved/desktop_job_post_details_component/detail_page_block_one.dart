@@ -18,20 +18,18 @@ import '../time_ago_and_bookmark_row.dart';
 class DetailPageBlockOne extends StatelessWidget {
   final JobPost jobPost;
 
-  const DetailPageBlockOne({super.key, required this.jobPost});
+  const DetailPageBlockOne({Key? key, required this.jobPost}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Get screen width
-    double width = MediaQuery.of(context).size.width;
     UserProvider up = Provider.of<UserProvider>(context);
     bool isJobApplied = !up.isJobPostApplied(jobPost.jobPostId ?? '');
     bool isJobSaved = up.isJobPostSaved(jobPost.jobPostId ?? '');
-    bool isHideButton = up.appUser?.uid == jobPost.companyId;
+    bool isCompanyOwner = up.appUser?.uid == jobPost.companyId;
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0), // Add padding to the whole widget
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -62,36 +60,6 @@ class DetailPageBlockOne extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const ShapedIcon(icon: UniconsLine.building),
-                SizedBox(width: 5.h),
-                Text("${AppLocalizations.of(context)!.company}: ",
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w900,
-                      color: ThemeColors.black3ThemeColor,
-                      fontFamily: 'Montserrat',
-                    )),
-              ],
-            ),
-            SizedBox(height: 5.h),
-            Wrap(
-              children: [
-                Text(
-                  jobPost.companyName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 24,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-            SizedBox(height: 15.h),
             Row(
               children: [
                 const ShapedIcon(icon: UniconsLine.map_marker_alt),
@@ -109,7 +77,52 @@ class DetailPageBlockOne extends StatelessWidget {
             SizedBox(height: 15.h),
             Row(
               children: [
-                if (!isHideButton) // Correct usage of 'if' statement
+                if (isCompanyOwner) ...[
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ThemeColors.primaryThemeColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                      ),
+                      onPressed: () {
+                        // TODO: Implement edit functionality
+                      },
+                      child: const Text(
+                        "Edit Listing",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10.w),
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(
+                            color: ThemeColors.primaryThemeColor),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                      ),
+                      onPressed: () {
+                        // TODO: Implement delete functionality
+                      },
+                      child: const Text(
+                        "Delete Listing",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: ThemeColors.primaryThemeColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                ] else if (!isCompanyOwner)
                   isJobApplied
                       ? SizedBox(
                           height: 40,
@@ -160,14 +173,13 @@ class DetailPageBlockOne extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-
                 const Spacer(),
                 RoundedImageWidget(
                   size: Responsive.isMobile(context) ? 50 : 100,
                   imageUrl:
                       jobPost.companyLogo ?? 'https://picsum.photos/200/300',
                   firstChar: getFirstChar(jobPost.companyName ?? ''),
-                ), // Add space between button and image
+                ),
               ],
             ),
             SizedBox(height: 15.h),

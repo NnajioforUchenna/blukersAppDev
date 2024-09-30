@@ -99,6 +99,7 @@ class _SelectIndustryScreenDesktopState
                                             builder: (context) =>
                                                 DisplayWorkers(
                                               title: job.title,
+                                            
                                             ),
                                           ),
                                         );
@@ -110,6 +111,7 @@ class _SelectIndustryScreenDesktopState
                                           MaterialPageRoute(
                                             builder: (context) => DisplayJobs(
                                               title: job.title,
+                                               JobId: job.jobId,
                                             ),
                                           ),
                                         );

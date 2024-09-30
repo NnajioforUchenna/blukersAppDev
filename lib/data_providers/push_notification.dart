@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -22,6 +23,8 @@ class DataNotificationProvider {
         body: json.encode(requestBody),
         headers: {'Content-Type': 'application/json'},
       );
+       
+        print('Response: ${requestBody.toString()}');   
 
       if (response.statusCode == 200) {
         return 'Notification sent successfully';

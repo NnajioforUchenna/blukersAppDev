@@ -68,7 +68,7 @@ class _DisplayJobCardState extends State<DisplayJobCard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TimeAgoAndBookMarkRow(jobPost: widget.jobPost),
+                     TimeAgoAndBookMarkRow(jobPost: widget.jobPost),
                     const SizedBox(height: 8),
                     Text(
                       toTitleCase(widget.jobPost.jobTitle),

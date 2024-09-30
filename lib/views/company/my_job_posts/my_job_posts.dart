@@ -80,11 +80,15 @@ class MyJobPosts extends StatelessWidget {
                   ),
                 ],
               ),
-              body: const TabBarView(
-                children: [
-                  InterestingWorkersTab(),
-                  MyJobPostsTab(),
-                ],
+              body: Consumer<JobPostsProvider>(
+                builder: (context, jobPostsProvider, child) {
+                  return const TabBarView(
+                    children: [
+                      InterestingWorkersTab(),
+                      MyJobPostsTab(),
+                    ],
+                  );
+                },
               ),
             ),
           );
