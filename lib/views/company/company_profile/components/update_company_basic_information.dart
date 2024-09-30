@@ -44,8 +44,7 @@ class _UpdateCompanyBasicInformationState
     return Container(
       // width: double.infinity,
       padding: EdgeInsets.only(
-        top: 56,
-        bottom: 56,
+       
         left: Responsive.isMobile(context) ? 25 : 40,
         right: Responsive.isMobile(context) ? 25 : 40,
       ),
@@ -53,6 +52,9 @@ class _UpdateCompanyBasicInformationState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+             const SizedBox(
+              height: 40,
+            ),
             // const Row(
             //   mainAxisAlignment: MainAxisAlignment.end,
             //   children: [SmallPopButtonWidget()],
@@ -140,6 +142,9 @@ class _UpdateCompanyBasicInformationState
                   ),
                 ),
               ),
+            ),
+             const SizedBox(
+              height: 40,
             ),
           ],
         ),
