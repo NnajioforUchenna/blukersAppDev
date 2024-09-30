@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../common_vieiws/desktop_nav_bar.dart';
+import '../../../common_vieiws/desktop_nav_bar_worker.dart';
 
 class WorkerAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WorkerAppBar({super.key});

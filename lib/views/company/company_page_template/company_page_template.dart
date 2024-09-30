@@ -1,4 +1,5 @@
-import 'package:blukers/views/common_vieiws/desktop_nav_bar.dart';
+import 'package:blukers/views/common_vieiws/desktop_nav_bar_company.dart';
+import 'package:blukers/views/common_vieiws/desktop_nav_bar_worker.dart';
 import 'package:flutter/material.dart';
 
 import '../../../services/responsive.dart';
@@ -16,13 +17,14 @@ class CompanyPageTemplate extends StatelessWidget {
         backgroundColor: Colors.white,
         // endDrawer: Responsive.isDesktop(context) ? null : const CompanyDrawer(),
         appBar: Responsive.isDesktop(context)
-            ? const DesktopNavBar()
+            ? const DesktopNavBarCompany()
             : const CompanyAppBar(),
         bottomNavigationBar: Responsive.isDesktop(context)
             ? null
             : const CompanyButtomNavigationBar(),
         body: Padding(
-          padding: EdgeInsets.only(top: Responsive.isDesktop(context) ? 20 : 0),
-          child: child));
+            padding:
+                EdgeInsets.only(top: Responsive.isDesktop(context) ? 20 : 0),
+            child: child));
   }
 }
