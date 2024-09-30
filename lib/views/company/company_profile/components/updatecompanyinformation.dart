@@ -40,8 +40,6 @@ class _UpdateCompanyInformationState extends State<UpdateCompanyInformation> {
     return Container(
       // width: double.infinity,
       padding: EdgeInsets.only(
-        top: 56,
-        bottom: 30,
         left: Responsive.isMobile(context) ? 25 : 40,
         right: Responsive.isMobile(context) ? 25 : 40,
       ),
@@ -49,6 +47,9 @@ class _UpdateCompanyInformationState extends State<UpdateCompanyInformation> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 40,
+            ),
             Row(
               mainAxisAlignment: Responsive.isMobile(context)
                   ? MainAxisAlignment.center
@@ -116,6 +117,9 @@ class _UpdateCompanyInformationState extends State<UpdateCompanyInformation> {
                   ),
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 40,
             ),
           ],
         ),
