@@ -142,7 +142,10 @@ final List<Map<String, dynamic>> listSubscriptions = [
       "Apply to 2 Jobs Daily",
       // "Show your profile on top in employers searchers section"
     ],
+    "icon": "assets/icons/basic_icon.svg",
+    "description": "Your starting point for finding jobs."
   },
+  
   {
     "color": const Color(0xff1a75bb),
     "title": "Premium",
@@ -156,11 +159,13 @@ final List<Map<String, dynamic>> listSubscriptions = [
       "Apply to 10 Jobs Daily",
       "Show your profile on top in employers searchers section"
     ],
+     "icon": "assets/icons/premium_icon.svg",
+    "description": "Get more opportunity and visibility."
   },
   {
     "color": const Color(0xffF16523),
     "title": "Premium",
-    "subtitle": "Plus",
+    "subtitle": " Plus",
     "amount": "9.99",
     "subscriptionId": "blukers_workers_premium_plus",
     "details": [
@@ -171,6 +176,8 @@ final List<Map<String, dynamic>> listSubscriptions = [
       "Show your profile on top in employers searchers section",
       "Display your immigration and employment verification status"
     ],
+     "icon": "assets/icons/premium_plus_icon.svg",
+    "description": "Exclusive benefits, top-tier support."
   },
 ];
 

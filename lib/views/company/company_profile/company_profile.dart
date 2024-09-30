@@ -36,29 +36,28 @@ class _CompanyProfileState extends State<CompanyProfile> {
     return up.appUser == null
         ? const LoginOrRegister()
         : Responsive(
-            mobile: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 56, left: 24, right: 24),
-                child: CompanyInfoWidget(
-                  index: index,
-                  onTapDesktop: (int i) {
-                    setState(() {
-                      index = i;
-                    });
-                  },
-                ),
+            mobile: Padding(
+              padding: const EdgeInsets.only(top: 56, left: 24, right: 24),
+              child: CompanyInfoWidget(
+                index: index,
+                onTapDesktop: (int i) {
+                  setState(() {
+                    index = i;
+                  });
+                },
               ),
             ),
             desktop: Center(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * .9,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 80),
+                child: Container(
+                  padding: const EdgeInsets.only(top: 40),
+                  margin: const EdgeInsets.only(bottom: 40),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        flex: 2,
+                        flex: 3,
                         child: Container(
                             margin: const EdgeInsets.only(right: 34),
                             child: CompanyInfoWidget(
@@ -71,7 +70,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                             )),
                       ),
                       Expanded(
-                          flex: 7,
+                          flex: 8,
                           child: Container(
                               decoration: BoxDecoration(
                                   boxShadow: const [
@@ -308,10 +307,8 @@ Widget buildProfileImage(context, up) {
               ? FadeInImage.assetNetwork(
                   placeholder: "assets/images/loading.jpeg",
                   image: up.appUser!.photoUrl!,
-               
                   fit: BoxFit.cover,
                 )
-          
               : FittedBox(
                   fit: BoxFit.fill,
                   child: Image.asset("assets/images/userDefaultProfilePic.png"),
@@ -333,9 +330,7 @@ Widget buildDeleteAccountSection(context, up) {
       colorFilter: const ColorFilter.mode(Color(0xFFC85E5E), BlendMode.srcIn),
     ),
     onPress: () {
-      
       if (up.appUser != null) {
-    
         confirmationDialog(
           context: context,
           stringsTemplate: 'deleteAccount',
@@ -347,55 +342,6 @@ Widget buildDeleteAccountSection(context, up) {
       }
     },
   );
-}
-
-class DesktopMenuButton extends StatelessWidget {
-  const DesktopMenuButton(
-      {super.key,
-      required this.child,
-      required this.isSelected,
-      required this.onPressed});
-  final Widget child;
-  final bool isSelected;
-  final void Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-            border: isSelected
-                ? const Border(
-                    left: BorderSide(
-                        color: ThemeColors.secondaryThemeColorDark, width: 5.1))
-                : null,
-            color: isSelected ? Colors.white : const Color(0xFFF9F9FA)),
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 22),
-        child: child,
-      ),
-    );
-  }
-}
-
-class UpdateUserInfoDialog extends StatelessWidget {
-  const UpdateUserInfoDialog({super.key, required this.child});
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-      ),
-      insetPadding:
-          const EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 80),
-      child: child,
-    );
-  }
 }
 
 class CompanyInfoWidget extends StatelessWidget {
@@ -410,77 +356,119 @@ class CompanyInfoWidget extends StatelessWidget {
     CompanyProvider cp = Provider.of<CompanyProvider>(context);
     CompanyChatProvider chatProvider =
         Provider.of<CompanyChatProvider>(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        buildProfilePicAndEdit(context, up, cp),
-        const SizedBox(height: 16),
-        Center(
-          child: Text(
-            up.appUser?.company?.name ?? "",
-            style: GoogleFonts.montserrat(
-                fontSize: Responsive.isMobile(context) ? 14 : 18,
-                color: ThemeColors.primaryThemeColor,
-                fontWeight: FontWeight.w700),
-            textAlign: TextAlign.center,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          buildProfilePicAndEdit(context, up, cp),
+          const SizedBox(height: 16),
+          Center(
+            child: Text(
+              up.appUser?.company?.name ?? "",
+              style: GoogleFonts.montserrat(
+                  fontSize: Responsive.isMobile(context) ? 14 : 18,
+                  color: ThemeColors.primaryThemeColor,
+                  fontWeight: FontWeight.w700),
+              textAlign: TextAlign.center,
+            ),
           ),
-        ),
-        SizedBox(height: Responsive.isDesktop(context) ? 16 : 35),
-        if (Responsive.isDesktop(context))
-          DesktopMenuButton(
-              onPressed: () {
-                onTapDesktop(0);
+          SizedBox(height: Responsive.isDesktop(context) ? 16 : 35),
+          if (Responsive.isDesktop(context))
+            DesktopMenuButton(
+              selectedBorderColor: ThemeColors.secondaryThemeColor,
+                onPressed: () {
+                  onTapDesktop(0);
+                },
+                isSelected: index == 0,
+                child: Text(
+                  AppLocalizations.of(context)!.basicInformation,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 20,
+                    color: index == 0 ? Colors.black : const Color(0xFF757575),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ))
+          else
+            ProfileMenuButton(
+              text: AppLocalizations.of(context)!.basicInformation,
+              onPress: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const UpdateUserInfoDialog(
+                      child: UpdateCompanyBasicInformation()),
+                );
               },
-              isSelected: index == 0,
-              child: Text(
-                AppLocalizations.of(context)!.basicInformation,
-                style: GoogleFonts.montserrat(
-                  fontSize: 20,
-                  color: index == 0 ? Colors.black : const Color(0xFF757575),
-                  fontWeight: FontWeight.w500,
-                ),
-              ))
-        else
-          ProfileMenuButton(
-            text: AppLocalizations.of(context)!.basicInformation,
-            onPress: () {
-              showDialog(
-                context: context,
-                builder: (context) => const UpdateUserInfoDialog(
-                    child: UpdateCompanyBasicInformation()),
-              );
-            },
-          ),
-         if (Responsive.isMobile(context))  const SizedBox(height: 16),
-        if (Responsive.isDesktop(context))
-          DesktopMenuButton(
-              onPressed: () {
-                onTapDesktop(1);
+            ),
+          if (Responsive.isMobile(context)) const SizedBox(height: 16),
+          if (Responsive.isDesktop(context))
+            DesktopMenuButton(
+              selectedBorderColor: ThemeColors.secondaryThemeColor,
+                onPressed: () {
+                  onTapDesktop(1);
+                },
+                isSelected: index == 1,
+                child: Text(
+                  AppLocalizations.of(context)!.companyInformation,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 20,
+                    color: index == 1 ? Colors.black : const Color(0xFF757575),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ))
+          else
+            ProfileMenuButton(
+              text: AppLocalizations.of(context)!.companyInformation,
+              onPress: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const UpdateUserInfoDialog(
+                      child: UpdateCompanyInformation()),
+                );
               },
-              isSelected: index == 1,
-              child: Text(
-                AppLocalizations.of(context)!.companyInformation,
-                style: GoogleFonts.montserrat(
-                  fontSize: 20,
-                  color: index == 1 ? Colors.black : const Color(0xFF757575),
-                  fontWeight: FontWeight.w500,
-                ),
-              ))
-        else
-          ProfileMenuButton(
-            text: AppLocalizations.of(context)!.companyInformation,
-            onPress: () {
-              showDialog(
-                context: context,
-                builder: (context) => const UpdateUserInfoDialog(
-                    child: UpdateCompanyInformation()),
-              );
-            },
-          ),
-        const SizedBox(height: 36),
-        if (Responsive.isDesktop(context))
-          DesktopMenuButton(
-              onPressed: () {
+            ),
+          const SizedBox(height: 36),
+          if (Responsive.isDesktop(context))
+            DesktopMenuButton(
+              selectedBorderColor: ThemeColors.secondaryThemeColor,
+                onPressed: () {
+                  confirmationDialog(
+                    context: context,
+                    stringsTemplate: 'logout',
+                    onConfirm: () async {
+                      chatProvider.clearGroups();
+                      await up.signOut();
+                      context.go('/');
+                    },
+                  );
+                },
+                isSelected: false,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Log out",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 20,
+                        color: const Color(0xFF757575),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.logout,
+                      size: 30.0,
+                      color: Color(0xFF595959),
+                    ),
+                  ],
+                ))
+          else
+            ProfileMenuButton(
+              text: "Log out",
+              trailing: const Icon(
+                Icons.logout,
+                size: 25.0,
+                color: Color(0xFF595959),
+              ),
+              onPress: () {
                 confirmationDialog(
                   context: context,
                   stringsTemplate: 'logout',
@@ -491,85 +479,48 @@ class CompanyInfoWidget extends StatelessWidget {
                   },
                 );
               },
-              isSelected: false,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Log out",
-                    style: GoogleFonts.montserrat(
-                      fontSize: 20,
-                      color: const Color(0xFF757575),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Icon(
-                    Icons.logout,
-                    size: 30.0,
-                    color: Color(0xFF595959),
-                  ),
-                ],
-              ))
-        else
-          ProfileMenuButton(
-            text: "Log out",
-            trailing: const Icon(
-              Icons.logout,
-              size: 25.0,
-              color: Color(0xFF595959),
             ),
-            onPress: () {
-              confirmationDialog(
-                context: context,
-                stringsTemplate: 'logout',
-                onConfirm: () async {
-                  chatProvider.clearGroups();
-                  await up.signOut();
-                  context.go('/');
+          if (Responsive.isMobile(context)) const SizedBox(height: 16),
+          if (Responsive.isDesktop(context))
+            DesktopMenuButton(
+                onPressed: () {
+                  confirmationDialog(
+                    context: context,
+                    stringsTemplate: 'deleteAccount',
+                    onConfirm: () async {
+                      // Navigator.of(context).pushReplacementNamed('/');
+                      await up.deleteUser(up.appUser!.uid);
+                      Navigator.of(context).pushReplacementNamed('/');
+                    },
+                  );
                 },
-              );
-            },
-          ),
-        if (Responsive.isMobile(context)) const SizedBox(height: 16),
-        if (Responsive.isDesktop(context))
-          DesktopMenuButton(
-              onPressed: () {
-                confirmationDialog(
-                  context: context,
-                  stringsTemplate: 'deleteAccount',
-                  onConfirm: () async {
-                    // Navigator.of(context).pushReplacementNamed('/');
-                    await up.deleteUser(up.appUser!.uid);
-                    Navigator.of(context).pushReplacementNamed('/');
-                  },
-                );
-              },
-              isSelected: false,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.deleteAccount,
-                    style: GoogleFonts.montserrat(
-                      fontSize: 20,
-                      color: const Color(0xFFC85E5E),
-                      fontWeight: FontWeight.w500,
+                isSelected: false,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.deleteAccount,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 20,
+                        color: const Color(0xFFC85E5E),
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  SvgPicture.asset(
-                    "assets/icons/delete_icon.svg",
-                    height: 20,
-                    colorFilter: const ColorFilter.mode(
-                        Color(0xFFC85E5E), BlendMode.srcIn),
-                  ),
-                ],
-              ))
-        else
-          buildDeleteAccountSection(context, up),
-        const SizedBox(height: 40),
-        const AppVersionDisplay(),
-        const SizedBox(height: 30),
-      ],
+                    SvgPicture.asset(
+                      "assets/icons/delete_icon.svg",
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                          Color(0xFFC85E5E), BlendMode.srcIn),
+                    ),
+                  ],
+                ))
+          else
+            buildDeleteAccountSection(context, up),
+          const SizedBox(height: 40),
+          const AppVersionDisplay(),
+          const SizedBox(height: 30),
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:blukers/views/company/company_profile/components/info_input_widget.dart';
+import 'package:blukers/views/old_common_views/components/profile/info_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +41,7 @@ class _UpdateCompanyInformationState extends State<UpdateCompanyInformation> {
       // width: double.infinity,
       padding: EdgeInsets.only(
         top: 56,
-        bottom: 56,
+        bottom: 30,
         left: Responsive.isMobile(context) ? 25 : 40,
         right: Responsive.isMobile(context) ? 25 : 40,
       ),
