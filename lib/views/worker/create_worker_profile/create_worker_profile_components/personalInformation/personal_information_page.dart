@@ -41,6 +41,20 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      AppLocalizations.of(context)!.firstName,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        color: ThemeColors.black1ThemeColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        height: 1.25,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   AuthInput(
                     child: TextFormField(
                       controller: cwpp.firstNameController,
@@ -50,13 +64,20 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                           ? AppLocalizations.of(context)!.required
                           : null,
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.firstName,
+                      //  hintText: AppLocalizations.of(context)!.firstName,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),
+                              width: 1,
+                              style: BorderStyle.solid,
+                              color: ThemeColors.black1ThemeColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              width: 1,
+                              style: BorderStyle.solid,
+                              color: ThemeColors.black1ThemeColor),
                         ),
                         fillColor: Colors.white,
                         filled: true,
@@ -64,6 +85,20 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                     ),
                   ),
                   SizedBox(height: height * 0.015),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      AppLocalizations.of(context)!.middleName,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        color: ThemeColors.black1ThemeColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        height: 1.25,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   AuthInput(
                     child: TextFormField(
                       controller: cwpp.middleNameController,
@@ -73,13 +108,20 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                       //     ? AppLocalizations.of(context)!.required
                       //     : null,
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.middleName,
+                        //hintText: AppLocalizations.of(context)!.middleName,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),
+                              width: 1,
+                              style: BorderStyle.solid,
+                              color: ThemeColors.black1ThemeColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              width: 1,
+                              style: BorderStyle.solid,
+                              color: ThemeColors.black1ThemeColor),
                         ),
                         fillColor: Colors.white,
                         filled: true,
@@ -87,6 +129,20 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                     ),
                   ),
                   SizedBox(height: height * 0.015),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      AppLocalizations.of(context)!.lastName,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        color: ThemeColors.black1ThemeColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        height: 1.25,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   AuthInput(
                     child: TextFormField(
                       controller: cwpp.lastNameController,
@@ -96,13 +152,20 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                           ? AppLocalizations.of(context)!.required
                           : null,
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.lastName,
+                       // hintText: AppLocalizations.of(context)!.lastName,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),
+                              width: 1,
+                              style: BorderStyle.solid,
+                              color: ThemeColors.black1ThemeColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              width: 1,
+                              style: BorderStyle.solid,
+                              color: ThemeColors.black1ThemeColor),
                         ),
                         fillColor: Colors.white,
                         filled: true,
@@ -116,7 +179,7 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                     AppLocalizations.of(context)!.birthdate,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: ThemeColors.blukersOrangeThemeColor,
+                      color: ThemeColors.black1ThemeColor,
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
                       height: 1.25,
@@ -147,9 +210,16 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: const BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                ),
+                                    width: 1,
+                                    style: BorderStyle.solid,
+                                    color: ThemeColors.black1ThemeColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                    width: 1,
+                                    style: BorderStyle.solid,
+                                    color: ThemeColors.black1ThemeColor),
                               ),
                               fillColor: Colors.white,
                               filled: true,
@@ -180,9 +250,16 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: const BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                ),
+                                    width: 1,
+                                    style: BorderStyle.solid,
+                                    color: ThemeColors.black1ThemeColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                    width: 1,
+                                    style: BorderStyle.solid,
+                                    color: ThemeColors.black1ThemeColor),
                               ),
                               fillColor: Colors.white,
                               filled: true,
@@ -216,9 +293,16 @@ class _PersonalInformationPageState extends State<PersonalInformationPage> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: const BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                ),
+                                    width: 1,
+                                    style: BorderStyle.solid,
+                                    color: ThemeColors.black1ThemeColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: const BorderSide(
+                                    width: 1,
+                                    style: BorderStyle.solid,
+                                    color: ThemeColors.black1ThemeColor),
                               ),
                               fillColor: Colors.white,
                               filled: true,

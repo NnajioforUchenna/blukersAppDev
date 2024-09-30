@@ -2,23 +2,20 @@ import 'package:blukers/providers/industry_provider.dart';
 import 'package:blukers/providers/jobs_lists_provider.dart';
 import 'package:blukers/views/worker/jobs_home/Components/display_jobs_by_preferences/Components/Jobs_preferences_card/Desktop_job_card/Components/desktop_filters_section.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../models/app_user/components/preference.dart';
 import '../../../../providers/user_provider_parts/user_provider.dart';
-import '../../../../utils/styles/theme_colors.dart';
-import '../../../common_vieiws/loading_page.dart';
-import '../../../worker/jobs_home/Components/display_jobs_by_preferences/Components/grey_container_text.dart';
 
 class WorkersPreferencesCardDesktop extends StatefulWidget {
   const WorkersPreferencesCardDesktop({super.key});
 
   @override
-  State<WorkersPreferencesCardDesktop> createState() => _WorkersPreferencesCardDesktopState();
+  State<WorkersPreferencesCardDesktop> createState() =>
+      _WorkersPreferencesCardDesktopState();
 }
 
-class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDesktop> {
+class _WorkersPreferencesCardDesktopState
+    extends State<WorkersPreferencesCardDesktop> {
   bool _isExpanded = false;
   bool _isExpandedFilters = false;
 
@@ -67,7 +64,7 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
 
     return Center(
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 1500),
+        width: MediaQuery.of(context).size.width * .85,
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -90,7 +87,8 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade300),
                     borderRadius: BorderRadius.circular(8),
@@ -107,11 +105,14 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
                                 return Padding(
                                   padding: const EdgeInsets.only(right: 6.0),
                                   child: Chip(
-                                    label: Text(job, style: const TextStyle(fontSize: 12)),
-                                    deleteIcon: const Icon(Icons.close, size: 14),
+                                    label: Text(job,
+                                        style: const TextStyle(fontSize: 12)),
+                                    deleteIcon:
+                                        const Icon(Icons.close, size: 14),
                                     onDeleted: () {
                                       selectedJobs[entry.key]?.remove(job);
-                                      if (selectedJobs[entry.key]?.isEmpty ?? true) {
+                                      if (selectedJobs[entry.key]?.isEmpty ??
+                                          true) {
                                         selectedJobs.remove(entry.key);
                                         selectedIndustries.remove(entry.key);
                                       }
@@ -129,7 +130,9 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
                           _isExpanded = !_isExpanded;
                         }),
                         child: Icon(
-                          _isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                          _isExpanded
+                              ? Icons.arrow_drop_up
+                              : Icons.arrow_drop_down,
                           size: 20,
                         ),
                       ),
@@ -149,7 +152,8 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: ip.industries.values.toList().map((industry) {
-                          bool isSelected = selectedIndustries.contains(industry.industryId);
+                          bool isSelected =
+                              selectedIndustries.contains(industry.industryId);
                           return Column(
                             children: [
                               CheckboxListTile(
@@ -157,16 +161,20 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
                                   industry.name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: isSelected ? Colors.orange : Colors.black,
+                                    color: isSelected
+                                        ? Colors.orange
+                                        : Colors.black,
                                   ),
                                 ),
                                 value: isSelected,
                                 onChanged: (bool? value) {
                                   setState(() {
                                     if (value == true) {
-                                      selectedIndustries.add(industry.industryId);
+                                      selectedIndustries
+                                          .add(industry.industryId);
                                     } else {
-                                      selectedIndustries.remove(industry.industryId);
+                                      selectedIndustries
+                                          .remove(industry.industryId);
                                       selectedJobs.remove(industry.industryId);
                                     }
                                   });
@@ -177,7 +185,8 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
                                 ...industry.jobs.entries.map((entry) {
                                   final jobId = entry.value.title;
                                   return Padding(
-                                    padding: const EdgeInsets.only(left: 20, right: 20),
+                                    padding: const EdgeInsets.only(
+                                        left: 20, right: 20),
                                     child: CheckboxListTile(
                                       title: Text(
                                         jobId,
@@ -187,19 +196,29 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
                                           fontWeight: FontWeight.w200,
                                         ),
                                       ),
-                                      value: selectedJobs[industry.industryId]?.contains(jobId) ?? false,
+                                      value: selectedJobs[industry.industryId]
+                                              ?.contains(jobId) ??
+                                          false,
                                       onChanged: (bool? value) {
                                         setState(() {
-                                          if (!selectedJobs.containsKey(industry.industryId)) {
-                                            selectedJobs[industry.industryId] = [];
+                                          if (!selectedJobs.containsKey(
+                                              industry.industryId)) {
+                                            selectedJobs[industry.industryId] =
+                                                [];
                                           }
                                           if (value == true) {
-                                            selectedJobs[industry.industryId]!.add(jobId);
+                                            selectedJobs[industry.industryId]!
+                                                .add(jobId);
                                           } else {
-                                            selectedJobs[industry.industryId]!.remove(jobId);
-                                            if (selectedJobs[industry.industryId]!.isEmpty) {
-                                              selectedJobs.remove(industry.industryId);
-                                              selectedIndustries.remove(industry.industryId);
+                                            selectedJobs[industry.industryId]!
+                                                .remove(jobId);
+                                            if (selectedJobs[
+                                                    industry.industryId]!
+                                                .isEmpty) {
+                                              selectedJobs
+                                                  .remove(industry.industryId);
+                                              selectedIndustries
+                                                  .remove(industry.industryId);
                                             }
                                           }
                                         });
@@ -207,7 +226,7 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
                                       },
                                     ),
                                   );
-                                }).toList(),
+                                }),
                               const Divider(),
                             ],
                           );
@@ -219,7 +238,6 @@ class _WorkersPreferencesCardDesktopState extends State<WorkersPreferencesCardDe
             ),
             const SizedBox(height: 8),
 
-           
             DesktopFiltersSection(
               isExpandedFilters: _isExpandedFilters,
               onFilterExpandedChange: (value) {

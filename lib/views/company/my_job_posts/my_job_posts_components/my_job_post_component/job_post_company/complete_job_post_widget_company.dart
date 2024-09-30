@@ -8,6 +8,7 @@ import '../../../../../../services/responsive.dart';
 import '../../../../../old_common_views/components/animations/index.dart';
 import '../../../../../worker/saved/animate_job_post_details.dart';
 import '../../../../../worker/saved/display_job_card.dart';
+
 import '../../../../../worker/saved/no_more_jobs_found_card.dart';
 import 'display_job_post_dialog_company.dart';
 import 'job_post_mobile_details_company.dart';

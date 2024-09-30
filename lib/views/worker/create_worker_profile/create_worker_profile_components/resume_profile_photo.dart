@@ -1,3 +1,4 @@
+import 'package:blukers/utils/styles/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,7 +12,7 @@ class ResumeProfilePhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CreateWorkerProfileProvider cwpp =
-    Provider.of<CreateWorkerProfileProvider>(context);
+        Provider.of<CreateWorkerProfileProvider>(context);
     String? logoUrl = cwpp.appUser?.workerResumeDetails?.profilePhotoUrl;
 
     return InkWell(
@@ -19,17 +20,22 @@ class ResumeProfilePhoto extends StatelessWidget {
         cwpp.selectProfilePhoto(context);
       },
       child: Card(
-        elevation: 2.0,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
+          side: const BorderSide(
+            color: ThemeColors.primaryThemeColor,
+            width: 2,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 30),
+                const SizedBox(height: 50),
                 SizedBox(
                   height: 150,
                   width: 150,
@@ -37,24 +43,34 @@ class ResumeProfilePhoto extends StatelessWidget {
                     borderRadius: BorderRadius.circular(1000),
                     child: logoUrl == null || logoUrl.isEmpty
                         ? Center(
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        AppLocalizations.of(context)!
-                            .tapToSelectAndUploadAFile,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          fontFamily: "Montserrat",
-                        ),
-                      ),
-                    )
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  "assets/images/user-id-verification.png",
+                                  height: 50,
+                                  width: 50,
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  AppLocalizations.of(context)!
+                                      .tapToSelectAndUploadAFile,
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    fontFamily: "Montserrat",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
                         : CachedNetworkImage(
-                      imageUrl: logoUrl,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                    ),
+                            imageUrl: logoUrl,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator(),
+                          ),
                   ),
                 ),
                 const SizedBox(height: 30),

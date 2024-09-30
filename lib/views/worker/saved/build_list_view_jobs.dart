@@ -78,6 +78,7 @@ class _ListViewBuildJobsState extends State<ListViewBuildJobs> {
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
 
+
     return Column(
       children: [
         Container(

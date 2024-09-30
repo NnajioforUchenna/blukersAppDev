@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/worker_provider.dart';
@@ -16,11 +18,30 @@ class AnimateWorkerDetails extends StatelessWidget {
       return WorkerDisplayDetailsWidget(
         worker: wp.selectedWorker!,
       );
-    } else if (wp.workersToDisplay.isNotEmpty) {
+    }else if(wp.selectedWorker == null){
+       return Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            'assets/icons/empty_job.svg',
+          ),
+          const SizedBox(height: 38),
+          Text(
+            'Click on Worker to view',
+            style: GoogleFonts.montserrat(
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ));
+    }
+     else if (wp.workersToDisplay.isNotEmpty) {
       return WorkerDisplayDetailsWidget(
         worker: wp.workersToDisplay.first,
       );
-    } else {
+    } 
+     else {
       return const Center(
           child: MyAnimation(
         name: 'blukersLoadingDots',

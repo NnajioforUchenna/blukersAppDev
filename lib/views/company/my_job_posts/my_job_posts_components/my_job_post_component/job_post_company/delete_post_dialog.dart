@@ -1,5 +1,11 @@
 import 'package:blukers/providers/job_posts_provider.dart';
+
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:blukers/utils/styles/index.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/job_post.dart';
@@ -78,8 +84,6 @@ class DeleteJobDialog extends StatelessWidget {
                     onPressed: () {
                       jp.deleteJobPost(jobPost.jobPostId);
                       Navigator.of(context).pop();
-                      
-                      
                     },
                     child: const Text(
                       'Delete now',
@@ -95,3 +99,33 @@ class DeleteJobDialog extends StatelessWidget {
     );
   }
 }
+
+// title: const Text('Confirm Deletion'),
+//       content: const Text('Are you sure you want to delete this job post?'),
+//       actions: <Widget>[
+//         TextButton(
+//           child: const Text('No',
+//               style: TextStyle(color: ThemeColors.primaryThemeColor)),
+//           onPressed: () {
+//             Navigator.of(context).pop();
+//           },
+//         ),
+//         TextButton(
+//           child: const Text('Yes',
+//               style: TextStyle(color: ThemeColors.secondaryThemeColor)),
+//           onPressed: () {
+//             jp.deleteJobPost(jobPost.jobPostId).then((_) {
+//               Navigator.of(context).pop();
+//               ScaffoldMessenger.of(context).showSnackBar(
+//                 const SnackBar(content: Text('Job Post Deleted Successfully')),
+//               );
+//             }).catchError((error) {
+//               Navigator.of(context).pop();
+//               ScaffoldMessenger.of(context).showSnackBar(
+//                 const SnackBar(content: Text('Failed to delete job post')),
+//               );
+//             });
+//             Navigator.of(context).pop();
+//           },
+//         ),
+//       ],

@@ -1,4 +1,5 @@
 import 'package:blukers/providers/create_worker_profile_provider.dart';
+import 'package:blukers/utils/styles/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,16 @@ class ResumePage extends StatelessWidget {
                 const SizedBox(height: 20),
                 const YourResume(),
                 const SizedBox(height: 20),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "LinkedIn URL",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 AuthInput(
                   child: TextFormField(
                     controller: cwpp.linkedInUrlController,
@@ -37,13 +48,20 @@ class ResumePage extends StatelessWidget {
                         ? AppLocalizations.of(context)!.required
                         : null,
                     decoration: InputDecoration(
-                      hintText: "LinkedIn URL",
+                      //  hintText: "LinkedIn URL",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
+                            width: 1,
+                            style: BorderStyle.solid,
+                            color: ThemeColors.black1ThemeColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                            width: 1,
+                            style: BorderStyle.solid,
+                            color: ThemeColors.black1ThemeColor),
                       ),
                       fillColor: Colors.white,
                       filled: true,

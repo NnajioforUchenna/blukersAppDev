@@ -35,11 +35,11 @@ class _TimeAgoAndBookMarkRowState extends State<TimeAgoAndBookMarkRow> {
                   //     builder: (context) => const DisplayJobTimelineDialog(),
                   //   );
                   // } else {
-                    // Save or unsave the job post without showing a loading spinner
-                    await up.saveJobPost(widget.jobPost);
+                  // Save or unsave the job post without showing a loading spinner
+                  await up.saveJobPost(widget.jobPost);
 
-                    // Trigger rebuild to reflect the change
-                    setState(() {});
+                  // Trigger rebuild to reflect the change
+                  setState(() {});
                   // }
                 },
                 icon: Icon(
@@ -54,5 +54,58 @@ class _TimeAgoAndBookMarkRowState extends State<TimeAgoAndBookMarkRow> {
               )
       ],
     );
+  }
+}
+
+class SavedJobsIcon extends StatefulWidget {
+  final JobPost jobPost;
+  const SavedJobsIcon({super.key, required this.jobPost});
+
+  @override
+  _SavedJobsIconState createState() => _SavedJobsIconState();
+}
+
+class _SavedJobsIconState extends State<SavedJobsIcon> {
+  @override
+  Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
+    bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId ?? '');
+    bool isHideButton = up.appUser?.uid == widget.jobPost.companyId;
+
+    return isHideButton
+        ? const SizedBox()
+        : IconButton(
+            onPressed: () async {
+              if (up.workerTimelineStep < 3) {
+                showDialog(
+                  context: context,
+                  builder: (context) => const DisplayJobTimelineDialog(),
+                );
+              } else {
+                // // Show loading spinner
+                // showDialog(
+                //   context: context,
+                //   barrierDismissible: false, // Prevent dismissing the dialog
+                //   builder: (context) {
+                //     return const Center(
+                //       child: CircularProgressIndicator(),
+                //     );
+                //   },
+                // );
+
+                // Save or unsave the job post and wait until the action is completed
+                await up.saveJobPost(widget.jobPost);
+               
+
+                // Trigger rebuild to reflect the change
+                setState(() {});
+              }
+            },
+            icon: Icon(
+              Icons.bookmark, // Toggle icon
+              color: isJobSaved ? ThemeColors.secondaryThemeColor : Colors.grey,
+              size: 30,
+            ),
+          );
   }
 }

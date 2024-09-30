@@ -447,27 +447,34 @@ class JobPostsProvider with ChangeNotifier {
     required String targetLanguage,
   }) async {
     // Get the 50 most recent job posts.
-    Map<String, JobPost> newJobs = {};
+    try {
+      Map<String, JobPost> newJobs = {};
 
-    List<Map<String, dynamic>> jobPosts =
-        await JobPostsDataProvider.getAiJobPosts(
-            queryName: queryName,
-            queryLocation: queryLocation,
-            pageNumber: pageNumber,
-            targetLanguage: targetLanguage);
+      List<Map<String, dynamic>> jobPosts =
+          await JobPostsDataProvider.getAiJobPosts(
+              queryName: queryName,
+              queryLocation: queryLocation,
+              pageNumber: pageNumber,
+              targetLanguage: targetLanguage);
 
-    hasMore = jobPosts.isNotEmpty;
+      hasMore = jobPosts.isNotEmpty;
 
-    for (var jobPost in jobPosts) {
-      if (jobPost['jobPostId'] != null) {
-        JobPost? parsedJobPost = JobPost.fromMap(jobPost);
-        if (parsedJobPost != null) {
-          newJobs[jobPost['jobPostId']] = parsedJobPost;
+      for (var jobPost in jobPosts) {
+        if (jobPost['jobPostId'] != null) {
+          JobPost? parsedJobPost = JobPost.fromMap(jobPost);
+          if (parsedJobPost != null) {
+            newJobs[jobPost['jobPostId']] = parsedJobPost;
+          }
         }
       }
-    }
 
-    return newJobs;
+      return newJobs;
+    } on Exception catch (_) {
+      hasMore = false;
+      notifyListeners();
+      return {};
+
+    }
   }
 
   Map<String, JobPost> fillDisplayedJobPosts(List<JobPost> listJobPosts) {

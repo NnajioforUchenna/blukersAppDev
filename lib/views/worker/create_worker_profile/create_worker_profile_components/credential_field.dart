@@ -69,7 +69,7 @@ class _CredentialFieldState extends State<CredentialField> {
         Row(
           children: [
             Expanded(
-              child: ElevatedButton(
+              child: MaterialButton(
                 onPressed: () async {
                   // Upload logic
                   Map<String, dynamic> result = {
@@ -97,15 +97,24 @@ class _CredentialFieldState extends State<CredentialField> {
                         ['filePlatformFile'] = result['file'];
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ThemeColors.blukersOrangeThemeColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                child: Text(AppLocalizations.of(context)!.upload),
+                color: ThemeColors.primaryThemeColor,
+                // style: ElevatedButton.styleFrom(
+                //   backgroundColor: ThemeColors.blukersOrangeThemeColor,
+                // ),
+                child: Text(
+                  AppLocalizations.of(context)!.upload,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
-              child: ElevatedButton(
+              child: MaterialButton(
                 onPressed: isFileUploaded
                     ? () {
                         showDialog(
@@ -114,8 +123,21 @@ class _CredentialFieldState extends State<CredentialField> {
                                   pdfFile: filePlatformFile!,
                                 ));
                       }
-                    : null,
-                child: Text(AppLocalizations.of(context)!.view),
+                    : () {},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                color: isFileUploaded
+                    ? ThemeColors.primaryThemeColor
+                    : const Color.fromARGB(172, 211, 235, 255),
+                child: Text(
+                  AppLocalizations.of(context)!.view,
+                  style: TextStyle(
+                    color: isFileUploaded
+                        ? Colors.white
+                        : ThemeColors.primaryThemeColor,
+                  ),
+                ),
               ),
             ),
           ],

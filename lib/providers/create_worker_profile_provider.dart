@@ -302,7 +302,7 @@ class CreateWorkerProfileProvider with ChangeNotifier {
 
   //_____________________________Work Experience Page Parameters_____________________________
   List<WorkExperienceForm> workExperienceForms = [];
-  List<Map<String, dynamic>> workExperience = [{}, {}];
+  List<Map<String, dynamic>> workExperience = [{}];
 
   void addWorkExperience() {
     workExperience.add({});
@@ -324,7 +324,7 @@ class CreateWorkerProfileProvider with ChangeNotifier {
 
   //_____________________________Reference Page Parameters_____________________________
   List<ReferenceFormWidget> referenceForms = [];
-  List<Map<String, dynamic>> references = [{}, {}];
+  List<Map<String, dynamic>> references = [{}];
 
   void addReference() {
     references.add({});

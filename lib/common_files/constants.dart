@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../models/address.dart';
@@ -87,14 +88,14 @@ String toTitleCase(String text) {
       .join(' ');
 }
 
-Widget displayParagraph(String text) {
+Widget displayParagraph(String text, {double? size}) {
   // Adding two newlines after every period
   String formattedText = text.replaceAll('. ', '.\n\n');
 
   return Text(
     formattedText,
-    style: const TextStyle(
-      fontSize: 13.0, // Adjust the font size as needed
+    style: GoogleFonts.montserrat(
+      fontSize:size ?? 16.0, // Adjust the font size as needed
       color: Colors.black,
       height: 1.5, // Adjust line height for better readability
     ),
