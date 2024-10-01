@@ -39,7 +39,7 @@ class _SelectIndustryScreenDesktopState
       child: Column(
         children: [
           SizedBox(
-              width: screenWidth * 0.6, child: const SearchHeaderDesktop()),
+              width: screenWidth * 0.7, child: const SearchHeaderDesktop()),
           const SizedBox(
             height: 10,
           ),
