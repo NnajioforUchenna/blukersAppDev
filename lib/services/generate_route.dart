@@ -1,4 +1,5 @@
 import 'package:blukers/services/responsive.dart';
+import 'package:blukers/views/company/Alert/job_alert.dart';
 import 'package:blukers/views/company/company_chat/mobile_company_chat/chat_screen.dart';
 import 'package:blukers/views/company/company_messenger/bottom_nav.dart';
 import 'package:blukers/views/company/company_path/company_path.dart';
@@ -134,6 +135,8 @@ final routes = [
           builder: (context, state) => const CompanyMessengerNavigationBar()),
     ],
   ),
+    GoRoute(
+          path: '/alertScreen', builder: (context, state) =>  JobAlertList()),
 
   ShellRoute(
     builder: (context, state, child) {

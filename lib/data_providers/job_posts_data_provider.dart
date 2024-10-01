@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+
 
 import '../common_files/constants.dart';
 import '../models/job_post.dart';
@@ -9,7 +11,7 @@ import 'data_constants.dart';
 
 final db = FirebaseFirestore.instance;
 
-class JobPostsDataProvider {
+class JobPostsDataProvider with ChangeNotifier {
   static Future<List<Map<String, dynamic>>> getJobPostsByJobID(
       String jobId, String targetLanguage) async {
     List<JobPost> jobPosts = await searchJobPosts(
@@ -208,6 +210,7 @@ class JobPostsDataProvider {
     required String queryLocation,
     required int pageNumber,
     required String targetLanguage,
+    
   }) async {
     // Define the payload using the provided parameters
     var body = jsonEncode({
@@ -240,5 +243,6 @@ class JobPostsDataProvider {
     await companyDoc.update({
       'jobPostIds': FieldValue.arrayRemove([jobPostId])
     });
+       
   }
 }

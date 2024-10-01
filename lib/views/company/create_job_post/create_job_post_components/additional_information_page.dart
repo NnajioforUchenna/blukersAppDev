@@ -1,3 +1,4 @@
+import 'package:blukers/views/company/Alert/job_noti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,14 +16,15 @@ class AdditionalInformationPage extends StatefulWidget {
       _AdditionalInformationPageState();
 }
 
-class _AdditionalInformationPageState
-    extends State<AdditionalInformationPage> {
+class _AdditionalInformationPageState extends State<AdditionalInformationPage> {
   final _formKey = GlobalKey<FormState>();
   final _streetController = TextEditingController();
   final _cityController = TextEditingController();
   final _stateController = TextEditingController();
   final _postalCodeController = TextEditingController();
   final _countryController = TextEditingController();
+
+  late JobNotificationHandler jobNotificationHandler;
 
   // Implementation of isFormComplete method
   bool isFormComplete() {
@@ -35,6 +37,7 @@ class _AdditionalInformationPageState
   @override
   void initState() {
     super.initState();
+    jobNotificationHandler = JobNotificationHandler();
   }
 
   @override
@@ -128,6 +131,7 @@ class _AdditionalInformationPageState
                               onPressed: () {
                                 if (isFormComplete() &&
                                     _formKey.currentState!.validate()) {
+                                 
                                   jp.updateUserAddress(
                                       _streetController.text,
                                       _cityController.text,

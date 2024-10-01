@@ -124,7 +124,7 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return DeleteDialog(jobPost: widget.jobPost);
+                                  return DeleteJobDialog(jobPost: widget.jobPost);
                                 },
                               );
                             },

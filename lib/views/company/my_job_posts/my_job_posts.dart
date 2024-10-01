@@ -119,16 +119,9 @@ class _MyJobPostsState extends State<MyJobPosts>
                                   )),
                               Tab(
                                 text: AppLocalizations.of(context)!.myJobs,
-                                icon: SvgPicture.asset(
-                                  'assets/icons/send_icon.svg',
-                                  height:
-                                      Responsive.isMobile(context) ? 25 : 30,
-                                  colorFilter: ColorFilter.mode(
-                                      tabController.index == 1
-                                          ? Colors.black
-                                          : Colors.black.withOpacity(0.30),
-                                      BlendMode.srcIn),
-                                ),
+                                icon: Icon(
+                                  UniconsLine.briefcase,
+                                )
                               ),
                             ],
                           ),

@@ -12,7 +12,8 @@ import '../../../saved/build_list_view_jobs.dart';
 
 class DisplaySelectedJobs extends StatelessWidget {
   final String title;
-  const DisplaySelectedJobs({super.key, required this.title});
+  final String JobId;
+  const DisplaySelectedJobs({super.key, required this.title, required this.JobId});
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +41,12 @@ class DisplaySelectedJobs extends StatelessWidget {
               : const LoadingPage()
           : Responsive.isDesktop(context)
               ? buildWebContent()
-              : const BuildListViewJobs(),
+              :  BuildListViewJobs( title: title, JobId:JobId,),
     );
   }
 
   Widget buildWebContent() {
-    return const Column(
+    return Column(
       children: [
         Expanded(
           child: Row(
@@ -54,14 +55,14 @@ class DisplaySelectedJobs extends StatelessWidget {
               // 1st column
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: BuildListViewJobs(),
+                  padding: const EdgeInsets.all(8.0),
+                  child: BuildListViewJobs( title: title, JobId: JobId),
                 ),
               ),
               // 2nd column
-              Expanded(
+              const Expanded(
                 flex: 2,
-                child: Padding(
+                child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: AnimateJobPostDetails(),
                 ),

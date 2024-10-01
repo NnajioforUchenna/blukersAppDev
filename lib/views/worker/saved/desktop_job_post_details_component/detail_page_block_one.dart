@@ -16,7 +16,7 @@ import '../../../old_common_views/job_timeline/display_job_timeline_dialog.dart'
 class DetailPageBlockOne extends StatefulWidget {
   final JobPost jobPost;
 
-  const DetailPageBlockOne({super.key, required this.jobPost});
+  const DetailPageBlockOne({Key? key, required this.jobPost}) : super(key: key);
 
   @override
   State<DetailPageBlockOne> createState() => _DetailPageBlockOneState();
@@ -26,7 +26,7 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    bool isJobApplied = !up.isJobPostApplied(widget.jobPost.jobPostId ?? '');
+      bool isJobApplied = !up.isJobPostApplied(widget.jobPost.jobPostId ?? '');
     bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId ?? '');
     bool isOwner = up.appUser?.uid == widget.jobPost.companyId;
 
@@ -136,7 +136,7 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return DeleteDialog(jobPost: widget.jobPost);
+                              return DeleteJobDialog(jobPost: widget.jobPost);
                             },
                           );
                         },

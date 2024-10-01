@@ -15,8 +15,9 @@ import 'job_search_bar.dart';
 
 class DisplayJobs extends StatelessWidget {
   final String title;
+  final String JobId;
 
-  const DisplayJobs({super.key, required this.title});
+  const DisplayJobs({super.key, required this.title, required this.JobId});
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +52,20 @@ class DisplayJobs extends StatelessWidget {
                 : const LoadingPage()
             : Responsive.isDesktop(context)
                 ? buildWebContent()
-                : const BuildListViewJobs(),
+                : BuildListViewJobs(
+                    title: title,
+                    JobId: JobId,
+                  ),
       ),
     );
   }
 
   Widget buildWebContent() {
-    return const Column(
+    return  Column(
       children: [
-        JobSearchBar(),
-        SizedBox(height: 10),
-        Row(
+        const JobSearchBar(),
+        const SizedBox(height: 10),
+        const Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Spacer(),
@@ -69,7 +73,7 @@ class DisplayJobs extends StatelessWidget {
             SizedBox(width: 30)
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,12 +81,12 @@ class DisplayJobs extends StatelessWidget {
               // 1st column
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: BuildListViewJobs(),
+                  padding: const EdgeInsets.all(8.0),
+                  child: BuildListViewJobs( title: title, JobId: JobId),
                 ),
               ),
               // 2nd column
-              Expanded(
+              const Expanded(
                 flex: 2,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),

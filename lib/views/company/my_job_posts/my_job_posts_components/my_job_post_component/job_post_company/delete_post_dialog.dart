@@ -1,19 +1,20 @@
+import 'package:blukers/providers/job_posts_provider.dart';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:blukers/utils/styles/index.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../models/job_post.dart';
-import '../../../../../../providers/job_posts_provider.dart';
-import '../../../../../../services/responsive.dart';
 
-class DeleteDialog extends StatelessWidget {
-  const DeleteDialog({
-    super.key,
+class DeleteJobDialog extends StatelessWidget {
+  const DeleteJobDialog({
+    Key? key,
     required this.jobPost,
-  });
+  }) : super(key: key);
 
   final JobPost jobPost;
 
@@ -21,114 +22,77 @@ class DeleteDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     JobPostsProvider jp = Provider.of<JobPostsProvider>(context, listen: false);
     return Dialog(
-      insetPadding: Responsive.isDesktop(context)
-          ? null
-          : const EdgeInsets.symmetric(
-              horizontal: 30,
-            ),
-      surfaceTintColor: Colors.white,
       backgroundColor: Colors.white,
-      // contentPadding: EdgeInsets.symmetric(
-      //   horizontal: Responsive.isMobile(context) ? 20 : 30,
-      // ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(16),
       ),
-
-      child: Container(
-        width: Responsive.isMobile(context) ? null : 417,
-        padding: EdgeInsets.symmetric(
-          horizontal: Responsive.isMobile(context) ? 20 : 30,
-        ),
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const SizedBox(height: 24),
-            SvgPicture.asset("assets/icons/delete_icon.svg"),
-            const SizedBox(height: 24),
-            Text(
-              "Delete This Job Post",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.montserrat(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16),
+          children: [
+            const Icon(
+              Icons.delete_outline,
+              color: Colors.deepOrange,
+              size: 48,
             ),
-            const SizedBox(height: 14),
-            Text(
-              "Deleting this job will remove it from the blukers app. Are you sure you want to delete?",
+            const SizedBox(height: 16),
+            const Text(
+              'Delete this Job Post?',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Deleting this job will remove it from the blukers app. Are you sure you want to delete?',
               textAlign: TextAlign.center,
-              style: GoogleFonts.montserrat(color: Colors.black, fontSize: 14),
+              style: TextStyle(color: Colors.black),
             ),
             const SizedBox(height: 24),
             Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
                 Expanded(
-                  child: SizedBox(
-                    height: 48,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            side: const BorderSide(
-                                color: ThemeColors.secondaryThemeColorDark)),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Colors.deepOrange),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      onPressed: () async {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("Cancel",
-                          style: GoogleFonts.montserrat(
-                              color: ThemeColors.secondaryThemeColorDark,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14)),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.deepOrange),
                     ),
                   ),
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: 16),
                 Expanded(
-                  child: SizedBox(
-                    height: 48,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ThemeColors.secondaryThemeColorDark,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepOrange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      onPressed: () async {
-                        jp.deleteJobPost(jobPost.jobPostId).then((_) {
-                          Navigator.of(context).pop();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Job Post Deleted Successfully')),
-                          );
-                        }).catchError((error) {
-                          Navigator.of(context).pop();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Failed to delete job post')),
-                          );
-                        });
-                      },
-                      child: Center(
-                        child: AutoSizeText(
-                          "Delete now",
-                          style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14),
-                        ),
-                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    onPressed: () {
+                      jp.deleteJobPost(jobPost.jobPostId);
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Delete now',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 24),
           ],
         ),
       ),
