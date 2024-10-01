@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
   late JobPostsProvider jp;
   late WorkersProvider wp;
   late UserProvider up;
+  bool _isLoading = false;
 
   bool isMobileSearchBarVisible = false;
 
@@ -49,6 +51,8 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Row(
         children: [
+          const SizedBox(width: 100, child: ChooseLanguageWidgetDesktop()),
+          const SizedBox(width: 40.0),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -69,7 +73,6 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
                     thickness: 1.5,
                     width: 20,
                   ),
-                  // const SizedBox(width: 10.0),
                   Expanded(
                     flex: 2,
                     child: _buildSearchField(
@@ -83,9 +86,51 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
             ),
           ),
           const SizedBox(width: 20.0),
-          const SizedBox(width: 100, child: ChooseLanguageWidgetDesktop())
-          // const SizedBox(width: 20.0),
-          // _buildSmallCircleButton(),
+          ElevatedButton(
+            onPressed: () async {
+              setState(() {
+                _isLoading = true; 
+              });
+
+              String nameRelated = _searchController1.text;
+              String locationRelated = _searchController2.text;
+              if (up.userRole == 'company') {
+                await wp.searchWorkers(nameRelated, locationRelated);
+                GoRouter.of(context).pushReplacement('/workerSearchResults');
+                return;
+              }
+              // Determine which provider to use
+              await jp.searchJobPosts(nameRelated, locationRelated);
+
+              GoRouter.of(context).pushReplacement('/jobSearchResults');
+
+              setState(() {
+                _isLoading = false; 
+              });
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ThemeColors.primaryThemeColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+            child:_isLoading
+              ? const SizedBox(
+                  height: 25,
+                  child: SpinKitChasingDots(
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                )
+              :  Text(
+              AppLocalizations.of(context)!.searchJobs,
+              style: GoogleFonts.montserrat(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -102,29 +147,10 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
         textInputAction: TextInputAction.search,
         controller: controller,
         onChanged: (value) {
-          if (controller.text.isEmpty) {
-            setState(() {
-              _searchController1.clear();
-              _searchController2.clear();
-              jp.setSearching(false);
-            });
-          }
+        
         },
         onSubmitted: (val) async {
-          String nameRelated = _searchController1.text;
-          String locationRelated = _searchController2.text;
-          if (up.userRole == 'company') {
-            await wp.searchWorkers(nameRelated, locationRelated);
-            GoRouter.of(context).go('/workerSearchResults');
-            return;
-          }
-          // Determine which provider to use
-          await jp.searchJobPosts(nameRelated, locationRelated);
-          if (GoRouter.of(context).canPop()) {
-              GoRouter.of(context).pop();
-            }
-          GoRouter.of(context).go('/jobSearchResults');
-          // Determine which provider to use
+       
         },
         decoration: InputDecoration(
           filled: true,
