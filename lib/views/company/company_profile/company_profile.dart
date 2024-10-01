@@ -516,7 +516,7 @@ class CompanyInfoWidget extends StatelessWidget {
                 ))
           else
             buildDeleteAccountSection(context, up),
-          const SizedBox(height: 40),
+          const SizedBox(height: 25),
           const AppVersionDisplay(),
           const SizedBox(height: 30),
         ],

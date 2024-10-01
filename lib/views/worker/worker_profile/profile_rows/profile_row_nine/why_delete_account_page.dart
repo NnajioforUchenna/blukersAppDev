@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../../services/responsive.dart';
 import '../../../../../utils/styles/theme_colors.dart';
-import '../../../../old_common_views/small_pop_button_widget.dart';
-import 'custom_check_box.dart';
 
 class WhyDeleteAccountPage extends StatefulWidget {
   const WhyDeleteAccountPage({super.key});
@@ -31,101 +28,94 @@ class _WhyDeleteAccountPageState extends State<WhyDeleteAccountPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     UserProvider up = Provider.of<UserProvider>(context);
     selected = up.getWhyDeleteAccount();
 
     return Dialog(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       backgroundColor: Colors.white,
-      insetPadding:
-          const EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 80),
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(
-                top: height * 0.05,
-                bottom: height * 0.05,
-                right: width * 0.1,
-                left: width * 0.1),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: height * 0.05,
-                        bottom: height * 0.025,
-                        right: width * 0.1,
-                        left: width * 0.1),
-                    child: Text(
-                      'Why are you deleting your account?',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.montserrat(
-                          fontSize: 18,
-                          color: ThemeColors.secondaryThemeColor,
-                          fontWeight: FontWeight.w500),
+      child: SizedBox(
+        width: width * (Responsive.isMobile(context) ? 0.6 : 0.8),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.isMobile(context) ? 25 : 40,
+          ),
+          child: Column(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 40,
                     ),
-                  ),
-                  // Display using for loop
-                  for (var question in questions.keys)
-                    QuestionRow(question, questions[question]!, context),
-
-                  TextInputWigdet(
-                    label: 'If Other, please specify',
-                    maxlines: 5,
-                    controller: otherController,
-                    onChanged: (value) {
-                      setState(() {
-                        questions['Other'] = true;
-                        selected = value;
-                        Provider.of<UserProvider>(context, listen: false)
-                            .setWhyDeleteAccount(value);
-                      });
-                    },
-                  ),
-                  SizedBox(height: height * 0.03),
-                  Container(
-                    height: height * 0.03,
-                    width: width * 0.30,
-                    margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
-                    child: ElevatedButton(
-                      onPressed: otherController.text.length > 20 ||
-                              selected.length > 20
-                          ? () {
-                              Navigator.of(context).pop();
-                            }
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        elevation: 5,
-                        backgroundColor: ThemeColors.secondaryThemeColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
+                    Center(
                       child: Text(
-                        'Update',
+                        'Whty are you deleting you account?',
                         style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontSize: Responsive.isMobile(context) ? 9.sp : 14,
-                          fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
+                            fontSize: Responsive.isMobile(context) ? 20 : 29),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    for (var question in questions.keys)
+                      QuestionRow(question, questions[question]!, context),
+                    if (selected == "Other")
+                      const SizedBox(
+                        height: 14,
+                      ),
+                    if (selected == "Other")
+                      TextInputWigdet(
+                        maxlines: 4,
+                        controller: otherController,
+                        onChanged: (value) {
+                          setState(() {
+                            questions['Other'] = true;
+                            selected = value;
+                            Provider.of<UserProvider>(context, listen: false)
+                                .setWhyDeleteAccount(value);
+                          });
+                        },
+                      ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: otherController.text.length > 20 ||
+                                selected.length > 20
+                            ? () {
+                                Navigator.of(context).pop();
+                              }
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ThemeColors.primaryThemeColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Text(
+                          'Update',
+                          style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: Responsive.isMobile(context) ? 16 : 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 40,
+                    )
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-          const Positioned(
-            top: 10, // Adjust as needed
-            left: 10, // Adjust as needed
-            child: SmallPopButtonWidget(),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -144,8 +134,11 @@ class _WhyDeleteAccountPageState extends State<WhyDeleteAccountPage> {
         });
       },
       child: Container(
-        margin: const EdgeInsets.only(
-            bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
+        margin: const EdgeInsets.only(bottom: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 16),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            border: Border.all(color: const Color(0xFFD0D0D5))),
         child: Row(
           children: [
             Expanded(
@@ -153,10 +146,21 @@ class _WhyDeleteAccountPageState extends State<WhyDeleteAccountPage> {
               child: Text(
                 question,
                 style: GoogleFonts.montserrat(
-                    fontSize: 12, fontWeight: FontWeight.w400),
+                  color: ThemeColors.black1ThemeColor,
+                  fontSize: Responsive.isMobile(context) ? 16 : 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
-            CustomCheckbox(value: selected == question),
+            SizedBox(
+              height: 18,
+              width: 18,
+              child: Checkbox(
+                  side: const BorderSide(color: ThemeColors.ash, width: 1),
+                  activeColor: ThemeColors.primaryThemeColor,
+                  value: selected == question,
+                  onChanged: (value) {}),
+            ),
           ],
         ),
       ),
@@ -164,39 +168,41 @@ class _WhyDeleteAccountPageState extends State<WhyDeleteAccountPage> {
   }
 
   TextInputWigdet(
-      {required String label,
-      required int maxlines,
+      {required int maxlines,
       required TextEditingController controller,
       required Null Function(dynamic value) onChanged}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.only(left: 10),
-          child: Text(
-            label,
-            style: GoogleFonts.montserrat(
-              fontWeight: FontWeight.w400,
-              fontSize: 10,
-            ),
-          ),
-        ),
-        const SizedBox(height: 5),
         TextFormField(
           controller: controller,
           validator: (value) =>
               value!.isEmpty ? AppLocalizations.of(context)!.required : null,
           onChanged: onChanged,
           maxLines: maxlines,
+          style: GoogleFonts.montserrat(
+              fontWeight: FontWeight.w600,
+              fontSize: Responsive.isMobile(context) ? 13 : 20,
+              color: Colors.black),
           decoration: InputDecoration(
+            hintText: 'Please specify',
+            hintStyle: GoogleFonts.montserrat(
+                fontWeight: FontWeight.w600,
+                fontSize: Responsive.isMobile(context) ? 13 : 14,
+                color: const Color(0xFF6D7178)),
             filled: true,
             isDense: true,
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 7.0, horizontal: 10.0),
-            fillColor: Colors.grey[200],
+            contentPadding: EdgeInsets.symmetric(
+                vertical: 12.0,
+                horizontal: Responsive.isMobile(context) ? 16 : 24),
+            fillColor: const Color(0xFFF4F4F4),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: const BorderSide(color: Color(0xFFD0D0D5)),
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
+              borderSide: const BorderSide(color: Color(0xFFD0D0D5)),
             ),
           ),
         )
