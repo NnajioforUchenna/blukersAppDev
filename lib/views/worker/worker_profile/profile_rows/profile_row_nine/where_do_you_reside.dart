@@ -1,84 +1,96 @@
+import 'package:blukers/providers/user_provider_parts/user_provider.dart';
 import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../utils/styles/theme_colors.dart';
-import '../../../../old_common_views/small_pop_button_widget.dart';
 import 'list_of_countries.dart';
 
-class WhereDoYouResidePage extends StatelessWidget {
+class WhereDoYouResidePage extends StatefulWidget {
   const WhereDoYouResidePage({super.key});
 
   @override
+  State<WhereDoYouResidePage> createState() => _WhereDoYouResidePageState();
+}
+
+class _WhereDoYouResidePageState extends State<WhereDoYouResidePage> {
+  String country = '';
+  @override
   Widget build(BuildContext context) {
+    UserProvider up = Provider.of<UserProvider>(context);
+
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Dialog(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       backgroundColor: Colors.white,
-      insetPadding:
-          const EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 80),
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(
-              top: height * 0.03,
-              bottom: height * 0.03,
+      child: Container(
+        width:   width * (Responsive.isMobile(context) ? 0.6 :0.8),
+        padding: EdgeInsets.only(
+          left: Responsive.isMobile(context) ? 25 : 40,
+          right: Responsive.isMobile(context) ? 25 : 40,
+        ),
+        child: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 40,
             ),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                      top: height * 0.05, bottom: height * 0.025),
-                  child: Text(
-                    'Where do you reside?',
-                    style: GoogleFonts.montserrat(
-                        fontSize: 18,
-                        color: ThemeColors.secondaryThemeColor,
-                        fontWeight: FontWeight.w500),
+
+            Center(
+              child: Text(
+                'Where do you reside?',
+                style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.w600,
+                    fontSize: Responsive.isMobile(context) ? 20 : 29),
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+
+            Expanded(child: ListOfCountries(
+              onCountrySelected: (String selectedCountry) {
+                country = selectedCountry;
+              },
+            )),
+            const SizedBox(
+              height: 40,
+            ),
+
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  up.updateUserCountry(country);
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ThemeColors.primaryThemeColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                SizedBox(height: height * 0.5, child: const ListOfCountries()),
-                const Spacer(),
-                Container(
-                  height: height * 0.03,
-                  width: width * 0.30,
-                  margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      elevation: 5,
-                      backgroundColor: ThemeColors.secondaryThemeColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Text(
-                      'Update',
-                      style: GoogleFonts.montserrat(
-                        color: Colors.white,
-                        fontSize: Responsive.isMobile(context) ? 9.sp : 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                child: Text(
+                  'Update',
+                  style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontSize: Responsive.isMobile(context) ? 16 : 18,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-          const Positioned(
-            top: 10, // Adjust as needed
-            left: 10, // Adjust as needed
-            child: SmallPopButtonWidget(),
-          ),
-        ],
+            const SizedBox(
+              height: 40,
+            )
+            // const Positioned(
+            //   top: 10, // Adjust as needed
+            //   left: 10, // Adjust as needed
+            //   child: SmallPopButtonWidget(),
+            // ),
+          ],
+        ),
       ),
     );
   }

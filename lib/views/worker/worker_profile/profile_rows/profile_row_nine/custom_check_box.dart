@@ -32,7 +32,7 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
           margin: const EdgeInsets.all(2.0),
           decoration: BoxDecoration(
             color:
-                widget.value ? ThemeColors.secondaryThemeColor : Colors.white,
+                widget.value ? ThemeColors.primaryThemeColor : Colors.white,
             borderRadius: BorderRadius.circular(4.0),
           ),
         ));

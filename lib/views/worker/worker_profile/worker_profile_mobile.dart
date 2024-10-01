@@ -209,7 +209,7 @@ class WorkerProfileMobile extends StatelessWidget {
                 ))
           else
             const ProfileRowNine(),
-          if (Responsive.isMobile(context)) const SizedBox(height: 16),
+          const SizedBox(height: 25),
           const AppVersionDisplay(),
           const SizedBox(height: 30),
         ],

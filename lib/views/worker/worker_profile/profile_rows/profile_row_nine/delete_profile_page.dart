@@ -91,14 +91,12 @@ class DeleteAccountPage extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          Container(
-            height: height * 0.04,
-            width: width * 0.4,
-            margin: EdgeInsets.only(top: height * 0.03, bottom: 30.0),
+          Center(
+        
             child: ElevatedButton(
-              onPressed: whyDeleteAccount && whereDoYouReside
-                  ? () async {
-                      confirmationDialog(
+              onPressed: () async {
+                     if(whyDeleteAccount && whereDoYouReside){
+                       confirmationDialog(
                         context: context,
                         stringsTemplate: 'deleteAccount',
                         onConfirm: () async {
@@ -107,23 +105,24 @@ class DeleteAccountPage extends StatelessWidget {
                           context.push('/');
                         },
                       );
+                     }
                     }
-                  : null,
-              style: ElevatedButton.styleFrom(
-                elevation: 5,
-                backgroundColor: ThemeColors.secondaryThemeColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-              ),
-              child: Text(
-                'Delete Account',
-                style: GoogleFonts.montserrat(
-                  color: Colors.white,
-                  fontSize: Responsive.isMobile(context) ? 10.sp : 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+                 ,
+                style: ElevatedButton.styleFrom(
+                    backgroundColor:whyDeleteAccount && whereDoYouReside
+                  ?  ThemeColors.primaryThemeColor :ThemeColors.primaryThemeColor.withOpacity(.5) ,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    'Submit',
+                    style: GoogleFonts.montserrat(
+                      color: Colors.white,
+                      fontSize: Responsive.isMobile(context) ? 16 : 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
             ),
           ),
         ],
