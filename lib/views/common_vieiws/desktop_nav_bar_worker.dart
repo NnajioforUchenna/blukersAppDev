@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:blukers/providers/app_settings_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -11,22 +10,23 @@ import 'package:showcaseview/showcaseview.dart';
 import '../../providers/user_provider_parts/user_provider.dart';
 import '../../services/responsive.dart';
 import '../../utils/styles/theme_colors.dart';
+import 'navbar_widgets.dart';
 
-class DesktopNavBar extends StatefulWidget implements PreferredSizeWidget {
-  const DesktopNavBar({super.key});
+class DesktopNavBarWorker extends StatefulWidget
+    implements PreferredSizeWidget {
+  const DesktopNavBarWorker({super.key});
 
   @override
-  State<DesktopNavBar> createState() => _DesktopNavBarState();
+  State<DesktopNavBarWorker> createState() => _DesktopNavBarWorkerState();
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 25);
 }
 
-class _DesktopNavBarState extends State<DesktopNavBar> {
+class _DesktopNavBarWorkerState extends State<DesktopNavBarWorker> {
   @override
   Widget build(BuildContext context) {
     AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
-    final userRole = up.userRole;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
       decoration: const BoxDecoration(
@@ -54,29 +54,18 @@ class _DesktopNavBarState extends State<DesktopNavBar> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              NavbarItem(
-                  title: userRole == "company" ? "Worker's Home" : "Jobs",
-                  route: userRole == "company" ? '/workers' : "/jobs"),
+              const NavbarItem(title: "Jobs", route: "/jobs"),
               const NavbarItem(
                 title: "Services",
                 route: '/workerOffers',
               ),
-              userRole == "company"
-                  ? const NavbarItem(
-                      title: "Create Job Post",
-                      route: '/createJobPost',
-                    )
-                  : const NavbarItem(
-                      title: "Select By Industry",
-                      route: '/selectJobs',
-                    ),
-              NavbarItem(
-                title: userRole == "company"
-                    ? "Path to Employing a Worker"
-                    : "Path to Successuful Job",
-                route: userRole == "company"
-                    ? '/pathToEmployingWorker'
-                    : '/pathToJob',
+              const NavbarItem(
+                title: "Select By Industry",
+                route: '/selectJobs',
+              ),
+              const NavbarItem(
+                title: "Path to Successuful Job",
+                route: '/pathToJob',
               ),
               const SizedBox(
                 height: 40,
@@ -139,7 +128,6 @@ class ProfileNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    final userRole = up.userRole;
     return PopupMenuButton<int>(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       color: Colors.white,
@@ -181,9 +169,7 @@ class ProfileNavBar extends StatelessWidget {
                   children: [
                     FittedBox(
                       child: Text(
-                        userRole == "company"
-                            ? up.appUser!.getCompanyName
-                            : up.appUser!.getDisplayName,
+                        up.appUser!.getDisplayName,
                         style: GoogleFonts.montserrat(
                           color: ThemeColors.black1ThemeColor,
                           fontSize: 14,
@@ -204,7 +190,7 @@ class ProfileNavBar extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  "Switch to ${userRole == "company" ? "Worker" : "Company"} Account",
+                  "Switch to Company",
                   style: GoogleFonts.montserrat(
                     color: ThemeColors.black1ThemeColor,
                     fontSize: 12,
@@ -221,18 +207,12 @@ class ProfileNavBar extends StatelessWidget {
                     scale: .5,
                     child: CupertinoSwitch(
                       trackColor: ThemeColors.secondaryThemeColor,
-                      value: userRole == "company" ? false : true,
+                      value: true,
                       activeColor: ThemeColors.primaryThemeColor,
                       onChanged: (value) {
                         Navigator.of(context).pop();
-                        if (value) {
-                          up.setUserRole("worker");
-
-                          context.go("/jobs");
-                        } else {
-                          up.setUserRole("company");
-                          context.go("/workers");
-                        }
+                        up.setUserRole("company");
+                        context.go("/workers");
                       },
                     ),
                   ),
@@ -250,45 +230,32 @@ class ProfileNavBar extends StatelessWidget {
                         color: Color.fromRGBO(242, 242, 247, 1), width: 1),
                     top: BorderSide(
                         color: Color.fromRGBO(242, 242, 247, 1), width: 1))),
-            child: Column(
+            child: const Column(
               children: [
-                userRole == "company"
-                    ? const OverlayRow(
-                        route: '/companyChat',
-                        title: "Chat With Potential Employees",
-                        icon: "assets/icons/chat.svg",
-                      )
-                    : const OverlayRow(
-                        route: '/messenger',
-                        title: "Job Alerts, Chats and Calls",
-                        icon: "assets/icons/notif.svg",
-                      ),
-                userRole == "company"
-                    ? const OverlayRow(
-                        route: '/myJobPosts',
-                        title: "My Workers",
-                        icon: "assets/icons/saved.svg",
-                      )
-                    : const OverlayRow(
-                        route: '/myJobs',
-                        title: "My Saved Jobs",
-                        icon: "assets/icons/saved.svg",
-                      ),
-                if (userRole == "worker")
-                  const OverlayRow(
-                    route: '/createResume',
-                    title: "My Resume",
-                    icon: "assets/icons/document.svg",
-                  ),
+                OverlayRow(
+                  route: '/messenger',
+                  title: "Job Alerts, Chats and Calls",
+                  icon: "assets/icons/notif.svg",
+                ),
+                OverlayRow(
+                  route: '/myJobs',
+                  title: "My Saved Jobs",
+                  icon: "assets/icons/saved.svg",
+                ),
+                OverlayRow(
+                  route: '/createResume',
+                  title: "My Resume",
+                  icon: "assets/icons/document.svg",
+                ),
               ],
             ),
           ),
         ),
-        PopupMenuItem<int>(
+        const PopupMenuItem<int>(
           enabled: false,
           child: OverlayRow(
-            route: userRole == "company" ? '/companyProfile' : '/workerProfile',
-            title: userRole == "company" ? "Company Profile" : "Profile",
+            route: '/workerProfile',
+            title: "Profile",
             icon: "assets/icons/profile.svg",
           ),
         )
@@ -300,9 +267,7 @@ class ProfileNavBar extends StatelessWidget {
                 ? null
                 : Border.all(
                     width: 2,
-                    color: userRole == "company"
-                        ? ThemeColors.secondaryThemeColor
-                        : ThemeColors.primaryThemeColor,
+                    color: ThemeColors.primaryThemeColor,
                   )),
         width: 28,
         height: 28,
@@ -322,129 +287,4 @@ class ProfileNavBar extends StatelessWidget {
       ),
     );
   }
-}
-
-class OverlayRow extends StatelessWidget {
-  final String route;
-  final String title;
-  final String icon;
-  const OverlayRow({
-    super.key,
-    required this.route,
-    required this.title,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).pop();
-        context.go(route);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          children: [
-            SvgPicture.asset(icon),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(
-              title,
-              style: GoogleFonts.montserrat(
-                color: ThemeColors.black1ThemeColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class NavbarItem extends StatelessWidget {
-  final String title;
-  final String route;
-  const NavbarItem({super.key, required this.title, required this.route});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.go(route);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          title,
-          style: GoogleFonts.montserrat(
-            color: ThemeColors.ash,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TooltipShape extends ShapeBorder {
-  const TooltipShape();
-
-  final BorderSide _side = BorderSide.none;
-  final BorderRadiusGeometry _borderRadius = BorderRadius.zero;
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(_side.width);
-
-  @override
-  Path getInnerPath(
-    Rect rect, {
-    TextDirection? textDirection,
-  }) {
-    final Path path = Path();
-
-    path.addRRect(
-      _borderRadius.resolve(textDirection).toRRect(rect).deflate(_side.width),
-    );
-
-    return path;
-  }
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    final Path path = Path();
-    final RRect rrect = _borderRadius.resolve(textDirection).toRRect(rect);
-
-    const double arrowWidth = 50.0;
-    const double arrowHeight = 40.0;
-
-    path.moveTo(0, 10);
-    path.quadraticBezierTo(0, 0, 10, 0);
-    path.lineTo(rrect.width - (arrowWidth + 10), 0);
-
-    path.lineTo(rrect.width - (arrowWidth / 2 + 10), -arrowHeight);
-    path.lineTo(rrect.width - 10, 0);
-
-    path.quadraticBezierTo(rrect.width, 0, rrect.width, 10);
-    path.lineTo(rrect.width, rrect.height - 10);
-    path.quadraticBezierTo(
-        rrect.width, rrect.height, rrect.width - 10, rrect.height);
-    path.lineTo(10, rrect.height);
-    path.quadraticBezierTo(0, rrect.height, 0, rrect.height - 10);
-
-    return path;
-  }
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
-
-  @override
-  ShapeBorder scale(double t) => RoundedRectangleBorder(
-        side: _side.scale(t),
-        borderRadius: _borderRadius * t,
-      );
 }

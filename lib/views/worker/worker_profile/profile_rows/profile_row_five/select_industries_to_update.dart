@@ -1,3 +1,4 @@
+import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -88,18 +89,17 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
                     up.updateAppUserCategory(selectedIndustries, selectedJobs);
                   },
                   child: Container(
-                    height: 38,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: industries.indexOf(industry) % 2 == 0
-                          ? Colors.grey[200]
-                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(9),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color(0xFFD9D9D9),
+                        width: 1,
+                      ),
                     ),
-                    margin: EdgeInsets.only(
-                      right: width * 0.05,
-                      left: width * 0.05,
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.1),
+                    margin: const EdgeInsets.only(bottom: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -108,9 +108,9 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
                             LocalizedIndustries.get(
                                 context, industry.industryId),
                             style: GoogleFonts.montserrat(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
+                              color: const Color(0xFF595959),
+                              fontSize: Responsive.isMobile(context) ? 13 : 20,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
@@ -131,81 +131,96 @@ class _SelectIndustriesToUpdateState extends State<SelectIndustriesToUpdate> {
                   ),
                 ),
                 if (selectedIndustries.contains(industry.industryId))
-                  ...industry.jobs.entries.map((entry) {
-                    final jobId = entry.key;
-                    final job = entry.value;
-                    return InkWell(
-                      onTap: () {
-                        if (!selectedJobs.containsKey(industry.industryId)) {
-                          selectedJobs[industry.industryId] = [];
-                        }
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 15),
+                      child: Column(
+                        children: [
+                          ...industry.jobs.entries.map((entry) {
+                            final jobId = entry.key;
+                            return InkWell(
+                              onTap: () {
+                                if (!selectedJobs
+                                    .containsKey(industry.industryId)) {
+                                  selectedJobs[industry.industryId] = [];
+                                }
 
-                        if (selectedJobs[industry.industryId]
-                                ?.contains(jobId) ??
-                            false) {
-                          setState(() {
-                            selectedJobs[industry.industryId]!.remove(jobId);
-                          });
-                        } else {
-                          setState(() {
-                            selectedJobs[industry.industryId]!.add(jobId);
-                          });
-                        }
-                        up.updateAppUserCategory(
-                            selectedIndustries, selectedJobs);
-                        // isSelect(); // Ensure the isSelect method is defined or remove this comment
-                      },
-                      child: Container(
-                        height: 20,
-                        margin: EdgeInsets.symmetric(horizontal: width * 0.1),
-                        padding: EdgeInsets.symmetric(horizontal: width * 0.1),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                LocalizedJobs.get(context,
-                                    jobId), // Assuming LocalizedJobs.get can handle jobId
-                                style: TextStyle(
-                                  color: Colors.blueGrey[700],
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w200,
+                                if (selectedJobs[industry.industryId]
+                                        ?.contains(jobId) ??
+                                    false) {
+                                  setState(() {
+                                    selectedJobs[industry.industryId]!
+                                        .remove(jobId);
+                                  });
+                                } else {
+                                  setState(() {
+                                    selectedJobs[industry.industryId]!
+                                        .add(jobId);
+                                  });
+                                }
+                                up.updateAppUserCategory(
+                                    selectedIndustries, selectedJobs);
+                                // isSelect(); // Ensure the isSelect method is defined or remove this comment
+                              },
+                              child: Container(
+                                height: 20,
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: width * 0.1,
+                                  vertical: 5
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: width * 0.1),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        LocalizedJobs.get(context, jobId),
+                                        style: TextStyle(
+                                          color: Colors.blueGrey[700],
+                                          fontSize: Responsive.isMobile(context)
+                                              ? 14
+                                              : 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.8,
+                                      child: Checkbox(
+                                        value: selectedJobs[industry.industryId]
+                                                ?.contains(jobId) ??
+                                            false,
+                                        onChanged: (bool? value) {
+                                          if (!selectedJobs.containsKey(
+                                              industry.industryId)) {
+                                            selectedJobs[industry.industryId] =
+                                                [];
+                                          }
+                                          if (value == true) {
+                                            setState(() {
+                                              selectedJobs[industry.industryId]!
+                                                  .add(jobId);
+                                            });
+                                          } else {
+                                            setState(() {
+                                              selectedJobs[industry.industryId]!
+                                                  .remove(jobId);
+                                            });
+                                          }
+                                          up.updateAppUserCategory(
+                                              selectedIndustries, selectedJobs);
+                                          // isSelect(); // Ensure the isSelect method is defined or remove this comment
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                            Transform.scale(
-                              scale: 0.6,
-                              child: Checkbox(
-                                value: selectedJobs[industry.industryId]
-                                        ?.contains(jobId) ??
-                                    false,
-                                onChanged: (bool? value) {
-                                  if (!selectedJobs
-                                      .containsKey(industry.industryId)) {
-                                    selectedJobs[industry.industryId] = [];
-                                  }
-                                  if (value == true) {
-                                    setState(() {
-                                      selectedJobs[industry.industryId]!
-                                          .add(jobId);
-                                    });
-                                  } else {
-                                    setState(() {
-                                      selectedJobs[industry.industryId]!
-                                          .remove(jobId);
-                                    });
-                                  }
-                                  up.updateAppUserCategory(
-                                      selectedIndustries, selectedJobs);
-                                  // isSelect(); // Ensure the isSelect method is defined or remove this comment
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
+                            );
+                          })
+                        ],
+                      ))
               ],
             );
           }),

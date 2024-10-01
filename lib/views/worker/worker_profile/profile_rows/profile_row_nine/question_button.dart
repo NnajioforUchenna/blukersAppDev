@@ -18,14 +18,16 @@ class QuestionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onPress();
       },
       child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xFFD0D0D5)),
           color: Colors.white, // Background color of the container
-          borderRadius: BorderRadius.circular(10.0), // Rounded corners
+          borderRadius: BorderRadius.circular(8.0), // Rounded corners
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.25), // Box shadow color
@@ -35,26 +37,23 @@ class QuestionButton extends StatelessWidget {
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                text,
-                style: GoogleFonts.montserrat(
-                  color: Colors.grey,
-                  fontSize: Responsive.isMobile(context) ? 10.sp : 11,
-                  fontWeight: FontWeight.w600,
-                ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              text,
+              style: GoogleFonts.montserrat(
+                color: ThemeColors.black1ThemeColor,
+                fontSize: Responsive.isMobile(context) ? 14.sp : 20,
+                fontWeight: FontWeight.w500,
               ),
-              const Icon(
-                UniconsLine.angle_right,
-                size: 30.0,
-                color: ThemeColors.grey2ThemeColor,
-              ),
-            ],
-          ),
+            ),
+           Icon(
+              UniconsLine.angle_right,
+              size:  Responsive.isMobile(context) ?  25: 30.0,
+              color: ThemeColors.black1ThemeColor,
+            ),
+          ],
         ),
       ),
     );

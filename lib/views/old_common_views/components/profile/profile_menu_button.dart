@@ -1,19 +1,21 @@
-import '../../../../utils/styles/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unicons/unicons.dart';
 
-class ProfileMenuButton extends StatelessWidget {
-  String text;
-  Function onPress;
-  Color textColor;
+import '../../../../utils/styles/theme_colors.dart';
 
-  ProfileMenuButton({
-    super.key,
-    required this.text,
-    required this.onPress,
-    this.textColor = ThemeColors.grey1ThemeColor,
-  });
+class ProfileMenuButton extends StatelessWidget {
+  final String text;
+  final Function onPress;
+  final Color textColor;
+  final Widget? trailing;
+
+  const ProfileMenuButton(
+      {super.key,
+      required this.text,
+      required this.onPress,
+      this.textColor = const Color(0xFF595959),
+      this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +24,15 @@ class ProfileMenuButton extends StatelessWidget {
         onPress();
       },
       child: Container(
-        // margin: const EdgeInsets.all(14.0),
-        margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
-          color: Colors.white, // Background color of the container
-          borderRadius: BorderRadius.circular(10.0), // Rounded corners
+          color: const Color(0xFFF9F9F9),
+          borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.25), // Box shadow color
+              color: Colors.grey.withOpacity(0.25),
               spreadRadius: 1,
               blurRadius: 2,
-              offset: const Offset(0, 2), // Shadow position
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -49,15 +49,76 @@ class ProfileMenuButton extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const Icon(
-                UniconsLine.angle_right,
-                size: 30.0,
-                color: ThemeColors.grey2ThemeColor,
-              ),
+              trailing ??
+                  const Icon(
+                    UniconsLine.angle_right,
+                    size: 30.0,
+                    color: Color(0xFF595959),
+                  ),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class DesktopMenuButton extends StatelessWidget {
+  const DesktopMenuButton(
+      {super.key,
+      required this.child,
+      required this.isSelected,
+      this.selectedBorderColor = ThemeColors.primaryThemeColor,
+      required this.onPressed});
+  final Widget child;
+  final bool isSelected;
+  final Color selectedBorderColor;
+
+  final void Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            boxShadow: isSelected
+                ? [
+                    const BoxShadow(
+                      color: Color(0x0D000000),
+                      offset: Offset(0, 4),
+                      blurRadius: 9.2,
+                      spreadRadius: 9,
+                    ),
+                  ]
+                : null,
+            border: isSelected
+                ? Border(
+                    left: BorderSide(color: selectedBorderColor, width: 5.1))
+                : null,
+            color: isSelected ? Colors.white : const Color(0xFFF9F9FA)),
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 22),
+        child: child,
+      ),
+    );
+  }
+}
+
+class UpdateUserInfoDialog extends StatelessWidget {
+  const UpdateUserInfoDialog({super.key, required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      insetPadding:
+          const EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 80),
+      child: child,
     );
   }
 }
