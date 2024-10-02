@@ -88,6 +88,9 @@ class _SearchHeaderDesktopState extends State<SearchHeaderDesktop> {
           const SizedBox(width: 20.0),
           ElevatedButton(
             onPressed: () async {
+               if (_searchController1.text.isEmpty && _searchController2.text.isEmpty || _isLoading) {
+                    return;
+              }
               setState(() {
                 _isLoading = true; 
               });
