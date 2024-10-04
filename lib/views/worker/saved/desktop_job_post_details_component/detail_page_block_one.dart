@@ -26,8 +26,8 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-      bool isJobApplied = !up.isJobPostApplied(widget.jobPost.jobPostId ?? '');
-    bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId ?? '');
+      bool isJobApplied = up.isJobPostApplied(widget.jobPost.jobPostId);
+    bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId);
     bool isOwner = up.appUser?.uid == widget.jobPost.companyId;
 
     return SingleChildScrollView(

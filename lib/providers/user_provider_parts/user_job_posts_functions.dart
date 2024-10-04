@@ -11,12 +11,12 @@ extension UserJobPostsFunctions on UserProvider {
   }
 
   bool isJobPostApplied(String jobPostId) {
-    return appUser?.workerRecords?.appliedJobPostIds?.contains(jobPostId) ??
+    return appUser?.workerRecords?.appliedJobPostIds.contains(jobPostId) ??
         false; // Change to JobPostId
   }
 
   bool isJobPostSaved(String jobPostId) {
-    return appUser?.workerRecords?.savedJobPostIds?.contains(jobPostId) ??
+    return appUser?.workerRecords?.savedJobPostIds.contains(jobPostId) ??
         false; // Change to JobPostId
   }
 
@@ -27,11 +27,11 @@ extension UserJobPostsFunctions on UserProvider {
   // Check if the job post is already saved
   if (isJobPostSaved(jobPost.jobPostId)) {
     // Remove the job post from savedJobPostIds
-    appUser?.workerRecords?.savedJobPostIds?.remove(jobPost.jobPostId);
+    appUser?.workerRecords?.savedJobPostIds.remove(jobPost.jobPostId);
     EasyLoading.showSuccess('Job Post Removed');
   } else {
     // Add the job post to savedJobPostIds
-    appUser?.workerRecords?.savedJobPostIds?.add(jobPost.jobPostId);
+    appUser?.workerRecords?.savedJobPostIds.add(jobPost.jobPostId);
     EasyLoading.showSuccess('Job Post Saved');
   }
 

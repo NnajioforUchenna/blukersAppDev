@@ -37,8 +37,8 @@ class _DisplayJobCardState extends State<SavedandapplyJobCard> {
     UserProvider up = Provider.of<UserProvider>(context);
     final bool isMobileLayout =
         !kIsWeb || MediaQuery.of(context).size.width < 600;
-    bool isJobApplied = up.isJobPostApplied(widget.jobPost.jobPostId ?? '');
-    bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId ?? '');
+    bool isJobApplied = up.isJobPostApplied(widget.jobPost.jobPostId);
+    bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId);
     bool isHideButton = up.appUser?.uid == widget.jobPost.companyId;
 
     bool isJobPostSelected() {

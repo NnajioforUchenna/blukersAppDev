@@ -14,7 +14,7 @@ class ApplyButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     double topPadding = MediaQuery.of(context).size.height * 0.05;
-    bool isJobApplied = !up.isJobPostApplied(jobPost.jobPostId ?? '');
+    bool isJobApplied = up.isJobPostApplied(jobPost.jobPostId);
     return Container(
       margin: EdgeInsets.only(top: topPadding),
       child: Row(
