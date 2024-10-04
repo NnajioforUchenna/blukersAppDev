@@ -124,7 +124,7 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return DeleteDialog(jobPost: widget.jobPost);
+                                  return DeleteJobDialog(jobPost: widget.jobPost);
                                 },
                               );
                             },
@@ -189,7 +189,6 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
                                           ThemeColors.secondaryThemeColorDark)),
                             ),
                             onPressed: () async {
-                              if (isJobSaved) return;
                               if (up.workerTimelineStep < 3) {
                                 showDialog(
                                   context: context,
@@ -197,23 +196,19 @@ class _JobPostMobileDetailsState extends State<JobPostMobileDetails> {
                                       const DisplayJobTimelineDialog(),
                                 );
                               } else {
-                                // Show loading spinner
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible:
-                                      false, // Prevent dismissing the dialog
-                                  builder: (context) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  },
-                                );
+                                // // Show loading spinner
+                                // showDialog(
+                                //   context: context,
+                                //   barrierDismissible: false, // Prevent dismissing the dialog
+                                //   builder: (context) {
+                                //     return const Center(
+                                //       child: CircularProgressIndicator(),
+                                //     );
+                                //   },
+                                // );
 
                                 // Save or unsave the job post and wait until the action is completed
                                 await up.saveJobPost(widget.jobPost);
-
-                                // Close the loading spinner
-                                Navigator.of(context).pop();
 
                                 // Trigger rebuild to reflect the change
                                 setState(() {});

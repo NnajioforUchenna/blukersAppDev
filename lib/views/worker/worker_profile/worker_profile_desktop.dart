@@ -22,8 +22,8 @@ class WorkerProfileDesktop extends StatelessWidget {
                     ),
                   ),
                 ),
-              // Profile content on the right
-              const Expanded(child: WorkerProfileMobile()),
+         
+              // const Expanded(child: WorkerProfileMobile()),
             ],
           ),
         );

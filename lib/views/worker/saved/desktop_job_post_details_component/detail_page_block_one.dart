@@ -16,7 +16,7 @@ import '../../../old_common_views/job_timeline/display_job_timeline_dialog.dart'
 class DetailPageBlockOne extends StatefulWidget {
   final JobPost jobPost;
 
-  const DetailPageBlockOne({super.key, required this.jobPost});
+  const DetailPageBlockOne({Key? key, required this.jobPost}) : super(key: key);
 
   @override
   State<DetailPageBlockOne> createState() => _DetailPageBlockOneState();
@@ -26,7 +26,7 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
   @override
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
-    bool isJobApplied = !up.isJobPostApplied(widget.jobPost.jobPostId ?? '');
+      bool isJobApplied = !up.isJobPostApplied(widget.jobPost.jobPostId ?? '');
     bool isJobSaved = up.isJobPostSaved(widget.jobPost.jobPostId ?? '');
     bool isOwner = up.appUser?.uid == widget.jobPost.companyId;
 
@@ -104,7 +104,6 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ThemeColors.secondaryThemeColorDark,
-              
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -128,7 +127,6 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
-                          
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                               side: const BorderSide(
@@ -138,7 +136,7 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return DeleteDialog(jobPost: widget.jobPost);
+                              return DeleteJobDialog(jobPost: widget.jobPost);
                             },
                           );
                         },
@@ -195,7 +193,6 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
                                   color: ThemeColors.secondaryThemeColorDark)),
                         ),
                         onPressed: () async {
-                          if (isJobSaved) return;
                           if (up.workerTimelineStep < 3) {
                             showDialog(
                               context: context,
@@ -203,23 +200,19 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
                                   const DisplayJobTimelineDialog(),
                             );
                           } else {
-                            // Show loading spinner
-                            showDialog(
-                              context: context,
-                              barrierDismissible:
-                                  false, // Prevent dismissing the dialog
-                              builder: (context) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              },
-                            );
+                            // // Show loading spinner
+                            // showDialog(
+                            //   context: context,
+                            //   barrierDismissible: false, // Prevent dismissing the dialog
+                            //   builder: (context) {
+                            //     return const Center(
+                            //       child: CircularProgressIndicator(),
+                            //     );
+                            //   },
+                            // );
 
                             // Save or unsave the job post and wait until the action is completed
                             await up.saveJobPost(widget.jobPost);
-
-                            // Close the loading spinner
-                            Navigator.of(context).pop();
 
                             // Trigger rebuild to reflect the change
                             setState(() {});

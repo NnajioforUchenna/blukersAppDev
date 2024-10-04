@@ -1,4 +1,5 @@
 import 'package:blukers/services/responsive.dart';
+import 'package:blukers/views/company/Alert/job_alert.dart';
 import 'package:blukers/views/company/company_chat/company_chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,7 +30,7 @@ class _CompanyMessengerNavigationBarState
     currentPageIndex = up.messengerIndex;
     AppSettingsProvider asp = Provider.of<AppSettingsProvider>(context);
     List<Widget> body = [
-      const SizedBox(),
+       JobAlertList(),
       const CompanyChat(),
       const SizedBox(),
       const SizedBox(),

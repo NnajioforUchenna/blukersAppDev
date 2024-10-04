@@ -8,6 +8,7 @@ import 'package:unicons/unicons.dart';
 import '../../../../../models/payment_model/paid_order.dart';
 import '../../../../../providers/app_settings_provider.dart';
 import '../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../services/responsive.dart';
 import '../../../../common_vieiws/icon_text_404.dart';
 import 'order_card.dart';
 
@@ -18,7 +19,6 @@ class OrdersList extends StatelessWidget {
   Widget build(BuildContext context) {
     AppSettingsProvider avp = Provider.of<AppSettingsProvider>(context);
     UserProvider up = Provider.of<UserProvider>(context);
-    double height = MediaQuery.of(context).size.height;
 
     if (!kIsWeb) {
       avp.checkForUpdate(context);
@@ -26,40 +26,55 @@ class OrdersList extends StatelessWidget {
 
     List<PaidOrder>? ordersList = up.appUser?.listActiveOrders.values.toList();
 
-    return ordersList != null && ordersList.isNotEmpty
-        ? SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin:
-                      EdgeInsets.only(top: height * 0.05, bottom: height * 0.1),
-                  child: Text(
-                    'Orders',
-                    style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.bold, fontSize: 24),
+    return Container(
+      padding: EdgeInsets.only(
+        top: 56,
+        bottom: 56,
+        left: Responsive.isMobile(context) ? 25 : 40,
+        right: Responsive.isMobile(context) ? 25 : 40,
+      ),
+      child: ordersList != null && ordersList.isNotEmpty
+          ? SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: Responsive.isMobile(context)
+                        ? MainAxisAlignment.center
+                        : MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Orders',
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w600,
+                            fontSize: Responsive.isMobile(context) ? 20 : 29),
+                      ),
+                    ],
                   ),
-                ),
-                Column(
-                  children: List.generate(ordersList.length, (index) {
-                    var order = ordersList[index];
-                    return OrderCard(
-                      order: order,
-                      color: index % 2 == 0
-                          ? const Color(0xff1a75bb)
-                          : const Color(
-                              0xffF16523), // You can also use 'index' if needed
-                    );
-                  }),
-                ),
-              ],
+                  const SizedBox(
+                    height: 56,
+                  ),
+                  Column(
+                    children: List.generate(ordersList.length, (index) {
+                      var order = ordersList[index];
+                      return OrderCard(
+                        order: order,
+                        color: index % 2 == 0
+                            ? const Color(0xff1a75bb)
+                            : const Color(
+                                0xffF16523), // You can also use 'index' if needed
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            )
+          : Center(
+              child: IconText404(
+                icon: UniconsLine.receipt_alt,
+                text: AppLocalizations.of(context)!.youDoNotHaveAnyOrder,
+              ),
             ),
-          )
-        : Center(
-            child: IconText404(
-              icon: UniconsLine.receipt_alt,
-              text: AppLocalizations.of(context)!.youDoNotHaveAnyOrder,
-            ),
-          );
+    );
   }
 }

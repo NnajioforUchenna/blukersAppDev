@@ -1,3 +1,4 @@
+import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +13,12 @@ class ProfileRowThree extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider up = Provider.of<UserProvider>(context);
     return Container(
-      margin: const EdgeInsets.only(top: 10.0, bottom: 30.0),
+      margin: EdgeInsets.only(top: 18.0, bottom: Responsive.isMobile(context) ? 40 :  24.0),
       child: Text(
         up.appUser!.getDisplayName,
         style: GoogleFonts.montserrat(
           color: ThemeColors.blukersOrangeThemeColor,
-          fontSize: 22,
+          fontSize: Responsive.isMobile(context)? 14 :  17,
           fontWeight: FontWeight.w700,
         ),
       ),

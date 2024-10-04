@@ -8,7 +8,10 @@ import '../../../../../../services/responsive.dart';
 import '../../../../../old_common_views/components/animations/index.dart';
 import '../../../../../worker/saved/animate_job_post_details.dart';
 import '../../../../../worker/saved/display_job_card.dart';
-import '../../../../../worker/saved/display_job_post_dialog.dart';
+
+import '../../../../../worker/saved/no_more_jobs_found_card.dart';
+import 'display_job_post_dialog_company.dart';
+import 'job_post_mobile_details_company.dart';
 
 class CompanyCompleteJobPostWidget extends StatefulWidget {
   final List<JobPost> jobPosts;
@@ -40,6 +43,7 @@ class _CompanyCompleteJobPostWidgetState
             ? buildWebContent(widget.jobPosts)
             : ListViewJobs(
                 jobPosts: widget.jobPosts,
+                companyId: widget.jobPosts.first.companyId,
               ));
   }
 }
@@ -54,6 +58,7 @@ Widget buildWebContent(jobPosts) {
           padding: const EdgeInsets.all(8.0),
           child: ListViewJobs(
             jobPosts: jobPosts,
+            companyId: jobPosts.first.companyId,
           ),
         ),
       ),
@@ -71,8 +76,13 @@ Widget buildWebContent(jobPosts) {
 
 class ListViewJobs extends StatefulWidget {
   final List<JobPost> jobPosts;
+  final String companyId;
 
-  const ListViewJobs({super.key, required this.jobPosts});
+  const ListViewJobs({
+    Key? key,
+    required this.jobPosts,
+    required this.companyId,
+  }) : super(key: key);
 
   @override
   State<ListViewJobs> createState() => _ListViewJobsState();
@@ -82,26 +92,48 @@ class _ListViewJobsState extends State<ListViewJobs> {
   final ScrollController controller = ScrollController();
   bool isRefilling = false;
   late JobPostsProvider jp;
+  late List<JobPost> filteredJobPosts;
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    jp = Provider.of<JobPostsProvider>(context, listen: false);
+    filterJobPosts();
+    controller.addListener(_scrollListener);
   }
 
-  refill() async {
-    JobPostsProvider jp = Provider.of<JobPostsProvider>(context, listen: false);
+  void filterJobPosts() {
+    filteredJobPosts = widget.jobPosts
+        .where((job) => job.companyId == widget.companyId)
+        .toList();
+  }
+
+  void _scrollListener() {
+    if (controller.position.pixels == controller.position.maxScrollExtent) {
+      if (jp.hasMore && !isRefilling) {
+        isRefilling = true;
+        refill();
+      }
+    }
+  }
+
+  Future<void> refill() async {
     UserProvider up = Provider.of<UserProvider>(context, listen: false);
 
     Map<String, JobPost> newJobs = await jp.loadMoreJobPosts(
-        pageNumber: widget.jobPosts.isEmpty ? 0 : widget.jobPosts.length ~/ 10,
-        targetLanguage: up.userLanguage,
-        queryName: jp.nameSearch,
-        queryLocation: jp.locationSearch);
+      pageNumber: filteredJobPosts.isEmpty ? 0 : filteredJobPosts.length ~/ 10,
+      targetLanguage: up.userLanguage,
+      queryName: jp.nameSearch,
+      queryLocation: jp.locationSearch,
+      // companyId: widget.companyId,
+    );
 
     if (mounted) {
       setState(() {
-        widget.jobPosts.addAll(newJobs.values.toList());
+        List<JobPost> newFilteredJobs = newJobs.values
+            .where((job) => job.companyId == widget.companyId)
+            .toList();
+        filteredJobPosts.addAll(newFilteredJobs);
       });
     }
 
@@ -109,73 +141,67 @@ class _ListViewJobsState extends State<ListViewJobs> {
   }
 
   @override
-  void initState() {
-    jp = Provider.of<JobPostsProvider>(context, listen: false);
-    controller.addListener(() async {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
-        if (jp.hasMore) {
-          if (!isRefilling) {
-            isRefilling = true;
-            refill();
-          }
-        }
-      }
-    });
-    super.initState();
+  void dispose() {
+    controller.removeListener(_scrollListener);
+    controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    JobPostsProvider jp = Provider.of<JobPostsProvider>(context);
     return ListView.separated(
       controller: controller,
       shrinkWrap: true,
-      padding: EdgeInsets.only(
-          top: Responsive.isMobile(context) ? 20 : 0, left: 15, right: 15),
-      // Added to give some space around cards
-      itemCount: widget.jobPosts.length + 1,
+      padding: const EdgeInsets.all(15),
+      itemCount: filteredJobPosts.length + 1,
       itemBuilder: (context, index) {
-        if (index < widget.jobPosts.length) {
-          JobPost jobPost = widget.jobPosts[index];
+        if (index < filteredJobPosts.length) {
+          JobPost jobPost = filteredJobPosts[index];
           return DisplayJobCard(
-              jobPost: jobPost,
-              onTap: () {
-                jp.setSelectedJobPost(jobPost);
-                if (Responsive.isMobile(context)) {
-                  showDialog(
-                      context: context,
-                      builder: (context) => DisplayJobPostDialog(
-                            jobPost: jobPost,
-                          ));
-                }
-              });
-        } else {
-          if (jp.hasMore) {
-            if (!isRefilling) {
-              isRefilling = true;
-              refill();
-            }
-          }
-          return jp.hasMore
-              ? const Center(
-                  child: SizedBox(
-                    height: 400,
-                    child: Padding(
-                      padding: EdgeInsets.all(32.0),
-                      child: Center(
-                          child: MyAnimation(
-                        name: 'blukersLoadingDots',
-                      )),
+            jobPost: jobPost,
+            onTap: () {
+              jp.setSelectedJobPost(jobPost);
+              if (Responsive.isMobile(context)) {
+                showDialog(
+                  context: context,
+                  builder: (context) => Container(
+                    color: Colors.transparent,
+                    child: JobPostMobileDetailsCompany(
+                      jobPost: jobPost,
                     ),
                   ),
-                )
-              : const SizedBox.shrink();
+                );
+              }
+            },
+          );
+        } else {
+          if (jp.hasMore && !isRefilling) {
+            isRefilling = true;
+            refill();
+          }
+
+          // return jp.hasMore
+          //     ? const Center(
+          //         child: SizedBox(
+          //           height: 400,
+          //           child: Padding(
+          //             padding: EdgeInsets.all(32.0),
+          //             child: Center(
+          //               child: MyAnimation(
+          //                 name: 'blukersLoadingDots',
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       )
+          //     : NoJobsFoundCard(
+          //         nameSearch: jp.nameSearch,
+          //         locationSearch: jp.locationSearch,
+          //       );
         }
       },
       separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(
-          height: 5,
-        );
+        return const SizedBox(height: 5);
       },
     );
   }

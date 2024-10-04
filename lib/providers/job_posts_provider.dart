@@ -15,9 +15,12 @@ import '../views/worker/jobs_home/Components/display_selected_jobs/display_selec
 
 class JobPostsProvider with ChangeNotifier {
   AppUser? appUser;
+  List<JobPost> _jobPosts = [];
 
   Map<String, JobPost> searchJobs = {};
   Map<String, JobPost> recent50Jobs = {};
+
+  
 
   // Controls Displayed Job Posts
   Map<String, JobPost> displayedJobPosts = {};
@@ -115,6 +118,7 @@ class JobPostsProvider with ChangeNotifier {
       MaterialPageRoute(
         builder: (context) => DisplaySelectedJobs(
           title: job.title,
+          JobId: job.jobId,
         ),
       ),
     );
@@ -486,13 +490,20 @@ class JobPostsProvider with ChangeNotifier {
 //       .then((ids) => JobPostsDataProvider.getJobPostsByCompanyIds(ids));
 // }
 
+ 
+
 // delete jobs posted
+
   Future<void> deleteJobPost(String jobPostId) async {
-    JobPostsDataProvider.deleteJobPost(jobPostId, appUser!.uid);
+    await JobPostsDataProvider.deleteJobPost(jobPostId, appUser!.uid);
+  
+    // Notify listeners to refresh the UI
     notifyListeners();
   }
 
   void getJobsByPreferences() {
     getJobPostsByJobID('electrician', 'en');
   }
+
+  // Method to set all job posts (you might want to call this from your data fetching logic)
 }

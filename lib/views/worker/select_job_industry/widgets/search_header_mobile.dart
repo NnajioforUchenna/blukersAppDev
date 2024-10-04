@@ -2,6 +2,7 @@ import 'package:blukers/providers/worker_provider.dart';
 import 'package:blukers/views/worker/select_job_industry/widgets/choose_language_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
   final TextEditingController locationController = TextEditingController();
   String buttonLabel = 'Search Jobs';
   String searchName = 'Position, work area or company';
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,24 +42,29 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
     return Padding(
       padding: const EdgeInsets.only(left: 40, right: 40, top: 24, bottom: 10),
       child: Column(children: [
-        SearchField(
-          controller: controller,
-          searchName: searchName,
-          onDone: () {
-            if (up.userRole == 'company') {
-              wp.searchWorkers(controller.text, locationController.text);
-              GoRouter.of(context).go('/workerSearchResults');
-              return;
-            }
-            jp.setSearching(true);
-            jp.searchJobPosts(controller.text, locationController.text);
-            if (GoRouter.of(context).canPop()) {
-              GoRouter.of(context).pop();
-            }
-
-            GoRouter.of(context).go('/jobSearchResults');
-          },
-          icon: Icons.search,
+        SizedBox(
+          height: 40,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                flex: 4,
+                child: SearchField(
+                  controller: controller,
+                  searchName: searchName,
+                  onDone: () {},
+                  icon: Icons.search,
+                ),
+              ),
+              const SizedBox(
+                width: 14,
+              ),
+              const Expanded(
+                child: ChooseLanguageWidget(),
+              )
+            ],
+          ),
         ),
         const SizedBox(
           height: 16,
@@ -71,21 +78,7 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
               Expanded(
                 flex: 4,
                 child: SearchField(
-                    onDone: () {
-                      if (up.userRole == 'company') {
-                        wp.searchWorkers(
-                            controller.text, locationController.text);
-                        GoRouter.of(context).go('/workerSearchResults');
-                        return;
-                      }
-                      jp.setSearching(true);
-                      jp.searchJobPosts(
-                          controller.text, locationController.text);
-                      if (GoRouter.of(context).canPop()) {
-                        GoRouter.of(context).pop();
-                      }
-                      GoRouter.of(context).go('/jobSearchResults');
-                    },
+                    onDone: () {},
                     controller: locationController,
                     searchName: "city, state or zip code",
                     icon: Icons.location_on_outlined),
@@ -93,9 +86,50 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
               const SizedBox(
                 width: 14,
               ),
-              const Expanded(
-                child: ChooseLanguageWidget(),
-              )
+              ElevatedButton(
+                onPressed: () async {
+                  setState(() {
+                    _isLoading = true;
+                  });
+
+                  String nameRelated = controller.text;
+                  String locationRelated = locationController.text;
+                  if (up.userRole == 'company') {
+                    await wp.searchWorkers(nameRelated, locationRelated);
+                    GoRouter.of(context).go('/workerSearchResults');
+                    return;
+                  }
+                  await jp.searchJobPosts(nameRelated, locationRelated);
+
+                  GoRouter.of(context).go('/jobSearchResults');
+
+                  setState(() {
+                    _isLoading = false;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ThemeColors.primaryThemeColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                child: _isLoading
+                    ? const SizedBox(
+                        height: 25,
+                        child: SpinKitChasingDots(
+                          color: Colors.white,
+                          size: 12,
+                        ),
+                      )
+                    : Text(
+                        AppLocalizations.of(context)!.searchJobs,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+              ),
             ],
           ),
         )
@@ -144,16 +178,7 @@ class SearchField extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: const Color.fromRGBO(161, 161, 161, 0.7)),
           prefixIcon: Icon(icon, color: ThemeColors.black1ThemeColor),
-          // suffixIcon: IconButton(
-          //     icon: const Icon(Icons.close),
-          //     onPressed: controller.text.isEmpty
-          //         ? null
-          //         : () {
-          //             controller.clear();
-          //             jp.clearSearchParameters();
-          //             GoRouter.of(context).go('/jobs');
-          //           }),
-
+         
           enabledBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               Radius.circular(10.0),
@@ -163,18 +188,17 @@ class SearchField extends StatelessWidget {
               width: 1.5,
             ),
           ),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             borderSide: BorderSide(
-                width: 1.5,
-                color: ThemeColors
-                    .blukersOrangeThemeColor), // Make sure to define ThemeColors.blukersOrangeThemeColor
+              color: const Color(0xFF808080).withOpacity(0.55),
+              width: 1.5,
+            ), 
           ),
         ),
         onTap: () {
-          // Put your function here
-          // showDialog(
-          //     context: context, builder: (context) => const SearchJobsUi());
+         
         },
         style: GoogleFonts.montserrat(
           fontSize: 14,

@@ -28,6 +28,7 @@ class Industry {
     };
   }
 
+
   static Industry fromMap(Map<String, dynamic> map) {
     Map<String, Job> jobsMap = {};
 

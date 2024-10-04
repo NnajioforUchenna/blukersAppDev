@@ -45,6 +45,7 @@ class MobileIndustryBodyPanel extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => DisplayJobs(
                     title: job.title,
+                    JobId: job.jobId,
                   ),
                 ),
               );

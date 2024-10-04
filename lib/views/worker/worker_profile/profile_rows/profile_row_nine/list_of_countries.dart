@@ -1,12 +1,15 @@
-import '../../../../../providers/user_provider_parts/user_provider.dart';
+import 'package:blukers/utils/styles/index.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../common_files/countries.dart';
-import 'custom_check_box.dart';
+import '../../../../../providers/user_provider_parts/user_provider.dart';
+import '../../../../../services/responsive.dart';
 
 class ListOfCountries extends StatefulWidget {
-  const ListOfCountries({super.key});
+  final Function(String) onCountrySelected;
+  const ListOfCountries({super.key, required this.onCountrySelected});
 
   @override
   State<ListOfCountries> createState() => _ListOfCountriesState();
@@ -28,35 +31,40 @@ class _ListOfCountriesState extends State<ListOfCountries> {
         ...Countries.map((country) {
           return InkWell(
             onTap: () {
-              print(country);
               setState(() {
                 selectedCountry = country;
-                up.updateUserCountry(country);
+                widget.onCountrySelected(country);
               });
             },
             child: Container(
-              height: 30,
-              margin: const EdgeInsets.only(left: 20, right: 20, bottom: 3),
-              padding: EdgeInsets.only(left: width * 0.075, right: width * 0.1),
+              margin: const EdgeInsets.only(left: 20, right: 20, bottom: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 16),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Countries.indexOf(country) % 2 == 0
-                    ? Colors.grey[200]
-                    : Colors.transparent,
-              ),
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: const Color(0xFFD0D0D5))),
               child: Row(
                 children: [
                   Expanded(
                     flex: 3,
                     child: Text(
                       country,
-                      style: const TextStyle(
-                        fontSize: 12.0,
+                      style: GoogleFonts.montserrat(
+                        color: ThemeColors.black1ThemeColor,
+                        fontSize: Responsive.isMobile(context) ? 16 : 18,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  CustomCheckbox(value: country == selectedCountry),
+                  SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: Checkbox(
+                        side:
+                            const BorderSide(color: ThemeColors.ash, width: 1),
+                        activeColor: ThemeColors.primaryThemeColor,
+                        value: country == selectedCountry,
+                        onChanged: (value) {}),
+                  ),
                 ],
               ),
             ),

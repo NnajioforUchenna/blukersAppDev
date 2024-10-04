@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../providers/user_provider_parts/user_provider.dart';
 import '../../../../utils/styles/theme_colors.dart';
-import '../../../common_vieiws/desktop_nav_bar.dart';
+import '../../../common_vieiws/desktop_nav_bar_worker.dart';
 import 'company_signIn_row.dart';
 
 class CompanyAppBar extends StatelessWidget implements PreferredSizeWidget {

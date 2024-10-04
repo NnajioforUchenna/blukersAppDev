@@ -1,3 +1,4 @@
+import 'package:blukers/views/company/Alert/job_noti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,10 +20,12 @@ class CompensationAndContractPage extends StatefulWidget {
   @override
   State<CompensationAndContractPage> createState() =>
       _CompensationAndContractPageState();
+      
 }
 
 class _CompensationAndContractPageState
     extends State<CompensationAndContractPage> {
+       late JobNotificationHandler jobNotificationHandler;
   JobType? _selectedJobType;
   SalaryPeriod? _selectedSalaryPeriod;
   int? _durationInMonth;
@@ -40,6 +43,7 @@ class _CompensationAndContractPageState
     _startDate = jp.previousParams['startDate'];
     _endDate = jp.previousParams['endDate'];
     _salaryController.text = jp.previousParams['salaryAmount'] ?? '';
+     jobNotificationHandler = JobNotificationHandler();
   }
 
   Future<void> _selectDate(BuildContext context,
@@ -313,6 +317,7 @@ class _CompensationAndContractPageState
           child: ElevatedButton(
             onPressed: () {
               if (_isFormValid()) {
+                 jobNotificationHandler.listenForNewJobs();
                 jp.addCompensationAndContract(
                   jobType: _selectedJobType,
                   salaryAmount: _salaryController.text,

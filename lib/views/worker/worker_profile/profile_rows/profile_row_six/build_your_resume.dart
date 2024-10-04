@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../old_common_views/components/profile/profile_menu_button.dart';
 import '../../../../old_common_views/small_pop_button_widget.dart';
-import '../../profile_menu_button.dart';
 import '../profile_row_three/profile_row_three.dart';
 import '../profile_row_two/profile_row_two.dart';
 import 'update_basic_information.dart';
@@ -14,12 +14,12 @@ class BuildYourResume extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Dialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
+      backgroundColor: Colors.white,
       insetPadding:
           const EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 80),
       child: Stack(

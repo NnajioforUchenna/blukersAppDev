@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../profile_menu_button.dart';
+import '../../../../old_common_views/components/profile/profile_menu_button.dart';
 import 'update_industry.dart';
 
 class ProfileRowFive extends StatelessWidget {
@@ -13,7 +13,7 @@ class ProfileRowFive extends StatelessWidget {
       text: AppLocalizations.of(context)!.industriesSlashJobs,
       onPress: () {
         showDialog(
-            context: context, builder: (context) => const UpdateIndustry());
+            context: context, builder: (context) => const UpdateUserInfoDialog(child: UpdateIndustry()));
       },
     );
   }

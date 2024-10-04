@@ -1,3 +1,4 @@
+import 'package:blukers/services/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
@@ -23,56 +24,54 @@ class ProfileRowTwo extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              // color: ThemeColors.blukersBlueThemeColor,
-              shape: BoxShape.circle, // Make the container circular
+              shape: BoxShape.circle,
               border: Border.all(
                 color: ThemeColors.blukersBlueThemeColor,
-                width: 4.0, // Set the border width
+                width: 4.0,
               ),
             ),
-            width: 160,
-            height: 160,
+            width:Responsive.isMobile(context)? 80 :  160,
+            height: Responsive.isMobile(context)? 80 :  160,
             child: Center(
               child: Container(
                 decoration: BoxDecoration(
-                  // color: ThemeColors.blukersBlueThemeColor,
                   shape: BoxShape.circle, // Make the container circular
                   border: Border.all(
                     color: Colors.white,
                     width: 4.0, // Set the border width
                   ),
                 ),
-                width: 150,
-                height: 150,
+                width: Responsive.isMobile(context)? 70 :  150,
+                height: Responsive.isMobile(context)? 70 : 150,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(1000),
                   child: up.appUser!.photoUrl != null &&
-                      up.appUser!.photoUrl != ""
+                          up.appUser!.photoUrl != ""
                       ? FadeInImage.assetNetwork(
-                    placeholder: "assets/images/loading.jpeg",
-                    image: up.appUser!.photoUrl!,
-                    //width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                  )
-                  // : Image.asset("assets/images/userDefaultProfilePic.png"),
+                          placeholder: "assets/images/loading.jpeg",
+                          image: up.appUser!.photoUrl!,
+                          //width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                        )
+                      // : Image.asset("assets/images/userDefaultProfilePic.png"),
                       : FittedBox(
-                    fit: BoxFit.fill,
-                    child: Image.asset(
-                        "assets/images/userDefaultProfilePic.png"),
-                  ),
+                          fit: BoxFit.fill,
+                          child: Image.asset(
+                              "assets/images/userDefaultProfilePic.png"),
+                        ),
                 ),
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 0,
             right: 0,
             child: CircleAvatar(
-              radius: 20,
+              radius: Responsive.isMobile(context)? 15 :  20,
               backgroundColor: ThemeColors.secondaryThemeColor,
               child: Icon(
                 UniconsLine.pen,
-                size: 20,
+                size: Responsive.isMobile(context)? 15 :  20,
                 color: Colors.white,
               ),
             ),

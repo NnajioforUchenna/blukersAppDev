@@ -36,99 +36,118 @@ class _MyJobPostsState extends State<MyJobPosts>
             length: 2,
             child: Scaffold(
               backgroundColor: Colors.white,
-              appBar: AppBar(
-                leading: IconButton(
-                  onPressed: () {
-                    GoRouter.of(context).go('/workers');
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  ),
-                ),
-                backgroundColor: Colors.white,
-                centerTitle: true,
-                bottom: TabBar(
-                  onTap: (index) {
-                    setState(() {});
-                  },
-                  controller: tabController,
-                  indicatorColor: Colors.black,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicatorWeight: 3,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.black.withOpacity(0.30),
-                  labelStyle: GoogleFonts.montserrat(
-                      fontSize: Responsive.isMobile(context) ? 16 : 20,
-                      fontWeight: FontWeight.w500),
-                  tabs: [
-                    Tab(
-                    
-                        text: AppLocalizations.of(context)!.savedWorkers,
-                        icon:  Icon(Icons.bookmark, size: Responsive.isMobile(context) ? 25 : 30, )),
-                    Tab(
-                      text: AppLocalizations.of(context)!.myJobs,
-                      icon: SvgPicture.asset(
-                        'assets/icons/send_icon.svg',
-                        height: Responsive.isMobile(context) ? 25 : 30,
-                        colorFilter: ColorFilter.mode(
-                            tabController.index == 1
-                                ? Colors.black
-                                : Colors.black.withOpacity(0.30),
-                            BlendMode.srcIn),
-                      ),
-                    ),
-                  ],
-                ),
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: InkWell(
-                      onTap: () {
-                        if (up.companyTimelineStep < 2) {
-                          showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  const DisplayWorkerTimelineDialog());
-                        } else {
-                          jp.createNewJobPost(up.appUser, context);
-                        }
-                      },
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+              body: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? MediaQuery.of(context).size.width * 0.96
+                          : MediaQuery.of(context).size.width * 0.9,
+                      child: Column(
                         children: [
-                          const Icon(UniconsLine.file_plus_alt,
-                              color: ThemeColors.secondaryThemeColor),
-                          // Use Icon instead of IconButton
-                          if (Responsive.isDesktop(context))
-                            const Padding(
-                              padding: EdgeInsets.only(left: 4.0),
-                              child: Text('New',
-                                  style: TextStyle(
-                                      color: ThemeColors.secondaryThemeColor)),
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                constraints: const BoxConstraints(),
+                                onPressed: () {
+                                  GoRouter.of(context).go('/workers');
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (up.companyTimelineStep < 2) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            const DisplayWorkerTimelineDialog());
+                                  } else {
+                                    jp.createNewJobPost(up.appUser, context);
+                                  }
+                                },
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(UniconsLine.file_plus_alt,
+                                        color: ThemeColors.secondaryThemeColor),
+                                    // Use Icon instead of IconButton
+                                    if (Responsive.isDesktop(context))
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 4.0),
+                                        child: Text('New',
+                                            style: TextStyle(
+                                                color: ThemeColors
+                                                    .secondaryThemeColor)),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TabBar(
+                            onTap: (index) {
+                              setState(() {});
+                            },
+                            controller: tabController,
+                            indicatorColor: Colors.black,
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            indicatorWeight: 3,
+                            labelColor: Colors.black,
+                            unselectedLabelColor:
+                                Colors.black.withOpacity(0.30),
+                            labelStyle: GoogleFonts.montserrat(
+                                fontSize:
+                                    Responsive.isMobile(context) ? 16 : 20,
+                                fontWeight: FontWeight.w500),
+                            tabs: [
+                              Tab(
+                                  text: AppLocalizations.of(context)!
+                                      .savedWorkers,
+                                  icon: Icon(
+                                    Icons.bookmark,
+                                    size:
+                                        Responsive.isMobile(context) ? 25 : 30,
+                                  )),
+                              Tab(
+                                text: AppLocalizations.of(context)!.myJobs,
+                                icon: Icon(
+                                  UniconsLine.briefcase,
+                                )
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-              body: Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Center(
-                  child: SizedBox(
-                    width: Responsive.isMobile(context)
-                        ? double.infinity
-                        : MediaQuery.of(context).size.width * 0.9,
-                    child: TabBarView(
-                      controller: tabController,
-                      children: const [
-                        InterestingWorkersTab(),
-                        MyJobPostsTab(),
-                      ],
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Center(
+                          child: SizedBox(
+                            width: Responsive.isMobile(context)
+                                ? double.infinity
+                                : MediaQuery.of(context).size.width * 0.9,
+                            child: TabBarView(
+                              controller: tabController,
+                              children: const [
+                                InterestingWorkersTab(),
+                                MyJobPostsTab(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
