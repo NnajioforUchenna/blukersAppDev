@@ -88,6 +88,9 @@ class _SearchHeaderMobileState extends State<SearchHeaderMobile> {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  if (controller.text.isEmpty && locationController.text.isEmpty || _isLoading) {
+                    return;
+                  }
                   setState(() {
                     _isLoading = true;
                   });
