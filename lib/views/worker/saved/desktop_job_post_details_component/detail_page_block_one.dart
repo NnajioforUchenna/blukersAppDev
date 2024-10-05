@@ -49,14 +49,16 @@ class _DetailPageBlockOneState extends State<DetailPageBlockOne> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SvgPicture.asset("assets/icons/company_icon.svg"),
-              SizedBox(width: 5.h),
-              Text(
-                  "${widget.jobPost.companyName}, ${widget.jobPost.location ?? AppLocalizations.of(context)!.notSpecified}",
-                  style: GoogleFonts.montserrat(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: ThemeColors.black1ThemeColor,
-                  )),
+              SizedBox(width: 5.w),
+              Expanded(
+                child: Text(
+                    "${widget.jobPost.companyName}, ${widget.jobPost.location ?? AppLocalizations.of(context)!.notSpecified}",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: ThemeColors.black1ThemeColor,
+                    )),
+              ),
             ],
           ),
           SizedBox(height: 10.h),
