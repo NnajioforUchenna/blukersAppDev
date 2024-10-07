@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,13 +24,18 @@ class MobileDetailPageBlockOne extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    toTitleCase(jobPost.jobTitle),
-                    style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 25,
+                  Expanded(
+                    child: AutoSizeText(
+                      toTitleCase(jobPost.jobTitle),
+                      minFontSize: 18,
+                      maxFontSize: 25,
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w600,
+                        
+                      ),
                     ),
                   ),
                   InkWell(
@@ -54,13 +60,15 @@ class MobileDetailPageBlockOne extends StatelessWidget {
                 children: [
                   SvgPicture.asset("assets/icons/company_icon.svg"),
                   const SizedBox(width: 5),
-                  Text(
-                      "${jobPost.companyName}, ${jobPost.location ?? AppLocalizations.of(context)!.notSpecified}",
-                      style: GoogleFonts.montserrat(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: ThemeColors.black1ThemeColor,
-                      )),
+                  Expanded(
+                    child: Text(
+                        "${jobPost.companyName}, ${jobPost.location ?? AppLocalizations.of(context)!.notSpecified}",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: ThemeColors.black1ThemeColor,
+                        )),
+                  ),
                 ],
               ),
               const SizedBox(height: 8),

@@ -113,7 +113,7 @@ class _DesktopNavBarCompanyState extends State<DesktopNavBarCompany> {
                         ),
                       ),
                     )
-                  : const ProfileNavBarDesktop()
+                  : const ProfileNavBarCompany()
             ],
           )
         ],
@@ -122,8 +122,8 @@ class _DesktopNavBarCompanyState extends State<DesktopNavBarCompany> {
   }
 }
 
-class ProfileNavBarDesktop extends StatelessWidget {
-  const ProfileNavBarDesktop({super.key});
+class ProfileNavBarCompany extends StatelessWidget {
+  const ProfileNavBarCompany({super.key});
 
   @override
   Widget build(BuildContext context) {
